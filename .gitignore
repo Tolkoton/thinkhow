@@ -1,0 +1,14 @@
+# ThinkHow — basics; the engine adds its own block below on install
+.env
+.env.*
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+dist/
+build/
+.DS_Store
