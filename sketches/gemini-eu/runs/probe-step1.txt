@@ -1,0 +1,10 @@
+europe-west3  gemini-4-argon           404 Publisher model `projects/pocket-lawyer-431614/locations/europe-west3/publishers/google/models/gemini-4-argon` was not found or your project does not have acces
+europe-west3  gemini-3.1-pro-preview   404 Publisher model `projects/pocket-lawyer-431614/locations/europe-west3/publishers/google/models/gemini-3.1-pro-preview` was not found or your project does not ha
+europe-west3  gemini-3.1-pro           404 Publisher model `projects/pocket-lawyer-431614/locations/europe-west3/publishers/google/models/gemini-3.1-pro` was not found or your project does not have acces
+europe-west3  gemini-3-pro-preview     404 Publisher model `projects/pocket-lawyer-431614/locations/europe-west3/publishers/google/models/gemini-3-pro-preview` was not found or your project does not have
+europe-west3  gemini-2.5-pro           404 Publisher model `projects/pocket-lawyer-431614/locations/europe-west3/publishers/google/models/gemini-2.5-pro` was not found or your project does not have acces
+eu            gemini-4-argon           200 modelVersion=gemini-4-argon thoughtsTokens=None reply='Я — Gemini 4 Argon, велика мовна модель, створена компанією Google.'
+eu            gemini-3.1-pro-preview   404 Publisher model `projects/pocket-lawyer-431614/locations/eu/publishers/google/models/gemini-3.1-pro-preview` was not found or your project does not have access 
+eu            gemini-3.1-pro           404 Publisher model `projects/pocket-lawyer-431614/locations/eu/publishers/google/models/gemini-3.1-pro` was not found or your project does not have access to it. E
+eu            gemini-3-pro-preview     404 Publisher model `projects/pocket-lawyer-431614/locations/eu/publishers/google/models/gemini-3-pro-preview` was not found or your project does not have access to
+eu            gemini-2.5-pro           404 Publisher model `projects/pocket-lawyer-431614/locations/eu/publishers/google/models/gemini-2.5-pro` was not found or your project does not have access to it. E

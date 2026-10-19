@@ -1,0 +1,3 @@
+{} | thought parts: 0 | answer: 10 | usage: {"promptTokenCount": 54, "candidatesTokenCount": 6, "totalTokenCount": 289, "thoughtsTokenCount": 229}
+{"thinkingConfig": {"includeThoughts": true}} | thought parts: 1 | answer: 10 | usage: {"promptTokenCount": 54, "candidatesTokenCount": 6, "totalTokenCount": 413, "thoughtsTokenCount": 353}
+{"thinkingConfig": {"thinkingLevel": "HIGH", "includeThoughts": true}} | thought parts: 1 | answer: 10 | usage: {"promptTokenCount": 54, "candidatesTokenCount": 6, "totalTokenCount": 1257, "thoughtsTokenCount": 1197}

@@ -1,0 +1,4 @@
+5_whys 1307
+pre_mortem 1215
+jtbd 1245
+mean 1256 x18 = 22602

@@ -1,0 +1,297 @@
+{
+ "problem": "Відкрити власну кав'ярню-обсмажувальню з онлайн-підпискою на каву у Львові",
+ "last_turn": 60,
+ "card": "pre_mortem",
+ "phase": "phase_4_mitigation_tripwires",
+ "items": [
+  {
+   "id": "g1",
+   "type": "goal",
+   "text": "За пів року вийти на самоокупність кав'ярні й мати 150 платних підписок на зерно",
+   "turn": "s1#2"
+  },
+  {
+   "id": "g2",
+   "type": "goal",
+   "text": "Піти з найманої роботи менеджером продукту не пізніше ніж через рік",
+   "turn": "s1#3"
+  },
+  {
+   "id": "p1",
+   "type": "plan",
+   "text": "Lease signed for the premises on Franka St. (with the 5-point protections agreed with Bogdan), deposit transferred, keys in hand, and contractor Roman has started wall prep",
+   "turn": "s2#49"
+  },
+  {
+   "id": "p3",
+   "type": "plan",
+   "text": "Запуск через 3 місяці; перші 2 місяці людина працює в кав'ярні сама вечорами і у вихідні, бариста — один найманий",
+   "turn": "s1#5"
+  },
+  {
+   "id": "p4",
+   "type": "plan",
+   "text": "Онлайн-підписка: сайт на готовому конструкторі, доставка новою поштою раз на два тижні",
+   "turn": "s1#6"
+  },
+  {
+   "id": "p5",
+   "type": "plan",
+   "text": "Бюджет: власні заощадження без кредиту на обладнання плюс потенційне залучення невеликого співінвестора (колишнього колеги Алекса з Варшави) під контракт на зелене зерно та оборотний капітал",
+   "turn": "s2#31"
+  },
+  {
+   "id": "o1",
+   "type": "option_considered",
+   "text": "Почати лише з онлайн-підписки без залу",
+   "status": "rejected",
+   "reason": "Людина хоче живого простору і вважає, що зал продає зерно краще за рекламу",
+   "turn": "s1#8"
+  },
+  {
+   "id": "o2",
+   "type": "option_considered",
+   "text": "Франшиза відомої мережі",
+   "status": "rejected",
+   "reason": "Не хоче чужого бренду і роялті",
+   "turn": "s1#8"
+  },
+  {
+   "id": "o3",
+   "type": "option_considered",
+   "text": "Власна кав'ярня-обсмажувальня з підпискою",
+   "status": "chosen",
+   "reason": "Поєднує мрію про простір і масштабований онлайн-дохід",
+   "turn": "s1#9"
+  },
+  {
+   "id": "a1",
+   "type": "assumption",
+   "text": "Люди з району готові платити за спешелті-каву на 30% дорожче, ніж у мережах поруч",
+   "turn": "s1#10"
+  },
+  {
+   "id": "a2",
+   "type": "assumption",
+   "text": "Підписники знайдуться серед друзів і підписників особистого Instagram (близько 3 тисяч)",
+   "turn": "s1#10"
+  },
+  {
+   "id": "a3",
+   "type": "assumption",
+   "text": "Обсмаження вечорами не заважатиме сусідам і не потребує окремих дозволів",
+   "turn": "s1#11"
+  },
+  {
+   "id": "m1",
+   "type": "missing",
+   "text": "Немає даних про пішохідний потік біля обраного приміщення в різні години",
+   "turn": "s1#11"
+  },
+  {
+   "id": "m2",
+   "type": "missing",
+   "text": "Не з'ясовано вимоги до вентиляції та дозволи на обсмаження в житловому будинку",
+   "turn": "s1#12"
+  },
+  {
+   "id": "m3",
+   "type": "missing",
+   "text": "Не порахована точка беззбитковості по чашках на день",
+   "turn": "s1#12"
+  },
+  {
+   "id": "b1",
+   "type": "blind_spot",
+   "text": "Людина говорить про каву й атмосферу, але майже не згадує продажі й маркетинг",
+   "turn": "s1#13"
+  },
+  {
+   "id": "e1",
+   "type": "emotion",
+   "text": "Relief and restored trust with Oksana after withdrawing the Kredobank loan and declining the 5-kg roaster allocation (which went to Gdańsk), alongside deeper mutual awareness of how they handle stress differently",
+   "turn": "s2#52"
+  },
+  {
+   "id": "e2",
+   "type": "emotion",
+   "text": "Для Оксани ростер у залі (запах, звук зерна в охолоджувачі, повний контроль від зеленого зерна до чашки) — це статус творця, а не посередника, і головний сенс звільнення з найму; без цього проєкт втрачає для неї душу, хоча відмова від $15 000 кредиту принесла їй величезне полегшення",
+   "turn": "s2#19"
+  },
+  {
+   "id": "c1",
+   "type": "change_mind",
+   "text": "Залізобетонна червона лінія (walk-away): відмовитися від приміщення на Франка і не підписувати договір, якщо орендодавець не погодить чіткий стоп-лосс при достроковому виході (втрата лише гарантійного депозиту без подальших претензій та штрафів за перші 6 місяців)",
+   "turn": "s2#28"
+  },
+  {
+   "id": "r1",
+   "type": "router_note",
+   "text": "Роутер запропонував Pre-mortem, WRAP і зважену матрицю; людина обрала Pre-mortem, бо рішення вже ухвалене і хоче знайти, де план тонкий",
+   "turn": "s1#16"
+  },
+  {
+   "id": "t1",
+   "type": "threat",
+   "text": "[Пріоритет 2] Затримка старту через узгодження потужності (збільшення з 10 до 25–30 кВт для приміщення на Франка) та ремонт спалює стартовий капітал на оренду й кредит до відкриття",
+   "turn": "s2#4"
+  },
+  {
+   "id": "t2",
+   "type": "threat",
+   "text": "Висока вартість залучення (CAC) і низьке утримання в онлайн-підписці: незнайомий бренд не купують, а друзі відписуються через 2–3 місяці",
+   "turn": "s2#2"
+  },
+  {
+   "id": "t3",
+   "type": "threat",
+   "text": "Невідповідність аудиторії локації: трафік біжить на трамвай за дешевим капучино, а не за дорогим спешелті й пачками зерна",
+   "turn": "s2#2"
+  },
+  {
+   "id": "t4",
+   "type": "threat",
+   "text": "Брак часу та фокусу через основну роботу в ІТ: неможливість керувати операційкою кав'ярні віддалено призводить до хаосу з персоналом і сервісом",
+   "turn": "s2#3"
+  },
+  {
+   "id": "t5",
+   "type": "threat",
+   "text": "[Пріоритет 1] Поєднання зайнятості в ІТ та стресу партнерки через кредит на Giesen і звалену на неї рутину ремонту й операційки веде до її виходу з гри та краху бізнесу",
+   "turn": "s2#4"
+  },
+  {
+   "id": "t6",
+   "type": "threat",
+   "text": "Нестабільна якість обсмажки зерна власними силами після тижневих курсів і вечірньої втоми вбиває продукт і відлякує покупців",
+   "turn": "s2#3"
+  },
+  {
+   "id": "mit1",
+   "type": "mitigation",
+   "text": "Погоджений з Оксаною гібридний MVP без кредиту: купівля електричного ростера Aillio Bullet R1 (1 кг) у зал на Франка для шеф-обсмажки мікро-лотів, шоу для гостей та розробки рецептів, плюс масштабування основних обсягів під бар і підписку на толь-ростингу на Промисловій (Diedrich 15 кг) за зразками Оксани",
+   "turn": "s2#22"
+  },
+  {
+   "id": "mit2",
+   "type": "mitigation",
+   "text": "Найм старшого баристи з функціями адміна на вивільнені кошти та чіткий розподіл ролей: партнерка відповідає за бренд і маркетинг, а людина — за фінанси, сайт та ранкові зміни з 8:00 до 10:00",
+   "turn": "s2#5"
+  },
+  {
+   "id": "tw1",
+   "type": "tripwire",
+   "text": "Якщо три тижні поспіль на недільних ретроспективах партнерка оцінює свій стрес на 8+ із 10 — взяти двотижневу відпустку в ІТ і особисто переналаштувати процеси в кав'ярні",
+   "turn": "s2#5"
+  },
+  {
+   "id": "tw2",
+   "type": "tripwire",
+   "text": "Якщо на 1 грудня щомісячний мінус перевищує $1800 і база підписників не зростає хоча б на 10% щотижня — заморозити проєкт і продати право оренди приміщення",
+   "turn": "s2#5"
+  },
+  {
+   "id": "mit3",
+   "type": "mitigation",
+   "text": "Закріпити в договорі оренди 1,5 місяця повних ремонтних канікул та 50% оплати на ще 1 місяць, усунення прихованих технічних проблем коштом орендодавця, а також чіткий «стоп-лосс» при достроковому виході в перші 6 місяців — втрата гарантійного депозиту (1–2 місяці оренди) як повне закриття всіх зобов'язань без штрафів за решту терміну, а після 6 місяців — вихід за 60 днів попередження",
+   "turn": "s2#26"
+  },
+  {
+   "id": "tw3",
+   "type": "tripwire",
+   "text": "Якщо на кінець 5-го тижня ремонту (середина жовтня) не розведені електрика та вода і не почато каркас барної стійки — заморозити закупівлю меблів, декору, посуду й пакування та перенаправити ці кошти в резервний фонд оренди",
+   "turn": "s2#6"
+  },
+  {
+   "id": "cs1",
+   "type": "chosen_step",
+   "text": "Send lawyer Ihor the refined 5-point brief for the lease draft with Bogdan: 1) 45 days 100% rent-free holiday + 30 days at 50% discount; 2) early exit with 60-day notice and forfeiture of only 1 month's deposit (no further penalties or equipment liens), taking effect once rough utility works (wiring, plumbing, subfloor) are 100% completed and signed off; 3) unconditional approval for up to 3 kW electric equipment (Bullet R1) and a 100 mm courtyard exhaust; 4) permanent capital improvements remain with the landlord without restoration obligations; 5) written guarantee of 15 kW physical capacity at the building's input cable and main breaker box (excluding city-wide grid outages)",
+   "turn": "s2#36"
+  },
+  {
+   "id": "o4",
+   "type": "option_considered",
+   "text": "Гібридний запуск (третій шлях): купівля малого ростера-семплера на 1 кг (наприклад, Bullet за $3000–4000) за власні заощадження без кредиту для обсмажки мікро-лотів, шоу, запаху та створення профілів Оксаною просто в залі на Франка, плюс толь-ростинг на Промисловій для основних комерційних обсягів бару та підписки",
+   "turn": "s2#19"
+  },
+  {
+   "id": "a4",
+   "type": "assumption",
+   "text": "Fully validated by live test: Oksana achieved a smooth RoR and 16.5% DTR by batch 3 on the Aillio Bullet R1 V2, scored 85.75 in a blind cupping against Svit Kavy (86.5) with zero defects, and Yurko on Promyslova confirmed the exported CSV maps cleanly to their 15-kg Diedrich",
+   "turn": "s2#41"
+  },
+  {
+   "id": "a5",
+   "type": "assumption",
+   "text": "Disproven: Landlord Bogdan and his lawyer reviewed the updated 5-point lease draft (including the deposit-only stop-loss after rough utilities and the 15 kW physical capacity guarantee), called it balanced, and agreed to sign",
+   "turn": "s2#41"
+  },
+  {
+   "id": "cs2",
+   "type": "chosen_step",
+   "text": "Week 1 ('The Gatekeeper Week') execution: 1) Review Ihor's 5-point lease draft on Thursday evening and send it to Bogdan on Friday at 9:30 AM with a Monday follow-up buffer; 2) Pick up the washed Ethiopian Sidama (Fest Coffee) from Nova Poshta today and pack it tonight along with the MacBook, USB drive, and Oksana's iPad charger; 3) Take the 7:10 AM Saturday train to Ivano-Frankivsk for the test roast on Denys's Aillio Bullet R1 V2 (smooth RoR, 15–17% DTR, CSV/Cropster export verified by Yurko) followed by Sunday's blind cupping in Lviv (85+ SCA score with zero defects against Svit Kavy), then reconvene on Monday",
+   "turn": "s2#40"
+  },
+  {
+   "id": "e3",
+   "type": "emotion",
+   "text": "Huge relief and momentum (while running on three hours of sleep) after Oksana found the Opoczno Newstone Grey tiles at Agromat—which she loves even more than the original choice—and all plumbing hardware was secured in the trunk",
+   "turn": "s2#59"
+  },
+  {
+   "id": "cs3",
+   "type": "chosen_step",
+   "text": "Week 2 Sprint execution (Layout A confirmed): 1) Completed Wednesday blue-tape walkthrough—shifted grinders 30 cm left to fix knock-box ergonomics, solved the 49 cm sewage pipe with an 8 cm oak barista platform ($350), and confirmed a 100 mm transom window sandwich panel swap ($120); 2) Thursday night Figma sprint to finalize Layout A ('theater' island bar) anchored horizontally to the inner right corner of the main brick archway (0,0) and vertically to a laser-marked 'metr-shtrikh' (100 cm above projected finished floor); 3) Friday morning PDF delivery and Friday afternoon A3 blueprint handover to Roman, final lease signing and deposit transfer with Bogdan, followed by celebrating with Oksana at Choven",
+   "turn": "s2#48"
+  },
+  {
+   "id": "tw4",
+   "type": "tripwire",
+   "text": "Wednesday 6:00 PM site inspection pass/fail tripwires: 1) If the main wall sewage inlet is higher than 45 cm from the subfloor (needed for a 2% gravity slope over 2.5m from a 92cm counter), or if the courtyard transom window swap isn't feasible, get an immediate Thursday morning estimate from contractor Roman; 2) If the engineering fix (Saniflo pump/extra pipework or diamond core brick drilling) exceeds $1,000 (out of the $2,500 contingency buffer), trigger an automatic Figma redesign moving the bar to the back-left wall next to the main plumbing stack",
+   "turn": "s2#45"
+  },
+  {
+   "id": "t7",
+   "type": "threat",
+   "text": "New dilemma triggered by an email from the 5-kg roaster supplier: paying the $4,800 (30%) loan down payment today drains personal cash reserves right after the lease deposit and construction advance (leaving zero liquidity for renovation surprises), while waiting a month pushes delivery into the autumn queue (a 3-month delay resulting in ~10 weeks of dead rent)",
+   "turn": "s2#49"
+  },
+  {
+   "id": "b2",
+   "type": "blind_spot",
+   "text": "Kept the Kredobank loan application running as a secret 'shadow-track' out of PM anxiety over future scaling and single points of failure (Yurko's rates or Diedrich downtime), inadvertently scope-creeping the project back into debt and hurting Oksana's trust",
+   "turn": "s2#50"
+  },
+  {
+   "id": "cs4",
+   "type": "chosen_step",
+   "text": "Completed shadow-track rollback: declined the 5-kg roaster allocation with Maciej (reallocated to Gdańsk), withdrew the Kredobank loan application with Mariana, and repaired trust with Oksana",
+   "turn": "s2#52"
+  },
+  {
+   "id": "t8",
+   "type": "threat",
+   "text": "Risk of losing legendary tiler Vasyl to a Sokilnyky project until December if Oksana's preferred 60x60 matte grey terrazzo tiles (or the space-saving RO siphons and Synesso hoses) aren't in local Lviv stock tomorrow (Oct 19) and require a 10-day shipment from Kyiv or Poland, missing the Oct 25 on-site deadline",
+   "turn": "s2#53"
+  },
+  {
+   "id": "cs5",
+   "type": "chosen_step",
+   "text": "Backcasted critical path & Friday A3 Blueprint Definition of Done locked in: 1) Thursday Oct 19 run: 10:00 AM Leo Keramika (35 sqm matte graphite Zeus Ceramica), 11:30 AM Santekh-Svit (high-temp dry-valve McAlpine siphon + 3/8-inch John Guest brass fittings per tech Taras), 1:00 PM site drop-off with Roman; 2) Friday A3 Blueprint sign-off criteria: Datum Line Protocol (+/- 5mm from the 1m metr-shtrikh on the archway, initialed by Roman), Hydraulic Clearance Zone (3D bounding box for McAlpine/John Guest/RO + 2% slope from 75cm tray to 49cm inlet, signed by Roman & Taras), Power & Water Separation (IP54 3-phase/grinder outlets on dry side 15cm above platform, blue/red color-coded), and Platform Swing Clearance (8cm platform ends 5cm before under-counter milk fridge hinge for a 110° swing); 3) Switch method tomorrow morning to map out 'Sprint 1: Rough-in and Flooring'",
+   "turn": "s2#56"
+  },
+  {
+   "id": "t9",
+   "type": "threat",
+   "text": "Inventory crisis at Leo Keramika: the 50 sqm Lviv stock of matte graphite Zeus Ceramica was sold out the previous evening, forcing a high-stress choice between: Option A (in-stock glossy beige '2004 dental clinic' tiles that ruin Oksana's aesthetic and are slippery), Option B (6-day shipment from Kyiv that misses Wednesday's deadline, loses tiler Vasyl to Sokilnyky, and causes 3 weeks of dead rent), or Option C (undocumented leftover hotel grey porcelain near the airport with unknown thickness/commercial grade that could throw off the 1m datum line or crack under the bar's weight)",
+   "turn": "s2#57"
+  },
+  {
+   "id": "cs6",
+   "type": "chosen_step",
+   "text": "Resolved the tile & plumbing bottleneck and locked in Sprint 1 ('Subfloor & Rough-In', Oct 23–27) Kanban milestones to prepare for Vasyl on Oct 30: 1) Tomorrow 9:00 AM delivery of 45 sqm 10mm Opoczno 'Newstone Grey' tiles from Agromat + A3 blueprint sign-off; 2) Mon Oct 23: Wall chasing (shtroby) & pipe/3-phase cable laying, signed off by Taras after a 6:00 PM pressure test before plastering; 3) Tue Oct 24: Subfloor grinding (removing Soviet adhesive) & quartz primer (Ceresit CT 17), verified via Viber dust-swipe video; 4) Wed–Thu Oct 25–26: 2 cm self-leveling pour using pin-screeds, strict no-foot-traffic cure on Thu, verified Thu evening with laser level across 10 points against the 1m archway datum (+/- 2mm tolerance); 5) Fri Oct 27: Two coats of Ceresit CL 51 liquid waterproofing + corner tape in the wet zone (floor + 15 cm up walls)",
+   "turn": "s2#60"
+  }
+ ],
+ "chosen_step": null
+}
