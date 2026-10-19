@@ -11,3 +11,8 @@
 - Record: tasks/done/401-maintain-2026-10-19/report.md
 - Reason: All four questions hold. Every reference I could check matches its source. Both «Що зробити» / «Готово, коли» items are answered: the maintenance report is written and its main points are in report.md; nothing to update, so the task goes to done/. There is no open question for the owner, and the engine terms are in English (commit, gates, stack, dependencies, snapshot, lesson queue).
 - Request: 20261019T184704Z-e71da0 (attempt 1)
+
+## 2026-10-19T18:49:20Z — 402-cleanup-2026-10-19 — READER_PASS
+- Record: tasks/done/402-cleanup-2026-10-19/report.md
+- Reason: All four questions hold. I could check every reference with Read and Grep: the 0-signal count, the 401 report's 0 code files, and commits 6664022 and 0dd163f with their subjects. The report answers all four «Що зробити» items and both «Готово, коли» items, it has no open questions, and it keeps the technical terms in English (simplifier, commit, anomaly, reader).
+- Request: 20261019T184833Z-6ac97f (attempt 1)
