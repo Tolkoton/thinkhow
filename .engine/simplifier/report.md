@@ -35,3 +35,15 @@ Nothing listed here was removed.
   - evidence: read .engine/goals.md:29 P3 states as decided: after the circle widens, only sessions the person marked can be viewed.; read .engine/goals.md:47 Q1 lists 'позначки «можна подивитись» самою людиною' as an open question for people outside the close circle.; read .engine/goals/requests/001.md:49 Owner: 'більше не треба нічого вигадувати… Без позначок «можна подивитись»'.; grep .engine/architecture/domain-map.md:276 The only architectural mention of the marks records them as rejected by the owner. No decision cites the future-marks clause or Q1 (grep for Q1 in .engine/architecture, docs/adr, tasks/proposed: none).; judgement  Chesterton: the clause says what happens when the circle widens, a future the intro (.engine/goals.md:11-12) does foresee. So it may be wanted back. These are the owner's lines and the state is a future one, so this is flag_only.
   - test safety none, reversal risk medium, protected true, traces to: Q1 (open); no decision cites the future-marks clause
   - validator: protected set to true: the path is in a protected zone
+
+## 2026-10-21T22:50:45Z — walking-skeleton requirements
+
+### confirm (0)
+
+### flag_only (0)
+
+## 2026-10-21T22:50:45Z — walking-skeleton architecture
+
+### confirm (0)
+
+### flag_only (0)

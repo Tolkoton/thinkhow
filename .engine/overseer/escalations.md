@@ -58,3 +58,21 @@ If new evidence genuinely falsifies it, append a NEW entry that supersedes this
 one; do not reopen the old one in conversation.
 
 ---
+
+## 2026-10-21T23:30Z — AUTONOMOUS — walking-skeleton-wiring
+- Decision: composition roots `web/app.py` і `learning/job.py` будують адаптери `platform.storage`/`platform.llm` з `platform.config` і передають аргументами; `workspace` отримує Знання й модель лише як `facilitate` (callable з `facilitation`), не імпортує `knowledge` і `platform.llm`; import-linter з контрактами M3 — з S1, росте з кожним slice.
+- Door: two-way
+- Cost to reverse: перенести побудову адаптерів в інше місце — кілька рядків у двох файлах і контракт import-linter.
+- Why not escalated: технічна деталь у межах M3 (ручний DI, A2/§9.3); не продукт і не one-way door.
+- Evidence: feature-critic, раунд 2 (`.engine/architecture/feature/walking-skeleton.md`, «Рішення архітектора»); M3 component diagram не має стрілок workspace → knowledge/llm.
+- Falsified by: import-linter вимагає стрілки, якої M3 не має, або власник у огляді M3 вирішить інакше.
+- Status: CLOSED
+
+## 2026-10-21T23:30Z — AUTONOMOUS — walking-skeleton-no-htmx
+- Decision: кістяк без HTMX (M2 S5, M3 A6 його називали): звичайні форми + ~30 рядків власного JS; потік відповіді — `fetch` POST + `ReadableStream` (EventSource і HTMX sse вміють лише GET).
+- Door: two-way
+- Cost to reverse: підключити HTMX одним `<script>` і переписати кілька шаблонів.
+- Why not escalated: технічний вибір без впливу на продукт; HTMX не в переліку пакетів власника, його копія чи CDN — зайве питання.
+- Evidence: feature-critic, раунди 1–2 (примітки про POST-потік і HTMX).
+- Falsified by: сторінкам знадобиться часткове оновлення, яке без HTMX дає помітно більше JS.
+- Status: CLOSED

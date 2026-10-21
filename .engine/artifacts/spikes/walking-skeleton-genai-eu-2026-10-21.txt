@@ -1,0 +1,16 @@
+# spike 2026-10-21: google-genai 2.32.0, vertexai=True, location=eu, model gemini-4-argon, generate_content_stream + response_schema
+## script
+import json, time
+from google import genai
+from google.genai import types
+c = genai.Client(vertexai=True, project="pocket-lawyer-431614", location="eu")
+schema = {"type":"OBJECT","properties":{"reply":{"type":"STRING"},"phase":{"type":"STRING"}},"required":["reply","phase"],"propertyOrdering":["reply","phase"]}
+t=time.monotonic(); buf=""; n=0; usage=None
+for ch in c.models.generate_content_stream(model="gemini-4-argon", contents="Скажи одне коротке питання про план відкрити кав'ярню. phase='p1'.",
+        config=types.GenerateContentConfig(response_mime_type="application/json", response_schema=schema, max_output_tokens=4000, http_options=types.HttpOptions(timeout=120000))):
+    n+=1; buf += ch.text or ""; usage = ch.usage_metadata or usage
+print("chunks", n, "secs", round(time.monotonic()-t,1)); print(json.loads(buf)); print(usage.prompt_token_count, usage.candidates_token_count)
+## output
+chunks 3 secs 3.5
+{'reply': "Яку локацію для кав'ярні ви вже пригледіли?", 'phase': 'p1'}
+usage prompt=223 candidates=44
