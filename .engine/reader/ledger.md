@@ -16,3 +16,8 @@
 - Record: tasks/done/402-cleanup-2026-10-19/report.md
 - Reason: All four questions hold. I could check every reference with Read and Grep: the 0-signal count, the 401 report's 0 code files, and commits 6664022 and 0dd163f with their subjects. The report answers all four «Що зробити» items and both «Готово, коли» items, it has no open questions, and it keeps the technical terms in English (simplifier, commit, anomaly, reader).
 - Request: 20261019T184833Z-6ac97f (attempt 1)
+
+## 2026-10-21T22:37:32Z — 101-poc-gemini-eu — READER_PASS
+- Record: tasks/done/101-poc-gemini-eu/report.md
+- Reason: All four questions hold. Every reference I checked matches its source: the sketch record's lines and numbers, the ledger entries, the commits (in .git/logs/HEAD) and the updated PR-01…PR-03, ADR-0002, the architecture map and INDEX. Every «Що зробити» / «Готово, коли» item is either done or deferred with a reason. Both owner questions are answered («так»), so none is open. The report keeps engine terms in English.
+- Request: 20261021T223640Z-10726a (attempt 1)
