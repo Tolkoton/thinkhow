@@ -43,3 +43,11 @@
 - Smoke: passed — `scripts/smoke_test_skel_web.py` (real uvicorn, local mode), output `.engine/artifacts/spikes/skel-web-smoke-2026-10-22.txt`
 - Surprises: FastAPI 0.159.1 treats an empty form field as missing (422) — fields are `Form("")`; `fetch` does not reject on HTTP errors — the controller handles `!ok`
 - Open for next slice: S6 extends `tests/smoke/test_e2e_local.py` to `analyze`; S7: Dockerfile must copy `cards/`; PR-04 in a real browser through IAP is the owner's check
+
+## Slice 6 — skel-learning (DONE 2026-10-22) — tracer bullet, part 2
+
+- Module: `src/thinkhow/learning/` — analyze (one call per closed session, anchor `enum` of the session's turns), local, job (`python -m thinkhow.learning.job seed|analyze`) (~200 LOC)
+- Tests: 24 contract tests of the slice-tester (`tests/contract/skel_learning/`, one live: a 40-turn session on `gemini-4-argon`/`eu`, green); `tests/smoke/test_e2e_local.py` extended to `analyze` — PR-09 `verified`
+- Smoke: passed — `scripts/smoke_test_skel_learning.py` (Job as processes, local mode), output `.engine/artifacts/spikes/skel-learning-smoke-2026-10-22.txt`
+- Surprises: pydantic writes `const` for a one-value `Literal` — the anchor schema forces `enum`; the same holds for a one-phase card in S3 (not reachable now: one card, 4 phases)
+- Open for next slice: S7 — Job rights (read `users`, write `system`), Scheduler, Dockerfile with `cards/`

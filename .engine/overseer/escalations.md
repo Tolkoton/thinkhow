@@ -136,3 +136,19 @@ one; do not reopen the old one in conversation.
 - Why not escalated: технічна деталь в межах уже ухваленого «один обробник помилок» (M3 A4); engine-rules «BLOCK you can resolve → fix it, log it, continue».
 - Evidence: `.engine/slices/skel-web.md`, «Revisions during planning»; probe cold-reader-а (FastAPI 0.159.1, `dependencies/utils.py:906`).
 - Status: CLOSED
+
+## 2026-10-22T18:20Z — AUTONOMOUS — skel-learning-cold-reader
+- Decision: друге BLOCK cold-reader-а на skel-learning (Seam 2 не досяжний для `run`, що не приймає `llm`) виправлено в контракті (доказ коду 0 через зламаний `conversation.md`) і запечатано без третього прогону.
+- Door: two-way
+- Cost to reverse: перепланувати й перепечатати контракт; код ще не написано.
+- Why not escalated: уточнення тестової досяжності вже ухваленого Q3; engine-rules «BLOCK you can resolve → fix it, log it, continue».
+- Evidence: `.engine/slices/skel-learning.md`, «Revisions during planning».
+- Status: CLOSED
+
+## 2026-10-22T18:33Z — AUTONOMOUS — learning-identity-edge
+- Decision: контракт import-linter «learning needs no identity» отримує `ignore_imports` одного ребра `thinkhow.access.user -> thinkhow.platform.identity`; ADR-0003, Amendment 1.
+- Door: two-way
+- Cost to reverse: один рядок у `pyproject.toml`.
+- Why not escalated: та сама форма, що вже ухвалена в ADR-0003 (один названий виняток, непряма перевірка лишається).
+- Evidence: `lint-imports` BROKEN 2026-10-22 18:31 через `thinkhow.access.user -> thinkhow.platform.identity (l.6)`.
+- Status: CLOSED

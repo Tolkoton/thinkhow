@@ -48,3 +48,13 @@ platform.storage` зламав контракт, хоча кожна його с
   читаються разом із цим ADR.
 - Двосторонні двері: один рядок у `pyproject.toml`. Запис AUTONOMOUS facilitation-indirect-storage
   у `escalations.md` замінено цим ADR.
+
+## Amendment 1 — 2026-10-22, slice skel-learning
+
+Контракт «learning needs no identity» (S1) зламався ланцюжком `learning.analyze → workspace → access →
+access.user → platform.identity`: `access.user` імпортує лише тип `Identity` (параметр `current_user`), а
+завдання навчання особи не перевіряє і `current_user` не кличе. За правилом цього ADR — один названий виняток:
+`ignore_imports = ["thinkhow.access.user -> thinkhow.platform.identity"]` у контракті навчання; будь-який інший
+шлях від навчання до `platform.identity` і далі ламає контракт. Відкинуто: `allow_indirect_imports` (те саме, що
+варіант A вище); перенести `Identity` з `platform` в `access` — `platform.identity` повертає його, і `platform` не
+імпортує частини (M3 A4).

@@ -1,13 +1,16 @@
 """The tracer bullet, locally (feature «Integration exit criterion»): local folder, scripted model.
 
 Part 1 (skel-web): seed → create a topic → a turn → SSE → conversation.md + map.json → close the session.
+Part 2 (skel-learning): the Job `analyze` → an observation whose link opens an existing turn (PR-09).
 """
 
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 
 from fastapi.testclient import TestClient
 
+from thinkhow.learning import job
 from thinkhow.web.app import build_deps
 from thinkhow.web.server import create_app
 
@@ -44,3 +47,13 @@ def test_local_chain_from_a_new_topic_to_the_files(tmp_path: Path) -> None:
     problem_map = json.loads((folder / "map.json").read_text(encoding="utf-8"))
     assert [item["id"] for item in problem_map["items"]] == ["i1"]
     assert (tmp_path / "system" / "knowledge" / "changes" / "000001.json").is_file()
+
+    assert job.run(["analyze"], environ, CARDS, lambda: datetime.now(UTC)) == 0
+    topic_id = topic.rsplit("/", 1)[-1]
+    observation_file = (
+        tmp_path / "system" / "learning" / "observations" / "local-owner" / topic_id / "s1.json"
+    )
+    observation = json.loads(observation_file.read_text(encoding="utf-8"))
+    assert observation["link"] == f"{topic}#t{observation['turn']}"
+    page = client.get(topic).text
+    assert f'id="t{observation["turn"]}"' in page

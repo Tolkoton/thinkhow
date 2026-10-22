@@ -96,6 +96,8 @@ name = "learning needs no identity"
 type = "forbidden"
 source_modules = ["thinkhow.learning"]
 forbidden_modules = ["thinkhow.platform.identity"]
+# ADR-0003 (amendment 1): access.user names the Identity type only; the Job never verifies an identity
+ignore_imports = ["thinkhow.access.user -> thinkhow.platform.identity"]
 
 [[tool.importlinter.contracts]]
 name = "facilitation types are plain values"
