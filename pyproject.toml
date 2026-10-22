@@ -47,6 +47,11 @@ module = ["google.cloud.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
+# gate-allow: PyYAML ships no py.typed, a stubs package is a new dependency (slice skel-knowledge Seam)
+module = ["yaml"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
 module = ["tests.*"]
 disallow_untyped_defs = false
 
