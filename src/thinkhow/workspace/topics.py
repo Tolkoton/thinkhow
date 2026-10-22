@@ -1,0 +1,274 @@
+"""Topics of a person in the users bucket: the only writer of users/ (M3 A3.3).
+
+Paths are built here only, from the server's ids. Read rule: own or the owner; write rule: own (Q2).
+"""
+
+import json
+import re
+import secrets
+from collections.abc import Iterator
+from datetime import datetime
+
+from thinkhow.access import CurrentUser
+from thinkhow.facilitation.types import (
+    Facilitate,
+    FacilitationContext,
+    FacilitatorUpdate,
+    MapItem,
+    MapUpdate,
+    ProblemMap,
+)
+from thinkhow.facilitation.types import Turn as FacilitationTurn
+from thinkhow.platform.storage import Storage
+from thinkhow.workspace import conversation as conv_file
+from thinkhow.workspace.model import (
+    CARD_ID,
+    SILENCE,
+    Answered,
+    ClosedSession,
+    Delta,
+    Failed,
+    NothingToRetry,
+    NumberedTurn,
+    PendingAnswer,
+    ReplyEvent,
+    Saved,
+    Session,
+    TopicId,
+    TopicNotFound,
+    TopicRef,
+    TopicSummary,
+    TopicView,
+)
+
+UID = re.compile(r"^[A-Za-z0-9_-]{1,128}$")
+TOPIC_ID = re.compile(r"^t-[0-9a-f]{12}$")
+CONVERSATION = re.compile(r"^([A-Za-z0-9_-]{1,128})/(t-[0-9a-f]{12})/conversation\.md$")
+MARKDOWN = "text/markdown; charset=utf-8"
+JSON = "application/json"
+
+
+def ensure_profile(storage: Storage, user: CurrentUser) -> None:
+    data = json.dumps({"email": user.email}, ensure_ascii=False).encode()
+    storage.create_if_absent("users", f"{_uid(user.id)}/profile.json", data, JSON)
+
+
+def create_topic(storage: Storage, user: CurrentUser, title: str, now: datetime) -> TopicId:
+    _check_now(now)
+    clean = conv_file.normalize_title(title)
+    if not clean:
+        raise ValueError("a topic needs a title")
+    ref = TopicRef(_uid(user.id), "t-" + secrets.token_hex(6))
+    _write_conversation(storage, ref, conv_file.Conversation(clean, [conv_file.SessionDoc(no=1)]))
+    _write_map(storage, ref, ProblemMap())
+    return ref.topic_id
+
+
+def list_topics(storage: Storage, user: CurrentUser) -> list[TopicSummary]:
+    refs = [ref for ref in _refs(storage, f"{_uid(user.id)}/") if ref.uid == user.id]
+    return [TopicSummary(ref, _read_conversation(storage, ref).title) for ref in refs]
+
+
+def all_topics_for_learning(storage: Storage) -> Iterator[TopicRef]:
+    """The one reader of all people's topics (M3 A3.3): web gives it to the owner only; learning reads it."""
+    yield from _refs(storage, "")
+
+
+def open_topic(storage: Storage, user: CurrentUser, ref: TopicRef, now: datetime) -> TopicView:
+    _check_now(now)
+    _can_read(user, ref)
+    conv = _read_conversation(storage, ref)
+    sessions = [_session(s, now) for s in conv.sessions]
+    return TopicView(ref, conv.title, sessions, _read_map(storage, ref), _awaiting(conv, now))
+
+
+def reply(
+    storage: Storage, facilitate: Facilitate, user: CurrentUser, ref: TopicRef, text: str, now: datetime
+) -> Iterator[ReplyEvent]:
+    """Checks now (Q4, eager); the returned iterator saves the turn, then streams and writes the answer."""
+    _check_now(now)
+    _can_write(user, ref)
+    clean = conv_file.normalize(text)
+    if not clean:
+        raise ValueError("an empty turn is not saved")
+    conv = _read_conversation(storage, ref)
+    if _awaiting(conv, now):
+        raise PendingAnswer("the last turn has no answer yet: retry it first")
+    return _reply_flow(storage, facilitate, ref, conv, clean, now)
+
+
+def retry(
+    storage: Storage, facilitate: Facilitate, user: CurrentUser, ref: TopicRef, now: datetime
+) -> Iterator[ReplyEvent]:
+    _check_now(now)
+    _can_write(user, ref)
+    conv = _read_conversation(storage, ref)
+    if not _awaiting(conv, now):
+        raise NothingToRetry("no unanswered turn in an open session")
+    last = conv.sessions[-1].turns[-1]
+    return _answer(storage, facilitate, ref, conv, last.no, last.text, now)
+
+
+def close_session(storage: Storage, user: CurrentUser, ref: TopicRef, now: datetime) -> None:
+    _check_now(now)
+    _can_write(user, ref)
+    conv = _read_conversation(storage, ref)
+    last = conv.sessions[-1]
+    if _closed_at(last, now) is None:
+        last.closed_at = conv_file.second(now)
+        _write_conversation(storage, ref, conv)
+
+
+def closed_sessions(storage: Storage, ref: TopicRef, now: datetime) -> list[ClosedSession]:
+    """Read only, no access rule: for learning, with refs from all_topics_for_learning."""
+    _check_now(now)
+    _check_ref(ref)
+    sessions = [_session(s, now) for s in _read_conversation(storage, ref).sessions]
+    return [ClosedSession(s.no, s.turns, s.closed_at) for s in sessions if s.closed_at and s.turns]
+
+
+def _reply_flow(
+    storage: Storage,
+    facilitate: Facilitate,
+    ref: TopicRef,
+    conv: conv_file.Conversation,
+    text: str,
+    now: datetime,
+) -> Iterator[ReplyEvent]:
+    """Flow (M2): the person's turn into conversation.md → Saved → the answer (I4)."""
+    if _closed_at(conv.sessions[-1], now) is not None:
+        conv.sessions.append(conv_file.SessionDoc(no=conv.sessions[-1].no + 1))
+    turn_no = conv.last_no() + 1
+    conv.sessions[-1].turns.append(conv_file.Turn(turn_no, "user", conv_file.second(now), text))
+    _write_conversation(storage, ref, conv)
+    yield Saved(turn_no)
+    yield from _answer(storage, facilitate, ref, conv, turn_no, text, now)
+
+
+def _answer(
+    storage: Storage,
+    facilitate: Facilitate,
+    ref: TopicRef,
+    conv: conv_file.Conversation,
+    turn_no: int,
+    text: str,
+    now: datetime,
+) -> Iterator[ReplyEvent]:
+    """Flow: facilitate → deltas → answer into conversation.md → map.json → Answered; a failure → Failed."""
+    session = conv.sessions[-1]
+    history = [FacilitationTurn(t.role, t.text) for t in session.turns if t.no < turn_no]
+    problem_map = _read_map(storage, ref)
+    update: FacilitatorUpdate | None = None
+    try:
+        for item in facilitate(FacilitationContext(CARD_ID, history, problem_map, turn_no, text)):
+            if isinstance(item, FacilitatorUpdate):
+                update = item
+                break
+            yield Delta(item.text)
+    except Exception as exc:
+        yield Failed(type(exc).__name__)
+        return
+    if update is None:
+        yield Failed("NoUpdate")
+        return
+    answer = conv_file.normalize(update.reply)
+    if not answer:
+        yield Failed("EmptyReply")
+        return
+    session.turns.append(conv_file.Turn(turn_no + 1, "model", conv_file.second(now), answer))
+    _write_conversation(storage, ref, conv)
+    _write_map(storage, ref, apply_updates(problem_map, update, turn_no + 1))
+    yield Answered(turn_no + 1)
+
+
+def apply_updates(problem_map: ProblemMap, update: FacilitatorUpdate, last_turn: int) -> ProblemMap:
+    items = list(problem_map.items)
+    for change in update.map_updates:
+        items = _apply_one(items, change)
+    return ProblemMap(items=items, phase_id=update.current_phase_id, last_turn=last_turn)
+
+
+def _apply_one(items: list[MapItem], change: MapUpdate) -> list[MapItem]:
+    at = next((i for i, item in enumerate(items) if item.id == change.id), None)
+    if change.op == "remove":
+        return items if at is None else items[:at] + items[at + 1 :]
+    new = MapItem(id=change.id, type=change.type, text=change.text, turn=change.turn)
+    if at is not None:
+        return items[:at] + [new] + items[at + 1 :]
+    return items + [new] if change.op == "add" else items
+
+
+def _session(doc: conv_file.SessionDoc, now: datetime) -> Session:
+    turns = [NumberedTurn(t.no, t.role, t.text, t.at) for t in doc.turns]
+    return Session(doc.no, turns, _closed_at(doc, now))
+
+
+def _closed_at(doc: conv_file.SessionDoc, now: datetime) -> datetime | None:
+    """Closed by the button (its marker), or by 24 h of silence after the last turn (Q5); never if empty."""
+    if doc.closed_at is not None:
+        return doc.closed_at
+    if doc.turns and now >= doc.turns[-1].at + SILENCE:
+        return doc.turns[-1].at + SILENCE
+    return None
+
+
+def _awaiting(conv: conv_file.Conversation, now: datetime) -> bool:
+    """The person's turn is the last one and its session is still open on `now` (Q7)."""
+    last = conv.sessions[-1]
+    return bool(last.turns) and last.turns[-1].role == "user" and _closed_at(last, now) is None
+
+
+def _refs(storage: Storage, prefix: str) -> Iterator[TopicRef]:
+    for path in storage.list("users", prefix):
+        if m := CONVERSATION.match(path):
+            yield TopicRef(m.group(1), m.group(2))
+
+
+def _can_read(user: CurrentUser, ref: TopicRef) -> None:
+    _check_ref(ref)
+    if ref.uid != user.id and not user.is_owner:
+        raise TopicNotFound(ref.topic_id)
+
+
+def _can_write(user: CurrentUser, ref: TopicRef) -> None:
+    _check_ref(ref)
+    if ref.uid != user.id:
+        raise TopicNotFound(ref.topic_id)
+
+
+def _check_ref(ref: TopicRef) -> None:
+    if not UID.match(ref.uid) or not TOPIC_ID.match(ref.topic_id):
+        raise TopicNotFound(ref.topic_id)
+
+
+def _check_now(now: datetime) -> None:
+    if now.tzinfo is None or now.utcoffset() is None:
+        raise ValueError("now must carry a time zone")
+
+
+def _uid(uid: str) -> str:
+    if not UID.match(uid):
+        raise ValueError(f"not a server id: {uid!r}")
+    return uid
+
+
+def _read_conversation(storage: Storage, ref: TopicRef) -> conv_file.Conversation:
+    data = storage.read("users", f"{ref.uid}/{ref.topic_id}/conversation.md")
+    if data is None:
+        raise TopicNotFound(ref.topic_id)
+    return conv_file.parse(data.decode("utf-8"))
+
+
+def _write_conversation(storage: Storage, ref: TopicRef, conv: conv_file.Conversation) -> None:
+    path = f"{ref.uid}/{ref.topic_id}/conversation.md"
+    storage.write("users", path, conv_file.render(conv).encode("utf-8"), MARKDOWN)
+
+
+def _read_map(storage: Storage, ref: TopicRef) -> ProblemMap:
+    data = storage.read("users", f"{ref.uid}/{ref.topic_id}/map.json")
+    return ProblemMap() if data is None else ProblemMap.model_validate_json(data)
+
+
+def _write_map(storage: Storage, ref: TopicRef, problem_map: ProblemMap) -> None:
+    path = f"{ref.uid}/{ref.topic_id}/map.json"
+    storage.write("users", path, problem_map.model_dump_json().encode("utf-8"), JSON)

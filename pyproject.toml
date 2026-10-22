@@ -102,3 +102,9 @@ name = "facilitation types are plain values"
 type = "forbidden"
 source_modules = ["thinkhow.facilitation.types"]
 forbidden_modules = ["thinkhow.knowledge", "thinkhow.platform"]
+
+[[tool.importlinter.contracts]]
+name = "access writes nothing"
+type = "forbidden"
+source_modules = ["thinkhow.access"]
+forbidden_modules = ["thinkhow.platform.storage"]

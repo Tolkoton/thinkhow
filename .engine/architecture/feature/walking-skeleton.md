@@ -170,7 +170,7 @@ Google, чотири запобіжники A3). Інструкція розго
 - S4 → S5: усі функції `workspace` мають першим іменованим аргументом `storage: Storage` (ручний DI,
   M3 A2), `reply`/`retry` — ще й `facilitate: Facilitate`. `workspace.list_topics(user)`, `create_topic(user, title) -> TopicId`,
   `open_topic(user, ref: TopicRef) -> TopicView`, `reply(user, ref, text) -> Iterator[ReplyEvent]`
-  (`Saved(turn_no)` → `Delta(text)`… → `Answered(turn_no)` | `Failed`), `retry(user, topic_id)`,
+  (`Saved(turn_no)` → `Delta(text)`… → `Answered(turn_no)` | `Failed`), `retry(user, ref)` (skel-workspace),
   `close_session(user, ref)`, `ensure_profile(user)`; `user` — `access.CurrentUser(id, email,
   is_owner)`. `TopicId` — `str`, який видає сервер (`t-` + 12 hex, перевіряється регулярним виразом);
   `TopicRef(uid: str, topic_id: TopicId)` — тема адресується парою; `uid` — стабільний id від IAP

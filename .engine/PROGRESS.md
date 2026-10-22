@@ -27,3 +27,11 @@
 - Surprises: in 1 of 3 smoke runs the reply's first sentence was Russian to a Ukrainian message (C4) — reported to the owner;
   import-linter counts indirect chains, so `workspace` imports only `facilitation.types` (Q6)
 - Open for next slice: S4 imports `thinkhow.facilitation.types` only; `turn_no` is the topic-wide number of the person's message
+
+## Slice 4 — skel-workspace (DONE 2026-10-22)
+
+- Module: `src/thinkhow/access/` (CurrentUser, owner rule) and `src/thinkhow/workspace/` — model, conversation (format, ADR-0004), topics (~420 LOC)
+- Tests: 46 contract tests of the slice-tester (`tests/contract/skel_workspace/`), all green
+- Smoke: passed — `scripts/smoke_test_skel_workspace.py`, output `.engine/artifacts/spikes/skel-workspace-smoke-2026-10-22.txt`
+- Surprises: none in the code; planning found that an unanswered turn crossing a session close needed a rule (Q7, I5)
+- Open for next slice: S5 must call `all_topics_for_learning` only for `is_owner`; `reply`/`retry` raise before the stream

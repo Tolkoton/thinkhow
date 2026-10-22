@@ -111,3 +111,12 @@ one; do not reopen the old one in conversation.
 - Why not escalated: overseer ADR_REQUIRED (request 20261022T164551Z-90467c) on a reversible decision → ADR and continue.
 - Evidence: `lint-imports` → 6 kept after the change.
 - Status: CLOSED
+
+## 2026-10-22T17:10Z — AUTONOMOUS — skel-workspace-cold-reader
+- Decision: друге BLOCK cold-reader-а на skel-workspace (нормалізація відповіді фасилітатора не названа) виправлено в контракті й запечатано без третього прогону, замість зупинки за /plan-slice.
+- Door: two-way
+- Cost to reverse: перепланувати й перепечатати контракт; код ще не написано.
+- Why not escalated: уточнення поведінки в межах уже ухваленого правила нормалізації, не продукт; engine-rules «BLOCK you can resolve → fix it, log it, continue» (як skel-platform, skel-facilitation).
+- Evidence: `.engine/slices/skel-workspace.md`, «Revisions during planning»; `respond.py` без нормалізації.
+- Falsified by: тестувальник або overseer знайде ще одну неназвану поведінку в цьому ж місці.
+- Status: CLOSED
