@@ -34,3 +34,7 @@ build/
 .claude/unattended/logs/
 .claude/unattended/archive/
 # <<< engine
+
+# ThinkHow local mode data
+.local-data/
+.import_linter_cache/

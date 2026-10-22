@@ -1,0 +1,26 @@
+# spike 2026-10-21: field order of streamed structured output, pydantic model with reply first
+## script
+import time
+from typing import Literal
+from pydantic import BaseModel
+from google import genai
+from google.genai import types
+class Upd(BaseModel):
+    op: Literal["add","update","remove"]; id: str; text: str
+class Out(BaseModel):
+    reply: str
+    current_phase_id: Literal["p1","p2"]
+    phase_exit_met: bool
+    map_updates: list[Upd]
+c = genai.Client(vertexai=True, project="pocket-lawyer-431614", location="eu")
+for name, kw in (("json_schema", dict(response_json_schema=Out.model_json_schema())), ("schema_pyd", dict(response_schema=Out))):
+    t=time.monotonic(); first=None; buf=""
+    for ch in c.models.generate_content_stream(model="gemini-4-argon", contents="Людина: хочу відкрити кав'ярню через 3 місяці. Дай довгу (5 речень) відповідь з одним питанням і додай 2 пункти карти.",
+        config=types.GenerateContentConfig(response_mime_type="application/json", **kw)):
+        buf += ch.text or ""
+        if first is None and buf.strip(): first = buf[:60]
+    print(name, round(time.monotonic()-t,1), "FIRST:", repr(first)); print(buf[:300])
+## output
+json_schema 10.1s FIRST: '{"reply": "Відкриття власної кав'ярні за три'
+schema_pyd 17.0s FIRST: '{\n  "reply": "Відкриття ка'
+Both modes stream the reply field first when it is declared first.
