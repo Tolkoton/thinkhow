@@ -18,3 +18,12 @@
 - Smoke: passed — `scripts/smoke_test_skel_knowledge.py`, output `.engine/artifacts/spikes/skel-knowledge-smoke-2026-10-22.txt`
 - Surprises: the tester's hand-in needs the module skeleton in the tree first (import), else the script refuses it
 - Open for next slice: none; the real bucket is the owner's (Job `seed`, PR-07)
+
+## Slice 3 — skel-facilitation (DONE 2026-10-22)
+
+- Module: `src/thinkhow/facilitation/` — types, respond, rules.md (PoC 101 instruction, two lines changed) (~250 LOC)
+- Tests: 21 contract tests of the slice-tester (`tests/contract/skel_facilitation/`); live `tests/live/test_facilitation_live.py` green
+- Smoke: passed — `scripts/smoke_test_skel_facilitation.py`, output `.engine/artifacts/spikes/skel-facilitation-smoke-2026-10-22.txt`
+- Surprises: in 1 of 3 smoke runs the reply's first sentence was Russian to a Ukrainian message (C4) — reported to the owner;
+  import-linter counts indirect chains, so `workspace` imports only `facilitation.types` (Q6)
+- Open for next slice: S4 imports `thinkhow.facilitation.types` only; `turn_no` is the topic-wide number of the person's message

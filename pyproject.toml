@@ -82,6 +82,8 @@ name = "facilitation stores nothing and knows no person"
 type = "forbidden"
 source_modules = ["thinkhow.facilitation"]
 forbidden_modules = ["thinkhow.access", "thinkhow.platform.storage"]
+# ADR-0003: only the M3 chain facilitation -> knowledge -> storage is exempt; any other path to storage fails
+ignore_imports = ["thinkhow.knowledge.store -> thinkhow.platform.storage"]
 
 [[tool.importlinter.contracts]]
 name = "knowledge knows no person"
@@ -94,3 +96,9 @@ name = "learning needs no identity"
 type = "forbidden"
 source_modules = ["thinkhow.learning"]
 forbidden_modules = ["thinkhow.platform.identity"]
+
+[[tool.importlinter.contracts]]
+name = "facilitation types are plain values"
+type = "forbidden"
+source_modules = ["thinkhow.facilitation.types"]
+forbidden_modules = ["thinkhow.knowledge", "thinkhow.platform"]

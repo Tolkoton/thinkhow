@@ -1,0 +1,14 @@
+{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 2362, "output_tokens": 269, "thought_tokens": 0, "latency_ms": 7825, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "event": "llm_call", "request_id": null}
+person: Хочу за три місяці відкрити кав'ярню з обсмажуванням у Львові. Перевірмо план, поки не пізно.
+facilitator: Давай проведём мысленный эксперимент по методу Pre-mortem. Уявімо, що минуло шість місяців — три місяці на відкриття і ще три місяці спроб втриматися на плаву, — але сьогодні ти зачиняєш двері кав'ярні назавжди, проєкт безнадійно провалився. Коли ти озираєшся назад із цієї точки, як саме виглядає цей крах і які перші 2–3 причини того, чому все пішло шкереберть, спадають тобі на думку?
+question marks in the reply (for information, as in PoC 101): 1
+deltas: 6; phase: phase_1_time_travel; exit met: False
+  map add i1 [plan] Відкрити кав'ярню з власним обсмажуванням у Львові за 3 місяці (t1)
+OK: streamed, joined deltas == reply, the phase is the card's
+
+--- finding (2026-10-22, builder) ---
+The first sentence of the reply above is Russian («Давай проведём мысленный эксперимент по методу Pre-mortem.»),
+the rest Ukrainian; the person wrote Ukrainian (C4). Two re-runs of the same smoke right after began in Ukrainian
+(«Давай проведемо уявний експеримент…», «Давай зробимо уявний стрибок…»). PoC 101's lang-check
+(sketches/gemini-eu/runs/lang-check.txt) judged whole replies and reported none. Quality of facilitation is the
+owner's to judge (P4); the instruction is PoC's verbatim (contract Q5) — not changed here, reported to the owner.

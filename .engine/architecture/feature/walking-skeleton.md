@@ -163,7 +163,8 @@ Google, чотири запобіжники A3). Інструкція розго
   `facilitation`).
 - S3 → S4: `FacilitationContext(card_id: str, history: list[Turn], problem_map: ProblemMap,
   turn_no: int, text: str)`, `Facilitate`, `ReplyDelta`, `FacilitatorUpdate`, `ProblemMap`, `MapUpdate`
-  — типи з `facilitation` (стрілка M3 workspace → facilitation); `workspace` не бачить ні Знань, ні `Llm`;
+  — типи з `thinkhow.facilitation.types` (стрілка M3 workspace → facilitation; імпорт лише цього
+  підмодуля, skel-facilitation Q6); `workspace` не бачить ні Знань, ні `Llm`;
   `FacilitatorUpdate(reply, current_phase_id, phase_exit_met, map_updates: list[MapUpdate])` — схема
   з PoC 101 (`sketches/gemini-eu/session.py`).
 - S4 → S5: усі функції `workspace` мають першим іменованим аргументом `storage: Storage` (ручний DI,

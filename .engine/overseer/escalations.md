@@ -85,3 +85,29 @@ one; do not reopen the old one in conversation.
 - Evidence: `.engine/slices/skel-platform.md`, «Revisions during planning»; probe `inspect.isgeneratorfunction(Models.generate_content_stream)` → True.
 - Falsified by: overseer на коді S1 знайде, що повтор не працює проти лінивого потоку.
 - Status: CLOSED
+
+## 2026-10-22T16:45Z — AUTONOMOUS — skel-facilitation-cold-reader
+- Decision: друге BLOCK cold-reader-а на skel-facilitation (два формулювання, що лишилися до Q6: `history` як `platform.llm.Turn`, дельти «як є») виправлено в контракті й запечатано без третього прогону, замість зупинки за /plan-slice («blocks again → stop»).
+- Door: two-way
+- Cost to reverse: перепланувати й перепечатати контракт; код ще не написано.
+- Why not escalated: узгодження тексту з уже ухваленим Q6, не продукт і не one-way door; engine-rules «BLOCK you can resolve → fix it, log it, continue» (як skel-platform-cold-reader).
+- Evidence: `.engine/slices/skel-facilitation.md`, «Revisions during planning»; probe cold-reader-а (підклас pydantic ≠ базовому класу).
+- Falsified by: тестувальник або overseer знайде ще одне протиріччя Seam і Q6.
+- Status: CLOSED
+
+## 2026-10-22T16:50Z — AUTONOMOUS — facilitation-indirect-storage
+- Decision: import-linter contract «facilitation stores nothing and knows no person» (S1) gets `allow_indirect_imports = true`: facilitation's own modules still may not import `access` or `platform.storage`, but the M3 chain facilitation → knowledge → platform.storage is lawful.
+- Door: two-way
+- Cost to reverse: one line in `pyproject.toml`.
+- Why not escalated: M3 diagram has both arrows (facil → knowledge, knowledge → storage); the contract meant direct use. The workspace contract stays strict (skel-facilitation Q6).
+- Evidence: `lint-imports` 2026-10-22: BROKEN via `thinkhow.knowledge.store -> thinkhow.platform.storage` once facilitation imported knowledge.
+- Falsified by: facilitation gains a path that writes through knowledge (knowledge exposes a write function facilitation calls).
+- Status: CLOSED
+
+## 2026-10-22T16:55Z — AUTONOMOUS — facilitation-indirect-storage (superseded)
+- Decision: the entry facilitation-indirect-storage above is superseded by `docs/adr/0003-facilitation-reads-knowledge-not-storage.md`: `allow_indirect_imports` removed; `ignore_imports` for the one M3 edge `thinkhow.knowledge.store -> thinkhow.platform.storage`.
+- Door: two-way
+- Cost to reverse: one line in `pyproject.toml`.
+- Why not escalated: overseer ADR_REQUIRED (request 20261022T164551Z-90467c) on a reversible decision → ADR and continue.
+- Evidence: `lint-imports` → 6 kept after the change.
+- Status: CLOSED
