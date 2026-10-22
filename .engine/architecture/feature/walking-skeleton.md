@@ -153,7 +153,7 @@ Google, чотири запобіжники A3). Інструкція розго
   rev: KnowledgeRev | None) -> Iterator[LlmEvent]`, де `LlmEvent` = `ReplyDelta(text)` | `Done(raw_json:
   str, usage)`; `generate_json(system, contents, schema, rev) -> BaseModel`; помилка недоступності —
   `LlmUnavailable`. `Turn(role: Literal["user","model"], text: str)`.
-- S1 → S5: `identity.current_user(headers) -> Identity(id: str, email: str)` або `IdentityError`.
+- S1 → S5: `make_identity(settings).identify(headers) -> Identity(id: str, email: str)` або `IdentityError`.
 - S2 → S3: `CurrentKnowledge(rev: int, n: int, cards: dict[str, Card], memory: list[MemoryRecord])`;
   `Card.facilitator` — фази з `id`, метою, виходом; текст картки для промпту — `card_prompt(card) -> str`.
 - S3 → S5 (зв'язування): `respond(ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: Llm)
@@ -185,7 +185,7 @@ Google, чотири запобіжники A3). Інструкція розго
   лише читання. Номер має **кожна** репліка сесії (і людини, і фасилітатора) — наскрізно в межах теми;
   якір `#t<no>`.
 - S5, S6 → S7: пакети `thinkhow.{web,access,workspace,facilitation,knowledge,learning,platform}`
-  існують; точки входу `uvicorn thinkhow.web.app:app` і `python -m thinkhow.learning.job`.
+  існують; точки входу `uvicorn thinkhow.web.app:app` і `python -m thinkhow.learning.job` з `PYTHONPATH=src` (без `[build-system]`, skel-platform Q8).
 
 ## Integration exit criterion
 Локально: `tests/smoke/test_e2e_local.py` (локальний режим: локальна тека + сценарна модель + фіксована

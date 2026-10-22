@@ -19,3 +19,73 @@ dev = [
     "pytest>=9.1.1",
     "ruff>=0.17.1",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = ["live: calls real Google services (Vertex AI); run with -m live"]
+addopts = "-m 'not live'"
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+extend-exclude = ["sketches", ".claude"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.mypy]
+# gate-allow: the project's first type-checker settings, written by slice skel-platform (contract Seam: strict for src); google.cloud ships no type stubs
+python_version = "3.12"
+strict = true
+mypy_path = "src"
+packages = ["thinkhow"]
+exclude = ["^sketches/", "^\\.claude/"]
+
+[[tool.mypy.overrides]]
+module = ["google.cloud.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+
+[tool.importlinter]
+root_package = "thinkhow"
+
+[[tool.importlinter.contracts]]
+name = "M3 layers: no cycles, dependencies point down"
+type = "layers"
+layers = [
+    "thinkhow.web",
+    "thinkhow.learning",
+    "thinkhow.workspace",
+    "thinkhow.facilitation",
+    "thinkhow.knowledge",
+    "thinkhow.access",
+    "thinkhow.platform",
+]
+
+[[tool.importlinter.contracts]]
+name = "workspace gets knowledge and the model only as facilitate"
+type = "forbidden"
+source_modules = ["thinkhow.workspace"]
+forbidden_modules = ["thinkhow.knowledge", "thinkhow.platform.llm"]
+
+[[tool.importlinter.contracts]]
+name = "facilitation stores nothing and knows no person"
+type = "forbidden"
+source_modules = ["thinkhow.facilitation"]
+forbidden_modules = ["thinkhow.access", "thinkhow.platform.storage"]
+
+[[tool.importlinter.contracts]]
+name = "knowledge knows no person"
+type = "forbidden"
+source_modules = ["thinkhow.knowledge"]
+forbidden_modules = ["thinkhow.access"]
+
+[[tool.importlinter.contracts]]
+name = "learning needs no identity"
+type = "forbidden"
+source_modules = ["thinkhow.learning"]
+forbidden_modules = ["thinkhow.platform.identity"]

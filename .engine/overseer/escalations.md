@@ -76,3 +76,12 @@ one; do not reopen the old one in conversation.
 - Evidence: feature-critic, раунди 1–2 (примітки про POST-потік і HTMX).
 - Falsified by: сторінкам знадобиться часткове оновлення, яке без HTMX дає помітно більше JS.
 - Status: CLOSED
+
+## 2026-10-21T23:55Z — AUTONOMOUS — skel-platform-cold-reader
+- Decision: друге BLOCK cold-reader-а на skel-platform (фейки повтору мають падати на першому `next()`) виправлено в контракті й запечатано без третього прогону, замість зупинки за /plan-slice («blocks again → stop»).
+- Door: two-way
+- Cost to reverse: перепланувати й перепечатати контракт власником; код ще не написано.
+- Why not escalated: виправлення — уточнення тестів, не продукт і не one-way door; engine-rules «BLOCK you can resolve → fix it, log it, continue».
+- Evidence: `.engine/slices/skel-platform.md`, «Revisions during planning»; probe `inspect.isgeneratorfunction(Models.generate_content_stream)` → True.
+- Falsified by: overseer на коді S1 знайде, що повтор не працює проти лінивого потоку.
+- Status: CLOSED

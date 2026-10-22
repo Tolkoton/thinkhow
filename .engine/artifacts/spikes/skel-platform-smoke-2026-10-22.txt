@@ -1,0 +1,4 @@
+LocalStorage write/read/list/create_if_absent OK
+the llm_call log line (one JSON line, tokens, no text):
+{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 249, "output_tokens": 92, "thought_tokens": 0, "latency_ms": 4610, "attempts": 1, "rev": 1, "n": 1, "outcome": "ok", "event": "llm_call", "request_id": null}
+stream_json gave 4 deltas; joined == reply OK
