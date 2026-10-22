@@ -51,3 +51,11 @@
 - Smoke: passed — `scripts/smoke_test_skel_learning.py` (Job as processes, local mode), output `.engine/artifacts/spikes/skel-learning-smoke-2026-10-22.txt`
 - Surprises: pydantic writes `const` for a one-value `Literal` — the anchor schema forces `enum`; the same holds for a one-phase card in S3 (not reachable now: one card, 4 phases)
 - Open for next slice: S7 — Job rights (read `users`, write `system`), Scheduler, Dockerfile with `cards/`
+
+## Slice 7 — skel-guards-deploy (DONE 2026-10-22)
+
+- Files: `tests/test_a3_guards.py` (A3.3, A3.4, strict bucket rule, planted breaches), `tests/test_ac4.py` (the four AC4 guards), `tests/test_dockerfile.py`, `tests/test_deploy_doc.py`, `Dockerfile`, `.dockerignore`, `docs/deploy.md` (owner's steps and checklist)
+- Tests: 36 contract tests of the slice-tester (`tests/contract/skel_guards_deploy/`), all green
+- Smoke: none in this slice by contract — the agent has no Docker daemon and may not deploy; the image is built by the owner's `gcloud builds submit`
+- Surprises: the deploy order matters (seed before the service: the service reads the Knowledge at start); the Job needs the same `THINKHOW_*` as the service
+- Open: AC1–AC3 (PR-04, PR-07) — the owner's checklist in `docs/deploy.md`

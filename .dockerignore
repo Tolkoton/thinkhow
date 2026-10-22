@@ -1,0 +1,15 @@
+.env*
+.venv
+.git
+.engine
+.claude
+tests
+sketches
+tasks
+docs
+.local-data
+.import_linter_cache
+.mypy_cache
+.ruff_cache
+.pytest_cache
+**/__pycache__

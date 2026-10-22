@@ -152,3 +152,11 @@ one; do not reopen the old one in conversation.
 - Why not escalated: та сама форма, що вже ухвалена в ADR-0003 (один названий виняток, непряма перевірка лишається).
 - Evidence: `lint-imports` BROKEN 2026-10-22 18:31 через `thinkhow.access.user -> thinkhow.platform.identity (l.6)`.
 - Status: CLOSED
+
+## 2026-10-22T18:55Z — AUTONOMOUS — skel-guards-deploy-cold-reader
+- Decision: друге BLOCK cold-reader-а на skel-guards-deploy (Job без змінних `THINKHOW_*`) виправлено в контракті й запечатано без третього прогону.
+- Door: two-way
+- Cost to reverse: перепланувати й перепечатати контракт; код ще не написано.
+- Why not escalated: виправлення інструкції під уже наявний код (`load_settings`); engine-rules «BLOCK you can resolve → fix it, log it, continue».
+- Evidence: `.engine/slices/skel-guards-deploy.md`, «Revisions during planning».
+- Status: CLOSED
