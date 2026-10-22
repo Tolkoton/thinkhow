@@ -1,0 +1,10 @@
+INFO:     127.0.0.1:42916 - "GET / HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/", "status": 200, "latency_ms": 19, "event": "http_request", "request_id": "2f2311a19db44b768a8e36f9bfca3748"}
+INFO:     127.0.0.1:42926 - "POST /topics HTTP/1.1" 303 See Other
+{"severity": "INFO", "method": "POST", "route": "/topics", "status": 303, "latency_ms": 2, "event": "http_request", "request_id": "c0515c8a852342deb58fc37b06db56f4"}
+INFO:     127.0.0.1:42932 - "POST /topics/local-owner/t-aabc90d76b38/reply HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "POST", "route": "/topics/{uid}/{topic_id}/reply", "status": 200, "latency_ms": 12, "event": "http_request", "request_id": "776ad507ccc540bf80664d6cf1d0345e"}
+GET / → 200, «Мої теми», «Усі теми»
+SSE events: ['saved', 'delta', 'delta', 'delta', 'delta', 'delta', 'delta', 'delta', 'delta', 'delta', 'delta', 'answered']
+streamed reply: (локальний режим) Уявіть, що план провалився. Що сталося першим?
+OK: home, a topic and a streamed answer; the files stay under /tmp/thinkhow-smoke-n0n41wjg for a look

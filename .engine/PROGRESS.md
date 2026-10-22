@@ -35,3 +35,11 @@
 - Smoke: passed — `scripts/smoke_test_skel_workspace.py`, output `.engine/artifacts/spikes/skel-workspace-smoke-2026-10-22.txt`
 - Surprises: none in the code; planning found that an unanswered turn crossing a session close needed a rule (Q7, I5)
 - Open for next slice: S5 must call `all_topics_for_learning` only for `is_owner`; `reply`/`retry` raise before the stream
+
+## Slice 5 — skel-web (DONE 2026-10-22) — tracer bullet, part 1
+
+- Module: `src/thinkhow/web/` — server (routes, SSE, login layer, one error handler, ASGI request log), app (composition root), local (scripted model), templates, `static/conversation.js` (~470 LOC with JS)
+- Tests: 50 contract tests of the slice-tester (`tests/contract/skel_web/`, 13 run under `node --test`); `tests/smoke/test_e2e_local.py`; `tests/web/test_conversation_js.py`
+- Smoke: passed — `scripts/smoke_test_skel_web.py` (real uvicorn, local mode), output `.engine/artifacts/spikes/skel-web-smoke-2026-10-22.txt`
+- Surprises: FastAPI 0.159.1 treats an empty form field as missing (422) — fields are `Form("")`; `fetch` does not reject on HTTP errors — the controller handles `!ok`
+- Open for next slice: S6 extends `tests/smoke/test_e2e_local.py` to `analyze`; S7: Dockerfile must copy `cards/`; PR-04 in a real browser through IAP is the owner's check

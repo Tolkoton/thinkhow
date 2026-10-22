@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ view.title }}{% endblock %}
+{% block body %}
+<h1>{{ view.title }}</h1>
+{% for s in view.sessions %}
+<section>
+  <h2>Сесія {{ s.no }}{% if s.closed_at %} (завершено){% endif %}</h2>
+  {% for t in s.turns %}
+  <article id="t{{ t.no }}" class="turn {{ t.role }}">
+    <p class="who"><a href="#t{{ t.no }}">#{{ t.no }}</a> {% if t.role == "user" %}Ви{% else %}Фасилітатор{% endif %}</p>
+    <p class="text">{{ t.text }}</p>
+  </article>
+  {% endfor %}
+</section>
+{% endfor %}
+<div id="live"></div>
+<p id="error" class="error"></p>
+{% if own %}
+<form id="reply-form" method="post" action="/topics/{{ view.ref.uid }}/{{ view.ref.topic_id }}/reply"
+      data-key="draft:{{ view.ref.uid }}/{{ view.ref.topic_id }}">
+  <textarea name="text"></textarea>
+  <button id="send" type="submit">Надіслати</button>
+  <button id="retry" type="button"{% if not view.awaiting_answer %} hidden{% endif %}>Спробуйте ще раз</button>
+</form>
+<form method="post" action="/topics/{{ view.ref.uid }}/{{ view.ref.topic_id }}/close">
+  <button type="submit">Завершити сесію</button>
+</form>
+<script src="/static/conversation.js"></script>
+{% endif %}
+{% endblock %}

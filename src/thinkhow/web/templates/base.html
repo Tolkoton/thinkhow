@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ThinkHow{% endblock %}</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 46rem; margin: 2rem auto; padding: 0 1rem; }
+    .turn .text, .turn.model { white-space: pre-wrap; }
+    .turn { margin: 0.8rem 0; }
+    .who { font-weight: 600; margin: 0; }
+    .error { color: #a00; }
+    textarea { width: 100%; min-height: 6rem; }
+  </style>
+</head>
+<body>
+<p><a href="/">ThinkHow</a></p>
+{% block body %}{% endblock %}
+</body>
+</html>

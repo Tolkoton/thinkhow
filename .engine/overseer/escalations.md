@@ -120,3 +120,19 @@ one; do not reopen the old one in conversation.
 - Evidence: `.engine/slices/skel-workspace.md`, «Revisions during planning»; `respond.py` без нормалізації.
 - Falsified by: тестувальник або overseer знайде ще одну неназвану поведінку в цьому ж місці.
 - Status: CLOSED
+
+## 2026-10-22T17:35Z — AUTONOMOUS — skel-web-wording
+- Decision: тексти, які бачить людина в кістяку (помилки «Тему не знайдено.», «Спершу дочекайтеся відповіді або натисніть «Спробуйте ще раз».», «Порожню репліку не надіслано.», «Щось пішло не так — спробуйте ще раз.», «Потрібно увійти через Google», підписи кнопок і сторінок), пише агент.
+- Door: two-way
+- Cost to reverse: рядки в шаблонах і одному обробнику помилок.
+- Why not escalated: власник вирішив «спершу прототип» (задача 105) і відклав дрібниці до знайомства з ним; слова — не продуктове рішення.
+- Evidence: `.engine/slices/skel-web.md`, Seam; critic note 4.
+- Status: CLOSED
+
+## 2026-10-22T17:55Z — AUTONOMOUS — skel-web-cold-reader
+- Decision: друге BLOCK cold-reader-а на skel-web (порожнє поле форми — 422 JSON FastAPI повз один обробник) виправлено в контракті (`Form("")`, `RequestValidationError` → 400) і запечатано без третього прогону.
+- Door: two-way
+- Cost to reverse: перепланувати й перепечатати контракт; код ще не написано.
+- Why not escalated: технічна деталь в межах уже ухваленого «один обробник помилок» (M3 A4); engine-rules «BLOCK you can resolve → fix it, log it, continue».
+- Evidence: `.engine/slices/skel-web.md`, «Revisions during planning»; probe cold-reader-а (FastAPI 0.159.1, `dependencies/utils.py:906`).
+- Status: CLOSED
