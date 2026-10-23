@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% block body %}
-<p>Мова: {{ language.name }} · <a href="/language">змінити</a></p>
+<p class="meta">Мова: {{ language.name }} · <a href="/language">змінити</a></p>
 <h1>Мої теми</h1>
-<ul>
+<ul class="topics">
 {% for t in mine %}  <li><a href="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}">{{ t.title }}</a></li>
-{% else %}  <li>Поки жодної теми.</li>
+{% else %}  <li class="empty">Поки жодної теми.</li>
 {% endfor %}</ul>
 <h2>Нова тема</h2>
-<form method="post" action="/topics">
+<form class="inline" method="post" action="/topics">
   <input name="title" required>
-  <button type="submit">Створити</button>
+  <button class="primary" type="submit">Створити</button>
 </form>
 {% if user.is_owner %}
 <h2>Усі теми</h2>
-<ul>
-{% for t in everyone %}  <li><a href="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}">{{ t.title }}</a> — {{ t.ref.uid }}</li>
+<ul class="topics">
+{% for t in everyone %}  <li><a href="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}">{{ t.title }}</a> <span class="meta">— {{ t.ref.uid }}</span></li>
 {% endfor %}</ul>
 {% endif %}
 {% endblock %}

@@ -1,0 +1,2 @@
+light: body bg rgb(255, 255, 255); :has pending visible before=False after=True; UA=145.0.7632.6
+dark: body bg rgb(17, 17, 17); :has pending visible before=False after=True; UA=145.0.7632.6

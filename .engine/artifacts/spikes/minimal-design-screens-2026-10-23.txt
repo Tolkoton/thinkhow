@@ -1,0 +1,13 @@
+conversation: /topics/local-owner/t-5d125665b093 — 4 turns
+desktop-light: screenshots taken; body background rgb(246, 245, 242)
+desktop-dark: screenshots taken; body background rgb(21, 23, 27)
+phone-light: screenshots taken; body background rgb(246, 245, 242)
+phone-dark: screenshots taken; body background rgb(21, 23, 27)
+dark theme: body luminance {('desktop', 'light'): 0.913, ('desktop', 'dark'): 0.009, ('phone', 'light'): 0.913, ('phone', 'dark'): 0.009}
+pending: visible while /reply is held; screenshot taken
+pending: hidden after the answer; #send enabled; 6 turns
+500: pending hidden, #send enabled, error shown: Перевірка: помилка сервера
+network error: «Спробуйте ще раз» visible, pending hidden
+width 390px: no horizontal scroll on «Мої теми» and on the topic with a 60-letter word
+width 360px: no horizontal scroll on «Мої теми» and on the topic with a 60-letter word
+OK: dark theme, pending state, hidden buttons, line breaks, phone width; screenshots in tasks/done/201-minimal-design/screens

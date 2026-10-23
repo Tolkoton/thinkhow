@@ -105,3 +105,17 @@
 - Surprises: none in the code; the departures from the feature artifact (default field, rules.md untouched, no 409)
   are logged AUTONOMOUS (escalations 2026-10-23T18:40Z)
 - Open: deployment by the owner (checklist 10–14 in `docs/deploy.md`)
+
+## Slice 11 — minimal-design (DONE 2026-10-23) — task 201
+
+- Module: `web/static/style.css` (new, one palette for the light and the dark theme), `web/templates/*.html` (link,
+  `<header class="site">`, `<main>`, classes, `#pending`, `autocomplete="off"` on `#send`/`#retry`); `conversation.js`
+  unchanged; `scripts/screenshots_minimal_design.py` (new)
+- Tests: 13 contract tests of the slice-tester (`tests/contract/minimal_design/`); `testing.py check` — match for
+  skel-web, voice-dictation, voice-language, voice-reply-language
+- Smoke: `scripts/screenshots_minimal_design.py` — OK (dark theme, pending while `/reply` is held, error and network
+  ends, hidden buttons, line breaks, no horizontal scroll at 390/360 px), output
+  `.engine/artifacts/spikes/minimal-design-screens-2026-10-23.txt`, screenshots `tasks/done/201-minimal-design/screens/`;
+  `smoke_test_voice_dictation.py`, `smoke_test_skel_web.py`, `smoke_test_voice_language.py` — OK
+- Surprises: `.turn.model { pre-wrap }` (old) put blank lines into saved answers — fixed (behaviors file, self-added)
+- Open: I2 contrast threshold 4.5:1 PROVISIONAL (owner); `autocomplete="off"` not checked in a real Firefox

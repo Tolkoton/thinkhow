@@ -3,11 +3,11 @@
 {% block body %}
 <h1>Мова</h1>
 <p>Якою мовою ви говорите й пишете? Нею розпізнаватиметься голос і відповідатиме фасилітатор.</p>
-<form method="post" action="/language">
+<form class="inline" method="post" action="/language">
   <select name="code" required>
 {% if not current %}    <option value="">— оберіть мову —</option>
 {% endif %}{% for lang in languages %}    <option value="{{ lang.code }}"{% if lang.code == current %} selected{% endif %}>{{ lang.name }}</option>
 {% endfor %}  </select>
-  <button type="submit">Зберегти</button>
+  <button class="primary" type="submit">Зберегти</button>
 </form>
 {% endblock %}
