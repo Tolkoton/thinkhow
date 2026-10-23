@@ -25,6 +25,7 @@ from fastapi.testclient import TestClient
 from thinkhow.access import CurrentUser
 from thinkhow.platform.config import load_settings
 from thinkhow.platform.identity import IapIdentity
+from thinkhow.platform.speech import ScriptedSpeech
 from thinkhow.platform.storage import LocalStorage
 from thinkhow.web.server import Deps, create_app
 
@@ -182,6 +183,7 @@ def make_app(tmp_path: Path) -> App:
         settings=settings,
         facilitate=_no_facilitate,
         now=lambda: datetime(2026, 10, 23, 16, 0, 0, tzinfo=UTC),
+        speech=ScriptedSpeech("(локальний режим) розпізнаний текст"),
     )
     fastapi_app = create_app(deps)
     client = TestClient(fastapi_app, raise_server_exceptions=False, follow_redirects=False)

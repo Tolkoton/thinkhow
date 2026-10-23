@@ -35,6 +35,7 @@ from thinkhow.facilitation.types import FacilitationContext, FacilitatorUpdate, 
 from thinkhow.platform import log
 from thinkhow.platform.config import load_settings
 from thinkhow.platform.identity import IapIdentity
+from thinkhow.platform.speech import ScriptedSpeech
 from thinkhow.platform.storage import Bucket, LocalStorage
 from thinkhow.web.server import Deps, create_app
 from thinkhow.workspace import TopicRef, create_topic, reply, set_language
@@ -160,6 +161,7 @@ def make_app(
         settings=settings_for(tmp_path),
         facilitate=fac,
         now=now,
+        speech=ScriptedSpeech("(локальний режим) розпізнаний текст"),
     )
     client = TestClient(create_app(deps), raise_server_exceptions=False, follow_redirects=False)
     return App(client, store, fac)

@@ -35,6 +35,19 @@ Near the model's 15-minute limit (`gen_long.py` wrote 14 varied Ukrainian monolo
 - the same, mp4/AAC 64 kbit/s, 7 706 674 bytes → 12.01 s to text, WER 0.026.
 So a recording up to the 15-minute limit goes inline in one request (well under Cloud Run's 32 MiB request body).
 
+Bitrate (slice voice-dictation, critic): Chromium's default `MediaRecorder` audio is ~128 kbit/s (`uk0.webm`
+187 700 B for 11.7 s), so a 14.5-min dictation would be ~14 MB — never sent. With `audioBitsPerSecond: 64000`
+(`record64.py` — `record.py` with `audioBitsPerSecond: 64000` and only webm/opus and `audio/mp4`; run on `uk0.wav`
+and `en0.wav`) Chromium honours it (`uk0.webm` 94 580 B, `en0.webm` 104 786 B; mp4/opus alike) and
+`gemini-3.5-transcribe` reads them with WER 0 in ~1 s (`results64.json`). The near-limit webm above is libopus at
+its default (~64 kbit/s; 78 kbit/s with the container) — a re-encode with `bit_rate = 64000` gave the same bytes —
+so 14.7 min at 64 kbit/s ≈ 8.6 MB is the measured case.
+
+Language codes (`probe_codes.py` → `probe_codes_output.txt`): `xx-XX` → `400 INVALID_ARGUMENT` («language code
+xx-XX … is not valid»); `uk-UA`, `rup-BG`, `ceb`, `cmn-Hans-CN` accepted. With a mismatched pinned code
+(`cmn-Hans-CN`, `rup-BG`, `ceb`) the Ukrainian clip still came back as Ukrainian text: the pin is a hint, not a
+filter.
+
 Finding on repeated audio: a 194 s file made of the SAME two sentences nine times (`uk0`+`uk1` ×9) came back with
 one extra copy of the pair (440 words for 396) in both runs. Varied speech (above) did not do this. Real dictation
 is not a loop of identical sentences; noted as a known failure mode, not a blocker.

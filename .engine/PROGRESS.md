@@ -74,3 +74,19 @@
   splits GET vs. the rest only; a list in the profile's `language` field broke a dict lookup (caught by I1)
 - Open for next slice: S2 (`voice-dictation`) and S3 (`voice-reply-language`) call `workspace.language(...)` and get
   409 on POST from the handler; the owner chooses a language once after the deployment
+
+## Slice 9 — voice-dictation (DONE 2026-10-23) — F13, tracer bullet part 2
+
+- Module: `src/thinkhow/platform/speech.py` (`GeminiSpeech` — `gemini-3.5-transcribe` on Vertex `eu`, pinned
+  language, retries, `speech_call` log; `ScriptedSpeech`; `make_speech`), `platform/_retry.py` (the retry rule moved
+  out of `llm`), `workspace/voice.py` (`transcribe`), `web` — `POST …/voice`, 400/502 fragments, `Deps.speech`;
+  `static/conversation.js` — `createRecorder` and the page's microphone (~330 LOC with JS)
+- Tests: 52 contract tests of the slice-tester (`tests/contract/voice_dictation/`, 18 under `node --test`); live
+  `tests/live/test_speech_live.py` (`-m live`: webm 1.38 s, AAC 1.16 s, verbatim; `-m live_codes`: `xx-XX` refused,
+  all 85 codes accepted)
+- Smoke: passed — `uv run --with playwright==1.64.1 python scripts/smoke_test_voice_dictation.py` (real Chromium,
+  fake microphone), output `.engine/artifacts/spikes/voice-dictation-smoke-2026-10-23.txt`
+- Docs: ADR-0005; M2 S8, M3 A2/A6 and the diagram, INDEX F13; `docs/deploy.md` checklist items 10–14
+- Surprises: Chromium records 128 kbit/s by default (pinned 64 kbit/s); Playwright does not expose Blob bodies; a
+  mismatched pinned language is a hint, not a filter; the 1.64 Playwright needs the cached chromium-1208 by path
+- Open for next slice: S3 (`voice-reply-language`) — the facilitator answers in the profile's language

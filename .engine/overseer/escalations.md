@@ -160,3 +160,17 @@ one; do not reopen the old one in conversation.
 - Why not escalated: виправлення інструкції під уже наявний код (`load_settings`); engine-rules «BLOCK you can resolve → fix it, log it, continue».
 - Evidence: `.engine/slices/skel-guards-deploy.md`, «Revisions during planning».
 - Status: CLOSED
+
+## 2026-10-23T17:50Z — AUTONOMOUS — voice-dictation-playwright
+- Decision: контракт `voice-dictation` (Q10b) каже додати Playwright у dev-залежності (`uv add --dev playwright`); це
+  дія з дозволу (engine-rules, `ask` у налаштуваннях), а задача йде без нагляду. Smoke запускається
+  `uv run --with playwright==1.64.1 python scripts/smoke_test_voice_dictation.py` — тимчасове середовище uv, проєкт і
+  `uv.lock` не змінюються; Chromium 1208 уже в кеші сервера. Додати Playwright у dev-залежності — пропозиція власникові.
+- Door: two-way
+- Cost to reverse: один рядок `uv add --dev playwright` і зміна команди в smoke-скрипті.
+- Why not escalated: стосується лише способу запуску smoke, не продукту; правка `pyproject.toml` руками в обхід дозволу
+  була б обходом запобіжника. Cold reader контракту сам радив не чекати дозволу (нотатка 2), а виправлення контракту
+  не потрапило в запечатаний текст (помилка агента: скрипт правок упав до запису, печатку поставлено на попередній
+  текст).
+- Evidence: `.engine/slices/voice-dictation.md` (Q10b, запечатано 2c67e3513d8a…); журнал цієї сесії.
+- Status: CLOSED

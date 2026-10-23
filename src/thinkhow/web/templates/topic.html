@@ -19,6 +19,9 @@
 <form id="reply-form" method="post" action="/topics/{{ view.ref.uid }}/{{ view.ref.topic_id }}/reply"
       data-key="draft:{{ view.ref.uid }}/{{ view.ref.topic_id }}">
   <textarea name="text"></textarea>
+  <button id="mic" type="button">🎤 Говорити</button>
+  <button id="recognize" type="button" hidden>Розпізнати ще раз</button>
+  <span id="mic-state"></span>
   <button id="send" type="submit">Надіслати</button>
   <button id="retry" type="button"{% if not view.awaiting_answer %} hidden{% endif %}>Спробуйте ще раз</button>
 </form>

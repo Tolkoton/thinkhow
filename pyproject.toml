@@ -23,8 +23,12 @@ dev = [
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
-markers = ["live: calls real Google services (Vertex AI); run with -m live"]
-addopts = "-m 'not live'"
+# gate-allow: adds the live_codes marker the voice-dictation contract names (85 paid calls kept out of every run)
+markers = [
+    "live: calls real Google services (Vertex AI); run with -m live",
+    "live_codes: the 85 language codes against the real speech model; run with -m live_codes",
+]
+addopts = "-m 'not live and not live_codes'"
 
 [tool.ruff]
 line-length = 110

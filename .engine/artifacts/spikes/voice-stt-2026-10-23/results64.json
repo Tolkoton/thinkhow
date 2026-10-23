@@ -1,0 +1,82 @@
+[
+ {
+  "file": "en0.mp4",
+  "model": "transcribe",
+  "fmt": "mp4",
+  "lang": "en",
+  "secs": 1.37,
+  "wer": 0.0,
+  "hyp": "I am trying to decide whether to move to a new job in another city. The salary is higher, but I am afraid of losing my friends and my usual routine.",
+  "err": ""
+ },
+ {
+  "file": "en0.mp4",
+  "model": "flash",
+  "fmt": "mp4",
+  "lang": "en",
+  "secs": 4.5,
+  "wer": 0.0,
+  "hyp": "I am trying to decide whether to move to a new job in another city. The salary is higher, but I am afraid of losing my friends and my usual routine.",
+  "err": ""
+ },
+ {
+  "file": "en0.webm",
+  "model": "transcribe",
+  "fmt": "webm",
+  "lang": "en",
+  "secs": 0.97,
+  "wer": 0.0,
+  "hyp": "I am trying to decide whether to move to a new job in another city. The salary is higher, but I am afraid of losing my friends and my usual routine.",
+  "err": ""
+ },
+ {
+  "file": "en0.webm",
+  "model": "flash",
+  "fmt": "webm",
+  "lang": "en",
+  "secs": 2.56,
+  "wer": 0.0,
+  "hyp": "I am trying to decide whether to move to a new job in another city, the salary is higher, but I am afraid of losing my friends and my usual routine.",
+  "err": ""
+ },
+ {
+  "file": "uk0.mp4",
+  "model": "transcribe",
+  "fmt": "mp4",
+  "lang": "uk",
+  "secs": 0.98,
+  "wer": 0.0,
+  "hyp": "Я думаю, чи варто мені переходити на нову роботу в іншому місті. Там більша зарплата, але я боюся втратити друзів і звичний ритм життя.",
+  "err": ""
+ },
+ {
+  "file": "uk0.mp4",
+  "model": "flash",
+  "fmt": "mp4",
+  "lang": "uk",
+  "secs": 3.29,
+  "wer": 0.0,
+  "hyp": "Я думаю, чи варто мені переходити на нову роботу в іншому місті? Там більша зарплата, але я боюся втратити друзів і звичний ритм життя.",
+  "err": ""
+ },
+ {
+  "file": "uk0.webm",
+  "model": "transcribe",
+  "fmt": "webm",
+  "lang": "uk",
+  "secs": 0.99,
+  "wer": 0.0,
+  "hyp": "Я думаю, чи варто мені переходити на нову роботу в іншому місті. Там більша зарплата, але я боюся втратити друзів і звичний ритм життя.",
+  "err": ""
+ },
+ {
+  "file": "uk0.webm",
+  "model": "flash",
+  "fmt": "webm",
+  "lang": "uk",
+  "secs": 4.36,
+  "wer": 0.0,
+  "hyp": "Я думаю, чи варто мені переходити на нову роботу в іншому місті. Там більша зарплата, але я боюся втратити друзів і звичний ритм життя.",
+  "err": ""
+ }
+]

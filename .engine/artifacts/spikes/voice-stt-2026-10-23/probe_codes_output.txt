@@ -1,0 +1,5 @@
+xx-XX ERR ClientError 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Unable to submit request because the language code xx-XX (qos=CRITICAL) is not valid. Provide a well-f
+uk-UA OK Я думаю, чи варто мені переходити на нову роботу в іншому мі
+rup-BG OK Я думаю, чи варто мені переходити на нову роботу в іншому мі
+ceb OK Я думаю, чи варто мені переходити на нову роботу в іншому мі
+cmn-Hans-CN OK Я думаю, чи варто мені переходити на нову роботу в іншому мі

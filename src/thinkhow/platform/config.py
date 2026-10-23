@@ -29,6 +29,8 @@ class Settings(BaseSettings):
     local_user_email: str = "owner@localhost"
     llm_timeout_s: float = 300.0
     llm_attempts: int = 3
+    speech_model: str = "gemini-3.5-transcribe"
+    speech_timeout_s: float = 120.0
 
     @classmethod
     def settings_customise_sources(

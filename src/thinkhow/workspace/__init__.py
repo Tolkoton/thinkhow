@@ -32,6 +32,7 @@ from thinkhow.workspace.topics import (
     reply,
     retry,
 )
+from thinkhow.workspace.voice import transcribe
 
 __all__ = [
     "CARD_ID",
@@ -65,4 +66,5 @@ __all__ = [
     "reply",
     "retry",
     "set_language",
+    "transcribe",
 ]

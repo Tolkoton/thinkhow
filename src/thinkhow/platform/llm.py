@@ -4,18 +4,16 @@ Vertex AI (google-genai) in production, a scripted double in tests and local mod
 Does NOT build prompts or know any schema of the parts; the knowledge revision is opaque log data.
 """
 
-import random
 import time
 from collections.abc import Callable, Iterator, Sequence
 from dataclasses import dataclass
 from typing import Any, Literal, Protocol, TypeVar
 
-import httpx
-import httpx2
-from google.genai import errors, types
+from google.genai import types
 from pydantic import BaseModel
 
 from thinkhow.platform._reply_stream import ReplyExtractor
+from thinkhow.platform._retry import backoff_s, retryable
 from thinkhow.platform.config import Settings
 from thinkhow.platform.log import log_event
 
@@ -164,9 +162,9 @@ class VertexLlm:
 
     def _fail_or_wait(self, exc: Exception, attempt: int, shown: bool) -> None:
         """Raise LlmUnavailable unless a retry is allowed; otherwise wait the backoff."""
-        if shown or not _retryable(exc) or attempt + 1 >= self.attempts:
+        if shown or not retryable(exc) or attempt + 1 >= self.attempts:
             raise LlmUnavailable(f"the model did not answer: {type(exc).__name__}") from exc
-        self.sleep(min(2**attempt, 30) * random.uniform(0.5, 1.0))
+        self.sleep(backoff_s(attempt))
 
     def _log(self, call: _Attempt, started: float, rev: KnowledgeRev | None, outcome: str) -> None:
         log_event(
@@ -182,12 +180,6 @@ class VertexLlm:
             n=rev.n if rev else None,
             outcome=outcome,
         )
-
-
-def _retryable(exc: Exception) -> bool:
-    if isinstance(exc, (httpx.TimeoutException, httpx2.TimeoutException)):
-        return True
-    return isinstance(exc, errors.APIError) and (exc.code == 429 or exc.code >= 500)
 
 
 def _contents(turns: Sequence[Turn]) -> list[types.Content]:

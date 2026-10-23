@@ -104,6 +104,87 @@ function createController({ fetch, storage, ui, key }) {
   };
 }
 
+// The microphone: record → send the recording → the text into the field; the recording stays until text came (F13).
+// The recorder's last chunk and its `stop` event come after recorder.stop() returns, so the Blob is built there.
+function createRecorder({ media, Recorder, fetch, ui, url, limitMs, setTimeout, clearTimeout }) {
+  const TYPES = ["audio/webm;codecs=opus", "audio/mp4"];
+  const NOT_SENT = "Не вдалося надіслати запис — спробуйте ще раз; якщо не вийде, увійдіть знову в новій вкладці.";
+  let recorder = null;
+  let timer = null;
+  let held = null;
+
+  function options() {
+    const mimeType = TYPES.find((t) => Recorder.isTypeSupported(t));
+    return mimeType ? { mimeType, audioBitsPerSecond: 64000 } : { audioBitsPerSecond: 64000 };
+  }
+
+  function listen(rec, stream) {
+    const chunks = [];
+    rec.addEventListener("dataavailable", (e) => {
+      if (e.data && e.data.size !== 0) chunks.push(e.data);
+    });
+    rec.addEventListener("stop", () => {
+      for (const track of stream.getTracks()) track.stop();
+      held = new Blob(chunks, { type: rec.mimeType || "audio/webm" });
+      recognize();
+    });
+  }
+
+  async function start() {
+    let stream;
+    try {
+      stream = await media.getUserMedia({ audio: true });
+    } catch (e) {
+      ui.showError("Немає доступу до мікрофона.");
+      return;
+    }
+    recorder = new Recorder(stream, options());
+    listen(recorder, stream);
+    recorder.start();
+    ui.recording();
+    timer = setTimeout(stop, limitMs);
+  }
+
+  function stop() {
+    if (!recorder || recorder.state !== "recording") return;
+    clearTimeout(timer);
+    recorder.stop();
+  }
+
+  function fragmentText(body) {
+    const m = /^\s*<p class="error">([\s\S]*)<\/p>\s*$/.exec(body);
+    return m ? m[1].replace(/<[^>]*>/g, "").trim() : null;
+  }
+
+  async function answer(response) {
+    const type = response.headers.get("content-type") || "";
+    if (response.ok && type.startsWith("application/json")) {
+      const { text } = await response.json();
+      if (text) {
+        held = null;
+        ui.insertText(text);
+        return ui.idle();
+      }
+      return ui.showError("Не почули слів — спробуйте ще раз.");
+    }
+    return ui.showError(fragmentText(await response.text()) || NOT_SENT);
+  }
+
+  async function recognize() {
+    if (!held) return;
+    ui.recognizing();
+    try {
+      const response = await fetch(url, { method: "POST", body: held, headers: { "Content-Type": held.type } });
+      await answer(response);
+    } catch (e) {
+      ui.showError(NOT_SENT);
+    }
+    if (held) ui.offerRecognize();
+  }
+
+  return { start, stop, recognize, recording: () => !!recorder && recorder.state === "recording" };
+}
+
 // The page: wire the form and the buttons to the controller.
 function attach(doc, win) {
   const form = doc.getElementById("reply-form");
@@ -149,9 +230,59 @@ function attach(doc, win) {
     controller.send(field.value);
   });
   if (retry) retry.addEventListener("click", () => controller.retry());
+  attachMic(doc, win, form, field, error);
 }
 
-const ThinkHow = { createSseParser, createController };
+// The page's microphone: the buttons, the words of the state, and the field the text is appended to (I5).
+function attachMic(doc, win, form, field, error) {
+  const mic = doc.getElementById("mic");
+  const again = doc.getElementById("recognize");
+  const state = doc.getElementById("mic-state");
+  if (!mic || !win.navigator || !win.navigator.mediaDevices) return;
+  const key = form.dataset.key;
+  const ui = {
+    recording() {
+      error.textContent = "";
+      again.hidden = true;
+      state.textContent = "Запис… натисніть ще раз, щоб зупинити";
+    },
+    recognizing() {
+      mic.disabled = again.disabled = true;
+      state.textContent = "Розпізнаю…";
+    },
+    insertText(text) {
+      const before = field.value;
+      field.value = before === "" || /[ \n]$/.test(before) ? before + text : before + " " + text;
+    },
+    idle() {
+      mic.disabled = again.disabled = false;
+      again.hidden = true;
+      state.textContent = "";
+    },
+    showError(text) {
+      mic.disabled = again.disabled = false;
+      state.textContent = "";
+      error.textContent = text;
+    },
+    offerRecognize() {
+      again.hidden = false;
+    },
+  };
+  const recorder = createRecorder({
+    media: win.navigator.mediaDevices,
+    Recorder: win.MediaRecorder,
+    fetch: win.fetch.bind(win),
+    ui,
+    url: "/topics/" + key.slice("draft:".length) + "/voice",
+    limitMs: 14.5 * 60 * 1000,
+    setTimeout: win.setTimeout.bind(win),
+    clearTimeout: win.clearTimeout.bind(win),
+  });
+  mic.addEventListener("click", () => (recorder.recording() ? recorder.stop() : recorder.start()));
+  again.addEventListener("click", () => recorder.recognize());
+}
+
+const ThinkHow = { createSseParser, createController, createRecorder };
 if (typeof module !== "undefined") {
   module.exports = ThinkHow;
 } else {

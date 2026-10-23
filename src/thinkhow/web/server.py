@@ -13,8 +13,9 @@ from pathlib import Path
 from typing import Annotated, Any
 
 from fastapi import Depends, FastAPI, Form, Request
+from fastapi.concurrency import run_in_threadpool
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import HTMLResponse, RedirectResponse, Response, StreamingResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -24,6 +25,7 @@ from thinkhow.facilitation import Facilitate
 from thinkhow.platform import log
 from thinkhow.platform.config import Settings
 from thinkhow.platform.identity import FixedIdentity, IapIdentity, IdentityError
+from thinkhow.platform.speech import Speech, SpeechUnavailable
 from thinkhow.platform.storage import Storage
 
 HERE = Path(__file__).resolve().parent
@@ -42,6 +44,7 @@ class Deps:
     settings: Settings
     facilitate: Facilitate
     now: Callable[[], datetime]
+    speech: Speech
 
 
 def create_app(deps: Deps) -> FastAPI:
@@ -103,6 +106,15 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         ref = workspace.TopicRef(uid, topic_id)
         return _stream(workspace.retry(deps.storage, deps.facilitate, user, ref, deps.now()))
 
+    @app.post("/topics/{uid}/{topic_id}/voice")
+    async def voice(request: Request, user: User, uid: str, topic_id: str) -> Response:
+        """The recording's raw bytes → text; the model call runs in the thread pool, not on the event loop."""
+        audio, mime = await request.body(), request.headers.get("content-type", "")
+        ref = workspace.TopicRef(uid, topic_id)
+        call = (deps.storage, deps.speech, user, ref, audio, mime)
+        text = await run_in_threadpool(workspace.transcribe, *call)
+        return JSONResponse({"text": text})
+
     @app.post("/topics/{uid}/{topic_id}/close")
     def close(user: User, uid: str, topic_id: str) -> Response:
         workspace.close_session(deps.storage, user, workspace.TopicRef(uid, topic_id), deps.now())
@@ -159,6 +171,7 @@ MESSAGES: list[tuple[type[Exception], int, str]] = [
     (workspace.PendingAnswer, 409, "Спершу дочекайтеся відповіді або натисніть «Спробуйте ще раз»."),
     (workspace.NothingToRetry, 409, "Немає репліки, на яку треба відповісти."),
     (IdentityError, 401, "Потрібно увійти через Google."),
+    (SpeechUnavailable, 502, "Не вдалося розпізнати — спробуйте ще раз."),
 ]
 
 
@@ -192,6 +205,8 @@ async def _bad_request(request: Request, exc: Exception) -> Response:
         return _fragment(400, "Такої мови немає в переліку.")
     if request.method == "POST" and path == "/topics":
         return _fragment(400, "Назва теми порожня.")
+    if request.method == "POST" and path.endswith("/voice"):
+        return _fragment(400, "Запис не прийнято — спробуйте записати ще раз.")
     if request.method == "POST" and path.endswith("/reply"):
         return _fragment(400, "Порожню репліку не надіслано.")
     return _fragment(400, NOT_ACCEPTED)
