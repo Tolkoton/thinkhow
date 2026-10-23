@@ -31,3 +31,8 @@
 - Record: tasks/done/403-cleanup-2026-10-22/report.md
 - Reason: Every reference I could check matches its source: pyproject.toml lines 6–12, commit 8c72bfb and its subject, task 105 in blocked/, the empty TEST_CMD_FULL, the metrics history 0→7 and the empty route section. The report answers all four items of «Що зробити» and both «Готово, коли» conditions, there is no open question for the owner, and the technical terms are English. The nightly stdout and the validate/route outputs were not recorded anywhere I can read, so those are «не перевірено».
 - Request: 20261022T142503Z-6abfeb (attempt 1)
+
+## 2026-10-23T22:39:16Z — 404-cleanup-2026-10-23 — READER_PASS
+- Record: tasks/done/404-cleanup-2026-10-23/report.md
+- Reason: Every reference I could check matches: the nightly output, the findings at report.md:75, the line ranges in pyproject, speech.py, llm.py and server.py, ADR-0005, metrics.jsonl and TEST_CMD_FULL. All four «Що зробити» items have an answer, including why there was no second opinion. There are no open owner questions, and the technical terms stay in English.
+- Request: 20261023T223831Z-b60f3b (attempt 1)
