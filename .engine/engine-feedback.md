@@ -43,3 +43,9 @@ From: lesson #e07413f4 (gate, skel-knowledge, 2026-10-22).
 DELETE GUARD treats a function MOVED to another module (llm._retryable → platform/_retry.retryable, as the sealed contract voice-dictation Q5a required, the move covered by tests/contract/voice_dictation/test_vd_catchup_retry.py) as a deletion of untested code and escalates to the owner (task 901). Either recognise a move (same body, new name in the same package, imported back) or let the builder write the test of the new home first and then the guard see it as touched; today the only way through is an owner's «так».
 
 From: lesson #1875bff6 (gate, voice-dictation, 2026-10-23).
+
+## 2026-10-23 — slice-tester can hand in sealed contract tests that carry '# type: ignore' (minimal-design
+
+slice-tester can hand in sealed contract tests that carry '# type: ignore' (minimal-design, test_mdesign_invariants.py:123-125); the gate's bypass guard then blocks every Stop of the builder, who may not edit a sealed file, and the only way out is an objection round (rounds are capped at two). Suggest: the tester runs the gate's bypass guard (and mypy) on its own files before the hand-in, or testing.py record refuses a hand-in whose files add a type-ignore.
+
+From: lesson #ed996fe0 (gate, minimal-design.behaviors, 2026-10-23).
