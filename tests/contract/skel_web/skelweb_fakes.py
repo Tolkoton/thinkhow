@@ -5,6 +5,8 @@
   `ReplyDelta`, a `FacilitatorUpdate` is yielded as is, an exception is raised there, a callable is called.
 - ArmedStorage: a `LocalStorage` whose writes raise `StorageBroke` once `armed` is set.
 - make_app: `create_app(Deps(...))` with a local folder, the double and `IapIdentity(verify_fake)`.
+- choose_language: the persons of a test choose a language before a page is opened (voice-language S1:
+  a page without a chosen language is a 303 to `/language`).
 - sse_events: a strict reader of a `text/event-stream` body (each event: `event:` + ONE `data:` line + blank).
 - Page: the tags and the text of a page (html.parser), the text inside the element with a given id.
 - LogCapture: every JSON line written by `log_event` (default stream redirected) or on stdout.
@@ -35,7 +37,7 @@ from thinkhow.platform.config import load_settings
 from thinkhow.platform.identity import IapIdentity
 from thinkhow.platform.storage import Bucket, LocalStorage
 from thinkhow.web.server import Deps, create_app
-from thinkhow.workspace import TopicRef, create_topic, reply
+from thinkhow.workspace import TopicRef, create_topic, reply, set_language
 
 REPO = Path(__file__).resolve().parents[3]
 CARDS = REPO / "cards"
@@ -161,6 +163,12 @@ def make_app(
     )
     client = TestClient(create_app(deps), raise_server_exceptions=False, follow_redirects=False)
     return App(client, store, fac)
+
+
+def choose_language(storage: LocalStorage, *users: CurrentUser, code: str = "uk-UA") -> None:
+    """Each person has chosen a language, as `POST /language` would record it (voice-language S1)."""
+    for user in users:
+        set_language(storage, user, code)
 
 
 def seed_topic(

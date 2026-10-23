@@ -1,5 +1,6 @@
 """Contract tests of skel-web: local_script, build_deps in local mode end to end, a real uvicorn start."""
 
+import http.client
 import json
 import os
 import socket
@@ -98,6 +99,10 @@ def test_e2e_local_mode_build_deps_topic_reply_close_files(tmp_path: Path) -> No
     deps = build_deps(local_env(tmp_path), CARDS)
     client = TestClient(create_app(deps), follow_redirects=False)
 
+    # the person chooses a language first (voice-language S1: a page without one is a 303 to /language)
+    chosen = client.post("/language", data={"code": "uk-UA"})
+    assert chosen.status_code == 303
+
     home = client.get("/")
     assert home.status_code == 200
     assert "Усі теми" in home.text and "Мої теми" in home.text
@@ -152,17 +157,34 @@ def test_uvicorn_starts_the_app_in_local_mode_and_home_opens(tmp_path: Path) -> 
         stderr=subprocess.STDOUT,
     )
     try:
-        body, status = None, None
+        started = False
         deadline = time.monotonic() + 30
         while time.monotonic() < deadline and proc.poll() is None:
             try:
-                with urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=2) as resp:
-                    status, body = resp.status, resp.read().decode("utf-8")
+                with urllib.request.urlopen(f"http://127.0.0.1:{port}/language", timeout=2) as resp:
+                    started = resp.status == 200
                 break
             except OSError:
                 time.sleep(0.2)
+        assert started, f"uvicorn did not serve /language (exit {proc.poll()})"
+
+        # the person chooses a language first (voice-language S1), then home opens
+        conn = http.client.HTTPConnection("127.0.0.1", port, timeout=5)
+        conn.request(
+            "POST",
+            "/language",
+            body="code=uk-UA",
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+        )
+        chosen = conn.getresponse()
+        chosen.read()
+        conn.close()
+        assert chosen.status == 303
+
+        with urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=5) as resp:
+            status, body = resp.status, resp.read().decode("utf-8")
         assert status == 200, f"uvicorn did not serve / (exit {proc.poll()})"
-        assert body is not None and "Усі теми" in body
+        assert "Усі теми" in body
     finally:
         proc.terminate()
         try:

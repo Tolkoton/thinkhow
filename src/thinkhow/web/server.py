@@ -65,10 +65,21 @@ def _routes(app: FastAPI, deps: Deps) -> None:
 
     @app.get("/", response_class=HTMLResponse)
     def home(request: Request, user: User) -> Response:
+        language = workspace.language(deps.storage, user)
         mine = workspace.list_topics(deps.storage, user)
         everyone = _all_topics(deps, user) if user.is_owner else []
-        context = {"user": user, "mine": mine, "everyone": everyone}
+        context = {"user": user, "mine": mine, "everyone": everyone, "language": language}
         return TEMPLATES.TemplateResponse(request, "home.html", context)
+
+    @app.get("/language", response_class=HTMLResponse)
+    def language_page(request: Request, user: User) -> Response:
+        context = {"languages": workspace.LANGUAGES, "current": _current_code(deps, user)}
+        return TEMPLATES.TemplateResponse(request, "language.html", context)
+
+    @app.post("/language")
+    def choose_language(user: User, code: Annotated[str, Form()]) -> Response:
+        workspace.set_language(deps.storage, user, code)
+        return RedirectResponse("/", status_code=303)
 
     @app.post("/topics")
     def new_topic(user: User, title: Annotated[str, Form()] = "") -> Response:
@@ -77,6 +88,7 @@ def _routes(app: FastAPI, deps: Deps) -> None:
 
     @app.get("/topics/{uid}/{topic_id}", response_class=HTMLResponse)
     def topic(request: Request, user: User, uid: str, topic_id: str) -> Response:
+        workspace.language(deps.storage, user)
         view = workspace.open_topic(deps.storage, user, workspace.TopicRef(uid, topic_id), deps.now())
         context = {"view": view, "own": user.id == uid}
         return TEMPLATES.TemplateResponse(request, "topic.html", context)
@@ -95,6 +107,14 @@ def _routes(app: FastAPI, deps: Deps) -> None:
     def close(user: User, uid: str, topic_id: str) -> Response:
         workspace.close_session(deps.storage, user, workspace.TopicRef(uid, topic_id), deps.now())
         return RedirectResponse(f"/topics/{uid}/{topic_id}", status_code=303)
+
+
+def _current_code(deps: Deps, user: CurrentUser) -> str:
+    """The chosen code to mark in the list, or "" before the first choice (the language page needs none)."""
+    try:
+        return workspace.language(deps.storage, user).code
+    except workspace.NoLanguage:
+        return ""
 
 
 def _all_topics(deps: Deps, user: CurrentUser) -> list[workspace.TopicSummary]:
@@ -146,6 +166,7 @@ def _error_handlers(app: FastAPI) -> None:
     """One place turns errors into a fragment of the page (M3 A4)."""
     for kind, status, text in MESSAGES:
         app.add_exception_handler(kind, _fixed(status, text))
+    app.add_exception_handler(workspace.NoLanguage, _no_language)
     app.add_exception_handler(ValueError, _bad_request)
     app.add_exception_handler(RequestValidationError, _bad_request)
     app.add_exception_handler(Exception, _fixed(500, "Щось пішло не так — спробуйте ще раз."))
@@ -158,8 +179,17 @@ def _fixed(status: int, text: str) -> Callable[[Request, Exception], Awaitable[R
     return handler
 
 
+async def _no_language(request: Request, exc: Exception) -> Response:
+    """A page leads to the language choice; any other request gets a fragment it can show (F13 S1 Q5)."""
+    if request.method == "GET":
+        return RedirectResponse("/language", status_code=303)
+    return _fragment(409, "Спершу оберіть мову (сторінка «Мова»).")
+
+
 async def _bad_request(request: Request, exc: Exception) -> Response:
     path = request.url.path
+    if request.method == "POST" and path == "/language":
+        return _fragment(400, "Такої мови немає в переліку.")
     if request.method == "POST" and path == "/topics":
         return _fragment(400, "Назва теми порожня.")
     if request.method == "POST" and path.endswith("/reply"):

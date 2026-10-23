@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
+<p>Мова: {{ language.name }} · <a href="/language">змінити</a></p>
 <h1>Мої теми</h1>
 <ul>
 {% for t in mine %}  <li><a href="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}">{{ t.title }}</a></li>

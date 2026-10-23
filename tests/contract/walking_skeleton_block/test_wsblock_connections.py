@@ -70,7 +70,9 @@ def client_as(environ: dict[str, str], identity: Identity | None = None, **repla
         replace["identity"] = FixedIdentity(identity)
     if replace:
         deps = dataclasses.replace(deps, **replace)
-    return TestClient(create_app(deps), follow_redirects=False, raise_server_exceptions=False)
+    client = TestClient(create_app(deps), follow_redirects=False, raise_server_exceptions=False)
+    client.post("/language", data={"code": "uk-UA"})  # F13: the person has chosen a language before the pages
+    return client
 
 
 # S1 → S2/S4/S6 — Storage
@@ -261,6 +263,7 @@ def test_s4_workspace_signatures_and_its_flow_through_the_routes(tmp_path: Path)
     flaky = RecordingLlm(ScriptedLlm(web_local.local_script), fail_streams=1)
     facilitate = functools.partial(respond, knowledge=knowledge.current(base.storage), llm=flaky)
     client = TestClient(create_app(dataclasses.replace(base, facilitate=facilitate)), follow_redirects=False)
+    client.post("/language", data={"code": "uk-UA"})  # F13: a language before the pages
 
     topic = client.post("/topics", data={"title": "Через маршрути"}).headers["location"]
     assert "Через маршрути" in client.get("/").text

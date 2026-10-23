@@ -20,6 +20,9 @@ from thinkhow.web.server import create_app
 def test_seam4_local_chain_ends_in_an_observation_whose_link_opens_an_existing_turn(tmp_path: Path) -> None:
     environ = local_environ(tmp_path)
     client = TestClient(create_app(build_deps(environ, CARDS)), follow_redirects=False)
+    # voice-language.md: «`GET /topics/{uid}/{topic_id}` викликають `workspace.language(...)`» — the local
+    # person chooses a language first, otherwise the topic page answers 303 to `/language`.
+    assert client.post("/language", data={"code": "uk-UA"}).status_code == 303
     topic = client.post("/topics", data={"title": "Кав'ярня"}).headers["location"]
     client.post(f"{topic}/reply", data={"text": "Хочу відкрити кав'ярню за три місяці."})
     assert client.post(f"{topic}/close").status_code == 303

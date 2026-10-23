@@ -32,6 +32,7 @@ def test_local_chain_from_a_new_topic_to_the_files(tmp_path: Path) -> None:
         "THINKHOW_OWNER_EMAIL": "owner@localhost",
     }
     client = TestClient(create_app(build_deps(environ, CARDS)), follow_redirects=False)
+    assert client.post("/language", data={"code": "uk-UA"}).status_code == 303  # F13: language first
     assert "Мої теми" in client.get("/").text
     topic = client.post("/topics", data={"title": "Кав'ярня"}).headers["location"]
     stream = client.post(f"{topic}/reply", data={"text": "Хочу відкрити кав'ярню за три місяці."})

@@ -1,0 +1,8 @@
+first visit: GET / → 303 /language
+GET /language → 200 with <select name="code">
+POST /language pl-PL → 303 /
+GET / → 200, «Мова: Polski»
+profile.json: {'email': 'owner@localhost', 'language': 'pl-PL'}
+POST /language ru-RU → 400, profile.json unchanged
+a profile with the email only (as after task 105): GET / → 303 /language
+OK: the language is chosen, stored and refused for Russian; the files stay under /tmp/thinkhow-language-9_4qh0fg

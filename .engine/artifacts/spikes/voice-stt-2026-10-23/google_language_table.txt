@@ -1,0 +1,88 @@
+# gemini-3.5-transcribe language table, docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe
+# fetched 2026-10-23 (WebFetch, page offset 100000); code | name | status — 86 rows
+af-ZA | Afrikaans | Experimental
+am-ET | Amharic | Experimental
+ar-EG | Arabic (Egypt) | Experimental
+hy-AM | Armenian | Experimental
+as-IN | Assamese | Experimental
+az-AZ | Azerbaijani | Experimental
+be-BY | Belarusian | Experimental
+bn-BD | Bengali (Bangladesh) | Experimental
+bn-IN | Bengali (India) | Experimental
+bs-BA | Bosnian | Experimental
+bg-BG | Bulgarian | Experimental
+rup-BG | Bulgarian (Aromanian) | Experimental
+my-MM | Burmese | Experimental
+yue-Hant-HK | Cantonese (Traditional) | Experimental
+ca-ES | Catalan | Supported
+ceb | Cebuano | Experimental
+km-KH | Central Khmer | Experimental
+hr-HR | Croatian | Supported
+cs-CZ | Czech | Experimental
+da-DK | Danish | Supported
+nl-NL | Dutch | Supported
+en-AU | English (Australia) | Supported
+en-GB | English (Great Britain) | Supported
+en-IN | English (India) | Supported
+en-US | English (United States) | Supported
+et-EE | Estonian | Experimental
+fa-IR | Farsi | Experimental
+fil-PH | Filipino | Experimental
+fi-FI | Finnish | Supported
+fr-FR | French | Supported
+fr-CA | French (Canada) | Supported
+gl-ES | Galician | Experimental
+ka-GE | Georgian | Experimental
+de-DE | German | Supported
+el-GR | Greek | Supported
+gu-IN | Gujarati | Experimental
+ha-NG | Hausa | Experimental
+he-IL | Hebrew | Experimental
+hi-IN | Hindi | Supported
+hu-HU | Hungarian | Experimental
+is-IS | Icelandic | Experimental
+id-ID | Indonesian | Experimental
+it-IT | Italian | Supported
+ja-JP | Japanese | Supported
+jv-ID | Javanese | Experimental
+kea-CV | Kabuverdianu | Experimental
+kn-IN | Kannada | Experimental
+kk-KZ | Kazakh | Experimental
+ko-KR | Korean | Supported
+ky-KG | Kyrgyz | Experimental
+lv-LV | Latvian | Experimental
+ln-CD | Lingala | Experimental
+lt-LT | Lithuanian | Experimental
+mk-MK | Macedonian | Experimental
+ms-MY | Malay | Experimental
+ml-IN | Malayalam | Experimental
+mt-MT | Maltese | Experimental
+cmn-Hans-CN | Mandarin Chinese (Simplified) | Supported
+mr-IN | Marathi | Experimental
+mn-MN | Mongolian | Experimental
+ne-NP | Nepali | Experimental
+nb-NO | Norwegian | Experimental
+or-IN | Oriya | Experimental
+pl-PL | Polish | Supported
+pt-BR | Portuguese (Brazil) | Supported
+pt-PT | Portuguese (Portugal) | Supported
+pa-IN | Punjabi | Experimental
+pa-Guru-IN | Punjabi (Gurmukhi script) | Experimental
+ro-RO | Romanian | Supported
+ru-RU | Russian | Supported
+sr-RS | Serbian | Experimental
+sd-Arab-IN | Sindhi (Arabic script) | Experimental
+sk-SK | Slovak | Experimental
+sl-SI | Slovenian | Experimental
+es-419 | Spanish (Latin America) | Experimental
+es-ES | Spanish (Spain) | Supported
+es-US | Spanish (United States) | Supported
+sw-KE | Swahili (Kenya) | Experimental
+sv-SE | Swedish | Supported
+tg-TJ | Tajik | Experimental
+te-IN | Telugu | Experimental
+th-TH | Thai | Experimental
+tr-TR | Turkish | Supported
+uk-UA | Ukrainian | Supported
+uz-UZ | Uzbek | Experimental
+vi-VN | Vietnamese | Supported

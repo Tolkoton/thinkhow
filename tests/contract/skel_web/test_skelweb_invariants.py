@@ -7,9 +7,11 @@ from skelweb_fakes import (
     BOB,
     H_ALICE,
     H_OWNER,
+    OWNER,
     REPO,
     T0,
     Page,
+    choose_language,
     conv,
     make_app,
     seed_topic,
@@ -25,6 +27,7 @@ ANS = "Що може піти не так?"
 
 def test_I1_the_person_is_only_who_identify_says(tmp_path: Path) -> None:
     app = make_app(tmp_path, [["Так", update("Так")]])
+    choose_language(app.storage, ALICE, OWNER)
     bob_ref = seed_topic(app.storage, BOB, "Тема Боба", [(ASK, ANS)])
     bob_before = conv(app.storage, bob_ref)
     spoof = {"uid": "bob_2", "email": "owner@example.com", "is_owner": "true"}
@@ -81,6 +84,7 @@ def _no_markup_from_text(page: Page) -> None:
 
 def test_I2_texts_and_titles_are_shown_as_text(tmp_path: Path) -> None:
     app = make_app(tmp_path)
+    choose_language(app.storage, ALICE, OWNER)
     refs = [
         seed_topic(app.storage, ALICE, title, [(text, text)]) for title, text in zip(EVIL, EVIL, strict=True)
     ]

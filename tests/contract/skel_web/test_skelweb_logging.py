@@ -12,6 +12,7 @@ from skelweb_fakes import (
     ArmedStorage,
     ListBroken,
     LogCapture,
+    choose_language,
     install_log_capture,
     make_app,
     seed_topic,
@@ -46,6 +47,7 @@ def http_lines(logs: LogCapture, path_template: str) -> list[dict[str, Any]]:
 
 def test_request_id_from_cloud_trace_header_or_a_new_uuid4_hex(tmp_path: Path, logs: LogCapture) -> None:
     app = make_app(tmp_path)
+    choose_language(app.storage, ALICE)
     headers = {**H_ALICE, "x-cloud-trace-context": "abc123def456/7890;o=1"}
     assert app.client.get("/", headers=headers).status_code == 200
     assert app.client.get("/", headers=H_ALICE).status_code == 200
@@ -90,6 +92,7 @@ def test_sse_latency_runs_to_the_end_of_the_stream(tmp_path: Path, logs: LogCapt
 
 def test_unexpected_exception_is_logged_as_http_request_status_500(tmp_path: Path, logs: LogCapture) -> None:
     app = make_app(tmp_path, storage=ListBroken(tmp_path / "data"))
+    choose_language(app.storage, ALICE)
     assert app.client.get("/", headers=H_ALICE).status_code == 500
     lines = http_lines(logs, "/")
     assert len(lines) == 1

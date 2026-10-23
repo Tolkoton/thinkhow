@@ -11,11 +11,13 @@ from skelweb_fakes import (
     H_ALICE,
     H_BOB,
     H_OWNER,
+    OWNER,
     T0,
     ArmedStorage,
     Boom,
     ListBroken,
     Page,
+    choose_language,
     conv,
     error_fragment,
     make_app,
@@ -40,6 +42,7 @@ def url(ref: TopicRef, tail: str = "") -> str:
 
 def test_home_lists_my_topics_and_the_new_topic_form(tmp_path: Path) -> None:
     app = make_app(tmp_path)
+    choose_language(app.storage, ALICE)
     seed_topic(app.storage, ALICE, "Моя кав'ярня")
     seed_topic(app.storage, BOB, "Тема Боба")
     r = app.client.get("/", headers=H_ALICE)
@@ -54,6 +57,7 @@ def test_home_lists_my_topics_and_the_new_topic_form(tmp_path: Path) -> None:
 
 def test_owner_home_has_all_topics_with_title_and_uid(tmp_path: Path) -> None:
     app = make_app(tmp_path)
+    choose_language(app.storage, OWNER)
     seed_topic(app.storage, BOB, "Тема Боба")
     r = app.client.get("/", headers=H_OWNER)
     assert r.status_code == 200
@@ -65,6 +69,7 @@ def test_owner_home_has_all_topics_with_title_and_uid(tmp_path: Path) -> None:
 
 def test_html_routes_are_text_html_utf8(tmp_path: Path) -> None:
     app = make_app(tmp_path)
+    choose_language(app.storage, ALICE)
     ref = seed_topic(app.storage, ALICE, "Тема")
     assert app.client.get("/", headers=H_ALICE).headers["content-type"] == "text/html; charset=utf-8"
     assert app.client.get(url(ref), headers=H_ALICE).headers["content-type"] == "text/html; charset=utf-8"
@@ -72,7 +77,10 @@ def test_html_routes_are_text_html_utf8(tmp_path: Path) -> None:
 
 def test_every_request_ensures_the_profile_of_the_person(tmp_path: Path) -> None:
     app = make_app(tmp_path)
-    assert app.client.get("/", headers=H_BOB).status_code == 200
+    # Bob has no language yet: the page is a 303 to /language (voice-language S1), the login layer still ran
+    r = app.client.get("/", headers=H_BOB)
+    assert r.status_code == 303
+    assert urlparse(r.headers["location"]).path == "/language"
     raw = app.storage.read("users", "bob_2/profile.json")
     assert raw is not None
     assert json.loads(raw)["email"] == "bob@example.com"
@@ -89,6 +97,7 @@ def test_post_topics_creates_and_redirects_303_to_the_topic(tmp_path: Path) -> N
 
 def test_topic_page_title_turn_anchors_roles_and_texts(tmp_path: Path) -> None:
     app = make_app(tmp_path)
+    choose_language(app.storage, ALICE)
     ref = seed_topic(app.storage, ALICE, "Кав'ярня біля дому", [(ASK, ANS)])
     r = app.client.get(url(ref), headers=H_ALICE)
     assert r.status_code == 200
@@ -102,6 +111,7 @@ def test_topic_page_title_turn_anchors_roles_and_texts(tmp_path: Path) -> None:
 
 def test_own_topic_page_has_reply_form_send_and_close(tmp_path: Path) -> None:
     app = make_app(tmp_path)
+    choose_language(app.storage, ALICE)
     ref = seed_topic(app.storage, ALICE, "Тема", [(ASK, ANS)])
     page = Page(app.client.get(url(ref), headers=H_ALICE).text)
     assert page.has_tag("textarea", name="text")
@@ -111,6 +121,7 @@ def test_own_topic_page_has_reply_form_send_and_close(tmp_path: Path) -> None:
 
 def test_topic_awaiting_answer_shows_try_again(tmp_path: Path) -> None:
     app = make_app(tmp_path)
+    choose_language(app.storage, ALICE)
     ref = seed_topic(app.storage, ALICE, "Тема")
     make_pending(app.storage, ALICE, ref, ASK)
     page = Page(app.client.get(url(ref), headers=H_ALICE).text)
@@ -119,6 +130,7 @@ def test_topic_awaiting_answer_shows_try_again(tmp_path: Path) -> None:
 
 def test_owner_on_a_foreign_topic_sees_it_without_form_and_buttons(tmp_path: Path) -> None:
     app = make_app(tmp_path)
+    choose_language(app.storage, OWNER)
     ref = seed_topic(app.storage, BOB, "Тема Боба", [(ASK, ANS)])
     r = app.client.get(url(ref), headers=H_OWNER)
     assert r.status_code == 200
@@ -218,6 +230,7 @@ def test_storage_failure_mid_stream_is_failed_internal_and_the_stream_ends(tmp_p
 
 def test_foreign_topic_page_is_404_fragment(tmp_path: Path) -> None:
     app = make_app(tmp_path)
+    choose_language(app.storage, ALICE)
     ref = seed_topic(app.storage, BOB, "Тема Боба", [(ASK, ANS)])
     r = app.client.get(url(ref), headers=H_ALICE)
     assert r.status_code == 404
@@ -282,6 +295,7 @@ def test_empty_title_is_400_fragment_and_no_topic(tmp_path: Path) -> None:
 
 def test_value_error_on_another_route_is_400_request_not_accepted(tmp_path: Path) -> None:
     app = make_app(tmp_path, now=lambda: datetime(2026, 10, 22, 16, 0, 0))  # no time zone → ValueError (S4)
+    choose_language(app.storage, ALICE)
     ref = seed_topic(app.storage, ALICE, "Тема")
     r = app.client.get(url(ref), headers=H_ALICE)
     assert r.status_code == 400
@@ -303,6 +317,7 @@ def test_no_or_bad_iap_assertion_is_401_sign_in_with_google(tmp_path: Path) -> N
 
 def test_unexpected_exception_is_500_fragment_without_trace(tmp_path: Path) -> None:
     app = make_app(tmp_path, storage=ListBroken(tmp_path / "data"))
+    choose_language(app.storage, ALICE)
     r = app.client.get("/", headers=H_ALICE)
     assert r.status_code == 500
     assert error_fragment(r.text) == "Щось пішло не так — спробуйте ще раз."

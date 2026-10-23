@@ -29,7 +29,8 @@ addopts = "-m 'not live'"
 [tool.ruff]
 line-length = 110
 target-version = "py312"
-extend-exclude = ["sketches", ".claude"]
+# gate-allow: .engine holds spike and probe scripts, not working code (like sketches)
+extend-exclude = ["sketches", ".claude", ".engine"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP"]

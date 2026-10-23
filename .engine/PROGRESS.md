@@ -59,3 +59,18 @@
 - Smoke: none in this slice by contract — the agent has no Docker daemon and may not deploy; the image is built by the owner's `gcloud builds submit`
 - Surprises: the deploy order matters (seed before the service: the service reads the Knowledge at start); the Job needs the same `THINKHOW_*` as the service
 - Open: AC1–AC3 (PR-04, PR-07) — the owner's checklist in `docs/deploy.md`
+
+## Slice 8 — voice-language (DONE 2026-10-23) — F13, tracer bullet part 1
+
+- Module: `src/thinkhow/workspace/languages.py` (85 languages, CLDR endonyms, no Russian), `workspace/profile.py`
+  (`language`, `set_language`, `NoLanguage`), `web` — `/language` page and form, the `NoLanguage` handler (GET → 303
+  `/language`, other methods → 409), «Мова» on every page (~200 LOC with the list)
+- Tests: 20 contract tests of the slice-tester (`tests/contract/voice_language/`); 18 sealed tests of skel-web and
+  skel-learning corrected by a fresh tester on two objection packages (`.engine/testing/objections/`), only the
+  language choice added; walking-skeleton block tests, `tests/smoke/test_e2e_local.py` and both skeleton smokes
+  choose a language first
+- Smoke: passed — `scripts/smoke_test_voice_language.py`, output `.engine/artifacts/spikes/voice-language-smoke-2026-10-23.txt`
+- Surprises: FastAPI answers `HEAD` on a GET route with 405 before the login layer (critic probe) — the handler
+  splits GET vs. the rest only; a list in the profile's `language` field broke a dict lookup (caught by I1)
+- Open for next slice: S2 (`voice-dictation`) and S3 (`voice-reply-language`) call `workspace.language(...)` and get
+  409 on POST from the handler; the owner chooses a language once after the deployment

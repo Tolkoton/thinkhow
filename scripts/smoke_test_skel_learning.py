@@ -37,6 +37,7 @@ def main() -> None:
     print("seed:", seeded.returncode, seeded.stdout.strip())
     assert seeded.returncode == 0
     client = TestClient(server.create_app(app_module.build_deps(env, ROOT / "cards")), follow_redirects=False)
+    assert client.post("/language", data={"code": "uk-UA"}).status_code == 303  # F13: language first
     topic = client.post("/topics", data={"title": "Smoke"}).headers["location"]
     client.post(f"{topic}/reply", data={"text": "Хочу перевірити план запуску."})
     client.post(f"{topic}/close")

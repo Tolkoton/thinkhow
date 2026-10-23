@@ -38,12 +38,16 @@ def main() -> None:
     try:
         for _ in range(100):
             try:
-                home = httpx.get(base + "/")
+                httpx.get(base + "/language")
                 break
             except httpx.ConnectError:
                 time.sleep(0.1)
         else:
             raise AssertionError("uvicorn did not start")
+        chosen = httpx.post(base + "/language", data={"code": "uk-UA"})
+        assert chosen.status_code == 303, chosen.status_code
+        print("POST /language uk-UA → 303 (F13: a language is chosen before the pages)")
+        home = httpx.get(base + "/")
         assert home.status_code == 200 and "Мої теми" in home.text and "Усі теми" in home.text
         print("GET / → 200, «Мої теми», «Усі теми»")
         topic = httpx.post(base + "/topics", data={"title": "Smoke"}).headers["location"]

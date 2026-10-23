@@ -1,5 +1,6 @@
 """ThinkHow part: workspace (M3 A1) — topics, conversation.md, map.json, profile.json (sole writer)."""
 
+from thinkhow.workspace.languages import LANGUAGES, Language
 from thinkhow.workspace.model import (
     CARD_ID,
     SILENCE,
@@ -19,6 +20,7 @@ from thinkhow.workspace.model import (
     TopicSummary,
     TopicView,
 )
+from thinkhow.workspace.profile import NoLanguage, language, set_language
 from thinkhow.workspace.topics import (
     all_topics_for_learning,
     close_session,
@@ -33,11 +35,14 @@ from thinkhow.workspace.topics import (
 
 __all__ = [
     "CARD_ID",
+    "LANGUAGES",
     "SILENCE",
     "Answered",
     "ClosedSession",
     "Delta",
     "Failed",
+    "Language",
+    "NoLanguage",
     "NothingToRetry",
     "NumberedTurn",
     "PendingAnswer",
@@ -54,8 +59,10 @@ __all__ = [
     "closed_sessions",
     "create_topic",
     "ensure_profile",
+    "language",
     "list_topics",
     "open_topic",
     "reply",
     "retry",
+    "set_language",
 ]
