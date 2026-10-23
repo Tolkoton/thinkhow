@@ -1,0 +1,21 @@
+seed: 0 {"severity": "INFO", "created": true, "event": "seed_done", "request_id": null}
+{"severity": "INFO", "method": "POST", "route": "/language", "status": 303, "latency_ms": 3, "event": "http_request", "request_id": "d6ca6e094c1647fc8ae5778c74ba0bdd"}
+{"severity": "INFO", "method": "POST", "route": "/topics", "status": 303, "latency_ms": 2, "event": "http_request", "request_id": "6524ab0525dc4a14969b267b62112c70"}
+{"severity": "INFO", "method": "POST", "route": "/topics/{uid}/{topic_id}/reply", "status": 200, "latency_ms": 12, "event": "http_request", "request_id": "6935f2eda4ac4acfa5ef1f5a75f6aee4"}
+analyze: 0 {"severity": "INFO", "written": 1, "skipped": 0, "failed": 0, "event": "analyze_done", "request_id": null}
+observation: {
+  "uid": "local-owner",
+  "topic_id": "t-d5c92bfd74f8",
+  "first_turn": 1,
+  "last_turn": 2,
+  "turn": 1,
+  "link": "/topics/local-owner/t-d5c92bfd74f8#t1",
+  "worked": true,
+  "finding": "(локальний режим) Людина назвала план; фасилітатор поставив одне питання.",
+  "cause": "facilitation",
+  "analyzed_at": "2026-10-23T22:34:26.019904Z"
+}
+{"severity": "INFO", "method": "GET", "route": "/topics/{uid}/{topic_id}", "status": 200, "latency_ms": 9, "event": "http_request", "request_id": "545a68dbb81747cf8803ea13e9d792d3"}
+second analyze: {'severity': 'INFO', 'written': 0, 'skipped': 1, 'failed': 0, 'event': 'analyze_done', 'request_id': None}
+OK: seed, analyze → one observation whose link opens an existing turn; a repeat writes nothing
+exit 0

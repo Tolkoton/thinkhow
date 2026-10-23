@@ -1,4 +1,9 @@
-"""Contract tests of skel-learning: the Job's composition root `job.run` (slice tester; from the contract)."""
+"""Contract tests of skel-learning: the Job's composition root `job.run` (slice tester; from the contract).
+
+Corrected by objection (round 2, slice continuous-analysis, task 202): `closed_sessions` → `topic_sessions`,
+`s<n>.json` → `t<first>-t<last>.json`, `session_no`/`closed_at` → `first_turn`/`last_turn`; the topics need
+no closing. `learning/job.py` itself is unchanged by that slice.
+"""
 
 from datetime import timedelta
 from pathlib import Path
@@ -15,7 +20,8 @@ from skell_fakes import (
     T,
     install_log_capture,
     local_environ,
-    obs_path,
+    observation_bytes,
+    range_path,
     write_topic,
 )
 
@@ -23,7 +29,7 @@ from thinkhow.learning.analyze import Observation
 from thinkhow.learning.job import run
 from thinkhow.platform.config import ConfigError
 from thinkhow.platform.storage import LocalStorage
-from thinkhow.workspace import TopicRef, closed_sessions
+from thinkhow.workspace import TopicRef, topic_sessions
 
 H = timedelta(hours=1)
 BROKEN = (
@@ -50,55 +56,43 @@ def test_run_analyze_in_local_mode_writes_the_scripted_observation_and_returns_0
     tmp_path: Path, logs: LogCapture
 ) -> None:
     storage = LocalStorage(tmp_path)
-    write_topic(
+    write_topic(  # turns 1-2 analyzed; turns 3-4 after more than 24 h of silence
         storage,
         ALICE,
         "t-a00000000001",
         [
-            S(
-                1,
-                [T(1, "user", "Перша.", NOW - 9 * H), T(2, "model", "Так?", NOW - 9 * H + S1)],
-                closed=NOW - 8 * H,
-            ),
-            S(
-                2,
-                [T(3, "user", "Друга.", NOW - 3 * H), T(4, "model", "Так?", NOW - 3 * H + S1)],
-                closed=NOW - 2 * H,
-            ),
+            S(1, [T(1, "user", "Перша.", NOW - 40 * H), T(2, "model", "Так?", NOW - 40 * H + S1)]),
+            S(2, [T(3, "user", "Друга.", NOW - 3 * H), T(4, "model", "Так?", NOW - 3 * H + S1)]),
         ],
     )
     storage.write(
         "system",
-        obs_path(ALICE, "t-a00000000001", 1),
-        Observation(
-            uid=ALICE,
-            topic_id="t-a00000000001",
-            session_no=1,
-            turn=1,
-            link=f"/topics/{ALICE}/t-a00000000001#t1",
-            worked=True,
-            finding="Вже є.",
-            cause="method",
-            closed_at=NOW - 8 * H,
-            analyzed_at=NOW - 7 * H,
-        )
-        .model_dump_json()
-        .encode(),
+        range_path(ALICE, "t-a00000000001", 1, 2),
+        observation_bytes(ALICE, "t-a00000000001", 1, 2, NOW - 30 * H),
+        "application/json",
+    )
+    write_topic(  # a topic with nothing new
+        storage, BOB, "t-b00000000001", [S(1, [T(1, "user", "Третя.", NOW - 9 * H)])]
+    )
+    storage.write(
+        "system",
+        range_path(BOB, "t-b00000000001", 1, 1),
+        observation_bytes(BOB, "t-b00000000001", 1, 1, NOW - 8 * H),
         "application/json",
     )
     assert run(["analyze"], local_environ(tmp_path), CARDS, lambda: NOW) == 0
-    raw = storage.read("system", obs_path(ALICE, "t-a00000000001", 2))
+    raw = storage.read("system", range_path(ALICE, "t-a00000000001", 3, 4))
     assert raw is not None
     assert Observation.model_validate_json(raw) == Observation(
         uid=ALICE,
         topic_id="t-a00000000001",
-        session_no=2,
+        first_turn=3,
+        last_turn=4,
         turn=3,  # the first value of the schema's enum
         link=f"/topics/{ALICE}/t-a00000000001#t3",
         worked=True,
         finding="(локальний режим) Людина назвала план; фасилітатор поставив одне питання.",
         cause="facilitation",
-        closed_at=NOW - 2 * H,
         analyzed_at=NOW,
     )
     done = logs.events("analyze_done")
@@ -126,28 +120,17 @@ def test_seam2_run_with_a_broken_conversation_logs_the_topic_analyzes_the_rest_a
         storage,
         ALICE,
         "t-a00000000001",
-        [
-            S(
-                1,
-                [T(1, "user", "План.", NOW - 3 * H), T(2, "model", "Так?", NOW - 3 * H + S1)],
-                closed=NOW - 2 * H,
-            )
-        ],
+        [S(1, [T(1, "user", "План.", NOW - 3 * H), T(2, "model", "Так?", NOW - 3 * H + S1)])],
     )
     storage.write("users", f"{BOB}/t-b00000000001/conversation.md", BROKEN, "text/markdown; charset=utf-8")
     with pytest.raises(ValueError):  # the premise: the file does not parse
-        closed_sessions(storage, TopicRef(BOB, "t-b00000000001"), NOW)
-    write_topic(
-        storage,
-        BOB,
-        "t-b00000000002",
-        [S(1, [T(1, "user", "Інший план.", NOW - 3 * H)], closed=NOW - 2 * H)],
-    )
+        topic_sessions(storage, TopicRef(BOB, "t-b00000000001"), NOW)
+    write_topic(storage, BOB, "t-b00000000002", [S(1, [T(1, "user", "Інший план.", NOW - 3 * H)])])
 
     assert run(["analyze"], local_environ(tmp_path), CARDS, lambda: NOW) == 0
 
-    assert storage.read("system", obs_path(ALICE, "t-a00000000001", 1)) is not None
-    assert storage.read("system", obs_path(BOB, "t-b00000000002", 1)) is not None
+    assert storage.read("system", range_path(ALICE, "t-a00000000001", 1, 2)) is not None
+    assert storage.read("system", range_path(BOB, "t-b00000000002", 1, 1)) is not None
     failed = logs.events("analyze_failed")
     assert len(failed) == 1
     assert failed[0]["uid"] == BOB and failed[0]["topic_id"] == "t-b00000000001"

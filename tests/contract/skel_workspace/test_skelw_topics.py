@@ -18,11 +18,11 @@ from thinkhow.workspace import (
     TopicSummary,
     TopicView,
     all_topics_for_learning,
-    closed_sessions,
     create_topic,
     ensure_profile,
     list_topics,
     open_topic,
+    topic_sessions,
 )
 
 
@@ -139,10 +139,10 @@ def test_naive_now_is_value_error(tmp_path: Path) -> None:
     with pytest.raises(ValueError):
         open_topic(store, ALICE, ref, naive)
     with pytest.raises(ValueError):
-        closed_sessions(store, ref, naive)
+        topic_sessions(store, ref, naive)
 
 
-def test_closed_sessions_unknown_or_malformed_ref_is_topic_not_found(tmp_path: Path) -> None:
+def test_topic_sessions_unknown_or_malformed_ref_is_topic_not_found(tmp_path: Path) -> None:
     store = LocalStorage(tmp_path)
     create_topic(store, ALICE, "Тема", T0)
     for ref in [
@@ -152,4 +152,4 @@ def test_closed_sessions_unknown_or_malformed_ref_is_topic_not_found(tmp_path: P
         TopicRef("alice-1", "t-ABCDEF012345"),
     ]:
         with pytest.raises(TopicNotFound):
-            closed_sessions(store, ref, T0)
+            topic_sessions(store, ref, T0)

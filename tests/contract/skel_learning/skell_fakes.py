@@ -51,7 +51,8 @@ class T:
 
 @dataclass
 class S:
-    """One session: number, turns, time of its `closed` marker (None: not closed by the button)."""
+    """One session: number, turns, time of its legacy `closed` marker (None: no marker — the usual case now;
+    the marker is only written here by hand, as data an earlier version left)."""
 
     no: int
     turns: list[T]
@@ -82,7 +83,35 @@ def write_topic(
 
 
 def obs_path(uid: str, topic_id: str, session_no: int) -> str:
+    """A legacy observation file of an earlier version (continuous-analysis: only read, never written)."""
     return f"learning/observations/{uid}/{topic_id}/s{session_no}.json"
+
+
+def range_path(uid: str, topic_id: str, first: int, last: int) -> str:
+    """continuous-analysis, Seam step 4: `learning/observations/<uid>/<topic>/t<first>-t<last>.json`."""
+    return f"learning/observations/{uid}/{topic_id}/t{first}-t{last}.json"
+
+
+def observation_bytes(uid: str, topic_id: str, first: int, last: int, analyzed_at: datetime) -> bytes:
+    """A present observation of turns `first..last` (anchored on `first`), as a JSON file of the new shape."""
+    from thinkhow.learning.analyze import Observation
+
+    return (
+        Observation(
+            uid=uid,
+            topic_id=topic_id,
+            first_turn=first,
+            last_turn=last,
+            turn=first,
+            link=f"/topics/{uid}/{topic_id}#t{first}",
+            worked=True,
+            finding="Вже проаналізовано раніше.",
+            cause="circumstances",
+            analyzed_at=analyzed_at,
+        )
+        .model_dump_json()
+        .encode("utf-8")
+    )
 
 
 @dataclass

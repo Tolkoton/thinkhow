@@ -115,11 +115,6 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         text = await run_in_threadpool(workspace.transcribe, *call)
         return JSONResponse({"text": text})
 
-    @app.post("/topics/{uid}/{topic_id}/close")
-    def close(user: User, uid: str, topic_id: str) -> Response:
-        workspace.close_session(deps.storage, user, workspace.TopicRef(uid, topic_id), deps.now())
-        return RedirectResponse(f"/topics/{uid}/{topic_id}", status_code=303)
-
 
 def _current_code(deps: Deps, user: CurrentUser) -> str:
     """The chosen code to mark in the list, or "" before the first choice (the language page needs none)."""

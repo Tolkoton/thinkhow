@@ -204,9 +204,11 @@ gcloud scheduler jobs create http thinkhow-analyze-nightly --location=$REGION \
 6. Розгорніть сервіс ще раз (повторіть команду кроку 8), коли ніхто не пише. Тема й розмова мають бути на місці.
 
 **AC1 — увесь ланцюжок**
-7. Натисніть «Завершити сесію». Потім запустіть `gcloud run jobs execute thinkhow-learning --region=$REGION --wait`.
-8. Виконайте `gcloud storage ls -r gs://$SYSTEM_BUCKET/learning/observations/`. Має бути `s1.json`. У ньому поле
-   `link` відкриває вашу репліку: `<URL сервісу><link>` веде на сторінку теми з потрібним `#t<n>`.
+7. Нічого не завершуйте: кнопки «Завершити сесію» немає (задача 202). Запустіть
+   `gcloud run jobs execute thinkhow-learning --region=$REGION --wait` — він бере всі репліки, яких ще не аналізував.
+8. Виконайте `gcloud storage ls -r gs://$SYSTEM_BUCKET/learning/observations/`. Має бути файл `t<a>-t<b>.json` (діапазон
+   нових реплік, наприклад `t1-t2.json`). У ньому поле `link` відкриває вашу репліку: `<URL сервісу><link>` веде на
+   сторінку теми з потрібним `#t<n>`. Повторний запуск Job без нових реплік нового файлу не додає.
 9. Подивіться журнали: Logs Explorer, bucket `thinkhow-eu`. Мають бути рядки `http_request`, `llm_call` (модель
    `gemini-4-argon`) і `analyze_done` без тексту розмов.
 

@@ -1,8 +1,10 @@
-"""The analyzer: one Gemini call per closed session → one observation anchored to a turn (F10, G6).
+"""The analyzer: one Gemini call per topic about the turns it has not analyzed → one observation, one anchor.
 
+Task 202: no closing, no silence threshold; what was analyzed is read from the observation file names (G6).
 Reads people's topics through workspace only; writes only system/learning/observations/ (I2).
 """
 
+import re
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from datetime import datetime
@@ -15,15 +17,21 @@ from thinkhow.platform.llm import Llm, LlmUnavailable, Turn
 from thinkhow.platform.log import log_event
 from thinkhow.platform.storage import Storage
 
-ANALYZER = """Ти — аналізатор ThinkHow. Ти читаєш одну закриту сесію, у якій фасилітатор вів людину за
-моделлю мислення, щоб вона сама дійшла до ясності (без готових відповідей).
+ANALYZER = """Ти — аналізатор ThinkHow. Ти читаєш нові репліки однієї теми (з часу минулого аналізу), у яких
+фасилітатор вів людину за моделлю мислення, щоб вона сама дійшла до ясності (без готових відповідей).
+Репліки під рядком «Контекст» уже проаналізовано — вони лише для розуміння; висновок і якір — лише про нові.
 Напиши одне спостереження українською:
-- finding — що в цій сесії спрацювало чи не спрацювало у веденні людини до ясності, коротко, своїми словами;
+- finding — що у нових репліках спрацювало чи не спрацювало у веденні людини до ясності, коротко, своїми
+  словами;
   не цитуй людину і не переказуй подробиць її життя понад потрібне для висновку;
 - worked — чи спрацювало;
 - cause — чия це «заслуга» чи «вина»: method (вибір моделі мислення), facilitation (ведення розмови) чи
   circumstances (обставини людини);
-- anchor — одна репліка, де це видно найкраще, її номер з переліку («t<номер>»)."""
+- anchor — одна з нових реплік, де це видно найкраще, її номер з переліку («t<номер>»)."""
+CONTEXT = "[Контекст — уже проаналізовано, не якір:]"
+NEW = "[Нові репліки:]"
+RANGE_FILE = re.compile(r"^t(\d+)-t(\d+)\.json$")
+LEGACY_FILE = re.compile(r"^s(\d+)\.json$")
 CAUSE = Literal["method", "facilitation", "circumstances"]
 
 
@@ -32,13 +40,13 @@ class Observation(BaseModel):
 
     uid: str
     topic_id: str
-    session_no: int
+    first_turn: int
+    last_turn: int
     turn: int
     link: str
     worked: bool
     finding: str
     cause: CAUSE
-    closed_at: datetime
     analyzed_at: datetime
 
 
@@ -73,68 +81,102 @@ def _enum_of(anchors: list[str]) -> Callable[[dict[str, Any]], None]:
 
 
 def analyze(storage: Storage, llm: Llm, now: datetime) -> AnalyzeReport:
-    """Flow: every topic → its closed sessions → skip the observed → one call each, one file each (Q1, Q3)."""
+    """Flow: every topic → its turns after the last analyzed one → one call, one file (Q1, Q2 of task 202)."""
     if now.tzinfo is None:
         raise ValueError("now must carry a time zone")
-    written = skipped = failed = 0
-    for ref in workspace.all_topics_for_learning(storage):
-        try:
-            sessions = workspace.closed_sessions(storage, ref, now)
-        except Exception as exc:
-            log_event(
-                "analyze_failed",
-                severity="WARNING",
-                uid=ref.uid,
-                topic_id=ref.topic_id,
-                error=type(exc).__name__,
-            )
-            failed += 1
-            continue
-        for session in sessions:
-            outcome = _one(storage, llm, ref, session, now)
-            written += outcome == "written"
-            skipped += outcome == "skipped"
-            failed += outcome == "failed"
-    report = AnalyzeReport(written, skipped, failed)
+    outcomes = [_topic(storage, llm, ref, now) for ref in workspace.all_topics_for_learning(storage)]
+    report = AnalyzeReport(outcomes.count("written"), outcomes.count("skipped"), outcomes.count("failed"))
     log_event("analyze_done", written=report.written, skipped=report.skipped, failed=report.failed)
     return report
 
 
-def _one(
-    storage: Storage, llm: Llm, ref: workspace.TopicRef, session: workspace.ClosedSession, now: datetime
-) -> str:
-    path = f"learning/observations/{ref.uid}/{ref.topic_id}/s{session.session_no}.json"
-    if storage.read("system", path) is not None:
-        return "skipped"
-    schema = answer_schema([t.no for t in session.turns])
+def _topic(storage: Storage, llm: Llm, ref: workspace.TopicRef, now: datetime) -> str:
+    """Flow: sessions + observation names → seen → the new turns and their context → one observation."""
+    folder = f"learning/observations/{ref.uid}/{ref.topic_id}/"
     try:
-        answer = llm.generate_json(ANALYZER, [Turn("user", _session_text(session))], schema, None)
-    except (ValidationError, LlmUnavailable) as exc:
-        log_event(
-            "analyze_failed",
-            severity="WARNING",
-            uid=ref.uid,
-            topic_id=ref.topic_id,
-            session_no=session.session_no,
-            error=type(exc).__name__,
-        )
+        sessions = workspace.topic_sessions(storage, ref, now)
+        seen = _seen(storage.list("system", folder), folder, sessions)
+    except Exception as exc:
+        _failed(ref, exc)
         return "failed"
-    turn = int(answer.model_dump()["anchor"][1:])
-    observation = Observation(
-        uid=ref.uid,
-        topic_id=ref.topic_id,
-        session_no=session.session_no,
-        turn=turn,
-        link=f"/topics/{ref.uid}/{ref.topic_id}#t{turn}",
-        closed_at=session.closed_at,
-        analyzed_at=now,
-        **{k: v for k, v in answer.model_dump().items() if k in ("worked", "finding", "cause")},
-    )
-    storage.write("system", path, observation.model_dump_json().encode("utf-8"), "application/json")
+    new = [t for s in sessions for t in s.turns if t.no > seen]
+    if not new:
+        return "skipped"
+    context = next(s for s in sessions if new[0] in s.turns).turns
+    context = [t for t in context if t.no < new[0].no]
+    schema = answer_schema([t.no for t in new])
+    try:
+        answer = llm.generate_json(ANALYZER, [Turn("user", _text(context, new))], schema, None)
+    except (ValidationError, LlmUnavailable) as exc:
+        _failed(ref, exc, new)
+        return "failed"
+    _write(storage, ref, new, answer.model_dump(), now)
     return "written"
 
 
-def _session_text(session: workspace.ClosedSession) -> str:
-    lines = [f"#{t.no} {'людина' if t.role == 'user' else 'фасилітатор'}: {t.text}" for t in session.turns]
-    lines.append(f"[Сесія {session.session_no} закрита {session.closed_at.isoformat()}]")
-    return "\n".join(lines)
+def _seen(paths: Sequence[str], folder: str, sessions: Sequence[workspace.Session]) -> int:
+    """The last analyzed turn: `t<a>-t<b>.json` → b; an old `s<n>.json` → the last turn of session n (Q4)."""
+    last_of = {s.no: s.turns[-1].no for s in sessions if s.turns}
+    seen = 0
+    for path in paths:
+        name = path.removeprefix(folder)
+        if m := RANGE_FILE.match(name):
+            seen = max(seen, int(m.group(2)))
+        elif (m := LEGACY_FILE.match(name)) and int(m.group(1)) in last_of:
+            seen = max(seen, last_of[int(m.group(1))])
+    return seen
+
+
+def _write(
+    storage: Storage,
+    ref: workspace.TopicRef,
+    new: Sequence[workspace.NumberedTurn],
+    answer: dict[str, Any],
+    now: datetime,
+) -> None:
+    turn = int(answer["anchor"][1:])
+    observation = Observation(
+        uid=ref.uid,
+        topic_id=ref.topic_id,
+        first_turn=new[0].no,
+        last_turn=new[-1].no,
+        turn=turn,
+        link=f"/topics/{ref.uid}/{ref.topic_id}#t{turn}",
+        analyzed_at=now,
+        **{k: v for k, v in answer.items() if k in ("worked", "finding", "cause")},
+    )
+    name = f"t{new[0].no}-t{new[-1].no}.json"
+    storage.write(
+        "system",
+        f"learning/observations/{ref.uid}/{ref.topic_id}/{name}",
+        observation.model_dump_json().encode("utf-8"),
+        "application/json",
+    )
+
+
+def _failed(ref: workspace.TopicRef, exc: Exception, new: Sequence[workspace.NumberedTurn] = ()) -> None:
+    """The topic and the range that failed (no text); the topic-read failure has no range."""
+    error = type(exc).__name__
+    if not new:
+        log_event("analyze_failed", severity="WARNING", uid=ref.uid, topic_id=ref.topic_id, error=error)
+        return
+    first, last = new[0].no, new[-1].no
+    log_event(
+        "analyze_failed",
+        severity="WARNING",
+        uid=ref.uid,
+        topic_id=ref.topic_id,
+        error=error,
+        first_turn=first,
+        last_turn=last,
+    )
+
+
+def _text(context: Sequence[workspace.NumberedTurn], new: Sequence[workspace.NumberedTurn]) -> str:
+    """The new turns, after the analyzed turns of their session as context under its own header (Q8)."""
+    lines = [CONTEXT, *map(_line, context), NEW] if context else []
+    return "\n".join(lines + [_line(t) for t in new])
+
+
+def _line(turn: workspace.NumberedTurn) -> str:
+    return f"#{turn.no} {'людина' if turn.role == 'user' else 'фасилітатор'}: {turn.text}"

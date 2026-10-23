@@ -49,3 +49,13 @@ From: lesson #1875bff6 (gate, voice-dictation, 2026-10-23).
 slice-tester can hand in sealed contract tests that carry '# type: ignore' (minimal-design, test_mdesign_invariants.py:123-125); the gate's bypass guard then blocks every Stop of the builder, who may not edit a sealed file, and the only way out is an objection round (rounds are capped at two). Suggest: the tester runs the gate's bypass guard (and mypy) on its own files before the hand-in, or testing.py record refuses a hand-in whose files add a type-ignore.
 
 From: lesson #ed996fe0 (gate, minimal-design.behaviors, 2026-10-23).
+
+## 2026-10-23 — a parked slice has no way back (testing.py, task 202)
+
+A later, sealed slice contract (continuous-analysis) changes behaviour that an earlier slice's sealed tests pin down
+(skel-web expects the «Завершити сесію» button the owner removed). The earlier slice had used its two dispute rounds
+long ago for unrelated hygiene, so `request skel-web --tester objection` parks it at once, and nothing in testing.py
+un-parks a slice or reseals its tests after the owner's answer. Suggest: count rounds per requesting contract (a new
+sealed contract that names the change opens fresh rounds), or give the owner an `unpark <slug>` action-line.
+
+From: task 202, builder.

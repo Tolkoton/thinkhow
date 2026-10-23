@@ -2,6 +2,8 @@
 
 Not sealed until the slice planner answers Q2: «клас винятку; без тексту» — read here as «without the
 exception's text» as well as without the conversation's.
+
+Corrected by objection (round 2, slice continuous-analysis, task 202): the topic needs no closing.
 """
 
 from datetime import timedelta
@@ -28,13 +30,7 @@ def test_q2_analyze_failed_line_has_no_exception_message(tmp_path: Path, logs: L
         storage,
         ALICE,
         "t-a00000000001",
-        [
-            S(
-                1,
-                [T(1, "user", "План.", NOW - 3 * H), T(2, "model", "Так?", NOW - 3 * H + S1)],
-                closed=NOW - 2 * H,
-            )
-        ],
+        [S(1, [T(1, "user", "План.", NOW - 3 * H), T(2, "model", "Так?", NOW - 3 * H + S1)])],
     )
     analyze(storage, FakeLlm(fail={"План.": LlmUnavailable("повідомлення-винятку-q2")}), NOW)
     failed = logs.events("analyze_failed")

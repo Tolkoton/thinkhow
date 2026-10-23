@@ -31,13 +31,19 @@ from thinkhow.workspace import (
     Saved,
     TopicNotFound,
     TopicRef,
-    close_session,
-    closed_sessions,
     create_topic,
     open_topic,
     reply,
     retry,
+    topic_sessions,
 )
+
+
+def append_legacy_closed(store: LocalStorage, ref: TopicRef, line: str) -> None:
+    """Append a `closed` marker as the earlier versions' (removed) button wrote it."""
+    text = conv_bytes(store, ref).decode("utf-8").rstrip("\n")
+    store.write("users", conv_path(ref), f"{text}\n\n{line}\n".encode(), "text/markdown; charset=utf-8")
+
 
 # (raw human text, as normalized, raw model reply, as normalized)
 I1_CASES = [
@@ -88,8 +94,8 @@ def test_I1_text_reads_back_exactly_as_normalized(tmp_path: Path) -> None:
     assert [(t.role, t.text) for t in turns] == expected
     assert [t.no for t in turns] == list(range(1, 2 * len(I1_CASES) + 1))
     later = T0 + H24
-    (closed,) = closed_sessions(store, ref, later)
-    assert [(t.role, t.text) for t in closed.turns] == expected
+    (session,) = topic_sessions(store, ref, later)
+    assert [(t.role, t.text) for t in session.turns] == expected
 
 
 def test_I2_nobody_reads_or_writes_a_foreign_topic_owner_only_reads(tmp_path: Path) -> None:
@@ -118,8 +124,6 @@ def test_I2_nobody_reads_or_writes_a_foreign_topic_owner_only_reads(tmp_path: Pa
             reply(store, fac, BOB, bad, "чуже", T0)
         with pytest.raises(TopicNotFound):
             retry(store, fac, BOB, bad, T0)
-        with pytest.raises(TopicNotFound):
-            close_session(store, BOB, bad, T0)
 
     # the owner reads Alice's topic, but writes nothing into it
     assert open_topic(store, OWNER, ref, T0).title == "Тема Аліси"
@@ -127,8 +131,6 @@ def test_I2_nobody_reads_or_writes_a_foreign_topic_owner_only_reads(tmp_path: Pa
         reply(store, fac, OWNER, ref, "власник пише", T0)
     with pytest.raises(TopicNotFound):
         retry(store, fac, OWNER, ref, T0)
-    with pytest.raises(TopicNotFound):
-        close_session(store, OWNER, ref, T0)
     for absent in [
         TopicRef("alice-1", "t-000000000000"),
         TopicRef("alice-1", "../x"),
@@ -153,8 +155,10 @@ def test_I2_nobody_reads_or_writes_a_foreign_topic_owner_only_reads(tmp_path: Pa
     assert drain(reply(store, ScenarioFacilitate(store, [ok("Так?")]), OWNER, own, "пишу", T0))[
         -1
     ] == Answered(2)
-    close_session(store, OWNER, own, T0)
-    assert open_topic(store, OWNER, own, T0).sessions[0].closed_at == T0
+    assert [(t.no, t.role) for t in open_topic(store, OWNER, own, T0).sessions[0].turns] == [
+        (1, "user"),
+        (2, "model"),
+    ]
 
 
 def test_I3_numbers_run_1_to_n_across_sessions_failures_and_retries(tmp_path: Path) -> None:
@@ -172,7 +176,7 @@ def test_I3_numbers_run_1_to_n_across_sessions_failures_and_retries(tmp_path: Pa
             [update("   ")],  # retry: EmptyReply
             ok("a3"),  # retry: 6
             ok("a4"),  # session 2: 7, 8
-            ["x", RuntimeError("mid")],  # 9, then closed by button
+            ["x", RuntimeError("mid")],  # 9, then closed by a legacy marker
             ok("a5"),  # session 3: 10, 11
             [FacilitationError("bad")],  # session 4: 12
             ok("a6"),  # retry: 13
@@ -187,10 +191,9 @@ def test_I3_numbers_run_1_to_n_across_sessions_failures_and_retries(tmp_path: Pa
     log += drain(retry(store, fac, ALICE, ref, T0 + 4 * m))
     log += drain(reply(store, fac, ALICE, ref, "u7", T0 + 30 * h))
     log += drain(reply(store, fac, ALICE, ref, "u9", T0 + 30 * h + m))
-    close_session(store, ALICE, ref, T0 + 31 * h)
+    append_legacy_closed(store, ref, "<!-- thinkhow:closed 2 2026-10-23T23:00:00Z -->")  # T0 + 31h
     log += drain(reply(store, fac, ALICE, ref, "u10", T0 + 32 * h))
-    close_session(store, ALICE, ref, T0 + 80 * h)  # already closed by silence: nothing
-    log += drain(reply(store, fac, ALICE, ref, "u12", T0 + 80 * h))
+    log += drain(reply(store, fac, ALICE, ref, "u12", T0 + 80 * h))  # session 3 closed by silence
     log += drain(retry(store, fac, ALICE, ref, T0 + 80 * h))
 
     numbered = [e for e in log if isinstance(e, Saved | Answered)]
@@ -264,7 +267,7 @@ def test_I5_a_closed_session_never_gets_another_turn(tmp_path: Path) -> None:
         [
             [LlmUnavailable("down")],  # turn 1 at T0, unanswered
             [LlmUnavailable("still down")],  # retry one second before the silence: still session 1
-            [RuntimeError("down")],  # session 2: turn 2, unanswered, then the button
+            [RuntimeError("down")],  # session 2: turn 2, unanswered, then a legacy marker
             ok("нарешті"),  # session 3: 3, 4
         ],
     )
@@ -272,9 +275,8 @@ def test_I5_a_closed_session_never_gets_another_turn(tmp_path: Path) -> None:
     assert drain(retry(store, fac, ALICE, ref, T0 + H24 - S1)) == [Failed("LlmUnavailable")]
     with pytest.raises(NothingToRetry):
         retry(store, fac, ALICE, ref, T0 + H24)
-    close_session(store, ALICE, ref, T0 + H24)
     drain(reply(store, fac, ALICE, ref, "друга", T0 + H24))
-    close_session(store, ALICE, ref, T0 + H24 + timedelta(hours=1))
+    append_legacy_closed(store, ref, "<!-- thinkhow:closed 2 2026-10-23T17:00:00Z -->")  # T0 + 25h
     for later in [T0 + H24 + timedelta(hours=1), T0 + timedelta(hours=100)]:
         with pytest.raises(NothingToRetry):
             retry(store, fac, ALICE, ref, later)
@@ -289,8 +291,8 @@ def test_I5_a_closed_session_never_gets_another_turn(tmp_path: Path) -> None:
         ]
         assert view.sessions[0].closed_at == T0 + H24
         assert view.sessions[1].closed_at == T0 + H24 + timedelta(hours=1)
-    got = sorted(closed_sessions(store, ref, T0 + timedelta(hours=200)), key=lambda c: c.session_no)
-    assert [(c.session_no, [t.no for t in c.turns], c.closed_at) for c in got] == [
+    got = topic_sessions(store, ref, T0 + timedelta(hours=200))
+    assert [(c.no, [t.no for t in c.turns], c.closed_at) for c in got] == [
         (1, [1], T0 + H24),
         (2, [2], T0 + H24 + timedelta(hours=1)),
         (3, [3, 4], T0 + timedelta(hours=124)),

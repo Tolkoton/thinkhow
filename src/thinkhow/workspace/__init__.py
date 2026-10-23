@@ -5,7 +5,6 @@ from thinkhow.workspace.model import (
     CARD_ID,
     SILENCE,
     Answered,
-    ClosedSession,
     Delta,
     Failed,
     NothingToRetry,
@@ -23,14 +22,13 @@ from thinkhow.workspace.model import (
 from thinkhow.workspace.profile import NoLanguage, language, set_language
 from thinkhow.workspace.topics import (
     all_topics_for_learning,
-    close_session,
-    closed_sessions,
     create_topic,
     ensure_profile,
     list_topics,
     open_topic,
     reply,
     retry,
+    topic_sessions,
 )
 from thinkhow.workspace.voice import transcribe
 
@@ -39,7 +37,6 @@ __all__ = [
     "LANGUAGES",
     "SILENCE",
     "Answered",
-    "ClosedSession",
     "Delta",
     "Failed",
     "Language",
@@ -56,8 +53,6 @@ __all__ = [
     "TopicSummary",
     "TopicView",
     "all_topics_for_learning",
-    "close_session",
-    "closed_sessions",
     "create_topic",
     "ensure_profile",
     "language",
@@ -66,5 +61,6 @@ __all__ = [
     "reply",
     "retry",
     "set_language",
+    "topic_sessions",
     "transcribe",
 ]

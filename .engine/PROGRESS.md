@@ -119,3 +119,17 @@
   `smoke_test_voice_dictation.py`, `smoke_test_skel_web.py`, `smoke_test_voice_language.py` — OK
 - Surprises: `.turn.model { pre-wrap }` (old) put blank lines into saved answers — fixed (behaviors file, self-added)
 - Open: I2 contrast threshold 4.5:1 PROVISIONAL (owner); `autocomplete="off"` not checked in a real Firefox
+
+## Slice 12 — continuous-analysis (BUILT, waiting for the owner 2026-10-23) — task 202
+
+- Module: `learning/analyze.py` (one call per topic about the turns after the last analyzed one; cursor from the names
+  `t<a>-t<b>.json`, an old `s<n>.json` moves it to the end of session n; context = analyzed turns of the same session),
+  `workspace.topic_sessions` (new reader for learning); removed `close_session`, `closed_sessions`, `ClosedSession`,
+  `POST …/close`, the «Завершити сесію» form and its CSS; the old `closed` marker is only read
+- Tests: 24 contract tests of the slice-tester (`tests/contract/continuous_analysis/`); objection rounds (all
+  `test_wrong`, resealed) for skel-learning, skel-workspace, skel-guards-deploy (walking_skeleton_block);
+  `tests/smoke/test_e2e_local.py` rewritten to the exit criterion
+- Smoke: `scripts/smoke_test_skel_learning.py`, `scripts/smoke_test_skel_workspace.py` — OK,
+  `.engine/artifacts/spikes/continuous-analysis-smoke-{learning,workspace}-2026-10-23.txt`
+- Open: skel-web is PARKED (two dispute rounds used before; a third is refused) — 3 sealed tests there still expect
+  the button and the close route; owner's answer in `tasks/blocked/202-no-end-session-button.md`. No overseer audit yet.

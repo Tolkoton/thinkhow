@@ -88,7 +88,6 @@ def test_s1_storage_protocol_is_the_one_door_of_knowledge_workspace_and_learning
     topic = workspace.create_topic(store, ALICE, "Кав'ярня", NOW)
     ref = workspace.TopicRef(ALICE.id, topic)
     drain(workspace.reply(store, chain_facilitate(store, llm), ALICE, ref, "Хочу кав'ярню.", NOW))
-    workspace.close_session(store, ALICE, ref, NOW + timedelta(minutes=1))
     ws_writes = [c for c in store.calls[before:] if c[0] in ("write", "create_if_absent")]
     assert ws_writes and all(b == "users" and p.startswith("alice-1/") for _, b, p in ws_writes)
 
@@ -96,9 +95,9 @@ def test_s1_storage_protocol_is_the_one_door_of_knowledge_workspace_and_learning
     report = analyze(store, ScriptedLlm(learning_local.local_script), NOW + timedelta(minutes=2))
     assert report.written == 1
     learn_writes = [c for c in store.calls[before:] if c[0] in ("write", "create_if_absent")]
-    assert learn_writes == [("write", "system", f"learning/observations/alice-1/{topic}/s1.json")]
+    assert learn_writes == [("write", "system", f"learning/observations/alice-1/{topic}/t1-t2.json")]
     assert {b for _, b, _ in store.calls} <= {"users", "system"}
-    assert (tmp_path / "system" / "learning" / "observations" / "alice-1" / topic / "s1.json").is_file()
+    assert (tmp_path / "system" / "learning" / "observations" / "alice-1" / topic / "t1-t2.json").is_file()
     assert (tmp_path / "users" / "alice-1" / topic / "conversation.md").is_file()
 
 
@@ -126,7 +125,6 @@ def test_s1_llm_protocol_serves_facilitation_and_learning_and_unavailable_reache
         assert all(isinstance(t, LlmTurn) for t in call["contents"])
         assert issubclass(call["schema"], FacilitatorUpdate)
 
-    workspace.close_session(store, ALICE, ref, NOW + timedelta(minutes=1))
     learn = RecordingLlm(ScriptedLlm(learning_local.local_script))
     report = analyze(store, learn, NOW + timedelta(minutes=2))
     assert (report.written, report.failed) == (1, 0)
@@ -246,10 +244,9 @@ def test_s4_workspace_signatures_and_its_flow_through_the_routes(tmp_path: Path)
         "list_topics",
         "create_topic",
         "open_topic",
-        "close_session",
         "ensure_profile",
         "all_topics_for_learning",
-        "closed_sessions",
+        "topic_sessions",
         "reply",
         "retry",
     ):
@@ -278,46 +275,51 @@ def test_s4_workspace_signatures_and_its_flow_through_the_routes(tmp_path: Path)
     assert conversation.count("<!-- thinkhow:turn 1 user") == 1
     assert conversation.count("<!-- thinkhow:turn 2 model") == 1
     assert conversation.count("Моя репліка.") == 1
-    assert client.post(f"{topic}/close").status_code == 303
+    assert client.post(f"{topic}/close").status_code == 404  # task 202: the close route is gone
     assert client.post(f"{topic}/retry").status_code == 409
 
 
 # S4 → S6 — read-only sessions for learning
-def test_s4_learning_reads_every_topic_and_closed_sessions_numbered_across_the_topic(tmp_path: Path) -> None:
+def test_s4_learning_reads_every_topic_and_topic_sessions_numbered_across_the_topic(tmp_path: Path) -> None:
     store = RecordingStorage(tmp_path)
     fake = FakeFacilitate()
     a = workspace.TopicRef(ALICE.id, workspace.create_topic(store, ALICE, "Аліса", NOW))
     b = workspace.TopicRef(BOB.id, workspace.create_topic(store, BOB, "Боб", NOW))
     drain(workspace.reply(store, fake, ALICE, a, "Сесія один.", NOW))
-    workspace.close_session(store, ALICE, a, NOW + timedelta(minutes=1))
-    drain(workspace.reply(store, fake, ALICE, a, "Сесія два.", NOW + timedelta(minutes=2)))
-    workspace.close_session(store, ALICE, a, NOW + timedelta(minutes=3))
-    drain(workspace.reply(store, fake, BOB, b, "Ще відкрита.", NOW))
+    # task 202: no close; a new session begins after more than 24 h of silence
+    drain(workspace.reply(store, fake, ALICE, a, "Сесія два.", NOW + timedelta(hours=25)))
+    drain(workspace.reply(store, fake, BOB, b, "Ще відкрита.", NOW + timedelta(hours=25)))
 
-    later = NOW + timedelta(hours=1)
+    later = NOW + timedelta(hours=26)
     assert set(workspace.all_topics_for_learning(store)) == {a, b}
-    sessions = workspace.closed_sessions(store, a, later)
-    assert [s.session_no for s in sessions] == [1, 2]
+    sessions = workspace.topic_sessions(store, a, later)
+    assert [s.no for s in sessions] == [1, 2]
     assert [[(t.no, t.role, t.text) for t in s.turns] for s in sessions] == [
         [(1, "user", "Сесія один."), (2, "model", "Що далі?")],
         [(3, "user", "Сесія два."), (4, "model", "Що далі?")],
     ]
-    assert workspace.closed_sessions(store, b, later) == []
+    bob_sessions = workspace.topic_sessions(store, b, later)
+    assert [[(t.no, t.role, t.text) for t in s.turns] for s in bob_sessions] == [
+        [(1, "user", "Ще відкрита."), (2, "model", "Що далі?")],
+    ]
 
     writes_before = len(store.writes())
     report = analyze(store, ScriptedLlm(learning_local.local_script), later)
     assert (report.written, report.failed) == (2, 0)
-    assert sorted(p for _, _, p in store.writes()[writes_before:]) == [
-        f"learning/observations/alice-1/{a.topic_id}/s1.json",
-        f"learning/observations/alice-1/{a.topic_id}/s2.json",
-    ]
-    for s, turns in ((1, {1, 2}), (2, {3, 4})):
+    assert sorted(p for _, _, p in store.writes()[writes_before:]) == sorted(
+        [
+            f"learning/observations/alice-1/{a.topic_id}/t1-t4.json",
+            f"learning/observations/bob_2/{b.topic_id}/t1-t2.json",
+        ]
+    )
+    for uid, topic_id, first, last in (("alice-1", a.topic_id, 1, 4), ("bob_2", b.topic_id, 1, 2)):
         obs = json.loads(
             (
-                tmp_path / "system" / "learning" / "observations" / "alice-1" / a.topic_id / f"s{s}.json"
+                tmp_path / "system" / "learning" / "observations" / uid / topic_id / f"t{first}-t{last}.json"
             ).read_text()
         )
-        assert obs["turn"] in turns
+        assert (obs["first_turn"], obs["last_turn"]) == (first, last)
+        assert first <= obs["turn"] <= last
 
 
 # S6 → owner (G6)
@@ -326,13 +328,12 @@ def test_s6_observation_link_of_a_persons_topic_opens_the_turn_for_the_owner(tmp
     alice = client_as(environ, Identity("alice-1", "alice@example.com"))
     topic = alice.post("/topics", data={"title": "Аліса"}).headers["location"]
     alice.post(f"{topic}/reply", data={"text": "Хочу відкрити кав'ярню."})
-    assert alice.post(f"{topic}/close").status_code == 303
     topic_id = topic.rsplit("/", 1)[-1]
 
     assert job.run(["analyze"], environ, CARDS, lambda: NOW + timedelta(days=400)) == 0
-    file = tmp_path / "system" / "learning" / "observations" / "alice-1" / topic_id / "s1.json"
+    file = tmp_path / "system" / "learning" / "observations" / "alice-1" / topic_id / "t1-t2.json"
     obs = json.loads(file.read_text(encoding="utf-8"))
-    assert (obs["uid"], obs["topic_id"], obs["session_no"]) == ("alice-1", topic_id, 1)
+    assert (obs["uid"], obs["topic_id"], obs["first_turn"], obs["last_turn"]) == ("alice-1", topic_id, 1, 2)
     assert obs["turn"] in (1, 2)
     assert obs["link"] == f"/topics/alice-1/{topic_id}#t{obs['turn']}"
 
@@ -390,7 +391,7 @@ def test_ac4_foreign_topic_hidden_owner_sees_all_knowledge_untouched_by_the_chai
 
     assert bob.get(topic).status_code == 404
     assert bob.post(f"{topic}/reply", data={"text": "Втручання."}).status_code == 404
-    assert bob.post(f"{topic}/close").status_code == 404
+    assert bob.post(f"{topic}/retry").status_code == 404  # task 202: the close route is gone; retry keeps G4
     assert "Таємна тема Аліси" not in bob.get("/").text
     assert conv.read_bytes() == before
 
@@ -398,7 +399,6 @@ def test_ac4_foreign_topic_hidden_owner_sees_all_knowledge_untouched_by_the_chai
     page = owner.get(topic)
     assert page.status_code == 200 and "Особиста репліка Аліси." in page.text
 
-    alice.post(f"{topic}/close")
     analyze(store, ScriptedLlm(learning_local.local_script), NOW + timedelta(days=400))
     knowledge_writes = [c for c in store.writes() if c[1] == "system" and c[2].startswith("knowledge/")]
     assert knowledge_writes == []

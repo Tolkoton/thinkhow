@@ -37,7 +37,6 @@ from thinkhow.workspace import (
     Saved,
     TopicNotFound,
     TopicRef,
-    close_session,
     create_topic,
     open_topic,
     reply,
@@ -266,5 +265,3 @@ def test_naive_now_in_writing_functions_is_value_error(tmp_path: Path) -> None:
     drain(reply(store, fac, ALICE, ref, ASK, T0))
     with pytest.raises(ValueError):
         drain(retry(store, fac, ALICE, ref, naive))
-    with pytest.raises(ValueError):
-        close_session(store, ALICE, ref, naive)

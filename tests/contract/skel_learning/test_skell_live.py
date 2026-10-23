@@ -1,7 +1,10 @@
 """Contract test of skel-learning, Seam 3: one real analyzer call to gemini-4-argon on `eu` (`-m live`).
 
-Slice tester; from the contract, not the code. A closed session of 40 Ukrainian turns → one call through
-`analyze` → one `Observation` whose turn is one of the session's turns.
+Slice tester; from the contract, not the code. A topic of 40 Ukrainian turns → one call through
+`analyze` → one `Observation` whose turn is one of the topic's turns.
+
+Corrected by objection (round 2, slice continuous-analysis, task 202): no closing is needed; the file is
+`t1-t40.json`.
 """
 
 import os
@@ -9,7 +12,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import pytest
-from skell_fakes import ALICE, NOW, S1, S, T, obs_path, write_topic
+from skell_fakes import ALICE, NOW, S1, S, T, range_path, write_topic
 
 from thinkhow.learning.analyze import AnalyzeReport, Observation, analyze
 from thinkhow.platform.config import load_settings
@@ -33,7 +36,7 @@ FACILITATOR = [
 
 
 @pytest.mark.live
-def test_seam3_real_model_anchors_the_observation_to_a_turn_of_a_40_turn_session(tmp_path: Path) -> None:
+def test_seam3_real_model_anchors_the_observation_to_a_turn_of_a_40_turn_topic(tmp_path: Path) -> None:
     storage = LocalStorage(tmp_path)
     start = NOW - timedelta(hours=5)
     turns = [
@@ -42,7 +45,7 @@ def test_seam3_real_model_anchors_the_observation_to_a_turn_of_a_40_turn_session
         else T(n, "model", FACILITATOR[(n // 2 - 1) % 5], start + n * 60 * S1)
         for n in range(1, 41)
     ]
-    write_topic(storage, ALICE, "t-a00000000001", [S(1, turns, closed=NOW - timedelta(hours=1))], "Кав'ярня")
+    write_topic(storage, ALICE, "t-a00000000001", [S(1, turns)], "Кав'ярня")
     settings = load_settings(
         {
             **os.environ,
@@ -56,9 +59,10 @@ def test_seam3_real_model_anchors_the_observation_to_a_turn_of_a_40_turn_session
     llm = make_llm(settings, script=lambda *_: "")
     report = analyze(storage, llm, NOW)
     assert report == AnalyzeReport(written=1, skipped=0, failed=0)
-    raw = storage.read("system", obs_path(ALICE, "t-a00000000001", 1))
+    raw = storage.read("system", range_path(ALICE, "t-a00000000001", 1, 40))
     assert raw is not None
     obs = Observation.model_validate_json(raw)
+    assert (obs.first_turn, obs.last_turn) == (1, 40)
     assert obs.turn in set(range(1, 41))
     assert obs.link == f"/topics/{ALICE}/t-a00000000001#t{obs.turn}"
     assert obs.finding.strip() != ""

@@ -67,7 +67,6 @@ def main() -> None:
         assert isinstance(
             events(ws.retry(storage, facilitate, PERSON, ref, T0 + timedelta(minutes=3)))[-1], ws.Answered
         )
-        ws.close_session(storage, PERSON, ref, T0 + timedelta(minutes=5))
         later = T0 + timedelta(minutes=6)
         print("--- conversation.md ---")
         print(storage.read("users", f"{ref.uid}/{ref.topic_id}/conversation.md").decode())
@@ -76,7 +75,7 @@ def main() -> None:
         view = ws.open_topic(storage, PERSON, ref, later)
         numbers = [t.no for s in view.sessions for t in s.turns]
         assert numbers == [1, 2, 3, 4], numbers
-        assert view.sessions[0].closed_at is not None
+        assert view.sessions[0].closed_at is None
         assert [i.id for i in view.problem_map.items] == ["i1", "i3"]
         try:
             ws.open_topic(storage, OTHER, ref, later)
@@ -87,9 +86,9 @@ def main() -> None:
         assert ws.open_topic(storage, OWNER, ref, later).title == "Відкрити кав'ярню"
         print("the owner opens it")
         assert list(ws.all_topics_for_learning(storage)) == [ref]
-        closed = ws.closed_sessions(storage, ref, later)
-        assert [(c.session_no, len(c.turns)) for c in closed] == [(1, 4)]
-        print("OK: turns 1-4, session 1 closed, map from the updates, G4 holds, one closed session")
+        sessions = ws.topic_sessions(storage, ref, later)
+        assert [(s.no, len(s.turns)) for s in sessions] == [(1, 4)]
+        print("OK: turns 1-4, session 1 open, map from the updates, G4 holds, one session for learning")
 
 
 if __name__ == "__main__":

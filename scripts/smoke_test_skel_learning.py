@@ -40,12 +40,11 @@ def main() -> None:
     assert client.post("/language", data={"code": "uk-UA"}).status_code == 303  # F13: language first
     topic = client.post("/topics", data={"title": "Smoke"}).headers["location"]
     client.post(f"{topic}/reply", data={"text": "Хочу перевірити план запуску."})
-    client.post(f"{topic}/close")
     first = job("analyze", env)
     print("analyze:", first.returncode, first.stdout.strip())
     assert first.returncode == 0
     uid, topic_id = topic.split("/")[2:4]
-    path = Path(data) / "system" / "learning" / "observations" / uid / topic_id / "s1.json"
+    path = Path(data) / "system" / "learning" / "observations" / uid / topic_id / "t1-t2.json"
     observation = json.loads(path.read_text(encoding="utf-8"))
     print("observation:", json.dumps(observation, ensure_ascii=False, indent=2))
     assert f'id="t{observation["turn"]}"' in client.get(topic).text

@@ -26,7 +26,6 @@ from thinkhow.workspace.model import (
     CARD_ID,
     SILENCE,
     Answered,
-    ClosedSession,
     Delta,
     Failed,
     NothingToRetry,
@@ -118,22 +117,11 @@ def _language_of(storage: Storage, user: CurrentUser) -> str | None:
     return f"{chosen.name} ({chosen.code})"
 
 
-def close_session(storage: Storage, user: CurrentUser, ref: TopicRef, now: datetime) -> None:
-    _check_now(now)
-    _can_write(user, ref)
-    conv = _read_conversation(storage, ref)
-    last = conv.sessions[-1]
-    if _closed_at(last, now) is None:
-        last.closed_at = conv_file.second(now)
-        _write_conversation(storage, ref, conv)
-
-
-def closed_sessions(storage: Storage, ref: TopicRef, now: datetime) -> list[ClosedSession]:
+def topic_sessions(storage: Storage, ref: TopicRef, now: datetime) -> list[Session]:
     """Read only, no access rule: for learning, with refs from all_topics_for_learning."""
     _check_now(now)
     _check_ref(ref)
-    sessions = [_session(s, now) for s in _read_conversation(storage, ref).sessions]
-    return [ClosedSession(s.no, s.turns, s.closed_at) for s in sessions if s.closed_at and s.turns]
+    return [_session(s, now) for s in _read_conversation(storage, ref).sessions]
 
 
 def _reply_flow(
@@ -215,7 +203,7 @@ def _session(doc: conv_file.SessionDoc, now: datetime) -> Session:
 
 
 def _closed_at(doc: conv_file.SessionDoc, now: datetime) -> datetime | None:
-    """Closed by the button (its marker), or by 24 h of silence after the last turn (Q5); never if empty."""
+    """Closed by the marker of an old file (task 202: only read), or by 24 h of silence; never if empty."""
     if doc.closed_at is not None:
         return doc.closed_at
     if doc.turns and now >= doc.turns[-1].at + SILENCE:

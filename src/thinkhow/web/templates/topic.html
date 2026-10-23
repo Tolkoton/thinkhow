@@ -28,9 +28,6 @@
     <button id="retry" type="button" autocomplete="off"{% if not view.awaiting_answer %} hidden{% endif %}>Спробуйте ще раз</button>
   </div>
 </form>
-<form class="close" method="post" action="/topics/{{ view.ref.uid }}/{{ view.ref.topic_id }}/close">
-  <button type="submit">Завершити сесію</button>
-</form>
 <script src="/static/conversation.js"></script>
 {% endif %}
 {% endblock %}

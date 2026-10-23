@@ -3,6 +3,9 @@
 Written from the contract (.engine/slices/skel-learning.md, «Exit criterion»), not the code. The script
 is run the way the exit criterion names it — `python scripts/smoke_test_skel_learning.py` from the
 repository root — and judged by its exit code, its stdout and what it leaves in the repository.
+
+Corrected by objection (round 2, slice continuous-analysis, task 202): the observation carries
+`first_turn`/`last_turn` (1, 2) instead of `session_no`.
 """
 
 import json
@@ -76,7 +79,7 @@ def test_smoke_succeeds_and_prints_the_observation_file_with_a_link_to_a_turn_of
     assert observations, result.stdout
     obs = observations[0]
     assert obs.uid == "local-owner"
-    assert obs.session_no == 1
+    assert (obs.first_turn, obs.last_turn) == (1, 2)
     assert obs.turn in {1, 2}
     assert obs.link == f"/topics/local-owner/{obs.topic_id}#t{obs.turn}"
     assert re.fullmatch(r"/topics/local-owner/[^/#]+#t[12]", obs.link)

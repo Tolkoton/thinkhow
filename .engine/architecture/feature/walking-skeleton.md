@@ -5,6 +5,10 @@
 `.engine/architecture/architecture-map.md`; ADR-0001, ADR-0002. Робота без нагляду: Phase 1 виведено
 з файлу задачі й карт, не спитано (`/feature-architect`, «Unattended operation»).
 
+> **Змінено задачею 202 (2026-10-23):** кнопки «завершити», `close_session`, `closed_sessions` і `s<n>.json`
+> більше немає; `analyze` бере нові з минулого прогону репліки (`.engine/slices/continuous-analysis.md`). Нижче —
+> історичний запис функції, як її будували.
+
 ## Goal
 Найтонший наскрізний ланцюжок ThinkHow, що доводить: усі контейнери M2 стикуються.
 Запрошена людина входить через IAP → створює тему → пише репліку → `gemini-4-argon` на `eu` веде її за

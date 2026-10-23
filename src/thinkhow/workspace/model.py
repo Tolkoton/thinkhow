@@ -45,13 +45,6 @@ class Session:
 
 
 @dataclass(frozen=True)
-class ClosedSession:
-    session_no: int
-    turns: list[NumberedTurn]
-    closed_at: datetime
-
-
-@dataclass(frozen=True)
 class TopicSummary:
     ref: TopicRef
     title: str

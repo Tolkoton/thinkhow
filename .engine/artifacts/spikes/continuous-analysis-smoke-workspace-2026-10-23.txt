@@ -1,0 +1,27 @@
+  events: ['Saved', 'Delta', 'Delta', 'Answered']
+  events: ['Saved', 'Delta', 'Failed']
+  events: ['Delta', 'Delta', 'Answered']
+--- conversation.md ---
+<!-- thinkhow:format 1 -->
+# Відкрити кав'ярню
+
+<!-- thinkhow:session 1 -->
+
+<!-- thinkhow:turn 1 user 2026-10-22T16:00:00Z -->
+Хочу відкрити кав'ярню за три місяці.
+
+<!-- thinkhow:turn 2 model 2026-10-22T16:00:00Z -->
+Уявіть провал. Що сталося першим (репліка 1)?
+
+<!-- thinkhow:turn 3 user 2026-10-22T16:02:00Z -->
+Оренда — за три тижні.
+
+<!-- thinkhow:turn 4 model 2026-10-22T16:03:00Z -->
+Уявіть провал. Що сталося першим (репліка 3)?
+
+--- map.json ---
+{"items":[{"id":"i1","type":"plan","text":"Хочу відкрити кав'ярню за три місяці.","turn":"t1"},{"id":"i3","type":"plan","text":"Оренда — за три тижні.","turn":"t3"}],"phase_id":"phase_1_time_travel","last_turn":4}
+person 2 cannot open person 1's topic: TopicNotFound
+the owner opens it
+OK: turns 1-4, session 1 open, map from the updates, G4 holds, one session for learning
+exit 0

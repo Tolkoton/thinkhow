@@ -179,5 +179,3 @@ form.reply { margin-top: 1.25rem; }
 
 .pending { display: none; color: var(--muted); font-size: 0.95rem; }
 #send:disabled ~ .pending { display: inline; }
-
-form.close { margin-top: 2rem; }

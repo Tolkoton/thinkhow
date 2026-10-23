@@ -132,7 +132,7 @@ def test_smoke_passes_and_prints_conversation_md_and_map_json(
     for no, role in ((1, "user"), (2, "model"), (3, "user"), (4, "model")):
         assert f"<!-- thinkhow:turn {no} {role} " in out, (no, role)
     assert "<!-- thinkhow:turn 5 " not in out
-    assert "<!-- thinkhow:closed 1 " in out
+    assert "<!-- thinkhow:closed" not in out
     maps = printed_maps(out)
     assert maps, "no map.json printed"
     assert any(mp.items for mp in maps), "the printed map.json has no items from the updates"
@@ -196,16 +196,19 @@ def test_smoke_fails_when_the_turn_numbers_are_not_1_to_4(
     assert not ok, "turn numbers 1, 2, 3, 5 were not caught"
 
 
-def test_smoke_fails_when_session_1_is_not_closed(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
-    def drop_closed(data: bytes) -> bytes:
-        lines = data.split(b"\n")
-        return b"\n".join(line for line in lines if not line.startswith(b"<!-- thinkhow:closed"))
+def test_smoke_fails_when_session_1_is_closed(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    marker = b"<!-- thinkhow:closed 1 2026-10-22T16:03:00Z -->"
+
+    def add_closed(data: bytes) -> bytes:
+        if b"<!-- thinkhow:turn 4 " not in data or marker in data:
+            return data
+        return data.rstrip(b"\n") + b"\n\n" + marker + b"\n"
 
     def sabotage(m: pytest.MonkeyPatch) -> None:
-        rewrite_files(m, "conversation.md", drop_closed)
+        rewrite_files(m, "conversation.md", add_closed)
 
     ok, _ = run_smoke(monkeypatch, tmp_path, sabotage)
-    assert not ok, "an open session 1 was not caught"
+    assert not ok, "a closed session 1 was not caught"
 
 
 def test_smoke_fails_when_the_map_has_no_items_from_the_updates(
@@ -258,16 +261,14 @@ def test_smoke_fails_when_learning_does_not_get_the_topic(
     assert not ok, "all_topics_for_learning without the topic was not caught"
 
 
-def test_smoke_fails_when_closed_sessions_is_not_one_session_of_4_turns(
+def test_smoke_fails_when_topic_sessions_is_not_one_session_of_4_turns(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
-    original = workspace.closed_sessions
+    original = workspace.topic_sessions
 
     def short(*args: Any, **kwargs: Any) -> list[Any]:
         found = original(*args, **kwargs)
-        return [
-            type(s)(session_no=s.session_no, turns=list(s.turns)[:-1], closed_at=s.closed_at) for s in found
-        ]
+        return [type(s)(no=s.no, turns=list(s.turns)[:-1], closed_at=s.closed_at) for s in found]
 
-    ok, _ = run_smoke(monkeypatch, tmp_path, lambda m: replace_public(m, "closed_sessions", short))
-    assert not ok, "a closed session of 3 turns was not caught"
+    ok, _ = run_smoke(monkeypatch, tmp_path, lambda m: replace_public(m, "topic_sessions", short))
+    assert not ok, "a session of 3 turns for learning was not caught"
