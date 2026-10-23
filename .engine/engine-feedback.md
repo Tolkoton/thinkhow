@@ -37,3 +37,9 @@ From: lesson #e9c935f1 (gate, skel-platform, 2026-10-22).
 slice-tester at point (a): the hand-in is refused at import when the module skeleton is not in the tree, and while the builder writes it and the tester re-hands in, the Stop gate blocks on the expected RED (counting toward GATE_MAX_BLOCKS). The flow could have the builder write the skeleton before the tester is called, and the gate could skip a slice whose hand-in is pending.
 
 From: lesson #e07413f4 (gate, skel-knowledge, 2026-10-22).
+
+## 2026-10-23 — DELETE GUARD treats a function MOVED to another module (llm._retryable → platform/_retry.r
+
+DELETE GUARD treats a function MOVED to another module (llm._retryable → platform/_retry.retryable, as the sealed contract voice-dictation Q5a required, the move covered by tests/contract/voice_dictation/test_vd_catchup_retry.py) as a deletion of untested code and escalates to the owner (task 901). Either recognise a move (same body, new name in the same package, imported back) or let the builder write the test of the new home first and then the guard see it as touched; today the only way through is an owner's «так».
+
+From: lesson #1875bff6 (gate, voice-dictation, 2026-10-23).
