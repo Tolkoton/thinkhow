@@ -1,0 +1,14 @@
+two.webm run 0 secs 2.79 ref 234 hyp 233 WER~ 0.009
+    replace ['пів', 'року'] -> ['півроку']
+two.webm run 1 secs 2.54 ref 234 hyp 233 WER~ 0.009
+    replace ['пів', 'року'] -> ['півроку']
+four.webm run 0 secs 4.11 ref 468 hyp 464 WER~ 0.017
+    replace ['пів', 'року'] -> ['півроку']
+    replace ['я', 'ходила'] -> ['яходила']
+    replace ['я', 'ходила'] -> ['яходила']
+    replace ['пів', 'року'] -> ['півроку']
+four.webm run 1 secs 4.0 ref 468 hyp 464 WER~ 0.017
+    replace ['пів', 'року'] -> ['півроку']
+    replace ['я', 'ходила'] -> ['яходила']
+    replace ['я', 'ходила'] -> ['яходила']
+    replace ['пів', 'року'] -> ['півроку']

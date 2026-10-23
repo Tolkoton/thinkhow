@@ -1,0 +1,2 @@
+PermissionDenied 403 Cloud Speech-to-Text API has not been used in project pocket-lawyer-431614 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/speech.googleapis.com/overview?project=pocket-lawyer-431614 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [reason: "SERVICE_DISABLED"
+domain: "googleapis

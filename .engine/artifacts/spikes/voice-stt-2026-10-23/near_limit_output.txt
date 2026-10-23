@@ -1,0 +1,2 @@
+near.webm 8612993 bytes secs 14.15 ref 1990 hyp 1981 WER~ 0.026
+near.m4a 7706674 bytes secs 12.01 ref 1990 hyp 1982 WER~ 0.026
