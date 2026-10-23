@@ -1,0 +1,7 @@
+first visit: / → /language
+language uk-UA chosen
+topic page: http://localhost:36735/topics/local-owner/t-af7fd40358ab
+field after the microphone: (локальний режим) розпізнаний текст
+POST …/voice: {'type': 'audio/webm;codecs=opus', 'status': 200}
+sent; the page shows the turn and the facilitator's answer: 2 turns
+OK: language → topic → microphone → text in the field → sent and answered; files under /tmp/thinkhow-voice-x7ci92h6

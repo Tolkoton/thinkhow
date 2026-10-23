@@ -74,6 +74,7 @@ class FacilitationContext:
     problem_map: ProblemMap
     turn_no: int
     text: str
+    language: str | None = None
 
 
 Facilitate = Callable[[FacilitationContext], Iterator[ReplyDelta | FacilitatorUpdate]]

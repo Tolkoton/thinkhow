@@ -129,6 +129,10 @@
   інші перевірки) і кидають `NoLanguage`. Контракт S3 оновлює всі наявні конструктори `FacilitationContext` (код,
   тести попередніх slices, smoke-скрипти) — названо в його контракті. Live-тест. · contract out: поле `language`
   у `FacilitationContext` · depends on: S1
+  *Поправка під час планування S3 (escalations.md 2026-10-23T18:40Z, AUTONOMOUS):* поле `language: str | None = None`
+  (зі значенням за замовчуванням), `rules.md` не змінюється — мовне правило окремим розділом «# Мова відповіді»;
+  без обраної мови `reply`/`retry` не відмовляють, а передають `None`; «ніколи російською» — в обох гілках
+  (`.engine/slices/voice-reply-language.md`, Q1–Q3).
 
 ## Inter-slice contracts
 - S1 → S2: `workspace.language(storage, user) -> Language` і `workspace.NoLanguage` (обидва з S1);

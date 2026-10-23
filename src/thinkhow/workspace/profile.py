@@ -7,8 +7,8 @@ import json
 
 from thinkhow.access import CurrentUser
 from thinkhow.platform.storage import Storage
+from thinkhow.workspace._paths import JSON, _uid
 from thinkhow.workspace.languages import LANGUAGES, Language
-from thinkhow.workspace.topics import JSON, _uid
 
 BY_CODE = {lang.code: lang for lang in LANGUAGES}
 

@@ -174,3 +174,16 @@ one; do not reopen the old one in conversation.
   текст).
 - Evidence: `.engine/slices/voice-dictation.md` (Q10b, запечатано 2c67e3513d8a…); журнал цієї сесії.
 - Status: CLOSED
+
+## 2026-10-23T18:40Z — AUTONOMOUS — voice-reply-language-departures
+- Decision: slice S3 `voice-reply-language` відходить від рядка S3 feature-артефакту `voice-and-language` у трьох
+  місцях: (1) `FacilitationContext.language: str | None = None` — зі значенням за замовчуванням; (2) `rules.md` не
+  змінюється, мовне правило — окремим розділом «# Мова відповіді» після нього; (3) `reply`/`retry` без мови не дають
+  409, а передають `None` (правило «ніколи російською» діє й тоді).
+- Door: two-way
+- Cost to reverse: зробити поле обов'язковим і додати 409 — заперечення до запечатаних тестів skel-workspace,
+  skel-web (там кола вичерпано — паркування), skel-facilitation; кілька рядків коду.
+- Why not escalated: поведінка для людини та сама (без мови до теми не дійти — S1), а зміна запечатаних тестів
+  трьох slices через заперечення нічого людині не додає; рішення — технічне (Q1–Q3 контракту S3).
+- Evidence: `.engine/slices/voice-reply-language.md` Q1–Q3; `.engine/testing/ledger.md` (skel-web, раунд 2).
+- Status: CLOSED

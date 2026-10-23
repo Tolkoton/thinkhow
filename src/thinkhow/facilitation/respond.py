@@ -20,6 +20,7 @@ from thinkhow.knowledge import Card, CurrentKnowledge, MemoryRecord, card_prompt
 from thinkhow.platform import llm as model
 
 RULES = (Path(__file__).with_name("rules.md")).read_text(encoding="utf-8").rstrip("\n")
+NO_LANGUAGE_RULE = "Ніколи не відповідай російською: на репліку російською відповідай українською."
 RETRY_ASK = "Поверни лише оновлення до своєї відповіді вище: фаза, вихід, зміни карти."
 
 
@@ -30,7 +31,8 @@ def respond(
     card = knowledge.cards.get(ctx.card_id)
     if card is None:
         raise ValueError(f"no card {ctx.card_id!r} in the Knowledge")
-    system, contents, rev = system_instruction(card, knowledge.memory), _contents(ctx), knowledge.rev_pair()
+    system = system_instruction(card, knowledge.memory, ctx.language)
+    contents, rev = _contents(ctx), knowledge.rev_pair()
     shown: list[str] = []
     raw = ""
     for event in llm.stream_json(system, contents, answer_schema(card), rev):
@@ -42,8 +44,22 @@ def respond(
     yield from _settle(card, llm, system, contents, rev, "".join(shown), raw)
 
 
-def system_instruction(card: Card, memory: Sequence[MemoryRecord]) -> str:
-    return f"{RULES}\n\n# Картка\n{card_prompt(card)}\n# Пам'ять досвіду\n{_memory_text(memory)}\n"
+def system_instruction(card: Card, memory: Sequence[MemoryRecord], language: str | None = None) -> str:
+    """The rules as they are, then the person's language (F13), the card and the memory."""
+    head = f"{RULES}\n\n# Мова відповіді\n{language_rule(language)}\n"
+    return f"{head}\n# Картка\n{card_prompt(card)}\n# Пам'ять досвіду\n{_memory_text(memory)}\n"
+
+
+def language_rule(language: str | None) -> str:
+    """The person's language first, Russian never; with no language chosen, only the ban (F13, AC3)."""
+    if language is None:
+        return NO_LANGUAGE_RULE
+    return (
+        f"Відповідай мовою людини — {language}: цю мову вона обрала для розмов з ThinkHow, "
+        "і це правило важливіше за «мовою останньої репліки» вище. "
+        "Іншою мовою — лише якщо людина прямо попросить. "
+        "Ніколи не відповідай російською — ні на репліку російською, ні на прохання."
+    )
 
 
 def answer_schema(card: Card) -> type[FacilitatorUpdate]:

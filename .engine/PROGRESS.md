@@ -90,3 +90,18 @@
 - Surprises: Chromium records 128 kbit/s by default (pinned 64 kbit/s); Playwright does not expose Blob bodies; a
   mismatched pinned language is a hint, not a filter; the 1.64 Playwright needs the cached chromium-1208 by path
 - Open for next slice: S3 (`voice-reply-language`) — the facilitator answers in the profile's language
+
+## Slice 10 — voice-reply-language (DONE 2026-10-23) — F13, the last slice
+
+- Module: `facilitation/respond.py` (`language_rule`; «# Мова відповіді» between the rules and the card),
+  `facilitation/types.py` (`FacilitationContext.language: str | None = None`), `workspace/topics.py` (`reply`/`retry`
+  read the person's language eagerly, `None` before the first choice), `workspace/_paths.py` (`JSON`, `UID`, `_uid`
+  moved out of `topics` to break the `profile` ↔ `topics` cycle) (~60 LOC)
+- Tests: 19 contract tests of the slice-tester (`tests/contract/voice_reply_language/`); no sealed test of an earlier
+  slice changed (`testing.py check` — match for skel-facilitation, skel-workspace, skel-web)
+- Smoke: live — `tests/live/test_facilitation_language_live.py` 7/7 (pl → pl; ru from a uk person → uk, 5 of 5;
+  uk from an en person → en), output `.engine/artifacts/spikes/voice-reply-language-live-2026-10-23.txt`; after S3
+  the browser smoke and the speech live test are green again (`voice-dictation-smoke-2026-10-23-after-s3.txt`)
+- Surprises: none in the code; the departures from the feature artifact (default field, rules.md untouched, no 409)
+  are logged AUTONOMOUS (escalations 2026-10-23T18:40Z)
+- Open: deployment by the owner (checklist 10–14 in `docs/deploy.md`)

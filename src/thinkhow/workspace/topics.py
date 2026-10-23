@@ -21,6 +21,7 @@ from thinkhow.facilitation.types import (
 from thinkhow.facilitation.types import Turn as FacilitationTurn
 from thinkhow.platform.storage import Storage
 from thinkhow.workspace import conversation as conv_file
+from thinkhow.workspace._paths import JSON, UID, _uid
 from thinkhow.workspace.model import (
     CARD_ID,
     SILENCE,
@@ -40,12 +41,11 @@ from thinkhow.workspace.model import (
     TopicSummary,
     TopicView,
 )
+from thinkhow.workspace.profile import NoLanguage, language
 
-UID = re.compile(r"^[A-Za-z0-9_-]{1,128}$")
 TOPIC_ID = re.compile(r"^t-[0-9a-f]{12}$")
 CONVERSATION = re.compile(r"^([A-Za-z0-9_-]{1,128})/(t-[0-9a-f]{12})/conversation\.md$")
 MARKDOWN = "text/markdown; charset=utf-8"
-JSON = "application/json"
 
 
 def ensure_profile(storage: Storage, user: CurrentUser) -> None:
@@ -94,7 +94,7 @@ def reply(
     conv = _read_conversation(storage, ref)
     if _awaiting(conv, now):
         raise PendingAnswer("the last turn has no answer yet: retry it first")
-    return _reply_flow(storage, facilitate, ref, conv, clean, now)
+    return _reply_flow(storage, facilitate, ref, conv, clean, now, _language_of(storage, user))
 
 
 def retry(
@@ -106,7 +106,16 @@ def retry(
     if not _awaiting(conv, now):
         raise NothingToRetry("no unanswered turn in an open session")
     last = conv.sessions[-1].turns[-1]
-    return _answer(storage, facilitate, ref, conv, last.no, last.text, now)
+    return _answer(storage, facilitate, ref, conv, last.no, last.text, now, _language_of(storage, user))
+
+
+def _language_of(storage: Storage, user: CurrentUser) -> str | None:
+    """The person's language as the model reads it, «name (code)», or None before the first choice (F13)."""
+    try:
+        chosen = language(storage, user)
+    except NoLanguage:
+        return None
+    return f"{chosen.name} ({chosen.code})"
 
 
 def close_session(storage: Storage, user: CurrentUser, ref: TopicRef, now: datetime) -> None:
@@ -134,6 +143,7 @@ def _reply_flow(
     conv: conv_file.Conversation,
     text: str,
     now: datetime,
+    lang: str | None,
 ) -> Iterator[ReplyEvent]:
     """Flow (M2): the person's turn into conversation.md → Saved → the answer (I4)."""
     if _closed_at(conv.sessions[-1], now) is not None:
@@ -142,7 +152,7 @@ def _reply_flow(
     conv.sessions[-1].turns.append(conv_file.Turn(turn_no, "user", conv_file.second(now), text))
     _write_conversation(storage, ref, conv)
     yield Saved(turn_no)
-    yield from _answer(storage, facilitate, ref, conv, turn_no, text, now)
+    yield from _answer(storage, facilitate, ref, conv, turn_no, text, now, lang)
 
 
 def _answer(
@@ -153,6 +163,7 @@ def _answer(
     turn_no: int,
     text: str,
     now: datetime,
+    lang: str | None,
 ) -> Iterator[ReplyEvent]:
     """Flow: facilitate → deltas → answer into conversation.md → map.json → Answered; a failure → Failed."""
     session = conv.sessions[-1]
@@ -160,7 +171,7 @@ def _answer(
     problem_map = _read_map(storage, ref)
     update: FacilitatorUpdate | None = None
     try:
-        for item in facilitate(FacilitationContext(CARD_ID, history, problem_map, turn_no, text)):
+        for item in facilitate(FacilitationContext(CARD_ID, history, problem_map, turn_no, text, lang)):
             if isinstance(item, FacilitatorUpdate):
                 update = item
                 break
@@ -244,12 +255,6 @@ def _check_ref(ref: TopicRef) -> None:
 def _check_now(now: datetime) -> None:
     if now.tzinfo is None or now.utcoffset() is None:
         raise ValueError("now must carry a time zone")
-
-
-def _uid(uid: str) -> str:
-    if not UID.match(uid):
-        raise ValueError(f"not a server id: {uid!r}")
-    return uid
 
 
 def _read_conversation(storage: Storage, ref: TopicRef) -> conv_file.Conversation:

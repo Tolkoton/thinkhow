@@ -1,0 +1,34 @@
+
+[Polski (pl-PL)] Chcę w ciągu trzech miesięcy otworzyć kawiarnię w Krakowie.
+→ Zróbmy eksperyment myślowy. Wyobraź sobie, że minęło pół roku — jest już kilka miesięcy po planowanym otwarciu kawiarni w Krakowie — i niestety cały ten projekt okazał się całkowitą porażką. Kiedy patrzysz wstecz z tego punktu w przyszłości, jak wygląda ten krach i jakie pierwsze 2–3 przyczyny sprawiły, że się nie udało?
+.{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 2441, "output_tokens": 218, "thought_tokens": 0, "latency_ms": 4799, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "event": "llm_call", "request_id": null}
+
+[Українська (uk-UA)] Хочу за три месяца открыть кофейню во Львове. Давайте проверим план, пока не поздно.
+→ Давайте проведемо уявний експеримент. Уявіть, що три місяці вже минули: кав'ярня так і не запрацювала нормально, або ж проєкт безнадійно провалився на самому старті. Якщо озирнутися назад із цієї точки в майбутньому, як виглядає цей крах і які перші 2–3 причини привели до провалу?
+first sentence: Давайте проведемо уявний експеримент
+.{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 2441, "output_tokens": 249, "thought_tokens": 0, "latency_ms": 4782, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "event": "llm_call", "request_id": null}
+
+[Українська (uk-UA)] Хочу за три месяца открыть кофейню во Львове. Давайте проверим план, пока не поздно.
+→ Давайте проведемо мисленнєвий експеримент. Уявіть, що минуло 4 місяці з цього моменту, але ваша ідея з кав'ярнею у Львові за 3 місяці безнадійно провалилася — заклад або так і не відкрився вчасно, або вже закривається у збитках. Озираючись назад із тієї точки: як виглядає цей крах і які перші 2–3 причини того, чому все пішло шкереберть, спадають вам на думку?
+first sentence: Давайте проведемо мисленнєвий експеримент
+.{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 2441, "output_tokens": 223, "thought_tokens": 0, "latency_ms": 5921, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "event": "llm_call", "request_id": null}
+
+[Українська (uk-UA)] Хочу за три месяца открыть кофейню во Львове. Давайте проверим план, пока не поздно.
+→ Давайте проведемо уявний експеримент. Перенесімося на пів року вперед: минули три місяці на підготовку і ще три після запланованого старту, але проєкт із кав'ярнею у Львові зазнав повного краху. Озираючись назад із цієї точки в майбутньому, як саме виглядає цей провал і які перші 2–3 причини привели до нього?
+first sentence: Давайте проведемо уявний експеримент
+.{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 2441, "output_tokens": 244, "thought_tokens": 0, "latency_ms": 5728, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "event": "llm_call", "request_id": null}
+
+[Українська (uk-UA)] Хочу за три месяца открыть кофейню во Львове. Давайте проверим план, пока не поздно.
+→ Давайте проведемо уявний експеримент. Уявіть, що минуло чотири місяці — на місяць більше від вашого дедлайну, — і проєкт кав'ярні у Львові безнадійно провалився: або вона так і не відкрилася, або вже закривається у збитках. Озираючись назад із цієї точки, як виглядає цей крах і які перші 2–3 причини того, чому все пішло шкереберть, спадають вам на думку?
+first sentence: Давайте проведемо уявний експеримент
+.{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 2441, "output_tokens": 231, "thought_tokens": 0, "latency_ms": 4975, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "event": "llm_call", "request_id": null}
+
+[Українська (uk-UA)] Хочу за три месяца открыть кофейню во Львове. Давайте проверим план, пока не поздно.
+→ Давайте проведемо уявний експеримент. Уявіть, що минуло пів року від сьогодні: ви вклали ресурси та час, щоб відкрити кав'ярню за три місяці, але проєкт повністю провалився — закладу немає або він безнадійно збитковий. Озираючись назад із тієї точки у майбутньому, які перші 2–3 причини спадають на думку: чому саме це сталося?
+first sentence: Давайте проведемо уявний експеримент
+.{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 2448, "output_tokens": 214, "thought_tokens": 0, "latency_ms": 4605, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "event": "llm_call", "request_id": null}
+
+[English (United States) (en-US)] Хочу за три місяці відкрити кав'ярню у Львові. Перевірмо план, поки не пізно.
+→ Let's test it using a Pre-mortem. Imagine we fast-forward six months from today — three months after your planned opening date. Unfortunately, the coffee shop in Lviv was a complete failure: either it never opened on time, or it had to shut down right after launching. Looking back from that point in the future, what does that collapse look like, and what are the first 2–3 reasons that explain why it failed?
+.
+7 passed in 37.03s
