@@ -106,6 +106,11 @@ docker run --rm thinkhow:skeleton python -m thinkhow.learning.job
 2. APIs & Services → Credentials → Create credentials → OAuth client ID → Web application. Authorized redirect URI:
    `https://iap.googleapis.com/v1/oauth/clientIds/<CLIENT_ID>:handleRedirect`.
 3. Security → Identity-Aware Proxy → Settings: вкажіть цей OAuth-клієнт (client ID і secret) для проєкту.
+   Якщо проєкт не належить організації, API налаштувань IAP для всього проєкту відповідає `Project must belong to an
+   organization`. Тоді клієнт задається на самому сервісі, після кроку 8: рядок Cloud Run `thinkhow` → ⋮ → Settings →
+   Custom OAuth. Ознака, що клієнта немає: сервіс відповідає `502 Empty Google Account OAuth client ID(s)/secret(s)`.
+   Ознака, що він є: `gcloud iap settings get --resource-type=cloud-run --service=thinkhow --region=$REGION`
+   показує `oauthSettings`, а запит без входу отримує `302` на `accounts.google.com`.
 
 ## 7. Cloud Run Job `thinkhow-learning` і посів Знань
 
