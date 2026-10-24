@@ -1,0 +1,19 @@
+RED: tests/voice against HEAD's speech.py and voice.py (voice.py given RECENT_TURNS, VOCABULARY_SIZE and a vocabulary() returning []), 2026-10-24
+FAILED tests/voice/test_voice_context.py::test_names_in_another_script_and_mid_sentence_capitals_are_taken_common_words_are_not
+FAILED tests/voice/test_voice_context.py::test_lower_case_words_of_another_script_are_taken_too
+FAILED tests/voice/test_voice_context.py::test_in_a_latin_conversation_latin_words_are_common_and_only_names_count
+FAILED tests/voice/test_voice_context.py::test_newest_turns_first_each_word_once_title_counts_and_only_the_latest_turns_are_read
+FAILED tests/voice/test_voice_context.py::test_the_vocabulary_is_capped - ass...
+FAILED tests/voice/test_voice_context.py::test_a_new_topic_gives_at_most_the_title_words
+FAILED tests/voice/test_voice_context.py::test_workspace_sends_the_topic_vocabulary_with_the_profile_language
+FAILED tests/voice/test_voice_context.py::test_gemini_puts_the_vocabulary_in_the_config_and_the_audio_alone_in_contents
+FAILED tests/voice/test_voice_context.py::test_the_journal_gets_the_vocabulary_size_not_its_words
+FAILED tests/voice/test_voice_context.py::test_the_local_double_takes_a_vocabulary_and_ignores_it
+10 failed, 1 passed in 0.61s
+
+GREEN after the change:
+11 passed in 0.52s
+
+Proposal 715 (overseer test gap): the sentence-start test against voice.py with _starts_sentence always False (names at a sentence start kept):
+  AssertionError: assert ['Київ', 'Львів', 'Тема'] == []  — 1 failed
+  on the code as it is: 1 passed

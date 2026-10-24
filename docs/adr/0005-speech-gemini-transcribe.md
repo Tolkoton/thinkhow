@@ -73,3 +73,18 @@ B (Chirp 3) **не порівнювали**: API Speech-to-Text у проєкт�
 `tests/contract/voice_dictation/` (контракт slice `voice-dictation`), `tests/live/test_speech_live.py` (`-m live`,
 `-m live_codes`), `scripts/smoke_test_voice_dictation.py` (справжній Chromium). Повернутися до B: власник вмикає
 `speech.googleapis.com`, і друга реалізація `platform.speech.Speech` з'являється поруч — порт уже є (M3 A2).
+
+## Addendum 2026-10-24 — the conversation's vocabulary (task 304)
+
+Decision of the agent, a two-way door (task 304: «Як саме … — вирішує агент»). The model also gets
+`AudioTranscriptionConfig.custom_vocabulary`. This is a list of up to 100 name-like words from the topic's title
+and its latest six turns: words in another script than most of the conversation, and words with a capital where
+no sentence starts. The newest turns come first. `language_codes` stays the profile's language. The words go in
+the config, not as text in the request; the journal records their number only (`vocabulary` in `speech_call`).
+
+Why this way (`.engine/artifacts/spikes/voice-context-2026-10-24/README.md`): the model refuses
+`system_instruction` with 400. It takes a text part with the context, but the names do not change, and in one
+run the model left out a spoken sentence. `custom_vocabulary` fixed accented names: 4/9 and 6/9 → 9/9 in two
+runs on the test sentence, 6/18 → 12/18 on the heavier accent. Time did not grow (median 0.67 s against 0.75 s). An inflected
+Ukrainian form of a name that has its own Ukrainian spelling («у Шварцвалді») stays Cyrillic.
+Confirmation: `tests/voice/test_voice_context.py`; live `test_with_the_conversation_vocabulary_the_names_come_out_as_written`.

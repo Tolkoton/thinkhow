@@ -20,7 +20,7 @@ import re
 import shutil
 import subprocess
 import threading
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from html.parser import HTMLParser
@@ -86,7 +86,7 @@ class RecordingSpeech:
     loop_running: list[bool] = field(default_factory=list)
     threads: list[threading.Thread] = field(default_factory=list)
 
-    def transcribe(self, audio: bytes, mime: str, language: str) -> str:
+    def transcribe(self, audio: bytes, mime: str, language: str, vocabulary: Sequence[str] = ()) -> str:
         self.calls.append((audio, mime, language))
         self.threads.append(threading.current_thread())
         try:

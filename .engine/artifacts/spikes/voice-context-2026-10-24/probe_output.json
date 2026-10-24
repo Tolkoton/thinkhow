@@ -1,0 +1,812 @@
+[
+ {
+  "run": 0,
+  "file": "cyr-p0",
+  "variant": "none",
+  "secs": 1.2,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p0",
+  "variant": "vocab",
+  "secs": 0.74,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p0",
+  "variant": "text_part",
+  "secs": 0.65,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p0",
+  "variant": "vocab_all",
+  "secs": 0.65,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p0",
+  "variant": "text_part+vocab",
+  "secs": 0.68,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p1",
+  "variant": "none",
+  "secs": 0.62,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p1",
+  "variant": "vocab",
+  "secs": 0.62,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p1",
+  "variant": "text_part",
+  "secs": 0.7,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p1",
+  "variant": "vocab_all",
+  "secs": 0.66,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p1",
+  "variant": "text_part+vocab",
+  "secs": 0.69,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p2",
+  "variant": "none",
+  "secs": 0.74,
+  "names": "1/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p2",
+  "variant": "vocab",
+  "secs": 0.67,
+  "names": "2/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand — це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p2",
+  "variant": "text_part",
+  "secs": 0.71,
+  "names": "1/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p2",
+  "variant": "vocab_all",
+  "secs": 0.69,
+  "names": "1/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand — це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "cyr-p2",
+  "variant": "text_part+vocab",
+  "secs": 0.7,
+  "names": "2/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand — це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p0",
+  "variant": "none",
+  "secs": 0.62,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p0",
+  "variant": "vocab",
+  "secs": 0.62,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p0",
+  "variant": "text_part",
+  "secs": 0.65,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p0",
+  "variant": "vocab_all",
+  "secs": 0.57,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p0",
+  "variant": "text_part+vocab",
+  "secs": 0.63,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p1",
+  "variant": "none",
+  "secs": 0.57,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p1",
+  "variant": "vocab",
+  "secs": 0.52,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p1",
+  "variant": "text_part",
+  "secs": 0.66,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p1",
+  "variant": "vocab_all",
+  "secs": 0.66,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p1",
+  "variant": "text_part+vocab",
+  "secs": 0.63,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p2",
+  "variant": "none",
+  "secs": 0.67,
+  "names": "1/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p2",
+  "variant": "vocab",
+  "secs": 0.65,
+  "names": "2/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p2",
+  "variant": "text_part",
+  "secs": 0.68,
+  "names": "1/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p2",
+  "variant": "vocab_all",
+  "secs": 0.65,
+  "names": "2/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "lat-p2",
+  "variant": "text_part+vocab",
+  "secs": 0.66,
+  "names": "2/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p0",
+  "variant": "none",
+  "secs": 0.59,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p0",
+  "variant": "vocab",
+  "secs": 0.63,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p0",
+  "variant": "text_part",
+  "secs": 0.66,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p0",
+  "variant": "vocab_all",
+  "secs": 0.65,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p0",
+  "variant": "text_part+vocab",
+  "secs": 0.66,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p1",
+  "variant": "none",
+  "secs": 0.7,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p1",
+  "variant": "vocab",
+  "secs": 0.62,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p1",
+  "variant": "text_part",
+  "secs": 0.67,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p1",
+  "variant": "vocab_all",
+  "secs": 0.63,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p1",
+  "variant": "text_part+vocab",
+  "secs": 0.62,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p2",
+  "variant": "none",
+  "secs": 0.66,
+  "names": "1/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p2",
+  "variant": "vocab",
+  "secs": 0.67,
+  "names": "2/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand — це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p2",
+  "variant": "text_part",
+  "secs": 0.72,
+  "names": "1/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p2",
+  "variant": "vocab_all",
+  "secs": 0.65,
+  "names": "1/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand — це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "cyr-p2",
+  "variant": "text_part+vocab",
+  "secs": 0.66,
+  "names": "2/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand — це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p0",
+  "variant": "none",
+  "secs": 0.61,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p0",
+  "variant": "vocab",
+  "secs": 0.66,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p0",
+  "variant": "text_part",
+  "secs": 0.63,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p0",
+  "variant": "vocab_all",
+  "secs": 0.6,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p0",
+  "variant": "text_part+vocab",
+  "secs": 0.64,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p1",
+  "variant": "none",
+  "secs": 0.57,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p1",
+  "variant": "vocab",
+  "secs": 0.55,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p1",
+  "variant": "text_part",
+  "secs": 0.65,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p1",
+  "variant": "vocab_all",
+  "secs": 0.64,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p1",
+  "variant": "text_part+vocab",
+  "secs": 0.71,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p2",
+  "variant": "none",
+  "secs": 0.69,
+  "names": "1/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p2",
+  "variant": "vocab",
+  "secs": 0.73,
+  "names": "2/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p2",
+  "variant": "text_part",
+  "secs": 0.7,
+  "names": "1/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p2",
+  "variant": "vocab_all",
+  "secs": 0.65,
+  "names": "2/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 1,
+  "file": "lat-p2",
+  "variant": "text_part+vocab",
+  "secs": 0.69,
+  "names": "2/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p0",
+  "variant": "none",
+  "secs": 0.56,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p0",
+  "variant": "vocab",
+  "secs": 0.57,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p0",
+  "variant": "text_part",
+  "secs": 0.67,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p0",
+  "variant": "vocab_all",
+  "secs": 0.64,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p0",
+  "variant": "text_part+vocab",
+  "secs": 0.65,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p1",
+  "variant": "none",
+  "secs": 0.58,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p1",
+  "variant": "vocab",
+  "secs": 0.6,
+  "names": "2/2",
+  "text": "Наприклад, у Schwarzwald багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p1",
+  "variant": "text_part",
+  "secs": 0.68,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p1",
+  "variant": "vocab_all",
+  "secs": 0.59,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p1",
+  "variant": "text_part+vocab",
+  "secs": 0.63,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p2",
+  "variant": "none",
+  "secs": 0.7,
+  "names": "1/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p2",
+  "variant": "vocab",
+  "secs": 0.64,
+  "names": "2/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand — це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p2",
+  "variant": "text_part",
+  "secs": 0.7,
+  "names": "1/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p2",
+  "variant": "vocab_all",
+  "secs": 0.65,
+  "names": "1/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand — це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "cyr-p2",
+  "variant": "text_part+vocab",
+  "secs": 0.7,
+  "names": "2/2",
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand — це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p0",
+  "variant": "none",
+  "secs": 0.55,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p0",
+  "variant": "vocab",
+  "secs": 0.61,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p0",
+  "variant": "text_part",
+  "secs": 0.68,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p0",
+  "variant": "vocab_all",
+  "secs": 0.9,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p0",
+  "variant": "text_part+vocab",
+  "secs": 0.68,
+  "names": "2/2",
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p1",
+  "variant": "none",
+  "secs": 0.69,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p1",
+  "variant": "vocab",
+  "secs": 0.67,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p1",
+  "variant": "text_part",
+  "secs": 0.65,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p1",
+  "variant": "vocab_all",
+  "secs": 0.63,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p1",
+  "variant": "text_part+vocab",
+  "secs": 0.67,
+  "names": "1/2",
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p2",
+  "variant": "none",
+  "secs": 0.71,
+  "names": "1/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p2",
+  "variant": "vocab",
+  "secs": 0.66,
+  "names": "2/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p2",
+  "variant": "text_part",
+  "secs": 0.67,
+  "names": "1/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p2",
+  "variant": "vocab_all",
+  "secs": 0.66,
+  "names": "2/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 2,
+  "file": "lat-p2",
+  "variant": "text_part+vocab",
+  "secs": 0.69,
+  "names": "2/2",
+  "text": "Ну, як вгадати, як це я знаю? Mittelstand - це ж не одна галузь, і в Schwarzwald теж усі різні.",
+  "err": ""
+ }
+]

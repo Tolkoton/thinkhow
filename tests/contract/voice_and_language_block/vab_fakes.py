@@ -69,7 +69,7 @@ class RecordingSpeech:
     fail_first: list[BaseException] = field(default_factory=list)
     calls: list[tuple[bytes, str, str]] = field(default_factory=list)
 
-    def transcribe(self, audio: bytes, mime: str, language: str) -> str:
+    def transcribe(self, audio: bytes, mime: str, language: str, vocabulary: Sequence[str] = ()) -> str:
         self.calls.append((audio, mime, language))
         if self.fail_first:
             raise self.fail_first.pop(0)

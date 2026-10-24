@@ -1,0 +1,122 @@
+[
+ {
+  "run": 0,
+  "file": "p0",
+  "variant": "none",
+  "secs": 1.29,
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "p0",
+  "variant": "vocab",
+  "secs": 0.82,
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "p0",
+  "variant": "text_part",
+  "secs": 0.79,
+  "text": "Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "p0",
+  "variant": "system",
+  "secs": 0.38,
+  "text": "",
+  "err": "ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'The input system_instruction is not supported.', 'status': 'INVALID_ARGUMENT'}}"
+ },
+ {
+  "run": 0,
+  "file": "p0",
+  "variant": "system+vocab",
+  "secs": 1.18,
+  "text": "",
+  "err": "ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'The input system_instruction is not supported.', 'status': 'INVALID_ARGUMENT'}}"
+ },
+ {
+  "run": 0,
+  "file": "p1",
+  "variant": "none",
+  "secs": 1.46,
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту. Dort sind viele Familienunternehmen, die ein SEO für deren Website brauchen.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "p1",
+  "variant": "vocab",
+  "secs": 0.97,
+  "text": "Наприклад, у Schwarzwald багато сімейних виробництв, яким потрібне SEO для сайту. Dort sind viele Familienunternehmen, die ein SEO für deren Website brauchen.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "p1",
+  "variant": "text_part",
+  "secs": 0.78,
+  "text": "Наприклад, у Шварцвальд багато сімейних виробництв, яким потрібне SEO для сайту.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "p1",
+  "variant": "system",
+  "secs": 0.34,
+  "text": "",
+  "err": "ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'The input system_instruction is not supported.', 'status': 'INVALID_ARGUMENT'}}"
+ },
+ {
+  "run": 0,
+  "file": "p1",
+  "variant": "system+vocab",
+  "secs": 1.13,
+  "text": "",
+  "err": "ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'The input system_instruction is not supported.', 'status': 'INVALID_ARGUMENT'}}"
+ },
+ {
+  "run": 0,
+  "file": "p2",
+  "variant": "none",
+  "secs": 1.46,
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "p2",
+  "variant": "vocab",
+  "secs": 0.91,
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand - це ж не одна галузь, і Schwarzwald теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "p2",
+  "variant": "text_part",
+  "secs": 0.71,
+  "text": "Ну, як вгадати? Як це я знаю? Mittelstand - це ж не одна галузь, і в Шварцвальд теж усі різні.",
+  "err": ""
+ },
+ {
+  "run": 0,
+  "file": "p2",
+  "variant": "system",
+  "secs": 0.33,
+  "text": "",
+  "err": "ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'The input system_instruction is not supported.', 'status': 'INVALID_ARGUMENT'}}"
+ },
+ {
+  "run": 0,
+  "file": "p2",
+  "variant": "system+vocab",
+  "secs": 1.13,
+  "text": "",
+  "err": "ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'The input system_instruction is not supported.', 'status': 'INVALID_ARGUMENT'}}"
+ }
+]

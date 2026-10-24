@@ -1,0 +1,12 @@
+10 entries: 1.12 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.
+50 entries: 0.66 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.
+100 entries: 0.65 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.
+200 entries: 0.64 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.
+500 entries: 0.75 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.
+1000 entries: 0.90 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.
+5000 entries: 0.47 s | ERROR ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'custom_vocabulary cannot contain more than 1000 entries.', 'status': 'INVALID_ARGUMENT'}}
+one entry of 50 chars: 1.44 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.
+one entry of 100 chars: 0.80 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.
+one entry of 200 chars: 0.67 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.
+one entry of 500 chars: 0.63 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Upwork.
+empty list: 0.62 s | Я хочу працювати з фірмами німецького Mittelstand, а не шукати дрібні замовлення на Апворку.
