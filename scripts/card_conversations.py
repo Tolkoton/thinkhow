@@ -231,7 +231,7 @@ def _drive(
         led = _led(decisions)
         if chosen_at is None and any(d["kind"] == "choose" for d in new):
             chosen_at = count
-        if any(d["kind"] == "end" and d["card_id"] == led for d in new):
+        if target is not None and any(d["kind"] == "end" and d["card_id"] == led for d in new):
             if not (switch and conv.switched):
                 if switch:
                     conv.note = "картка закінчилась до перемикання"
