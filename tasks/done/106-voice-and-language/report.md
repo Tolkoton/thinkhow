@@ -51,7 +51,7 @@
 - **Залежності** — нових пакетів не додано (розпізнавання йде через уже наявний `google-genai`).
 - **`docs/deploy.md` і `docs/deploy-sonko.md`** — `deploy.md`: крок 1 чекліста (сторінка «Мова» при першому вході) і
   пункти 10–14; `deploy-sonko.md` — без змін: у ньому немає кроків про Speech-to-Text, а нових API чи прав немає.
-- **Готово, коли:** локально все працює, `uv run pytest` — 456 passed; ruff, mypy, import-linter чисті; live-тест
+- **Готово, коли:** локально все працює, `uv run pytest` — 456 passed на `aa7d981`; ruff, mypy, import-linter чисті; live-тест
   розпізнавання на `eu` з закріпленою мовою — зелений; ADR-0005 з виміряним часом до тексту; цей звіт.
 
 ## Витрати
@@ -60,14 +60,16 @@
   `gemini-4-argon` (live-тести фасилітатора) і ~20 викликів Gemini TTS для синтетичних записів — частки долара.
 
 ## Commit-и
-`c1e242c` (план і spike) → `7c0d1a3` (S1) → `ea05726` (S2) → `aa7d981` (S3) і commit закриття задачі.
+`c1e242c` (план і spike) → `7c0d1a3` (S1) → `ea05726` (S2) → `aa7d981` (S3) → `58f01a9` (задача знову в `doing/`) і commit закриття задачі.
 
 ## Що чекає на вас
-- **Задача 901 у `tasks/blocked/`** — gate зупинився на перенесенні функції `_retryable` з `platform/llm.py` у новий
-  `platform/_retry.py` (так вимагав контракт S2: інакше розпізнавання тягнуло б за собою модуль моделі). Gate бачить
-  перенесення як «видалено код без тестів»; правило тепер покрите `tests/contract/voice_dictation/test_vd_catchup_retry.py`.
-  Поки ви не відповісте там «так», overseer записує аудити S2 і S3 як BLOCK — обидва аудити не знайшли жодної
-  невиконаної перевірки. Порада: «так».
+- **Задачу 901 закрито вашою відповіддю** (commit `e6f7688`). Після цього S2 і S3 знову пройшли аудит: overseer дав PASS
+  2026-10-24 (request `20261024T074942Z-375d52`). Цей аудит заново запустив усі перевірки на HEAD `58f01a9`.
+- **3 червоні тести skel-web** (`test_own_topic_page_has_reply_form_send_and_close`,
+  `test_close_redirects_303_to_the_topic_and_closes_the_session`, `test_e2e_local_mode_build_deps_topic_reply_close_files`).
+  Вони досі очікують кнопку «Завершити сесію», яку прибрала задача 202. Код задачі 106 їх не ламає. За вашою
+  відповіддю їх виправляє задача 202 (`tasks/todo/202`, `tasks/todo/708`). На HEAD `58f01a9`: 506 passed, 3 failed;
+  ruff, mypy (156 files) і import-linter (7 kept) чисті.
 - **Пропозиції** (`tasks/proposed/`): 706 — Playwright у dev-залежності (зараз smoke голосу бере його з тимчасового
   середовища uv); 707 — розбір тестування після десяти slices (поклав скрипт тестування).
 - **Огляд simplifier** (`.engine/simplifier/report.md`): пакет `google-cloud-speech` більше не потрібен — прибрати
