@@ -1,0 +1,74 @@
+# Task 105 — checklist on the owner's deployment, 2026-10-24 (agent's own read-only checks; no conversation text)
+# Items 1, 3: the owner in a browser, 2026-10-23 (task 105, question 6 answer). Items 2, 4: waived by the owner (same answer).
+# Items 5-9: Сонько ran them (~/sonko/done/2026-10-24-thinkhow-checklist-5-9.md); below is what the agent read itself.
+
+$ date -u
+Sat Oct 24 07:40:34 UTC 2026
+
+$ gcloud run revisions list --service=thinkhow --region=europe-west3
+   REVISION            ACTIVE  SERVICE   DEPLOYED                 DEPLOYED BY
+✔  thinkhow-00002-nrf  yes     thinkhow  2026-10-24 07:36:47 UTC  leskivmr@gmail.com
+✔  thinkhow-00001-j5g          thinkhow  2026-10-23 14:33:26 UTC  leskivmr@gmail.com
+
+$ gcloud builds list --limit=1
+12e96089-fe39-4e2a-bacc-8d26a5639144	2026-10-24T07:35:15+00:00	SUCCESS	europe-west3-docker.pkg.dev/pocket-lawyer-431614/thinkhow/thinkhow:skeleton
+
+$ gcloud run jobs executions list --job=thinkhow-learning --region=europe-west3
+   JOB                EXECUTION                REGION        RUNNING  COMPLETE  CREATED                  RUN BY
+✔  thinkhow-learning  thinkhow-learning-8nczv  europe-west3  0        1 / 1     2026-10-24 07:38:33 UTC  leskivmr@gmail.com
+✔  thinkhow-learning  thinkhow-learning-4j4g7  europe-west3  0        1 / 1     2026-10-24 07:37:19 UTC  leskivmr@gmail.com
+✔  thinkhow-learning  thinkhow-learning-vdjzh  europe-west3  0        1 / 1     2026-10-24 00:00:01 UTC  thinkhow-scheduler@pocket-lawyer-431614.iam.gserviceaccount.com
+✔  thinkhow-learning  thinkhow-learning-lwfsb  europe-west3  0        1 / 1     2026-10-23 14:32:51 UTC  leskivmr@gmail.com
+
+$ gcloud storage ls -r gs://pocket-lawyer-431614-thinkhow-users   (item 5; after redeploy = item 6)
+gs://pocket-lawyer-431614-thinkhow-users/:
+
+gs://pocket-lawyer-431614-thinkhow-users/104839836105981044615/:
+gs://pocket-lawyer-431614-thinkhow-users/104839836105981044615/profile.json
+
+gs://pocket-lawyer-431614-thinkhow-users/104839836105981044615/t-113f78de92a5/:
+gs://pocket-lawyer-431614-thinkhow-users/104839836105981044615/t-113f78de92a5/conversation.md
+gs://pocket-lawyer-431614-thinkhow-users/104839836105981044615/t-113f78de92a5/map.json
+
+$ conversation.md markers only
+<!-- thinkhow:format 1 -->
+<!-- thinkhow:session 1 -->
+<!-- thinkhow:turn 1 user 2026-10-23T15:39:29Z -->
+<!-- thinkhow:turn 2 model 2026-10-23T15:39:29Z -->
+<!-- thinkhow:turn 3 user 2026-10-23T15:39:56Z -->
+<!-- thinkhow:turn 4 model 2026-10-23T15:39:56Z -->
+
+$ gcloud storage ls -r gs://pocket-lawyer-431614-thinkhow-system/learning/observations/   (item 8)
+gs://pocket-lawyer-431614-thinkhow-system/learning/observations/:
+
+gs://pocket-lawyer-431614-thinkhow-system/learning/observations/104839836105981044615/:
+
+gs://pocket-lawyer-431614-thinkhow-system/learning/observations/104839836105981044615/t-113f78de92a5/:
+gs://pocket-lawyer-431614-thinkhow-system/learning/observations/104839836105981044615/t-113f78de92a5/t1-t4.json
+
+$ observation t1-t4.json, non-text fields
+{'uid': '104839836105981044615', 'topic_id': 't-113f78de92a5', 'first_turn': 1, 'last_turn': 4, 'turn': 3, 'link': '/topics/104839836105981044615/t-113f78de92a5#t3', 'analyzed_at': '2026-10-24T07:37:34.484626Z'}
+
+$ logs, bucket thinkhow-eu (item 9): analyze_done / llm_call, last 2 h
+2026-10-24T07:38:47.820938Z	cloud_run_job	event=analyze_done;failed=0;request_id=None;skipped=1;written=0
+2026-10-24T07:37:38.216476Z	cloud_run_job	event=analyze_done;failed=0;request_id=None;skipped=0;written=1
+2026-10-24T07:37:38.141682Z	cloud_run_job	attempts=1;event=llm_call;latency_ms=3455;model=gemini-4-argon;n=None;outcome=ok;output_tokens=82;prompt_tokens=813;request_id=None;rev=None;thought_tokens=0
+
+$ logs, bucket thinkhow-eu: the owner's session 2026-10-23 (http_request, llm_call of the service)
+2026-10-23T15:40:06.112979Z	thinkhow-00001-j5g	event=http_request;latency_ms=172;method=GET;request_id=5062b136989ef7bb36a881a0f92ac310;route=/topics/{uid}/{topic_id};status=200
+2026-10-23T15:40:05.834904Z	thinkhow-00001-j5g	event=http_request;latency_ms=9093;method=POST;request_id=805a1468c39238263bc3684fe698a6e7;route=/topics/{uid}/{topic_id}/reply;status=200
+2026-10-23T15:40:05.696133Z	thinkhow-00001-j5g	attempts=1;event=llm_call;latency_ms=8670;model=gemini-4-argon;n=0;outcome=ok;output_tokens=303;prompt_tokens=2503;request_id=805a1468c39238263bc3684fe698a6e7;rev=1;thought_tokens=0
+2026-10-23T15:39:37.095075Z	thinkhow-00001-j5g	event=http_request;latency_ms=200;method=GET;request_id=a3cec0299401a031a282babc2960bccc;route=/topics/{uid}/{topic_id};status=200
+2026-10-23T15:39:36.796155Z	thinkhow-00001-j5g	event=http_request;latency_ms=7427;method=POST;request_id=9a41629643463b35a282babc2960b9c9;route=/topics/{uid}/{topic_id}/reply;status=200
+2026-10-23T15:39:36.647319Z	thinkhow-00001-j5g	attempts=1;event=llm_call;latency_ms=6998;model=gemini-4-argon;n=0;outcome=ok;output_tokens=227;prompt_tokens=2350;request_id=9a41629643463b35a282babc2960b9c9;rev=1;thought_tokens=0
+2026-10-23T15:38:50.630517Z	thinkhow-00001-j5g	event=http_request;latency_ms=10;method=GET;request_id=f3f9bbf20c9f3697e63d4cda27d42251;route=/static/conversation.js;status=200
+2026-10-23T15:38:50.507297Z	thinkhow-00001-j5g	event=http_request;latency_ms=185;method=GET;request_id=2fe465f8c2daf241e63d4cda27d4232c;route=/topics/{uid}/{topic_id};status=200
+2026-10-23T15:38:50.221402Z	thinkhow-00001-j5g	event=http_request;latency_ms=233;method=POST;request_id=4079a79696d5945ee63d4cda27d42ffc;route=/topics;status=303
+2026-10-23T15:38:25.041141Z	thinkhow-00001-j5g	event=http_request;latency_ms=0;method=GET;request_id=7047f8aaeaf53487c4e4adf54de9c9eb;route=/favicon.ico;status=404
+2026-10-23T15:38:24.891239Z	thinkhow-00001-j5g	event=http_request;latency_ms=332;method=GET;request_id=288810eca0862a53734f50bb5a370a00;route=/;status=200
+
+$ every jsonPayload key per event in thinkhow-eu, last 2 days (no text field)
+3 analyze_done ['event', 'failed', 'request_id', 'skipped', 'written']
+3 llm_call ['attempts', 'event', 'latency_ms', 'model', 'n', 'outcome', 'output_tokens', 'prompt_tokens', 'request_id', 'rev', 'thought_tokens']
+9 http_request ['event', 'latency_ms', 'method', 'request_id', 'route', 'status']
+1 seed_done ['created', 'event', 'request_id']

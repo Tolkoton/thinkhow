@@ -68,7 +68,8 @@ Google, чотири запобіжники A3). Інструкція розго
 - SDK-premise (нова, slice-рівень, для S1): `google-genai` 2.32.0 з `vertexai=True, location="eu"`
   стрімить `gemini-4-argon` зі `response_schema` — PASS, spike
   `.engine/artifacts/spikes/walking-skeleton-genai-eu-2026-10-21.txt` (2026-10-21).
-- PR-04, PR-07 — `unverified`; перевіряє лише розгортання власника (AC2, AC3).
+- PR-04, PR-07 — `verified` 2026-10-24 на розгортанні власника (AC2, AC3; межі перевірки PR-04 — у
+  `.engine/premises/premise-log.md`), докази `.engine/artifacts/spikes/skeleton-deploy-verify-2026-10-24.txt`.
 - PR-09 (нова, feature): усі slices стикуються в один ланцюжок «HTTP-запит → workspace → facilitation →
   knowledge → platform.llm/storage → файли → learning» — перевіряє tracer (локальний e2e smoke S5 і S6).
 
@@ -223,3 +224,4 @@ Google, чотири запобіжники A3). Інструкція розго
   M3, немає composition root, import-linter запізно → виправлено в цій редакції). Третього раунду немає
   (правило «два раунди»); залишок — двосторонні двері, записано AUTONOMOUS в escalations.md.
 - AC1–AC3 потребують розгортання власника — питання в `blocked/` з чеклістом наприкінці задачі.
+  Закрито 2026-10-24: `SKELETON_VERIFIED` (`.engine/PROGRESS.md`).

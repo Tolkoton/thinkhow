@@ -133,3 +133,16 @@
   `.engine/artifacts/spikes/continuous-analysis-smoke-{learning,workspace}-2026-10-23.txt`
 - Open: skel-web is PARKED (two dispute rounds used before; a third is refused) — 3 sealed tests there still expect
   the button and the close route; owner's answer in `tasks/blocked/202-no-end-session-button.md`. No overseer audit yet.
+
+## SKELETON_VERIFIED — 2026-10-24 — task 105
+
+- The walking skeleton works end to end on the owner's deployment (`pocket-lawyer-431614`, `europe-west3`): IAP login
+  with Gmail → topic `t-113f78de92a5` → two replies streamed by `gemini-4-argon` on `eu` (owner, 2026-10-23) →
+  `conversation.md`, `map.json`, `profile.json` in bucket `users` → redeploy `thinkhow-00002-nrf` (image of `7095cb0`),
+  files in place → Job `analyze` wrote `learning/observations/<uid>/t-113f78de92a5/t1-t4.json`, `link` `#t3`; second run
+  `written=0` → logs in `thinkhow-eu` without conversation text.
+- Evidence: `.engine/artifacts/spikes/skeleton-deploy-verify-2026-10-24.txt`; Сонько's run
+  `~/sonko/done/2026-10-24-thinkhow-checklist-5-9.md`. PR-04, PR-07 → `verified` (`.engine/premises/premise-log.md`).
+- Not checked on the deployment, by the owner's word (task 105, question 6): item 2 (IAP open to
+  `allAuthenticatedUsers`), item 4 (draft after the IAP session ends — covered by tests). Items 10–14 (F13 voice) belong
+  to task 106.
