@@ -1,4 +1,4 @@
-"""Composition root of the Cloud Run Job: `python -m thinkhow.learning.job seed|analyze` (PYTHONPATH=src).
+"""Composition root of the Cloud Run Job: `python -m thinkhow.learning.job seed|cards|analyze`.
 
 A failed session is not a failed Job (Q3): it is in the log, and the next run tries it again.
 """
@@ -18,18 +18,20 @@ from thinkhow.platform.log import log_event
 from thinkhow.platform.storage import make_storage
 
 CARDS_DIR = Path(__file__).resolve().parents[3] / "cards"
-USAGE = "usage: python -m thinkhow.learning.job seed|analyze"
+USAGE = "usage: python -m thinkhow.learning.job seed|cards|analyze"
 
 
 def run(argv: Sequence[str], environ: Mapping[str, str], cards_dir: Path, now: Callable[[], datetime]) -> int:
     command = argv[0] if argv else ""
-    if command not in ("seed", "analyze"):
+    if command not in ("seed", "cards", "analyze"):
         print(USAGE, file=sys.stderr)
         return 2
     settings = load_settings(environ)
     storage = make_storage(settings)
     if command == "seed":
         log_event("seed_done", created=knowledge.seed(storage, cards_dir))
+    elif command == "cards":
+        log_event("cards_published", rev=knowledge.publish(storage, cards_dir))
     else:
         analyze(storage, make_llm(settings, local_script), now())
     return 0

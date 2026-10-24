@@ -10,7 +10,14 @@ from thinkhow.knowledge.schema import (
     RouterHalf,
     Trap,
 )
-from thinkhow.knowledge.store import CurrentKnowledge, KnowledgeCorrupt, KnowledgeMissing, current, seed
+from thinkhow.knowledge.store import (
+    CurrentKnowledge,
+    KnowledgeCorrupt,
+    KnowledgeMissing,
+    current,
+    publish,
+    seed,
+)
 
 __all__ = [
     "Card",
@@ -25,5 +32,6 @@ __all__ = [
     "Trap",
     "card_prompt",
     "current",
+    "publish",
     "seed",
 ]

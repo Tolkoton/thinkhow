@@ -134,6 +134,18 @@ gcloud run jobs execute thinkhow-learning --region=$REGION --wait --args=-m,thin
 
 У журналі має з'явитися рядок `seed_done` з `"created": true`. Повторний запуск дає `false` і нічого не змінює.
 
+Нова ревізія карток. Коли в образі змінилась тека `cards/` (наприклад, задача 302 додала 17 карток до Pre-mortem), а
+Знання вже засіяно, запустіть Job з командою `cards` — він пише нову ревізію Знань з теки `cards/` образу:
+
+```bash
+gcloud run jobs update thinkhow-learning --region=$REGION --image=$IMAGE
+gcloud run jobs execute thinkhow-learning --region=$REGION --wait --args=-m,thinkhow.learning.job,cards
+```
+
+У журналі має з'явитися рядок `cards_published` з номером нової ревізії (`"rev": 2` для першої такої). Повторний
+запуск дає `"rev": null` і нічого не змінює. Сервіс читає Знання лише на старті, тому **після** `cards` розгорніть
+сервіс (розділ 8) або перезапустіть його новою ревізією — інакше він і далі працює зі старою ревізією.
+
 ## 8. Cloud Run service `thinkhow`
 
 Сервіс має рівно один екземпляр (`--max-instances 1`, рішення M2 «кожен файл пише одна задача»). Під час викладки

@@ -162,3 +162,18 @@
 - Smoke: `scripts/smoke_test_skel_facilitation.py`, `tests/live/test_facilitation_live.py` — OK,
   `.engine/artifacts/spikes/facilitator-free-mode-smoke-2026-10-24.txt`
 - Open: the new rules reach the owner's prototype only after a new image and redeploy (`docs/deploy.md` 5, 8)
+
+## Slice 14 — cards-library (DONE 2026-10-24) — task 302, feature thinking-models-router S1
+
+- Module: `knowledge/store.py` (`publish`: a new revision from `cards/` — new version files only for changed and new
+  cards, the change record last, `None` when nothing changed), `learning/job.py` (command `cards`, `cards_published`);
+  17 new cards in `cards/` (18 with Pre-mortem, unchanged); `docs/deploy.md` §7 (Job `cards`, then the service);
+  `scripts/smoke_test_skel_knowledge.py` (ids = the files of `cards/`) (~70 LOC of code, ~1 900 lines of cards)
+- Tests: 34 contract tests of the slice-tester (`tests/contract/cards_library/`, one question answered: bans are
+  case-insensitive); one objection round for skel-knowledge (`test_skelk_real_card.py`, `test_wrong`, resealed with
+  the 18 ids)
+- Smoke: passed — `scripts/smoke_test_cards_library.py` (rev 1 with Pre-mortem → Job `cards` as a process → rev 2,
+  18 cards, Pre-mortem `v1.json`; repeat `rev: null`), output `.engine/artifacts/spikes/cards-library-smoke-2026-10-24.txt`
+- Surprises: the testing hook records a hand-in only when the agent stops — a hand record is refused while wired
+- Open for next slice: S2 (router) reads `card.router`; local folders seeded before S1 keep one card (`build_deps`
+  calls only `seed`)

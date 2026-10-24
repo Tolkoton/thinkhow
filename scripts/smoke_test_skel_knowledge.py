@@ -22,7 +22,9 @@ def main() -> None:
         assert (first, second) == (True, False)
         state = knowledge.current(storage)
         print(f"rev {state.rev}, n {state.n}, cards {sorted(state.cards)}, memory {state.memory}")
-        assert (state.rev, state.n, sorted(state.cards), state.memory) == (1, 0, ["pre-mortem"], [])
+        ids = sorted(path.stem for path in (ROOT / "cards").glob("*.yaml"))
+        assert (state.rev, state.n, sorted(state.cards), state.memory) == (1, 0, ids, [])
+        assert "pre-mortem" in state.cards
         print("--- card_prompt(pre-mortem) ---")
         print(knowledge.card_prompt(state.cards["pre-mortem"]))
     print("Look: the card above is Ukrainian and has 4 phases, each with its id and «Вихід».")

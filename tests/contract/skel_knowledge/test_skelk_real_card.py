@@ -16,6 +16,27 @@ POC_PHASES = [
     "phase_3_triage",
     "phase_4_mitigation_tripwires",
 ]
+# The repository's `cards/` after task 302: exactly the 18 ids of cards-library «Goal» 1 (sorted by hand).
+REPOSITORY_CARD_IDS = [
+    "complexity-sensemaking",
+    "consider-opposite",
+    "evaporating-cloud",
+    "first-principles",
+    "five-whys",
+    "goal-to-plan",
+    "is-is-not",
+    "issue-tree",
+    "jobs-to-be-done",
+    "mental-contrasting",
+    "opportunity-tree",
+    "pre-mortem",
+    "reflective-cycle",
+    "reversible-doors",
+    "scamper",
+    "socratic-questioning",
+    "weighted-matrix",
+    "wrap-decision",
+]
 
 
 def load_real_card() -> Card:
@@ -53,7 +74,7 @@ def test_seeding_the_repository_cards_gives_revision_1_with_pre_mortem(tmp_path:
     assert (knowledge.rev, knowledge.n, sorted(knowledge.cards), knowledge.memory) == (
         1,
         0,
-        ["pre-mortem"],
+        REPOSITORY_CARD_IDS,
         [],
     )
     assert knowledge.cards["pre-mortem"] == load_real_card()

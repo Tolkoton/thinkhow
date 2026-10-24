@@ -1,0 +1,25 @@
+seeded in process: rev 1, cards ['pre-mortem']
+job cards: 0 {"severity": "INFO", "rev": 2, "event": "cards_published", "request_id": null}
+rev 2, 18 cards: ['complexity-sensemaking', 'consider-opposite', 'evaporating-cloud', 'first-principles', 'five-whys', 'goal-to-plan', 'is-is-not', 'issue-tree', 'jobs-to-be-done', 'mental-contrasting', 'opportunity-tree', 'pre-mortem', 'reflective-cycle', 'reversible-doors', 'scamper', 'socratic-questioning', 'weighted-matrix', 'wrap-decision']
+pre-mortem path: knowledge/cards/pre-mortem/v1.json
+what: картки з теки cards/ — нові: complexity-sensemaking, consider-opposite, evaporating-cloud, first-principles, five-whys, goal-to-plan, is-is-not, issue-tree, jobs-to-be-done, mental-contrasting, opportunity-tree, reflective-cycle, reversible-doors, scamper, socratic-questioning, weighted-matrix, wrap-decision
+card_prompt(complexity-sensemaking): 4007 chars, 4 phases
+card_prompt(consider-opposite): 4852 chars, 4 phases
+card_prompt(evaporating-cloud): 4098 chars, 4 phases
+card_prompt(first-principles): 4162 chars, 4 phases
+card_prompt(five-whys): 4371 chars, 3 phases
+card_prompt(goal-to-plan): 5227 chars, 4 phases
+card_prompt(is-is-not): 3981 chars, 4 phases
+card_prompt(issue-tree): 3871 chars, 4 phases
+card_prompt(jobs-to-be-done): 5160 chars, 4 phases
+card_prompt(mental-contrasting): 4598 chars, 4 phases
+card_prompt(opportunity-tree): 5805 chars, 5 phases
+card_prompt(pre-mortem): 4138 chars, 4 phases
+card_prompt(reflective-cycle): 5579 chars, 5 phases
+card_prompt(reversible-doors): 4371 chars, 4 phases
+card_prompt(scamper): 4457 chars, 4 phases
+card_prompt(socratic-questioning): 4598 chars, 4 phases
+card_prompt(weighted-matrix): 4459 chars, 4 phases
+card_prompt(wrap-decision): 4764 chars, 4 phases
+job cards again: 0 {"severity": "INFO", "rev": null, "event": "cards_published", "request_id": null}
+OK: rev 1 (one card) → Job cards → rev 2 with 18 cards, Pre-mortem v1; a repeat writes nothing.
