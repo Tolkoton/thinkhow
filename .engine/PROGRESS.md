@@ -177,3 +177,22 @@
 - Surprises: the testing hook records a hand-in only when the agent stops — a hand record is refused while wired
 - Open for next slice: S2 (router) reads `card.router`; local folders seeded before S1 keep one card (`build_deps`
   calls only `seed`)
+
+## Slice 15 — router (DONE 2026-10-24) — task 302, feature thinking-models-router S2, tracer bullet
+
+- Module: `facilitation/route.py` (one `generate_json`: profile of 8 dimensions + offer 2–3 / ask / choose; schema
+  narrowed to the revision's card ids; one retry), `facilitation/router.md` (the router's rules), `facilitation/converse.py`
+  (router before the facilitator; `end` done / not_fit before the closing update), `facilitation/routed.md` (the
+  facilitator under the router), `facilitation/language.py` (the language rule moved out of `respond`), `types.py`
+  (`Profile`, `Candidate`, `Rev`, `Decision`, `RoutingEvent`, `current_card`, `routing` outside equality),
+  `respond.py` (`respond` dispatches: no routing → `lead` as before), `workspace/topics.py` (`routing.json`),
+  `web/local.py` (the local twin chooses pre-mortem) (~330 LOC)
+- Tests: 46 contract tests of the slice-tester (`tests/contract/router/`, two questions answered); no sealed test of an
+  earlier slice changed; `tests/smoke/test_e2e_local.py` checks `routing.json`; offline detector tests in
+  `tests/live/test_router_live.py`
+- Live: tracer `tests/live/test_router_live.py` — class iii on the first run,
+  `.engine/artifacts/spikes/router-live-2026-10-24T142943Z.md` (PR-14 verified)
+- Surprises: a sealed block test pins `deps.facilitate.func is respond` and its slice has no objection rounds left —
+  `respond` dispatches instead of a new `converse` in the app; `routing` outside equality (`compare=False`)
+- Open for next slice: S3 measures the router on `cases.yaml`, live conversations per card; the 301 live tests A/B
+  now go through the router (A's free-mode expectations no longer apply)

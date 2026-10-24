@@ -9,14 +9,19 @@ import secrets
 from collections.abc import Iterator
 from datetime import datetime
 
+from pydantic import BaseModel, ConfigDict
+
 from thinkhow.access import CurrentUser
 from thinkhow.facilitation.types import (
+    Decision,
     Facilitate,
     FacilitationContext,
     FacilitatorUpdate,
     MapItem,
     MapUpdate,
     ProblemMap,
+    RoutingEvent,
+    current_card,
 )
 from thinkhow.facilitation.types import Turn as FacilitationTurn
 from thinkhow.platform.storage import Storage
@@ -41,6 +46,14 @@ from thinkhow.workspace.model import (
     TopicView,
 )
 from thinkhow.workspace.profile import NoLanguage, language
+
+
+class RoutingFile(BaseModel):
+    """routing.json: the router's decisions of a topic, in order (written only here — M2 «вибір методу»)."""
+
+    model_config = ConfigDict(extra="forbid")
+    decisions: list[Decision]
+
 
 TOPIC_ID = re.compile(r"^t-[0-9a-f]{12}$")
 CONVERSATION = re.compile(r"^([A-Za-z0-9_-]{1,128})/(t-[0-9a-f]{12})/conversation\.md$")
@@ -156,13 +169,19 @@ def _answer(
     """Flow: facilitate → deltas → answer into conversation.md → map.json → Answered; a failure → Failed."""
     session = conv.sessions[-1]
     history = [FacilitationTurn(t.role, t.text) for t in session.turns if t.no < turn_no]
-    problem_map = _read_map(storage, ref)
+    problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
+    card_id = current_card(routing) or CARD_ID
+    ctx = FacilitationContext(card_id, history, problem_map, turn_no, text, lang, routing)
     update: FacilitatorUpdate | None = None
+    decisions: list[Decision] = []
     try:
-        for item in facilitate(FacilitationContext(CARD_ID, history, problem_map, turn_no, text, lang)):
+        for item in facilitate(ctx):
             if isinstance(item, FacilitatorUpdate):
                 update = item
                 break
+            if isinstance(item, RoutingEvent):
+                decisions.append(item.decision)
+                continue
             yield Delta(item.text)
     except Exception as exc:
         yield Failed(type(exc).__name__)
@@ -177,6 +196,8 @@ def _answer(
     session.turns.append(conv_file.Turn(turn_no + 1, "model", conv_file.second(now), answer))
     _write_conversation(storage, ref, conv)
     _write_map(storage, ref, apply_updates(problem_map, update, turn_no + 1))
+    if decisions:
+        _write_routing(storage, ref, (*routing, *decisions))
     yield Answered(turn_no + 1)
 
 
@@ -260,6 +281,17 @@ def _write_conversation(storage: Storage, ref: TopicRef, conv: conv_file.Convers
 def _read_map(storage: Storage, ref: TopicRef) -> ProblemMap:
     data = storage.read("users", f"{ref.uid}/{ref.topic_id}/map.json")
     return ProblemMap() if data is None else ProblemMap.model_validate_json(data)
+
+
+def _read_routing(storage: Storage, ref: TopicRef) -> tuple[Decision, ...]:
+    """The router's decisions of the topic; none without routing.json (a parse error is not recovered)."""
+    data = storage.read("users", f"{ref.uid}/{ref.topic_id}/routing.json")
+    return () if data is None else tuple(RoutingFile.model_validate_json(data).decisions)
+
+
+def _write_routing(storage: Storage, ref: TopicRef, routing: tuple[Decision, ...]) -> None:
+    path = f"{ref.uid}/{ref.topic_id}/routing.json"
+    storage.write("users", path, RoutingFile(decisions=list(routing)).model_dump_json().encode("utf-8"), JSON)
 
 
 def _write_map(storage: Storage, ref: TopicRef, problem_map: ProblemMap) -> None:

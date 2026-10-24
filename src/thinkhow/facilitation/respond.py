@@ -9,31 +9,43 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ValidationError, create_model
 
+from thinkhow.facilitation.converse import converse
+from thinkhow.facilitation.language import NO_LANGUAGE_RULE as NO_LANGUAGE_RULE
+from thinkhow.facilitation.language import language_rule as language_rule
 from thinkhow.facilitation.types import (
     FacilitationContext,
     FacilitationError,
     FacilitatorUpdate,
     MapUpdate,
-    ProblemMap,
     ReplyDelta,
+    RoutingEvent,
 )
 from thinkhow.knowledge import Card, CurrentKnowledge, MemoryRecord, card_prompt
 from thinkhow.platform import llm as model
 
 RULES = (Path(__file__).with_name("rules.md")).read_text(encoding="utf-8").rstrip("\n")
-NO_LANGUAGE_RULE = "Ніколи не відповідай російською: на репліку російською відповідай українською."
 RETRY_ASK = "Поверни лише оновлення до своєї відповіді вище: фаза, вихід, зміни карти."
+ROUTED_SECTION = (Path(__file__).with_name("routed.md")).read_text(encoding="utf-8").rstrip("\n")
 FREE_MODE_LINE = "[Стан] Вільний режим уже триває: людина чула, що картка не підходить. Не кажи цього знову."
 
 
 def respond(
+    ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm
+) -> Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent]:
+    """The app's Facilitate: without routing — leading by the card, as before; with it — converse."""
+    if ctx.routing is None:
+        return lead(ctx, knowledge, llm)
+    return converse(ctx, knowledge, llm, lead)
+
+
+def lead(
     ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm
 ) -> Iterator[ReplyDelta | FacilitatorUpdate]:
     """Flow: the card → one streamed call → pass the deltas on → settle the update (retry it at most once)."""
     card = knowledge.cards.get(ctx.card_id)
     if card is None:
         raise ValueError(f"no card {ctx.card_id!r} in the Knowledge")
-    system = system_instruction(card, knowledge.memory, ctx.language)
+    system = system_instruction(card, knowledge.memory, ctx.language, ctx.routing is not None)
     contents, rev = _contents(ctx), knowledge.rev_pair()
     shown: list[str] = []
     raw = ""
@@ -46,22 +58,14 @@ def respond(
     yield from _settle(card, llm, system, contents, rev, "".join(shown), raw)
 
 
-def system_instruction(card: Card, memory: Sequence[MemoryRecord], language: str | None = None) -> str:
-    """The rules as they are, then the person's language (F13), the card and the memory."""
+def system_instruction(
+    card: Card, memory: Sequence[MemoryRecord], language: str | None = None, routed: bool = False
+) -> str:
+    """The rules, the person's language (F13), under the router its section, then the card and the memory."""
     head = f"{RULES}\n\n# Мова відповіді\n{language_rule(language)}\n"
+    if routed:
+        head += f"\n{ROUTED_SECTION}\n"
     return f"{head}\n# Картка\n{card_prompt(card)}\n# Пам'ять досвіду\n{_memory_text(memory)}\n"
-
-
-def language_rule(language: str | None) -> str:
-    """The person's language first, Russian never; with no language chosen, only the ban (F13, AC3)."""
-    if language is None:
-        return NO_LANGUAGE_RULE
-    return (
-        f"Відповідай мовою людини — {language}: цю мову вона обрала для розмов з ThinkHow, "
-        "і це правило важливіше за «мовою останньої репліки» вище. "
-        "Іншою мовою — лише якщо людина прямо попросить. "
-        "Ніколи не відповідай російською — ні на репліку російською, ні на прохання."
-    )
 
 
 def answer_schema(card: Card) -> type[FacilitatorUpdate]:
@@ -133,15 +137,19 @@ def _phases(card: Card) -> Any:
 
 def _contents(ctx: FacilitationContext) -> list[model.Turn]:
     frame = (
-        f"[Карта проблеми зараз]\n{ctx.problem_map.model_dump_json()}\n\n{_state(ctx.problem_map)}"
+        f"[Карта проблеми зараз]\n{ctx.problem_map.model_dump_json()}\n\n{_state(ctx)}"
         f"[Репліка людини #{ctx.turn_no}]\n{ctx.text}"
     )
     return [*(model.Turn(t.role, t.text) for t in ctx.history), model.Turn("user", frame)]
 
 
-def _state(problem_map: ProblemMap) -> str:
-    """Free mode already under way — the person heard it once — is said to the model in the frame (I4)."""
-    if problem_map.phase_id is None and problem_map.last_turn > 0:
+def _state(ctx: FacilitationContext) -> str:
+    """Free mode already under way — the person heard it once — is said to the model in the frame (I4).
+
+    Only without the router: under it a card that does not fit goes back to the router, there is no free mode.
+    """
+    problem_map = ctx.problem_map
+    if ctx.routing is None and problem_map.phase_id is None and problem_map.last_turn > 0:
         return f"{FREE_MODE_LINE}\n\n"
     return ""
 

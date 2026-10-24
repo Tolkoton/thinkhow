@@ -1,8 +1,8 @@
 """The values facilitation exchanges with workspace and web (M3 A1). Plain values only:
 this module imports neither thinkhow.knowledge nor thinkhow.platform (skel-facilitation Q6)."""
 
-from collections.abc import Callable, Iterator
-from dataclasses import dataclass
+from collections.abc import Callable, Iterator, Sequence
+from dataclasses import dataclass, field
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -67,6 +67,75 @@ class FacilitatorUpdate(_Frozen):
     map_updates: list[MapUpdate]
 
 
+class Profile(_Frozen):
+    """The problem profile: the 8 dimensions of M1 (no «crisis» state — N3)."""
+
+    intent: Literal[
+        "understand_situation",
+        "find_cause",
+        "choose_between_options",
+        "generate_ideas",
+        "plan_execution",
+        "stress_test",
+        "predict_consequences",
+        "reflect_on_experience",
+        "overcome_block",
+        "resolve_dilemma",
+        "unclear",
+    ]
+    structuredness: Literal["well_structured", "moderately_structured", "ill_structured", "wicked", "unclear"]
+    reversibility: Literal["one_way_door", "two_way_door", "unclear"]
+    stakes: Literal["high", "medium", "low", "unclear"]
+    data: Literal["data_rich", "qualitative_only", "data_poor_speculative", "unclear"]
+    options: Literal[
+        "none_exist", "single_ultimatum", "binary_dilemma", "multiple_clear", "too_many_unfiltered", "unclear"
+    ]
+    emotion: Literal[
+        "neutral_analytical",
+        "ambivalent",
+        "anxious",
+        "overwhelmed_fatigued",
+        "overconfident_attached",
+        "unclear",
+    ]
+    social: Literal["individual_personal", "interpersonal_dyad", "product_or_team", "unclear"]
+
+
+class Candidate(_Frozen):
+    card_id: str
+    why: str = Field(min_length=1)
+
+
+class Rev(_Frozen):
+    rev: int
+    n: int
+
+
+class Decision(_Frozen):
+    """One decision of the router in routing.json; `turn` is the person's turn it answered."""
+
+    turn: int
+    rev: Rev
+    kind: Literal["offer", "ask", "choose", "end"]
+    profile: Profile | None
+    candidates: list[Candidate]
+    card_id: str | None
+    end: Literal["done", "not_fit"] | None
+    why: str
+
+
+@dataclass(frozen=True)
+class RoutingEvent:
+    decision: Decision
+
+
+def current_card(routing: Sequence[Decision]) -> str | None:
+    """The card of the last decision when it is a `choose`; otherwise none (the router is next)."""
+    if routing and routing[-1].kind == "choose":
+        return routing[-1].card_id
+    return None
+
+
 @dataclass(frozen=True)
 class FacilitationContext:
     card_id: str
@@ -75,9 +144,10 @@ class FacilitationContext:
     turn_no: int
     text: str
     language: str | None = None
+    routing: tuple[Decision, ...] | None = field(default=None, compare=False)
 
 
-Facilitate = Callable[[FacilitationContext], Iterator[ReplyDelta | FacilitatorUpdate]]
+Facilitate = Callable[[FacilitationContext], Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent]]
 
 
 class FacilitationError(Exception):

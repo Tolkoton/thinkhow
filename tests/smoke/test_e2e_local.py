@@ -1,6 +1,7 @@
 """The tracer bullet, locally (feature «Integration exit criterion»): local folder, scripted model.
 
-Part 1 (skel-web): seed → create a topic → a turn → SSE → conversation.md + map.json; no button to close.
+Part 1 (skel-web): seed → create a topic → a turn → SSE → conversation.md + map.json; no button to close;
+the router's local twin chose pre-mortem into routing.json (task 302).
 Part 2 (skel-learning, task 202): `analyze` takes the new turns at once, a repeat writes nothing, a new
 turn is analyzed alone; each observation's link opens an existing turn (PR-09).
 """
@@ -49,6 +50,10 @@ def test_local_chain_from_a_new_topic_to_the_files(tmp_path: Path) -> None:
     assert shown in conversation
     problem_map = json.loads((folder / "map.json").read_text(encoding="utf-8"))
     assert [item["id"] for item in problem_map["items"]] == ["i1"]
+    routing = json.loads((folder / "routing.json").read_text(encoding="utf-8"))  # task 302: the router first
+    assert [(d["kind"], d["card_id"], d["rev"]) for d in routing["decisions"]] == [
+        ("choose", "pre-mortem", {"rev": 1, "n": 0})
+    ]
     assert (tmp_path / "system" / "knowledge" / "changes" / "000001.json").is_file()
 
     def analyze() -> dict[str, bytes]:

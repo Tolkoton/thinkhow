@@ -13,11 +13,22 @@ from pydantic import BaseModel
 from thinkhow.platform.llm import Turn
 
 REPLY = "(локальний режим) Уявіть, що план провалився. Що сталося першим?"
+UNCLEAR = ("intent", "structuredness", "reversibility", "stakes", "data", "options", "emotion", "social")
+ROUTER_CHOICE: dict[str, Any] = {
+    "action": "choose",
+    "profile": dict.fromkeys(UNCLEAR, "unclear"),
+    "candidates": [],
+    "card_id": "pre-mortem",
+    "reply": None,
+    "why": "(локальний режим) одразу Pre-mortem",
+}
 FRAME = re.compile(r"\[Репліка людини #(\d+)\]\n(.*)\Z", re.S)
 
 
 def local_script(system: str, contents: Sequence[Turn], schema: type[BaseModel]) -> str:
-    """Flow: the turn number and text from the frame → the first phase of the schema → the answer JSON."""
+    """Flow: router schema → choose pre-mortem; else the frame's turn and text → first phase → JSON."""
+    if "action" in schema.model_fields:
+        return json.dumps(ROUTER_CHOICE, ensure_ascii=False)
     turn_no, text = _frame(contents)
     answer: dict[str, Any] = {"reply": REPLY} if "reply" in schema.model_fields else {}
     answer["current_phase_id"] = _first_phase(schema)
