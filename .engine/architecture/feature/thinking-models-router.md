@@ -112,7 +112,7 @@
   фасилітатор → `workspace` → web; S1 — вміст без інтеграційного припущення)
 - **S3 router-eval** — delivers: набір ситуацій `tests/fixtures/routing/cases.yaml` (на кожну картку щонайменше 3
   позитивні й 1 hard negative, нічиї з research 01 §7(д), «інший метод», зміна посеред розмови, розмова власника
-  `t-d824f508a729`), скрипт прогону через справжню модель на `eu` зі звітом по картках, живі розмови із синтетичною
+  `t-d824f508a729`, тема після `end: not_fit` картки X — X немає серед кандидатів), скрипт прогону через справжню модель на `eu` зі звітом по картках, живі розмови із синтетичною
   людиною по одній на картку, виправлення карток за найчастішими плутанинами · contract out: звіти
   `.engine/artifacts/router-eval/<час>.md` і `.engine/artifacts/card-conversations/<час>/<id>.md` · depends on: S1,
   S2 · block: evaluation
@@ -197,3 +197,8 @@
   може кликати й `publish` у локальному режимі — вирішує планувальник slice-а.
 - Simplifier перед нарізкою (лінзи requirements і architecture): одна знахідка — жорстка межа «2 уточнення поспіль»
   у схемі відповіді роутера не має рядка власника; прибрано з плану (`simplifier.py applied`).
+- Під час планування S2 (`.engine/slices/router.md`, Q5, Q9): рядок «`workspace` передає `None`, коли `routing.json`
+  немає» замінено — `routing` поза рівністю контекстів (`field(compare=False)`), `workspace` передає `()` без файлу,
+  `None` = «без роутера»; `respond` лишається `Facilitate` застосунку і розгалужується (запечатаний
+  `test_wsblock_connections.py:193` вимагає `func is respond`, а його slice раундів заперечень не має). Two-way door,
+  AUTONOMOUS (escalations 2026-10-24T13:55Z).

@@ -248,3 +248,29 @@ one; do not reopen the old one in conversation.
 - Why not escalated: власникові нема з чого вибирати — обидва виправлення лише узгоджують план із уже запечатаним.
 - Evidence: `.engine/architecture/feature/thinking-models-router.md` (Inter-slice contracts, Appendix).
 - Status: CLOSED
+
+## 2026-10-24T13:55Z — AUTONOMOUS — router-routing-none-vs-empty
+- Decision: у S2 (`router`) `FacilitationContext.routing` — поле поза рівністю (`compare=False`); `workspace` передає
+  `()` для теми без `routing.json`, `None` лишається «без роутера»; `respond` лишається `Facilitate` застосунку і
+  розгалужується. Замінює рядок feature-а «`None`, коли файлу немає» (раунд 2 feature-critic-а), бо запечатаний
+  `test_wsblock_connections.py:193` (`deps.facilitate.func is respond`, потік без `RoutingEvent`) не можна змінити:
+  його slice `skel-guards-deploy` використав обидва раунди заперечень.
+- Door: two-way
+- Cost to reverse: одна гілка в `respond` і одне поле `compare=False`; повернути — заперечення до тесту, коли
+  з'явиться новий раунд (новий feature).
+- Why not escalated: власникові нема з чого вибирати — обидва варіанти дають ту саму поведінку для людини.
+- Evidence: `.engine/slices/router.md` (Q5, Q9, Seam «Compatibility»).
+- Status: CLOSED
+
+## 2026-10-24T15:20Z — AUTONOMOUS — router-phase-4-fourth-round
+- Decision: slice-planner-critic фази 4 контракту `router` відповів REVISE учетверте; кожного разу — нова, виправна
+  вада (клас `ask` і правило результатів; перевірка «Давай перше.» і `rev`; збій фасилітатора чи сервісу як
+  FALSIFIED; нетимчасова відмова Vertex на схемі роутера як збій сервісу). Межа «4 раунди» створена проти
+  коливання між двома позиціями; тут коливання немає — кожна правка робить критерій суворішим і узгоджена з
+  critic-ом. Правило двигуна «BLOCK, який можна виправити, — виправ, запиши, продовжуй» переважає; контракт
+  остаточно читає свіжий cold reader перед печаткою.
+- Door: two-way
+- Cost to reverse: новий раунд критики фази 4 або паркування до печатки.
+- Why not escalated: власникові нема з чого вибирати — розвилки між позиціями немає.
+- Evidence: `.engine/slices/router.md` (Exit criterion, Critic notes).
+- Status: CLOSED
