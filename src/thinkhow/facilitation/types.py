@@ -62,7 +62,7 @@ class MapUpdate(_Frozen):
 
 class FacilitatorUpdate(_Frozen):
     reply: str = Field(min_length=1)
-    current_phase_id: str
+    current_phase_id: str | None
     phase_exit_met: bool
     map_updates: list[MapUpdate]
 

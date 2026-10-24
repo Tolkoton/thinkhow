@@ -146,3 +146,19 @@
 - Not checked on the deployment, by the owner's word (task 105, question 6): item 2 (IAP open to
   `allAuthenticatedUsers`), item 4 (draft after the IAP session ends — covered by tests). Items 10–14 (F13 voice) belong
   to task 106.
+
+## Slice 13 — facilitator-free-mode (BUILT 2026-10-24) — task 301
+
+- Module: `facilitation/rules.md` (new rules: free mode when the card does not fit, said once in plain words, no method
+  names, ways to evaluate on «як це дізнатися?», summaries only from the person's words, short answers);
+  `facilitation/types.py` (`current_phase_id: str | None`); `facilitation/respond.py` (schemas `Literal[phases] | None`,
+  the frame line `[Стан] Вільний режим уже триває…` when `phase_id` is null and `last_turn > 0`); `web/local.py`
+  (`_first_phase` reads `anyOf`)
+- Tests: 6 contract tests of the slice-tester (`tests/contract/facilitator_free_mode/`, one objection round on I3);
+  objection rounds (`test_wrong`, resealed) for skel-facilitation and voice-reply-language — the `RULES` constant;
+  `tests/live/test_facilitation_free_mode_live.py` (A, B live; detector tests in the ordinary run)
+- Live: A `.engine/artifacts/spikes/facilitator-free-mode-live-A-2026-10-24T085834Z.md` (one announcement, at #1; no
+  method names; two ways to evaluate at #13), B `…-live-B-2026-10-24T085925Z.md` (phases 1→2→3→4→4)
+- Smoke: `scripts/smoke_test_skel_facilitation.py`, `tests/live/test_facilitation_live.py` — OK,
+  `.engine/artifacts/spikes/facilitator-free-mode-smoke-2026-10-24.txt`
+- Open: the new rules reach the owner's prototype only after a new image and redeploy (`docs/deploy.md` 5, 8)

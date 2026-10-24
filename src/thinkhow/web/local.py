@@ -36,6 +36,8 @@ def _frame(contents: Sequence[Turn]) -> tuple[int, str]:
 
 
 def _first_phase(schema: type[BaseModel]) -> str:
+    """The card's first phase: from `enum` or `const`, also inside `anyOf` with null (free mode)."""
     phase = schema.model_json_schema()["properties"]["current_phase_id"]
-    values = phase.get("enum") or [phase.get("const", "")]
+    branch = next((b for b in phase.get("anyOf", [phase]) if b.get("type") != "null"), phase)
+    values = branch.get("enum") or [branch.get("const", "")]
     return str(values[0])

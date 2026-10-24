@@ -14,6 +14,7 @@ from thinkhow.facilitation.types import (
     FacilitationError,
     FacilitatorUpdate,
     MapUpdate,
+    ProblemMap,
     ReplyDelta,
 )
 from thinkhow.knowledge import Card, CurrentKnowledge, MemoryRecord, card_prompt
@@ -22,6 +23,7 @@ from thinkhow.platform import llm as model
 RULES = (Path(__file__).with_name("rules.md")).read_text(encoding="utf-8").rstrip("\n")
 NO_LANGUAGE_RULE = "Ніколи не відповідай російською: на репліку російською відповідай українською."
 RETRY_ASK = "Поверни лише оновлення до своєї відповіді вище: фаза, вихід, зміни карти."
+FREE_MODE_LINE = "[Стан] Вільний режим уже триває: людина чула, що картка не підходить. Не кажи цього знову."
 
 
 def respond(
@@ -63,7 +65,7 @@ def language_rule(language: str | None) -> str:
 
 
 def answer_schema(card: Card) -> type[FacilitatorUpdate]:
-    """FacilitatorUpdate with current_phase_id narrowed to the card's phases (Q1); `reply` stays first."""
+    """FacilitatorUpdate with current_phase_id narrowed to a card phase or null; `reply` stays first."""
     return create_model(
         "FacilitatorAnswer", __base__=FacilitatorUpdate, current_phase_id=(_phases(card), ...)
     )
@@ -125,15 +127,23 @@ def _plain(fields: dict[str, Any]) -> FacilitatorUpdate:
 
 
 def _phases(card: Card) -> Any:
-    return Literal[tuple(phase.id for phase in card.facilitator.phases)]
+    """A phase of the card, or None: the card does not fit (free mode, facilitator-free-mode Q1)."""
+    return Literal[tuple(phase.id for phase in card.facilitator.phases)] | None
 
 
 def _contents(ctx: FacilitationContext) -> list[model.Turn]:
     frame = (
-        f"[Карта проблеми зараз]\n{ctx.problem_map.model_dump_json()}\n\n"
+        f"[Карта проблеми зараз]\n{ctx.problem_map.model_dump_json()}\n\n{_state(ctx.problem_map)}"
         f"[Репліка людини #{ctx.turn_no}]\n{ctx.text}"
     )
     return [*(model.Turn(t.role, t.text) for t in ctx.history), model.Turn("user", frame)]
+
+
+def _state(problem_map: ProblemMap) -> str:
+    """Free mode already under way — the person heard it once — is said to the model in the frame (I4)."""
+    if problem_map.phase_id is None and problem_map.last_turn > 0:
+        return f"{FREE_MODE_LINE}\n\n"
+    return ""
 
 
 def _memory_text(memory: Sequence[MemoryRecord]) -> str:

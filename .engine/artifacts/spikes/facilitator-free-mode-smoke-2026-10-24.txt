@@ -1,0 +1,7 @@
+# smoke facilitator-free-mode 2026-10-24 — scripts/smoke_test_skel_facilitation.py + tests/live/test_facilitation_live.py against Vertex (gemini-4-argon, eu)
+person: Хочу за три місяці відкрити кав'ярню з обсмажуванням у Львові. Перевірмо план, поки не пізно.
+facilitator: Уявімо, що минуло чотири місяці — на один більше, ніж ви відводили на запуск, — і ваша кав'ярня з обсмажуванням у Львові безнадійно провалилася: або так і не відкрилася вчасно, або вже закривається у збитках. Озирніться назад із тієї точки в часі. Як виглядає цей крах і які перші дві-три причини призвели до того, що все пішло шкереберть?
+question marks in the reply (for information, as in PoC 101): 1
+deltas: 5; phase: phase_1_time_travel; exit met: False
+  map add i1 [plan] Відкрити кав'ярню з власним обсмажуванням у Львові за 3 місяці (t1)
+OK: streamed, joined deltas == reply, the phase is the card's
