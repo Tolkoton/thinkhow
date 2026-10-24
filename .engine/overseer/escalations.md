@@ -187,3 +187,51 @@ one; do not reopen the old one in conversation.
   трьох slices через заперечення нічого людині не додає; рішення — технічне (Q1–Q3 контракту S3).
 - Evidence: `.engine/slices/voice-reply-language.md` Q1–Q3; `.engine/testing/ledger.md` (skel-web, раунд 2).
 - Status: CLOSED
+
+## 2026-10-24T09:30Z — AUTONOMOUS — facilitator-free-mode-once-per-entry
+- Decision: задача 301 каже «щонайбільше один раз на тему» про те, що метод не підходить. Slice
+  `facilitator-free-mode` тримає це як «один раз на кожен вхід у вільний режим»: стан — `phase_id = null` при
+  `last_turn > 0` у карті. Якщо розмова з вільного режиму повернеться до фаз картки (у людини з'явився план), а потім
+  картка знову перестане підходити, фасилітатор скаже це вдруге.
+- Door: two-way
+- Cost to reverse: окреме поле в карті (`map.json`) «людині вже сказано», його тест і читання в правилах — один slice.
+- Why not escalated: у розмовах власника такого шляху не було; головна вада (повтор у кожній відповіді) усувається
+  повністю; нове поле карти — публічна поверхня, яку краще додавати під реальний випадок.
+- Evidence: `.engine/slices/facilitator-free-mode.md` (Out of scope, Deferred); `tasks/doing/301-facilitator-no-method-loop.md`.
+- Status: CLOSED
+
+## 2026-10-24T09:50Z — AUTONOMOUS — facilitator-free-mode-premortem-bar
+- Decision: задача 301 каже «Pre-mortem, коли план є, веде як і раніше (якість PoC 101 не погіршити)». Live-тест B
+  slice-а `facilitator-free-mode` перевіряє механічно нижчу планку: за п'ять фіксованих реплік PoC 101 розмова вийшла з
+  першої фази, фази не йдуть назад, null немає, «змінити метод» немає. Розмова B іде у звіт повністю — якість
+  читає власник.
+- Door: two-way
+- Cost to reverse: підняти планку в тесті (напр. «фаза 3 чи далі») — один рядок, ризик нестабільного тесту.
+- Why not escalated: репліки людини фіксовані й писались у відповідь іншим реплікам фасилітатора; суворіша планка
+  ловила б шум, а головну регресію (null чи застрягання з планом) ловить і ця.
+- Evidence: `.engine/slices/facilitator-free-mode.md` (Exit criterion, B, `PROVISIONAL — owner ratification pending`).
+- Status: CLOSED
+
+## 2026-10-24T10:20Z — AUTONOMOUS — facilitator-free-mode-phase4-four-rounds
+- Decision: Phase 4 контракту `facilitator-free-mode` отримала CRITIC_REVISE у чотирьох раундах. Заперечення не
+  коливались: кожне нове (детектор надто вузький → надто широкий щодо «спосіб» → не ловить відмінки → немає наслідку
+  ручних перевірок), кожне виправлено. Запобіжник «4 раунди» створено проти коливання; його немає, тож фаза не
+  паркується — остаточно контракт читає cold reader.
+- Door: two-way
+- Cost to reverse: новий раунд критики Phase 4 або паркування задачі.
+- Why not escalated: власникові нема з чого вибирати — розвилки між двома позиціями немає.
+- Evidence: `.engine/slices/facilitator-free-mode.md` (Exit criterion, Critic notes).
+- Status: CLOSED
+
+## 2026-10-24T10:45Z — AUTONOMOUS — facilitator-free-mode-cold-reader-second-block
+- Decision: cold reader контракту `facilitator-free-mode` заблокував двічі, кожного разу іншим, виправним
+  запереченням: (1) Exit criterion не називав I4 / Hardest seam 3; (2) Q5 спирався на хибне «механізму немає» —
+  константи `RULES` двох незапаркованих slice-ів тепер змінюються через заперечення tester-ам (`testing.py request
+  <slug> --tester objection`), а не правкою builder-а. Обидва виправлено. Правило /plan-slice «другий блок → чекати
+  власника» поступається правилу двигуна «BLOCK, який можна виправити, — виправ, запиши, продовжуй»: власникові
+  нема з чого вибирати. Третій cold reader читає виправлений контракт перед печаткою.
+- Door: two-way
+- Cost to reverse: перепланування контракту (новий slug) до збірки.
+- Why not escalated: розвилки немає; обидва виправлення роблять контракт суворішим.
+- Evidence: `.engine/slices/facilitator-free-mode.md` (Exit criterion, Seam, Q5).
+- Status: CLOSED

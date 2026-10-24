@@ -1,0 +1,27 @@
+# spike facilitator-free-mode nullable-phase 2026-10-24 (gemini-4-argon, eu, response_json_schema)
+# script: /tmp/spike301/nullable.py (below)
+import os, sys
+from typing import Literal
+from pydantic import create_model
+from thinkhow.facilitation.types import FacilitatorUpdate
+from thinkhow.platform.config import load_settings
+from thinkhow.platform.llm import make_llm, Turn, ReplyDelta
+P = Literal["phase_1_time_travel", "phase_2_blind_spots"] | None
+S = create_model("FacilitatorAnswer", __base__=FacilitatorUpdate, current_phase_id=(P, ...))
+S.model_fields  # noqa
+print("schema:", S.model_json_schema()["properties"]["current_phase_id"])
+env = {**os.environ, "THINKHOW_LOCAL": "false", "THINKHOW_USERS_BUCKET": "-", "THINKHOW_SYSTEM_BUCKET": "-", "THINKHOW_OWNER_EMAIL": "-"}
+llm = make_llm(load_settings(env), script=lambda *_: "")
+sysmsg = ("Ти фасилітатор. Якщо в людини немає плану, current_phase_id = null; якщо є план — phase_1_time_travel. "
+          "reply — одне коротке питання. phase_exit_met=false, map_updates=[]")
+for text in ["Плану ще немає, шукаю, як заробити.", "Мій план: за 3 місяці відкрити кав'ярню у Львові."]:
+    raw, n = None, 0
+    for ev in llm.stream_json(sysmsg, [Turn("user", text)], S, None):
+        if isinstance(ev, ReplyDelta): n += 1
+        else: raw = ev.raw_json
+    v = S.model_validate_json(raw)
+    print(repr(text), "-> deltas", n, "phase", v.current_phase_id, "| reply:", v.reply)
+# output:
+schema: {'anyOf': [{'enum': ['phase_1_time_travel', 'phase_2_blind_spots'], 'type': 'string'}, {'type': 'null'}], 'title': 'Current Phase Id'}
+'Плану ще немає, шукаю, як заробити.' -> deltas 2 phase None | reply: Які варіанти заробітку ви вже розглядали або що вам найближче за навичками?
+"Мій план: за 3 місяці відкрити кав'ярню у Львові." -> deltas 3 phase phase_1_time_travel | reply: Уявіть, що минуло 3 місяці, ви відкрили кав'ярню у Львові, але задум повністю провалився — що саме пішло не так?
