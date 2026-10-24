@@ -109,14 +109,15 @@ def test_topic_page_title_turn_anchors_roles_and_texts(tmp_path: Path) -> None:
     assert ANS not in t1
 
 
-def test_own_topic_page_has_reply_form_send_and_close(tmp_path: Path) -> None:
+def test_own_topic_page_has_reply_form_send_and_no_close(tmp_path: Path) -> None:
+    # task 202 (continuous-analysis contract): the close button is gone
     app = make_app(tmp_path)
     choose_language(app.storage, ALICE)
     ref = seed_topic(app.storage, ALICE, "Тема", [(ASK, ANS)])
     page = Page(app.client.get(url(ref), headers=H_ALICE).text)
     assert page.has_tag("textarea", name="text")
     assert page.shows("Надіслати")
-    assert page.shows("Завершити сесію")
+    assert not page.shows("Завершити сесію")
 
 
 def test_topic_awaiting_answer_shows_try_again(tmp_path: Path) -> None:
@@ -186,13 +187,15 @@ def test_retry_streams_the_answer_without_saved(tmp_path: Path) -> None:
     assert sse_events(r.text) == [("delta", {"text": "Ще раз: що першим?"}), ("answered", {"turn": 2})]
 
 
-def test_close_redirects_303_to_the_topic_and_closes_the_session(tmp_path: Path) -> None:
+def test_close_route_is_gone_and_the_conversation_stays_as_it_was(tmp_path: Path) -> None:
+    # task 202 (continuous-analysis contract): POST …/close no longer exists
     app = make_app(tmp_path)
     ref = seed_topic(app.storage, ALICE, "Тема", [(ASK, ANS)])
+    before = conv(app.storage, ref)
     r = app.client.post(url(ref, "/close"), headers=H_ALICE)
-    assert r.status_code == 303
-    assert urlparse(r.headers["location"]).path == url(ref)
-    assert b"<!-- thinkhow:closed 1 " in (conv(app.storage, ref) or b"")
+    assert r.status_code == 404
+    assert conv(app.storage, ref) == before
+    assert b"<!-- thinkhow:closed " not in (before or b"")
 
 
 def test_model_failure_mid_stream_is_a_failed_event_and_the_turn_stays(tmp_path: Path) -> None:

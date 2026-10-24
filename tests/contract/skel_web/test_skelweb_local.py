@@ -90,7 +90,7 @@ def local_env(tmp_path: Path) -> dict[str, str]:
     }
 
 
-def test_e2e_local_mode_build_deps_topic_reply_close_files(tmp_path: Path) -> None:
+def test_e2e_local_mode_build_deps_topic_reply_files_without_close(tmp_path: Path) -> None:
     from fastapi.testclient import TestClient
 
     from thinkhow.web.app import build_deps
@@ -122,14 +122,15 @@ def test_e2e_local_mode_build_deps_topic_reply_close_files(tmp_path: Path) -> No
     assert {name for name, _ in events[1:-1]} == {"delta"}
     assert "".join(data["text"] for _, data in events[1:-1]) == LOCAL_REPLY
 
-    assert client.post(f"{topic_path}/close").status_code == 303
+    # task 202 (continuous-analysis contract): no close route; the turn is in the file without it
+    assert client.post(f"{topic_path}/close").status_code == 404
 
     conversation = deps.storage.read("users", f"local-owner/{topic_id}/conversation.md")
     assert conversation is not None
     text = conversation.decode("utf-8")
     assert "<!-- thinkhow:turn 1 user " in text and "<!-- thinkhow:turn 2 model " in text
     assert "<!-- thinkhow:turn 3 " not in text
-    assert "<!-- thinkhow:closed 1 " in text
+    assert "<!-- thinkhow:closed " not in text
     raw_map = deps.storage.read("users", f"local-owner/{topic_id}/map.json")
     assert raw_map is not None
     assert [item["id"] for item in json.loads(raw_map)["items"]] == ["i1"]
