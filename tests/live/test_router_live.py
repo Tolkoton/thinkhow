@@ -196,7 +196,7 @@ def _routing(storage: LocalStorage, ref: TopicRef) -> list[dict[str, Any]]:
 
 
 def _write(
-    rows: list[dict[str, Any]], routing: list[dict[str, Any]], calls: list[Call], verdict: str
+    rows: list[dict[str, Any]], routing: list[dict[str, Any]], calls: list[Call], verdict: str, log: list[str]
 ) -> Path:
     stamp = datetime.now(UTC).strftime("%Y-%m-%dT%H%M%SZ")
     path = SPIKES / f"router-live-{stamp}.md"
@@ -228,6 +228,7 @@ def _write(
         "",
     ]
     lines += [f"- {c.schema}: {c.outcome} {c.cause}".rstrip() for c in calls]
+    lines += ["", "## Рядки журналу `llm_call` (час і токени — P4)", "", "```", *log, "```"]
     with path.open("x", encoding="utf-8") as out:
         out.write("\n".join(lines) + "\n")
     return path
@@ -280,7 +281,7 @@ def _classify(
 
 
 @pytest.mark.live
-def test_the_owners_topic_goes_through_the_router(tmp_path: Path) -> None:
+def test_the_owners_topic_goes_through_the_router(tmp_path: Path, capfd: pytest.CaptureFixture[str]) -> None:
     storage = LocalStorage(tmp_path)
     seed(storage, CARDS)
     environ = {
@@ -330,5 +331,8 @@ def test_the_owners_topic_goes_through_the_router(tmp_path: Path) -> None:
     routing = _routing(storage, ref)
     phases = {cid: [p.id for p in card.facilitator.phases] for cid, card in knowledge.cards.items()}
     verdict = _classify(rows, routing, llm.calls, phases, {"rev": knowledge.rev, "n": knowledge.n})
-    print(_write(rows, routing, llm.calls, verdict))
+    out = capfd.readouterr().out
+    log = [line for line in out.splitlines() if '"llm_call"' in line]
+    print(out, end="")
+    print(_write(rows, routing, llm.calls, verdict, log))
     assert verdict == "iii", verdict

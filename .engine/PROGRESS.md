@@ -191,7 +191,11 @@
   earlier slice changed; `tests/smoke/test_e2e_local.py` checks `routing.json`; offline detector tests in
   `tests/live/test_router_live.py`
 - Live: tracer `tests/live/test_router_live.py` — class iii on the first run,
-  `.engine/artifacts/spikes/router-live-2026-10-24T142943Z.md` (PR-14 verified)
+  `.engine/artifacts/spikes/router-live-2026-10-24T142943Z.md` (PR-14 verified). Calls of that run (`llm_call` lines, printed by the run;
+  the artifact of that run predates their capture): router `offer` — 13 098 ms, 9 834 prompt + 721 output tokens;
+  router `choose` — 6 306 ms, 10 094 + 175; facilitator (issue-tree) — 5 731 ms, 3 383 + 207; all `attempts: 1`,
+  `outcome: ok`, `rev 1`. Every later live run writes its `llm_call` lines into its own artifact; the second run (after the capture was added) — class iii too,
+  `.engine/artifacts/spikes/router-live-2026-10-24T143627Z.md`, with its three `llm_call` lines inside
 - Surprises: a sealed block test pins `deps.facilitate.func is respond` and its slice has no objection rounds left —
   `respond` dispatches instead of a new `converse` in the app; `routing` outside equality (`compare=False`)
 - Open for next slice: S3 measures the router on `cases.yaml`, live conversations per card; the 301 live tests A/B
