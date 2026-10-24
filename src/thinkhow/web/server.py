@@ -6,8 +6,8 @@ The person comes only from the verified identity of the request, never from the 
 import json
 import time
 import uuid
-from collections.abc import Awaitable, Callable, Iterator, MutableMapping
-from dataclasses import dataclass
+from collections.abc import Awaitable, Callable, Iterator, Mapping, MutableMapping
+from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Annotated, Any
@@ -22,11 +22,13 @@ from fastapi.templating import Jinja2Templates
 from thinkhow import workspace
 from thinkhow.access import CurrentUser, current_user
 from thinkhow.facilitation import Facilitate
+from thinkhow.knowledge import Card
 from thinkhow.platform import log
 from thinkhow.platform.config import Settings
 from thinkhow.platform.identity import FixedIdentity, IapIdentity, IdentityError
 from thinkhow.platform.speech import Speech, SpeechUnavailable
 from thinkhow.platform.storage import Storage
+from thinkhow.web.method import caption, marks
 
 HERE = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=HERE / "templates")
@@ -45,6 +47,7 @@ class Deps:
     facilitate: Facilitate
     now: Callable[[], datetime]
     speech: Speech
+    cards: Mapping[str, Card] = field(default_factory=dict)
 
 
 def create_app(deps: Deps) -> FastAPI:
@@ -93,7 +96,9 @@ def _routes(app: FastAPI, deps: Deps) -> None:
     def topic(request: Request, user: User, uid: str, topic_id: str) -> Response:
         workspace.language(deps.storage, user)
         view = workspace.open_topic(deps.storage, user, workspace.TopicRef(uid, topic_id), deps.now())
-        context = {"view": view, "own": user.id == uid}
+        method = caption(view.routing, view.problem_map.phase_id, deps.cards)
+        context = {"view": view, "own": user.id == uid, "method": method}
+        context["marks"] = marks(view.routing, deps.cards)
         return TEMPLATES.TemplateResponse(request, "topic.html", context)
 
     @app.post("/topics/{uid}/{topic_id}/reply")

@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Literal
 
-from thinkhow.facilitation.types import ProblemMap
+from thinkhow.facilitation.types import Decision, ProblemMap
 
 TopicId = str
 CARD_ID = "pre-mortem"
@@ -57,6 +57,7 @@ class TopicView:
     sessions: list[Session]
     problem_map: ProblemMap
     awaiting_answer: bool
+    routing: tuple[Decision, ...] = ()
 
 
 @dataclass(frozen=True)

@@ -91,7 +91,8 @@ def open_topic(storage: Storage, user: CurrentUser, ref: TopicRef, now: datetime
     _can_read(user, ref)
     conv = _read_conversation(storage, ref)
     sessions = [_session(s, now) for s in conv.sessions]
-    return TopicView(ref, conv.title, sessions, _read_map(storage, ref), _awaiting(conv, now))
+    problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
+    return TopicView(ref, conv.title, sessions, problem_map, _awaiting(conv, now), routing)
 
 
 def reply(

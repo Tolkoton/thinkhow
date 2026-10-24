@@ -179,3 +179,24 @@ form.reply { margin-top: 1.25rem; }
 
 .pending { display: none; color: var(--muted); font-size: 0.95rem; }
 #send:disabled ~ .pending { display: inline; }
+
+/* The thinking model that leads (task 203): a quiet caption beside the conversation, marks in the history */
+aside.method { color: var(--muted); font-size: 0.9rem; margin: -0.5rem 0 1rem; }
+aside.method .label { font-weight: 600; }
+.method-mark {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0.25rem 0 0.75rem;
+  padding-left: 0.6rem;
+  border-left: 2px solid var(--border);
+}
+
+@media (min-width: 72rem) {
+  aside.method {
+    position: fixed;
+    top: 5.5rem;
+    left: calc(50% + 22rem);
+    width: 13rem;
+    margin: 0;
+  }
+}

@@ -2,10 +2,14 @@
 {% block title %}{{ view.title }}{% endblock %}
 {% block body %}
 <h1>{{ view.title }}</h1>
+<aside class="method" aria-label="Модель мислення"><span class="label">Модель мислення:</span> {{ method }}</aside>
 {% for s in view.sessions %}
 <section class="session">
   <h2>Сесія {{ s.no }}{% if s.closed_at %} (завершено){% endif %}</h2>
   {% for t in s.turns %}
+  {% for m in marks.get(t.no, []) %}
+  <p class="method-mark">{{ m }}</p>
+  {% endfor %}
   <article id="t{{ t.no }}" class="turn {{ t.role }}">
     <p class="who"><a href="#t{{ t.no }}">#{{ t.no }}</a> {% if t.role == "user" %}Ви{% else %}Фасилітатор{% endif %}</p>
     <p class="text">{{ t.text }}</p>

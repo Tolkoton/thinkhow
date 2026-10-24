@@ -34,7 +34,7 @@ def build_deps(environ: Mapping[str, str], cards_dir: Path) -> Deps:
     llm = make_llm(settings, local_script)
     facilitate = functools.partial(respond, knowledge=current, llm=llm)
     identity, speech = make_identity(settings), make_speech(settings)
-    return Deps(storage, identity, settings, facilitate, lambda: datetime.now(UTC), speech)
+    return Deps(storage, identity, settings, facilitate, lambda: datetime.now(UTC), speech, current.cards)
 
 
 def __getattr__(name: str) -> FastAPI:
