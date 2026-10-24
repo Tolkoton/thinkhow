@@ -36,3 +36,8 @@
 - Record: tasks/done/404-cleanup-2026-10-23/report.md
 - Reason: Every reference I could check matches: the nightly output, the findings at report.md:75, the line ranges in pyproject, speech.py, llm.py and server.py, ADR-0005, metrics.jsonl and TEST_CMD_FULL. All four «Що зробити» items have an answer, including why there was no second opinion. There are no open owner questions, and the technical terms stay in English.
 - Request: 20261023T223831Z-b60f3b (attempt 1)
+
+## 2026-10-24T08:10:57Z — 708-open-item-testing-parked-skel-web — READER_PASS
+- Record: tasks/done/708-open-item-testing-parked-skel-web/report.md
+- Reason: All four checks pass. (1) Every reference I could check says what the report claims: both commits and their subjects, testing.py lines 938-939, engine-feedback.md lines 56-59, the to-engine task, and the corrected tests. (2) The task's only item (carry out the owner's answer, record it in the report, close the task) is done, and the report explains it. (3) No question for the owner is left open. (4) Technical terms (builder, tester, sealed tests, slice, commit, runner, reader, park) stay in English. Two command outputs were never recorded in a file, so I could not check them (marked «не переві
+- Request: 20261024T081017Z-ea6c22 (attempt 1)
