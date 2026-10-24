@@ -59,3 +59,9 @@ un-parks a slice or reseals its tests after the owner's answer. Suggest: count r
 sealed contract that names the change opens fresh rounds), or give the owner an `unpark <slug>` action-line.
 
 From: task 202, builder.
+
+## 2026-10-24 — After an OVERSEER_BLOCK whose fix touches only tests/ or .engine/ (no file under SOURCE_DI
+
+After an OVERSEER_BLOCK whose fix touches only tests/ or .engine/ (no file under SOURCE_DIRS), the Stop hook does not inject a new OVERSEER_REQUEST on the re-claim (no code changed since the last request), so the unit stays at BLOCK until the builder runs overseer_verdict.py request by hand. Task 302, slice router: BLOCK 20261024T143036Z-d15c39, fix e62d85c (tests/live, PROGRESS), re-audit only through a hand request 20261024T143846Z-64fadd. Suggest: a re-claim of a unit whose last verdict is BLOCK triggers a request whatever path changed.
+
+From: lesson #35b77262 (overseer, router, 2026-10-24).

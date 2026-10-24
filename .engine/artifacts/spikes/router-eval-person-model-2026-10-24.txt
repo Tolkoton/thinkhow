@@ -1,0 +1,6 @@
+# probe 2026-10-24: a second Gemini model on Vertex eu for the synthetic person (slice router-eval, Q2)
+# command: PYTHONPATH=src uv run python /tmp/probe/p.py gemini-3.5-flash gemini-2.5-pro  (Settings(local=False, model=<id>); one generate_json with schema {reply: str})
+{"severity": "INFO", "model": "gemini-3.5-flash", "prompt_tokens": 59, "output_tokens": 15, "thought_tokens": 402, "latency_ms": 3543, "attempts": 1, "rev": null, "n": null, "outcome": "ok", "event": "llm_call", "request_id": null}
+gemini-3.5-flash OK Чудово, дякую! Як твої справи?
+{"severity": "WARNING", "model": "gemini-2.5-pro", "prompt_tokens": 0, "output_tokens": 0, "thought_tokens": 0, "latency_ms": 428, "attempts": 1, "rev": null, "n": null, "outcome": "unavailable", "event": "llm_call", "request_id": null}
+gemini-2.5-pro FAIL LlmUnavailable the model did not answer: ClientError

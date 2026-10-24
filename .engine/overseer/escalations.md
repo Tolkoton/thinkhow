@@ -274,3 +274,37 @@ one; do not reopen the old one in conversation.
 - Why not escalated: власникові нема з чого вибирати — розвилки між позиціями немає.
 - Evidence: `.engine/slices/router.md` (Exit criterion, Critic notes).
 - Status: CLOSED
+
+## 2026-10-24T16:40Z — AUTONOMOUS — router-eval-phase-4-fourth-round
+- Decision: slice-planner-critic фази 4 контракту `router-eval` відповів REVISE учетверте, щоразу новою виправною
+  вадою (звіт без AC3; водій розмов поза критерієм; журнал; AC5 за карткою, яку не вели). Коливання між двома
+  позиціями немає — кожна правка робить критерій суворішим і узгоджена з critic-ом; правило двигуна «BLOCK, який
+  можна виправити, — виправ, запиши, продовжуй». Контракт остаточно читає свіжий cold reader перед печаткою.
+- Door: two-way
+- Cost to reverse: новий раунд критики фази 4 або паркування до печатки.
+- Why not escalated: власникові нема з чого вибирати.
+- Evidence: `.engine/slices/router-eval.md` (Exit criterion, Critic notes).
+- Status: CLOSED
+
+## 2026-10-24T17:20Z — AUTONOMOUS — router-eval-cold-reader-second-block
+- Decision: cold reader контракту `router-eval` заблокував двічі, щоразу новою виправною вадою: (1) правки карток
+  могли б підганяти картки під набір — відкладена частина `*-3` і перевірка «6 слів»; (2) ця перевірка була
+  червоною вже на нинішніх картках (`ii-3`) — правило переносу набору і означення слова. Правило /plan-slice
+  «другий блок → чекати власника» поступається правилу двигуна «BLOCK, який можна виправити, — виправ, запиши,
+  продовжуй» (той самий випадок — 2026-10-24T10:45Z, facilitator-free-mode). Третій cold reader читає перед печаткою.
+- Door: two-way
+- Cost to reverse: перепланування контракту до збірки.
+- Why not escalated: розвилки немає; обидва виправлення роблять контракт суворішим.
+- Evidence: `.engine/slices/router-eval.md` (Hardest seams, Seam 1; Critic notes).
+- Status: CLOSED
+
+## 2026-10-24T17:45Z — AUTONOMOUS — router-eval-cold-reader-third-block
+- Decision: третій cold reader контракту `router-eval` знайшов одне розходження з уже затвердженим контрактом S2 → S3
+  feature-а (міра для `ask`); виправлено вирівнюванням з контрактом feature-а (`candidates[0]`, окремий лік) і
+  нотатками; контракт запечатано без четвертого читання — виправлення не містить нового рішення, лише повертає
+  текст до вищого контракту.
+- Door: two-way
+- Cost to reverse: зміна однієї міри в скрипті й звіті.
+- Why not escalated: власникові нема з чого вибирати — вищий контракт уже визначив міру.
+- Evidence: `.engine/slices/router-eval.md` (Seam `router_eval.py`; Critic notes); `.engine/architecture/feature/thinking-models-router.md` («Inter-slice contracts», S2 → S3).
+- Status: CLOSED
