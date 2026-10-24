@@ -95,3 +95,19 @@ Nothing listed here was removed.
 - `F-ac181163` **src/thinkhow/platform/speech.py:91-98** — duplication: speech._text applies the same rule as llm._chunk_text (src/thinkhow/platform/llm.py:189-196): go through response.candidates, take part.text where part.thought is false, and join the parts. The only difference is the final .strip(), so a change to the thought-part rule would have to be made in both places.
   - evidence: read src/thinkhow/platform/speech.py:91 loops over candidates and content.parts, keeps part.text if not part.thought, joins, strips; read src/thinkhow/platform/llm.py:189 the same loop, the same thought filter and the same join, without the strip; grep tests/contract/voice_dictation/test_vd_speech.py the speech tests use thought parts, so they cover the speech copy of the rule
   - test safety characterization_exists, reversal risk low, protected false, traces to: M3 A2 (platform owns the Gemini SDK); speech.py's docstring says it retries the way platform.llm does, and the retry is already shared through platform._retry, but the text extraction is not
+
+## 2026-10-24T12:39:05Z — feature thinking-models-router — architecture lens
+
+### confirm (0)
+
+### flag_only (0)
+
+## 2026-10-24T12:39:23Z — feature thinking-models-router — requirements lens
+
+### confirm (0)
+
+### flag_only (1)
+- APPLIED BY THE ARCHITECT `F-58efae79` **.engine/architecture/feature/thinking-models-router.md:38-42** — invented_requirement: The hard limit 'the router asks at most 2 clarifying questions in a row, then must offer 2-3 ways' (a dynamic Literal in the answer schema) is asked for by no owner statement, AC or 'Готово, коли' line of task 302. Without it, AC2-AC4 and the action set offer/ask/choose stay as they are; the limit would sit as a note in the router instruction or a deferred item instead.
+  - applied to the plan 2026-10-24T12:39:31Z: plan: the schema limit of 2 clarifying questions removed; the router instruction only says to ask when it cannot offer otherwise — nothing is asked of the owner
+  - evidence: read .engine/architecture/feature/thinking-models-router.md:38 The plan says itself that it sets this limit although P5 is against safeguards, and justifies it with G1 and the observed loop in t-d824f508a729; read tasks/doing/302-thinking-models-library-and-router.md:19 The observed loop is the facilitator repeating 'час змінити метод' because there was no other card to switch to. It is not a router asking too many clarifying questions, so it does not show this limit is needed.; grep docs/research/02-router.md:1010 The origin is the research recommendation MAX_CLARIFYING_TURNS = 2 (7(ґ)). The task lists research 02 as material only and names no limit; grep .engine/goals.md:41 P5: thresholds, limits and safeguards that no goal line requires are not built; they are noted for later; judgement  The cost is small (one Literal) and the G1 argument is plausible, so this is a lead for the owner, not a removal. The cited evidence of need is about a different component.
+  - test safety none, reversal risk medium, protected false, traces to: no owner line or AC; it traces only to research 02 §7(ґ) and to the plan's own reading of G1

@@ -235,3 +235,16 @@ one; do not reopen the old one in conversation.
 - Why not escalated: розвилки немає; обидва виправлення роблять контракт суворішим.
 - Evidence: `.engine/slices/facilitator-free-mode.md` (Exit criterion, Seam, Q5).
 - Status: CLOSED
+
+## 2026-10-24T12:30Z — AUTONOMOUS — thinking-models-router-critic-round-2
+- Decision: feature-critic раунду 2 (останнього за правилом власника) відповів REVISE: план суперечив трьом
+  запечатаним тестам (`test_skelw_reply.py` рядки 61, 138 — увесь `FacilitationContext` з `routing` за
+  замовчуванням; `test_skelk_real_card.py` — у `cards/` лише Pre-mortem). Прийнято пораду critic-а без третього
+  раунду: `workspace` передає `routing=None`, коли `routing.json` немає, `converse` читає `None` як «рішень немає»;
+  тест посіву з однією карткою — заперечення slice-tester-у в S1 (його передумову скасовує задача 302 «додай всі
+  моделі»), заміна названа.
+- Door: two-way
+- Cost to reverse: зміна одного правила контракту S2 (None ↔ ()) до збірки; після — одна гілка в `workspace`.
+- Why not escalated: власникові нема з чого вибирати — обидва виправлення лише узгоджують план із уже запечатаним.
+- Evidence: `.engine/architecture/feature/thinking-models-router.md` (Inter-slice contracts, Appendix).
+- Status: CLOSED

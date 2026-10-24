@@ -1,0 +1,674 @@
+# Situations for the router eval (task 302, slice S3). Written from research 01 §7(д) (matrix, tie rules),
+# §7(а) (dimensions) and research 02 §7(е) (golden cases) — not from the card texts, so the router is not tested
+# on its own prompt. `expect` — the card that should come first; `also_ok` — other acceptable first cards (a
+# genuine tie); `not_first` — cards that must not be first (hard negatives, contraindications).
+# kind: positive · negative (looks like the card in `not_first`, but is not its case) · tie · midway (the
+# person's turn comes after a card ended) · other (the person asks for another way).
+cases:
+  # --- first-principles
+  - id: fp-1
+    kind: positive
+    expect: first-principles
+    text: >-
+      Хочу перебудувати наш процес онбордингу клієнтів з нуля. Всі на ринку роблять однаково — довгі дзвінки,
+      презентації, — і це дорого. Я не хочу копіювати, хочу зрозуміти, що тут насправді обов'язково.
+  - id: fp-2
+    kind: positive
+    expect: first-principles
+    also_ok: [scamper]
+    text: >-
+      Я роблю ремонт квартири і всі кажуть, що кухня мінімум 8 тисяч євро. Мені здається, це просто звичка ринку.
+      Хочу розібратися, з чого насправді складається ціна і що з цього мені справді треба.
+  - id: fp-3
+    kind: positive
+    expect: first-principles
+    also_ok: [issue-tree]
+    text: >-
+      Ми вже рік намагаємося зробити дешевшу доставку, і всі ідеї — це трохи краща версія того, що є. Відчуття,
+      що ми думаємо в рамках, які самі собі поставили.
+  - id: fp-neg-1
+    kind: negative
+    expect: mental-contrasting
+    also_ok: [reflective-cycle, goal-to-plan]
+    not_first: [first-principles]
+    text: >-
+      Я точно знаю, що мені треба доробити дисертацію, план є, все розписано. Але я вже третій місяць не можу
+      сісти і писати. Відкриваю файл і закриваю.
+
+  # --- issue-tree
+  - id: it-1
+    kind: positive
+    expect: issue-tree
+    also_ok: [complexity-sensemaking]
+    text: >-
+      Наша невелика студія дизайну втрачає гроші, але я не розумію де. Клієнтів наче стільки ж, люди працюють,
+      а в кінці місяця мінус. Хочу розкласти все по поличках і зрозуміти, куди дивитися.
+  - id: it-2
+    kind: positive
+    expect: issue-tree
+    text: >-
+      Мені треба зрозуміти, чому наш курс онлайн продається гірше, ніж торік. Може реклама, може ціна, може сам
+      курс застарів — все змішалося, хочу структуровано пройтися по можливих причинах.
+  - id: it-3
+    kind: positive
+    expect: issue-tree
+    also_ok: [first-principles]
+    text: >-
+      Мене попросили підготувати для керівництва аналіз, чому відділ не встигає з проєктами. Там і люди, і
+      процеси, і інструменти. Хочу спершу побачити повну картину, нічого не пропустивши.
+  - id: it-neg-1
+    kind: negative
+    expect: reversible-doors
+    not_first: [issue-tree, weighted-matrix]
+    text: >-
+      У мене через годину треба відповісти, чи беру я замовлення на вихідні. Голова пухне, я зараз не в стані
+      нічого великого розбирати.
+
+  # --- complexity-sensemaking
+  - id: cs-1
+    kind: positive
+    expect: complexity-sensemaking
+    also_ok: [issue-tree]
+    text: >-
+      У мене на роботі все навалилось: команда незадоволена, клієнт міняє вимоги, а ще ми переїжджаємо в новий
+      офіс. Я не розумію, де тут треба аналізувати, а де просто пробувати і дивитися.
+  - id: cs-2
+    kind: positive
+    expect: complexity-sensemaking
+    text: >-
+      Я відкриваю бізнес у новій для себе країні. Частину речей можна просто дізнатися — податки, реєстрація, — а
+      частина взагалі непередбачувана, як-от чи сподобається людям. Не знаю, як підходити до різних частин.
+  - id: cs-3
+    kind: positive
+    expect: complexity-sensemaking
+    also_ok: [issue-tree]
+    text: >-
+      Ситуація дивна: я намагаюся планувати розвиток громадської організації, але кожен мій план розвалюється,
+      бо люди поводяться не так, як я очікую. Може, я взагалі не так до цього підходжу?
+  - id: cs-neg-1
+    kind: negative
+    expect: five-whys
+    also_ok: [is-is-not]
+    not_first: [complexity-sensemaking]
+    text: >-
+      У нас на складі третій тиждень поспіль замовлення відправляють із запізненням на день. Процес я знаю
+      досконало, хочу знайти, де саме ламається.
+
+  # --- five-whys
+  - id: fw-1
+    kind: positive
+    expect: five-whys
+    also_ok: [is-is-not]
+    text: >-
+      Вже втретє за місяць наш щотижневий звіт клієнту йде з помилками в цифрах. Я знаю весь процес підготовки
+      звіту, хочу докопатися до справжньої причини, а не просто ще раз перевіряти.
+  - id: fw-2
+    kind: positive
+    expect: five-whys
+    text: >-
+      Я постійно запізнююся на ранкові зустрічі, хоч ставлю будильник. Це повторюється, і я хочу зрозуміти, що
+      саме за цим стоїть.
+  - id: fw-3
+    kind: positive
+    expect: five-whys
+    also_ok: [is-is-not, issue-tree]
+    text: >-
+      Після кожного запуску нової версії нашого застосунку у нас падає кількість відгуків. Ми вже двічі
+      бачили таке. Хочу зрозуміти, яка причина під цим.
+  - id: fw-neg-1
+    kind: negative
+    expect: scamper
+    also_ok: [first-principles, opportunity-tree]
+    not_first: [five-whys, is-is-not]
+    text: >-
+      Причину ми знаємо: наші коробки для торта занадто важкі для кур'єрів. Тепер треба придумати, як їх
+      змінити, — потрібні свіжі ідеї.
+
+  # --- is-is-not
+  - id: ii-1
+    kind: positive
+    expect: is-is-not
+    also_ok: [five-whys]
+    text: >-
+      Скарги на холодну каву приходять лише з однієї з трьох наших кав'ярень і лише вранці. Обладнання однакове,
+      зерно однакове. Не розумію, у чому різниця.
+  - id: ii-2
+    kind: positive
+    expect: is-is-not
+    text: >-
+      Наш сайт гальмує, але не завжди: в понеділок і вівторок усе нормально, а в середу після обіду — дуже
+      повільно. І лише у клієнтів з Польщі. Механізму я не розумію.
+  - id: ii-3
+    kind: positive
+    expect: is-is-not
+    also_ok: [five-whys]
+    text: >-
+      Частина наших клієнтів не отримує листів-нагадувань, а частина отримує. Розсилка та сама. Хочу точно
+      розібратися, де проблема є, а де її немає.
+  - id: ii-neg-1
+    kind: negative
+    expect: issue-tree
+    also_ok: [complexity-sensemaking]
+    not_first: [is-is-not]
+    text: >-
+      У нашій компанії все погано: продажі падають, люди звільняються, а з клієнтами постійні непорозуміння. Звідки
+      це все — не знаю, ми нічого не міряли.
+
+  # --- wrap-decision
+  - id: wr-1
+    kind: positive
+    expect: wrap-decision
+    text: >-
+      Мені запропонували перейти на посаду в банку з кращою зарплатою, а я зараз CTO в маленькому стартапі. Не
+      можу вирішити — це рішення на роки, і назад вже не буде.
+  - id: wr-2
+    kind: positive
+    expect: wrap-decision
+    text: >-
+      Чи варто мені продавати свою частку в бізнесі? Мені запропонували хорошу ціну, але я не впевнена.
+  - id: wr-3
+    kind: positive
+    expect: wrap-decision
+    also_ok: [reversible-doors]
+    text: >-
+      Ми з чоловіком думаємо переїхати в іншу країну. Або їдемо, або лишаємось — так ми це бачимо. Діти, робота,
+      батьки — все на кону.
+  - id: wr-neg-1
+    kind: negative
+    expect: reversible-doors
+    not_first: [wrap-decision]
+    text: >-
+      Думаю, чи змінити на тиждень ціну на мою послугу масажу, щоб подивитися, що буде. Я трохи нервую, але це
+      ж не назавжди.
+
+  # --- weighted-matrix
+  - id: wm-1
+    kind: positive
+    expect: weighted-matrix
+    text: >-
+      Обираю садочок для сина з чотирьох варіантів. Я вже все про них знаю — ціна, відстань, підхід, відгуки, —
+      але в голові все змішалось і не можу порівняти.
+  - id: wm-2
+    kind: positive
+    expect: weighted-matrix
+    also_ok: [wrap-decision]
+    text: >-
+      У мене три пропозиції роботи: одна краще платить, друга ближче до дому, третя цікавіша. Хочу спокійно
+      порівняти їх за тим, що для мене важливо.
+  - id: wm-3
+    kind: positive
+    expect: weighted-matrix
+    text: >-
+      Ми вибираємо постачальника упаковки з п'яти компаній. Є ціни, строки, якість зразків. Треба обрати одного
+      і пояснити команді чому.
+  - id: wm-neg-1
+    kind: negative
+    expect: reversible-doors
+    also_ok: [reflective-cycle]
+    not_first: [weighted-matrix]
+    text: >-
+      Мені треба обрати між двома квартирами, і я в паніці, не сплю третю ніч. Мені здається, що я помилюся і
+      все зіпсую.
+
+  # --- reversible-doors
+  - id: rd-1
+    kind: positive
+    expect: reversible-doors
+    text: >-
+      Маю п'ять хвилин перед дзвінком: чи погоджуватися на пробний місяць співпраці з новим клієнтом? Я весь на
+      нервах, хоча, мабуть, нічого страшного не станеться.
+  - id: rd-2
+    kind: positive
+    expect: reversible-doors
+    also_ok: [wrap-decision]
+    text: >-
+      Я місяць не можу вирішити, чи перейти на інший тарифний план для свого онлайн-магазину. Застрягла в
+      порівняннях, а насправді це ж можна змінити назад.
+  - id: rd-3
+    kind: positive
+    expect: reversible-doors
+    text: >-
+      Сестра кличе мене на вихідних на день народження в інше місто, а в мене дедлайн. Я дуже переживаю, що
+      вона образиться, і не можу вирішити. Хочу зрозуміти, наскільки це насправді важливо.
+  - id: rd-neg-1
+    kind: negative
+    expect: wrap-decision
+    not_first: [reversible-doors]
+    text: >-
+      Я думаю, чи продати будинок батьків, у якому я виріс, щоб викупити бізнес. Це назавжди, другого шансу не
+      буде. Часу подумати в мене кілька тижнів.
+
+  # --- evaporating-cloud
+  - id: ec-1
+    kind: positive
+    expect: evaporating-cloud
+    text: >-
+      Мій співзасновник хоче йти до великих корпоративних клієнтів, а я — до малого бізнесу через самообслуговування.
+      Ми блокуємо одне одного вже місяць, і будь-який компроміс здається гіршим за обидва варіанти.
+  - id: ec-2
+    kind: positive
+    expect: evaporating-cloud
+    text: >-
+      Якщо я візьму більше проєктів, щоб заробити, — не матиму часу на дітей. Якщо менше — не вистачить грошей.
+      Я в глухому куті: що б не зробив, щось страждає.
+  - id: ec-3
+    kind: positive
+    expect: evaporating-cloud
+    also_ok: [consider-opposite]
+    text: >-
+      У команді конфлікт: розробники хочуть переписати старий код, а продакт хоче нові функції. Обидва мають рацію,
+      і обидва варіанти виключають один одного.
+  - id: ec-neg-1
+    kind: negative
+    expect: weighted-matrix
+    also_ok: [wrap-decision]
+    not_first: [evaporating-cloud]
+    text: >-
+      Вибираю між двома ноутбуками для роботи: один легший, другий потужніший. Хочу спокійно порівняти.
+
+  # --- pre-mortem
+  - id: pm-1
+    kind: positive
+    expect: pre-mortem
+    text: >-
+      Ми запускаємо в Львові кав'ярню-ростерію плюс підписку на зерно онлайн. Договір оренди підписуємо за три
+      тижні, запуск — за три місяці. Хочу знайти тонкі місця, поки не пізно.
+  - id: pm-2
+    kind: positive
+    expect: pre-mortem
+    also_ok: [consider-opposite]
+    text: >-
+      Ми вирішили мігрувати весь наш сервіс на нову платформу за чотири місяці. План уже складено. Ціна збою
+      величезна. Що я міг пропустити?
+  - id: pm-3
+    kind: positive
+    expect: pre-mortem
+    text: >-
+      Я вирішив з січня піти з найму і стати фрилансером. Перші два клієнти вже домовились. Хочу перевірити цей
+      план, перш ніж писати заяву.
+  - id: pm-neg-1
+    kind: negative
+    expect: reflective-cycle
+    also_ok: [five-whys]
+    not_first: [pre-mortem]
+    text: >-
+      Наш запуск минулого місяця провалився: продали втричі менше, ніж планували. Хочу розібратися, що це було і що
+      я виношу з цього досвіду.
+  - id: pm-neg-2
+    kind: negative
+    expect: wrap-decision
+    also_ok: [weighted-matrix, issue-tree, goal-to-plan, first-principles, opportunity-tree]
+    not_first: [pre-mortem]
+    text: >-
+      Мені треба зараз заробити багато грошей. Я AI-інженер, глибоко розбираюся, але роботу знайти не вдається.
+      Є кілька ідей — фриланс, свої проєкти, консалтинг, — але плану немає.
+
+  # --- consider-opposite
+  - id: co-1
+    kind: positive
+    expect: consider-opposite
+    also_ok: [socratic-questioning]
+    text: >-
+      Я переконаний, що віддалена робота вбиває продуктивність моєї команди, і хочу всіх повернути в офіс. Допоможи
+      перевірити, чи я себе не обманюю.
+  - id: co-2
+    kind: positive
+    expect: consider-opposite
+    text: >-
+      Завтра переговори з орендодавцем про зниження ціни. Я впевнена у своїх аргументах, але хочу подивитися на це
+      його очима — що він скаже у відповідь найсильнішого?
+  - id: co-3
+    kind: positive
+    expect: consider-opposite
+    also_ok: [socratic-questioning, pre-mortem]
+    text: >-
+      Мій план ідеальний: я відкриваю другий магазин у сусідньому місті, бо перший іде чудово. Просто підтвердь, що
+      я все правильно думаю.
+  - id: co-neg-1
+    kind: negative
+    expect: mental-contrasting
+    also_ok: [reflective-cycle]
+    not_first: [consider-opposite, socratic-questioning]
+    text: >-
+      Я знаю, що мені треба поговорити з керівником про підвищення, і знаю, що скажу. Але щоразу, коли бачу його,
+      відкладаю. Мені страшно.
+
+  # --- socratic-questioning
+  - id: sq-1
+    kind: positive
+    expect: socratic-questioning
+    also_ok: [consider-opposite]
+    text: >-
+      Мені здається, що я погана мати, бо працюю і не проводжу з дітьми весь день. Я постійно про це думаю. Хочу
+      розібратися, наскільки це правда.
+  - id: sq-2
+    kind: positive
+    expect: socratic-questioning
+    text: >-
+      Я впевнений, що мене ніколи не візьмуть у велику компанію, бо в мене немає диплома. Через це я навіть не
+      подаюсь. Але, може, я не правий?
+  - id: sq-3
+    kind: positive
+    expect: socratic-questioning
+    also_ok: [consider-opposite, reflective-cycle]
+    text: >-
+      Відчуваю, що вигорів і більше не хочу працювати в IT. Хочу зрозуміти, звідки це переконання і чи воно про
+      професію, чи про щось інше.
+  - id: sq-neg-1
+    kind: negative
+    expect: is-is-not
+    also_ok: [five-whys]
+    not_first: [socratic-questioning]
+    text: >-
+      У нашій друкарні принтер друкує смуги лише на щільному папері і лише після обіду. Хочу знайти, у чому
+      справа.
+
+  # --- scamper
+  - id: sc-1
+    kind: positive
+    expect: scamper
+    also_ok: [first-principles]
+    text: >-
+      Ми виробляємо пакування для їжі, і треба придумати кілька нестандартних способів зменшити витрати картону, не
+      втративши міцності коробки.
+  - id: sc-2
+    kind: positive
+    expect: scamper
+    text: >-
+      У мене є маленька пекарня, і я хочу придумати щось нове для меню на зиму. Ідеї всі якісь банальні. Потрібні
+      свіжі варіанти.
+  - id: sc-3
+    kind: positive
+    expect: scamper
+    also_ok: [jobs-to-be-done, opportunity-tree]
+    text: >-
+      Наш настільний календар продається слабо. Сам продукт добрий, але хочеться його якось змінити, переробити,
+      поєднати з чимось, щоб він став цікавішим.
+  - id: sc-neg-1
+    kind: negative
+    expect: jobs-to-be-done
+    also_ok: [opportunity-tree]
+    not_first: [scamper]
+    text: >-
+      Клієнти скаржаться, що наш застосунок для обліку витрат незручний, і кидають його через тиждень. Ми не
+      розуміємо, для чого вони взагалі його брали. Як нам придумати нову функцію?
+
+  # --- mental-contrasting
+  - id: mc-1
+    kind: positive
+    expect: mental-contrasting
+    text: >-
+      Я знаю, що треба вчити німецьку, бо живу в Німеччині. Але ліньки, постійно відкладаю. Хочу нарешті почати
+      і не кинути.
+  - id: mc-2
+    kind: positive
+    expect: mental-contrasting
+    also_ok: [reflective-cycle]
+    text: >-
+      Я дуже хочу закрити свій збитковий магазин квітів — всі цифри кажуть закривати, — але рука не піднімається.
+      Головою розумію, а зробити не можу.
+  - id: mc-3
+    kind: positive
+    expect: mental-contrasting
+    also_ok: [goal-to-plan]
+    text: >-
+      Хочу почати бігати вранці. Пробувала тричі, кожного разу кидала через тиждень. Хочу цього разу продумати,
+      що мені заважатиме і що я тоді робитиму.
+  - id: mc-neg-1
+    kind: negative
+    expect: goal-to-plan
+    also_ok: [opportunity-tree]
+    not_first: [mental-contrasting]
+    text: >-
+      Я вирішив за рік вийти на дохід 5000 євро на місяць від свого консалтингу. Мотивації повно, хочу розписати,
+      як туди дійти, по кроках.
+
+  # --- reflective-cycle
+  - id: rc-1
+    kind: positive
+    expect: reflective-cycle
+    text: >-
+      Я щойно завершила свій перший рік керівницею команди. Було важко, було багато помилок. Хочу розкласти цей
+      досвід по поличках і зрозуміти, що я виношу.
+  - id: rc-2
+    kind: positive
+    expect: reflective-cycle
+    also_ok: [five-whys]
+    text: >-
+      Учора я посварився з партнером по бізнесу на зустрічі з клієнтом, і клієнт пішов. Мені досі погано. Хочу
+      зрозуміти, що це було і як мені поводитися надалі.
+  - id: rc-3
+    kind: positive
+    expect: reflective-cycle
+    also_ok: [five-whys]
+    text: >-
+      Наш план переговорів із клієнтом, який я так ретельно готував, не спрацював — клієнт усе одно відмовився.
+      Хочу осмислити, що пішло не так у моєму підході.
+  - id: rc-neg-1
+    kind: negative
+    expect: pre-mortem
+    not_first: [reflective-cycle]
+    text: >-
+      Наступного місяця ми відкриваємо другу точку. План є, люди найняті. Хочу заздалегідь подумати, що може
+      зламатися.
+
+  # --- goal-to-plan
+  - id: gp-1
+    kind: positive
+    expect: goal-to-plan
+    text: >-
+      Я хочу за два роки перейти з бухгалтерії в аналітику даних. Мета ясна, але не розумію, з чого почати і які
+      кроки.
+  - id: gp-2
+    kind: positive
+    expect: goal-to-plan
+    also_ok: [opportunity-tree]
+    text: >-
+      Ми вирішили, що наша невелика агенція має до літа мати три постійні клієнти на абонементі. Треба скласти
+      план на ці місяці.
+  - id: gp-3
+    kind: positive
+    expect: goal-to-plan
+    text: >-
+      Я хочу видати свою книжку наступної осені. Рукопис наполовину написаний. Допоможи розписати, що має статися
+      між сьогодні і тоді.
+  - id: gp-neg-1
+    kind: negative
+    expect: issue-tree
+    also_ok: [five-whys, opportunity-tree]
+    not_first: [goal-to-plan]
+    text: >-
+      Треба скласти план, як удвічі підняти повернення клієнтів у наш застосунок. Чому саме люди не
+      повертаються — ми поки не міряли і не знаємо.
+
+  # --- jobs-to-be-done
+  - id: jt-1
+    kind: positive
+    expect: jobs-to-be-done
+    text: >-
+      Люди купують наш сервіс доставки обідів в офіс, а потім за місяць переходять на щось інше. Хочу зрозуміти,
+      навіщо вони нас взагалі обирають і що їх змушує йти.
+  - id: jt-2
+    kind: positive
+    expect: jobs-to-be-done
+    also_ok: [opportunity-tree]
+    text: >-
+      Я роблю застосунок для репетиторів. Хочу зрозуміти, яку проблему він насправді розв'язує в їхньому житті і
+      чому вони переходять до нас зі своїх зошитів — або не переходять.
+  - id: jt-3
+    kind: positive
+    expect: jobs-to-be-done
+    text: >-
+      Продажі наших дитячих конструкторів упали, хоча ми нічого не міняли. Конкуренти не дешевші. Мені здається,
+      ми не розуміємо, що батьки насправді хочуть отримати, купуючи іграшку.
+  - id: jt-neg-1
+    kind: negative
+    expect: opportunity-tree
+    also_ok: [weighted-matrix]
+    not_first: [jobs-to-be-done]
+    text: >-
+      У нас у беклозі продукту сорок ідей нових функцій, і всі здаються важливими. Треба вирішити, що робити
+      першим у цьому кварталі.
+
+  # --- opportunity-tree
+  - id: ot-1
+    kind: positive
+    expect: opportunity-tree
+    text: >-
+      Наша мета на квартал — підняти кількість активних користувачів на 20 %. Ідей багато, але вони розрізнені.
+      Хочу побачити, які можливості ведуть до мети і яку ідею перевірити першою.
+  - id: ot-2
+    kind: positive
+    expect: opportunity-tree
+    also_ok: [jobs-to-be-done]
+    text: >-
+      Ми хочемо запустити платну підписку в нашому застосунку для бігунів. Ми впевнені, що люди за неї платитимуть,
+      але це лише наше припущення. Як нам дешево перевірити найризикованіше?
+  - id: ot-3
+    kind: positive
+    expect: opportunity-tree
+    text: >-
+      У нас вісім пропозицій від команди, що робити далі з продуктом, і кожна має прихильників. Хочу швидко
+      оцінити їх за охопленням, впливом, впевненістю і зусиллями.
+  - id: ot-neg-1
+    kind: negative
+    expect: weighted-matrix
+    also_ok: [wrap-decision]
+    not_first: [opportunity-tree, jobs-to-be-done]
+    text: >-
+      Обираю, яку з трьох машин купити для сім'ї. Хочу порівняти за тим, що для нас важливо.
+
+  # --- ties (research 01 §7(д), tie rules)
+  - id: tie-anxious-choice
+    kind: tie
+    expect: reversible-doors
+    not_first: [weighted-matrix, issue-tree, pre-mortem]
+    text: >-
+      Я маю обрати між трьома варіантами навчання для себе, і я так перевантажена, що не можу думати. Мені страшно
+      помилитися, я вже тиждень у цьому.
+  - id: tie-ambivalent-commit
+    kind: tie
+    expect: mental-contrasting
+    also_ok: [reflective-cycle]
+    not_first: [weighted-matrix, wrap-decision]
+    text: >-
+      Я вже знаю, що правильно — піти з цієї роботи, і навіть маю куди. Але боюся і щодня відкладаю розмову з
+      начальником.
+  - id: tie-many-options
+    kind: tie
+    expect: opportunity-tree
+    also_ok: [weighted-matrix]
+    not_first: [wrap-decision]
+    text: >-
+      У мене дванадцять ідей, що додати в мій інтернет-магазин, і я не знаю, з чого почати. Хочу якось швидко
+      відсіяти.
+  - id: tie-single-ultimatum
+    kind: tie
+    expect: wrap-decision
+    not_first: [weighted-matrix]
+    text: >-
+      Чи варто мені закривати свій проєкт, у який я вклала два роки? Я весь час думаю лише про це: закрити чи ні.
+  - id: tie-broad-cause
+    kind: tie
+    expect: issue-tree
+    also_ok: [complexity-sensemaking]
+    not_first: [five-whys]
+    text: >-
+      Чому наш бізнес не росте вже два роки? Може, ринок, може, команда, може, я сам — дуже широке питання.
+  - id: tie-urgent-chaos
+    kind: tie
+    expect: complexity-sensemaking
+    also_ok: [issue-tree]
+    not_first: [first-principles]
+    text: >-
+      У мене все змішалося, і часу мало — за пів години нарада, а я не розумію, з якого боку підходити до того, що
+      відбувається з проєктом.
+  - id: tie-product-ideas
+    kind: tie
+    expect: jobs-to-be-done
+    also_ok: [scamper, opportunity-tree]
+    text: >-
+      Клієнти скаржаться, що наш продукт незручний, а конкуренти додали нові звіти. Як мені придумати нову
+      функцію?
+  - id: tie-unknown-mechanism
+    kind: tie
+    expect: is-is-not
+    also_ok: [five-whys]
+    text: >-
+      Технічна дивина: наш датчик температури на одному з двох складів показує на три градуси більше, і тільки
+      вночі. Як він влаштований усередині, я не знаю.
+
+  # --- other: the person asks for another way at the offer
+  - id: other-1
+    kind: other
+    expect_not_offered_again: true
+    history:
+      - role: user
+        text: >-
+          Обираю садочок для сина з чотирьох варіантів. Я вже все про них знаю, але в голові все змішалось.
+      - role: model
+        text: >-
+          Схоже, у вас чотири знайомі варіанти, і їх важко звести докупи. Можемо так: (1) спокійно порівняти
+          садочки за тим, що для вас найважливіше, з вагою кожного; (2) спершу ширше подивитися, чи немає ще
+          варіантів, і перевірити рішення на реальності. Що вам ближче?
+    offered: [weighted-matrix, wrap-decision]
+    text: >-
+      Ні, це все не те. Мені не порівнювати треба, я, здається, вже обрала, але боюся помилитися.
+    expect: pre-mortem
+    also_ok: [reversible-doors, consider-opposite]
+    not_first: [weighted-matrix, wrap-decision]
+
+  # --- midway: a card ended, the router picks the next one by the state now (research 01 §7(е))
+  - id: mid-after-choice
+    kind: midway
+    ended: {card_id: weighted-matrix, end: done}
+    history:
+      - role: user
+        text: Обираю, з якою з трьох ідей бізнесу йти далі.
+      - role: model
+        text: Порівняймо їх за тим, що для вас важливо. Які критерії головні?
+      - role: user
+        text: Швидкість до перших грошей і чи можна це робити агентами.
+      - role: model
+        text: >-
+          За вашими вагами перша ідея — консалтинг для місцевого бізнесу — вийшла попереду. Ви кажете, що інтуїція
+          теж за неї. Що ви хочете зробити з цим вибором далі?
+    text: >-
+      Так, іду з консалтингом. Тепер хочу зрозуміти, що може піти не так, перш ніж почну.
+    expect: pre-mortem
+    also_ok: [consider-opposite]
+    not_first: [weighted-matrix]
+  - id: mid-after-premortem
+    kind: midway
+    ended: {card_id: pre-mortem, end: done}
+    history:
+      - role: user
+        text: Відкриваю консалтинг для місцевого бізнесу з наступного місяця.
+      - role: model
+        text: >-
+          Ми знайшли дві головні загрози — мало клієнтів у перші місяці і задовгі продажі — і для кожної у вас є
+          зміна в плані та сигнал. Що хочете робити далі?
+    text: >-
+      Тепер треба розписати, що конкретно я роблю наступні два тижні.
+    expect: goal-to-plan
+    also_ok: [mental-contrasting]
+    not_first: [pre-mortem]
+  - id: mid-not-fit
+    kind: midway
+    ended: {card_id: five-whys, end: not_fit}
+    history:
+      - role: user
+        text: Чому в нас падає кількість реєстрацій?
+      - role: model
+        text: Що саме змінилося перед тим, як почалося падіння?
+      - role: user
+        text: Не знаю, у нас аналітика там не налаштована.
+      - role: model
+        text: >-
+          Зрозуміло, точних даних зараз немає. Ми вже знаємо, що падіння триває місяць. Що зараз для вас
+          найважливіше — зрозуміти, де дивитися, чи вже діяти?
+    text: >-
+      Зрозуміти, де взагалі дивитися, бо там може бути що завгодно.
+    expect: issue-tree
+    also_ok: [is-is-not, complexity-sensemaking]
+    not_first: [five-whys]
