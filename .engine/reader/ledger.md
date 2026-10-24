@@ -41,3 +41,8 @@
 - Record: tasks/done/708-open-item-testing-parked-skel-web/report.md
 - Reason: All four checks pass. (1) Every reference I could check says what the report claims: both commits and their subjects, testing.py lines 938-939, engine-feedback.md lines 56-59, the to-engine task, and the corrected tests. (2) The task's only item (carry out the owner's answer, record it in the report, close the task) is done, and the report explains it. (3) No question for the owner is left open. (4) Technical terms (builder, tester, sealed tests, slice, commit, runner, reader, park) stay in English. Two command outputs were never recorded in a file, so I could not check them (marked «не переві
 - Request: 20261024T081017Z-ea6c22 (attempt 1)
+
+## 2026-10-24T08:14:11Z — 405-cleanup-2026-10-24 — READER_PASS
+- Record: tasks/done/405-cleanup-2026-10-24/report.md
+- Reason: All four questions hold. The references I could check say what the report says they do. Each of the four «Що зробити» items has an answer, and so does each «Готово, коли» item. The report asks the owner no new question; the google-cloud-speech item is a deferral carried over from 404. Technical terms are in English. Two references could not be checked from files: the `git log e7c52ba..37cefba` result and the `extra-allowed` figure of 2.92 USD. Neither is wrong on its face.
+- Request: 20261024T081332Z-d5007c (attempt 1)

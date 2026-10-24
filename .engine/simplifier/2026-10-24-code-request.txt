@@ -1,0 +1,160 @@
+LENS: code
+SCOPE: src
+
+DETERMINISTIC SIGNALS (cite a signal by its id):
+[
+ {
+  "id": "S-7452c107",
+  "tool": "ast",
+  "kind": "complexity",
+  "file": "src/thinkhow/learning/analyze.py",
+  "line": 93,
+  "message": "_topic: complexity 12, the limit is 10"
+ },
+ {
+  "id": "S-2a00ae99",
+  "tool": "ast",
+  "kind": "nesting",
+  "file": "src/thinkhow/platform/llm.py",
+  "line": 97,
+  "message": "VertexLlm.stream_json: nesting 5, the limit is 3"
+ },
+ {
+  "id": "S-7506c2cb",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/facilitation/types.py",
+  "line": 39,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-447e3251",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/knowledge/schema.py",
+  "line": 14,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-09ce0be4",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/knowledge/schema.py",
+  "line": 29,
+  "message": "unused variable 'when_no' (60% confidence)"
+ },
+ {
+  "id": "S-877229bc",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/knowledge/schema.py",
+  "line": 47,
+  "message": "unused method '_distinct_phase_ids' (60% confidence)"
+ },
+ {
+  "id": "S-0b08120f",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/learning/analyze.py",
+  "line": 39,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-771df671",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 17,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-7ea8c546",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 35,
+  "message": "unused method 'settings_customise_sources' (60% confidence)"
+ },
+ {
+  "id": "S-54be1e6a",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 38,
+  "message": "unused variable 'settings_cls' (100% confidence)"
+ },
+ {
+  "id": "S-b63d8199",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 40,
+  "message": "unused variable 'env_settings' (100% confidence)"
+ },
+ {
+  "id": "S-4a2e11b5",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 41,
+  "message": "unused variable 'dotenv_settings' (100% confidence)"
+ },
+ {
+  "id": "S-158db69f",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 42,
+  "message": "unused variable 'file_secret_settings' (100% confidence)"
+ },
+ {
+  "id": "S-39347750",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/web/app.py",
+  "line": 40,
+  "message": "unused function '__getattr__' (60% confidence)"
+ },
+ {
+  "id": "S-46dfaba5",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/web/server.py",
+  "line": 77,
+  "message": "unused function 'language_page' (60% confidence)"
+ },
+ {
+  "id": "S-c4ffaf73",
+  "tool": "pyproject",
+  "kind": "unused-dependency",
+  "file": "pyproject.toml",
+  "line": 7,
+  "message": "google-cloud-speech is declared and no module named google_cloud_speech is imported"
+ },
+ {
+  "id": "S-0411a0a7",
+  "tool": "pyproject",
+  "kind": "unused-dependency",
+  "file": "pyproject.toml",
+  "line": 8,
+  "message": "google-cloud-storage is declared and no module named google_cloud_storage is imported"
+ },
+ {
+  "id": "S-18535cf9",
+  "tool": "pyproject",
+  "kind": "unused-dependency",
+  "file": "pyproject.toml",
+  "line": 9,
+  "message": "google-genai is declared and no module named google_genai is imported"
+ },
+ {
+  "id": "S-0d4b52d2",
+  "tool": "pyproject",
+  "kind": "unused-dependency",
+  "file": "pyproject.toml",
+  "line": 10,
+  "message": "jinja2 is declared and no module named jinja2 is imported"
+ }
+]
+
+Answer with the JSON list of findings and nothing else.

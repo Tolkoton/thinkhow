@@ -2,36 +2,35 @@
  {
   "target": "pyproject.toml:7",
   "category": "redundant_dependency",
-  "claim": "The google-cloud-speech dependency can go: speech recognition now runs on gemini-3.5-transcribe through google-genai (platform/speech.py), nothing in src or tests imports google.cloud.speech, and ADR-0005 says the package is no longer needed. Behaviour stays the same without it. The only importer left is the archived spike .engine/artifacts/spikes/voice-stt-2026-10-23/chirp3_probe.py, and .engine/architecture/architecture-map.md:523 still lists google.cloud.speech, which would need a one-word update.",
+  "claim": "The google-cloud-speech dependency can go: speech recognition runs on gemini-3.5-transcribe through google-genai, nothing in src or tests imports google.cloud.speech, and the app behaves the same without it.",
   "evidence": [
    {"source": "signal", "ref": "S-c4ffaf73", "detail": "google-cloud-speech is declared and no module named google_cloud_speech is imported"},
-   {"source": "grep", "ref": "src/thinkhow/platform/speech.py:11", "detail": "speech imports google.genai types; no google.cloud.speech import anywhere in src or tests"},
-   {"source": "grep", "ref": "docs/adr/0005-speech-gemini-transcribe.md:61", "detail": "ADR-0005: the google-cloud-speech package is no longer needed"},
-   {"source": "grep", "ref": ".engine/slices/voice-dictation.md:40", "detail": "the slice leaves removing the package as a proposal to the owner, so it was kept on purpose until the owner decides"},
-   {"source": "read", "ref": "tasks/done/403-cleanup-2026-10-22/report.md:57", "detail": "an earlier cleanup kept the deps because the walking skeleton was not built yet. That reason has expired for this package: the speech code exists and uses genai"},
-   {"source": "judgement", "ref": "", "detail": "Removing a package is ask-gated, so this needs the owner's word. The other three dependency signals are false: google-genai is imported in llm.py, speech.py and _retry.py; google-cloud-storage in storage.py:115 as google.cloud.storage; jinja2 through fastapi.templating.Jinja2Templates at web/server.py:20"}
+   {"source": "read", "ref": "src/thinkhow/platform/speech.py:11", "detail": "speech imports google.genai types and builds a genai.Client at line 114; it has no Speech-to-Text import"},
+   {"source": "grep", "ref": ".engine/artifacts/spikes/voice-stt-2026-10-23/chirp3_probe.py:2", "detail": "the only import of google.cloud.speech_v2 in the repository is a spike probe outside src"},
+   {"source": "grep", "ref": "docs/adr/0005-speech-gemini-transcribe.md:61", "detail": "ADR-0005 says the google-cloud-speech package is no longer needed"},
+   {"source": "read", "ref": ".engine/architecture/feature/voice-and-language.md:119", "detail": "the plan kept the package only because removing a package needs permission. It names an owner option to enable speech.googleapis.com and compare Chirp 3, which would need it back"}
   ],
   "protected": false,
   "chesterton_checked": true,
   "test_safety": "characterization_exists",
   "proposed_action": "confirm",
-  "traceability": "none found: no goal or F13 criterion needs google-cloud-speech once ADR-0005 put gemini-3.5-transcribe in place",
+  "traceability": "none found: no goal or F13 criterion needs google-cloud-speech since ADR-0005; the owner's answer is still pending (tasks/done/404-cleanup-2026-10-23/report.md:58)",
   "reversal_risk": "medium"
  },
  {
   "target": "src/thinkhow/platform/speech.py:91-98",
   "category": "duplication",
-  "claim": "speech._text applies the same rule as llm._chunk_text (src/thinkhow/platform/llm.py:189-196): walk response.candidates, take candidate.content.parts when content exists, keep part.text where part.thought is false, and join them. speech only adds .strip(). A change to how answer text is pulled out (for example how thought parts are treated) would have to be made in both places.",
+  "claim": "speech._text applies the same rule as llm._chunk_text (src/thinkhow/platform/llm.py:189-196): go through response.candidates, take part.text where part.thought is false, and join the parts. The only difference is the final .strip(), so a change to the thought-part rule would have to be made in both places.",
   "evidence": [
-   {"source": "read", "ref": "src/thinkhow/platform/speech.py:91", "detail": "_text: for candidate in response.candidates or []; for part in (candidate.content.parts if candidate.content else None) or []; if part.text and not part.thought: append; join, strip"},
-   {"source": "read", "ref": "src/thinkhow/platform/llm.py:189", "detail": "_chunk_text: the same loops, the same condition, join without strip"},
-   {"source": "read", "ref": "src/thinkhow/platform/speech.py:3", "detail": "the docstring says speech retries the way platform.llm does, through the shared platform._retry. The text extraction was copied and not shared"}
+   {"source": "read", "ref": "src/thinkhow/platform/speech.py:91", "detail": "loops over candidates and content.parts, keeps part.text if not part.thought, joins, strips"},
+   {"source": "read", "ref": "src/thinkhow/platform/llm.py:189", "detail": "the same loop, the same thought filter and the same join, without the strip"},
+   {"source": "grep", "ref": "tests/contract/voice_dictation/test_vd_speech.py", "detail": "the speech tests use thought parts, so they cover the speech copy of the rule"}
   ],
   "protected": false,
   "chesterton_checked": true,
   "test_safety": "characterization_exists",
   "proposed_action": "flag_only",
-  "traceability": "M3 A2 (platform owns the Google SDK); no requirement needs two copies",
+  "traceability": "M3 A2 (platform owns the Gemini SDK); speech.py's docstring says it retries the way platform.llm does, and the retry is already shared through platform._retry, but the text extraction is not",
   "reversal_risk": "low"
  }
 ]
