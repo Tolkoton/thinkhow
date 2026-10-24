@@ -200,3 +200,17 @@
   `respond` dispatches instead of a new `converse` in the app; `routing` outside equality (`compare=False`)
 - Open for next slice: S3 measures the router on `cases.yaml`, live conversations per card; the 301 live tests A/B
   now go through the router (A's free-mode expectations no longer apply)
+
+## Slice 16 — router-eval (DONE 2026-10-24) — task 302, feature thinking-models-router S3
+
+- Files: `tests/fixtures/routing/cases.yaml` (85 situations, held-out `*-3`), `scripts/router_eval.py`,
+  `scripts/card_conversations.py` (synthetic person `gemini-3.5-flash`); card edits (router halves of `issue-tree`,
+  `jobs-to-be-done`, `complexity-sensemaking`)
+- Tests: 49 contract tests of the slice-tester (`tests/contract/router_eval/`, two questions answered)
+- Live: router eval run 1 `.engine/artifacts/router-eval/2026-10-24T181411Z.md` — first 83/85, held-out 18/18; run 2
+  after the card edits `…181915Z.md` — first 85/85, held-out 18/18; conversations
+  `.engine/artifacts/card-conversations/2026-10-24T181933Z/` (18 cards: offered, led, last phase, `end: done`; switch)
+  and `…183048Z/` (the owner's topic: issue-tree → pre-mortem → jobs-to-be-done)
+- Surprises: the owner topic driver stopped at the first `end` — fixed (no target card → runs to N turns); task-301
+  live A now fails only its free-mode phase check, superseded by the router
+- Open: AC6 — deployment through Сонько (Job `cards`, then the service)
