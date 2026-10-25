@@ -39,6 +39,17 @@ def test_advice_stays_out_of_her_map() -> None:
     assert "у карту її не пиши, доки людина сама її не прийме" in flat(RULES)
 
 
+def test_no_card_forbids_advice_outright(tmp_path: Path) -> None:
+    """Every card's text goes into the same instruction as RULES: none may forbid what the rule asks for."""
+    storage = LocalStorage(tmp_path)
+    seed(storage, CARDS)
+    knowledge = current(storage)
+    for card in knowledge.cards.values():
+        text = flat(system_instruction(card, (), "uk-UA", routed=True)[len(RULES) :])
+        for banned in ("не дає порад", "не роздає порад", "не давай порад"):
+            assert banned not in text.replace(f"без прохання {banned}", ""), (card.id, banned)
+
+
 def test_research_points_to_the_advice_rule(tmp_path: Path) -> None:
     assert "оцінюй лише порадою за правилом вище" in flat(RESEARCH_SECTION)
     storage = LocalStorage(tmp_path)
