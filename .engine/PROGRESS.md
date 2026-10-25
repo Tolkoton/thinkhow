@@ -249,3 +249,17 @@
   (#17), 9.0 s (#25, no search), 30.4 s (price, 3 queries)
 - Surprises: the same calls took 3 min an hour earlier — Vertex's own latency varies; recorded only (P4)
 - Open for next slice: S2 — «answer»; the rule's line «fact — only what was found» (S1 finding)
+
+## Slice 19 — fact-answer (DONE 2026-10-25) — task 303, feature research-in-conversation S2
+
+- Module: `facilitation/answer.py` + `answer.md` (one streamed call with search, no card), `facilitation/settle.py`
+  (settle, sources line, research event, frame — moved out of `respond.py`, no change of behaviour), router action
+  `answer` (`route.py`, `router.md`: the item and «В "ask" не питай… фактів про світ»), `converse.py` branch,
+  `types.py` (`FactAnswer`, `FactUpdate`, `Decision.kind` + `answer`), `research.md` + «fact — лише для знайденого»,
+  `scripts/card_conversations.py` (`answer` = роутер) (~140 LOC)
+- Tests: 18 contract tests of a fresh slice-tester (`tests/contract/fact_answer/`; the first hand-in was not recorded and its tests were written with the code present — replaced; three questions answered); 786 passed
+- Live: `.engine/artifacts/spikes/fact-answer-live-2026-10-25T095155Z.txt` — the Škoda price as a first turn →
+  `answer`: 32 840 € with 3 real sources and a `fact`; router 14.3 s + answer 16.9 s; a job dilemma → `offer` (PR-18
+  verified)
+- Surprises: none
+- Open for next slice: S3 — `deep_question` (also in `FactAnswer`), the cycle in `settle`'s neighbourhood

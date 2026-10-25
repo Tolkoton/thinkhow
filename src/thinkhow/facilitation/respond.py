@@ -3,24 +3,25 @@
 The rules are PoC 101's instruction (`rules.md`, two lines changed: skel-facilitation Q5).
 """
 
-from collections.abc import Callable, Iterator, Sequence
+from collections.abc import Iterator, Sequence
 from pathlib import Path
 from typing import Any, Literal
 
-from pydantic import BaseModel, ValidationError, create_model
+from pydantic import BaseModel, create_model
 
 from thinkhow.facilitation.converse import converse
 from thinkhow.facilitation.language import NO_LANGUAGE_RULE as NO_LANGUAGE_RULE
 from thinkhow.facilitation.language import language_rule as language_rule
+from thinkhow.facilitation.settle import RESEARCH_SECTION as RESEARCH_SECTION
+from thinkhow.facilitation.settle import frame, settle, with_research
+from thinkhow.facilitation.settle import sources_line as sources_line
 from thinkhow.facilitation.types import (
     FacilitationContext,
-    FacilitationError,
     FacilitatorUpdate,
     MapUpdate,
     ReplyDelta,
     ResearchEvent,
     RoutingEvent,
-    Source,
 )
 from thinkhow.knowledge import Card, CurrentKnowledge, MemoryRecord, card_prompt
 from thinkhow.platform import llm as model
@@ -28,8 +29,6 @@ from thinkhow.platform import llm as model
 RULES = (Path(__file__).with_name("rules.md")).read_text(encoding="utf-8").rstrip("\n")
 RETRY_ASK = "Поверни лише оновлення до своєї відповіді вище: фаза, вихід, зміни карти."
 ROUTED_SECTION = (Path(__file__).with_name("routed.md")).read_text(encoding="utf-8").rstrip("\n")
-RESEARCH_SECTION = (Path(__file__).with_name("research.md")).read_text(encoding="utf-8").rstrip("\n")
-SOURCES_HEAD = "\n\nДжерела: "
 FREE_MODE_LINE = "[Стан] Вільний режим уже триває: людина чула, що картка не підходить. Не кажи цього знову."
 
 
@@ -59,31 +58,9 @@ def lead(
             yield ReplyDelta(event.text)
         else:
             raw, found = event.raw_json, event.found
-    yield from with_research(_settle(card, llm, system, contents, rev, "".join(shown), raw), found)
-
-
-def with_research(
-    items: Iterator[ReplyDelta | FacilitatorUpdate], found: model.Found | None
-) -> Iterator[ReplyDelta | FacilitatorUpdate | ResearchEvent]:
-    """Flow: pass the answer on; before its update — the sources line and the research event (S1, I1)."""
-    if found is None or not (found.queries or found.sources):
-        yield from items
-        return
-    for item in items:
-        if isinstance(item, FacilitatorUpdate):
-            event = _research(found)
-            line = sources_line(event.sources)
-            if line:
-                yield ReplyDelta(line)
-            yield event
-            yield item.model_copy(update={"reply": item.reply + line})
-            return
-        yield item
-
-
-def _research(found: model.Found) -> ResearchEvent:
-    sources = tuple(Source(s.title, s.url) for s in found.sources)
-    return ResearchEvent("quick", found.queries, sources, found.suggestions_html)
+    schemas = answer_schema(card), update_schema(card)
+    settled = settle(llm, system, contents, rev, "".join(shown), raw, *schemas, RETRY_ASK, _same)
+    yield from with_research(settled, found)
 
 
 def system_instruction(
@@ -94,22 +71,6 @@ def system_instruction(
     if routed:
         head += f"\n{ROUTED_SECTION}\n\n{RESEARCH_SECTION}\n"
     return f"{head}\n# Картка\n{card_prompt(card)}\n# Пам'ять досвіду\n{_memory_text(memory)}\n"
-
-
-def sources_line(sources: Sequence[Source]) -> str:
-    """The line of sources under an answer, the same in the stream and in `reply`; none without sources."""
-    if not sources:
-        return ""
-    links = (f"[{_title(s.title)}]({_url(s.url)})" for s in sources)
-    return SOURCES_HEAD + ", ".join(links)
-
-
-def _title(title: str) -> str:
-    return title.replace("[", "").replace("]", "")
-
-
-def _url(url: str) -> str:
-    return url.replace("(", "%28").replace(")", "%29")
 
 
 def answer_schema(card: Card) -> type[FacilitatorUpdate]:
@@ -129,62 +90,17 @@ def update_schema(card: Card) -> type[BaseModel]:
     )
 
 
-def _settle(
-    card: Card,
-    llm: model.Llm,
-    system: str,
-    contents: list[model.Turn],
-    rev: model.KnowledgeRev,
-    shown: str,
-    raw: str,
-) -> Iterator[ReplyDelta | FacilitatorUpdate]:
-    parsed = _parse(answer_schema(card), raw)
-    if parsed is not None:
-        if not shown:
-            yield ReplyDelta(parsed.reply)
-        yield _plain(parsed.model_dump() | {"reply": shown or parsed.reply})
-        return
-    if shown:
-        retry = [*contents, model.Turn("model", shown), model.Turn("user", RETRY_ASK)]
-        update = _retry(lambda: llm.generate_json(system, retry, update_schema(card), rev))
-        yield _plain(update.model_dump() | {"reply": shown})
-        return
-    full = _retry(lambda: llm.generate_json(system, contents, answer_schema(card), rev))
-    yield ReplyDelta(full.reply)
-    yield _plain(full.model_dump())
-
-
-def _parse(schema: type[FacilitatorUpdate], raw: str) -> FacilitatorUpdate | None:
-    try:
-        return schema.model_validate_json(raw)
-    except ValidationError:
-        return None
-
-
-def _retry[M: BaseModel](call: Callable[[], M]) -> M:
-    try:
-        result: M = call()
-    except ValidationError as exc:
-        raise FacilitationError("the model's update stayed invalid after one retry") from exc
-    return result
-
-
-def _plain(fields: dict[str, Any]) -> FacilitatorUpdate:
-    """Exactly FacilitatorUpdate, not the narrowed schema subclass."""
-    return FacilitatorUpdate.model_validate(fields)
-
-
 def _phases(card: Card) -> Any:
     """A phase of the card, or None: the card does not fit (free mode, facilitator-free-mode Q1)."""
     return Literal[tuple(phase.id for phase in card.facilitator.phases)] | None
 
 
+def _same(fields: dict[str, Any]) -> dict[str, Any]:
+    return fields
+
+
 def _contents(ctx: FacilitationContext) -> list[model.Turn]:
-    frame = (
-        f"[Карта проблеми зараз]\n{ctx.problem_map.model_dump_json()}\n\n{_state(ctx)}"
-        f"[Репліка людини #{ctx.turn_no}]\n{ctx.text}"
-    )
-    return [*(model.Turn(t.role, t.text) for t in ctx.history), model.Turn("user", frame)]
+    return frame(ctx, _state(ctx))
 
 
 def _state(ctx: FacilitationContext) -> str:

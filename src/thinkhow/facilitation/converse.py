@@ -6,6 +6,7 @@ Does NOT read steps.json or the experience memory, plan a route ahead or store a
 from collections.abc import Callable, Iterator
 from dataclasses import replace
 
+from thinkhow.facilitation.answer import answer_fact
 from thinkhow.facilitation.route import RouterAnswer, route
 from thinkhow.facilitation.types import (
     Decision,
@@ -36,6 +37,9 @@ def converse(
         answer = route(ctx, knowledge, llm)
         decision = _decision(answer, ctx.turn_no, knowledge)
         yield RoutingEvent(decision)
+        if answer.action == "answer":
+            yield from answer_fact(ctx, knowledge, llm)
+            return
         if answer.action != "choose":
             yield from _router_reply(answer)
             return

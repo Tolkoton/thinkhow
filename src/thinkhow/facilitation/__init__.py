@@ -3,6 +3,7 @@
 workspace imports only `thinkhow.facilitation.types`; web imports this package.
 """
 
+from thinkhow.facilitation.answer import answer_fact
 from thinkhow.facilitation.converse import converse
 from thinkhow.facilitation.respond import respond
 from thinkhow.facilitation.route import RouterAnswer, route
@@ -13,6 +14,8 @@ from thinkhow.facilitation.types import (
     FacilitationContext,
     FacilitationError,
     FacilitatorUpdate,
+    FactAnswer,
+    FactUpdate,
     ItemType,
     MapItem,
     MapUpdate,
@@ -28,6 +31,7 @@ from thinkhow.facilitation.types import (
 )
 
 __all__ = [
+    "answer_fact",
     "Candidate",
     "Decision",
     "Profile",
@@ -44,6 +48,8 @@ __all__ = [
     "FacilitationContext",
     "FacilitationError",
     "FacilitatorUpdate",
+    "FactAnswer",
+    "FactUpdate",
     "MapItem",
     "MapUpdate",
     "ProblemMap",

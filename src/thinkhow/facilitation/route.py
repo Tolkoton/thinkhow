@@ -26,7 +26,7 @@ CARDS_HEAD = "# Картка за карткою — для вибору"
 
 
 class RouterAnswer(_Frozen):
-    action: Literal["offer", "ask", "choose"]
+    action: Literal["offer", "ask", "choose", "answer"]
     profile: Profile
     candidates: list[Candidate]
     card_id: str | None
@@ -44,6 +44,8 @@ class RouterAnswer(_Frozen):
             raise ValueError("an ask needs a reply")
         if self.action == "choose" and self.card_id is None:
             raise ValueError("a choose needs a card_id")
+        if self.action == "answer" and self.card_id is not None:
+            raise ValueError("an answer chooses no card")
         return self
 
 
@@ -110,6 +112,8 @@ def _decision_line(d: Decision) -> str:
         return f"- репліка #{d.turn}: end {d.card_id} — {d.end} ({how})"
     if d.kind == "choose":
         return f"- репліка #{d.turn}: choose {d.card_id} (людина обрала)"
+    if d.kind == "answer":
+        return f"- репліка #{d.turn}: answer (відповідь фактом)"
     if d.kind == "offer":
         return f"- репліка #{d.turn}: offer {', '.join(c.card_id for c in d.candidates)} (запропоновано)"
     return f"- репліка #{d.turn}: ask (уточнювальне питання)"

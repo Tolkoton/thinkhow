@@ -1,0 +1,41 @@
+# Live tracer fact-answer (task 303, S2)
+
+Run: 2026-10-25T095155Z
+
+## Пряме питання «Скільки зараз коштує новий Škoda Octavia Combi у Німеччині?»
+
+answered: True; рішення роутера: ['answer']
+
+Відповідь:
+
+Офіційна рекомендована ціна (UVP) на новий Škoda Octavia Combi у Німеччині стартує від 32 840 євро за базову комплектацію. Версія 30 Jahre коштує від 39 180 євро, комплектація Sportline — від 42 690 євро, а спортивна модифікація RS — від 50 190 євро. Водночас у дилерів та через реімпорт (EU-Neuwagen) нові автомобілі в наявності можна знайти зі знижками за ціною від 23 600 до 34 000 євро залежно від двигуна та оснащення. Що з цими цифрами для вас важливо далі?
+
+Джерела: [skoda-auto.de](https://www.skoda-auto.de/modelle/octavia/octavia-combi), [auto-per-mausklick.de](https://www.auto-per-mausklick.de/eu-neuwagen/skoda/skoda-octavia-combi-reimport/), [autouncle.de](https://www.autouncle.de/de/gebrauchtwagen/Skoda/Octavia/g-automatikgetriebe)
+
+- запити: ['Skoda Octavia Combi Preis Deutschland neu 2025 2026', 'Skoda Octavia Combi Neuwagen Preisliste Deutschland']
+- джерела: ['https://www.skoda-auto.de/modelle/octavia/octavia-combi', 'https://www.auto-per-mausklick.de/eu-neuwagen/skoda/skoda-octavia-combi-reimport/', 'https://www.autouncle.de/de/gebrauchtwagen/Skoda/Octavia/g-automatikgetriebe']
+- пункти fact: ['У Німеччині офіційна ціна нового Škoda Octavia Combi стартує від 32 840 євро (Sportline — від 42 690 євро, RS — від 50 190 євро), а пропозиції дилерів та реімпорт починаються приблизно від 23 600–31 000 євро.']
+
+## Ситуація «Не можу вирішити, чи переходити на нову роботу, бо там більше платять, але далеко їздити» — записується
+
+answered: True; рішення роутера: ['offer']
+
+Відповідь:
+
+Ви вагаєтеся, чи переходити на нову роботу, де вища зарплата, але довша дорога.
+
+1. Вийти за межі вибору «йти чи залишатися», пошукати інші варіанти, перевірити, як воно буде насправді, і підготуватися до рішення.
+2. Розібрати протиріччя між потребою у вищому доході та потребою берегти час на дорогу і знайти рішення без поганого компромісу.
+3. Спокійно порівняти теперішню і нову роботу за всіма важливими для вас критеріями, а не лише за грошима і дорогою.
+
+Який із цих способів вам ближчий, чи хочете підійти інакше?
+
+- пункти fact: []
+
+## Рядки `llm_call`
+
+```
+{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 10087, "output_tokens": 185, "thought_tokens": 0, "latency_ms": 14344, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "search": false, "queries": 0, "event": "llm_call", "request_id": null}
+{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 1304, "output_tokens": 378, "thought_tokens": 102, "latency_ms": 16866, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "search": true, "queries": 2, "event": "llm_call", "request_id": null}
+{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 10095, "output_tokens": 514, "thought_tokens": 0, "latency_ms": 10666, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "search": false, "queries": 0, "event": "llm_call", "request_id": null}
+```

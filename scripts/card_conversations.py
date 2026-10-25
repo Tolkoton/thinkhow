@@ -225,7 +225,7 @@ def _drive(
         assert isinstance(events[-1], Answered), events[-1]
         decisions = topic.routing()
         new = decisions[before:]
-        who = "роутер" if new and new[-1]["kind"] in ("offer", "ask") else "фасилітатор"
+        who = "роутер" if new and new[-1]["kind"] in ("offer", "ask", "answer") else "фасилітатор"
         answer = "".join(e.text for e in events if isinstance(e, Delta))
         conv.rows.append(Row(who, answer, topic.phase() if who == "фасилітатор" else None, new))
         led = _led(decisions)

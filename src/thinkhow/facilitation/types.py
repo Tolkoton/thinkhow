@@ -68,6 +68,19 @@ class FacilitatorUpdate(_Frozen):
     map_updates: list[MapUpdate]
 
 
+class FactAnswer(_Frozen):
+    """A fact answered at once (the router's «answer»): the reply first, the map's changes."""
+
+    reply: str = Field(min_length=1)
+    map_updates: list[MapUpdate]
+
+
+class FactUpdate(_Frozen):
+    """The update-only retry of a fact answer: the map's changes alone."""
+
+    map_updates: list[MapUpdate]
+
+
 class Profile(_Frozen):
     """The problem profile: the 8 dimensions of M1 (no «crisis» state — N3)."""
 
@@ -117,7 +130,7 @@ class Decision(_Frozen):
 
     turn: int
     rev: Rev
-    kind: Literal["offer", "ask", "choose", "end"]
+    kind: Literal["offer", "ask", "choose", "end", "answer"]
     profile: Profile | None
     candidates: list[Candidate]
     card_id: str | None
