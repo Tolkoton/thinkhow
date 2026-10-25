@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from datetime import UTC, datetime
 from html.parser import HTMLParser
 from pathlib import Path
@@ -22,6 +23,7 @@ ALICE = CurrentUser(id="alice-1", email="alice@example.com", is_owner=False)
 H_ALICE = {"x-goog-iap-jwt-assertion": "tok-alice"}
 TOKENS = {"tok-alice": {"sub": "accounts.google.com:alice-1", "email": "alice@example.com"}}
 CONTROLS = ("button", "summary")
+STYLE = Path(__file__).resolve().parents[2] / "src" / "thinkhow" / "web" / "static" / "style.css"
 
 
 class Controls(HTMLParser):
@@ -119,3 +121,18 @@ def test_mic_state_words_are_for_screen_readers_only(tmp_path: Path) -> None:
     topic = client.get(f"/topics/{ref.uid}/{ref.topic_id}", headers=H_ALICE).text
     assert '<span id="mic-state" class="sr-only" aria-live="polite"></span>' in topic
     assert 'aria-pressed="false"' in topic
+
+
+def test_the_stylesheet_shows_the_mic_states_the_words_used_to_say() -> None:
+    css = re.sub(r"\s+", " ", re.sub(r"/\*.*?\*/", "", STYLE.read_text(encoding="utf-8"), flags=re.S))
+    rules: dict[str, str] = {}
+    for selector, body in re.findall(r"([^{}]+?) \{ ([^{}]*) \}", css):
+        rules[selector.strip()] = rules.get(selector.strip(), "") + body
+    rec, busy = '#mic[data-state="recording"]', '#mic[data-state="recognizing"]'
+    assert "display: none" in rules["#mic .i-stop, #mic .spinner"]
+    assert "background: var(--error)" in rules[rec]
+    assert "display: none" in rules[rec + " .i-mic"] and "display: block" in rules[rec + " .i-stop"]
+    assert "display: none" in rules[busy + " .i-mic"] and "display: inline-block" in rules[busy + " .spinner"]
+    assert (
+        "display: none" in rules[".pending"] and "display: inline-flex" in rules["#send:disabled ~ .pending"]
+    )
