@@ -1,0 +1,51 @@
+# Live tracer research-quick (task 303, S1)
+
+Run: 2026-10-25T08:41:29Z
+
+## Репліка власника #17 (історія #1–#16, картка weighted-matrix)
+
+answered: True
+
+Відповідь моделі:
+
+Щоб не вгадувати, можна спертися на ринкові строки: на фріланс-платформах чи через прямі повідомлення в LinkedIn перше невелике замовлення на розробку зазвичай знаходять за 2–4 тижні, тоді як у німецькому Mittelstand цикл угоди триває від 3–6 місяців для малого бізнесу до 6–12 місяців для класичних середніх компаній (плюс відстрочка оплати 30–60 днів). Продаж готових мікростартапів із SEO потребує кількох місяців на розкачку трафіку. Щоб звузити список для порівняння до 3–4 реальних варіантів: який поріг часу до перших грошей для вас критичний, після якого варіант відпадає одразу?
+
+Джерела: [medium.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFIn4_qCQv86LbDdEkbHV_43-xK0beveAADGmCTC0QUSZn4_JH3ddSaEfm22tYqs2GqZoYnYpH71zZ2eC-JLROMydR0aTuoqKdTS0zIndOyjmerYZXMV5oNyOKuVfJSf6rsuGGRBhBYaasquTMQNKfv2d6XNlqFBxm4rUw7_7Yc-heNaQXcnolWkeLDbi9qSndkgySDCxp6rz7wDCkd_ArZOQ_GQtgtp2QDlji3IXLqsw==), [sandsconsult.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFI6dL-9gNHA-pS262qV98yyGFWEhPMDgExv_Ty-jpZNu7uN8TkPwJh5HISCBKZxUdUiCKEZ_6KhpwPKWHuXqICvMkIlgKABKhhYb5YlJ4Muoufudwdo4eBEsHxmvZlpdf_zUKgRMThOb2aQoViAjDF2WG1jlIqueUcVyytDobDLEiRMoS89TrIs0ZTTETvkVsLJwMnWzfu5zWSLRZ4tZdj-5Q_pr_1GbGU3g1HGLtmqTE=)
+
+- запити: ['B2B sales cycle length SME Germany Mittelstand consulting', 'time to first client freelance AI developer Upwork']
+- джерела: ['https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFIn4_qCQv86LbDdEkbHV_43-xK0beveAADGmCTC0QUSZn4_JH3ddSaEfm22tYqs2GqZoYnYpH71zZ2eC-JLROMydR0aTuoqKdTS0zIndOyjmerYZXMV5oNyOKuVfJSf6rsuGGRBhBYaasquTMQNKfv2d6XNlqFBxm4rUw7_7Yc-heNaQXcnolWkeLDbi9qSndkgySDCxp6rz7wDCkd_ArZOQ_GQtgtp2QDlji3IXLqsw==', 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFI6dL-9gNHA-pS262qV98yyGFWEhPMDgExv_Ty-jpZNu7uN8TkPwJh5HISCBKZxUdUiCKEZ_6KhpwPKWHuXqICvMkIlgKABKhhYb5YlJ4Muoufudwdo4eBEsHxmvZlpdf_zUKgRMThOb2aQoViAjDF2WG1jlIqueUcVyytDobDLEiRMoS89TrIs0ZTTETvkVsLJwMnWzfu5zWSLRZ4tZdj-5Q_pr_1GbGU3g1HGLtmqTE=']
+- Search suggestions: 4741 символів
+- пункти fact у карті: ['На фріланс-платформах (наприклад, Upwork) та через прямий аутріч у LinkedIn перше замовлення на АІ-розробку зазвичай отримують за 2–4 тижні.', 'Цикл B2B-продажів у німецькому Mittelstand зазвичай триває 6–12 місяців (для менших SME — 3–6 місяців) із відстрочкою оплати 30–60 днів.']
+
+## Репліка власника #25 (історія #1–#24) — записується
+
+answered: True
+
+Відповідь моделі:
+
+Вже зібрані мікростартапи та минулий досвід на фрілансі — це вагомі козирі, бо вам не треба починати з абсолютного нуля. Щоб ми могли чітко порівняти і вибрати, де гроші прийдуть найшвидше, давайте зафіксуємо самі варіанти, між якими обираємо. На столі зараз чотири напрямки: 1) фріланс-проєкти з вашим двигуном, 2) продаж уже зібраних мікростартапів, 3) рішення для малого бізнесу і 4) АІ-консалтинг для Mittelstand у Шварцвальді — беремо в роботу всі чотири чи якийсь із них відкидаємо одразу?
+
+- пункти fact у карті: ['Має кілька вже зібраних мікростартапів та попередній досвід роботи на фрілансі (поза Upwork)']
+
+## Пряме питання «Скільки зараз коштує новий Škoda Octavia Combi у Німеччині?» (історія #1–#16) — записується
+
+answered: True
+
+Відповідь моделі:
+
+У Німеччині офіційна ціна на новий Škoda Octavia Combi за прайсом виробника зараз стартує від 32 840 євро за базову комплектацію, версія «30 Jahre» коштує від 39 180 євро, Sportline — від 42 690 євро, а RS — від 50 190 євро (через онлайн-платформи зі знижками базову версію можна знайти приблизно від 29 840 євро). Скажіть, ця сума — це зараз ваш орієнтир цілі для заробітку, від якого ми відштовхуємося, обираючи між вашими варіантами проєктів?
+
+Джерела: [skoda-auto.de](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF2pSoiG-Fw7Ek6A0GHROg942_3-61cK3Hc7i5VIzLJQKxkQovKnjo5Zc9TQT_0tc37NbqooK0_hNiF_XxCowj3nQPPfJwnEMS9fHDFhwrEGToIeATudj09BgHeLMH737t1ooyruqGuNP1B_Pg=), [skoda-auto.de](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEjveXLMQHN-exhIUUmeCUu6Z4mItaclKxVEJSrjTChc4HvVGmnFjer45xZImOYDG-HqI7HlOaO455lp3xoFuxMA_oYQ33nNuVvjBalzeYN3iVYQLpP5LpBSNN-UYy7BF2phmsf63F6Po6MpqZ2yoaki2Dl4rr4569iRA==), [skoda-auto.de](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFxN-YzvROla88w3ECL5i-h-JtJxr8-6AbO6pLHIJb9ptyfVb9nR0xjhKng-Ej4MMLmPckM4OwKAUI0iHnKjul7qYD5h29pOCeQBwtTSJmdm2rAFSlLE6m4Q3K9zQBicKyVHPuGedYaxoVqPuMc88icOKtOtx4VSRJpzbk=), [meinauto.de](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEQxG83gRyMpmwoOgqNOE_UHgYYg43dR2sVug63aq5MYWHUvGsJLJiNEB3ENf1t1shAPFjKt6uuS0kShOe50Bojwpxlq92bdYTQHPt_jVcIJGKo-VmIFZkQgBmeyL1S7z_2Nd-gS84cBUreCCnlPfA=)
+
+- запити: ['Skoda Octavia Combi Preis Deutschland neu Listenpreis 2025 2026', 'Skoda Octavia Combi Deutschland Konfigurator Preis ab']
+- джерела: ['https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF2pSoiG-Fw7Ek6A0GHROg942_3-61cK3Hc7i5VIzLJQKxkQovKnjo5Zc9TQT_0tc37NbqooK0_hNiF_XxCowj3nQPPfJwnEMS9fHDFhwrEGToIeATudj09BgHeLMH737t1ooyruqGuNP1B_Pg=', 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEjveXLMQHN-exhIUUmeCUu6Z4mItaclKxVEJSrjTChc4HvVGmnFjer45xZImOYDG-HqI7HlOaO455lp3xoFuxMA_oYQ33nNuVvjBalzeYN3iVYQLpP5LpBSNN-UYy7BF2phmsf63F6Po6MpqZ2yoaki2Dl4rr4569iRA==', 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFxN-YzvROla88w3ECL5i-h-JtJxr8-6AbO6pLHIJb9ptyfVb9nR0xjhKng-Ej4MMLmPckM4OwKAUI0iHnKjul7qYD5h29pOCeQBwtTSJmdm2rAFSlLE6m4Q3K9zQBicKyVHPuGedYaxoVqPuMc88icOKtOtx4VSRJpzbk=', 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEQxG83gRyMpmwoOgqNOE_UHgYYg43dR2sVug63aq5MYWHUvGsJLJiNEB3ENf1t1shAPFjKt6uuS0kShOe50Bojwpxlq92bdYTQHPt_jVcIJGKo-VmIFZkQgBmeyL1S7z_2Nd-gS84cBUreCCnlPfA=']
+- Search suggestions: 4526 символів
+- пункти fact у карті: ['Новий Škoda Octavia Combi у Німеччині за офіційним прайсом коштує від 32 840 євро (від 29 840 євро зі знижками дилерів, Sportline — від 42 690 євро, RS — від 50 190 євро).']
+
+## Рядки `llm_call`
+
+```
+{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 5668, "output_tokens": 579, "thought_tokens": 0, "latency_ms": 180904, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "search": true, "queries": 2, "event": "llm_call", "request_id": null}
+{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 6503, "output_tokens": 631, "thought_tokens": 0, "latency_ms": 65482, "attempts": 1, "rev": 1, "n": 0, "outcome": "ok", "search": true, "queries": 0, "event": "llm_call", "request_id": null}
+{"severity": "INFO", "model": "gemini-4-argon", "prompt_tokens": 5668, "output_tokens": 404, "thought_tokens": 371, "latency_ms": 189445, "attempts": 3, "rev": 1, "n": 0, "outcome": "ok", "search": true, "queries": 2, "event": "llm_call", "request_id": null}
+```

@@ -8,6 +8,7 @@ import re
 import secrets
 from collections.abc import Iterator
 from datetime import datetime
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
 
@@ -20,6 +21,7 @@ from thinkhow.facilitation.types import (
     MapItem,
     MapUpdate,
     ProblemMap,
+    ResearchEvent,
     RoutingEvent,
     current_card,
 )
@@ -53,6 +55,32 @@ class RoutingFile(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
     decisions: list[Decision]
+
+
+class ResearchSource(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    title: str
+    url: str
+
+
+class ResearchEntry(BaseModel):
+    """One answer's research in research.json; `turn` is the number of the model's answer."""
+
+    model_config = ConfigDict(extra="forbid")
+    turn: int
+    depth: Literal["quick", "deep"]
+    queries: list[str]
+    sources: list[ResearchSource]
+    suggestions_html: str | None
+    question: str | None
+    report: str | None
+
+
+class ResearchFile(BaseModel):
+    """research.json: the searches behind a topic's answers, in order (written only here — A7)."""
+
+    model_config = ConfigDict(extra="forbid")
+    entries: list[ResearchEntry]
 
 
 TOPIC_ID = re.compile(r"^t-[0-9a-f]{12}$")
@@ -167,7 +195,7 @@ def _answer(
     now: datetime,
     lang: str | None,
 ) -> Iterator[ReplyEvent]:
-    """Flow: facilitate → deltas → answer into conversation.md → map.json → Answered; a failure → Failed."""
+    """Flow: facilitate → deltas → answer into conversation.md → map, routing, research.json → Answered."""
     session = conv.sessions[-1]
     history = [FacilitationTurn(t.role, t.text) for t in session.turns if t.no < turn_no]
     problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
@@ -175,6 +203,7 @@ def _answer(
     ctx = FacilitationContext(card_id, history, problem_map, turn_no, text, lang, routing)
     update: FacilitatorUpdate | None = None
     decisions: list[Decision] = []
+    research: list[ResearchEvent] = []
     try:
         for item in facilitate(ctx):
             if isinstance(item, FacilitatorUpdate):
@@ -182,6 +211,9 @@ def _answer(
                 break
             if isinstance(item, RoutingEvent):
                 decisions.append(item.decision)
+                continue
+            if isinstance(item, ResearchEvent):
+                research.append(item)
                 continue
             yield Delta(item.text)
     except Exception as exc:
@@ -199,6 +231,8 @@ def _answer(
     _write_map(storage, ref, apply_updates(problem_map, update, turn_no + 1))
     if decisions:
         _write_routing(storage, ref, (*routing, *decisions))
+    if research:
+        _append_research(storage, ref, [_entry(event, turn_no + 1) for event in research])
     yield Answered(turn_no + 1)
 
 
@@ -293,6 +327,28 @@ def _read_routing(storage: Storage, ref: TopicRef) -> tuple[Decision, ...]:
 def _write_routing(storage: Storage, ref: TopicRef, routing: tuple[Decision, ...]) -> None:
     path = f"{ref.uid}/{ref.topic_id}/routing.json"
     storage.write("users", path, RoutingFile(decisions=list(routing)).model_dump_json().encode("utf-8"), JSON)
+
+
+def _entry(event: ResearchEvent, turn: int) -> ResearchEntry:
+    sources = [ResearchSource(title=s.title, url=s.url) for s in event.sources]
+    return ResearchEntry(
+        turn=turn,
+        depth=event.depth,
+        queries=list(event.queries),
+        sources=sources,
+        suggestions_html=event.suggestions_html,
+        question=event.question,
+        report=event.report,
+    )
+
+
+def _append_research(storage: Storage, ref: TopicRef, entries: list[ResearchEntry]) -> None:
+    """research.json keeps every earlier entry; the new ones go after them (I5)."""
+    path = f"{ref.uid}/{ref.topic_id}/research.json"
+    data = storage.read("users", path)
+    old = [] if data is None else ResearchFile.model_validate_json(data).entries
+    body = ResearchFile(entries=[*old, *entries]).model_dump_json().encode("utf-8")
+    storage.write("users", path, body, JSON)
 
 
 def _write_map(storage: Storage, ref: TopicRef, problem_map: ProblemMap) -> None:

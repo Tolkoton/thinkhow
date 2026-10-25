@@ -214,3 +214,23 @@
 - Surprises: the owner topic driver stopped at the first `end` — fixed (no target card → runs to N turns); task-301
   live A now fails only its free-mode phase check, superseded by the router
 - Open: AC6 — deployment through Сонько (Job `cards`, then the service)
+
+## Slice 17 — research-quick (DONE 2026-10-25) — task 303, feature research-in-conversation S1, tracer bullet
+
+- Module: `platform/llm.py` (`Source`, `Found`, `Done.found`, `VertexLlm(search=True)` — `enterprise_web_search` only in
+  `stream_json`, metadata united over the chunks; `ScriptedLlm(found_script)`; `make_llm(search, found_script)`;
+  `llm_call` + `search`, `queries`), `facilitation/research.md` (the rule «Факти про світ», under the router only),
+  `facilitation/respond.py` (`sources_line`, `with_research`), `facilitation/types.py` (`Source`, `ResearchEvent`,
+  `fact`), `facilitation/converse.py`, `workspace/topics.py` (`research.json`), `web/local.py` (`local_found`),
+  `web/app.py` (~190 LOC)
+- Tests: 28 contract tests of the slice-tester (`tests/contract/research_quick/`, seven questions answered); no sealed
+  test of an earlier slice changed (742 passed); new smoke `tests/smoke/test_e2e_local.py` part 3
+- Live: `tests/live/test_research_live.py` — `.engine/artifacts/spikes/research-quick-live-2026-10-25T084129Z.txt`:
+  the owner's #17 → searched (2 queries, 2 sources), market timelines + one question, two `fact` items; #25 → no search;
+  the Škoda price → 32 840 € with 4 sources. `llm_call`: #17 180.9 s, 5 668 + 579 tokens; #25 65.5 s; price 189.4 s,
+  `attempts: 3`
+- Surprises: search answers took 3 min (the spike of 25.10: 25–44 s) — recorded, no threshold (P4); on #25 the model
+  put a fact about the person (not found) into the map as `fact` — the rule's text is sealed in this slice; the next
+  slice that touches the rules (S2) words it: «fact» only for what was found
+- Open for next slice: S1b — unwrap Google's redirect links (the line and `research.json` keep them for now), show
+  Search suggestions; S1 is not deployed before S1b

@@ -21,6 +21,7 @@ ItemType = Literal[
     "tripwire",
     "chosen_step",
     "router_note",
+    "fact",
 ]
 
 
@@ -129,6 +130,24 @@ class RoutingEvent:
     decision: Decision
 
 
+@dataclass(frozen=True)
+class Source:
+    title: str
+    url: str
+
+
+@dataclass(frozen=True)
+class ResearchEvent:
+    """What a search behind one answer found; workspace writes it into research.json (A7)."""
+
+    depth: Literal["quick", "deep"]
+    queries: tuple[str, ...]
+    sources: tuple[Source, ...]
+    suggestions_html: str | None
+    question: str | None = None
+    report: str | None = None
+
+
 def current_card(routing: Sequence[Decision]) -> str | None:
     """The card of the last decision when it is a `choose`; otherwise none (the router is next)."""
     if routing and routing[-1].kind == "choose":
@@ -147,7 +166,9 @@ class FacilitationContext:
     routing: tuple[Decision, ...] | None = field(default=None, compare=False)
 
 
-Facilitate = Callable[[FacilitationContext], Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent]]
+Facilitate = Callable[
+    [FacilitationContext], Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent]
+]
 
 
 class FacilitationError(Exception):

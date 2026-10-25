@@ -12,6 +12,7 @@ from thinkhow.facilitation.types import (
     FacilitationContext,
     FacilitatorUpdate,
     ReplyDelta,
+    ResearchEvent,
     Rev,
     RoutingEvent,
     current_card,
@@ -19,14 +20,15 @@ from thinkhow.facilitation.types import (
 from thinkhow.knowledge import Card, CurrentKnowledge
 from thinkhow.platform import llm as model
 
-Lead = Callable[[FacilitationContext, CurrentKnowledge, model.Llm], Iterator[ReplyDelta | FacilitatorUpdate]]
+LeadItem = ReplyDelta | FacilitatorUpdate | ResearchEvent
+Lead = Callable[[FacilitationContext, CurrentKnowledge, model.Llm], Iterator[LeadItem]]
 DONE_WHY = "картку пройдено"
 NOT_FIT_WHY = "картка не підходить"
 
 
 def converse(
     ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm, lead: Lead
-) -> Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent]:
+) -> Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent]:
     """Flow: route when no card is chosen → the chosen card's lead → the end of the card before the update."""
     routing = ctx.routing or ()
     card_id = current_card(routing)
@@ -45,7 +47,7 @@ def converse(
 
 def _lead_card(
     ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm, lead: Lead
-) -> Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent]:
+) -> Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent]:
     """The card's stream with its update held back, so the end of the card comes before it."""
     update: FacilitatorUpdate | None = None
     for item in lead(ctx, knowledge, llm):

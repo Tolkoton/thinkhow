@@ -18,7 +18,7 @@ from thinkhow.platform.identity import make_identity
 from thinkhow.platform.llm import make_llm
 from thinkhow.platform.speech import make_speech
 from thinkhow.platform.storage import make_storage
-from thinkhow.web.local import local_script
+from thinkhow.web.local import local_found, local_script
 from thinkhow.web.server import Deps, create_app
 
 CARDS_DIR = Path(__file__).resolve().parents[3] / "cards"
@@ -31,7 +31,7 @@ def build_deps(environ: Mapping[str, str], cards_dir: Path) -> Deps:
     if settings.local:
         knowledge.seed(storage, cards_dir)
     current = knowledge.current(storage)
-    llm = make_llm(settings, local_script)
+    llm = make_llm(settings, local_script, search=True, found_script=local_found)
     facilitate = functools.partial(respond, knowledge=current, llm=llm)
     identity, speech = make_identity(settings), make_speech(settings)
     return Deps(storage, identity, settings, facilitate, lambda: datetime.now(UTC), speech, current.cards)

@@ -76,3 +76,28 @@ def test_local_chain_from_a_new_topic_to_the_files(tmp_path: Path) -> None:
         observation = json.loads(data)
         assert observation["link"] == f"{topic}#t{observation['turn']}"
         assert f'id="t{observation["turn"]}"' in page
+
+
+def test_local_chain_with_the_doubles_search_writes_sources_research_and_a_fact(tmp_path: Path) -> None:
+    """Part 3 (research-quick, task 303): a turn that asks a price → the double «found» → the three files."""
+    environ = {
+        "THINKHOW_LOCAL": "true",
+        "THINKHOW_LOCAL_DIR": str(tmp_path),
+        "THINKHOW_OWNER_EMAIL": "owner@localhost",
+    }
+    client = TestClient(create_app(build_deps(environ, CARDS)), follow_redirects=False)
+    assert client.post("/language", data={"code": "uk-UA"}).status_code == 303
+    topic = client.post("/topics", data={"title": "Офіс"}).headers["location"]
+    stream = client.post(f"{topic}/reply", data={"text": "Не знаю, скільки коштує оренда офісу в Лейпцигу"})
+    events = sse_events(stream.text)
+    assert events[-1] == ("answered", {"turn": 2})
+    line = "Джерела: [example.org](https://example.org/local-search)"
+    shown = "".join(str(data["text"]) for name, data in events if name == "delta")
+    assert shown.endswith("\n\n" + line)
+    folder = tmp_path / "users" / "local-owner" / topic.rsplit("/", 1)[-1]
+    assert shown in (folder / "conversation.md").read_text(encoding="utf-8")
+    research = json.loads((folder / "research.json").read_text(encoding="utf-8"))
+    assert [(e["turn"], e["depth"]) for e in research["entries"]] == [(2, "quick")]
+    assert research["entries"][0]["sources"] == [{"title": "example.org", "url": "https://example.org/local-search"}]
+    problem_map = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+    assert [item["type"] for item in problem_map["items"]] == ["fact"]
