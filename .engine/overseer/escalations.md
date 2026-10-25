@@ -308,3 +308,15 @@ one; do not reopen the old one in conversation.
 - Why not escalated: власникові нема з чого вибирати — вищий контракт уже визначив міру.
 - Evidence: `.engine/slices/router-eval.md` (Seam `router_eval.py`; Critic notes); `.engine/architecture/feature/thinking-models-router.md` («Inter-slice contracts», S2 → S3).
 - Status: CLOSED
+
+## 2026-10-25T08:40Z — AUTONOMOUS — research-in-conversation-deep-from-answer
+- Decision: feature-critic, раунд 2 з 2 (`FEATURE_CRITIC_REVISE`): глибоке дослідження було досяжне лише під обраною
+  карткою. Прийнято варіант critic-а A: одна функція циклу для обох шляхів (`lead` і виклик «answer»), поле
+  `deep_question` у схемі «answer», правило роутера «погодився на глибоке, картки немає → answer», S3 залежить від S2.
+  Варіант B (лише під карткою) відкинуто: тоді багатогранне пряме питання вело б через модель мислення — проти слів
+  власника «не треба мене ганяти по мисленевих моделях» (N1 v5). Третього раунду критики немає (правило власника).
+- Door: two-way
+- Cost to reverse: прибрати поле зі схеми «answer» і одне правило роутера.
+- Why not escalated: розвилку розв'язують слова власника в задачі 303.
+- Evidence: `.engine/architecture/feature/research-in-conversation.md` (S3, Appendix — critic notes).
+- Status: CLOSED

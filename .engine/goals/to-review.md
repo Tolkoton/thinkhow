@@ -52,3 +52,14 @@
 - [ ] v4 C1 → docs/adr/0002-gemini-pro-in-eu.md
 - [ ] v4 Q2 → docs/adr/0002-gemini-pro-in-eu.md
 - [ ] v4 N1 → docs/adr/0002-gemini-pro-in-eu.md
+- [ ] v5 G7 → .engine/architecture/architecture-map.md
+- [ ] v5 N1 → .engine/architecture/architecture-map.md
+- [ ] v5 N1 → .engine/architecture/domain-map.md
+- [ ] v5 G7 → .engine/architecture/feature/thinking-models-router.md
+- [ ] v5 N1 → .engine/architecture/feature/thinking-models-router.md
+- [ ] v5 N1 → .engine/architecture/feature/voice-and-language.md
+- [ ] v5 N1 → .engine/architecture/feature/walking-skeleton.md
+- [ ] v5 N1 → docs/adr/0001-files-in-cloud-storage.md
+- [ ] v5 N1 → docs/adr/0002-gemini-pro-in-eu.md
+- [ ] v5 G7 → docs/adr/0006-research-web-grounding-enterprise.md
+- [ ] v5 N1 → docs/adr/0006-research-web-grounding-enterprise.md
