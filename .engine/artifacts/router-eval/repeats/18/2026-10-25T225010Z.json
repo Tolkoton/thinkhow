@@ -1,0 +1,285 @@
+{
+ "meta": {
+  "label": "task 307 repeat 1 (18 cards, 6091f88)",
+  "stamp": "2026-10-25T225010Z",
+  "model": "gemini-4-argon",
+  "rev": {
+   "rev": 1,
+   "n": 0
+  },
+  "cases_blob": "1214ae39c04b18adda7e13684eb7bbc405a1fc01",
+  "cards_hash": "ba1c5b7f46173886fb63a682424d48491cc5db4f8f8afab82898266a843327f0",
+  "model_calls": 4
+ },
+ "summary": {
+  "cases": 4,
+  "graded": 4,
+  "first_ok": 4,
+  "offered_ok": 4,
+  "held_out": {
+   "n": 1,
+   "first": 1,
+   "offered": 1
+  },
+  "rest": {
+   "n": 3,
+   "first": 3,
+   "offered": 3
+  },
+  "negatives_broken": [],
+  "absent_broken": [],
+  "asks": 0,
+  "first_ok_via_ask": 0,
+  "invalid": 0,
+  "unavailable": 0,
+  "by_card": {
+   "complexity-sensemaking": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "consider-opposite": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "evaporating-cloud": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "first-principles": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "five-whys": {
+    "n": 2,
+    "first": 2,
+    "offered": 2,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "goal-to-plan": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "is-is-not": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "issue-tree": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "jobs-to-be-done": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "mental-contrasting": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "opportunity-tree": {
+    "n": 1,
+    "first": 1,
+    "offered": 1,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "pre-mortem": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "reflective-cycle": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "reversible-doors": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "scamper": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "socratic-questioning": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "weighted-matrix": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "wrap-decision": {
+    "n": 1,
+    "first": 1,
+    "offered": 1,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   }
+  },
+  "confusions": []
+ },
+ "outcomes": [
+  {
+   "case_id": "fw-2",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "mental-contrasting",
+    "reflective-cycle"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете розібратися, чому раз за разом запізнюєтесь на ранкові зустрічі, хоча будильник стоїть, і знайти, що насправді за цим стоїть.\n\nОсь кілька способів, якими ми можемо це розібрати:\n1. **5 Whys** — пройдемося по вашому ранку крок за кроком, щоб знайти, де саме у вашому розпорядку виникає збій і що можна в ньому змінити.\n2. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — поєднаємо ваше бажання бути вчасно з головною внутрішньою перешкодою вранці та складемо чіткий план «якщо станеться X — я зроблю Y».\n3. **Gibbs Reflective Cycle і Double-Loop Learning** — розберемо один конкретний ранок, коли ви запізнилися, і з'ясуємо, яке власне приховане правило чи звичка запускає цю поведінку.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fw-3",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви помітили, що вже двічі після релізу нової версії застосунку падає кількість відгуків, і хочете знайти справжню причину цього явища.\n\nОсь три способи, якими ми можемо це розібрати:\n1. **Is / Is-Not Problem Specification** — порівняємо, де, коли, на яких платформах чи у яких користувачів падіння відгуків проявляється, а де все лишається в нормі, щоб звузити коло можливих причин.\n2. **5 Whys** — пройдемося ланцюжком «чому» по тому, що саме змінюється під час релізу та в шляху користувача до відгуку, щоб дійти до кореня збою.\n3. **Issue Trees (MECE)** — розкладемо всі можливі чинники падіння відгуків (технічні зміни, інтерфейс, сповіщення, поведінка аудиторії) на окремі гілки й перевіримо їх по черзі.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-2",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "offer",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "jobs-to-be-done",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете запустити платну підписку в застосунку для бігунів і перед розробкою шукаєте спосіб дешево перевірити найризикованіше припущення щодо готовності людей платити.\n\nОсь кілька способів подумати над цим:\n1. **Opportunity Solution Tree, Assumption Mapping і RICE** — допоможе виписати всі припущення, на яких тримається ідея платної підписки, знайти серед них найризикованіше та придумати швидкий і дешевий тест до початку розробки.\n2. **Jobs to be Done (JTBD)** — допоможе розібратися, яку саме задачу бігуни «наймають» вирішувати ваш застосунок, що зараз утримує їх на безкоштовній версії чи у конкурентів, і за який прогрес вони справді готові платити.\n3. **Pre-mortem** — допоможе уявити, що ви вже запустили підписку і вона провалилася, щоб заздалегідь побачити слабкі місця вашого задуму та підстрахуватися.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "wr-1",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "reversible-doors",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти обираєш між роллю CTO в маленькому стартапі та пропозицією з банку з вищою зарплатою, і цей крок здається тобі незворотним рішенням на роки.\n\nОсь кілька способів, якими можемо це продумати:\n1. **WRAP** — допоможе вийти за межі вибору «піти чи лишитися», перевірити припущення про обидва місця і подивитися на це рішення з відстані, перш ніж робити крок.\n2. **One-Way / Two-Way Doors і 10/10/10** — допоможе швидко перевірити, чи справді тут немає шляху назад, і оцінити, як ти почуватимешся щодо цього вибору через 10 хвилин, 10 місяців і 10 років.\n3. **Evaporating Cloud (з теорії обмежень)** — допоможе розібрати, які дві важливі потреби тягнуть тебе в протилежні боки між стартапом і банком, і знайти рішення без болючої втрати.\n\nЯкий із цих способів тобі ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  }
+ ],
+ "llm_call": [
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10571, \"output_tokens\": 661, \"thought_tokens\": 0, \"latency_ms\": 11368, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10567, \"output_tokens\": 722, \"thought_tokens\": 0, \"latency_ms\": 11981, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10568, \"output_tokens\": 743, \"thought_tokens\": 0, \"latency_ms\": 12393, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10582, \"output_tokens\": 767, \"thought_tokens\": 0, \"latency_ms\": 13108, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-2\"}"
+ ]
+}

@@ -341,3 +341,17 @@ one; do not reopen the old one in conversation.
 - Why not escalated: позиції не коливаються, власникові нема з чого вибирати; рішення технічне.
 - Evidence: `.engine/slices/product-router-eval.md` («Critic notes»).
 - Status: CLOSED
+
+## 2026-10-25T23:20Z — AUTONOMOUS — product-router-eval-tests-after-code
+- Decision: test manager (point a) дав slice `product-router-eval` tester-у, але дві здачі tester-а скрипт відмовив на RED:
+  (1) I3 — правило AC-тесту, коду для нього в контракті немає, тож тест зелений до коду; (2) два AC-тести дивляться на
+  артефакти, які я запустив до тестів (7 розмов `2026-10-25T224310Z`, прогін 1 `2026-10-25T224739Z`). Обидві причини —
+  мої (вада контракту і порядок робіт), не tester-а. Запечатаний контракт не змінюю. Код `scripts/router_eval_compare.py`
+  написано за контрактом (тести tester-а, незапечатані, — як орієнтир, не правлені); далі точка (b) і catch-up tester,
+  який пише й пломбує тести по готовому коду (expect recorded).
+- Door: two-way
+- Cost to reverse: свіжий tester на новий контракт (I3 як функція коду).
+- Why not escalated: технічний порядок перевірки; власникові нема з чого вибирати; що I3 перевіряє тестовий помічник,
+  а не код, — записано у звіті.
+- Evidence: `.engine/testing/ledger.md` (запити 20261025T224256Z-46113e, 20261025T225234Z-3251a1), цей журнал.
+- Status: CLOSED

@@ -356,3 +356,21 @@
   `offer-design`, `jobs-to-be-done`, `demand-test` on the owner's t-84d1517cb1c1 #1 (`gemini-4-argon`, `eu`)
 - Surprises: two YAML list items with «: » parsed as mappings — quoted
 - Open for next slice: S2 product-router-eval (runs 1–2, live conversations, AC4/AC5 test of the 7 new cards)
+
+## Slice 26 — product-router-eval (DONE 2026-10-25) — task 307, feature product-thinking-pack S2
+
+- Module: `scripts/router_eval_compare.py` — `compare` (old cases per case against the base: regressions, fixed,
+  missing, unavailable outside the denominators, `ot-2` changed expectation; new cases by card, held-out apart, hard
+  negatives), `render` → `<X>.compare.md`, `shares` / `summary_table` → `repeats/summary.md` (side = folder)
+- Runs: run 1 `.engine/artifacts/router-eval/2026-10-25T224739Z` (25 cards, 119 cases): 116 of 119 first; new 23 of
+  23 first, held-out 7 of 7, no hard negative broken; old 82 of 85 (base 83): `fw-3` changed, `fw-2`, `wr-1` as in
+  the base. No confusion on a new card → no card edit, no run 2
+- Repeats ×5 (`repeats/18/` on 6091f88, `repeats/25/`): `fw-3` 2/5 → 4/5, `wr-1` 4/5 → 2/5 (the same three old cards
+  offered on both sides, only WRAP/doors order changes), `fw-2` 5/5 → 5/5, `ot-2` 5/5 → 5/5
+- Conversations: `.engine/artifacts/card-conversations/2026-10-25T224310Z/` — 7 of 7 offered, chosen, all phases,
+  `end: done` in 6–7 turns of the person
+- Tests: 24 tests by the slice-tester in `tests/contract/product_router_eval/` (two hand-ins refused on RED: I3 has
+  no code and two AC tests read artifacts measured before the tests — escalation AUTONOMOUS 2026-10-25T23:20Z; the
+  files stay unsealed, all green); 11 block tests `tests/contract/product_thinking_pack_block/` (sealed, all green)
+- Surprises: the contract put I3 into a test helper; measurement before tests made RED impossible — next time a
+  measuring slice runs its live steps after the tester's hand-in

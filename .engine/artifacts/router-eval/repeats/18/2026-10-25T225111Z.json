@@ -1,0 +1,281 @@
+{
+ "meta": {
+  "label": "task 307 repeat 4 (18 cards, 6091f88)",
+  "stamp": "2026-10-25T225111Z",
+  "model": "gemini-4-argon",
+  "rev": {
+   "rev": 1,
+   "n": 0
+  },
+  "cases_blob": "1214ae39c04b18adda7e13684eb7bbc405a1fc01",
+  "cards_hash": "ba1c5b7f46173886fb63a682424d48491cc5db4f8f8afab82898266a843327f0",
+  "model_calls": 4
+ },
+ "summary": {
+  "cases": 4,
+  "graded": 4,
+  "first_ok": 3,
+  "offered_ok": 3,
+  "held_out": {
+   "n": 1,
+   "first": 0,
+   "offered": 0
+  },
+  "rest": {
+   "n": 3,
+   "first": 3,
+   "offered": 3
+  },
+  "negatives_broken": [],
+  "absent_broken": [],
+  "asks": 1,
+  "first_ok_via_ask": 0,
+  "invalid": 0,
+  "unavailable": 0,
+  "by_card": {
+   "complexity-sensemaking": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "consider-opposite": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "evaporating-cloud": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "first-principles": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "five-whys": {
+    "n": 2,
+    "first": 1,
+    "offered": 1,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "goal-to-plan": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "is-is-not": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "issue-tree": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "jobs-to-be-done": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "mental-contrasting": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "opportunity-tree": {
+    "n": 1,
+    "first": 1,
+    "offered": 1,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "pre-mortem": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "reflective-cycle": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "reversible-doors": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "scamper": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "socratic-questioning": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "weighted-matrix": {
+    "n": 0,
+    "first": 0,
+    "offered": 0,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   },
+   "wrap-decision": {
+    "n": 1,
+    "first": 1,
+    "offered": 1,
+    "held_out_first": 0,
+    "held_out_offered": 0
+   }
+  },
+  "confusions": []
+ },
+ "outcomes": [
+  {
+   "case_id": "fw-2",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "mental-contrasting",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете розібратися, чому раз у раз запізнюєтеся на ранкові зустрічі, хоча й ставите будильник.\n\nОсь кілька способів, якими можна до цього підійти:\n1. **5 Whys** — пройдемося крок за кроком тим, як саме минає ваш ранок від дзвінка будильника до зустрічі, щоб знайти першопричину запізнень і змінити саме її.\n2. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — виділимо головну внутрішню перешкоду, через яку ви відкладаєте підйом чи збори попри будильник, і складемо чітке правило «якщо — то» на цей момент.\n3. **Is / Is-Not Problem Specification** — порівняємо ранки, коли ви запізнюєтесь, з тими днями чи подіями, куди приходите вчасно, щоб побачити, що саме відрізняється.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fw-3",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "ask",
+   "first": null,
+   "offered": [],
+   "first_ok": false,
+   "offered_ok": false,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже розумієте зсередини, який ланцюжок подій під час випуску нової версії міг до цього призвести, чи наразі механізм незрозумілий і ви лише бачите, де й коли падають відгуки?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-2",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "offer",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "jobs-to-be-done",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви готуєтеся запустити платну підписку в застосунку для бігунів і хочете до початку розробки дешево перевірити своє головне припущення — що люди справді за неї платитимуть.\n\nОсь кілька способів, якими ми можемо це продумати:\n\n1. **Opportunity Solution Tree, Assumption Mapping і RICE** — допоможе виписати всі ваші припущення щодо платної підписки, виділити серед них найризикованіше і придумати швидкий та дешевий тест до старту розробки.\n2. **Jobs to be Done (JTBD)** — допоможе розібратися, яку саме задачу бігуни намагаються вирішити вашим застосунком і що змусить їх перейти з безкоштовного варіанта чи альтернатив на платну підписку.\n3. **Pre-mortem** — допоможе уявити, що запуск підписки вже провалився, знайти головні причини цього і заздалегідь підстелити соломку.\n\nЯкий із цих способів вам зараз ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "wr-1",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "reversible-doors",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви стоїте перед важким вибором між посадою CTO у маленькому стартапі та пропозицією в банку з кращою зарплатою, і це рішення здається вам незворотним кроком на роки. Ось якими способами можна це продумати:\n\n1. **WRAP** — допоможе вийти за межі вибору «йти в банк чи лишатися в стартапі», перевірити ваші припущення про обидва місця та підготуватися до ризиків на роки вперед.\n2. **One-Way / Two-Way Doors і 10/10/10** — допоможе швидко перевірити, наскільки цей перехід справді незворотний, і подивитися на наслідки вибору через 10 днів, 10 місяців і 10 років.\n3. **Evaporating Cloud (з теорії обмежень)** — допоможе розібрати конфлікт між двома важливими потребами, які стоять за стартапом і банком, та знайти рішення без відчуття втрати.\n\nЯкий із цих способів вам ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  }
+ ],
+ "llm_call": [
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10568, \"output_tokens\": 308, \"thought_tokens\": 0, \"latency_ms\": 6637, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10571, \"output_tokens\": 760, \"thought_tokens\": 0, \"latency_ms\": 12362, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10567, \"output_tokens\": 742, \"thought_tokens\": 0, \"latency_ms\": 14355, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10582, \"output_tokens\": 742, \"thought_tokens\": 310, \"latency_ms\": 17326, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-2\"}"
+ ]
+}
