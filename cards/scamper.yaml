@@ -2,6 +2,7 @@
 # Джерела: research 01 §7(г) №38 (Осборн, 1953; Еберле, 1971), §7(ґ) п.13, §7(д), §7(е) J2.
 id: scamper
 title: Сім напрямків змінити те, що є (SCAMPER)
+method: "SCAMPER"
 
 router:
   needs: >-

@@ -3,6 +3,7 @@
 # Джерела в research 01: §7(ґ) слот 18, §7(г) рядки 52, 54, 55, §7(д) намір 3–6, §7(е) J2, §3.3, §3.5 бар'єр 2.
 id: opportunity-tree
 title: Дерево можливостей, найризикованіше припущення і пріоритети
+method: "Opportunity Solution Tree, Assumption Mapping і RICE"
 
 router:
   needs: >-

@@ -183,6 +183,11 @@ class RecordingLlm:
         self.calls.append(Call(whose, "ok"))
         return answer
 
+    def search_text(
+        self, system: str, prompt: str, rev: model.KnowledgeRev | None
+    ) -> tuple[str, model.Found | None]:
+        return self.inner.search_text(system, prompt, rev)
+
 
 def _cause(exc: Exception) -> str:
     cause = exc.__cause__
@@ -265,11 +270,9 @@ def _classify(
     offer = routing[last_offer]
     if offer["candidates"][0]["card_id"] == "pre-mortem":
         return "ii: pre-mortem first"
-    texts = [row["answer"] for row in rows if row["who"] == "router"] + [
-        c["why"] for c in offer["candidates"]
-    ]
-    if any(names_a_method(t) for t in texts):
-        return "ii: a method named"
+    texts = [row["answer"] for row in rows if row["who"] == "router"]
+    if not any(names_a_method(t) for t in texts):  # task 205: the offer names each method
+        return "ii: no method named"
     chooses = [d for d in routing[last_offer + 1 :] if d["kind"] == "choose"]
     if not chooses or chooses[0]["card_id"] != offer["candidates"][0]["card_id"]:
         return "ii: «Давай перше.» did not choose the first candidate"

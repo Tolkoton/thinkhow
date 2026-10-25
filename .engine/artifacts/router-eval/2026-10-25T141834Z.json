@@ -1,0 +1,2580 @@
+{
+ "meta": {
+  "label": "task 205: methods named",
+  "stamp": "2026-10-25T141834Z",
+  "model": "gemini-4-argon",
+  "rev": {
+   "rev": 1,
+   "n": 0
+  },
+  "cases_blob": "1214ae39c04b18adda7e13684eb7bbc405a1fc01",
+  "cards_hash": "6a6a1bbdd997189d08d4f55c8f2ede849b9c2a4d96d8c0403b5f9b621210ac8f",
+  "model_calls": 85
+ },
+ "summary": {
+  "cases": 85,
+  "graded": 85,
+  "first_ok": 84,
+  "offered_ok": 83,
+  "held_out": {
+   "n": 18,
+   "first": 18,
+   "offered": 18
+  },
+  "rest": {
+   "n": 67,
+   "first": 66,
+   "offered": 65
+  },
+  "negatives_broken": [],
+  "absent_broken": [],
+  "asks": 0,
+  "first_ok_via_ask": 0,
+  "invalid": 0,
+  "unavailable": 0,
+  "by_card": {
+   "complexity-sensemaking": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "consider-opposite": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "evaporating-cloud": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "first-principles": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "five-whys": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "goal-to-plan": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "is-is-not": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "issue-tree": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "jobs-to-be-done": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "mental-contrasting": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "opportunity-tree": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "pre-mortem": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "reflective-cycle": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "reversible-doors": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "scamper": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "socratic-questioning": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "weighted-matrix": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "wrap-decision": {
+    "n": 3,
+    "first": 2,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   }
+  },
+  "confusions": [
+   [
+    "wrap-decision → reversible-doors",
+    1
+   ]
+  ]
+ },
+ "outcomes": [
+  {
+   "case_id": "co-1",
+   "kind": "positive",
+   "expect": "consider-opposite",
+   "action": "offer",
+   "first": "consider-opposite",
+   "offered": [
+    "consider-opposite",
+    "socratic-questioning",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви переконані, що віддалена робота знижує продуктивність команди, і хочете перед поверненням усіх в офіс чесно перевірити, чи не помиляєтеся у своєму висновку.\n\nОсь кілька способів, якими можемо піти:\n1. **Consider-the-Opposite і Steelmanning** — ми сформулюємо найсильніші аргументи на користь протилежної думки і перевіримо, чи ви не підганяєте факти під свій висновок про шкоду віддаленої роботи.\n2. **Socratic Questioning** — ми розберемо, на яких прихованих припущеннях і доказах тримається ваше переконання, що продуктивність падає саме через роботу з дому.\n3. **Pre-mortem** — ми уявимо, що ви вже повернули команду в офіс і це обернулося провалом, щоб заздалегідь побачити всі ризики такого кроку.\n\nЯкий із цих способів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overconfident_attached",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "co-2",
+   "kind": "positive",
+   "expect": "consider-opposite",
+   "action": "offer",
+   "first": "consider-opposite",
+   "offered": [
+    "consider-opposite",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви готуєтеся до завтрашніх переговорів із орендодавцем про зниження ціни і, хоча впевнені у своїх аргументах, хочете заздалегідь побачити ситуацію його очима та розгадати його найсильніші заперечення.\n\n1. **Consider-the-Opposite і Steelmanning** — допоможе побудувати найсильнішу та найбільш переконливу версію позиції орендодавця, щоб ви не застали себе зненацька на переговорах і заздалегідь мали відповіді на його головні контраргументи.\n2. **Pre-mortem** — дозволить уявити, що завтрашня розмова вже пішла не за вашим сценарієм, і заздалегідь знайти слабкі місця у вашому плані переговорів, щоб підстелити соломку.\n\nЯкий із цих способів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overconfident_attached",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "co-3",
+   "kind": "positive",
+   "expect": "consider-opposite",
+   "action": "offer",
+   "first": "consider-opposite",
+   "offered": [
+    "consider-opposite",
+    "pre-mortem",
+    "wrap-decision"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви впевнені у своєму рішенні відкрити другий магазин у сусідньому місті на основі успіху першого і хочете переконатися, що все врахували.\n\n1. **Consider-the-Opposite і Steelmanning** — дозволить сформулювати найсильніші аргументи проти вашого висновку і перевірити, чи успіх першого магазину справді гарантує успіх у сусідньому місті.\n2. **Pre-mortem** — допоможе уявити, що після відкриття другого магазину щось пішло не так, щоб заздалегідь побачити слабкі місця в плані і підстрахуватися.\n3. **WRAP** — допоможе подивитися ширше на саму ідею масштабування, перевірити припущення про нове місто на практиці та підготувати запасні варіанти.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overconfident_attached",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "co-neg-1",
+   "kind": "negative",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти точно знаєш, що хочеш поговорити з керівником про підвищення і що саме скажеш, але щоразу при зустрічі тебе зупиняє страх і ти відкладаєш розмову.\n\n1. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — допоможе поєднати твоє бажання поговорити про підвищення з конкретною внутрішньою перешкодою і скласти чіткий план «якщо — то», щоб наступного разу при зустрічі з керівником не відкласти розмову.\n2. **Socratic Questioning** — допоможе спокійно розібрати й перевірити думку, яка викликає цей страх, щоб зрозуміти, на чому вона тримається і наскільки вона відповідає дійсності.\n\nЯкий із цих способів тобі зараз ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "cs-1",
+   "kind": "positive",
+   "expect": "complexity-sensemaking",
+   "action": "offer",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "На вас одночасно навалилися незадоволення команди, зміни вимог від клієнта і переїзд в новий офіс, тому важко зрозуміти, де треба рахувати, а де — пробувати на практиці.\n\n1. **Complexity Sensemaking** — ви розділите ваші робочі проблеми за їхньою природою і зрозумієте, де треба діяти за чітким планом, де рахувати, а де робити пробні кроки.\n2. **Issue Trees (MECE)** — ви спокійно розкладете ситуацію з командою, клієнтом та переїздом на окремі незалежні гілки, щоб обрати, за яку братися спершу.\n\nЯкий спосіб вам зараз ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "wicked",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "overwhelmed_fatigued",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "cs-2",
+   "kind": "positive",
+   "expect": "complexity-sensemaking",
+   "action": "offer",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "goal-to-plan",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви відкриваєте бізнес у новій країні й бачите, що в ньому змішані зрозумілі речі, як-от податки й реєстрація, і зовсім непередбачувані — як-от реакція місцевих людей, тому не знаєте, як підходити до кожної частини.\n\n1. **Complexity Sensemaking** — розібрати всі задачі за їхньою природою і зрозуміти, де достатньо чітких інструкцій та розрахунку, а де потрібні безпечні пробні кроки.\n2. **GROW і Backcasting** — окреслити бажану точку запуску бізнесу і прокласти шлях від неї до перших конкретних кроків на найближчий час.\n3. **Jobs to be Done (JTBD)** — розібратися з непередбачуваною частиною попиту: зрозуміти, в якій ситуації місцеві клієнти купуватимуть ваш продукт і з чим ви конкуруєте.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "wicked",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "cs-3",
+   "kind": "positive",
+   "expect": "complexity-sensemaking",
+   "action": "offer",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "reflective-cycle",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви намагаєтеся планувати розвиток громадської організації, але плани щоразу розвалюються через непередбачувану поведінку людей, і ви сумніваєтеся в самому підході до планування.\n\nОсь якими способами можна про це подумати:\n1. **Complexity Sensemaking** — визначимо, у яких частинах розвитку організації можна планувати наперед, а де через непередбачувану поведінку людей працюють лише короткі пробні кроки.\n2. **Gibbs Reflective Cycle і Double-Loop Learning** — розберемо один конкретний випадок, коли план розвалився, зрозуміємо, на якому вашому очікуванні від людей він тримався, і сформулюємо нове правило для планування.\n3. **Jobs to be Done (JTBD)** — подивимося на організацію очима тих, кого ви залучаєте: яку власну потребу вони вирішують і що насправді утримує їх від очікуваних дій.\n\nЯкий із цих способів вам ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "cs-neg-1",
+   "kind": "negative",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете знайти першопричину, чому замовлення на складі вже третій тиждень відправляють із запізненням на день, спираючись на те, що добре знаєте весь процес. Ось як можемо до цього підійти:\n\n1. **5 Whys** — пройдемо ланцюжком причин крок за кроком по відомому вам процесу, щоб докопатися до кореня запізнень і знайти точкову зміну, яка це виправить.\n2. **Issue Trees (MECE)** — розкладемо весь шлях замовлення на незалежні ділянки та можливі чинники затримок, щоб побачити картину цілком і перевірити кожну гілку.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ec-1",
+   "kind": "positive",
+   "expect": "evaporating-cloud",
+   "action": "offer",
+   "first": "evaporating-cloud",
+   "offered": [
+    "evaporating-cloud",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви зі співзасновником застрягли між двома протилежними напрямками — великі корпоративні клієнти проти малого бізнесу через самообслуговування — і не хочете погоджуватися на половинчастий компроміс.\n\n1. **Evaporating Cloud (з теорії обмежень)** — допоможе розкласти потреби за позицією кожного з вас і знайти рішення без гнилого компромісу, яке задовольнить обох.\n2. **Consider-the-Opposite і Steelmanning** — допоможе побудувати найсильнішу версію аргументів вашого співзасновника за корпоративних клієнтів і перевірити власну позицію на сліпі плями.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "resolve_dilemma",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "ambivalent",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "ec-2",
+   "kind": "positive",
+   "expect": "evaporating-cloud",
+   "action": "offer",
+   "first": "evaporating-cloud",
+   "offered": [
+    "evaporating-cloud",
+    "first-principles"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви опинилися перед дилемою, де і взяти більше проєктів заради грошей, і взяти менше заради часу з дітьми виглядає як вибір із неминучою втратою.\n\n1. **Evaporating Cloud (з теорії обмежень)** — допоможе розкласти обидві ваші потреби — у достатку і в часі з дітьми — та знайти приховане припущення, через яке вони здаються несумісними, щоб вийти з глухого кута без втрат.\n2. **First Principles Thinking** — допоможе розібрати зв'язок між кількістю проєктів, доходом і вашим часом до базових складових і знайти спосіб заробляти достатньо без нарощування годин роботи.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "resolve_dilemma",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "ec-3",
+   "kind": "positive",
+   "expect": "evaporating-cloud",
+   "action": "offer",
+   "first": "evaporating-cloud",
+   "offered": [
+    "evaporating-cloud",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу ситуацію, де в команді зіткнулися дві слушні потреби — переписати старий код і випускати нові функції — які зараз здаються взаємовиключними.\n\nОсь якими способами можна про це подумати:\n1. **Evaporating Cloud (з теорії обмежень)** — допоможе розкласти потреби розробників і продакта та знайти приховане припущення, щоб задовольнити обидві сторони без слабкого компромісу.\n2. **Consider-the-Opposite і Steelmanning** — допоможе сформулювати найсильніші аргументи кожної сторони, щоб краще підготуватися до розмови в команді та знайти точки дотику.\n\nЯкий спосіб тобі ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "resolve_dilemma",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ec-neg-1",
+   "kind": "negative",
+   "expect": "weighted-matrix",
+   "action": "offer",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви спокійно обираєте між двома конкретними ноутбуками для роботи — легшим і потужнішим — і хочете зважено їх порівняти.\n\n1. **Weighted Decision Matrix** — визначите, які критерії у роботі для вас найважливіші, оціните обидва ноутбуки за ними і наочно побачите, який виграє.\n2. **Evaporating Cloud (з теорії обмежень)** — перевірите, чи справді доведеться жертвувати вагою заради потужності (або навпаки), і пошукаєте спосіб задовольнити обидві потреби без компромісу.\n\nЯкий спосіб вам ближчий, чи хочеться підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fp-1",
+   "kind": "positive",
+   "expect": "first-principles",
+   "action": "offer",
+   "first": "first-principles",
+   "offered": [
+    "first-principles",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете переосмислити онбординг клієнтів з чистого аркуша і відмовитися від дорогих ринкових шаблонів на кшталт довгих дзвінків і презентацій, залишивши тільки справді необхідне.\n\nОсь якими способами можна подумати:\n1. **First Principles Thinking** — відкинемо галузеві звички про довгі дзвінки й презентації, виділимо те, без чого онбординг справді неможливий, і зберемо новий дешевший процес із базових елементів.\n2. **Jobs to be Done (JTBD)** — подивимося на онбординг очима клієнта — який прогрес йому потрібен на старті і що йому заважає, — щоб залишити в процесі лише те, що допомагає йому рухатися.\n\nЯкий із цих підходів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fp-2",
+   "kind": "positive",
+   "expect": "first-principles",
+   "action": "offer",
+   "first": "first-principles",
+   "offered": [
+    "first-principles",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви робите ремонт і хочете поставити під сумнів ринковий стандарт кухні за 8 тисяч євро — розібратися, з чого насправді складається ця сума і що з цього вам справді потрібно.\n\nОсь два способи, як можна про це подумати:\n1. **First Principles Thinking** — розібрати кухню на базові потреби й елементи без прив'язки до ринкових шаблонів і зібрати власне рішення з того, що справді потрібно.\n2. **Issue Trees (MECE)** — розкласти вартість кухні на окремі складові по поличках, щоб побачити, звідки набігає сума і де саме можна скоротити витрати.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fp-3",
+   "kind": "positive",
+   "expect": "first-principles",
+   "action": "offer",
+   "first": "first-principles",
+   "offered": [
+    "first-principles",
+    "scamper"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже рік шукаєте, як здешевити доставку, але всі ідеї крутяться навколо дрібних покращень звичної схеми, і хочеться вийти за ці рамки.\n\nОсь два способи, як можна про це подумати:\n1. **First Principles Thinking** — розібрати вашу доставку до базових фактів і потреб, відкинувши звичне «так заведено», та зібрати принципово інше рішення з нуля.\n2. **SCAMPER** — пройтися по поточному процесу доставки через сім незвичних кутів (прибрати, перевернути, об'єднати тощо), щоб знайти неочевидні зміни в тому, що вже є.\n\nЯкий спосіб вам зараз ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fp-neg-1",
+   "kind": "negative",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже маєте готовий план дисертації й знаєте, що робити, але вже третій місяць щось зупиняє вас у момент, коли ви відкриваєте файл.\n\n1. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — знайдемо головну внутрішню перешкоду, яка змушує закривати файл, і складемо чіткий план «якщо — то», щоб обходити її на автоматі.\n2. **Socratic Questioning** — перевіримо приховані думки чи страхи щодо дисертації, які непомітно гальмують роботу в момент, коли треба писати.\n\nЯкий із цих способів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fw-1",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете знайти справжню причину того, чому щотижневий звіт клієнту вже втретє виходить із помилками в цифрах, а не просто додавати ще одну перевірку.\n\n1. **5 Whys** — пройдемо ланцюжком причин крок за кроком по всьому процесу підготовки звіту, щоб знайти корінь збою і змінити сам процес, а не просто перевіряти цифри вручну.\n2. **Issue Trees (MECE)** — розкладемо весь шлях даних у звіті на незалежні гілки (джерела, розрахунки, перенесення, перевірка), щоб нічого не пропустити і побачити всі можливі місця виникнення помилок.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fw-2",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "reflective-cycle",
+    "mental-contrasting"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете розібратися, чому попри будильник раз за разом запізнюєтеся на ранкові зустрічі, і знайти справжню причину цього.\n\nОсь кілька способів, якими можемо піти:\n1. **5 Whys** — пройдемося ланцюжком від моменту пробудження до зустрічі, щоб знайти, де саме у вашому ранковому розпорядку виникає збій і що можна змінити.\n2. **Gibbs Reflective Cycle і Double-Loop Learning** — розберемо один конкретний ранок, коли ви запізнилися, щоб побачити ваші думки й автоматичні рішення в той момент і переглянути власне внутрішнє правило.\n3. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — визначимо, яка внутрішня перешкода чи звичка спрацьовує вранці після будильника, і складемо чіткий план «якщо — то», щоб діяти вчасно.\n\nЯкий із цих способів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fw-3",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви помітили, що вже двічі після виходу нової версії застосунку падає кількість відгуків, і хочете докопатися до справжньої причини цього явища.\n\nОсь три способи, як можна це розібрати:\n1. **Is / Is-Not Problem Specification** — порівняємо, де, коли й у яких користувачів падіння відгуків проявляється, а де все лишається як було, щоб відсіяти хибні здогадки й звузити коло причин.\n2. **5 Whys** — пройдемо ланцюжком від самого падіння відгуків углиб того, що змінюється під час релізу, щоб дійти до першопричини в процесі чи продукті.\n3. **Issue Trees (MECE)** — розкладемо всі можливі гілки — від технічних збоїв і змін в інтерфейсі до поведінки користувачів — у чітку структуру, щоб нічого не пропустити й перевірити їх по черзі.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fw-neg-1",
+   "kind": "negative",
+   "expect": "scamper",
+   "action": "offer",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "first-principles"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже знаєте, що проблема у заважких коробках для тортів, і зараз шукаєте свіжі ідеї, як змінити пакування для кур'єрів.\n\n1. **SCAMPER** — пройдемося сімома напрямками змін для вже наявної коробки (що замінити, прибрати, об'єднати чи перевернути), щоб швидко знайти неочевидні способи зробити її легшою.\n2. **First Principles Thinking** — розберемо задачу пакування та доставки торта до базових вимог, відкинувши звичне уявлення про коробку, і зберемо принципово інше рішення з нуля.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "gp-1",
+   "kind": "positive",
+   "expect": "goal-to-plan",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви маєте чітку мету за два роки перейти з бухгалтерії в аналітику даних, але поки не бачите, як розкласти цей шлях на конкретні кроки й з чого стартувати. Ось два способи, як ми можемо це розібрати:\n\n1. **GROW і Backcasting** — допоможе розкласти ваш перехід в аналітику за два роки у зворотному напрямку — від кінцевої точки через проміжні віхи до конкретних перших кроків на цей тиждень.\n2. **Issue Trees (MECE)** — дозволить спершу розкласти все, що потрібно для переходу в аналітику даних (навички, портфоліо, пошук роботи), на окремі гілки й обрати, за яку братися першою.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "gp-2",
+   "kind": "positive",
+   "expect": "goal-to-plan",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви поставили ціль для невеликої агенції — мати трьох постійних клієнтів на абонементі до літа — і хочете скласти план дій на ці місяці.\n\n1. **GROW і Backcasting** — розкласти шлях від вашої точки зараз до трьох клієнтів до літа на конкретні віхи та перші кроки на найближчі тижні.\n2. **Jobs to be Done (JTBD)** — зрозуміти, у якій ситуації клієнти наймають агенцію на абонемент і що утримує їх від такого кроку, щоб знати, кому й що саме пропонувати.\n\nЯкий із цих способів вам зараз ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "gp-3",
+   "kind": "positive",
+   "expect": "goal-to-plan",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви маєте наполовину готовий рукопис і хочете спланувати всі етапи від сьогодні до видання книжки наступної осені.\n\nПропоную два способи продумати це:\n1. **GROW і Backcasting** — розкласти шлях від виданої наступної осені книжки назад до вашого наполовину готового рукопису сьогодні, визначити ключові віхи та найперші кроки.\n2. **Issue Trees (MECE)** — розкласти весь проєкт видання книжки на окремі напрямки (дописування тексту, редагування, дизайн, видавництво або самвидав, просування), щоб нічого не випустити з уваги.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "gp-neg-1",
+   "kind": "negative",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете скласти план, як удвічі збільшити повернення клієнтів у застосунок, але поки не знаєте і не вимірювали, чому саме вони перестають ним користуватися.\n\n1. **Issue Trees (MECE)** — допоможе розкласти можливі причини відтоку на чіткі гілки і зрозуміти, що саме перевіряти насамперед, перш ніж складати план дій.\n2. **Opportunity Solution Tree, Assumption Mapping і RICE** — дозволить пов'язати мету «удвічі підняти повернення» з можливими потребами клієнтів, ідеями рішень та швидкими перевірками найризикованіших припущень.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-1",
+   "kind": "positive",
+   "expect": "is-is-not",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви бачите, що скарги на холодну каву з'являються лише в одній із трьох кав'ярень і тільки вранці, хоча обладнання й зерно всюди однакові, і хочете зрозуміти причину цієї різниці.\n\n1. **Is / Is-Not Problem Specification** — зіставимо те, де і коли скарги на холодну каву є, з іншими кав'ярнями та змінами, де їх немає, щоб звузити коло причин і знайти, що саме відрізняється.\n2. **5 Whys** — пройдемо крок за кроком ранковий процес приготування та видачі кави у цій кав'ярні, щоб знайти, на якому етапі напій втрачає температуру.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-2",
+   "kind": "positive",
+   "expect": "is-is-not",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, що сайт гальмує лише за певних умов — у середу після обіду і тільки у клієнтів з Польщі, — а сам механізм збою наразі незрозумілий.\n\nОсь якими способами можна до цього підійти:\n1. **Is / Is-Not Problem Specification** — зіставимо, де, коли і у кого гальмування є, а де його немає, щоб звузити коло можливих причин і відсіяти хибні версії.\n2. **Issue Trees (MECE)** — розкладемо всі можливі технічні й зовнішні причини гальмування на окремі гілки, щоб системно перевірити кожну з них.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-3",
+   "kind": "positive",
+   "expect": "is-is-not",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете з'ясувати, чому та сама розсилка листів-нагадувань доходить лише до частини клієнтів, і чітко окреслити, у кого саме виникає проблема. Ось два способи, як до цього підійти:\n\n1. **Is / Is-Not Problem Specification** — зіставимо, у яких клієнтів, за яких умов і коли листи не приходять, а де все працює нормально, щоб звузити коло можливих причин.\n2. **5 Whys** — якщо ви знаєте шлях відправлення листа зсередини, пройдемо його крок за кроком питаннями «чому», щоб знайти місце збою.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-neg-1",
+   "kind": "negative",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "У компанії одночасно падають продажі, звільняються люди і виникають непорозуміння з клієнтами, причому даних про причини зараз немає.\n\n1. **Complexity Sensemaking** — ми швидко розділимо цей клубок проблем за їхньою природою, щоб зрозуміти, що треба терміново гасити, що можна просто порахувати, а де потрібні обережні пробні кроки.\n2. **Issue Trees (MECE)** — ми спокійно розкладемо ситуацію в компанії на окремі незалежні гілки — продажі, команда, робота з клієнтами — і виберемо, з чого почати розбір.\n\nЯкий спосіб вам зараз ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "overwhelmed_fatigued",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-1",
+   "kind": "positive",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви бачите, що при тій самій кількості клієнтів і роботі команди студія виходить у мінус, і хочете розкласти ситуацію по поличках, щоб знайти, куди витікають гроші.\n\nОсь два способи, як до цього підійти:\n\n1. **Issue Trees (MECE)** — допоможе розкласти фінанси й роботу студії на окремі незалежні гілки — доходи, прямі витрати на проєкти, постійні витрати, завантаження людей — щоб ви побачили, де саме витікають гроші і куди копати першим.\n2. **Is / Is-Not Problem Specification** — допоможе порівняти, у яких саме проєктах, послугах чи місяцях з'являється мінус, а де все залишається в плюсі, щоб швидко звузити коло підозрюваних.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-2",
+   "kind": "positive",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете з'ясувати, чому онлайн-курс продається гірше, ніж торік, і впорядкувати різні версії — від реклами й ціни до самого продукту — замість того, щоб тримати все в голові на купу.\n\nОсь два способи, як до цього підійти:\n\n1. **Issue Trees (MECE)** — допоможе розкласти падіння продажів на незалежні гілки — реклама, ціна, сам курс та інше — щоб нічого не змішувалося і було видно, куди копати першим.\n2. **Is / Is-Not Problem Specification** — допоможе порівняти, де, коли й у яких клієнтів продажі впали, а де тримаються на рівні минулого року, щоб звузити коло причин на основі фактів.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-3",
+   "kind": "positive",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "complexity-sensemaking",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви готуєте для керівництва аналіз причин, чому відділ не встигає з проєктами, де переплелися питання людей, процесів та інструментів, і хочете спершу скласти цілісну картину без прогалин.\n\n1. **Issue Trees (MECE)** — допоможе розкласти всі чинники затримок (люди, процеси, інструменти) на незалежні гілки без пропусків і перетинів, щоб побачити повну картину й обрати, куди копати глибше.\n2. **Complexity Sensemaking** — допоможе розсортувати проблеми відділу за їхньою природою, щоб зрозуміти, де достатньо прямого аналізу й правил, а де ситуація заплутана і потребує пробних кроків.\n3. **5 Whys** — якщо взяти один-два найхарактерніші зірвані проєкти і пройтися по ланцюжку подій, це дасть змогу швидко знайти конкретні кореневі причини збоїв у процесі.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-neg-1",
+   "kind": "negative",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви маєте лише годину, щоб відповісти щодо замовлення на вихідні, а сил на довгі розбори зараз немає.\n\n1. **One-Way / Two-Way Doors і 10/10/10** — допоможе за кілька коротких кроків оцінити, наскільки це рішення оборотне і як ви почуватиметеся після нього, щоб швидко дати відповідь без зайвого навантаження.\n2. **Socratic Questioning** — допоможе швидко перевірити одне головне побоювання чи переконання («мушу погодитися» або «я не впораюся»), яке зараз тисне і заважає спокійно відповісти.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overwhelmed_fatigued",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "jt-1",
+   "kind": "positive",
+   "expect": "jobs-to-be-done",
+   "action": "offer",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете розібратися, чому клієнти спершу обирають ваш сервіс доставки обідів в офіс, але вже за місяць переключаються на щось інше.\n\nОсь два способи, як до цього підійти:\n1. **Jobs to be Done (JTBD)** — допоможе з'ясувати, для якої справжньої задачі клієнти «наймають» вашу доставку обідів, які сили привели їх до вас і чому згодом вони «звільняють» сервіс на користь іншого рішення.\n2. **Issue Trees (MECE)** — дозволить розкласти відтік за місяць на окремі можливі причини — від якості їжі й логістики до ціни та звичок в офісі — щоб побачити, де саме шукати проблему.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "jt-2",
+   "kind": "positive",
+   "expect": "jobs-to-be-done",
+   "action": "offer",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви створюєте застосунок для репетиторів і хочете зрозуміти, яку задачу в їхньому житті він насправді вирішує та що рухає їхнім переходом зі звичних зошитів або утримує від нього.\n\nОсь якими способами ми можемо це продумати:\n1. **Jobs to be Done (JTBD)** — розібрати, для якої реальної задачі в житті репетитори «наймають» ваш застосунок і які сили штовхають їх перейти із зошитів або утримують у них.\n2. **Issue Trees (MECE)** — розкласти на окремі гілки всі можливі причини, чому репетитори переходять або не переходять у застосунок, щоб побачити повну картину.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "unclear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "jt-3",
+   "kind": "positive",
+   "expect": "jobs-to-be-done",
+   "action": "offer",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, що продажі дитячих конструкторів просіли без змін у вашому продукті чи в цінах конкурентів, і ви хочете розібратися, чого саме зараз шукають батьки, купуючи іграшку.\n\n1. **Jobs to be Done (JTBD)** — це допоможе розібрати, для якої саме «роботи» батьки купують конструктор у реальній життєвій ситуації та що зараз утримує їх від покупки або штовхає до інших рішень.\n2. **Issue Trees (MECE)** — це дозволить розкласти падіння продажів на окремі незалежні гілки (канали, трафік, конверсія, повторні покупки), щоб перевірити, чи справа справді лише в потребах батьків.\n\nЯкий із цих способів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "jt-neg-1",
+   "kind": "negative",
+   "expect": "opportunity-tree",
+   "action": "offer",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "У вас у беклозі зібралося сорок ідей нових функцій, і потрібно вирішити, за які з них братися першими в цьому кварталі.\n\n1. **Opportunity Solution Tree, Assumption Mapping і RICE** — допоможе прив'язати сорок ідей із беклогу до цільової продуктової метрики та потреб клієнтів, відсіяти зайве і визначити, які функції брати в роботу в цьому кварталі.\n2. **Jobs to be Done (JTBD)** — допоможе спершу чітко визначити, для якої саме «роботи» клієнти наймають ваш продукт і що заважає їм рухатися далі, щоб оцінювати функції не за списком ідей, а за реальним запитом.\n\nЯкий із цих способів вам ближчий зараз, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "mc-1",
+   "kind": "positive",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "goal-to-plan"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви розумієте, що в Німеччині вам потрібна німецька, але постійно відкладаєте навчання через лінь і хочете нарешті почати та не кинути.\n\nОсь якими способами можемо над цим подумати:\n1. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — назвати своє бажання вивчити німецьку, чесно побачити внутрішню перешкоду, через яку ви відкладаєте, і скласти чіткий план «якщо станеться перешкода — то я зроблю конкретну дію», щоб почати й не кинути.\n2. **GROW і Backcasting** — уточнити, до якого саме рівня чи результату в німецькій ви прагнете, де ви зараз, і розкласти цей шлях на прості й реалістичні перші кроки на найближчий тиждень.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mc-2",
+   "kind": "positive",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви бачите за всіма цифрами, що збитковий квітковий магазин час закривати, але щось усередині тримає і не дає зробити цей крок.\n\n1. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — назвати внутрішню перешкоду, через яку рука не піднімається закрити магазин, і скласти чіткий план «якщо — то», щоб нарешті зробити перший крок.\n2. **Socratic Questioning** — розплутати приховане переконання чи страх про те, що означатиме закриття магазину, яке зараз тримає і не дає діяти за цифрами.\n\nЯкий із цих способів вам ближчий зараз, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "data_rich",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mc-3",
+   "kind": "positive",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "reflective-cycle"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете почати бігати зранку, але попередні три спроби обривалися через тиждень, тому зараз ви прагнете наперед продумати свої перешкоди та дії у відповідь.\n\nОсь два способи, як це можна розібрати:\n1. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — допоможе чітко назвати внутрішні перешкоди, які змушують кидати біг через тиждень, і заздалегідь заготовити прості дії «якщо станеться X — то я зроблю Y».\n2. **Gibbs Reflective Cycle і Double-Loop Learning** — дозволить розібрати попередні три спроби, зрозуміти, що саме спрацьовувало проти вас наприкінці першого тижня, і оновити власне правило перед новим стартом.\n\nЯкий із цих способів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mc-neg-1",
+   "kind": "negative",
+   "expect": "goal-to-plan",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "issue-tree",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви маєте чітку ціль — за рік вийти на 5000 євро на місяць зі свого консалтингу — і хочете перетворити її на покроковий план дій.\n\nОсь кілька способів, якими ми можемо піти:\n1. **GROW і Backcasting** — допоможе оцінити вашу поточну точку і розкласти річну ціль у 5000 євро у зворотній послідовності — від фінального результату до проміжних віх і перших кроків на цей тиждень.\n2. **Issue Trees (MECE)** — дозволить розкласти дохід у 5000 євро на складові (кількість клієнтів, середній чек, канали залучення) і вибрати, на якому важелі зосередитися насамперед.\n3. **Jobs to be Done (JTBD)** — допоможе чітко визначити, за яке саме завдання клієнти готові платити вам бажаний чек, щоб сформувати сильний офер для росту доходів.\n\nЯкий із цих підходів вам ближчий зараз, чи ви хотіли б поглянути на задачу інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mid-after-choice",
+   "kind": "midway",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "opportunity-tree",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви обрали ідею консалтингу для місцевого бізнесу і перед стартом хочете перевірити, де в ній слабкі місця та що може піти не так.\n\n1. **Pre-mortem — «розтин» плану, який ще не почався** — уявимо, що запуск консалтингу провалився, знайдемо найімовірніші причини і заздалегідь підстелимо соломку.\n2. **Opportunity Solution Tree, Assumption Mapping і RICE** — знайдемо найризикованіше припущення вашої ідеї та придумаємо швидкий і дешевий тест до повного старту.\n3. **Jobs to be Done (JTBD)** — розберемо, яку саме задачу місцевий бізнес «наймає» вас вирішити і що може завадити їм купити.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "mid-after-premortem",
+   "kind": "midway",
+   "expect": "goal-to-plan",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Після перевірки плану на ризики ви хочете перетворити напрацьоване на чіткий список дій на найближчі два тижні перед запуском.\n\n1. **GROW і Backcasting** — допоможе розкласти мету запуску консалтингу та знайдені запобіжники на конкретні віхи й перші кроки на ці два тижні.\n2. **Jobs to be Done (JTBD)** — допоможе перед виходом до клієнтів чітко сформулювати пропозицію: яку задачу місцевий бізнес «найматиме» вас вирішити і чому перейде до вас.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mid-not-fit",
+   "kind": "midway",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете зрозуміти, де саме шукати причину падіння реєстрацій, коли аналітики немає, а можливих пояснень багато.\n\n1. **Issue Trees (MECE)** — ви розкладете падіння реєстрацій на окремі незалежні гілки (від трафіку й каналів до форми та продукту) і побачите повну карту місць, куди варто зазирнути.\n2. **Is / Is-Not Problem Specification** — ви зіставите, де, коли й у яких користувачів реєстрації просіли, а де тримаються як раніше, щоб звузити коло пошуку навіть без детальної аналітики.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-1",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "offer",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "У вас є чітка ціль на квартал — збільшити кількість активних користувачів на 20 %, і ви хочете впорядкувати купу розрізнених ідей, щоб обрати першу для перевірки.\n\nОсь два способи, як можна підійти:\n\n1. **Opportunity Solution Tree, Assumption Mapping і RICE** — допоможе прив'язати ваші розрізнені ідеї до потреб користувачів, обрати пріоритетну і знайти найризикованіше припущення для швидкої перевірки.\n2. **Issue Trees (MECE)** — допоможе розкласти метрику активних користувачів на незалежні складові й побачити, у яку саме гілку найвигідніше бити першою.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-2",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "offer",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "jobs-to-be-done",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете запустити платну підписку в застосунку для бігунів і шукаєте спосіб дешево перевірити найризикованіше припущення щодо готовності людей платити, перш ніж вкладатися в розробку.\n\nОсь кілька способів, якими можна це продумати:\n1. **Opportunity Solution Tree, Assumption Mapping і RICE** — допоможе виписати всі припущення щодо платної підписки, знайти серед них найризикованіше і придумати для нього дешевий швидкий тест до розробки.\n2. **Jobs to be Done (JTBD)** — допоможе розібратися, яку саме важливу задачу бігуни «найматимуть» виконувати вашу підписку і що насправді змусить їх перейти з безкоштовного варіанта чи звичного способу на платний.\n3. **Pre-mortem** — допоможе уявити, що ви вже запустили підписку, але ніхто не купує, і заздалегідь побачити слабкі місця ідеї та підготуватися до них.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-3",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "choose",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-neg-1",
+   "kind": "negative",
+   "expect": "weighted-matrix",
+   "action": "choose",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "other-1",
+   "kind": "other",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "socratic-questioning",
+    "mental-contrasting"
+   ],
+   "first_ok": true,
+   "offered_ok": false,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Схоже, садочок у душі ви вже обрали, а тримає вас страх зробити неправильний вибір для сина.\n\n1. **One-Way / Two-Way Doors і 10/10/10** — швидко перевірити, чи це рішення справді назавжди і як воно виглядатиме через 10 хвилин, 10 місяців і 10 років, щоб зняти страх помилки.\n2. **Socratic Questioning** — спокійно розібрати сам страх «помилитися з садочком» і перевірити, на яких припущеннях він тримається.\n3. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — чітко назвати те, що всередині стримує від остаточного кроку, і скласти план «якщо — то», щоб спокійно рушити далі.\n\nЯкий із цих способів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "pm-1",
+   "kind": "positive",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "wrap-decision",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви готуєтеся запустити у Львові кав'ярню-ростерію разом з онлайн-підпискою на зерно за три місяці і хочете знайти слабкі місця плану ще до того, як за три тижні підпишете договір оренди.\n\n1. **Pre-mortem — «розтин» плану, який ще не почався** — уявимо, що запуск за три місяці провалився, і розберемо конкретні причини в ростерії, кав'ярні чи підписці, які до цього призвели, щоб усунути їх до підписання оренди.\n2. **WRAP** — ширше подивимося на саме рішення підписувати оренду й запускати все разом, перевіримо ваші припущення на реальних прикладах і визначимо критерії безпечного старту.\n3. **Jobs to be Done (JTBD)** — перевіримо, яку саме потребу закриватимуть клієнти вашою кав'ярнею та підпискою на зерно і що може завадити їм перейти до вас від звичних місць.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pm-2",
+   "kind": "positive",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "consider-opposite",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже склали план повної міграції сервісу за чотири місяці й хочете до старту перевірити його на вразливості, бо ціна збою величезна.\n\n1. **Pre-mortem — «розтин» плану, який ще не почався** — допоможе уявити, що через чотири місяці міграція вже провалилася, знайти конкретні причини такого збою та завчасно вбудувати захист у ваш план.\n2. **Consider-the-Opposite і Steelmanning** — допоможе сформулювати найсильніші аргументи проти цього рішення або чотиримісячного строку, щоб перевірити, чи не видаєте ви бажане за дійсне.\n3. **Socratic Questioning** — допоможе виявити приховані припущення, на яких тримається ваш план і терміни, та перевірити, чи справді вони спираються на факти.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pm-3",
+   "kind": "positive",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "wrap-decision"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти вирішив із січня піти з найму у фриланс, уже домовився з першими двома клієнтами й хочеш перевірити цей план на міцність перед тим, як писати заяву на звільнення.\n\nОсь два способи, як ми можемо це продумати:\n1. **Pre-mortem — «розтин» плану, який ще не почався** — уявимо, що план переходу на фриланс із січня провалився, знайдемо слабкі місця в домовленостях із першими двома клієнтами й інших деталях та підстелимо соломку ще до написання заяви.\n2. **WRAP** — пройдемося по самому рішенню звільнитися з найму: подивимося, чи є проміжні варіанти переходу, перевіримо припущення про клієнтів у реальності та підготуємося як до успіху, так і до збоїв.\n\nЯкий спосіб тобі ближчий, чи хочеш подивитися на це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "pm-neg-1",
+   "kind": "negative",
+   "expect": "reflective-cycle",
+   "action": "offer",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "issue-tree",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете розібрати провальний запуск минулого місяця, де продажі виявилися втричі меншими за план, і зрозуміти, що з цього досвіду винести далі.\n\nОсь три способи, як до цього підійти:\n1. **Gibbs Reflective Cycle і Double-Loop Learning** — пройдемося по тому, як ви діяли й почувалися під час запуску, і знайдемо ваше внутрішнє припущення чи правило, яке варто переглянути на майбутнє.\n2. **Issue Trees (MECE)** — розкладемо недопродаж на окремі незалежні гілки — попит, офер, канали, ціну, воронку — щоб побачити, де саме просіли цифри.\n3. **5 Whys** — простежимо ланцюжок причин і наслідків у процесі запуску від результату до кореневого збою, який його спричинив.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете подивитися на це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pm-neg-2",
+   "kind": "negative",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "weighted-matrix",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": false,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти маєш глибоку експертизу як AI-інженер і потребу швидко вийти на високий дохід, бачиш кілька напрямів (фриланс, свої проєкти, консалтинг), але поки не маєш чіткого плану дій.\n\nОсь три способи, як ми можемо це розібрати:\n1. **GROW і Backcasting** — допоможе уточнити фінансову ціль та строк, оцінити твої стартові ресурси і перетворити можливі напрями на конкретні перші кроки.\n2. **Weighted Decision Matrix** — допоможе спокійно порівняти фриланс, власні проєкти, консалтинг і пошук роботи за важливими для тебе критеріями (швидкість грошей, ризик, зусилля), щоб обрати головний фокус.\n3. **Issue Trees (MECE)** — допоможе розкласти задачу заробітку для AI-інженера на незалежні гілки (зокрема і те, чому зараз не вдається знайти роботу), щоб побачити всю картину і знайти найшвидший важіль.\n\nЯкий із цих способів тобі зараз ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "ill_structured",
+    "reversibility": "two_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "rc-1",
+   "kind": "positive",
+   "expect": "reflective-cycle",
+   "action": "offer",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви щойно завершили свій перший, непростий рік на чолі команди й хочете розкласти цей досвід та помилки по поличках, щоб зрозуміти свої головні висновки.\n\nОсь два способи, як це можна зробити:\n1. **Gibbs Reflective Cycle і Double-Loop Learning** — розібрати найпоказовіші ситуації та помилки цього року через власні дії, почуття та внутрішні правила, щоб переформулювати їх і не повторювати надалі.\n2. **Issue Trees (MECE)** — розкласти весь ваш перший рік керівництва на окремі напрямки (люди, процеси, власний ресурс, результати) й упорядкувати головні висновки в кожному з них.\n\nЯкий із цих підходів вам ближчий, чи хочеться піти іншим шляхом?",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "rc-2",
+   "kind": "positive",
+   "expect": "reflective-cycle",
+   "action": "offer",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви пережили важку сварку з партнером прямо на зустрічі, через яку пішов клієнт, і зараз хочете оговтатися, розібратися, що тоді сталося, і визначити, як діяти далі.\n\nОсь два способи, як ми можемо про це подумати:\n1. **Gibbs Reflective Cycle і Double-Loop Learning** — розібрати вчорашній конфлікт крок за кроком: відокремити емоції від фактів, зрозуміти, яке ваше внутрішнє правило чи очікування спрацювало на зустрічі, і сформулювати нове правило на майбутнє.\n2. **Consider-the-Opposite і Steelmanning** — подивитися на цю сварку очима вашого партнера і вибудувати найсильнішу версію його позиції, щоб зрозуміти, що рухало ним у той момент і про що домовлятися далі.\n\nЯкий із цих підходів вам зараз ближчий, чи хочеться зайти з іншого боку?",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rc-3",
+   "kind": "positive",
+   "expect": "reflective-cycle",
+   "action": "offer",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "five-whys",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви ретельно готували план переговорів, але клієнт усе одно відмовився, і зараз ви хочете спокійно розібратися, що саме не спрацювало у вашому підході.\n\nОсь кілька способів, якими можемо піти:\n1. **Gibbs Reflective Cycle і Double-Loop Learning** — розібрати цю розмову крок за кроком: що відбувалося, що ви відчували, на якому власному правилі будували план і що варто змінити на майбутнє.\n2. **5 Whys** — пройти ланцюжком «чому» від відмови клієнта до кореневої причини збою в процесі підготовки чи проведення переговорів.\n3. **Jobs to be Done (JTBD)** — подивитися на ситуацію очима клієнта: яку задачу він насправді вирішував і які сили втримали його від переходу на вашу пропозицію.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете подивитися на це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rc-neg-1",
+   "kind": "negative",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви готуєтеся наступного місяця відкривати другу точку за готовим планом з найнятою командою і хочете заздалегідь побачити, що може піти не так.\n\n1. **Pre-mortem — «розтин» плану, який ще не почався** — уявимо, що відкриття другої точки наступного місяця провалилося, знайдемо найслабші місця вашого плану і заздалегідь підстелимо соломку.\n2. **Consider-the-Opposite і Steelmanning** — візьмемо ваше головне очікування від нової точки і збудуємо найсильніші аргументи, чому все може піти зовсім інакше, щоб перевірити себе на сліпі плями.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "well_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "rd-1",
+   "kind": "positive",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, що за п'ять хвилин до дзвінка ви хвилюєтеся, чи погоджуватися на пробний місяць із новим клієнтом, хоча самі відчуваєте, що ризик невеликий.\n\n1. **One-Way / Two-Way Doors і 10/10/10** — допоможе за кілька реплік оцінити, наскільки легко вийти з цього пробного місяця і як ви подивитеся на це рішення через 10 хвилин, 10 місяців та 10 років, щоб зняти напругу перед дзвінком.\n2. **Socratic Questioning** — допоможе швидко розібрати страх, який стоїть за вашою тривогою, і перевірити, чи є під ним реальні факти.\n\nЯкий спосіб вам зараз ближчий, чи підійдемо інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rd-2",
+   "kind": "positive",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "mental-contrasting"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже місяць не можете наважитися на зміну тарифного плану для свого онлайн-магазину і застрягли в порівняннях, хоча розумієте, що це рішення можна скасувати.\n\n1. **One-Way / Two-Way Doors і 10/10/10** — допоможе швидко оцінити, наскільки легко повернутися назад при зміні тарифу, і подивитися на цей вибір з відстані, щоб зняти напругу й ухвалити рішення без зайвих вагань.\n2. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — допоможе з'ясувати, яка внутрішня перешкода змушує вас місяць відкладати перехід на інший тариф, і скласти чіткий план «якщо — то», щоб нарешті зрушити з місця.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "rd-3",
+   "kind": "positive",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "evaporating-cloud",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви розриваєтеся між поїздкою на день народження сестри в інше місто та власним дедлайном, хвилюєтеся, що сестра образиться, і хочете тверезо оцінити, наскільки велика ціна цього рішення.\n\nОсь кілька способів подумати над цим зараз:\n1. **One-Way / Two-Way Doors і 10/10/10** — допоможе швидко знизити тривогу, перевірити, чи справді наслідки вибору незворотні, і подивитися на це рішення з відстані 10 хвилин, 10 місяців і 10 років.\n2. **Evaporating Cloud (з теорії обмежень)** — допоможе розкласти обидві ваші потреби — підтримати сестру й встигнути з дедлайном — та знайти спосіб задовольнити обидві без важкого компромісу.\n3. **Socratic Questioning** — допоможе спокійно перевірити припущення, що сестра обов'язково образиться або що поїздка неминуче зірве дедлайн.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rd-neg-1",
+   "kind": "negative",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти стоїш перед важким і незворотним вибором на найближчі кілька тижнів: чи продавати батьківський будинок, у якому ти виріс, заради викупу бізнесу.\n\nОсь два способи, якими ми можемо це продумати:\n1. **WRAP** — допоможе вийти за межі вибору «продати чи ні», тверезо перевірити припущення щодо викупу бізнесу, подивитися на рішення з відстані й підготуватися до наслідків.\n2. **Evaporating Cloud (з теорії обмежень)** — дозволить розкласти конфлікт між потребою зберегти батьківський дім і бажанням викупити бізнес та пошукати спосіб задовольнити обидві потреби без болісної жертви.\n\nЯкий із цих способів тобі ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "ill_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sc-1",
+   "kind": "positive",
+   "expect": "scamper",
+   "action": "offer",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "first-principles",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви шукаєте нестандартні ідеї, як змінити пакування для їжі так, щоб витрачати менше картону і водночас зберегти міцність коробки.\n\n1. **SCAMPER** — ви візьмете нинішню коробку і послідовно прокрутите сім напрямків змін — що в ній можна замінити, поєднати, прибрати чи переставити місцями, щоб витрачати менше картону без втрати міцності.\n2. **First Principles Thinking** — ви відкладете звичну конструкцію коробки, розберете до фізичних основ, що саме дає їй міцність і захищає їжу, і зберете рішення наново без зайвого матеріалу.\n3. **Evaporating Cloud (з теорії обмежень)** — ви розберете саму суперечність між потребою зменшити витрату картону і потребою зберегти міцність та знайдете приховане припущення, яке змушує ці дві вимоги конфліктувати.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sc-2",
+   "kind": "positive",
+   "expect": "scamper",
+   "action": "offer",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "jobs-to-be-done",
+    "first-principles"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви шукаєте свіжі ідеї для зимового меню вашої пекарні, бо очевидні варіанти здаються надто банальними.\n\n1. **SCAMPER** — візьмемо те, що вже є у вашій пекарні, і пройдемося сімома напрямками змін (що замінити, поєднати, перевернути чи прибрати), щоб отримати небанальні ідеї для зимового меню.\n2. **Jobs to be Done (JTBD)** — подивимося, яку саме потребу «наймають» закрити ваші гості взимку і в яких життєвих ситуаціях купують випічку, щоб придумати пропозиції під реальний попит.\n3. **First Principles Thinking** — відкладемо звичні уявлення про «зимове меню пекарні», розберемо задачу до базових потреб і можливостей та зберемо нові варіанти з чистого аркуша.\n\nЯкий із цих способів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sc-3",
+   "kind": "positive",
+   "expect": "scamper",
+   "action": "offer",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "jobs-to-be-done",
+    "first-principles"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете переосмислити й оновити свій настільний календар, щоб він став цікавішим і краще продавався.\n\nОсь три способи, як можна над цим подумати:\n1. **SCAMPER** — допоможе покрутити ваш календар у семи напрямках — що в ньому замінити, поєднати з іншим чи перевернути, — і отримати конкретні ідеї оновлення.\n2. **Jobs to be Done (JTBD)** — допоможе розібратися, для якої саме «роботи» люди купують настільний календар і що їх стримує, щоб змінювати продукт під реальну потребу покупця.\n3. **First Principles Thinking** — допоможе відкинути звичне уявлення про те, яким має бути календар, розібрати задачу до основ і зібрати принципово інший продукт.\n\nЯкий із цих підходів вам ближчий, чи хочеться зайти з іншого боку?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sc-neg-1",
+   "kind": "negative",
+   "expect": "jobs-to-be-done",
+   "action": "offer",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "issue-tree",
+    "scamper"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Користувачі кидають ваш застосунок для обліку витрат за тиждень через незручність, і ви хочете придумати нову функцію, але спершу не розумієте, навіщо вони взагалі його встановлювали.\n\n1. **Jobs to be Done (JTBD)** — розібратися, для якої конкретної життєвої ситуації та цілі люди взагалі завантажують ваш застосунок і що відштовхує їх через тиждень, щоб зрозуміти, що саме їм потрібно замість вгадування нових функцій.\n2. **Issue Trees (MECE)** — розкласти відтік користувачів через тиждень на окремі незалежні гілки (очікування на вході, перший досвід, зручність щоденного обліку), щоб побачити, де саме втрачається інтерес і куди копати в першу чергу.\n3. **SCAMPER** — пройтися сімома напрямками змін (що спростити, прибрати, поєднати чи перебудувати в поточному обліку витрат), щоб знайти способи зробити вже наявний застосунок зручнішим без додавання зайвого.\n\nЯкий із цих способів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sq-1",
+   "kind": "positive",
+   "expect": "socratic-questioning",
+   "action": "offer",
+   "first": "socratic-questioning",
+   "offered": [
+    "socratic-questioning",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете чесно перевірити думку «я погана мати, бо працюю і не проводжу з дітьми весь день», яка не дає вам спокою.\n\nОсь два способи, як можна до цього підійти:\n1. **Socratic Questioning** — розібрати по кісточках саму думку «я погана мати, бо працюю», перевірити приховане правило за цим «бо» і відокремити факти від почуття провини.\n2. **Evaporating Cloud (з теорії обмежень)** — подивитися на це як на зіткнення двох важливих потреб — працювати і давати дітям турботу — та знайти спосіб поєднати їх без відчуття, що ви чимось жертвуєте.\n\nЯкий із цих підходів вам зараз ближчий, чи хочеться піти іншим шляхом?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sq-2",
+   "kind": "positive",
+   "expect": "socratic-questioning",
+   "action": "offer",
+   "first": "socratic-questioning",
+   "offered": [
+    "socratic-questioning",
+    "mental-contrasting",
+    "goal-to-plan"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти не подаєшся у великі компанії через переконання, що без диплома туди ніколи не візьмуть, але сам сумніваєшся, чи це справді так.\n\n1. **Socratic Questioning** — розібрати питаннями твоє переконання, що без диплома у велику компанію зась, і побачити, що в ньому є фактом, а що — неперевіреним припущенням.\n2. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — зіставити бажання потрапити у велику компанію зі страхом чи звичкою не подаватися і скласти простий план «якщо — то», щоб зробити перші спроби.\n3. **GROW і Backcasting** — оцінити, що в тебе вже є зараз, які вимоги насправді висувають великі компанії, і намітити перші кроки до працевлаштування.\n\nЯкий із цих способів тобі зараз ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sq-3",
+   "kind": "positive",
+   "expect": "socratic-questioning",
+   "action": "offer",
+   "first": "socratic-questioning",
+   "offered": [
+    "socratic-questioning",
+    "is-is-not",
+    "reflective-cycle"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти відчуваєш вигорання й небажання залишатися в IT і хочеш розібратися, чи ця думка справді стосується самої професії, чи за нею стоїть щось інше.\n\n1. **Socratic Questioning (Сократівські питання)** — перевіримо твою думку «більше не хочу працювати в IT» питаннями, щоб відокремити факти від втоми й узагальнень і зрозуміти, чи це справді про саму професію.\n2. **Is / Is-Not Problem Specification (Є / не є)** — порівняємо, де, коли і в яких задачах відчуття вигорання та відрази з'являється, а де його немає, щоб точно локалізувати джерело проблеми.\n3. **Gibbs Reflective Cycle і Double-Loop Learning (Осмислити досвід і переглянути власне правило)** — розберемо недавній досвід чи епізод, після якого закріпилося це відчуття, щоб зрозуміти, яке внутрішнє правило чи очікування за ним стоїть.\n\nЯкий із цих способів тобі ближчий зараз, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "overwhelmed_fatigued",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sq-neg-1",
+   "kind": "negative",
+   "expect": "is-is-not",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, що у вашій друкарні принтер дає смуги за дуже конкретних умов — лише на щільному папері й лише після обіду, — і ви хочете з'ясувати причину цього збою.\n\nОсь два способи, якими ми можемо це розібрати:\n1. **Is / Is-Not Problem Specification** — зіставимо всі обставини, де й коли смуги з'являються, з тими, де друк чистий, щоб відсіяти зайві версії і звузити пошук причини.\n2. **5 Whys** — пройдемося ланцюжком причин крок за кроком від самої появи смуг углиб роботи принтера й процесу друку, якщо ви добре знаєте, як він влаштований.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-ambivalent-commit",
+   "kind": "tie",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже вирішили піти з роботи і маєте нове місце, але страх змушує вас щодня відкладати розмову з керівником.\n\n1. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — допоможе з'ясувати, що саме всередині зупиняє вас у момент перед розмовою, і скласти чіткий план «якщо — то», щоб нарешті почати діяти.\n2. **Socratic Questioning** — допоможе спокійно розібрати й перевірити страх чи припущення про реакцію начальника, через які розмова здається небезпечною.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "tie-anxious-choice",
+   "kind": "tie",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже тиждень не можете обрати між трьома варіантами навчання, бо дуже боїтеся помилитися і через це почуваєтеся перевантаженою.\n\n1. **One-Way / Two-Way Doors і 10/10/10** — швидко перевіримо, наскільки цей вибір справді незворотний і як він виглядатиме через 10 днів, 10 місяців і 10 років, щоб зняти напругу й зрушити з місця.\n2. **Socratic Questioning** — спокійно розберемо сам страх «помилитися» і переконання, яке за ним стоїть, щоб вибір перестав здаватися вироком.\n\nЯкий із цих способів вам зараз ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "multiple_clear",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "tie-broad-cause",
+   "kind": "tie",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "complexity-sensemaking"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви намагаєтеся зрозуміти, чому бізнес не росте вже два роки, але можливих пояснень надто багато — від ринку й команди до вас самих.\n\nОсь якими способами можна до цього підійти:\n1. **Issue Trees (MECE)** — допоможе розкласти ваше широке питання про зупинку росту на окремі гілки (ринок, команда, управління тощо), щоб не гадати навмання і побачити, де саме шукати причину.\n2. **Complexity Sensemaking** — допоможе розділити намішані проблеми різної природи — що тут можна просто порахувати, а де доведеться робити пробні кроки — і зрозуміти, за що братися спершу.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-many-options",
+   "kind": "tie",
+   "expect": "opportunity-tree",
+   "action": "offer",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "У вас зібралося дванадцять ідей для інтернет-магазину, і ви хочете швидко відсіяти зайве та зрозуміти, за що братися першим.\n\n1. **Opportunity Solution Tree, Assumption Mapping і RICE** — прив'язати ваші дванадцять ідей до конкретної метрики чи потреби покупців і швидко відсортувати їх за охопленням, впливом та зусиллями, щоб обрати перші кроки.\n2. **Jobs to be Done (JTBD)** — спершу з'ясувати, заради якого прогресу покупці приходять у ваш магазин і що їм заважає купувати зараз, а вже через це відсіяти зайві ідеї.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-product-ideas",
+   "kind": "tie",
+   "expect": "jobs-to-be-done",
+   "action": "offer",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "opportunity-tree",
+    "scamper"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, ви хочете придумати нову функцію для продукту у відповідь на скарги клієнтів про незручність і нові звіти у конкурентів.\n\nОсь якими способами ми можемо над цим подумати:\n1. **Jobs to be Done (JTBD)** — розібрати, яку саме задачу клієнти вирішують вашим продуктом і що насправді стоїть за їхніми скаргами та оглядкою на звіти конкурентів.\n2. **Opportunity Solution Tree, Assumption Mapping і RICE** — пов'язати мету продукту з болями клієнтів і відібрати ідеї функцій, які дадуть найбільший ефект, замість просто копіювати конкурентів.\n3. **SCAMPER** — взяти поточний продукт і пройтися сімома напрямками змін, щоб знайти нові ідеї, як зробити його зручнішим.\n\nЯкий із цих підходів вам ближчий, чи хочеться зайти з іншого боку?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-single-ultimatum",
+   "kind": "tie",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "reversible-doors",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви стоїте перед важким вибором про долю проєкту, у який вклали два роки, і думки постійно крутяться лише навколо «закрити чи ні».\n\nОсь якими способами ми можемо це розібрати:\n1. **WRAP** — допоможе вийти за межі вибору «закрити чи ні», знайти проміжні варіанти, перевірити їх на реальність і подивитися на ситуацію на відстані від двох уже вкладених років.\n2. **One-Way / Two-Way Doors і 10/10/10** — допоможе швидко зняти напругу, перевірити, наскільки кожен крок справді незворотний, і оцінити наслідки через 10 хвилин, 10 місяців і 10 років.\n3. **Evaporating Cloud (з теорії обмежень)** — допоможе сформулювати дві важливі потреби, які стоять за бажанням закрити проєкт і бажанням його зберегти, та знайти рішення без болісного компромісу.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "tie-unknown-mechanism",
+   "kind": "tie",
+   "expect": "is-is-not",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу ситуацію так: датчик температури на одному зі складів завищує показники на три градуси лише вночі, а його внутрішньої будови ви не знаєте.\n\nПропоную два способи розібратися:\n1. **Is / Is-Not Problem Specification** — зіставимо, де, коли і за яких умов аномалія є, а де все працює нормально, щоб звузити коло можливих причин навіть без знання будови самого датчика.\n2. **Issue Trees (MECE)** — розкладемо всі можливі джерела розбіжності на окремі гілки (сам датчик, місце встановлення, нічні процеси на складі, передача даних), щоб перевірити їх по черзі.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "unclear",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-urgent-chaos",
+   "kind": "tie",
+   "expect": "complexity-sensemaking",
+   "action": "offer",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви опинилися в ситуації, де проблеми в проєкті змішалися докупи, а до наради лишилося пів години і треба швидко зорієнтуватися, з якого боку до всього підійти.\n\n1. **Complexity Sensemaking** — за кілька реплік відокремимо те, що «горить» просто зараз, від того, що треба проаналізувати чи спробувати на практиці, щоб ви йшли на нараду з розумінням, за що братися першим.\n2. **One-Way / Two-Way Doors і 10/10/10** — якщо на нараді від вас чекають конкретного рішення, ми швидко оцінимо, наскільки воно зворотне і які наслідки матиме, щоб зняти напругу й ухвалити його вчасно.\n\nЯкий із цих способів зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "none_exist",
+    "emotion": "anxious",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "wm-1",
+   "kind": "positive",
+   "expect": "weighted-matrix",
+   "action": "offer",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix",
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви обираєте садочок для сина з чотирьох відомих вам варіантів і хочете впорядкувати всі критерії — ціну, відстань, підхід та відгуки, — щоб спокійно їх порівняти.\n\nОсь два способи, як ми можемо це зробити:\n1. **Weighted Decision Matrix** — ви визначите, що для вас найважливіше (ціна, відстань, підхід тощо), дасте кожному критерію вагу й оціните всі чотири садочки, щоб наочно побачити лідера.\n2. **One-Way / Two-Way Doors і 10/10/10** — ми швидко перевіримо, наскільки цей вибір легко змінити, якщо садочок не підійде, та подивимося на рішення з перспективи 10 днів, 10 місяців і 10 років, щоб зняти зайву напругу.\n\nЯкий спосіб вам ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_rich",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wm-2",
+   "kind": "positive",
+   "expect": "weighted-matrix",
+   "action": "offer",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix",
+    "wrap-decision"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, що ти обираєш між трьома пропозиціями роботи з різними перевагами — гроші, відстань до дому чи цікавість задач — і хочеш спокійно порівняти їх за власними пріоритетами.\n\nОсь два способи, як ми можемо це зробити:\n1. **Weighted Decision Matrix** — допоможе виписати важливі для тебе критерії, дати їм вагу й чесно порахувати, яка з трьох пропозицій виграє в сумі.\n2. **WRAP** — дозволить подивитися на ці три офери ширше: чи можна поєднати їхні плюси в перемовинах, як перевірити реальність кожної роботи до виходу та як виглядатиме це рішення через рік.\n\nЯкий спосіб тобі зараз ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wm-3",
+   "kind": "positive",
+   "expect": "weighted-matrix",
+   "action": "offer",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви обираєте одного з п'яти постачальників упаковки, маючи на руках дані про ціни, строки та якість зразків, і хочете чітко обґрунтувати цей вибір команді.\n\n1. **Weighted Decision Matrix** — допоможе оцінити всіх постачальників за важливими для вас критеріями (ціна, строки, якість), порахувати їхню вагу й отримати прозоре обґрунтування для команди.\n2. **Pre-mortem** — дозволить уявити, що робота з головним кандидатом пішла шкідливо, і заздалегідь побачити приховані ризики перед остаточним вибором.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "data_rich",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "wm-neg-1",
+   "kind": "negative",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви обираєте між двома квартирами, але через страх помилитися і все зіпсувати вже третю ніч не можете спати. Ось як можемо до цього підійти:\n\n1. **One-Way / Two-Way Doors і 10/10/10** — швидко перевіримо, наскільки цей вибір справді незворотний і як він виглядатиме через 10 днів, 10 місяців і 10 років, щоб знизити напругу й зрушити з місця.\n2. **Socratic Questioning** — спокійно розберемо думку «я помилюся і все зіпсую» та перевіримо, на чому вона тримається і чи справді один вибір може все зруйнувати.\n\nЯкий спосіб вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "multiple_clear",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wr-1",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "wrap-decision",
+    "evaporating-cloud"
+   ],
+   "first_ok": false,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви стоїте перед вибором між посадою CTO у стартапі та переходом у банк на вищу зарплату, і це рішення здається остаточним і без дороги назад.\n\n1. **One-Way / Two-Way Doors і 10/10/10** — швидко перевіримо, наскільки цей перехід справді незворотний, і подивимося на обидва шляхи через 10 днів, 10 місяців і 10 років, щоб зняти напругу.\n2. **WRAP** — розширимо вибір за межі «перейти чи залишитися», перевіримо реалії роботи в банку та стартапі на фактах і підготуємося до ризиків.\n3. **Evaporating Cloud (з теорії обмежень)** — якщо вас розриває між двома важливими потребами (наприклад, фінансова стабільність проти свободи дій), знайдемо приховане припущення і спосіб не жертвувати жодною з них.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wr-2",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "evaporating-cloud",
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви стоїте перед важливим і незворотним рішенням: є вигідна пропозиція продати частку в бізнесі, але ви вагаєтеся, чи варто погоджуватися.\n\n1. **WRAP** — дозволить вийти за межі вибору «продати чи лишити все як є», перевірити пропозицію та підготуватися до різних сценаріїв.\n2. **Evaporating Cloud (з теорії обмежень)** — допоможе з'ясувати, які дві важливі потреби тягнуть вас у протилежні боки, і знайти рішення без болісного компромісу.\n3. **One-Way / Two-Way Doors і 10/10/10** — дасть змогу швидко оцінити наслідки цього кроку через 10 хвилин, 10 місяців і 10 років, щоб знизити напругу і побачити ширшу перспективу.\n\nЯкий із цих способів вам ближчий, чи хочете підійти до питання інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wr-3",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "evaporating-cloud",
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви з чоловіком стоїте перед великим сімейним рішенням про переїзд в іншу країну, де на кону діти, робота й батьки, а вибір зараз виглядає лише як «або їдемо, або лишаємось».\n\nОсь якими способами ми можемо про це подумати:\n1. **WRAP** — допоможе вийти за межі вибору «їхати або лишатися», перевірити ваші припущення про переїзд на реальність і підготуватися до різних сценаріїв.\n2. **Evaporating Cloud (з теорії обмежень)** — дозволить розкласти по поличках те, що тягне вас їхати й те, що тримає вдома, щоб знайти рішення, яке не змусить жертвувати найважливішим.\n3. **One-Way / Two-Way Doors і 10/10/10** — дасть змогу швидко перевірити, які частини цього переїзду насправді можна відіграти назад, і подивитися на вибір на відстані 10 місяців і 10 років.\n\nЯкий із цих способів вам ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "wr-neg-1",
+   "kind": "negative",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "mental-contrasting"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви розмірковуєте, чи спробувати змінити ціну на масаж на один тиждень як експеримент, але трохи хвилюєтеся перед цим кроком.\n\nОсь два способи, як можна над цим подумати:\n1. **One-Way / Two-Way Doors і 10/10/10** — швидко перевірити, наскільки легко буде повернути все назад за тиждень і як ви почуватиметеся щодо цього кроку через 10 хвилин, 10 місяців і 10 років, щоб зняти зайве хвилювання.\n2. **MCII (ментальне контрастування з планами «якщо — то» за Г. Еттінген)** — чітко назвати бажаний результат від зміни ціни і ту внутрішню перешкоду чи тривогу, яка зараз стримує, та скласти простий план «якщо — то» на цей тиждень.\n\nЯкий із цих підходів вам ближчий зараз, чи хочете розібрати це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  }
+ ],
+ "llm_call": [
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10572, \"output_tokens\": 538, \"thought_tokens\": 0, \"latency_ms\": 9482, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10572, \"output_tokens\": 549, \"thought_tokens\": 0, \"latency_ms\": 9568, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10589, \"output_tokens\": 637, \"thought_tokens\": 0, \"latency_ms\": 10533, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10584, \"output_tokens\": 555, \"thought_tokens\": 0, \"latency_ms\": 10912, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10578, \"output_tokens\": 510, \"thought_tokens\": 0, \"latency_ms\": 8626, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10586, \"output_tokens\": 620, \"thought_tokens\": 0, \"latency_ms\": 10320, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10563, \"output_tokens\": 601, \"thought_tokens\": 0, \"latency_ms\": 9276, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10580, \"output_tokens\": 655, \"thought_tokens\": 0, \"latency_ms\": 10246, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10582, \"output_tokens\": 551, \"thought_tokens\": 0, \"latency_ms\": 9075, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10570, \"output_tokens\": 544, \"thought_tokens\": 0, \"latency_ms\": 8699, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10589, \"output_tokens\": 617, \"thought_tokens\": 0, \"latency_ms\": 9765, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10581, \"output_tokens\": 715, \"thought_tokens\": 0, \"latency_ms\": 10739, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10583, \"output_tokens\": 506, \"thought_tokens\": 0, \"latency_ms\": 9512, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10567, \"output_tokens\": 556, \"thought_tokens\": 0, \"latency_ms\": 9314, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10567, \"output_tokens\": 737, \"thought_tokens\": 0, \"latency_ms\": 11166, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10568, \"output_tokens\": 725, \"thought_tokens\": 0, \"latency_ms\": 11122, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10574, \"output_tokens\": 584, \"thought_tokens\": 0, \"latency_ms\": 9878, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10579, \"output_tokens\": 462, \"thought_tokens\": 0, \"latency_ms\": 7576, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10574, \"output_tokens\": 546, \"thought_tokens\": 0, \"latency_ms\": 8629, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10573, \"output_tokens\": 613, \"thought_tokens\": 0, \"latency_ms\": 9631, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10556, \"output_tokens\": 605, \"thought_tokens\": 0, \"latency_ms\": 9990, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10567, \"output_tokens\": 647, \"thought_tokens\": 0, \"latency_ms\": 9868, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10573, \"output_tokens\": 802, \"thought_tokens\": 0, \"latency_ms\": 12554, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10578, \"output_tokens\": 556, \"thought_tokens\": 0, \"latency_ms\": 8671, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10571, \"output_tokens\": 741, \"thought_tokens\": 0, \"latency_ms\": 20137, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10569, \"output_tokens\": 479, \"thought_tokens\": 0, \"latency_ms\": 7957, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10562, \"output_tokens\": 537, \"thought_tokens\": 0, \"latency_ms\": 8563, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10578, \"output_tokens\": 494, \"thought_tokens\": 0, \"latency_ms\": 8818, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10566, \"output_tokens\": 636, \"thought_tokens\": 0, \"latency_ms\": 9883, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10569, \"output_tokens\": 537, \"thought_tokens\": 0, \"latency_ms\": 8968, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10583, \"output_tokens\": 688, \"thought_tokens\": 0, \"latency_ms\": 10244, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10589, \"output_tokens\": 460, \"thought_tokens\": 0, \"latency_ms\": 7938, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10572, \"output_tokens\": 615, \"thought_tokens\": 0, \"latency_ms\": 9461, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10578, \"output_tokens\": 606, \"thought_tokens\": 0, \"latency_ms\": 9565, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10567, \"output_tokens\": 456, \"thought_tokens\": 0, \"latency_ms\": 8138, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10554, \"output_tokens\": 434, \"thought_tokens\": 0, \"latency_ms\": 7508, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10569, \"output_tokens\": 583, \"thought_tokens\": 0, \"latency_ms\": 9344, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10584, \"output_tokens\": 689, \"thought_tokens\": 0, \"latency_ms\": 11552, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10568, \"output_tokens\": 651, \"thought_tokens\": 140, \"latency_ms\": 11467, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10566, \"output_tokens\": 699, \"thought_tokens\": 0, \"latency_ms\": 10544, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10581, \"output_tokens\": 660, \"thought_tokens\": 0, \"latency_ms\": 9921, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-neg-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10569, \"output_tokens\": 684, \"thought_tokens\": 0, \"latency_ms\": 10807, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10573, \"output_tokens\": 613, \"thought_tokens\": 0, \"latency_ms\": 10161, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10561, \"output_tokens\": 563, \"thought_tokens\": 0, \"latency_ms\": 9339, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10565, \"output_tokens\": 616, \"thought_tokens\": 0, \"latency_ms\": 10334, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10567, \"output_tokens\": 584, \"thought_tokens\": 389, \"latency_ms\": 13587, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10569, \"output_tokens\": 763, \"thought_tokens\": 0, \"latency_ms\": 11261, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10569, \"output_tokens\": 662, \"thought_tokens\": 0, \"latency_ms\": 9999, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10562, \"output_tokens\": 491, \"thought_tokens\": 0, \"latency_ms\": 8441, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10561, \"output_tokens\": 655, \"thought_tokens\": 0, \"latency_ms\": 9934, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10567, \"output_tokens\": 668, \"thought_tokens\": 0, \"latency_ms\": 10312, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10566, \"output_tokens\": 725, \"thought_tokens\": 0, \"latency_ms\": 11407, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10582, \"output_tokens\": 739, \"thought_tokens\": 0, \"latency_ms\": 10800, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10567, \"output_tokens\": 474, \"thought_tokens\": 0, \"latency_ms\": 7819, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10568, \"output_tokens\": 588, \"thought_tokens\": 0, \"latency_ms\": 9288, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10572, \"output_tokens\": 540, \"thought_tokens\": 0, \"latency_ms\": 8745, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10571, \"output_tokens\": 792, \"thought_tokens\": 0, \"latency_ms\": 12166, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10570, \"output_tokens\": 576, \"thought_tokens\": 0, \"latency_ms\": 9196, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10579, \"output_tokens\": 633, \"thought_tokens\": 0, \"latency_ms\": 9590, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10577, \"output_tokens\": 691, \"thought_tokens\": 0, \"latency_ms\": 10439, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10561, \"output_tokens\": 562, \"thought_tokens\": 0, \"latency_ms\": 9063, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10559, \"output_tokens\": 484, \"thought_tokens\": 0, \"latency_ms\": 8283, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10561, \"output_tokens\": 544, \"thought_tokens\": 0, \"latency_ms\": 8707, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10562, \"output_tokens\": 500, \"thought_tokens\": 0, \"latency_ms\": 8311, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10568, \"output_tokens\": 556, \"thought_tokens\": 0, \"latency_ms\": 9196, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10581, \"output_tokens\": 584, \"thought_tokens\": 0, \"latency_ms\": 8981, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10576, \"output_tokens\": 485, \"thought_tokens\": 0, \"latency_ms\": 7812, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10578, \"output_tokens\": 509, \"thought_tokens\": 0, \"latency_ms\": 8074, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10575, \"output_tokens\": 147, \"thought_tokens\": 0, \"latency_ms\": 3838, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10563, \"output_tokens\": 538, \"thought_tokens\": 0, \"latency_ms\": 8851, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10576, \"output_tokens\": 556, \"thought_tokens\": 0, \"latency_ms\": 9595, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10554, \"output_tokens\": 134, \"thought_tokens\": 0, \"latency_ms\": 3740, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10582, \"output_tokens\": 758, \"thought_tokens\": 0, \"latency_ms\": 11540, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10569, \"output_tokens\": 596, \"thought_tokens\": 0, \"latency_ms\": 9270, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-anxious-choice\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10563, \"output_tokens\": 497, \"thought_tokens\": 0, \"latency_ms\": 8129, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-many-options\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10562, \"output_tokens\": 602, \"thought_tokens\": 0, \"latency_ms\": 9562, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-ambivalent-commit\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10556, \"output_tokens\": 767, \"thought_tokens\": 242, \"latency_ms\": 14814, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-single-ultimatum\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10556, \"output_tokens\": 571, \"thought_tokens\": 0, \"latency_ms\": 9082, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-broad-cause\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10564, \"output_tokens\": 625, \"thought_tokens\": 0, \"latency_ms\": 9525, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-urgent-chaos\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10560, \"output_tokens\": 557, \"thought_tokens\": 0, \"latency_ms\": 9126, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-product-ideas\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10570, \"output_tokens\": 474, \"thought_tokens\": 0, \"latency_ms\": 8034, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-unknown-mechanism\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10727, \"output_tokens\": 639, \"thought_tokens\": 0, \"latency_ms\": 9951, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mid-after-choice\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10663, \"output_tokens\": 532, \"thought_tokens\": 0, \"latency_ms\": 9273, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mid-after-premortem\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10698, \"output_tokens\": 726, \"thought_tokens\": 0, \"latency_ms\": 10702, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"other-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10698, \"output_tokens\": 554, \"thought_tokens\": 0, \"latency_ms\": 8671, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mid-not-fit\"}"
+ ]
+}

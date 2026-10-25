@@ -2,6 +2,7 @@
 # Джерела: research 01 §3.3 (Lord, Lepper, Preston, 1984; Larrick, 2004), §3.5 бар'єр 1, §7(г) №36, §7(ґ) п.11, §7(д), §7(е) J4/J8.
 id: consider-opposite
 title: "Подумати протилежне: найсильніша версія іншої думки"
+method: "Consider-the-Opposite і Steelmanning"
 
 router:
   needs: >-

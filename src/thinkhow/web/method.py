@@ -1,7 +1,7 @@
 """What the topic page says of the thinking model that leads (task 203): a caption and marks in the history.
 
-Reads only what the router and the facilitator already write: routing.json and the map's phase. The replies
-themselves still never name a method (task 301): the caption and the marks are apart from them.
+Reads only what the router and the facilitator already write: routing.json and the map's phase. The caption
+and the marks are apart from the replies, which since task 205 name the method themselves too.
 """
 
 from collections.abc import Mapping, Sequence

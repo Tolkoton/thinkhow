@@ -2,6 +2,7 @@
 # Джерела в research 01: §7(ґ) слот 8, §7(г) рядки 26 і 28, §7(а) рядки 4 і 10, §7(д) правила 1–2, §7(е) J1.
 id: reversible-doors
 title: Двері в один чи в обидва боки і 10/10/10
+method: "One-Way / Two-Way Doors і 10/10/10"
 
 router:
   needs: >-

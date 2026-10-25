@@ -67,6 +67,11 @@ class ScenarioLlm:
             raise step
         return schema.model_validate_json(step)
 
+    def search_text(
+        self, system: str, prompt: str, rev: pl.KnowledgeRev | None
+    ) -> tuple[str, pl.Found | None]:
+        raise AssertionError("the card's facilitator does not search without JSON")
+
 
 def phase_dict(pid: str) -> dict[str, Any]:
     tag = pid.upper()

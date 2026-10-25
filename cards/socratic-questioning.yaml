@@ -2,6 +2,7 @@
 # Джерела: research 01 §3.3 (Braun et al., 2015; Vittorio et al., 2022), §7(г) №57, §7(ґ) п.12, §7(д), §7(е) J4.
 id: socratic-questioning
 title: "Сократівські питання: перевірити власне переконання"
+method: "Socratic Questioning"
 
 router:
   needs: >-

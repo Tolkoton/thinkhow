@@ -155,7 +155,7 @@ def test_A_owners_topic_without_a_plan_goes_free_mode_and_announces_at_most_once
     first_free = next((i for i, p in enumerate(phases) if p is None), None)
     assert len(announced) <= 1, announced
     assert announced in ([], [first_free]), (announced, first_free)
-    assert not [i for i, a in enumerate(answers) if names_a_method(a)]
+    # task 205 (owner, 2026-10-25): the facilitator names methods; task 301's «no method names» is gone
     for i in (3, 4):  # the answers to #7 and #9
         assert not ("участ" in answers[i].lower() and "продаж" in answers[i].lower()), answers[i]
     assert not [a for a in answers if "як ви хочете продовжити" in a.lower()]

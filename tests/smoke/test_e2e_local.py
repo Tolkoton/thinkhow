@@ -98,6 +98,8 @@ def test_local_chain_with_the_doubles_search_writes_sources_research_and_a_fact(
     assert shown in (folder / "conversation.md").read_text(encoding="utf-8")
     research = json.loads((folder / "research.json").read_text(encoding="utf-8"))
     assert [(e["turn"], e["depth"]) for e in research["entries"]] == [(2, "quick")]
-    assert research["entries"][0]["sources"] == [{"title": "example.org", "url": "https://example.org/local-search"}]
+    assert research["entries"][0]["sources"] == [
+        {"title": "example.org", "url": "https://example.org/local-search"}
+    ]
     problem_map = json.loads((folder / "map.json").read_text(encoding="utf-8"))
     assert [item["type"] for item in problem_map["items"]] == ["fact"]

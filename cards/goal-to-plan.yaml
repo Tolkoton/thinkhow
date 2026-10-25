@@ -3,6 +3,7 @@
 # §7(д) намір 5 і 9, §7(е) J3 і J5, §3.3.
 id: goal-to-plan
 title: "Від мети до перших кроків: мета, де я зараз, шляхи, що зроблю"
+method: "GROW і Backcasting"
 
 router:
   needs: >-

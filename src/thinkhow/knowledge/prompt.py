@@ -11,6 +11,7 @@ def card_prompt(card: Card) -> str:
     half = card.facilitator
     parts = [
         f"# Картка: {card.title}",
+        *([f"**Метод.** {card.method}"] if card.method else []),
         f"**Навіщо.** {half.purpose}",
         f"**Позиція ведучого.** {half.stance}",
         f"**Що потрібно на вході.** {half.needs}",

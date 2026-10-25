@@ -2,6 +2,7 @@
 # Джерела в дослідженні 01: §7(г) рядок 1, §7(ґ) слот 1, §7(д) стовпець First Principles, §7(е) J3, §3.3 Tier C.
 id: first-principles
 title: "Перші принципи: розібрати до основ і зібрати наново"
+method: "First Principles Thinking"
 
 router:
   needs: >-

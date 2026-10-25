@@ -2,6 +2,7 @@
 # за Аргірісом. Джерела в research 01: §7(ґ) слот 15, §7(г) рядок 61, §7(д) намір 8 і 9, §7(е) J1 і J8, §3.3.
 id: reflective-cycle
 title: Осмислити досвід і переглянути власне правило
+method: "Gibbs Reflective Cycle і Double-Loop Learning"
 
 router:
   needs: >-

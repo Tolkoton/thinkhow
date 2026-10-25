@@ -55,6 +55,7 @@ class FacilitatorHalf(_Frozen):
 class Card(_Frozen):
     id: Annotated[str, StringConstraints(pattern=r"^[a-z0-9-]{1,64}$")]
     title: str
+    method: str = ""  # the name the method is known by (task 205); revisions stored before it have none
     router: RouterHalf
     facilitator: FacilitatorHalf
 

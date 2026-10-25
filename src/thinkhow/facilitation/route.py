@@ -88,6 +88,7 @@ def _card_text(card: Card) -> str:
     half = card.router
     lines = [
         f"### {card.id} — {card.title}",
+        *([f"Метод: {card.method}"] if card.method else []),
         f"Потрібно на вході: {half.needs}",
         "Коли так:",
         *(f"- {item}" for item in half.when_yes),

@@ -2,6 +2,7 @@
 # Джерела в research 01: §7(ґ) слот 7, §7(г) рядок 22, §3.3 (Stacey et al., 2024), §3.5 бар'єр 4, §7(а) рядки 8 і 10, §7(д).
 id: weighted-matrix
 title: Зважене порівняння варіантів за власними цінностями
+method: "Weighted Decision Matrix"
 
 router:
   needs: >-
