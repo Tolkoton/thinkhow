@@ -51,3 +51,13 @@
 - Record: tasks/done/406-cleanup-2026-10-25/report.md
 - Reason: All four questions hold. I checked every reference I could open and each one says what the report claims. Each of the four «Що зробити» items has an answer in the report. Neither the report nor the task file has an open question for the owner. The terms the owner reads (commit, package, signals, simplifier, subagents, nightly) are in English.
 - Request: 20261025T013612Z-9db726 (attempt 1)
+
+## 2026-10-25T18:39:37Z — 305-advice-on-request — READER_BLOCK
+- Record: tasks/done/305-advice-on-request/report.md
+- Reason: Question 4 fails. The report is written for the owner, and at line 8 it uses the translated engine term «виконавця» («вибір виконавця, найпростіший»). It should use the English term (runner, or the agent), or say «мій вибір», as line 57 does. Questions 1–3 hold: every reference I could open says what the report ascribes to it, both «Що зробити» items are answered, and the one owner question was a real fork and is now answered.
+- Request: 20261025T183812Z-7988c6 (attempt 1)
+
+## 2026-10-25T18:41:16Z — 305-advice-on-request — READER_PASS
+- Record: tasks/done/305-advice-on-request/report.md
+- Reason: All four questions hold. The references I could check say what the report claims: rules.md:6, research.md:16, goals.md:2 and N1, router.md:34, the card lines, the nine «v6 N1» lines, proposal 715, both live conversations, 83 of 85 in both router-eval runs, and the ledger with 878/ruff/mypy. Both «Що зробити» items are done: the goals amendment was answered «так» and applied, and the facilitator rule is in place. The single question to the owner listed its options and gave advice, and it is now answered. Technical terms in the report are in English.
+- Request: 20261025T183945Z-ff0f8d (attempt 2)

@@ -63,3 +63,12 @@
 - [x] v5 N1 → docs/adr/0002-gemini-pro-in-eu.md (перечитано 2026-10-25: «модель веде, а не відповідає» щодо рішень — у силі; пошук фактів — ADR-0006)
 - [x] v5 G7 → docs/adr/0006-research-web-grounding-enterprise.md (перечитано 2026-10-25: ADR-0006 написано під G7 v5)
 - [x] v5 N1 → docs/adr/0006-research-web-grounding-enterprise.md (перечитано 2026-10-25: ADR-0006 написано під N1 v5)
+- [ ] v6 N1 → .engine/architecture/architecture-map.md
+- [ ] v6 N1 → .engine/architecture/domain-map.md
+- [ ] v6 N1 → .engine/architecture/feature/research-in-conversation.md
+- [ ] v6 N1 → .engine/architecture/feature/thinking-models-router.md
+- [ ] v6 N1 → .engine/architecture/feature/voice-and-language.md
+- [ ] v6 N1 → .engine/architecture/feature/walking-skeleton.md
+- [ ] v6 N1 → docs/adr/0001-files-in-cloud-storage.md
+- [ ] v6 N1 → docs/adr/0002-gemini-pro-in-eu.md
+- [ ] v6 N1 → docs/adr/0006-research-web-grounding-enterprise.md
