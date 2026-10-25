@@ -132,3 +132,23 @@ Nothing listed here was removed.
 ### confirm (0)
 
 ### flag_only (0)
+
+## 2026-10-25T21:42:56Z — product-thinking-pack plan (requirements)
+
+### confirm (0)
+
+### flag_only (2)
+- APPLIED BY THE ARCHITECT `F-6e11c1b4` **.engine/architecture/feature/product-thinking-pack.md:149** — invented_requirement: The deferred item 'Розбиття opportunity-tree — як у задачі 302' can go. Task 307 does not ask for it, the feature does not depend on it, and the deferral is already recorded with its reason (P5) in thinking-models-router.md:172 and slices/router-eval.md:247. Without this line nothing is lost.
+  - applied to the plan 2026-10-25T21:43:09Z: рядок «Розбиття opportunity-tree» прибрано з Deferred — nothing is asked of the owner
+  - evidence: read tasks/doing/307-product-thinking-pack.md:27-41 'Що зробити' and 'Готово, коли' say nothing about splitting opportunity-tree; grep .engine/architecture/feature/thinking-models-router.md:172 the same deferral, with 'why later: P5', is already recorded in the feature that owns it; read .engine/architecture/feature/product-thinking-pack.md:149 unlike line 147, this line has no 'why later' and no revisit trigger; it only points back to 302
+  - test safety none, reversal risk low, protected false, traces to: none found in task 307; owned by thinking-models-router.md:172
+- APPLIED BY THE ARCHITECT `F-9e9c8621` **.engine/architecture/feature/product-thinking-pack.md:164-167** — duplication: The open item asks the same pending question as lines 41-42: what happens on a regression in an old case, and whether it blocks the deploy. It also words it as '≥85 з 85', which no longer matches the per-case rule defined at lines 32-40.
+  - applied to the plan 2026-10-25T21:43:09Z: Open item тепер лише посилається на абзац «Не гірше» в AC, без застарілого 85 з 85 — nothing is asked of the owner
+  - evidence: read .engine/architecture/feature/product-thinking-pack.md:41-42 'PROVISIONAL — owner ratification pending'; read .engine/architecture/feature/product-thinking-pack.md:165-167 the same question again, with the out-of-date base; read .engine/architecture/feature/product-thinking-pack.md:32-36 the base is run 180821Z, compared case by case
+  - test safety none, reversal risk low, protected false, traces to: task 307 'на старих випадках набір не погіршився'
+
+## 2026-10-25T21:42:56Z — product-thinking-pack plan (architecture)
+
+### confirm (0)
+
+### flag_only (0)

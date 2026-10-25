@@ -320,3 +320,14 @@ one; do not reopen the old one in conversation.
 - Why not escalated: розвилку розв'язують слова власника в задачі 303.
 - Evidence: `.engine/architecture/feature/research-in-conversation.md` (S3, Appendix — critic notes).
 - Status: CLOSED
+
+## 2026-10-25T21:40Z — AUTONOMOUS — product-thinking-pack-plan-round-2
+- Decision: feature-critic, раунд 2 з 2 (`FEATURE_CRITIC_REVISE`): лічильник карток у `scripts/smoke_test_cards_library.py`,
+  взятий з `cards/`, зробив би запечатаний `test_cl_catchup_disputed_q1_smoke_checks.py` червоним. Прийнято варіант
+  critic-а (a): літерал 25. Нотатки (межа 6 слів для правок S2, docstring `card_conversations.py`) — у плані. Третього
+  раунду критики немає (правило власника); critic: «With objection 1 fixed, I'd pass the plan».
+- Door: two-way
+- Cost to reverse: одне число в скрипті.
+- Why not escalated: технічний вибір, власникові нема з чого вибирати.
+- Evidence: `.engine/architecture/feature/product-thinking-pack.md` (S1 п. 3, Appendix — critic notes).
+- Status: CLOSED
