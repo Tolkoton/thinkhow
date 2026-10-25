@@ -1,0 +1,18 @@
+wge 26.4 queries ['Skoda Octavia Combi Preis Deutschland Neuwagen 2026', 'Skoda Octavia Combi Gebrauchtwagen Preis Deutschland']
+  entry_point: (5113, '<style> .container {   align-items: center;   border-radius: 8px;   display: flex;   font-family: Google Sans, Roboto, sans-serif;   font-size: 14px;   line-height: 20px;   padding: 8px 12px; } .chip {   display: inline-block;   border: solid 1px;   border-radius: 16px;   min-width: 14px;   padding:')
+  supports: 4
+  chunk: meinauto.de meinauto.de https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHCmgz62mr5P7lFNV9oeKj
+    302 https://www.meinauto.de/skoda/neuwagen/octavia/angebote/octavia-combi-das-neue-gesicht
+  chunk: autoflex24.de autoflex24.de https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGnZKDfCPYQPQU5E1v2v29
+    302 https://www.autoflex24.de/skoda-octavia-combi-reimport-autos-guenstig-kaufen-a__924a__1853a__2091a__2497a__2743a__3525_a
+  chunk: autohauskuhn.de autohauskuhn.de https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHhkSbGtmTtV_ysdcvQCW1
+    302 https://www.autohauskuhn.de/skoda-octavia-combi-a__228_alle.php
+gs 21.3 queries ['Skoda Octavia Combi Preis Deutschland 2025 2026']
+  entry_point: (4701, '<style> .container {   align-items: center;   border-radius: 8px;   display: flex;   font-family: Google Sans, Roboto, sans-serif;   font-size: 14px;   line-height: 20px;   padding: 8px 12px; } .chip {   display: inline-block;   border: solid 1px;   border-radius: 16px;   min-width: 14px;   padding:')
+  supports: 7
+  chunk: automobilsalon-bellemann.de automobilsalon-bellemann.de https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGVUv82gjZrr5DGeB4SdOt
+    302 https://automobilsalon-bellemann.de/news/skoda-octavia-2026-preis-ausstattung-technische-daten/
+  chunk: carwow.de carwow.de https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHfq3yDajDY-l5qZGWgTM6
+    302 https://www.carwow.de/skoda/octavia-combi
+  chunk: automobile-kraemer.de automobile-kraemer.de https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGIhdJkwyi4iwiSGjrD1R2
+    302 https://www.automobile-kraemer.de/eu-neuwagen-skoda-octavia-combi-a__5348a__6887a__7008a__7058a__7256_alle.php
