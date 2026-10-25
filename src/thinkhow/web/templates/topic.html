@@ -12,8 +12,12 @@
   {% endfor %}
   <article id="t{{ t.no }}" class="turn {{ t.role }}">
     <p class="who"><a href="#t{{ t.no }}">#{{ t.no }}</a> {% if t.role == "user" %}Ви{% else %}Фасилітатор{% endif %}</p>
-    <p class="text">{{ t.text }}</p>
+    <p class="text">{{ t.text | turn_html }}</p>
   </article>
+  {% for r in view.research if r.turn == t.no and r.suggestions_html %}
+  <iframe class="search-suggestions" sandbox="allow-popups allow-popups-to-escape-sandbox"
+          srcdoc="{{ '<base target="_blank">' ~ r.suggestions_html }}" title="Пошук Google"></iframe>
+  {% endfor %}
   {% endfor %}
 </section>
 {% endfor %}

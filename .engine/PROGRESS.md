@@ -234,3 +234,18 @@
   slice that touches the rules (S2) words it: «fact» only for what was found
 - Open for next slice: S1b — unwrap Google's redirect links (the line and `research.json` keep them for now), show
   Search suggestions; S1 is not deployed before S1b
+
+## Slice 18 — research-display (DONE 2026-10-25) — task 303, feature research-in-conversation S1b
+
+- Module: `platform/links.py` (`resolve_link`, `httpx_head`), `platform/llm.py` (`resolve_sources`, `VertexLlm(resolve)`,
+  `make_llm` wires it with search), `workspace` (`ResearchView`, `TopicView.research`), `web/text.py` (`turn_html`),
+  `topic.html` (links, `iframe srcdoc` with `<base target="_blank">` + Google's HTML), `style.css`; `httpx` declared
+  (~110 LOC)
+- Tests: 24 contract tests of the slice-tester (`tests/contract/research_display/`, two questions answered); new guard
+  `tests/test_a3_httpx.py`; 768 passed, no sealed test changed
+- Probe: `.engine/artifacts/spikes/research-display-probe-2026-10-25/probe.out` — Google's chips have no `target`
+- Live: `.engine/artifacts/spikes/research-display-live-2026-10-25T091556Z.txt` — #17: 4 sources, all real pages
+  (jobbers.io, kudiso.de…), 0 Google links left; the page: 4 `<a href>`, the frame after #18; `llm_call` 46.5 s
+  (#17), 9.0 s (#25, no search), 30.4 s (price, 3 queries)
+- Surprises: the same calls took 3 min an hour earlier — Vertex's own latency varies; recorded only (P4)
+- Open for next slice: S2 — «answer»; the rule's line «fact — only what was found» (S1 finding)

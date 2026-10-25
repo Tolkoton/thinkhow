@@ -39,6 +39,7 @@ from thinkhow.workspace.model import (
     NumberedTurn,
     PendingAnswer,
     ReplyEvent,
+    ResearchView,
     Saved,
     Session,
     TopicId,
@@ -120,7 +121,8 @@ def open_topic(storage: Storage, user: CurrentUser, ref: TopicRef, now: datetime
     conv = _read_conversation(storage, ref)
     sessions = [_session(s, now) for s in conv.sessions]
     problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
-    return TopicView(ref, conv.title, sessions, problem_map, _awaiting(conv, now), routing)
+    research = tuple(ResearchView(e.turn, e.suggestions_html) for e in _read_research(storage, ref))
+    return TopicView(ref, conv.title, sessions, problem_map, _awaiting(conv, now), routing, research)
 
 
 def reply(
@@ -342,11 +344,16 @@ def _entry(event: ResearchEvent, turn: int) -> ResearchEntry:
     )
 
 
+def _read_research(storage: Storage, ref: TopicRef) -> list[ResearchEntry]:
+    """The research entries of the topic; none without research.json (a parse error is not recovered)."""
+    data = storage.read("users", f"{ref.uid}/{ref.topic_id}/research.json")
+    return [] if data is None else ResearchFile.model_validate_json(data).entries
+
+
 def _append_research(storage: Storage, ref: TopicRef, entries: list[ResearchEntry]) -> None:
     """research.json keeps every earlier entry; the new ones go after them (I5)."""
     path = f"{ref.uid}/{ref.topic_id}/research.json"
-    data = storage.read("users", path)
-    old = [] if data is None else ResearchFile.model_validate_json(data).entries
+    old = _read_research(storage, ref)
     body = ResearchFile(entries=[*old, *entries]).model_dump_json().encode("utf-8")
     storage.write("users", path, body, JSON)
 

@@ -6,6 +6,8 @@ then the owner's #17 goes through `workspace.reply` with `VertexLlm(search=True)
 conditions: the owner's #25 after #1–#24, and a direct price question after #1–#16. One run; no search on
 #17 is a finding, not a reason to run again. Each run writes a new file in .engine/artifacts/spikes/ with
 the model's answers, the queries, the sources and the `llm_call` lines — the owner's turns only by number.
+Slice research-display: no Google redirect link may stay where Google answers a redirect, and the topic page
+shows the links and the Search suggestions frame under the answer to #17.
 """
 
 import json
@@ -15,14 +17,19 @@ from datetime import timedelta
 from pathlib import Path
 from typing import Any
 
+import httpx
 import pytest
+from fastapi.testclient import TestClient
 
 from thinkhow.access import CurrentUser
 from thinkhow.facilitation import respond
 from thinkhow.knowledge import current, seed
 from thinkhow.platform.config import load_settings
+from thinkhow.platform.links import GOOGLE_REDIRECT
 from thinkhow.platform.llm import make_llm
 from thinkhow.platform.storage import LocalStorage
+from thinkhow.web.app import build_deps
+from thinkhow.web.server import create_app
 from thinkhow.workspace import Answered, Delta, TopicRef, set_language
 from thinkhow.workspace import conversation as conv_file
 
@@ -77,6 +84,8 @@ def _ask(storage: LocalStorage, facilitate: Any, ref: TopicRef, text: str, at: A
     research = json.loads(storage.read("users", f"{base}/research.json") or b'{"entries": []}')
     problem_map = json.loads(storage.read("users", f"{base}/map.json") or b"{}")
     return {
+        "ref": ref,
+        "turn": events[-1].turn_no if isinstance(events[-1], Answered) else None,
         "answered": isinstance(events[-1], Answered),
         "answer": "".join(e.text for e in events if isinstance(e, Delta)),
         "research": research["entries"],
@@ -133,8 +142,25 @@ def test_owner_turn_17_searches_and_answers_with_sources(
     lines += _section("Репліка власника #17 (історія #1–#16, картка weighted-matrix)", r17)
     lines += _section("Репліка власника #25 (історія #1–#24) — записується", r25)
     lines += _section(f"Пряме питання «{PRICE}» (історія #1–#16) — записується", price)
+    left = _google_links(r17) + _google_links(price)
+    page = _page(tmp_path, r17)
+    lines += ["## S1b: розгортання і сторінка", "", f"посилань Google лишилось: {left}", ""]
+    lines += [f'на сторінці теми #17: `<a href="https://` — {page.count('<a href="https://')}']
+    lines += [
+        f'`<iframe class="search-suggestions"` після #{r17["turn"]}: {_frame_after(page, r17["turn"])}',
+        "",
+    ]
+    for entry in r17["research"]:
+        lines += [
+            "Search suggestions (HTML, як прийшов):",
+            "",
+            "```html",
+            entry["suggestions_html"] or "",
+            "```",
+            "",
+        ]
     lines += ["## Рядки `llm_call`", "", "```", *log, "```", ""]
-    path = SPIKES / f"research-quick-live-{_now().replace(':', '')}.txt"
+    path = SPIKES / f"research-display-live-{_now().replace(':', '')}.txt"
     path.write_text("\n".join(lines), encoding="utf-8")
     print(out, end="")
     print(path)
@@ -143,8 +169,45 @@ def test_owner_turn_17_searches_and_answers_with_sources(
     assert r17["research"] and r17["research"][0]["queries"] and r17["research"][0]["sources"], r17[
         "research"
     ]
+    for status in left:  # a Google link still there: Google must not have answered with a redirect
+        assert not (300 <= status[1] < 400 and str(status[2]).startswith("http")), left
+    assert '<a href="https://' in page and _frame_after(page, r17["turn"]), page[-2000:]
     first = json.loads(log[0])  # the first model call of the run is #17's facilitator call
     assert first["search"] is True and first["queries"] >= 1, log
+
+
+def _google_links(row: dict[str, Any]) -> list[tuple[str, int, str | None]]:
+    """Every source still a Google redirect link, with what a direct HEAD answers for it now."""
+    urls = [s["url"] for e in row["research"] for s in e["sources"] if s["url"].startswith(GOOGLE_REDIRECT)]
+    return [(u, *_head(u)) for u in urls]
+
+
+def _head(url: str) -> tuple[int, str | None]:
+    try:
+        response = httpx.head(url, follow_redirects=False, timeout=10)
+    except httpx.HTTPError as exc:
+        return 0, type(exc).__name__
+    return response.status_code, response.headers.get("location")
+
+
+def _page(root: Path, row: dict[str, Any]) -> str:
+    """The topic page of #17's local topic, as the owner of the local app sees it."""
+    environ = {
+        "THINKHOW_LOCAL": "true",
+        "THINKHOW_LOCAL_DIR": str(root),
+        "THINKHOW_OWNER_EMAIL": "owner@localhost",
+    }
+    client = TestClient(create_app(build_deps(environ, CARDS)), follow_redirects=False)
+    client.post("/language", data={"code": "uk-UA"})
+    ref = row["ref"]
+    return client.get(f"/topics/{ref.uid}/{ref.topic_id}").text
+
+
+def _frame_after(page: str, turn: int | None) -> bool:
+    start = page.find(f'id="t{turn}"')
+    nxt = page.find(f'id="t{(turn or 0) + 1}"')
+    frame = page.find('<iframe class="search-suggestions"', start)
+    return start >= 0 and frame > start and (nxt < 0 or frame < nxt)
 
 
 def _now() -> str:

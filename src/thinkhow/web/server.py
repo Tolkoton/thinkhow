@@ -29,9 +29,11 @@ from thinkhow.platform.identity import FixedIdentity, IapIdentity, IdentityError
 from thinkhow.platform.speech import Speech, SpeechUnavailable
 from thinkhow.platform.storage import Storage
 from thinkhow.web.method import caption, marks
+from thinkhow.web.text import turn_html
 
 HERE = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=HERE / "templates")
+TEMPLATES.env.filters["turn_html"] = turn_html
 Scope = MutableMapping[str, Any]
 Message = MutableMapping[str, Any]
 ASGIApp = Callable[

@@ -4,9 +4,11 @@ Vertex AI (google-genai) in production, a scripted double in tests and local mod
 Does NOT build prompts or know any schema of the parts; the knowledge revision is opaque log data.
 """
 
+import functools
 import time
 from collections.abc import Callable, Iterator, Sequence
-from dataclasses import dataclass
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass, replace
 from typing import Any, Literal, Protocol, TypeVar
 
 from google.genai import types
@@ -15,9 +17,11 @@ from pydantic import BaseModel
 from thinkhow.platform._reply_stream import ReplyExtractor
 from thinkhow.platform._retry import backoff_s, retryable
 from thinkhow.platform.config import Settings
+from thinkhow.platform.links import httpx_head, resolve_link
 from thinkhow.platform.log import log_event
 
 M = TypeVar("M", bound=BaseModel)
+RESOLVE_THREADS = 8
 
 
 @dataclass(frozen=True)
@@ -106,9 +110,11 @@ class VertexLlm:
         sleep: Callable[[float], None] = time.sleep,
         clock: Callable[[], float] = time.monotonic,
         search: bool = False,
+        resolve: Callable[[str], str] | None = None,
     ) -> None:
         self.client = client
         self.search = search
+        self.resolve = resolve
         self.model = model
         self.timeout_s = timeout_s
         self.attempts = attempts
@@ -138,7 +144,7 @@ class VertexLlm:
                 except Exception as exc:
                     self._fail_or_wait(exc, attempt, shown)
                     continue
-                call.found = gathered.found() if self.search else None
+                call.found = self._resolved(gathered.found() if self.search else None)
                 self._log(call, started, rev, "ok")
                 yield Done("".join(raw), call.usage, call.found)
                 return
@@ -189,6 +195,12 @@ class VertexLlm:
             tools=[types.Tool(enterprise_web_search=types.EnterpriseWebSearch())] if search else None,
         )
 
+    def _resolved(self, found: Found | None) -> Found | None:
+        """The found sources with Google's redirect links unwrapped, before Done and the log line (S1b)."""
+        if found is None or self.resolve is None:
+            return found
+        return replace(found, sources=resolve_sources(found.sources, self.resolve))
+
     def _fail_or_wait(self, exc: Exception, attempt: int, shown: bool) -> None:
         """Raise LlmUnavailable unless a retry is allowed; otherwise wait the backoff."""
         if shown or not retryable(exc) or attempt + 1 >= self.attempts:
@@ -211,6 +223,18 @@ class VertexLlm:
             search=call.search,
             queries=len(call.found.queries) if call.found else 0,
         )
+
+
+def resolve_sources(sources: Sequence[Source], resolve: Callable[[str], str]) -> tuple[Source, ...]:
+    """Every source's url resolved in parallel; order and titles kept, no url twice after resolving."""
+    if not sources:
+        return ()
+    with ThreadPoolExecutor(max_workers=min(RESOLVE_THREADS, len(sources))) as pool:
+        urls = list(pool.map(resolve, [s.url for s in sources]))
+    unique: dict[str, Source] = {}
+    for source, url in zip(sources, urls, strict=True):
+        unique.setdefault(url, Source(source.title, url))
+    return tuple(unique.values())
 
 
 class _Gathered:
@@ -315,4 +339,7 @@ def make_llm(
     from google import genai
 
     client = genai.Client(vertexai=True, project=settings.project, location=settings.location)
-    return VertexLlm(client, settings.model, settings.llm_timeout_s, settings.llm_attempts, search=search)
+    resolve = functools.partial(resolve_link, head=httpx_head) if search else None
+    return VertexLlm(
+        client, settings.model, settings.llm_timeout_s, settings.llm_attempts, search=search, resolve=resolve
+    )

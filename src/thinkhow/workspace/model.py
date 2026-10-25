@@ -51,6 +51,14 @@ class TopicSummary:
 
 
 @dataclass(frozen=True)
+class ResearchView:
+    """What the topic page shows of one research entry: the answer it belongs to, Google's suggestions."""
+
+    turn: int
+    suggestions_html: str | None
+
+
+@dataclass(frozen=True)
 class TopicView:
     ref: TopicRef
     title: str
@@ -58,6 +66,7 @@ class TopicView:
     problem_map: ProblemMap
     awaiting_answer: bool
     routing: tuple[Decision, ...] = ()
+    research: tuple[ResearchView, ...] = ()
 
 
 @dataclass(frozen=True)
