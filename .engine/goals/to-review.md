@@ -52,14 +52,14 @@
 - [ ] v4 C1 → docs/adr/0002-gemini-pro-in-eu.md
 - [ ] v4 Q2 → docs/adr/0002-gemini-pro-in-eu.md
 - [ ] v4 N1 → docs/adr/0002-gemini-pro-in-eu.md
-- [ ] v5 G7 → .engine/architecture/architecture-map.md
-- [ ] v5 N1 → .engine/architecture/architecture-map.md
-- [ ] v5 N1 → .engine/architecture/domain-map.md
-- [ ] v5 G7 → .engine/architecture/feature/thinking-models-router.md
-- [ ] v5 N1 → .engine/architecture/feature/thinking-models-router.md
-- [ ] v5 N1 → .engine/architecture/feature/voice-and-language.md
-- [ ] v5 N1 → .engine/architecture/feature/walking-skeleton.md
-- [ ] v5 N1 → docs/adr/0001-files-in-cloud-storage.md
-- [ ] v5 N1 → docs/adr/0002-gemini-pro-in-eu.md
-- [ ] v5 G7 → docs/adr/0006-research-web-grounding-enterprise.md
-- [ ] v5 N1 → docs/adr/0006-research-web-grounding-enterprise.md
+- [x] v5 G7 → .engine/architecture/architecture-map.md (перечитано 2026-10-25: M2 S9 і M3 A7 написано під G7 v5 (дослідження — частина продукту))
+- [x] v5 N1 → .engine/architecture/architecture-map.md (перечитано 2026-10-25: S9: виняток для фактів N1 v5 — дія «answer» і пошук у фасилітаторі; правило «без готових відповідей» щодо рішень лишається)
+- [x] v5 N1 → .engine/architecture/domain-map.md (перечитано 2026-10-25: «без готових відповідей» у Фасилітації стосується рішень і порад — N1 v5 це зберігає; факти додає feature research-in-conversation)
+- [x] v5 G7 → .engine/architecture/feature/thinking-models-router.md (перечитано 2026-10-25: роутер обирає спосіб думати — G7 v5 лише додає пошук фактів, рішення роутера не змінюються; дію «answer» додає research-in-conversation S2)
+- [x] v5 N1 → .engine/architecture/feature/thinking-models-router.md (перечитано 2026-10-25: «роутер не радить, що робити з проблемою» — у силі; пряме фактичне питання — дія «answer» (research-in-conversation S2))
+- [x] v5 N1 → .engine/architecture/feature/voice-and-language.md (перечитано 2026-10-25: голос і мова не зачіпають N1)
+- [x] v5 N1 → .engine/architecture/feature/walking-skeleton.md (перечитано 2026-10-25: правило фасилітатора без готових відповідей щодо рішень — у силі; факти — research-in-conversation)
+- [x] v5 N1 → docs/adr/0001-files-in-cloud-storage.md (перечитано 2026-10-25: зберігання файлів N1 не зачіпає)
+- [x] v5 N1 → docs/adr/0002-gemini-pro-in-eu.md (перечитано 2026-10-25: «модель веде, а не відповідає» щодо рішень — у силі; пошук фактів — ADR-0006)
+- [x] v5 G7 → docs/adr/0006-research-web-grounding-enterprise.md (перечитано 2026-10-25: ADR-0006 написано під G7 v5)
+- [x] v5 N1 → docs/adr/0006-research-web-grounding-enterprise.md (перечитано 2026-10-25: ADR-0006 написано під N1 v5)

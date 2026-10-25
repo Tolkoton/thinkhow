@@ -120,3 +120,15 @@ Nothing listed here was removed.
   - test safety characterization_exists, reversal risk medium, protected false, traces to: none found: no goal or F13 criterion needs google-cloud-speech since ADR-0005. The only reason to keep it is the owner's still-open option to compare against Speech-to-Text v2 (voice-and-language.md:119)
 
 ### flag_only (0)
+
+## 2026-10-25T07:57:25Z — research-in-conversation plan, lens requirements
+
+### confirm (0)
+
+### flag_only (0)
+
+## 2026-10-25T07:57:25Z — research-in-conversation plan, lens architecture
+
+### confirm (0)
+
+### flag_only (0)
