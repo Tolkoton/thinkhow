@@ -331,3 +331,13 @@ one; do not reopen the old one in conversation.
 - Why not escalated: технічний вибір, власникові нема з чого вибирати.
 - Evidence: `.engine/architecture/feature/product-thinking-pack.md` (S1 п. 3, Appendix — critic notes).
 - Status: CLOSED
+
+## 2026-10-25T23:05Z — AUTONOMOUS — product-router-eval-phase-2-round-4
+- Decision: фаза 2 slice-а `product-router-eval` мала три раунди critic-а, кожен — нова виправна вада (повтори в одній
+  теці з повними прогонами; `unavailable` як регрес; хибне «чому» Q1), без коливання. Третє виправлення не йде на
+  четвертий раунд фази (запобіжник `/plan-slice` від коливання): його перевіряє cold reader усього контракту.
+- Door: two-way
+- Cost to reverse: ще один раунд critic-а фази 2 до пломбування.
+- Why not escalated: позиції не коливаються, власникові нема з чого вибирати; рішення технічне.
+- Evidence: `.engine/slices/product-router-eval.md` («Critic notes»).
+- Status: CLOSED
