@@ -3,7 +3,7 @@ this module imports neither thinkhow.knowledge nor thinkhow.platform (skel-facil
 
 from collections.abc import Callable, Iterator, Sequence
 from dataclasses import dataclass, field
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -79,6 +79,20 @@ class FactUpdate(_Frozen):
     """The update-only retry of a fact answer: the map's changes alone."""
 
     map_updates: list[MapUpdate]
+
+
+class DeepPlan(_Frozen):
+    """The deep cycle's plan: one line to the person, then 2–4 sub-questions to search."""
+
+    intro: str = Field(min_length=1)
+    questions: list[Annotated[str, Field(min_length=1)]] = Field(min_length=2, max_length=4)
+
+
+class DeepReport(_Frozen):
+    """The deep cycle's report to the person and the facts it found (the code makes them map items)."""
+
+    report: str = Field(min_length=1)
+    facts: list[str]
 
 
 class Profile(_Frozen):
@@ -159,6 +173,12 @@ class ResearchEvent:
     suggestions_html: str | None
     question: str | None = None
     report: str | None = None
+
+
+def clean_question(question: str | None) -> str | None:
+    """A deep question trimmed; an empty or blank one is none (research-deep)."""
+    text = (question or "").strip()
+    return text or None
 
 
 def current_card(routing: Sequence[Decision]) -> str | None:

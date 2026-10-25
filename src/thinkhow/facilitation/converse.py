@@ -7,6 +7,7 @@ from collections.abc import Callable, Iterator
 from dataclasses import replace
 
 from thinkhow.facilitation.answer import answer_fact
+from thinkhow.facilitation.deep import deep_answer
 from thinkhow.facilitation.route import RouterAnswer, route
 from thinkhow.facilitation.types import (
     Decision,
@@ -37,6 +38,9 @@ def converse(
         answer = route(ctx, knowledge, llm)
         decision = _decision(answer, ctx.turn_no, knowledge)
         yield RoutingEvent(decision)
+        if answer.action == "answer" and answer.deep_question is not None:
+            yield from deep_answer(answer.deep_question, ctx, llm, knowledge.rev_pair())
+            return
         if answer.action == "answer":
             yield from answer_fact(ctx, knowledge, llm)
             return

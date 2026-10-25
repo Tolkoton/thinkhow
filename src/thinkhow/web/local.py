@@ -56,6 +56,13 @@ def _first_phase(schema: type[BaseModel]) -> str:
     return str(values[0])
 
 
+def local_search(system: str, prompt: str) -> tuple[str, Found | None]:
+    """The local double's web search of the deep cycle: a fixed text and source."""
+    return f"(локально) знайдено: {prompt}", Found(
+        queries=(prompt[:80],), sources=(LOCAL_SOURCE,), suggestions_html=None
+    )
+
+
 def local_found(system: str, contents: Sequence[Turn], schema: type[BaseModel]) -> Found | None:
     """The local double's search: a fixed «found» when the person's turn asks «скільки коштує»."""
     _, text = _frame(contents)

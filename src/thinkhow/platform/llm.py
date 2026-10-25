@@ -83,9 +83,12 @@ class Llm(Protocol):
         self, system: str, contents: Sequence[Turn], schema: type[M], rev: KnowledgeRev | None
     ) -> M: ...
 
+    def search_text(self, system: str, prompt: str, rev: KnowledgeRev | None) -> tuple[str, Found | None]: ...
+
 
 Script = Callable[[str, Sequence[Turn], type[BaseModel]], str]
 FoundScript = Callable[[str, Sequence[Turn], type[BaseModel]], Found | None]
+SearchScript = Callable[[str, str], tuple[str, Found | None]]
 
 
 class _Attempt:
@@ -174,6 +177,40 @@ class VertexLlm:
         except LlmUnavailable:
             self._log(call, started, rev, "unavailable")
             raise
+
+    def search_text(self, system: str, prompt: str, rev: KnowledgeRev | None) -> tuple[str, Found | None]:
+        """One web-searched call without JSON: the text and what search found (the deep cycle, S3)."""
+        started, call = self.clock(), _Attempt(search=True)
+        try:
+            for attempt in range(self.attempts):
+                call.attempts = attempt + 1
+                try:
+                    response = self.client.models.generate_content(
+                        model=self.model,
+                        contents=_contents([Turn("user", prompt)]),
+                        config=self._search_config(system),
+                    )
+                except Exception as exc:
+                    self._fail_or_wait(exc, attempt, shown=False)
+                    continue
+                call.usage = _usage(response.usage_metadata) or call.usage
+                gathered = _Gathered()
+                gathered.add(response)
+                call.found = self._resolved(gathered.found())
+                self._log(call, started, rev, "ok")
+                return _chunk_text(response), call.found
+            raise LlmUnavailable("no attempt was allowed")
+        except LlmUnavailable:
+            self._log(call, started, rev, "unavailable")
+            raise
+
+    def _search_config(self, system: str) -> types.GenerateContentConfig:
+        """A searched call's config: the search tool, no JSON schema."""
+        return types.GenerateContentConfig(
+            system_instruction=system,
+            http_options=types.HttpOptions(timeout=int(self.timeout_s * 1000)),
+            tools=[types.Tool(enterprise_web_search=types.EnterpriseWebSearch())],
+        )
 
     def _open_stream(
         self, system: str, contents: Sequence[Turn], schema: type[BaseModel], search: bool
@@ -303,10 +340,17 @@ def _usage(meta: Any) -> Usage | None:
 class ScriptedLlm:
     """The double: the script's JSON, cut into `chunk`-sized pieces, through the same delta extraction."""
 
-    def __init__(self, script: Script, chunk: int = 7, found_script: FoundScript | None = None) -> None:
+    def __init__(
+        self,
+        script: Script,
+        chunk: int = 7,
+        found_script: FoundScript | None = None,
+        search_script: SearchScript | None = None,
+    ) -> None:
         self.script = script
         self.chunk = chunk
         self.found_script = found_script
+        self.search_script = search_script
         self.calls: list[tuple[str, list[Turn], type[BaseModel]]] = []
 
     def stream_json(
@@ -326,16 +370,24 @@ class ScriptedLlm:
     ) -> M:
         return schema.model_validate_json(self._answer(system, contents, schema))
 
+    def search_text(self, system: str, prompt: str, rev: KnowledgeRev | None) -> tuple[str, Found | None]:
+        """The double's search: the search script's answer, or nothing found without one."""
+        return self.search_script(system, prompt) if self.search_script else ("", None)
+
     def _answer(self, system: str, contents: Sequence[Turn], schema: type[BaseModel]) -> str:
         self.calls.append((system, list(contents), schema))
         return self.script(system, contents, schema)
 
 
 def make_llm(
-    settings: Settings, script: Script, search: bool = False, found_script: FoundScript | None = None
+    settings: Settings,
+    script: Script,
+    search: bool = False,
+    found_script: FoundScript | None = None,
+    search_script: SearchScript | None = None,
 ) -> Llm:
     if settings.local:
-        return ScriptedLlm(script, found_script=found_script if search else None)
+        return ScriptedLlm(script, found_script=found_script if search else None, search_script=search_script)
     from google import genai
 
     client = genai.Client(vertexai=True, project=settings.project, location=settings.location)

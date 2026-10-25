@@ -263,3 +263,25 @@
   verified)
 - Surprises: none
 - Open for next slice: S3 — `deep_question` (also in `FactAnswer`), the cycle in `settle`'s neighbourhood
+
+## Slice 20 — research-deep (DONE 2026-10-25) — task 303, feature research-in-conversation S3
+
+- Module: `facilitation/deep.py` + `deep.md` (plan → parallel searches in the caller's context → report; facts made
+  map items by code), `deep_field.md` (the `deep_question` rule, facilitator under the router only), `research.md`
+  (+ the offer sentence), `router.md` (+ agreement → `answer` with `deep_question`), `respond.py` (routed schemas with
+  `deep_question`, `_Asked`), `converse.py` (`deep_answer`), `route.py` (`deep_question`, trimmed), `types.py`
+  (`DeepPlan`, `DeepReport`, `clean_question`), `platform/llm.py` (`search_text`, `search_script`), `web/local.py`
+  (`local_search`) (~260 LOC)
+- Tests: 34 contract tests of the slice-tester (`tests/contract/research_deep/`, seven questions answered in the
+  ledger reply below); 820 passed, no sealed test changed
+- Live (AC3): `.engine/artifacts/spikes/research-deep-live-2026-10-25T110340Z.txt` — «Так, досліди.» under the card →
+  4 sub-questions, 12 queries, a report with local sources ending in one question, `fact` items; 104.6 s;
+  ≈ $0.31 ($0.145 model + $0.168 search beyond the free 5 000/month); shown = recorded
+- Surprises: the facilitator said «Починаю дослідження…» and the plan's intro said it again — two lines of the same
+  meaning; the planning took 4+4+3 critic rounds (each a new defect)
+- Open for next slice: S4 — the owner's conversation #16–#30 again, before and after; deploy through Сонько; the
+  deep run through the deployed service (SSE silence ~100 s)
+- Answers to the tester's questions (no test waited on them): plan/search/report systems carry
+  `language_rule` under «# Мова відповіді»; suggestions — the last non-empty in sub-question order; findings headed
+  by their sub-question; queries collapsed; a blank `deep_question` is None with any action; locally `search_script`
+  is passed always; the separator goes into both stream and reply only after text

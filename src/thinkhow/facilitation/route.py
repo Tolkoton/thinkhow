@@ -7,7 +7,7 @@ from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import Any, Literal, cast
 
-from pydantic import ValidationError, create_model, model_validator
+from pydantic import ValidationError, create_model, field_validator, model_validator
 
 from thinkhow.facilitation.language import language_rule
 from thinkhow.facilitation.types import (
@@ -17,6 +17,7 @@ from thinkhow.facilitation.types import (
     FacilitationError,
     Profile,
     _Frozen,
+    clean_question,
 )
 from thinkhow.knowledge import Card, CurrentKnowledge
 from thinkhow.platform import llm as model
@@ -32,6 +33,12 @@ class RouterAnswer(_Frozen):
     card_id: str | None
     reply: str | None
     why: str
+    deep_question: str | None = None
+
+    @field_validator("deep_question")
+    @classmethod
+    def _trimmed(cls, value: str | None) -> str | None:
+        return clean_question(value)
 
     @model_validator(mode="after")
     def _fits_its_action(self) -> "RouterAnswer":
@@ -44,6 +51,8 @@ class RouterAnswer(_Frozen):
             raise ValueError("an ask needs a reply")
         if self.action == "choose" and self.card_id is None:
             raise ValueError("a choose needs a card_id")
+        if self.deep_question is not None and self.action != "answer":
+            raise ValueError("a deep question goes only with an answer")
         if self.action == "answer" and self.card_id is not None:
             raise ValueError("an answer chooses no card")
         return self

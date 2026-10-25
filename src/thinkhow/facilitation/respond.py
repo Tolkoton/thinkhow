@@ -10,6 +10,7 @@ from typing import Any, Literal
 from pydantic import BaseModel, create_model
 
 from thinkhow.facilitation.converse import converse
+from thinkhow.facilitation.deep import with_deep
 from thinkhow.facilitation.language import NO_LANGUAGE_RULE as NO_LANGUAGE_RULE
 from thinkhow.facilitation.language import language_rule as language_rule
 from thinkhow.facilitation.settle import RESEARCH_SECTION as RESEARCH_SECTION
@@ -22,6 +23,7 @@ from thinkhow.facilitation.types import (
     ReplyDelta,
     ResearchEvent,
     RoutingEvent,
+    clean_question,
 )
 from thinkhow.knowledge import Card, CurrentKnowledge, MemoryRecord, card_prompt
 from thinkhow.platform import llm as model
@@ -29,6 +31,7 @@ from thinkhow.platform import llm as model
 RULES = (Path(__file__).with_name("rules.md")).read_text(encoding="utf-8").rstrip("\n")
 RETRY_ASK = "Поверни лише оновлення до своєї відповіді вище: фаза, вихід, зміни карти."
 ROUTED_SECTION = (Path(__file__).with_name("routed.md")).read_text(encoding="utf-8").rstrip("\n")
+DEEP_FIELD = (Path(__file__).with_name("deep_field.md")).read_text(encoding="utf-8").rstrip("\n")
 FREE_MODE_LINE = "[Стан] Вільний режим уже триває: людина чула, що картка не підходить. Не кажи цього знову."
 
 
@@ -52,15 +55,18 @@ def lead(
     contents, rev = _contents(ctx), knowledge.rev_pair()
     shown: list[str] = []
     raw, found = "", None
-    for event in llm.stream_json(system, contents, answer_schema(card), rev):
+    stream_schema = _routed(card)[0] if ctx.routing is not None else answer_schema(card)
+    for event in llm.stream_json(system, contents, stream_schema, rev):
         if isinstance(event, model.ReplyDelta):
             shown.append(event.text)
             yield ReplyDelta(event.text)
         else:
             raw, found = event.raw_json, event.found
-    schemas = answer_schema(card), update_schema(card)
-    settled = settle(llm, system, contents, rev, "".join(shown), raw, *schemas, RETRY_ASK, _same)
-    yield from with_research(settled, found)
+    routed, asked = ctx.routing is not None, _Asked()
+    schemas = _routed(card) if routed else (answer_schema(card), update_schema(card))
+    fill = asked.take if routed else _same
+    settled = settle(llm, system, contents, rev, "".join(shown), raw, *schemas, RETRY_ASK, fill)
+    yield from with_deep(with_research(settled, found), asked.get, ctx, llm, rev)
 
 
 def system_instruction(
@@ -69,7 +75,7 @@ def system_instruction(
     """The rules, the person's language (F13), under the router its section, then the card and the memory."""
     head = f"{RULES}\n\n# Мова відповіді\n{language_rule(language)}\n"
     if routed:
-        head += f"\n{ROUTED_SECTION}\n\n{RESEARCH_SECTION}\n"
+        head += f"\n{ROUTED_SECTION}\n\n{RESEARCH_SECTION}\n\n{DEEP_FIELD}\n"
     return f"{head}\n# Картка\n{card_prompt(card)}\n# Пам'ять досвіду\n{_memory_text(memory)}\n"
 
 
@@ -93,6 +99,28 @@ def update_schema(card: Card) -> type[BaseModel]:
 def _phases(card: Card) -> Any:
     """A phase of the card, or None: the card does not fit (free mode, facilitator-free-mode Q1)."""
     return Literal[tuple(phase.id for phase in card.facilitator.phases)] | None
+
+
+class _Asked:
+    """The deep question the update carried: taken off its fields by `fill`, read when the update comes."""
+
+    def __init__(self) -> None:
+        self.question: str | None = None
+
+    def take(self, fields: dict[str, Any]) -> dict[str, Any]:
+        self.question = clean_question(fields.pop("deep_question", None))
+        return fields
+
+    def get(self) -> str | None:
+        return self.question
+
+
+def _routed(card: Card) -> tuple[type[BaseModel], type[BaseModel]]:
+    """Under the router the card's schemas get `deep_question` last (research-deep Q1)."""
+    deep: Any = (str | None, None)
+    full = create_model("RoutedFacilitatorAnswer", __base__=answer_schema(card), deep_question=deep)
+    update = create_model("RoutedFacilitatorUpdateOnly", __base__=update_schema(card), deep_question=deep)
+    return full, update
 
 
 def _same(fields: dict[str, Any]) -> dict[str, Any]:
