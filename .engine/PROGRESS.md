@@ -285,3 +285,20 @@
   `language_rule` under «# Мова відповіді»; suggestions — the last non-empty in sub-question order; findings headed
   by their sub-question; queries collapsed; a blank `deep_question` is None with any action; locally `search_script`
   is passed always; the separator goes into both stream and reply only after text
+
+## Slice 21 — research-live (DONE 2026-10-25) — task 303, feature research-in-conversation S4
+
+- Files: `tests/live/test_research_owner_live.py` (helpers `owner_turns`, `start_map`, `evidence` + the live run); no
+  product code
+- Tests: 9 contract tests of the slice-tester (`tests/contract/research_live/`, five questions)
+- Live: `.engine/artifacts/research-live/2026-10-25T112606Z/conversation.md` — the owner's #17–#29 verbatim after his
+  #1–#16 (map cut to turns ≤ 16, no `routing.json`): all 7 answered; #17, #19, #23, #25, #27 — the router offered ways
+  to think (no fact asked of the person, no search), #21 «якби я знав… чи треба мені фасилітатор?» — `answer` with 3
+  queries and sources (freelance 1–4 weeks, micro-SaaS 14–90 days, Mittelstand months), #29 — `ask`
+- Surprises: replayed verbatim, the owner's turns never choose an offered way, so the router offers again on every
+  turn; the router answers by search only when the turn is a question of fact (#21), not on «Як це можна взнати?»
+  (#17) — a finding for the owner, not changed here
+- Open: deployment through Сонько; the deployed deep run (SSE silence)
+- S4 rerun after the overseer's PASS (its two test gaps closed in the live test: I1 asserted, every check after the
+  artifact): `.engine/artifacts/research-live/2026-10-25T113539Z/conversation.md` — all 7 answered, I1 held; this time
+  #21 also `offer`, no search on any turn → the router path does not meet AC1; probe and slice S2b `router-unknown-fact`
