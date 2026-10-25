@@ -330,3 +330,13 @@
   and after)
 - Not done (decided): observations of the nightly learning stay in `system/learning/observations/` (the web account
   cannot write `system`); no «restore» — the bucket's versioning keeps the deleted files as old versions
+
+## Slice 24 — send-stops-recording (DONE 2026-10-25) — task 206, one slice without /plan-slice (as tasks 203, 204)
+
+- Module: `web/static/conversation.js` — `createRecorder` exposes `busy()` (from `start` until the text came or the
+  recognition failed, the gap between `stop()` and the recorder's `stop` event included); `attach` routes «Надіслати»
+  to `recorder.stop()` while the microphone is busy (a no-op while recognizing), so nothing is sent and the
+  «Порожню репліку не надіслано.» refusal never comes; the next press sends the field
+- Tests: `tests/web/send_stops_recording.test.mjs` (4, `node --test`) via `tests/web/test_send_stops_recording.py`
+- Browser: `scripts/smoke_test_send_stops_recording.py` (fake microphone) → `.engine/artifacts/send-stops-recording/`
+  (`browser.txt`, 2 PNGs, `red.txt`)

@@ -1,0 +1,6 @@
+topic page: http://localhost:50179/topics/local-owner/t-92fd58adc226
+«Говорити»: recording
+«Надіслати» pressed while recording
+field: (локальний режим) розпізнаний текст | POSTs: ['voice'] | turns: 0 | error: none
+second «Надіслати»: POSTs: ['voice', 'reply'] | turns: 2 | the corrected text was sent
+OK: «Надіслати» while recording: text in the field, nothing sent; the next press sent it

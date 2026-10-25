@@ -112,6 +112,7 @@ function createRecorder({ media, Recorder, fetch, ui, url, limitMs, setTimeout, 
   let recorder = null;
   let timer = null;
   let held = null;
+  let busy = false; // from start until the text came or recognition failed: «Надіслати» must wait
 
   function options() {
     const mimeType = TYPES.find((t) => Recorder.isTypeSupported(t));
@@ -141,6 +142,7 @@ function createRecorder({ media, Recorder, fetch, ui, url, limitMs, setTimeout, 
     recorder = new Recorder(stream, options());
     listen(recorder, stream);
     recorder.start();
+    busy = true;
     ui.recording();
     timer = setTimeout(stop, limitMs);
   }
@@ -172,6 +174,7 @@ function createRecorder({ media, Recorder, fetch, ui, url, limitMs, setTimeout, 
 
   async function recognize() {
     if (!held) return;
+    busy = true;
     ui.recognizing();
     try {
       const response = await fetch(url, { method: "POST", body: held, headers: { "Content-Type": held.type } });
@@ -179,10 +182,11 @@ function createRecorder({ media, Recorder, fetch, ui, url, limitMs, setTimeout, 
     } catch (e) {
       ui.showError(NOT_SENT);
     }
+    busy = false;
     if (held) ui.offerRecognize();
   }
 
-  return { start, stop, recognize, recording: () => !!recorder && recorder.state === "recording" };
+  return { start, stop, recognize, recording: () => !!recorder && recorder.state === "recording", busy: () => busy };
 }
 
 // The page: wire the form and the buttons to the controller.
@@ -224,13 +228,15 @@ function attach(doc, win) {
     },
   };
   const controller = createController({ fetch: win.fetch.bind(win), storage: win.localStorage, ui, key: form.dataset.key });
+  if (retry) retry.addEventListener("click", () => controller.retry());
+  const recorder = attachMic(doc, win, form, field, error);
+  // While the microphone is busy «Надіслати» only stops the recording; the next press sends the text (task 206).
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    if (recorder && recorder.busy()) return recorder.stop();
     error.textContent = "";
     controller.send(field.value);
   });
-  if (retry) retry.addEventListener("click", () => controller.retry());
-  attachMic(doc, win, form, field, error);
 }
 
 // The page's microphone: the buttons, the words of the state, and the field the text is appended to (I5).
@@ -238,7 +244,7 @@ function attachMic(doc, win, form, field, error) {
   const mic = doc.getElementById("mic");
   const again = doc.getElementById("recognize");
   const state = doc.getElementById("mic-state");
-  if (!mic || !win.navigator || !win.navigator.mediaDevices) return;
+  if (!mic || !win.navigator || !win.navigator.mediaDevices) return null;
   const key = form.dataset.key;
   const ui = {
     recording() {
@@ -280,6 +286,7 @@ function attachMic(doc, win, form, field, error) {
   });
   mic.addEventListener("click", () => (recorder.recording() ? recorder.stop() : recorder.start()));
   again.addEventListener("click", () => recorder.recognize());
+  return recorder;
 }
 
 const ThinkHow = { createSseParser, createController, createRecorder };
