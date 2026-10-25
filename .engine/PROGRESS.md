@@ -302,3 +302,17 @@
 - S4 rerun after the overseer's PASS (its two test gaps closed in the live test: I1 asserted, every check after the
   artifact): `.engine/artifacts/research-live/2026-10-25T113539Z/conversation.md` — all 7 answered, I1 held; this time
   #21 also `offer`, no search on any turn → the router path does not meet AC1; probe and slice S2b `router-unknown-fact`
+
+## Slice 22 — router-unknown-fact (DONE 2026-10-25) — task 303, feature research-in-conversation S2b (added after S4)
+
+- Module: `facilitation/router.md` — one rule under «Правила»: the person does not know a fact about the world or asks
+  how to find it → `answer` (the system searches); facts about the person — not `answer`
+- Tests: builder's `tests/router_unknown_fact/test_ruf_rule.py` (RED before the line, GREEN after); 845 passed
+- Probe: `.engine/artifacts/spikes/router-unknown-fact-2026-10-25/` — without the rule `offer` 12/12 on #17, #19, #21,
+  #25; with it `answer` 8/9 on #17–#21, #25 `offer` 3/3
+- Router set: before `.engine/artifacts/router-eval/2026-10-25T114855Z.md` 83/85 first (held-out 18/18), after
+  `…120636Z.md` 84/85 (18/18); no situation fell, no `answer` in the set; the one confusion after
+  (`wrap-decision → reversible-doors`) was there before
+- Live S4 again: `.engine/artifacts/research-live/2026-10-25T120515Z/conversation.md` — #17 → `answer` with search
+  (2 queries, sources); #19, #21 → `offer` (n = 1; the probe gave #19 2/3); #25 → the person chose a way, the card led
+- Open: the owner judges #19/#21; no further change without his word

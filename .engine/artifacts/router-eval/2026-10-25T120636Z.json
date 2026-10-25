@@ -1,0 +1,2578 @@
+{
+ "meta": {
+  "label": "router-unknown-fact-after",
+  "stamp": "2026-10-25T120636Z",
+  "model": "gemini-4-argon",
+  "rev": {
+   "rev": 1,
+   "n": 0
+  },
+  "cases_blob": "1214ae39c04b18adda7e13684eb7bbc405a1fc01",
+  "cards_hash": "a4ca5626e5a111a51e20210bdd153516deda5dbf0bf8c1ad575d6430bde56b0c",
+  "model_calls": 85
+ },
+ "summary": {
+  "cases": 85,
+  "graded": 85,
+  "first_ok": 84,
+  "offered_ok": 83,
+  "held_out": {
+   "n": 18,
+   "first": 18,
+   "offered": 18
+  },
+  "rest": {
+   "n": 67,
+   "first": 66,
+   "offered": 65
+  },
+  "negatives_broken": [],
+  "absent_broken": [],
+  "asks": 0,
+  "first_ok_via_ask": 0,
+  "invalid": 0,
+  "unavailable": 0,
+  "by_card": {
+   "complexity-sensemaking": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "consider-opposite": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "evaporating-cloud": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "first-principles": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "five-whys": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "goal-to-plan": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "is-is-not": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "issue-tree": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "jobs-to-be-done": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "mental-contrasting": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "opportunity-tree": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "pre-mortem": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "reflective-cycle": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "reversible-doors": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "scamper": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "socratic-questioning": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "weighted-matrix": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "wrap-decision": {
+    "n": 3,
+    "first": 2,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   }
+  },
+  "confusions": [
+   [
+    "wrap-decision → reversible-doors",
+    1
+   ]
+  ]
+ },
+ "outcomes": [
+  {
+   "case_id": "co-1",
+   "kind": "positive",
+   "expect": "consider-opposite",
+   "action": "offer",
+   "first": "consider-opposite",
+   "offered": [
+    "consider-opposite",
+    "pre-mortem",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви переконані, що віддалена робота знижує продуктивність команди, схиляєтеся до повернення всіх в офіс і хочете перевірити, чи не помиляєтеся у своєму висновку.\n\nОсь кілька способів, як це можна розібрати:\n1. Сформулювати найсильніші аргументи на користь того, що причина не у віддаленій роботі або що повернення в офіс зашкодить, щоб перевірити, чи ви не підганяєте факти під готовий висновок.\n2. Уявити, що ви вже повернули всіх в офіс, але стало тільки гірше, і заздалегідь знайти слабкі місця та приховані ризики цього рішення.\n3. Розкласти можливі причини падіння продуктивності команди на окремі гілки, щоб перевірити, чи справа справді у віддаленому форматі, чи в чомусь іншому.\n\nЯкий із цих підходів вам ближчий, чи хочеться подивитися на ситуацію інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overconfident_attached",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "co-2",
+   "kind": "positive",
+   "expect": "consider-opposite",
+   "action": "offer",
+   "first": "consider-opposite",
+   "offered": [
+    "consider-opposite",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви готуєтеся до завтрашніх переговорів з орендодавцем про зниження орендної плати і, будучи впевненою у своїх доводах, хочете наперед прорахувати його найвагоміші заперечення.\n\n1. Розібрати найсильнішу версію позиції орендодавця й зрозуміти, які вагомі аргументи проти зниження ціни він може навести.\n2. Уявити, що завтрашні переговори провалилися, щоб заздалегідь знайти слабкі місця у вашому плані й підготуватися до них.\n\nЯкий із цих способів вам ближчий, чи хочете підійти до розмови інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overconfident_attached",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "co-3",
+   "kind": "positive",
+   "expect": "consider-opposite",
+   "action": "offer",
+   "first": "consider-opposite",
+   "offered": [
+    "consider-opposite",
+    "pre-mortem",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви впевнені у своєму плані відкрити другий магазин у сусідньому місті, спираючись на успіх першого, і хочете переконатися, що все врахували.\n\n1. Спробувати побудувати найсильніші аргументи проти вашого задуму, щоб переконатися, що ви не випускаєте з уваги важливих фактів на користь успіху.\n2. Уявити, що відкриття вже відбулося, але щось пішло не так, і заздалегідь знайти слабкі місця вашого плану на практиці.\n3. Перевірити припущення про те, що успіх першого магазину автоматично повториться в сусідньому місті, і з'ясувати, на чому воно тримається.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overconfident_attached",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "co-neg-1",
+   "kind": "negative",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти вже знаєш, що час поговорити з керівником про підвищення і що саме сказати, але в потрібний момент страх змушує щоразу відкладати цю розмову.\n\n1. Назвати головну внутрішню перешкоду, яка зупиняє тебе в момент зустрічі з керівником, і скласти чіткий план «якщо — то», щоб наступного разу почати розмову попри страх.\n2. Спокійно розібрати сам страх: чого саме ти очікуєш від цієї розмови і наскільки ці побоювання тримаються на фактах.\n\nЯкий із цих підходів тобі зараз ближчий, чи хочеш подивитися на це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "cs-1",
+   "kind": "positive",
+   "expect": "complexity-sensemaking",
+   "action": "offer",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "На вас одночасно навалилися невдоволення команди, мінливі вимоги клієнта та переїзд в новий офіс, і ви хочете зрозуміти, де тут варто рахувати й аналізувати, а де — діяти пробними кроками.\n\nОсь як ми можемо підійти до цього:\n1. Розібрати кожну з цих проблем за її природою — де вже є зрозумілі правила, де варто залучити фахівців і проаналізувати, а де ситуація непередбачувана і треба робити невеликі пробні кроки.\n2. Спокійно розкласти одну з цих проблем на окремі незалежні частини, щоб побачити всю картину цілком і обрати, за яку гілку братися спершу.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "overwhelmed_fatigued",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "cs-2",
+   "kind": "positive",
+   "expect": "complexity-sensemaking",
+   "action": "offer",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "goal-to-plan",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви відкриваєте бізнес у новій країні й бачите, що тут змішані як цілком зрозумілі речі на кшталт податків та реєстрації, так і непередбачувана реакція людей, тому шукаєте, як правильно підійти до кожної з цих частин.\n\n1. Розділити всі ваші задачі за їхньою природою — де просто діяти за правилами, де рахувати зі спеціалістами, а де перевіряти попит малими пробними кроками.\n2. Окреслити бажаний результат відкриття бізнесу, оцінити поточну точку і намітити перші конкретні кроки до запуску.\n3. Розібратися з непередбачуваною частиною попиту — зрозуміти, в якій ситуації місцеві клієнти шукатимуть ваш продукт і заради чого переключаться на нього.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете глянути на ситуацію інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "cs-3",
+   "kind": "positive",
+   "expect": "complexity-sensemaking",
+   "action": "offer",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "reflective-cycle",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви намагаєтеся планувати розвиток громадської організації, але плани раз за разом розвалюються через неочікувану поведінку людей, і ви сумніваєтеся, чи підходить тут сам ваш підхід до планування.\n\nОсь якими способами можна над цим подумати:\n1. Розібрати, які частини роботи вашої організації взагалі піддаються наперед складеному плану, а де реакцію людей неможливо вгадати й треба діяти пробними кроками.\n2. Взяти один конкретний випадок, коли план розвалився, розібрати ваші очікування та дії людей і вивести нове правило для подальшої роботи.\n3. Перевірити припущення про людей і планування, на яких зараз тримаються ваші плани, щоб побачити, де очікування розходяться з реальністю.\n\nЯкий із цих шляхів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "cs-neg-1",
+   "kind": "negative",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете знайти точну причину, чому на складі вже третій тиждень поспіль відправки затримуються на день, спираючись на те, що добре знаєте весь процес.\n\n1. Пройти ланцюжком від самої затримки вглиб процесу, який ви знаєте, щоб докопатися до першопричини й зрозуміти, що конкретно змінити.\n2. Порівняти, які саме замовлення, зміни чи дні затримуються, а які проходять вчасно, щоб звузити коло пошуку поломки.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ec-1",
+   "kind": "positive",
+   "expect": "evaporating-cloud",
+   "action": "offer",
+   "first": "evaporating-cloud",
+   "offered": [
+    "evaporating-cloud",
+    "consider-opposite",
+    "wrap-decision"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви зі співзасновником уже місяць заблоковані між двома протилежними шляхами — йти до великих корпорацій чи до малого бізнесу через самообслуговування, — і жоден компроміс не здається прийнятним.\n\nОсь якими способами можна це розібрати:\n1. Розібрати обидва підходи до потреб, які за ними стоять, і знайти приховане припущення, через яке вибір між корпораціями та малим бізнесом здається непримиренним — щоб знайти рішення без поганого компромісу.\n2. Побудувати найсильнішу версію аргументів вашого співзасновника за корпоративних клієнтів і перевірити власну позицію щодо малого бізнесу, щоб вийти з глухого кута в суперечці.\n3. Вийти за межі вибору лише з двох шляхів, перевірити ключові припущення про обидва сегменти клієнтів і підготувати рішення для компанії з високими ставками.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "resolve_dilemma",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "ambivalent",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "ec-2",
+   "kind": "positive",
+   "expect": "evaporating-cloud",
+   "action": "offer",
+   "first": "evaporating-cloud",
+   "offered": [
+    "evaporating-cloud",
+    "first-principles"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви опинилися в глухому куті між двома важливими потребами: брати більше проєктів, щоб вистачало грошей, або брати менше, щоб мати час на дітей.\n\n1. Знайти приховане припущення, яке змушує обирати між достатком і часом із дітьми, та вийти на рішення без жертв.\n2. Розібрати до основ, скільки саме потрібно грошей та часу і як ви заробляєте зараз, щоб зібрати інший спосіб без прив'язки до кількості проєктів.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "resolve_dilemma",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "ec-3",
+   "kind": "positive",
+   "expect": "evaporating-cloud",
+   "action": "offer",
+   "first": "evaporating-cloud",
+   "offered": [
+    "evaporating-cloud",
+    "first-principles"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, що в команді зіткнулися дві обґрунтовані потреби — переписати старий код і випускати нові функції, — і зараз вони здаються взаємовиключними.\n\n1. Розібрати потреби обох сторін і приховані припущення за ними, щоб знайти рішення, де не доведеться жертвувати ані якістю коду, ані новими функціями.\n2. Відкинути звичне уявлення про те, як має відбуватися це переписування чи розробка функцій, розібрати задачу до базових вимог і зібрати новий спосіб поєднати обидві цілі.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "resolve_dilemma",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ec-neg-1",
+   "kind": "negative",
+   "expect": "weighted-matrix",
+   "action": "offer",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти обираєш між двома робочими ноутбуками — легшим і потужнішим — і хочеш спокійно їх порівняти.\n\n1. Визначити, що для твоєї роботи справді найважливіше, надати вагу кожному критерію та наочно порівняти обидва ноутбуки, щоб обрати без сумнівів.\n2. Розібрати потребу у легкості та потребу в потужності так, щоб зрозуміти, чи можна закрити обидві в твоєму робочому сценарії без неприємного компромісу.\n\nЯкий спосіб тобі ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fp-1",
+   "kind": "positive",
+   "expect": "first-principles",
+   "action": "offer",
+   "first": "first-principles",
+   "offered": [
+    "first-principles",
+    "jobs-to-be-done",
+    "scamper"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете перебудувати онбординг клієнтів із чистого аркуша, не копіюючи дорогі ринкові звички з довгими дзвінками та презентаціями.\n\n1. Відкинути звичні на ринку дзвінки й презентації, виділити лише те, без чого онбординг справді неможливий, і зібрати новий підхід із нуля.\n2. Подивитися, якого саме прогресу новий клієнт намагається досягти під час старту роботи з вами і що йому в цьому заважає чи допомагає.\n3. Узяти ваш нинішній процес і пройтися за сімома напрямками — що в ньому можна прибрати, об'єднати, автоматизувати чи перевернути, щоб зробити його дешевшим.\n\nЯкий із цих підходів вам ближчий, чи хочеться піти іншим шляхом?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fp-2",
+   "kind": "positive",
+   "expect": "first-principles",
+   "action": "offer",
+   "first": "first-principles",
+   "offered": [
+    "first-principles",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви робите ремонт і сумніваєтеся в ринковому правилі, що кухня має коштувати щонайменше 8 тисяч євро, та хочете зрозуміти, з чого насправді складається ця сума і що з цього вам дійсно потрібно.\n\nОсь як можемо до цього підійти:\n1. Розібрати кухню до базових потреб і реальної вартості матеріалів та робіт, відкинувши те, що «так заведено», і зібрати рішення під себе з нуля.\n2. Розкласти загальну вартість кухні на окремі незалежні складові, щоб наочно побачити, куди йдуть гроші і де можна скоротити витрати.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fp-3",
+   "kind": "positive",
+   "expect": "first-principles",
+   "action": "offer",
+   "first": "first-principles",
+   "offered": [
+    "first-principles",
+    "scamper"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже рік шукаєте спосіб здешевити доставку, але всі ідеї зводяться до дрібних покращень у звичних рамках.\n\n1. Відкинути звичні уявлення про те, як має працювати доставка, розібрати задачу до самих основ і зібрати принципово нове рішення з чистого аркуша.\n2. Пройтися по семи конкретних напрямках змін вашого нинішнього процесу доставки — що в ньому можна замінити, прибрати, поєднати чи перевернути, щоб вийти за межі очевидних покращень.\n\nЯкий із цих шляхів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fp-neg-1",
+   "kind": "negative",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви маєте чіткий план дисертації і знаєте, що треба робити, але вже третій місяць щось заважає почати писати, коли ви відкриваєте файл.\n\n1. Зіставити ваше бажання завершити дисертацію з тим, що саме всередині зупиняє вас у момент відкриття файлу, і скласти чіткий план дій на цей випадок.\n2. Розплутати й перевірити приховані думки чи переконання про дисертацію, які можуть викликати опір і змушувати вас щоразу закривати документ.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fw-1",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете знайти глибинну причину, чому в щотижневому звіті для клієнта вже втретє за місяць з'являються помилки в цифрах, щоб змінити сам процес і не покладатися лише на повторні перевірки.\n\nПропоную два способи розібратися:\n1. Пройтися ланцюжком причин крок за кроком від самої помилки у звіті до того місця в процесі, яке дозволяє їй ставатися, щоб виправити корінь проблеми.\n2. Розкласти весь процес підготовки звіту на окремі гілки й етапи, щоб систематично перевірити всі можливі джерела помилок в одному баченні.\n\nЯкий із цих підходів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fw-2",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "mental-contrasting",
+    "reflective-cycle"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви раз за разом запізнюєтесь на ранкові зустрічі попри будильник і хочете докопатися до справжньої причини цього.\n\nОсь кілька способів, як ми можемо це розібрати:\n1. Крок за кроком розмотати ланцюжок подій вашого ранку, щоб знайти першопричину запізнень і точково змінити розпорядок.\n2. Виявити внутрішню перешкоду чи звичку, яка змушує відкладати підйом чи вихід після будильника, і скласти чіткий план дій на цей момент.\n3. Розібрати один недавній ранок із запізненням, зрозуміти, яке ваше звичне правило поведінки тоді спрацювало, і переглянути його.\n\nЯкий із цих підходів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fw-3",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "offer",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "is-is-not",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви помітили, що вже двічі після виходу нової версії застосунку падає кількість відгуків, і хочете з'ясувати справжню причину цього.\n\nОсь якими способами можна до неї дістатися:\n1. Пройтися крок за кроком тим, що саме відбувається під час і після релізу, щоб докопатися до першопричини в процесі чи продукті.\n2. Порівняти, де, коли і в яких користувачів відгуки падають, а де ні, щоб звузити коло можливих причин за фактами.\n3. Розкласти всі можливі гілки — від технічних збоїв до змін у поведінці користувачів — і по черзі перевірити, де саме ховається проблема.\n\nЯкий спосіб вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fw-neg-1",
+   "kind": "negative",
+   "expect": "scamper",
+   "action": "offer",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "first-principles"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже знаєте, що коробки для торта заважкі для кур'єрів, і тепер шукаєте свіжі ідеї, як їх змінити.\n\n1. Пройтися по вашій нинішній коробці за сімома напрямками — що в ній можна замінити, прибрати, об'єднати чи перебудувати, щоб знайти свіжі ідеї, як її полегшити.\n2. Відкласти звичний вигляд коробки, розібрати саму задачу доставки торта до базових вимог і зібрати принципово нове легке рішення з нуля.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "gp-1",
+   "kind": "positive",
+   "expect": "goal-to-plan",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви маєте чітку мету — за два роки перейти з бухгалтерії в аналітику даних, — але поки не бачите, з чого почати і як вибудувати цей шлях.\n\n1. Окреслити бажаний перехід в аналітику за два роки, оцінити, що у вас уже є, і розкласти цей шлях на віхи та конкретні перші кроки на найближчий час.\n2. Розкласти саму задачу переходу з бухгалтерії в аналітику на окремі складові — навички, досвід, пошук роботи, фінанси — щоб побачити всю картину і вирішити, за що братися першим.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "gp-2",
+   "kind": "positive",
+   "expect": "goal-to-plan",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви поставили для своєї агенції мету вийти на трьох постійних клієнтів на абонементі до літа і хочете розписати план дій на ці місяці.\n\n1. Пройти шлях від вашої мети в три клієнти та поточного стану агенції до основних віх на найближчі місяці та конкретних перших кроків.\n2. Розібратися, для якої задачі клієнти купуватимуть у вас абонемент і що зараз утримує їх від такого переходу, щоб сформувати влучну пропозицію.\n\nЯкий спосіб вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "gp-3",
+   "kind": "positive",
+   "expect": "goal-to-plan",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви маєте наполовину готовий рукопис і хочете видати книжку наступної осені, тож зараз потрібно вибудувати шлях від сьогоднішнього дня до моменту виходу.\n\n1. Визначити, як саме виглядає видана книжка наступної осені, оцінити поточну точку з напівготовим рукописом, розкласти шлях на основні етапи до сьогоднішнього дня й обрати перші конкретні кроки.\n2. Розкласти всю задачу видання книжки на окремі незалежні напрямки (дописування тексту, редагування, дизайн, друк, просування), щоб нічого не випустити з уваги перед тим, як планувати графік.\n\nЯкий спосіб вам ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "gp-neg-1",
+   "kind": "negative",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете скласти план, як удвічі підняти повернення клієнтів у застосунок, але поки не знаєте і не міряли, чому саме вони перестають ним користуватися.\n\n1. Розкласти питання про те, чому люди не повертаються, на незалежні гілки (продукт, залучення, очікування, звичка), щоб зрозуміти, що саме перевіряти в першу чергу до складання плану.\n2. Пов'язати вашу мету — подвоїти повернення — з конкретними потребами та перешкодами користувачів і підібрати перші ідеї та швидкі тести.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-1",
+   "kind": "positive",
+   "expect": "is-is-not",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви бачите, що скарги на холодну каву надходять лише з однієї з трьох кав'ярень і тільки вранці, хоча обладнання й зерно всюди однакові, і хочете з'ясувати причину цієї різниці.\n\n1. Порівняти за всіма деталями, де й коли скарги на холодну каву є, а де все гаразд, щоб відсіяти зайві здогадки і знайти ту саму відмінність.\n2. Пройтися кроками ранкового приготування кави в цій кав'ярні, щоб простежити ланцюжок подій і знайти місце збою.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-2",
+   "kind": "positive",
+   "expect": "is-is-not",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ваш сайт працює повільно в дуже конкретних межах — у середу після обіду і лише у клієнтів з Польщі, а сам механізм збою поки що незрозумілий.\n\nОсь як можемо до цього підійти:\n1. Зіставимо, де, коли й у кого сайт гальмує, а де працює нормально, щоб звузити коло можливих причин і відсіяти здогадки, які не пояснюють цю різницю.\n2. Розкладемо всі можливі гілки причин повільної роботи сайту (мережа, сервери, трафік, зміни в коді), щоб системно перевірити кожну з них.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете розібрати це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-3",
+   "kind": "positive",
+   "expect": "is-is-not",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете з'ясувати, чому одна й та сама розсилка з нагадуваннями доходить лише до частини клієнтів, і чітко визначити, де саме виникає проблема.\n\nОсь як ми можемо до цього підійти:\n1. Порівняти за деталями випадки, де листи доходять, і де зникають, щоб звузити коло пошуку й відсіяти хибні версії.\n2. Пройтися кроками того, як формується і відправляється розсилка, щоб знайти, на якому саме етапі виникає збій.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-neg-1",
+   "kind": "negative",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, що в компанії одночасно навалилося кілька різних проблем — падають продажі, звільняються люди, виникають непорозуміння з клієнтами, — а даних і розуміння, звідки це все береться, наразі немає.\n\n1. Швидко розсортувати цей клубок проблем за їхньою природою, щоб зрозуміти, що тут «горить» і потребує негайної стабілізації, де треба пробувати малі кроки, а що можна спокійно проаналізувати.\n2. Розкласти загальну картину на окремі незалежні гілки — продажі, команда, робота з клієнтами — і вибрати, куди копати в першу чергу та які дані зібрати.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете глянути на ситуацію інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "overwhelmed_fatigued",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-1",
+   "kind": "positive",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви бачите, що клієнтів і роботи в студії наче не поменшало, але наприкінці місяця виходить мінус, і хочете впорядковано розібратися, куди саме витікають гроші.\n\nОсь два способи, як можна підійти:\n1. Спокійно розкласти фінанси й роботу студії на окремі незалежні гілки — доходи, види витрат, завантаження людей — щоб побачити всю картину й обрати, де шукати витік найперше.\n2. Порівняти проєкти, місяці чи види робіт, де гроші втрачаються, з тими, де все сходиться, щоб звузити коло пошуку за конкретними відмінностями.\n\nЯкий із цих підходів вам ближчий, чи хочете глянути на ситуацію інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-2",
+   "kind": "positive",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете розібратися, чому продажі онлайн-курсу впали порівняно з минулим роком, і впорядкувати різні припущення — від реклами й ціни до самого продукту.\n\n1. Розкласти падіння продажів на окремі незалежні гілки — реклама, ціна, сам курс та інше, — щоб побачити всю картину і вирішити, куди копати насамперед.\n2. Порівняти, де і в яких сегментах продажі курсу просіли, а де тримаються, щоб за цими відмінностями швидко відсіяти хибні здогадки.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-3",
+   "kind": "positive",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "complexity-sensemaking",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Тобі треба підготувати для керівництва аналіз, чому відділ не встигає з проєктами, де змішані люди, процеси й інструменти, і спершу побачити повну картину, нічого не пропустивши.\n\n1. Розкласти затримки проєктів на окремі напрямки — люди, процеси, інструменти — без перетинів, щоб побачити повну картину для керівництва і вирішити, куди копати першим.\n2. Розібрати змішані проблеми відділу за тим, де все зрозуміло, де потрібно порахувати й проаналізувати, а де варто діяти пробними кроками.\n3. Взяти один типовий випадок затримки проєкту і крок за кроком докопатися до справжніх причин у процесі.\n\nЯкий із цих способів тобі ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-neg-1",
+   "kind": "negative",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, що тобі вже за годину треба дати відповідь щодо замовлення на вихідні, а голова пухне і сил на довгі розбори немає.\n\n1. Ми за кілька коротких кроків перевіримо, чи можна буде змінити це рішення пізніше і як ти почуватимешся щодо нього за кілька днів, щоб ти міг спокійно відповісти вже зараз.\n2. Ми швидко подивимося, які дві важливі для тебе потреби зараз зіткнулися (наприклад, заробіток чи зобов'язання проти відпочинку), і чи є спосіб відповісти так, щоб не жертвувати жодною.\n\nЯкий із цих способів тобі зараз ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overwhelmed_fatigued",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "jt-1",
+   "kind": "positive",
+   "expect": "jobs-to-be-done",
+   "action": "offer",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "issue-tree",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете з'ясувати, чому клієнти замовляють вашу доставку обідів в офіс, але вже за місяць переключаються на щось інше.\n\nОсь кілька способів, як можна до цього підійти:\n1. Розібрати, яку саме задачу клієнти намагаються вирішити, коли замовляють у вас обіди, з якими альтернативами вони вас порівнюють і які сили спершу притягують їх до вас, а через місяць виштовхують до іншого рішення.\n2. Розкласти відтік клієнтів після першого місяця на окремі незалежні гілки — від якості їжі й логістики до ціни та очікувань, — щоб побачити всю картину і визначити, де шукати головну причину.\n3. Порівняти тих клієнтів, які йдуть за місяць, із тими, хто залишається, за часом, типом офісів чи замовлень, щоб звузити коло можливих причин відтоку.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете глянути на ситуацію інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "jt-2",
+   "kind": "positive",
+   "expect": "jobs-to-be-done",
+   "action": "offer",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете зрозуміти, яку справжню задачу в житті репетиторів вирішує ваш застосунок і що змушує їх переходити до нього зі звичних зошитів або залишатися там.\n\n1. Розібрати, для якого прогресу репетитори насправді шукають ваш застосунок і які сили штовхають їх до переходу або тримають у звичних зошитах.\n2. Розкласти ширше всі можливі причини, чому репетитори переходять до вас або залишаються у своїх зошитах, на окремі незалежні гілки, щоб нічого не пропустити.\n\nЯкий із цих способів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "jt-3",
+   "kind": "positive",
+   "expect": "jobs-to-be-done",
+   "action": "offer",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "issue-tree",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви бачите, що продажі дитячих конструкторів упали, хоча ні ви, ні конкуренти за ціною не змінювалися, і припускаєте, що бракує розуміння, чого насправді шукають батьки, купуючи іграшку.\n\n1. Розібрати, яку саме потребу та в якій життєвій ситуації закривають батьки купівлею іграшки, з чим ваш конструктор насправді конкурує в їхньому виборі та що утримує їх від покупки.\n2. Розкласти падіння продажів на окремі гілки можливих причин — від каналів залучення й повторних покупок до самого продукту та змін у попиті, — щоб не пропустити чинники поза потребами батьків.\n3. Порівняти, де саме впали продажі (у яких наборах, каналах, вікових групах чи регіонах), а де вони тримаються, щоб за цими відмінностями точно звузити коло причин.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "jt-neg-1",
+   "kind": "negative",
+   "expect": "opportunity-tree",
+   "action": "offer",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "У вас у беклозі продукту накопичилося сорок ідей нових функцій, і треба обрати, за що братися першим у цьому кварталі.\n\n1. Прив'яжемо ваші ідеї до головної мети на квартал та потреб клієнтів, щоб відсіяти зайве, обрати те, що брати першим, і перевірити його найризикованіше припущення.\n2. Розберемося, яку саме задачу клієнти вирішують за допомогою вашого продукту і що заважає їм рухатися далі, щоб оцінити ідеї з беклогу очима покупця.\n\nЯкий із цих способів вам зараз ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "mc-1",
+   "kind": "positive",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "goal-to-plan"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви розумієте, що треба вчити німецьку, живете в Німеччині, але постійно відкладаєте і хочете нарешті почати та не закинути.\n\nОсь як можемо до цього підійти:\n1. Зіставимо те, навіщо вам німецька, з тим, що саме всередині щоразу зупиняє, і складемо просте правило дій на момент, коли знову захочеться відкласти.\n2. Якщо відкладання через те, що мета здається надто великою й розмитою, — розіб'ємо вивчення мови на зрозумілі віхи й визначимо легкий перший крок на цей тиждень.\n\nЯкий спосіб вам ближчий, чи хочеться подивитися інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mc-2",
+   "kind": "positive",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти вже бачиш за всіма цифрами, що збитковий магазин квітів треба закривати, і хочеш це зробити, але щось усередині не дає зробити цей крок.\n\n1. Назвати, що саме всередині зупиняє перед закриттям магазину, і скласти чітке правило «якщо станеться ця перешкода — то я зроблю такий крок», щоб нарешті зрушити з місця.\n2. Спокійно перевірити думку чи страх, через який «не піднімається рука» закрити магазин, і побачити, наскільки він справді обґрунтований.\n\nЯкий із цих способів тобі зараз ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "data_rich",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mc-3",
+   "kind": "positive",
+   "expect": "mental-contrasting",
+   "action": "choose",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mc-neg-1",
+   "kind": "negative",
+   "expect": "goal-to-plan",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви маєте чітку ціль — за рік вийти на 5000 євро на місяць у консалтингу — і хочете перетворити її на покроковий план дій.\n\n1. Оцінити вашу поточну точку і розкласти річну ціль у 5000 євро на конкретні етапи та перші кроки на найближчий час.\n2. Розкласти формулу вашого доходу на окремі складові — як-от кількість клієнтів, середній чек та канали залучення — щоб побачити, за рахунок чого саме найкраще рости.\n\nЯкий спосіб вам ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mid-after-choice",
+   "kind": "midway",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви зупинилися на консалтингу для місцевого бізнесу за допомогою агентів і тепер хочете перевірити, де ця ідея може дати збій, ще до старту.\n\n1. Уявити, що ідея з консалтингом вже провалилася на практиці, щоб заздалегідь знайти слабкі місця і підстрахуватися до старту.\n2. Виділити найризикованіше припущення щодо клієнтів та швидко і дешево перевірити його перед повноцінним запуском.\n\nЯкий спосіб вам ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "mid-after-premortem",
+   "kind": "midway",
+   "expect": "goal-to-plan",
+   "action": "choose",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "unclear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mid-not-fit",
+   "kind": "midway",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете зрозуміти, де саме шукати причину падіння реєстрацій, коли аналітики бракує, а версій може бути безліч.\n\n1. Розкладемо всі можливі причини падіння реєстрацій на окремі гілки — від трафіку й технічних збоїв до самої пропозиції, — щоб ви побачили повну картину й обрали, що перевірити насамперед.\n2. Порівняємо, де, коли й у яких користувачів реєстрації падають, а де тримаються на попередньому рівні, щоб звузити коло пошуку навіть без детальної аналітики.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-1",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "offer",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "issue-tree",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете підняти кількість активних користувачів на 20 % за квартал і серед багатьох розрізнених ідей побачити, які можливості справді ведуть до цієї мети та що перевірити першим.\n\nОсь як можемо до цього підійти:\n1. Пов'язати вашу мету у 20 % із реальними потребами користувачів, упорядкувати розрізнені ідеї за цими потребами і виділити одне найризикованіше припущення для швидкої перевірки.\n2. Розкласти показник активних користувачів на незалежні складові (наприклад, залучення, повернення, частота дій), щоб спершу зрозуміти, у якій саме гілці лежить головний важіль росту.\n3. Подивитися на продукт очима користувачів: для якої задачі вони його відкривають і що заважає їм користуватися ним частіше, перш ніж оцінювати ваші ідеї.\n\nЯкий із цих шляхів вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-2",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "offer",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "jobs-to-be-done",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви готуєте платну підписку в застосунку для бігунів і хочете дешево перевірити своє головне припущення — що люди справді за неї платитимуть. Ось як можна до цього підійти:\n\n1. Виділити в ідеї платної підписки найризикованіше припущення і придумати швидкий дешевий експеримент, щоб перевірити його на реальних діях бігунів до розробки.\n2. Розібрати, яку задачу бігуни вже зараз намагаються вирішити грошима чи іншими способами і що може втримати їх від переходу на вашу підписку.\n3. Сформулювати найсильніші причини, чому ваші користувачі не стануть купувати підписку, щоб побачити слабкі місця вашої впевненості.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете піти іншим шляхом?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "overconfident_attached",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-3",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "choose",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-neg-1",
+   "kind": "negative",
+   "expect": "weighted-matrix",
+   "action": "choose",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "one_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "other-1",
+   "kind": "other",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": false,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Зрозумів: ви вже внутрішньо визначилися з садочком, але страх помилитися не дає спокійно зупинитися на цьому виборі. Можемо піти одним із таких шляхів:\n1. Швидко оцінити, наскільки цей вибір остаточний і як він виглядатиме через тиждень чи рік, щоб зняти зайву напругу.\n2. Розібрати, що саме всередині тримає і викликає цей страх, та скласти чіткий план, як діяти попри нього.\n3. Перевірити саму думку про можливу помилку — на чому вона тримається і наскільки є реальною.\n\nЯкий із цих способів вам зараз ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_rich",
+    "options": "multiple_clear",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "pm-1",
+   "kind": "positive",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "opportunity-tree",
+    "wrap-decision"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви готуєтеся запустити у Львові кав'ярню-ростерію з онлайн-підпискою на зерно за три місяці і хочете виявити слабкі місця до підписання договору оренди за три тижні.\n\n1. Уявити, що за три місяці запуск провалився, знайти головні причини цього і вже зараз закласти захист у план.\n2. Виділити найризикованіше припущення щодо кав'ярні чи онлайн-підписки і перевірити його дешевим тестом ще до підписання оренди.\n3. Ширше подивитися на саму угоду перед підписанням оренди: розширити варіанти, перевірити реалії ринку та визначити умови, за яких варто зупинитися.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pm-2",
+   "kind": "positive",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже маєте готовий чотиримісячний план повної міграції сервісу з дуже високою ціною помилки й хочете перевірити, що могли не врахувати до старту.\n\n1. Уявити, що минуло чотири місяці й міграція провалилася, щоб заздалегідь побачити слабкі місця вашого плану та підстелити соломку.\n2. Витягнути на світло й перевірити ключові припущення про строки, ресурси та готовність системи, на яких тримається ваш чотиримісячний план.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "well_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pm-3",
+   "kind": "positive",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "wrap-decision",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже вирішили з січня перейти з найму на фриланс, маєте домовленості з двома клієнтами й хочете перевірити свій план на міцність перед тим, як писати заяву.\n\n1. Уявити, що вже після січня перехід на фриланс провалився, знайти головні причини цього і заздалегідь підстелити соломку.\n2. Подивитися на рішення ширше, ніж просто «звільнятися чи ні», перевірити реалістичність очікувань від перших клієнтів і домовитися з собою про критерії успіху та відступу.\n3. Сформулювати найсильніші аргументи проти звільнення саме зараз, щоб переконатися, що ви не випускаєте з уваги важливих фактів.\n\nЯкий із цих підходів вам ближчий, чи хочеться подивитися інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "pm-neg-1",
+   "kind": "negative",
+   "expect": "reflective-cycle",
+   "action": "offer",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "issue-tree",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете розібрати невдалий запуск минулого місяця, де продажі виявилися втричі меншими за план, і зрозуміти, які висновки з цього зробити.\n\n1. Озирнутися на цей запуск, відокремити факти від вражень і сформулювати для себе нове правило на наступний раз.\n2. Розкласти падіння продажів на окремі незалежні гілки — попит, пропозиція, канали, ціна — і з'ясувати, де саме просіло.\n3. Пройти ланцюжком причин від моменту, коли все пішло не за планом, до конкретного збою в процесі підготовки чи запуску.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pm-neg-2",
+   "kind": "negative",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "weighted-matrix",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": false,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти глибоко знаєшся на AI і хочеш зараз добре заробити, але з роботою не складається, а ідеї на кшталт фрилансу, власних проєктів чи консалтингу ще не склалися в план.\n\n1. Окреслити бажану суму й строк, подивитися, де ти зараз із навичками, контактами й часом, і перетворити ідеї фрилансу, проєктів чи консалтингу на конкретні перші кроки на найближчі дні.\n2. Спокійно порівняти твої напрямки — фриланс, власні проєкти, консалтинг і пошук роботи — за тим, що для тебе зараз найважливіше (швидкість перших грошей, стеля доходу, ризик), щоб обрати, куди бити першим.\n3. Розкласти задачу заробітку для AI-інженера на окремі гілки — у чому саме стопор із пошуком роботи і які є джерела доходу — щоб побачити всю картину й вирішити, за що братися.\n\nЯкий із цих підходів тобі ближчий, чи хочеш подивитися на це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "rc-1",
+   "kind": "positive",
+   "expect": "reflective-cycle",
+   "action": "offer",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви позаду маєте непростий перший рік у ролі керівниці команди з багатьма помилками і хочете впорядкувати цей досвід та зробити з нього висновки на майбутнє.\n\n1. Ми можемо взяти найпоказовішу важку ситуацію чи помилку з цього року, спокійно розібрати, як ви в ній діяли і що керувало вашими рішеннями, та вивести нове правило для себе на майбутнє.\n2. Ми можемо розділити ваш перший рік керівництва на основні напрями, щоб упорядкувати весь досвід по поличках і побачити загальну картину того, що вдалося, а де були прогалини.\n\nЯкий із цих шляхів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "rc-2",
+   "kind": "positive",
+   "expect": "reflective-cycle",
+   "action": "offer",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви важко переживаєте вчорашню сварку з партнером, через яку пішов клієнт, і хочете розібратися, що сталося та як діяти далі.\n\n1. Покроково розібрати вчорашню сварку з партнером і власні почуття, щоб зрозуміти, що саме спрацювало не так, і вивести для себе нове правило на майбутнє.\n2. Спробувати подивитися на суперечку очима партнера і знайти найсильніші пояснення його поведінки, щоб підготуватися до спокійної розмови з ним.\n\nЯкий спосіб вам зараз ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rc-3",
+   "kind": "positive",
+   "expect": "reflective-cycle",
+   "action": "offer",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "five-whys",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви ретельно готувалися до переговорів, але клієнт відмовився, і тепер ви хочете розібратися, що саме не спрацювало у вашому підході.\n\n1. Розібрати ці переговори як власний досвід: що відбувалося, на яких припущеннях тримався ваш підхід і яке своє правило варто оновити на майбутнє.\n2. Пройтися ланцюжком причин від моменту відмови клієнта назад по кроках підготовки й розмови, щоб знайти конкретне слабке місце у процесі.\n3. Подивитися на ситуацію очима клієнта: яку задачу він насправді вирішував і які сили утримали його від переходу на вашу пропозицію.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rc-neg-1",
+   "kind": "negative",
+   "expect": "pre-mortem",
+   "action": "offer",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви готуєтеся відкрити другу точку наступного місяця, уже маєте план та команду й хочете заздалегідь перевірити, де все може піти не так.\n\n1. Уявити, що відкриття другої точки вже провалилося, назвати конкретні причини цього і для найважливіших додати запобіжники у ваш план.\n2. Сформулювати найсильніші аргументи на користь того, що задум із другою точкою у нинішньому вигляді помилковий, щоб побачити власні сліпі плями.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "well_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "rd-1",
+   "kind": "positive",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви зараз на нервах, бо маєте лише п'ять хвилин перед дзвінком, щоб вирішити, чи погоджуватися на пробний місяць із новим клієнтом.\n\n1. За пару хвилин оцінити, наскільки легко буде вийти з цього пробного місяця і як ви сприймете це рішення трохи згодом, щоб швидко зняти напругу перед дзвінком.\n2. Коротко розібрати саму думку, яка викликає у вас нерви, і перевірити, чи є під нею реальні підстави.\n\nЯкий спосіб вам зараз ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rd-2",
+   "kind": "positive",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "mental-contrasting"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже місяць застрягли в порівняннях тарифного плану для свого онлайн-магазину, хоча сама дія оборотна і її можна скасувати.\n\n1. Ми можемо швидко перевірити, що найгіршого станеться при переході і як легко все повернути назад, а також подивитися на цей вибір з відстані часу, щоб зняти напругу й ухвалити рішення вже сьогодні.\n2. Якщо ви вже знаєте, що перехід має сенс, але щось усередині тримає — ми можемо назвати цю внутрішню перешкоду і скласти простий план дії, щоб нарешті зрушити з місця.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете розібрати це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "data_rich",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "rd-3",
+   "kind": "positive",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти зараз розриваєшся між поїздкою на день народження сестри у вихідні та своїм дедлайном, дуже переживаєш через її можливу образу і хочеш оцінити реальну вагу цього вибору.\n\nОсь якими способами ми можемо це розібрати:\n1. Подивитися, які наслідки матиме кожен вибір через кілька днів, місяців і більш тривалий час, щоб знизити тривогу й швидко зрозуміти реальну вагу рішення.\n2. Спокійно перевірити припущення, що сестра обов'язково образиться, та на чому саме воно тримається.\n\nЯкий із цих підходів тобі зараз ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rd-neg-1",
+   "kind": "negative",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви стоїте перед незворотним вибором — продати батьківський дім, у якому виросли, заради викупу бізнесу, і маєте кілька тижнів, щоб усе зважити.\n\n1. Розібрати це рішення в чотири кроки: пошукати інші варіанти крім «продавати чи ні», перевірити припущення про бізнес на реальність, подивитися на вибір з відстані й підготуватися до несподіванок.\n2. Знайти вихід із протиріччя, якщо ви розриваєтеся між потребою зберегти батьківський дім і потребою викупити бізнес, не жертвуючи ні тим, ні іншим.\n\nЯкий із цих способів вам ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sc-1",
+   "kind": "positive",
+   "expect": "scamper",
+   "action": "offer",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "first-principles",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви шукаєте нестандартні ідеї, як зменшити витрати картону у вашому пакуванні для їжі і при цьому не втратити міцності коробки.\n\n1. Пройтися по вашій нинішній коробці за сімома напрямками змін — що в ній можна замінити, прибрати, поєднати чи перевернути, — щоб знайти неочевидні способи заощадити картон без втрати міцності.\n2. Відкласти звичну конструкцію коробки, виділити лише те, що справді тримає їжу та міцність, і зібрати рішення наново без зайвого матеріалу.\n3. Розібрати саму суперечність між меншою витратою картону і збереженням міцності, щоб знайти приховане припущення і вихід без компромісу між ними.\n\nЯкий із цих підходів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sc-2",
+   "kind": "positive",
+   "expect": "scamper",
+   "action": "offer",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "jobs-to-be-done",
+    "first-principles"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви шукаєте свіжі ідеї для зимового меню вашої пекарні, щоб вийти за межі банальних рішень.\n\n1. Пройтися сімома напрямками змін для вашого теперішнього меню й асортименту, щоб вийти за межі банальних рішень і знайти свіжі зимові ідеї.\n2. Подивитися, навіщо і в яких саме зимових ситуаціях люди купують випічку, щоб придумати новинки, які вирішуватимуть реальні потреби гостей.\n3. Відкинути звичні уявлення про те, яким «має бути» зимове меню пекарні, розібрати задачу до основ і зібрати концепцію з чистого аркуша.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sc-3",
+   "kind": "positive",
+   "expect": "scamper",
+   "action": "offer",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "jobs-to-be-done",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви хочете оновити свій настільний календар — змінити чи поєднати його з чимось іншим, щоб він став цікавішим і краще продавався.\n\nОсь кілька способів, як до цього можна підійти:\n1. Покрутити ваш календар з семи різних боків — що в ньому можна замінити, поєднати, прибрати чи перевернути, — щоб знайти неочевидні ідеї для оновлення.\n2. Розібратися, для якої саме задачі у своєму житті чи роботі люди купують настільний календар і що утримує їх від покупки зараз, щоб змінювати продукт під реальну потребу.\n3. Розкласти по поличках усі можливі причини слабких продажів — від самого продукту до ціни, каналів та подачі, — щоб переконатися, що справа справді у вигляді календаря.\n\nЯкий із цих шляхів вам зараз ближчий, чи хочеться подумати якось інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sc-neg-1",
+   "kind": "negative",
+   "expect": "jobs-to-be-done",
+   "action": "offer",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "issue-tree",
+    "scamper"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, що користувачі кидають ваш застосунок для обліку витрат уже за тиждень через незручність, і ви хочете придумати нову функцію, хоча ще не до кінця розумієте, навіщо вони взагалі його встановлювали.\n\n1. Розібратися, для якої справжньої задачі люди встановлюють ваш застосунок і що саме штовхає їх кинути його через тиждень, щоб наступна функція влучила в їхню потребу.\n2. Розкласти відтік користувачів через тиждень на окремі можливі причини — від очікувань на старті до конкретних незручностей, — щоб побачити, де саме корінь проблеми.\n3. Пройтися сімома напрямками змін по тому, як застосунок працює зараз, і швидко напрацювати ідеї, як зробити облік витрат зручнішим.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете глянути на ситуацію інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sq-1",
+   "kind": "positive",
+   "expect": "socratic-questioning",
+   "action": "offer",
+   "first": "socratic-questioning",
+   "offered": [
+    "socratic-questioning",
+    "evaporating-cloud",
+    "reflective-cycle"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви почуваєтеся поганою матір'ю через те, що працюєте й не проводите з дітьми весь день, і хочете чесно перевірити, наскільки ця думка правдива.\n\n1. Розібрати по кісточках думку «я погана мати, бо працюю», подивитися, на яких доказах вона тримається і що для вас насправді означає бути доброю матір'ю.\n2. Знайти спосіб поєднати потребу працювати і потребу давати дітям достатньо тепла та уваги, не розриваючись між ними.\n3. Взяти один конкретний момент, коли ця провина накрила найсильніше, і спокійно розібрати, що тоді сталося і яке внутрішнє правило тоді спрацювало.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sq-2",
+   "kind": "positive",
+   "expect": "socratic-questioning",
+   "action": "offer",
+   "first": "socratic-questioning",
+   "offered": [
+    "socratic-questioning",
+    "mental-contrasting"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви утримуєтеся від подачі резюме у великі компанії через переконання, що без диплома вас туди ніколи не візьмуть, але почали сумніватися, чи це справді так.\n\n1. Розібрати по кісточках переконання про те, що без диплома не візьмуть, і з'ясувати, на яких фактах воно тримається, а де вас обмежує припущення.\n2. Визначити, чого ви насправді хочете від подачі у велику компанію, що саме всередині зупиняє, і скласти чіткий план, як почати діяти попри цей сумнів.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете подивитися на це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sq-3",
+   "kind": "positive",
+   "expect": "socratic-questioning",
+   "action": "offer",
+   "first": "socratic-questioning",
+   "offered": [
+    "socratic-questioning",
+    "reflective-cycle",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви відчуваєте вигорання та небажання далі працювати в IT і хочете розібратися, що насправді стоїть за цією думкою — сама сфера чи інші чинники.\n\n1. Розберемо ваше переконання «більше не хочу працювати в IT» через прицільні запитання, щоб відокремити факти від втоми й побачити, чого саме воно стосується.\n2. Оглянемо конкретні недавні події та ситуації в роботі, які привели до відчуття вигорання, щоб зрозуміти, що саме вас виснажило і який висновок із цього зробити.\n3. Порівняємо, в яких саме задачах, умовах чи моментах з'являється це відторгнення, а де його немає, щоб точно локалізувати джерело проблеми.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "overwhelmed_fatigued",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sq-neg-1",
+   "kind": "negative",
+   "expect": "is-is-not",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, ви хочете з'ясувати, чому принтер у друкарні дає смуги саме на щільному папері і тільки після обіду.\n\n1. Порівняти, за яких умов, у який час і на яких матеріалах смуги з'являються, а на яких — ні, щоб відсіяти зайві версії і звузити коло пошуку.\n2. Пройтися крок за кроком тим, як у вас відбувається друк на щільному папері впродовж дня, щоб знайти, на якому етапі виникає збій.\n\nЯкий спосіб вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-ambivalent-commit",
+   "kind": "tie",
+   "expect": "mental-contrasting",
+   "action": "offer",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти вже вирішив піти з роботи і маєш куди, але страх змушує тебе щодня відкладати розмову з начальником.\n\n1. Ми чітко назвемо, що саме всередині тебе гальмує перед цією розмовою, і складемо простий план дій на цей випадок, щоб перестати відкладати.\n2. Ми спокійно розберемо те, чого ти найбільше боїшся в розмові з начальником, і перевіримо, наскільки ці побоювання справді обґрунтовані.\n\nЯкий із цих способів тобі зараз ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "tie-anxious-choice",
+   "kind": "tie",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви вже тиждень не можете обрати між трьома варіантами навчання, бо дуже боїтеся помилитися і відчуваєте сильне перевантаження.\n\n1. Ми швидко знімемо напругу: перевіримо, наскільки цей вибір справді незворотний, і подивимося на нього з відстані часу, щоб ви змогли спокійно видихнути й вирішити.\n2. Ми обережно розберемо страх помилитися і перевіримо, на яких припущеннях він тримається, щоб він перестав паралізувати ваш вибір.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "multiple_clear",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "tie-broad-cause",
+   "kind": "tie",
+   "expect": "issue-tree",
+   "action": "offer",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "complexity-sensemaking"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви шукаєте причину, чому бізнес зупинився в рості вже на два роки, а можливих пояснень надто багато — від ринку й команди до вас самих.\n\n1. Ми можемо спокійно розкласти питання стагнації бізнесу на окремі незалежні гілки — ринок, продукт, команда, продажі — щоб побачити всю картину і вирішити, куди копати насамперед.\n2. Ми можемо розділити все, що накопичилося за ці два роки, за природою проблем: де достатньо просто порахувати і навести лад, а де треба робити невеликі пробні кроки.\n\nЯкий спосіб вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-many-options",
+   "kind": "tie",
+   "expect": "opportunity-tree",
+   "action": "offer",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "У вас накопичилося дванадцять ідей для інтернет-магазину, і зараз потрібно швидко їх відфільтрувати та зрозуміти, за що братися насамперед.\n\n1. Прив'язати ваші дванадцять ідей до конкретної мети магазину й потреб покупців, щоб швидко відсіяти зайве і знайти, що протестувати першим.\n2. Розібратися, яку саме задачу клієнти вирішують у вашому магазині та що заважає їм купувати зараз, щоб залишити лише ті ідеї, які реально вплинуть на продажі.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-product-ideas",
+   "kind": "tie",
+   "expect": "jobs-to-be-done",
+   "action": "offer",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "opportunity-tree",
+    "scamper"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви шукаєте ідею для нової функції, бо клієнти скаржаться на незручність продукту, а конкуренти вже випустили нові звіти.\n\nОсь якими способами можна до цього підійти:\n1. Розібратися, яку саме задачу клієнти намагаються вирішити і що їм заважає у вашому продукті зараз, щоб нова функція відповідала їхній справжній потребі, а не просто копіювала звіти конкурентів.\n2. Відштовхнутися від скарг на незручність, знайти ключові болі клієнтів, підібрати під них кілька варіантів рішень і швидко перевірити найвдаліший.\n3. Взяти наявний функціонал або звіти і прокрутити їх через сім напрямків змін, щоб знайти свіжі ідеї покращення без створення всього з нуля.\n\nЯкий із цих способів вам ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-single-ultimatum",
+   "kind": "tie",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "reversible-doors",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви опинилися перед важким вибором — закривати чи ні проєкт, у який вклали два роки, — і ця думка не відпускає.\n\n1. Вийти за межі вибору «закрити чи ні», знайти проміжні варіанти, перевірити їх на реальність і спокійно підготуватися до рішення.\n2. Швидко оцінити, наскільки кожен крок справді незворотний, і подивитися на це рішення з відстані 10 хвилин, 10 місяців і 10 років, щоб зняти напругу.\n3. Розібрати, які дві важливі потреби тягнуть вас у протилежні боки — закрити проєкт і водночас зберегти вкладене, — та пошукати вихід без болючих втрат.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "ill_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "tie-unknown-mechanism",
+   "kind": "tie",
+   "expect": "is-is-not",
+   "action": "offer",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Бачу, що на одному з двох складів датчик температури показує на три градуси більше лише вночі, і ви не знаєте його внутрішньої будови.\n\nОсь як ми можемо підійти до пошуку причини:\n1. Порівняти, де, коли і за яких умов похибка є, а де все працює нормально, щоб звузити коло можливих причин і відсіяти зайві здогадки.\n2. Розкласти всі можливі джерела похибки — від самого приладу й живлення до умов на складі вночі — на окремі гілки та перевірити їх по черзі.\n\nЯкий спосіб вам ближчий, чи хочеться підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "unclear",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-urgent-chaos",
+   "kind": "tie",
+   "expect": "complexity-sensemaking",
+   "action": "offer",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "У вас перед самою нарадою все в проєкті змішалося докупи, і за лічені хвилини треба зрозуміти, з якого боку до цього підступитися.\n\n1. Швидко розсортувати все, що навалилося в проєкті, за природою проблем — що треба гасити негайно, де достатньо порахувати, а де зробити пробний крок, — щоб за кілька хвилин мати ясність для наради.\n2. Якщо перед нарадою треба терміново ухвалити одне конкретне рішення — за кілька хвилин оцінити, наскільки воно зворотне і як виглядатиме за деякий час, щоб зняти напругу і визначитися.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "none_exist",
+    "emotion": "anxious",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "wm-1",
+   "kind": "positive",
+   "expect": "weighted-matrix",
+   "action": "offer",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix",
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ти вже зібрала всі подробиці про чотири садочки для сина — ціну, відстань, підхід і відгуки, — але в голові все змішалося і важко звести це до одного вибору.\n\n1. Ми спокійно випишемо головні для тебе речі (ціну, відстань, підхід тощо), визначимо їхню важливість і оцінимо кожен із чотирьох садочків, щоб наочно побачити лідера.\n2. Ми швидко знімемо напругу від вибору, подивившись, наскільки легко буде змінити садочок, якщо щось не підійде, і як це рішення виглядатиме для вас за кілька місяців.\n\nЯкий спосіб тобі зараз ближчий, чи хочеш підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_rich",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wm-2",
+   "kind": "positive",
+   "expect": "weighted-matrix",
+   "action": "choose",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wm-3",
+   "kind": "positive",
+   "expect": "weighted-matrix",
+   "action": "offer",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix",
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви обираєте одного з п'яти постачальників упаковки, маючи на руках дані про ціни, строки та якість зразків, і хочете чітко пояснити свій вибір команді.\n\nОсь як ми можемо підійти до цього:\n1. Упорядкувати критерії важливості (ціну, строки, якість тощо), оцінити за ними кожного з п'яти постачальників і отримати наочне обґрунтування вибору для команди.\n2. Швидко перевірити, наскільки легко буде змінити постачальника у разі помилки і як це рішення виглядатиме через кілька місяців, щоб не ускладнювати вибір зайвими сумнівами.\n\nЯкий спосіб вам ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "data_rich",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "wm-neg-1",
+   "kind": "negative",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви застрягли перед вибором між двома квартирами, і страх припуститися непоправної помилки та «все зіпсувати» викликає паніку й не дає спати вже третю ніч.\n\n1. Ми швидко знімемо гостроту страху перед помилкою: перевіримо, наскільки кожен вибір справді незворотний і як це рішення виглядатиме для вас через деякий час.\n2. Ми спокійно розберемо думку про те, що помилка «все зіпсує», щоб побачити, які реальні факти стоять за цим страхом, а що є перебільшенням.\n\nЯкий із цих способів вам зараз ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "multiple_clear",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wr-1",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "wrap-decision",
+    "evaporating-cloud"
+   ],
+   "first_ok": false,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви стоїте перед вибором між роллю CTO у маленькому стартапі та переходом у банк на вищу зарплату, і цей крок здається вам остаточним та незворотним.\n\nОсь якими способами ми можемо це розібрати:\n1. Ми швидко перевіримо, наскільки цей перехід справді безповоротний, і подивимося на обидва рішення на відстані часу — щоб зняти тиск і зрозуміти, що ви реально ризикуєте втратити.\n2. Ми вийдемо за межі вибору лише «піти чи лишитися», перевіримо припущення про обидва місця і підготуємо орієнтири на випадок, якщо очікування не справдяться.\n3. Ми сформулюємо обидві ваші потреби — за якими стоять стартап і банк — і пошукаємо спосіб задовольнити обидві без відчуття важкої втрати.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете підійти до цього інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wr-2",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви стоїте перед важливим вибором — чи продавати свою частку в бізнесі за запропоновану хорошу ціну, — і відчуваєте сумніви.\n\n1. Пройти це рішення крок за кроком: пошукати інші варіанти, крім «продати або лишити як є», перевірити пропозицію на реалістичність, подивитися на вибір з відстані й підготуватися до наслідків.\n2. Розібрати, які дві важливі потреби тягнуть вас у протилежні боки — що дає продаж за хорошу ціну і що цінного тримає в бізнесі, — та пошукати рішення без втрати жодної з них.\n\nЯкий спосіб вам зараз ближчий, чи хочете підійти інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "ill_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wr-3",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "offer",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "evaporating-cloud",
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви з чоловіком стоїте перед великим рішенням щодо переїзду в іншу країну, де на кону діти, робота і батьки, а вибір зараз виглядає лише як «або їхати, або лишатися».\n\n1. Вийти за межі вибору «або їхати, або лишатися», перевірити припущення в реальності, подивитися на рішення з відстані та підготуватися до ризиків.\n2. Розібрати, які саме важливі потреби стоять за «їхати» і за «лишатися», та пошукати шлях, де не доведеться жертвувати роботою, дітьми чи батьками.\n3. Оцінити, наскільки цей крок справді незворотний і чи можна спробувати переїзд у меншому масштабі, а також подивитися, як ви почуватиметеся щодо вибору через тиждень, рік і десять років.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете розібрати це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "ill_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "wr-neg-1",
+   "kind": "negative",
+   "expect": "reversible-doors",
+   "action": "offer",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "mental-contrasting"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "Ви розмірковуєте, чи варто на тиждень змінити ціну на масаж для перевірки реакції, і хоча розумієте, що це тимчасово, все одно трохи хвилюєтеся.\n\n1. Швидко оцінити, наскільки безпечно спробувати змінити ціну і відкотити все назад, якщо результат не сподобається, щоб зняти зайве хвилювання.\n2. Зрозуміти, який саме внутрішній острах стримує вас від цього тижневого експерименту, і скласти чіткий план дій на випадок, якщо тривога знову зупинятиме.\n\nЯкий із цих підходів вам зараз ближчий, чи хочете розібрати це інакше?",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  }
+ ],
+ "llm_call": [
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10338, \"output_tokens\": 481, \"thought_tokens\": 0, \"latency_ms\": 8567, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10338, \"output_tokens\": 451, \"thought_tokens\": 0, \"latency_ms\": 9013, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10350, \"output_tokens\": 482, \"thought_tokens\": 0, \"latency_ms\": 10466, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10355, \"output_tokens\": 574, \"thought_tokens\": 0, \"latency_ms\": 11473, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10352, \"output_tokens\": 499, \"thought_tokens\": 0, \"latency_ms\": 9252, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10344, \"output_tokens\": 599, \"thought_tokens\": 0, \"latency_ms\": 9455, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10346, \"output_tokens\": 544, \"thought_tokens\": 0, \"latency_ms\": 8994, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10329, \"output_tokens\": 507, \"thought_tokens\": 0, \"latency_ms\": 8555, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10348, \"output_tokens\": 590, \"thought_tokens\": 0, \"latency_ms\": 10335, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10336, \"output_tokens\": 516, \"thought_tokens\": 0, \"latency_ms\": 8955, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10355, \"output_tokens\": 607, \"thought_tokens\": 0, \"latency_ms\": 10917, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10347, \"output_tokens\": 675, \"thought_tokens\": 0, \"latency_ms\": 11274, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10333, \"output_tokens\": 549, \"thought_tokens\": 0, \"latency_ms\": 8546, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10349, \"output_tokens\": 532, \"thought_tokens\": 0, \"latency_ms\": 9487, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10333, \"output_tokens\": 531, \"thought_tokens\": 0, \"latency_ms\": 8870, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10334, \"output_tokens\": 535, \"thought_tokens\": 595, \"latency_ms\": 15583, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10345, \"output_tokens\": 472, \"thought_tokens\": 0, \"latency_ms\": 7671, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10340, \"output_tokens\": 551, \"thought_tokens\": 0, \"latency_ms\": 8851, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10340, \"output_tokens\": 506, \"thought_tokens\": 0, \"latency_ms\": 8572, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10339, \"output_tokens\": 524, \"thought_tokens\": 0, \"latency_ms\": 8593, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10322, \"output_tokens\": 495, \"thought_tokens\": 0, \"latency_ms\": 8385, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10337, \"output_tokens\": 674, \"thought_tokens\": 0, \"latency_ms\": 10431, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10339, \"output_tokens\": 621, \"thought_tokens\": 0, \"latency_ms\": 10149, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10335, \"output_tokens\": 207, \"thought_tokens\": 0, \"latency_ms\": 5738, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10344, \"output_tokens\": 485, \"thought_tokens\": 0, \"latency_ms\": 7850, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10333, \"output_tokens\": 562, \"thought_tokens\": 0, \"latency_ms\": 10314, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10328, \"output_tokens\": 465, \"thought_tokens\": 0, \"latency_ms\": 8371, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10332, \"output_tokens\": 487, \"thought_tokens\": 0, \"latency_ms\": 8065, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10344, \"output_tokens\": 521, \"thought_tokens\": 0, \"latency_ms\": 8488, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10335, \"output_tokens\": 481, \"thought_tokens\": 0, \"latency_ms\": 8131, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10349, \"output_tokens\": 449, \"thought_tokens\": 0, \"latency_ms\": 7413, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10338, \"output_tokens\": 591, \"thought_tokens\": 0, \"latency_ms\": 9835, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10344, \"output_tokens\": 530, \"thought_tokens\": 0, \"latency_ms\": 8409, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10355, \"output_tokens\": 636, \"thought_tokens\": 0, \"latency_ms\": 10707, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10333, \"output_tokens\": 471, \"thought_tokens\": 0, \"latency_ms\": 8260, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10320, \"output_tokens\": 523, \"thought_tokens\": 0, \"latency_ms\": 8491, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10350, \"output_tokens\": 555, \"thought_tokens\": 0, \"latency_ms\": 8873, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10335, \"output_tokens\": 521, \"thought_tokens\": 0, \"latency_ms\": 8680, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10334, \"output_tokens\": 547, \"thought_tokens\": 0, \"latency_ms\": 8597, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10332, \"output_tokens\": 616, \"thought_tokens\": 0, \"latency_ms\": 10985, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10339, \"output_tokens\": 535, \"thought_tokens\": 0, \"latency_ms\": 8737, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10335, \"output_tokens\": 642, \"thought_tokens\": 0, \"latency_ms\": 10282, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10347, \"output_tokens\": 713, \"thought_tokens\": 0, \"latency_ms\": 11489, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-neg-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10331, \"output_tokens\": 448, \"thought_tokens\": 0, \"latency_ms\": 8689, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10327, \"output_tokens\": 646, \"thought_tokens\": 0, \"latency_ms\": 9971, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10335, \"output_tokens\": 541, \"thought_tokens\": 0, \"latency_ms\": 8826, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10333, \"output_tokens\": 671, \"thought_tokens\": 0, \"latency_ms\": 10405, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10328, \"output_tokens\": 452, \"thought_tokens\": 0, \"latency_ms\": 8465, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10335, \"output_tokens\": 617, \"thought_tokens\": 0, \"latency_ms\": 9612, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10327, \"output_tokens\": 601, \"thought_tokens\": 0, \"latency_ms\": 9323, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10332, \"output_tokens\": 552, \"thought_tokens\": 0, \"latency_ms\": 8666, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10333, \"output_tokens\": 473, \"thought_tokens\": 0, \"latency_ms\": 8278, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10348, \"output_tokens\": 620, \"thought_tokens\": 0, \"latency_ms\": 10118, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10333, \"output_tokens\": 688, \"thought_tokens\": 0, \"latency_ms\": 11204, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10334, \"output_tokens\": 581, \"thought_tokens\": 0, \"latency_ms\": 9589, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10338, \"output_tokens\": 145, \"thought_tokens\": 0, \"latency_ms\": 4079, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10336, \"output_tokens\": 466, \"thought_tokens\": 0, \"latency_ms\": 7645, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10337, \"output_tokens\": 562, \"thought_tokens\": 0, \"latency_ms\": 9012, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10345, \"output_tokens\": 496, \"thought_tokens\": 0, \"latency_ms\": 8775, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10343, \"output_tokens\": 631, \"thought_tokens\": 0, \"latency_ms\": 9550, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10327, \"output_tokens\": 518, \"thought_tokens\": 0, \"latency_ms\": 8337, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10327, \"output_tokens\": 465, \"thought_tokens\": 0, \"latency_ms\": 8126, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10325, \"output_tokens\": 586, \"thought_tokens\": 0, \"latency_ms\": 9488, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10328, \"output_tokens\": 482, \"thought_tokens\": 0, \"latency_ms\": 8644, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10342, \"output_tokens\": 453, \"thought_tokens\": 0, \"latency_ms\": 7798, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10334, \"output_tokens\": 562, \"thought_tokens\": 0, \"latency_ms\": 10062, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10347, \"output_tokens\": 647, \"thought_tokens\": 0, \"latency_ms\": 10253, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10344, \"output_tokens\": 736, \"thought_tokens\": 0, \"latency_ms\": 11181, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10329, \"output_tokens\": 550, \"thought_tokens\": 0, \"latency_ms\": 8802, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10342, \"output_tokens\": 634, \"thought_tokens\": 0, \"latency_ms\": 9697, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10348, \"output_tokens\": 595, \"thought_tokens\": 0, \"latency_ms\": 9263, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10341, \"output_tokens\": 161, \"thought_tokens\": 0, \"latency_ms\": 4484, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10320, \"output_tokens\": 149, \"thought_tokens\": 0, \"latency_ms\": 3923, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10328, \"output_tokens\": 453, \"thought_tokens\": 0, \"latency_ms\": 7930, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-ambivalent-commit\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10335, \"output_tokens\": 503, \"thought_tokens\": 0, \"latency_ms\": 9124, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-anxious-choice\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10329, \"output_tokens\": 481, \"thought_tokens\": 0, \"latency_ms\": 8052, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-many-options\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10322, \"output_tokens\": 590, \"thought_tokens\": 0, \"latency_ms\": 10275, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-single-ultimatum\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10322, \"output_tokens\": 446, \"thought_tokens\": 0, \"latency_ms\": 8503, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-broad-cause\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10330, \"output_tokens\": 604, \"thought_tokens\": 0, \"latency_ms\": 9225, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-urgent-chaos\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10326, \"output_tokens\": 604, \"thought_tokens\": 0, \"latency_ms\": 9438, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-product-ideas\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10336, \"output_tokens\": 564, \"thought_tokens\": 0, \"latency_ms\": 9878, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-unknown-mechanism\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10429, \"output_tokens\": 199, \"thought_tokens\": 0, \"latency_ms\": 4646, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mid-after-premortem\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10493, \"output_tokens\": 507, \"thought_tokens\": 0, \"latency_ms\": 8971, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mid-after-choice\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10464, \"output_tokens\": 641, \"thought_tokens\": 0, \"latency_ms\": 10720, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"other-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 10464, \"output_tokens\": 491, \"thought_tokens\": 0, \"latency_ms\": 7942, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mid-not-fit\"}"
+ ]
+}
