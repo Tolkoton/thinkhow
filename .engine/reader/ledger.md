@@ -46,3 +46,8 @@
 - Record: tasks/done/405-cleanup-2026-10-24/report.md
 - Reason: All four questions hold. The references I could check say what the report says they do. Each of the four «Що зробити» items has an answer, and so does each «Готово, коли» item. The report asks the owner no new question; the google-cloud-speech item is a deferral carried over from 404. Technical terms are in English. Two references could not be checked from files: the `git log e7c52ba..37cefba` result and the `extra-allowed` figure of 2.92 USD. Neither is wrong on its face.
 - Request: 20261024T081332Z-d5007c (attempt 1)
+
+## 2026-10-25T01:37:07Z — 406-cleanup-2026-10-25 — READER_PASS
+- Record: tasks/done/406-cleanup-2026-10-25/report.md
+- Reason: All four questions hold. I checked every reference I could open and each one says what the report claims. Each of the four «Що зробити» items has an answer in the report. Neither the report nor the task file has an open question for the owner. The terms the owner reads (commit, package, signals, simplifier, subagents, nightly) are in English.
+- Request: 20261025T013612Z-9db726 (attempt 1)

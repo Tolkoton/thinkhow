@@ -1,0 +1,3 @@
+30 signal(s) in .claude/state/simplifier/signals-full.json
+SIMPLIFIER CALL: lines grew from 2635 (median of the last 5 runs) to 3219; dead-code grew from 13 (median of the last 5 runs) to 20
+Reversal rate: 0 of the last 0 removals came back (0.0 %; the corridor is 5-20 %) — too few removals to judge (0 of the 10 needed)
