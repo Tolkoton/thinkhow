@@ -24,6 +24,7 @@ from thinkhow.workspace.profile import NoLanguage, language, set_language
 from thinkhow.workspace.topics import (
     all_topics_for_learning,
     create_topic,
+    delete_topic,
     ensure_profile,
     list_topics,
     open_topic,
@@ -56,6 +57,7 @@ __all__ = [
     "TopicView",
     "all_topics_for_learning",
     "create_topic",
+    "delete_topic",
     "ensure_profile",
     "language",
     "list_topics",

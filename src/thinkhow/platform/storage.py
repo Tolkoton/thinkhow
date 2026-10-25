@@ -1,6 +1,6 @@
 """File storage: Cloud Storage, or a local folder in local mode (M2 S2, M3 A2).
 
-Does NOT delete files, cache, or know what the files mean.
+Does NOT cache or know what the files mean; deletes one named file, never a folder (task 204).
 """
 
 from collections.abc import Mapping
@@ -22,6 +22,8 @@ class Storage(Protocol):
     def create_if_absent(self, bucket: Bucket, path: str, data: bytes, content_type: str) -> bool: ...
 
     def list(self, bucket: Bucket, prefix: str) -> list[str]: ...
+
+    def delete(self, bucket: Bucket, path: str) -> None: ...
 
 
 def check_path(path: str) -> str:
@@ -75,6 +77,10 @@ class LocalStorage:
         names = (p.relative_to(base).as_posix() for p in base.rglob("*") if p.is_file())
         return sorted(name for name in names if name.startswith(prefix))
 
+    def delete(self, bucket: Bucket, path: str) -> None:
+        """A missing file is no error: the end state is the same."""
+        self._file(bucket, path).unlink(missing_ok=True)
+
 
 class GcsStorage:
     """Cloud Storage through the client library (M2 S2: not a mounted folder)."""
@@ -107,6 +113,13 @@ class GcsStorage:
     def list(self, bucket: Bucket, prefix: str) -> list[str]:
         blobs = self.client.list_blobs(self.names[bucket], prefix=check_prefix(prefix))
         return sorted(blob.name for blob in blobs)
+
+    def delete(self, bucket: Bucket, path: str) -> None:
+        """A missing blob is no error; with versioning on, the deleted file stays as an old version."""
+        try:
+            self._blob(bucket, path).delete()
+        except NotFound:
+            pass
 
 
 def make_storage(settings: Settings) -> Storage:

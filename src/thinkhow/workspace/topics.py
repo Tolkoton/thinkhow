@@ -152,6 +152,19 @@ def retry(
     return _answer(storage, facilitate, ref, conv, last.no, last.text, now, _language_of(storage, user))
 
 
+def delete_topic(storage: Storage, user: CurrentUser, ref: TopicRef) -> None:
+    """Own topics only, the owner's too (task 204); conversation.md goes last, so a broken delete leaves
+    the topic listed and the person can delete it again."""
+    _can_write(user, ref)
+    conversation = f"{ref.uid}/{ref.topic_id}/conversation.md"
+    if storage.read("users", conversation) is None:
+        raise TopicNotFound(ref.topic_id)
+    for path in storage.list("users", f"{ref.uid}/{ref.topic_id}/"):
+        if path != conversation:
+            storage.delete("users", path)
+    storage.delete("users", conversation)
+
+
 def _language_of(storage: Storage, user: CurrentUser) -> str | None:
     """The person's language as the model reads it, «name (code)», or None before the first choice (F13)."""
     try:

@@ -3,7 +3,8 @@
 <p class="meta">Мова: {{ language.name }} · <a href="/language">змінити</a></p>
 <h1>Мої теми</h1>
 <ul class="topics">
-{% for t in mine %}  <li><a href="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}">{{ t.title }}</a></li>
+{% for t in mine %}  <li><a href="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}">{{ t.title }}</a>
+    {% include "delete.html" %}</li>
 {% else %}  <li class="empty">Поки жодної теми.</li>
 {% endfor %}</ul>
 <h2>Нова тема</h2>

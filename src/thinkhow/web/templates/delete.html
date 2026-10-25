@@ -1,0 +1,7 @@
+<details class="delete">
+  <summary>Видалити</summary>
+  <form method="post" action="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}/delete">
+    <p>Видалити тему «{{ t.title }}» разом з усією розмовою? Відновити її не вийде.</p>
+    <button class="danger" type="submit">Так, видалити</button>
+  </form>
+</details>

@@ -316,3 +316,17 @@
 - Live S4 again: `.engine/artifacts/research-live/2026-10-25T120515Z/conversation.md` — #17 → `answer` with search
   (2 queries, sources); #19, #21 → `offer` (n = 1; the probe gave #19 2/3); #25 → the person chose a way, the card led
 - Open: the owner judges #19/#21; no further change without his word
+
+## Slice 23 — delete-topic (DONE 2026-10-25) — task 204, one slice without /plan-slice (as task 203)
+
+- Modules: `platform/storage.py` — `Storage.delete(bucket, path)` (Local: unlink, Gcs: blob.delete; a missing file is
+  no error); `workspace/topics.py` — `delete_topic(storage, user, ref)`: own topics only (the owner too), every file
+  under `<uid>/<topic_id>/`, `conversation.md` last; `web/server.py` — `POST /topics/{uid}/{topic_id}/delete` → 303
+  to `/`; `web/templates/delete.html` — `<details>` «Видалити» → one confirmation «Так, видалити», included in the
+  home list (own topics) and on the own topic page
+- Tests: `tests/web/test_delete_topic.py` (14: storage, workspace, web, the guard «only workspace/topics.py deletes,
+  only in users»)
+- Screens: `scripts/screenshots_delete_topic.py` → `.engine/artifacts/delete-topic/` (4 PNGs + `run.txt`: files before
+  and after)
+- Not done (decided): observations of the nightly learning stay in `system/learning/observations/` (the web account
+  cannot write `system`); no «restore» — the bucket's versioning keeps the deleted files as old versions

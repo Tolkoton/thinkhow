@@ -37,5 +37,6 @@
   </div>
 </form>
 <script src="/static/conversation.js"></script>
+{% with t = view %}{% include "delete.html" %}{% endwith %}
 {% endif %}
 {% endblock %}

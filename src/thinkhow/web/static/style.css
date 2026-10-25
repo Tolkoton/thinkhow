@@ -180,6 +180,14 @@ form.reply { margin-top: 1.25rem; }
 .pending { display: none; color: var(--muted); font-size: 0.95rem; }
 #send:disabled ~ .pending { display: inline; }
 
+/* Deleting a topic (task 204): a quiet «Видалити», then one confirmation */
+details.delete { margin-top: 0.4rem; font-size: 0.95rem; }
+details.delete summary { color: var(--muted); cursor: pointer; width: fit-content; }
+details.delete form { margin-top: 0.5rem; }
+details.delete p { margin: 0 0 0.5rem; }
+button.danger { color: var(--error); border-color: var(--error); font-weight: 600; }
+form.reply ~ details.delete { margin-top: 2rem; }
+
 /* The thinking model that leads (task 203): a quiet caption beside the conversation, marks in the history */
 aside.method { color: var(--muted); font-size: 0.9rem; margin: -0.5rem 0 1rem; }
 aside.method .label { font-weight: 600; }

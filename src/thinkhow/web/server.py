@@ -113,6 +113,11 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         ref = workspace.TopicRef(uid, topic_id)
         return _stream(workspace.retry(deps.storage, deps.facilitate, user, ref, deps.now()))
 
+    @app.post("/topics/{uid}/{topic_id}/delete")
+    def delete(user: User, uid: str, topic_id: str) -> Response:
+        workspace.delete_topic(deps.storage, user, workspace.TopicRef(uid, topic_id))
+        return RedirectResponse("/", status_code=303)
+
     @app.post("/topics/{uid}/{topic_id}/voice")
     async def voice(request: Request, user: User, uid: str, topic_id: str) -> Response:
         """The recording's raw bytes → text; the model call runs in the thread pool, not on the event loop."""
