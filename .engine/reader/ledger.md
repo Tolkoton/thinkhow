@@ -61,3 +61,8 @@
 - Record: tasks/done/305-advice-on-request/report.md
 - Reason: All four questions hold. The references I could check say what the report claims: rules.md:6, research.md:16, goals.md:2 and N1, router.md:34, the card lines, the nine «v6 N1» lines, proposal 715, both live conversations, 83 of 85 in both router-eval runs, and the ledger with 878/ruff/mypy. Both «Що зробити» items are done: the goals amendment was answered «так» and applied, and the facilitator rule is in place. The single question to the owner listed its options and gave advice, and it is now answered. Technical terms in the report are in English.
 - Request: 20261025T183945Z-ff0f8d (attempt 2)
+
+## 2026-10-25T23:27:19Z — 307-product-thinking-pack — READER_PASS
+- Record: tasks/done/307-product-thinking-pack/report.md
+- Reason: All four questions hold. The report's numbers match the artifacts: run 1, the compare against base 180821Z, the ×5 repeats, the 7 conversations, the smoke on t-84d1517cb1c1 and the test counts. Every «Що зробити» item is either done or, for the Knowledge seeding through Job `cards`, plainly deferred to the owner's word with the reason and a ready request. The one open item, in the feature file, has its question and the author's advice. Technical terms stay English.
+- Request: 20261025T232500Z-d0a100 (attempt 1)

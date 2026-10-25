@@ -355,3 +355,14 @@ one; do not reopen the old one in conversation.
   а не код, — записано у звіті.
 - Evidence: `.engine/testing/ledger.md` (запити 20261025T224256Z-46113e, 20261025T225234Z-3251a1), цей журнал.
 - Status: CLOSED
+
+## 2026-10-25T23:35Z — AUTONOMOUS — product-router-eval-tests-after-code (supersedes the 23:20Z entry's follow-up)
+- Decision: обіцяного catch-up tester-а не було: у точці (b) test manager вирішив `catch_up: none` (його факти не
+  містять відмов RED), `integration: now`. Тож 24 тести tester-а в `tests/contract/product_router_eval/` лишились
+  незапечатаними (не правлені мною, усі зелені), запечатано 11 тестів блоку. Так і сказано у звіті задачі
+  («Відкладене»). Overseer PASS 20261025T231640Z-64faf8 це бачив.
+- Door: two-way
+- Cost to reverse: свіжий tester на catch-up — пломба цих тестів.
+- Why not escalated: технічне; власникові нема з чого вибирати.
+- Evidence: `.engine/testing/ledger.md` (точка b product-router-eval), overseer ledger.
+- Status: CLOSED
