@@ -187,12 +187,13 @@ def test_mic_recognize_and_state_are_in_the_form_of_the_own_topic_page_only(tmp_
     assert mic is not None, "no #mic on the own topic page"
     assert mic["tag"] == "button" and mic["attrs"].get("type") == "button"
     assert mic["in_form"]
-    assert FormPage.text_of(mic) == "🎤 Говорити"
+    # task 207: the buttons are icons without words; the name is for screen readers
+    assert mic["attrs"].get("aria-label") == "Говорити" and FormPage.text_of(mic) == ""
     recognize = page.by_id("recognize")
     assert recognize is not None, "no #recognize on the own topic page"
     assert recognize["tag"] == "button" and recognize["attrs"].get("type") == "button"
     assert "hidden" in recognize["attrs"]
-    assert FormPage.text_of(recognize) == "Розпізнати ще раз"
+    assert recognize["attrs"].get("aria-label") == "Розпізнати ще раз" and FormPage.text_of(recognize) == ""
     state = page.by_id("mic-state")
     assert state is not None and state["tag"] == "span"
     # the owner reads Bob's topic without a form: no microphone there

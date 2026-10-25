@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "icons.html" import icon %}
 {% block title %}{{ view.title }}{% endblock %}
 {% block body %}
 <h1>{{ view.title }}</h1>
@@ -28,12 +29,12 @@
       data-key="draft:{{ view.ref.uid }}/{{ view.ref.topic_id }}">
   <textarea name="text"></textarea>
   <div class="actions">
-    <button id="mic" type="button">🎤 Говорити</button>
-    <button id="recognize" type="button" hidden>Розпізнати ще раз</button>
-    <span id="mic-state"></span>
-    <button id="send" class="primary" type="submit" autocomplete="off">Надіслати</button>
-    <span id="pending" class="pending">Фасилітатор відповідає…</span>
-    <button id="retry" type="button" autocomplete="off"{% if not view.awaiting_answer %} hidden{% endif %}>Спробуйте ще раз</button>
+    <button id="mic" class="icon" type="button" aria-label="Говорити" aria-pressed="false">{{ icon("mic") }}{{ icon("stop") }}<span class="spinner" aria-hidden="true"></span></button>
+    <button id="recognize" class="icon" type="button" aria-label="Розпізнати ще раз" hidden>{{ icon("retry") }}</button>
+    <span id="mic-state" class="sr-only" aria-live="polite"></span>
+    <button id="send" class="primary icon" type="submit" autocomplete="off" aria-label="Надіслати">{{ icon("send") }}</button>
+    <span id="pending" class="pending" role="status"><span class="spinner" aria-hidden="true"></span><span class="sr-only">Фасилітатор відповідає…</span></span>
+    <button id="retry" class="icon" type="button" autocomplete="off" aria-label="Спробуйте ще раз"{% if not view.awaiting_answer %} hidden{% endif %}>{{ icon("retry") }}</button>
   </div>
 </form>
 <script src="/static/conversation.js"></script>

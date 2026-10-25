@@ -240,20 +240,27 @@ function attach(doc, win) {
 }
 
 // The page's microphone: the buttons, the words of the state, and the field the text is appended to (I5).
+// The words are for screen readers only; the eye sees the state on #mic itself: data-state (task 207).
 function attachMic(doc, win, form, field, error) {
   const mic = doc.getElementById("mic");
   const again = doc.getElementById("recognize");
   const state = doc.getElementById("mic-state");
   if (!mic || !win.navigator || !win.navigator.mediaDevices) return null;
   const key = form.dataset.key;
+  function show(name) {
+    mic.dataset.state = name;
+    mic.ariaPressed = name === "recording" ? "true" : "false";
+  }
   const ui = {
     recording() {
       error.textContent = "";
       again.hidden = true;
+      show("recording");
       state.textContent = "Запис… натисніть ще раз, щоб зупинити";
     },
     recognizing() {
       mic.disabled = again.disabled = true;
+      show("recognizing");
       state.textContent = "Розпізнаю…";
     },
     insertText(text) {
@@ -263,10 +270,12 @@ function attachMic(doc, win, form, field, error) {
     idle() {
       mic.disabled = again.disabled = false;
       again.hidden = true;
+      show("");
       state.textContent = "";
     },
     showError(text) {
       mic.disabled = again.disabled = false;
+      show("");
       state.textContent = "";
       error.textContent = text;
     },

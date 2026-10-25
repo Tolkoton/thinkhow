@@ -4,6 +4,7 @@ import json
 import re
 from datetime import UTC, datetime
 from pathlib import Path
+from urllib.parse import urlparse
 
 from vl_fakes import (
     ALICE,
@@ -170,7 +171,14 @@ def test_every_page_has_the_language_link(tmp_path: Path) -> None:
     for path in ("/", "/language", f"/topics/alice-1/{topic_id}"):
         r = app.client.get(path, headers=H_ALICE)
         assert r.status_code == 200, (path, r.status_code)
-        assert "Мова" in Html(r.text).links_to("/language"), path
+        # task 207: the header link is a globe icon; «Мова» is its aria-label
+        html = Html(r.text)
+        named = [
+            a.get("aria-label")
+            for t, a in html.tags
+            if t == "a" and urlparse(a.get("href") or "").path == "/language"
+        ]
+        assert "Мова" in html.links_to("/language") + named, path
 
 
 def test_post_topics_does_not_require_a_language(tmp_path: Path) -> None:

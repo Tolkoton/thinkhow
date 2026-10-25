@@ -175,3 +175,38 @@ test("send after a failed recognition sends what the field holds", async () => {
   assert.equal(replies(p).length, 1, "send stayed blocked after a refusal");
   assert.equal(replies(p)[0].init.body.get("text"), "набране");
 });
+
+// Task 207: the mic button is an icon; the state the words used to show is on the button itself.
+test("the mic shows its state without words: recording, recognizing, idle", async () => {
+  let release;
+  const p = loadPage([() => new Promise((r) => (release = r))]);
+  const mic = p.byId.mic;
+  fire(mic, "click");
+  await flush();
+  assert.equal(mic.dataset.state, "recording");
+  assert.equal(mic.ariaPressed, "true");
+  fire(mic, "click");
+  await flush();
+  assert.equal(mic.dataset.state, "recognizing");
+  assert.equal(mic.ariaPressed, "false");
+  assert.equal(mic.disabled, true);
+  release(text("світ")());
+  await flush();
+  assert.equal(mic.dataset.state, "");
+  assert.equal(mic.disabled, false);
+});
+
+test("the mic leaves its recording state when recognition fails", async () => {
+  const refused = () =>
+    new Response('<p class="error">Не вдалося розпізнати — спробуйте ще раз.</p>', {
+      status: 502,
+      headers: { "content-type": "text/html" },
+    });
+  const p = loadPage([refused]);
+  fire(p.byId.mic, "click");
+  await flush();
+  fire(p.byId.mic, "click");
+  await flush();
+  assert.equal(p.byId.mic.dataset.state, "");
+  assert.equal(p.byId.recognize.hidden, false);
+});

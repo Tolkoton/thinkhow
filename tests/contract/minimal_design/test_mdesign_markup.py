@@ -45,7 +45,8 @@ def _home(tmp_path: Path) -> Dom:
 
 
 def _buttons_labelled(dom: Dom, label: str) -> list[El]:
-    found = [e for e in dom.find("button") if norm(e.text()) == label]
+    # task 207: a button is an icon now; its name lives in aria-label
+    found = [e for e in dom.find("button") if (e.attrs.get("aria-label") or norm(e.text())) == label]
     found += [
         e
         for e in dom.find("input")
@@ -79,8 +80,9 @@ def test_navigation_links_live_in_header_site(tmp_path: Path) -> None:
     headers = [e for e in dom.find("header") if "site" in e.classes()]
     assert len(headers) == 1, f'<header class="site"> found {len(headers)} times'
     header = headers[0]
+    # task 207: «Мова» is a globe icon now; its name lives in aria-label
     inside = [
-        (urlparse(e.attrs.get("href") or "").path, norm(e.text()))
+        (urlparse(e.attrs.get("href") or "").path, e.attrs.get("aria-label") or norm(e.text()))
         for e in dom.find("a")
         if header in e.ancestors()
     ]

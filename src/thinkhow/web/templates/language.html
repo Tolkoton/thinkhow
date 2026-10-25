@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "icons.html" import icon %}
 {% block title %}Мова{% endblock %}
 {% block body %}
 <h1>Мова</h1>
@@ -8,6 +9,6 @@
 {% if not current %}    <option value="">— оберіть мову —</option>
 {% endif %}{% for lang in languages %}    <option value="{{ lang.code }}"{% if lang.code == current %} selected{% endif %}>{{ lang.name }}</option>
 {% endfor %}  </select>
-  <button class="primary" type="submit">Зберегти</button>
+  <button class="primary icon" type="submit" aria-label="Зберегти">{{ icon("check") }}</button>
 </form>
 {% endblock %}

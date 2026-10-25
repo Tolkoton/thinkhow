@@ -67,6 +67,8 @@ header.site {
 }
 
 header.site .brand { font-weight: 700; color: var(--fg); text-decoration: none; }
+header.site .icon-link { color: var(--muted); align-self: center; display: inline-flex; }
+header.site .icon-link:hover { color: var(--link); }
 
 main { padding-bottom: 3rem; }
 
@@ -80,13 +82,17 @@ h2 { font-size: 1.15rem; line-height: 1.3; margin: 1.75rem 0 0.75rem; }
 /* «Мої теми» */
 ul.topics { list-style: none; margin: 0; padding: 0; }
 ul.topics li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 0.6rem;
   margin: 0 0 0.5rem;
   padding: 0.7rem 0.9rem;
 }
-ul.topics li a { font-weight: 600; text-decoration: none; }
+ul.topics li a { flex: 1 1 0; min-width: 0; font-weight: 600; text-decoration: none; }
 ul.topics li a:hover { text-decoration: underline; }
 ul.topics li.empty { color: var(--muted); }
 
@@ -129,6 +135,51 @@ button.primary {
   font-weight: 600;
 }
 button:disabled { opacity: 0.6; cursor: default; }
+
+/* Icon buttons (task 207): no words on a button; its name is in aria-label for screen readers */
+.i { width: 1.35rem; height: 1.35rem; flex: none; }
+button.icon, summary.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.spinner {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 50% { box-shadow: 0 0 0 0.35rem transparent; } 0%, 100% { box-shadow: 0 0 0 0 var(--error); } }
+
+/* The microphone: a mic; while recording a red stop square that pulses; while recognizing a spinner */
+#mic .i-stop, #mic .spinner { display: none; }
+#mic[data-state="recording"] { background: var(--error); border-color: var(--error); color: var(--primary-fg); animation: pulse 1.4s ease-out infinite; }
+#mic[data-state="recording"] .i-mic { display: none; }
+#mic[data-state="recording"] .i-stop { display: block; }
+#mic[data-state="recognizing"] .i-mic { display: none; }
+#mic[data-state="recognizing"] .spinner { display: inline-block; }
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 3s; }
+  #mic[data-state="recording"] { animation: none; }
+}
 
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
@@ -174,18 +225,20 @@ form.reply { margin-top: 1.25rem; }
   gap: 0.5rem;
   margin-top: 0.6rem;
 }
-#mic-state { color: var(--muted); font-size: 0.95rem; }
-#mic-state:empty { display: none; }
 
-.pending { display: none; color: var(--muted); font-size: 0.95rem; }
-#send:disabled ~ .pending { display: inline; }
+.pending { display: none; }
+#send:disabled ~ .pending { display: inline-flex; }
 
-/* Deleting a topic (task 204): a quiet «Видалити», then one confirmation */
-details.delete { margin-top: 0.4rem; font-size: 0.95rem; }
-details.delete summary { color: var(--muted); cursor: pointer; width: fit-content; }
+/* Deleting a topic (task 204): a quiet bin, then one confirmation */
+details.delete { font-size: 0.95rem; }
+details.delete[open] { flex-basis: 100%; }
+details.delete summary { color: var(--muted); cursor: pointer; list-style: none; border-radius: 0.5rem; }
+details.delete summary::-webkit-details-marker { display: none; }
+details.delete summary:hover, details.delete[open] summary { color: var(--error); }
 details.delete form { margin-top: 0.5rem; }
 details.delete p { margin: 0 0 0.5rem; }
 button.danger { color: var(--error); border-color: var(--error); font-weight: 600; }
+button.danger.icon { background: var(--error); color: var(--surface); }
 form.reply ~ details.delete { margin-top: 2rem; }
 
 /* The thinking model that leads (task 203): a quiet caption beside the conversation, marks in the history */

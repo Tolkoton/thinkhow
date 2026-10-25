@@ -1,0 +1,14 @@
+{# The buttons' icons (task 207): plain line icons, no words, so the page reads in any language. #}
+{% macro icon(name) -%}
+<svg class="i i-{{ name }}" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+{%- if name == "mic" %}<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/>
+{%- elif name == "stop" %}<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>
+{%- elif name == "send" %}<path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/>
+{%- elif name == "trash" %}<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/>
+{%- elif name == "plus" %}<path d="M12 5v14"/><path d="M5 12h14"/>
+{%- elif name == "check" %}<path d="M20 6 9 17l-5-5"/>
+{%- elif name == "retry" %}<path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/>
+{%- elif name == "globe" %}<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20z"/>
+{%- endif -%}
+</svg>
+{%- endmacro %}

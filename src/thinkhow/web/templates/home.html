@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "icons.html" import icon %}
 {% block body %}
 <p class="meta">Мова: {{ language.name }} · <a href="/language">змінити</a></p>
 <h1>Мої теми</h1>
@@ -10,7 +11,7 @@
 <h2>Нова тема</h2>
 <form class="inline" method="post" action="/topics">
   <input name="title" required>
-  <button class="primary" type="submit">Створити</button>
+  <button class="primary icon" type="submit" aria-label="Створити">{{ icon("plus") }}</button>
 </form>
 {% if user.is_owner %}
 <h2>Усі теми</h2>

@@ -1,4 +1,5 @@
-"""Task 206: «Надіслати» while the microphone is busy stops the recording, sends nothing (`node --test`)."""
+"""Tasks 206 and 207: «Надіслати» while the microphone is busy stops the recording, sends nothing;
+the mic shows its state without words (`node --test`)."""
 
 import os
 import shutil

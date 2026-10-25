@@ -78,7 +78,7 @@ def make_topic(page: Any, base: str, title: str) -> str:
 def from_list(page: Any, base: str, topic_id: str, users: Path, out: Path) -> None:
     page.goto(base + "/")
     item = page.locator("ul.topics li", has=page.locator(f'a[href$="/{topic_id}"]'))
-    confirm = item.locator('button:has-text("Так, видалити")')
+    confirm = item.locator('button[aria-label="Так, видалити"]')
     assert not confirm.is_visible(), "the confirmation shows before «Видалити» is pressed"
     page.screenshot(path=str(out / "home-delete-button.png"))
     item.locator("summary").click()
@@ -102,7 +102,7 @@ def from_page(browser: Any, base: str, topic_id: str, users: Path, out: Path) ->
     assert TITLES[2] in text, text
     print("page confirmation:", text)
     page.screenshot(path=str(out / "topic-delete-confirm-phone.png"), full_page=True)
-    page.click('button:has-text("Так, видалити")')
+    page.click('button[aria-label="Так, видалити"]')
     page.wait_for_url(base + "/")
     assert TITLES[2] not in page.locator("ul.topics").first.inner_text()
     assert files(users / topic_id) == [], files(users / topic_id)
