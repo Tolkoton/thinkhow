@@ -340,3 +340,19 @@
 - Tests: `tests/web/send_stops_recording.test.mjs` (4, `node --test`) via `tests/web/test_send_stops_recording.py`
 - Browser: `scripts/smoke_test_send_stops_recording.py` (fake microphone) → `.engine/artifacts/send-stops-recording/`
   (`browser.txt`, 2 PNGs, `red.txt`)
+
+## Slice 25 — product-cards (DONE 2026-10-25) — task 307, feature product-thinking-pack S1 (tracer)
+
+- Content: 7 cards `cards/{customer-interviews,demand-test,positioning,offer-design,value-pricing,traction-channels,
+  unit-economics}.yaml` from `docs/research/04-product-pack.md` §3; boundaries added to `when_no` / `pairs_well` of
+  `jobs-to-be-done` and `opportunity-tree`; 34 router cases of the new cards in `tests/fixtures/routing/cases.yaml`
+  (commit 6ed9740, before the cards), old `ot-2` gets `demand-test` in `also_ok` (`# 307`)
+- Tests: 21 contract tests by the independent slice-tester (`tests/contract/product_cards/`, sealed); sealed tests of
+  cards-library, router-eval, skel-knowledge changed only by objection (`test_wrong`); `test_ntm_methods.py`, the
+  detector of `tests/live/test_router_live.py`, `scripts/smoke_test_cards_library.py` (25), `router_eval.py` and the
+  live test's card count follow `cards/`
+- Smoke: `scripts/smoke_test_product_cards.py` PASS on the first answer —
+  `.engine/artifacts/spikes/product-cards-router-live-2026-10-25T221243Z.txt`: 25 cards, `offer` with
+  `offer-design`, `jobs-to-be-done`, `demand-test` on the owner's t-84d1517cb1c1 #1 (`gemini-4-argon`, `eu`)
+- Surprises: two YAML list items with «: » parsed as mappings — quoted
+- Open for next slice: S2 product-router-eval (runs 1–2, live conversations, AC4/AC5 test of the 7 new cards)

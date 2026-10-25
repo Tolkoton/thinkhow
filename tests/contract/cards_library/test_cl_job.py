@@ -29,6 +29,9 @@ GOAL_IDS = [
     "weighted-matrix", "reversible-doors", "evaporating-cloud", "pre-mortem", "consider-opposite",
     "socratic-questioning", "scamper", "mental-contrasting", "reflective-cycle", "goal-to-plan",
     "jobs-to-be-done", "opportunity-tree",
+    # Task 307, product-cards «Goal» 1: «рівно 25 файлів: 18 id задачі 302 і 7 id вище» (objection 1).
+    "customer-interviews", "demand-test", "positioning", "offer-design", "value-pricing", "traction-channels",
+    "unit-economics",
 ]  # fmt: skip
 
 

@@ -16,10 +16,13 @@ POC_PHASES = [
     "phase_3_triage",
     "phase_4_mitigation_tripwires",
 ]
-# The repository's `cards/` after task 302: exactly the 18 ids of cards-library «Goal» 1 (sorted by hand).
+# The repository's `cards/` after task 307: the 18 ids of cards-library «Goal» 1 and the 7 of product-cards
+# (task 307), sorted, 25.
 REPOSITORY_CARD_IDS = [
     "complexity-sensemaking",
     "consider-opposite",
+    "customer-interviews",
+    "demand-test",
     "evaporating-cloud",
     "first-principles",
     "five-whys",
@@ -28,12 +31,17 @@ REPOSITORY_CARD_IDS = [
     "issue-tree",
     "jobs-to-be-done",
     "mental-contrasting",
+    "offer-design",
     "opportunity-tree",
+    "positioning",
     "pre-mortem",
     "reflective-cycle",
     "reversible-doors",
     "scamper",
     "socratic-questioning",
+    "traction-channels",
+    "unit-economics",
+    "value-pricing",
     "weighted-matrix",
     "wrap-decision",
 ]

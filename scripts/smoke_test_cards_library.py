@@ -57,7 +57,7 @@ def main() -> None:
     print(f"rev {state.rev}, {len(state.cards)} cards: {sorted(state.cards)}")
     print(f"pre-mortem path: {record['cards']['pre-mortem']}")
     print(f"what: {record['what']}")
-    assert state.rev == 2 and len(state.cards) == 18
+    assert state.rev == 2 and len(state.cards) == 25
     assert record["cards"]["pre-mortem"] == "knowledge/cards/pre-mortem/v1.json"
     for card_id, card in sorted(state.cards.items()):
         print(

@@ -52,7 +52,8 @@ HOW_FOR_OWNER = (
 
 
 def _names_a_method() -> Callable[[str], bool]:
-    """The detector of S2 (18 card ids and own names), loaded from its live test by path, without a copy."""
+    """The detector of S2 (the card ids and own names of `cards/`), loaded from its live test by path,
+    without a copy."""
     spec = importlib.util.spec_from_file_location(
         "router_live_detector", ROOT / "tests" / "live" / "test_router_live.py"
     )

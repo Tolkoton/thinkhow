@@ -252,7 +252,8 @@ def report(outcomes: list[Outcome], summ: dict[str, Any], meta: dict[str, Any], 
     lines = [
         f"# Роутер на наборі ситуацій — {meta['label']}",
         "",
-        f"Прогін {meta['stamp']}; модель продукту — `{meta['model']}` (Vertex `eu`); Знання — 18 карток",
+        f"Прогін {meta['stamp']}; модель продукту — `{meta['model']}` (Vertex `eu`);"
+        f" Знання — {meta['cards']} карток",
         f"з `cards/` (ревізія {meta['rev']}); набір — `tests/fixtures/routing/cases.yaml`",
         f"(blob `{meta['cases_blob']}`), {summ['cases']} ситуацій;",
         f"хеш `cards/` — `{meta['cards_hash'][:12]}`.",
@@ -386,6 +387,7 @@ def main() -> None:
         "cases_blob": blob.stdout.strip(),
         "cards_hash": cards_hash(ROOT / "cards"),
         "model_calls": llm.calls,
+        "cards": len(knowledge.cards),
     }
     args.out.mkdir(parents=True, exist_ok=True)
     md = args.out / f"{stamp}.md"

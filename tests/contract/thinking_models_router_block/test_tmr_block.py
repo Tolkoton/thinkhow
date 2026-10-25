@@ -3,8 +3,8 @@ one per acceptance criterion (the feature closes with S3 router-eval).
 
 Slice tester, mode `block`; from `.engine/architecture/feature/thinking-models-router.md`, the slice
 contracts it names and the public signatures, not the bodies. Every test drives two or more slices
-together: the 18 real cards of `cards/` (S1) through the router and the facilitator (S2) and the
-scripts and the set of situations (S3).
+together: the real cards of `cards/` (S1; 18 in task 302, more since task 307) through the router
+and the facilitator (S2) and the scripts and the set of situations (S3).
 Expected values are written by hand from the artifact and the slice contracts.
 """
 
@@ -127,6 +127,32 @@ def local_environ(tmp: Path) -> dict[str, str]:
     }
 
 
+# The 18 cards of task 302 (feature thinking-models-router). Task 307 adds cards to `cards/`;
+# the same checks for its cards belong to feature product-thinking-pack, not here.
+TASK_302_IDS = frozenset(
+    {
+        "complexity-sensemaking",
+        "consider-opposite",
+        "evaporating-cloud",
+        "first-principles",
+        "five-whys",
+        "goal-to-plan",
+        "is-is-not",
+        "issue-tree",
+        "jobs-to-be-done",
+        "mental-contrasting",
+        "opportunity-tree",
+        "pre-mortem",
+        "reflective-cycle",
+        "reversible-doors",
+        "scamper",
+        "socratic-questioning",
+        "weighted-matrix",
+        "wrap-decision",
+    }
+)
+
+
 # ------------------------------------------------------------------ Inter-slice contracts
 
 
@@ -135,7 +161,7 @@ def test_s1_to_s2_router_sees_router_halves_of_the_18_cards_and_the_facilitator_
     tmp_path: Path,
 ) -> None:
     _, k = seeded_knowledge(tmp_path)
-    assert sorted(k.cards) == CARD_IDS and len(CARD_IDS) == 18
+    assert sorted(k.cards) == CARD_IDS and TASK_302_IDS <= set(CARD_IDS)
     model = Model(
         router=lambda no, text: choose_raw("five-whys"),
         facilitator=lambda no, text: fac_raw(phases(k, "five-whys")[0]),
@@ -584,7 +610,7 @@ def test_ac4_the_newest_router_eval_report_has_a_row_for_every_card_and_its_conf
     assert reports, "no router-eval report"
     text = reports[-1].read_text(encoding="utf-8")
     rows = [line for line in text.splitlines() if line.startswith("|")]
-    for cid in CARD_IDS:
+    for cid in sorted(TASK_302_IDS):
         assert any(f"`{cid}`" in row or f"| {cid} |" in row for row in rows), cid
     assert "плутанин" in text.lower()
     assert (reports[-1].with_suffix(".json")).is_file()
@@ -593,7 +619,7 @@ def test_ac4_the_newest_router_eval_report_has_a_row_for_every_card_and_its_conf
 # AC5: every card — at least one live conversation; the links are in the report
 def test_ac5_a_live_conversation_report_exists_for_every_card_with_its_index_row() -> None:
     runs = [d for d in sorted((ARTIFACTS / "card-conversations").iterdir()) if d.is_dir()]
-    for cid in CARD_IDS:
+    for cid in sorted(TASK_302_IDS):
         holding = [d for d in runs if (d / f"{cid}.md").is_file()]
         assert holding, f"no live conversation of {cid}"
         assert f"({cid}.md)" in (holding[-1] / "index.md").read_text(encoding="utf-8"), cid
@@ -609,7 +635,7 @@ def test_ac6_job_cards_then_a_restarted_service_routes_with_revision_2(tmp_path:
     before = build_deps(environ, CARDS)
     assert job.run(["cards"], environ, CARDS, lambda: at(1)) == 0
     after = build_deps(environ, CARDS)
-    for deps, rev, count in ((before, 1, 1), (after, 2, 18)):
+    for deps, rev, count in ((before, 1, 1), (after, 2, len(CARD_IDS))):
         bound: Any = deps.facilitate
         assert bound.keywords["knowledge"].rev == rev
         assert len(bound.keywords["knowledge"].cards) == count

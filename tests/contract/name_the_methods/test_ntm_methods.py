@@ -21,6 +21,7 @@ from thinkhow.platform.storage import LocalStorage
 ROOT = Path(__file__).resolve().parents[3]
 CARDS = ROOT / "cards"
 RESEARCH_01 = (ROOT / "docs/research/01-library.md").read_text(encoding="utf-8")
+RESEARCH_04 = (ROOT / "docs/research/04-product-pack.md").read_text(encoding="utf-8")
 JUST_CHOSEN = "[Стан] Метод щойно обрано"
 
 
@@ -63,24 +64,26 @@ def test_a_card_without_a_method_still_loads_so_stored_revisions_stay_readable()
 def test_every_card_names_its_method_pre_mortem_by_its_sealed_title() -> None:
     """pre-mortem.yaml stays byte for byte (blob 8f52b66a, task 302): its title starts with the name."""
     cards = {c.id: c for c in _real_cards()}
-    assert len(cards) == 18
+    assert len(cards) == len(list(CARDS.glob("*.yaml")))
     pre_mortem = cards.pop("pre-mortem")
     assert pre_mortem.method == "" and pre_mortem.title.startswith("Pre-mortem")
     assert [c.id for c in cards.values() if not c.method.strip()] == []
 
 
-def test_every_method_name_stands_in_research_01_not_invented() -> None:
-    """Each name the card gives — the part before any bracket, split on «,» and «і» — is in research 01."""
+def test_every_method_name_stands_in_research_01_or_04_not_invented() -> None:
+    """Each name the card gives — the part before any bracket, split on «,» and «і» — is in research 01
+    or, for the product cards of task 307, in research 04."""
     for c in _real_cards():
         head = c.method.split("(")[0]
         for name in (part.strip() for part in re.split(r",| і ", head) if c.method):
-            assert name and name in RESEARCH_01, (c.id, name)
+            assert name and (name in RESEARCH_01 or name in RESEARCH_04), (c.id, name)
 
 
 def test_names_research_01_s3_6_marks_as_trademarks_stay_out_task_302_ban_holds() -> None:
-    """«Is / Is-Not», not Kepner-Tregoe®; «Complexity Sensemaking», not Cynefin®; «MCII», not WOOP."""
+    """«Is / Is-Not», not Kepner-Tregoe®; «Complexity Sensemaking», not Cynefin®; «MCII», not WOOP; and the
+    marks of research 04 §5 (task 307): SPIN®, Blue Ocean, Strategyzer's Value Proposition Canvas."""
     for c in _real_cards():
-        for mark in ("Kepner", "Cynefin", "WOOP", "GROW™"):
+        for mark in ("Kepner", "Cynefin", "WOOP", "GROW™", "SPIN", "Blue Ocean", "Value Proposition Canvas"):
             assert mark.lower() not in c.method.lower(), (c.id, mark)
 
 

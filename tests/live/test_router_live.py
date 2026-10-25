@@ -63,8 +63,18 @@ OWN_NAMES: dict[str, str] = {
     "goal-to-plan": r"\bgrow\b|backcasting|від мети до перших крок",
     "jobs-to-be-done": r"\bjtbd\b|jobs to be done|робот\w* яку наймають",
     "opportunity-tree": r"дерев\w* можливост|\brice\b|\bost\b",
+    "customer-interviews": r"mom test",
+    "demand-test": r"pretotyp|\bxyz\b",
+    "offer-design": r"value equation|hormozi",
+    "value-pricing": r"\bevc\b",
+    "traction-channels": r"bullseye",
+    "unit-economics": r"\bltv\b|\bcac\b",
 }
-NO_OWN_NAME: dict[str, str] = {"complexity-sensemaking": r"сенсмейк", "reflective-cycle": r"гіббс"}
+NO_OWN_NAME: dict[str, str] = {
+    "complexity-sensemaking": r"сенсмейк",
+    "reflective-cycle": r"гіббс",
+    "positioning": r"dunford|данфорд",
+}
 # one variant of each own name with a typographic apostrophe and dash, no comma, an inflected form
 VARIANTS: dict[str, str] = {
     "first-principles": "з перших принципів",
@@ -83,6 +93,12 @@ VARIANTS: dict[str, str] = {
     "goal-to-plan": "від мети до перших кроків",
     "jobs-to-be-done": "роботу, яку «наймають»",
     "opportunity-tree": "дерево можливостей",
+    "customer-interviews": "за The Mom Test",
+    "demand-test": "через pretotyping",
+    "offer-design": "рівнянням Value Equation",
+    "value-pricing": "через EVC",
+    "traction-channels": "мішенню Bullseye",
+    "unit-economics": "порахуємо LTV",
 }
 
 
@@ -134,6 +150,7 @@ def test_the_detector_knows_every_card_by_id_and_by_name() -> None:
         "Схоже, у вас кілька ідей і треба вирішити, з якої почати.",
         "1) Спокійно порівняти ідеї за тим, що для вас важливо. 2) Уявити, що обраний план не спрацював.",
         "Котрий спосіб ближчий — чи хочете інакше?",
+        "Можемо подумати про ціну, офер і канали, де шукати клієнтів, і про ваше позиціонування.",
     ],
 )
 def test_ordinary_router_sentences_are_not_caught(text: str) -> None:
@@ -208,7 +225,8 @@ def _write(
     lines = [
         "# Live tracer роутера — тема власника t-d824f508a729",
         "",
-        f"Прогін {stamp}, модель — справжня (Vertex, `eu`), шлях — `workspace.reply`, Знання — 18 карток.",
+        f"Прогін {stamp}, модель — справжня (Vertex, `eu`), шлях — `workspace.reply`,"
+        f" Знання — {len(_card_ids())} карток.",
         "",
         f"Клас результату: **{verdict}**",
         "",

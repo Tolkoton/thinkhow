@@ -30,9 +30,35 @@ def referenced(case: dict[str, Any]) -> list[str]:
     return ids
 
 
+# The 18 cards of task 302 (feature thinking-models-router). Task 307 adds cards to `cards/`;
+# the same checks for its cards belong to feature product-thinking-pack, not here.
+TASK_302_IDS = frozenset(
+    {
+        "complexity-sensemaking",
+        "consider-opposite",
+        "evaporating-cloud",
+        "first-principles",
+        "five-whys",
+        "goal-to-plan",
+        "is-is-not",
+        "issue-tree",
+        "jobs-to-be-done",
+        "mental-contrasting",
+        "opportunity-tree",
+        "pre-mortem",
+        "reflective-cycle",
+        "reversible-doors",
+        "scamper",
+        "socratic-questioning",
+        "weighted-matrix",
+        "wrap-decision",
+    }
+)
+
+
 def test_every_card_id_a_case_names_is_a_card_of_cards_dir() -> None:
     known = card_ids()
-    assert len(known) == 18
+    assert TASK_302_IDS <= known
     for case in cases():
         for cid in referenced(case):
             assert cid in known, (case["id"], cid)
@@ -87,7 +113,7 @@ def test_case_ids_are_different() -> None:
 
 def test_held_out_part_is_the_third_positive_case_of_each_card() -> None:
     held = [c for c in cases() if c["id"].endswith("-3")]
-    assert len(held) == 18
+    assert len(held) == len(card_ids())
     assert all(c["kind"] == "positive" for c in held)
     assert {c["expect"] for c in held} == card_ids()
 
