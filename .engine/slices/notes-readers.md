@@ -28,7 +28,8 @@ Feature: `.engine/architecture/feature/learning-loop.md`, slice **S4** (F5 «з�
 ## Seam (contract)
 - **`facilitation/route.py` `_card_text(card)`** → `_card_text(card, notes)`: після рядків «Ознаки:» — якщо є нотатки
   `router`, що називають цю картку (`card.id in record.cards`), рядок `Досвід:` і по рядку на нотатку
-  `- <title>. <noticed> <do>` (у порядку `id`); немає — нічого (інструкція побайтно як до slice-а). `router_instruction`
+  `- <title>. <noticed> <do>` (у порядку `id`; переноси рядків усередині `noticed`/`do` замінено пробілами — рядок
+  нотатки один); немає — нічого (інструкція побайтно як до slice-а). `router_instruction`
   передає `knowledge.memory`. Docstring модуля: читає `card.router`, `card.title` і нотатки `router`.
 - **Правило читання нотаток роутером** — не в `router.md` (його текст закріплено запечатаними оракулами
   spoken-replies), а одним рядком одразу після `CARDS_HEAD`, **лише коли хоча б одна картка має нотатку `router`**:
@@ -56,7 +57,8 @@ Feature: `.engine/architecture/feature/learning-loop.md`, slice **S4** (F5 «з�
   «Досвід: (немає)» — шум у кожній картці.
 
 ## Hardest seams (test-confidence points)
-- **Seam 1: нотатка до кількох карток.** Запис `router` з `cards: [a, b]` стоїть у розділах `a` і `b`, не в `c`;
+- **Seam 1: нотатка до кількох карток.** Запис `router` з `cards: [a, b]` стоїть у розділах `a` і `b`, не в `c`; друга
+  нотатка до `a` — у порядку `id`;
   запис `facilitator` з `cards: [a, b]` — у фасилітатора `a` і `b`, не `c`. Тест на справжній `router_instruction`,
   не на `_card_text` окремо.
 - **Seam 2: аудиторія.** Записи `router` і `facilitator` з тією самою карткою `x`: роутер бачить лише перший,
@@ -100,6 +102,8 @@ Feature: `.engine/architecture/feature/learning-loop.md`, slice **S4** (F5 «з�
 - (немає)
 
 ## Critic notes (non-blocking)
+- Cold reader: PASS; notes внесено — нотатка роутера одним рядком; порядок за `id` перевіряє Seam 1 (дві нотатки до
+  `a`); objection-пакет може вирости понад три названі тести — лише з причини Q1.
 - Раунд 1: REVISE — рядок у `router.md` змінював кожну інструкцію роутера і ламав оракули spoken-replies, а пакет
   називав один тест → правило лише з нотатками `router`, повний перелік пакета з причиною, прогін `tests/contract`
   builder-ом. Notes: I1 за рядком нотатки, Seam 2 зі спільною карткою, Seam 3 на наявних оракулах, trigger для S1.

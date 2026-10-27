@@ -40,7 +40,8 @@ import-linter, швидкий набір — зелені; кожне нове �
   питання»): `StepsFile(steps: list[StepResult])`, `StepResult(step_id: str, step: str, asked_turn: int, outcome:
   "worked"|"not_worked"|"unexpected"|None, clearer: "yes"|"partly"|"no"|None, said: str, at: datetime)`.
 - **Яке питання** — `pending_step(problem_map, steps) -> MapItem | None`: останній за `turn` (номер з `t<n>`) пункт
-  `chosen_step`, чийого `id` немає в `steps.json`; немає — None.
+  `chosen_step`, чийого `id` немає в `steps.json` і чий `turn` пізніший за `turn` кожного кроку, про який уже питали
+  (давніший крок, замінений новішим, не питається тижні потому); немає — None. `PROVISIONAL` разом з текстом питання.
 - **Коли показується** — `TopicView.step_question: str | None` (текст питання мовою людини, каталог, ключ
   `step_question` з `{step}`): лише власнику теми, коли є `pending_step` і остання репліка теми старша за `SILENCE`
   (наступна репліка відкриє нову сесію — та сама умова, що й у `_reply_flow`: `_closed_at(остання сесія, now) is not
@@ -52,7 +53,8 @@ import-linter, швидкий набір — зелені; кожне нове �
 - **Розпізнавання** — у потоці відповіді, **після запису відповіді ThinkHow (`#N+3`) і перед подією `Answered`**
   (сторінка перезавантажується на `answered`, `conversation.js`; тож перезавантажена сторінка вже бачить результат, а
   вихід клієнта не губить виклику): `recognize(step, question, text) -> StepOutcome | None`
-  (ін'єкція в `workspace.reply`, keyword `recognize: Recognize | None = None`; без неї — нічого не розпізнається,
+  (ін'єкція в `workspace.reply` і `workspace.retry`, той самий keyword `recognize: Recognize | None = None`; `web/app.py`
+  передає її в обидва; без неї — нічого не розпізнається,
   запис лишається з `outcome=None`). `StepOutcome(answered: bool, outcome, clearer, said)`; `answered=false` →
   запис не змінюється (людина писала про інше — «пропущено»); інакше запис оновлюється (`outcome`, `clearer`,
   `said`). Помилка `recognize` (будь-яка) → лог `step_recognize_failed` (тип, без тексту), запис лишається, відповідь
@@ -62,6 +64,7 @@ import-linter, швидкий набір — зелені; кожне нове �
 - **`facilitation/steps.py`**: `recognize_step(step, question, text, llm) -> StepOutcome` — один `generate_json`,
   інструкція українською (людина могла відповісти будь-якою мовою; `said` — коротко її словами, мовою її репліки),
   схема `StepOutcome`. `web/app.py` компонує `recognize = lambda step, q, text: recognize_step(step, q, text, llm)`.
+- **`TopicView.steps: tuple[StepResult, ...]`** — записи `steps.json` для блоку.
 - **Блок «Кроки»** на сторінці теми (і власнику в чужій темі): для кожного `StepResult` — `step`, результат
   (`step_worked`/`step_not_worked`/`step_unexpected`/`step_no_answer` для `outcome=None`), «чи стало ясніше»
   (`clearer_yes`/`clearer_partly`/`clearer_no`, нічого для None), `said`. Ключі каталогу: `step_question`,
@@ -143,6 +146,8 @@ import-linter, швидкий набір — зелені; кожне нове �
 - (немає)
 
 ## Critic notes (non-blocking)
+- Cold reader: PASS; notes внесено — давніший замінений крок не питається, `recognize` і в `retry`, поле
+  `TopicView.steps`.
 - Раунд 1: REVISE — розпізнавання після `Answered` губилось і давало «без відповіді» на перезавантаженій сторінці; `retry`
   не розпізнавав → перед `Answered`, `retry` теж, Seam 3. Notes: умова через `_closed_at`, дослівне джерело I2, гонка
   аналізатора, роутер у «Deferred», `PROVISIONAL` текстів, «пропущено» = «без відповіді».

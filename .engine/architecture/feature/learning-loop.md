@@ -137,7 +137,7 @@ F12, F6 («запис пам'яті досвіду»), F5 (зворотний ш
   docstring каже «Does NOT … read the experience memory», і `router_instruction`), фасилітатор — нотатки
   `facilitator` лише своєї картки (`respond.system_instruction`) · contract out: тексти інструкцій · depends on: S1 · block: learning-loop
 - **S5 starting-notes** — delivers: дослідження типових випадків 25 методів з джерелами → `notes/*.yaml` у
-  репозиторії; `job notes` додає відсутні за id записи однією ревізією через `apply_memory`; прогін `router_eval` з
+  репозиторії; `job notes` додає записи, id яких `notes` ще не публікувала (уточнено S5), однією ревізією через `apply_memory`; прогін `router_eval` з
   нотатками проти бази · depends on: S1, S4 · block: learning-loop
 - **S6 step-results** — delivers: при поверненні (наступна репліка відкриває нову сесію) в темі з обраним кроком без
   результату сторінка показує питання «як вийшов крок і чи стало ясніше»; з наступною реплікою питання стає реплікою
