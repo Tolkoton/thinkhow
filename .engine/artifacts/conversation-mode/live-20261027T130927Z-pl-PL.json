@@ -1,0 +1,546 @@
+{
+ "log": [
+  [
+   "state",
+   "listening",
+   164.40000009536743
+  ],
+  [
+   "clip-start",
+   0,
+   4.775986394557823,
+   777.7000000476837
+  ],
+  [
+   "state",
+   "hearing",
+   1662.7999999523163
+  ],
+  [
+   "clip-end",
+   0,
+   5553.5
+  ],
+  [
+   "state",
+   "thinking",
+   6964.099999904633
+  ],
+  [
+   "state",
+   "speaking",
+   69719.79999995232
+  ],
+  [
+   "state",
+   "listening",
+   126223
+  ],
+  [
+   "clip-start",
+   1,
+   1.9679818594104308,
+   126829.79999995232
+  ],
+  [
+   "state",
+   "hearing",
+   127462.79999995232
+  ],
+  [
+   "clip-end",
+   1,
+   128784.59999990463
+  ],
+  [
+   "state",
+   "thinking",
+   130113.70000004768
+  ],
+  [
+   "state",
+   "speaking",
+   215250.40000009537
+  ],
+  [
+   "state",
+   "listening",
+   270723
+  ],
+  [
+   "clip-start",
+   2,
+   4.223990929705216,
+   271334
+  ],
+  [
+   "state",
+   "hearing",
+   271912.59999990463
+  ],
+  [
+   "clip-end",
+   2,
+   275548.59999990463
+  ],
+  [
+   "state",
+   "thinking",
+   276913.40000009537
+  ],
+  [
+   "state",
+   "speaking",
+   354335
+  ],
+  [
+   "state",
+   "listening",
+   400302.90000009537
+  ],
+  [
+   "clip-start",
+   3,
+   5.135986394557823,
+   400917.7000000477
+  ],
+  [
+   "state",
+   "hearing",
+   401412.5
+  ],
+  [
+   "clip-end",
+   3,
+   406040
+  ],
+  [
+   "state",
+   "thinking",
+   407413.7000000477
+  ],
+  [
+   "state",
+   "speaking",
+   435712.59999990463
+  ],
+  [
+   "state",
+   "listening",
+   464242.90000009537
+  ],
+  [
+   "clip-start",
+   4,
+   1.9679818594104308,
+   464849
+  ],
+  [
+   "state",
+   "hearing",
+   465462.59999990463
+  ],
+  [
+   "clip-end",
+   4,
+   466801.2999999523
+  ],
+  [
+   "state",
+   "thinking",
+   468213.5
+  ],
+  [
+   "state",
+   "speaking",
+   519497.2999999523
+  ],
+  [
+   "state",
+   "listening",
+   874803
+  ],
+  [
+   "clip-start",
+   5,
+   3.3839909297052153,
+   875413.7999999523
+  ],
+  [
+   "state",
+   "hearing",
+   876062.5999999046
+  ],
+  [
+   "clip-end",
+   5,
+   878793.0999999046
+  ],
+  [
+   "state",
+   "thinking",
+   880163.7000000477
+  ],
+  [
+   "state",
+   "speaking",
+   909221
+  ],
+  [
+   "state",
+   "listening",
+   961983
+  ]
+ ],
+ "marks": [
+  {
+   "name": "talk:speech-end",
+   "t": 5312.599999904633
+  },
+  {
+   "name": "talk:voice-start",
+   "t": 69719.70000004768
+  },
+  {
+   "name": "talk:speech-end",
+   "t": 128512.5
+  },
+  {
+   "name": "talk:voice-start",
+   "t": 215250.29999995232
+  },
+  {
+   "name": "talk:speech-end",
+   "t": 275312.5
+  },
+  {
+   "name": "talk:voice-start",
+   "t": 354335
+  },
+  {
+   "name": "talk:speech-end",
+   "t": 405762.59999990463
+  },
+  {
+   "name": "talk:voice-start",
+   "t": 435712.5
+  },
+  {
+   "name": "talk:speech-end",
+   "t": 466612.5
+  },
+  {
+   "name": "talk:voice-start",
+   "t": 519497.2000000477
+  },
+  {
+   "name": "talk:speech-end",
+   "t": 878562.5
+  },
+  {
+   "name": "talk:voice-start",
+   "t": 909220.9000000954
+  }
+ ],
+ "requests": [
+  [
+   "t-35a74167a32a",
+   ""
+  ],
+  [
+   "style.css",
+   ""
+  ],
+  [
+   "conversation.js",
+   ""
+  ],
+  [
+   "voice",
+   ""
+  ],
+  [
+   "reply",
+   "text=Zastanawiam+si%C4%99%2C+czy+przenie%C5%9B%C4%87+moj%C4%85+ma%C5%82%C4%85+firm%C4%99+z+Warszawy+do+Krakowa.&spoken=1"
+  ],
+  [
+   "speak",
+   "text=Zastanawiasz+si%C4%99+nad+powa%C5%BCnym+krokiem%2C+czyli+przeniesieniem+swojej+ma%C5%82ej+firmy+z+Warszawy+do+Krakowa."
+  ],
+  [
+   "speak",
+   "text=Mo%C5%BCemy+podej%C5%9B%C4%87+do+tego+na+trzy+sposoby."
+  ],
+  [
+   "speak",
+   "text=Pierwszy+to+metoda+WRAP%3A+pozwoli+Ci+wyj%C5%9B%C4%87+poza+proste+pytanie+czy+si%C4%99+przenosi%C4%87%2C+sprawdzi%C4%87+za%C5%82o%C5%BCenia+w+praktyce%2C+spojrze%C4%87+na+spraw%C4%99+z+dystansu+i+przygotowa%C4%87+si%C4%99+na+ryzyko."
+  ],
+  [
+   "speak",
+   "text=Drugi+to+Unit+economics%2C+czyli+LTV+i+CAC%3A+pomo%C5%BCe+Ci+policzy%C4%87+koszty+pozyskania+oraz+obs%C5%82ug%C4%99+klienta+w+nowym+miejscu+i+sprawdzi%C4%87%2C+czy+zmiana+miasta+zepnie+si%C4%99+finansowo."
+  ],
+  [
+   "speak",
+   "text=Trzeci+to+Weighted+Decision+Matrix%3A+pozwoli+Ci+spokojnie+zestawi%C4%87+Warszaw%C4%99+i+Krak%C3%B3w+wed%C5%82ug+najwa%C5%BCniejszych+dla+Ciebie+kryteri%C3%B3w+i+oceni%C4%87%2C+gdzie+firma+zyska+wi%C4%99cej."
+  ],
+  [
+   "speak",
+   "text=Kt%C3%B3ry+z+tych+sposob%C3%B3w+jest+Ci+teraz+bli%C5%BCszy%2C+a+mo%C5%BCe+wolisz+podej%C5%9B%C4%87+do+tego+inaczej%3F"
+  ],
+  [
+   "voice",
+   ""
+  ],
+  [
+   "reply",
+   "text=Wybieram+pierwszy+spos%C3%B3b.&spoken=1"
+  ],
+  [
+   "speak",
+   "text=Zaczynamy+prac%C4%99+metod%C4%85+WRAP+i+wchodzimy+w+jej+pierwszy+krok%2C+czyli+poszerzanie+opcji."
+  ],
+  [
+   "speak",
+   "text=Metod%C4%99+opracowali+w+dwa+tysi%C4%85ce+trzynastym+roku+bracia+Chip+i+Dan+Heath+na+podstawie+bada%C5%84+Larricka%2C+Kahnemana+i+Kleina."
+  ],
+  [
+   "speak",
+   "text=Sk%C5%82ada+si%C4%99+ona+z+czterech+faz%3A+poszerzenia+opcji+poza+zwyk%C5%82e+tak+lub+nie%2C+przetestowania+za%C5%82o%C5%BCe%C5%84+w+rzeczywisto%C5%9Bci%2C+nabrania+dystansu+przed+wyborem+oraz+przygotowania+si%C4%99+na+ewentualny+b%C5%82%C4%85d."
+  ],
+  [
+   "speak",
+   "text=W+Twojej+sytuacji+pomo%C5%BCe+to+unikn%C4%85%C4%87+w%C4%85skiego+patrzenia+tylko+na+przeprowadzk%C4%99+albo+zostanie+w+miejscu+i+znale%C5%BA%C4%87+bezpieczniejsze+rozwi%C4%85zania+dla+firmy."
+  ],
+  [
+   "speak",
+   "text=Wyobra%C5%BA+sobie+na+chwil%C4%99%2C+%C5%BCe+z+jakiego%C5%9B+powodu+nie+mo%C5%BCesz+ani+przenie%C5%9B%C4%87+firmy+na+sta%C5%82e+do+Krakowa%2C+ani+zostawi%C4%87+jej+w+obecnym+kszta%C5%82cie+w+Warszawie+%E2%80%94+co+innego+m%C3%B3g%C5%82by%C5%9B+wtedy+zrobi%C4%87%3F"
+  ],
+  [
+   "voice",
+   ""
+  ],
+  [
+   "reply",
+   "text=Ile+teraz+kosztuje+wynajem+biura+dla+10+os%C3%B3b+w+Krakowie%3F&spoken=1"
+  ],
+  [
+   "speak",
+   "text=Wed%C5%82ug+danych+z+portali+Officemarket+by+Savills+oraz+Tabela+Ofert%2C+tradycyjne+biuro+dla+dziesi%C4%99ciu+os%C3%B3b+w+Krakowie%2C+czyli+oko%C5%82o+osiemdziesi%C4%99ciu+do+stu+metr%C3%B3w+kwadratowych%2C+kosztuje+ze+wszystkimi+op%C5%82atami+eksploatacyjnymi+od+pi%C4%99ciu+do+o%C5%9Bmiu+tysi%C4%99cy+z%C5%82otych+netto+miesi%C4%99cznie%2C+ale+zwykle+wymaga+umowy+na+trzy+do+pi%C4%99ciu+lat."
+  ],
+  [
+   "speak",
+   "text=Z+kolei+elastyczne+biuro+serwisowane+z+miesi%C4%99cznym+wypowiedzeniem+to+koszt+od+sze%C5%9Bciu+i+p%C3%B3%C5%82+do+dwunastu+i+p%C3%B3%C5%82+tysi%C4%85ca+z%C5%82otych+netto+miesi%C4%99cznie+za+dziesi%C4%99cioosobowy+zesp%C3%B3%C5%82."
+  ],
+  [
+   "speak",
+   "text=Wracaj%C4%85c+do+naszego+pierwszego+kroku%2C+czyli+poszerzania+opcji+poza+ca%C5%82kowit%C4%85+przeprowadzk%C4%99+albo+zostanie+w+Warszawie%2C+jak%C4%85+po%C5%9Bredni%C4%85+opcj%C4%99+daj%C4%85+Ci+takie+elastyczne+biura+lub+inne+formy+pracy%3F"
+  ],
+  [
+   "voice",
+   ""
+  ],
+  [
+   "reply",
+   "text=Zale%C5%BCy+mi%2C+%C5%BCeby+zesp%C3%B3%C5%82+zosta%C5%82+ze+mn%C4%85%2C+a+koszty+wzros%C5%82y+najwy%C5%BCej+o+15%25.&spoken=1"
+  ],
+  [
+   "speak",
+   "text=Utrzymanie+obecnego+zespo%C5%82u+i+wzrost+koszt%C3%B3w+najwy%C5%BCej+o+pi%C4%99tna%C5%9Bcie+procent+to+bardzo+jasne+warunki."
+  ],
+  [
+   "speak",
+   "text=Nadal+jeste%C5%9Bmy+w+pierwszym+kroku+metody+WRAP%2C+czyli+poszerzaniu+opcji%2C+%C5%BCeby+mie%C4%87+co+najmniej+trzy+realne+wyj%C5%9Bcia+zamiast+prostego+wyboru+mi%C4%99dzy+Warszaw%C4%85+a+Krakowem."
+  ],
+  [
+   "speak",
+   "text=Jak+mo%C5%BCna+po%C5%82%C4%85czy%C4%87+prac%C4%99+z+obu+miast+albo+wprowadzi%C4%87+zmian%C4%99+stopniowo%2C+tak+aby+zesp%C3%B3%C5%82+zosta%C5%82+z+Tob%C4%85%2C+a+koszty+zmie%C5%9Bci%C5%82y+si%C4%99+w+tym+limicie%3F"
+  ],
+  [
+   "voice",
+   ""
+  ],
+  [
+   "reply",
+   "text=Tak%2C+zbadaj+to+dok%C5%82adniej.&spoken=1"
+  ],
+  [
+   "speak",
+   "text=Zaczynam+dok%C5%82adne+badanie+koszt%C3%B3w+i+sposob%C3%B3w+po%C5%82%C4%85czenia+pracy+mi%C4%99dzy+Warszaw%C4%85+a+Krakowem+dla+dziesi%C4%99cioosobowego+zespo%C5%82u."
+  ],
+  [
+   "speak",
+   "text=Zanim+zbior%C4%99+dane%2C+powiedz+mi+prosz%C4%99%2C+ile+obecnie+wydajesz+miesi%C4%99cznie+na+utrzymanie+biura+w+Warszawie%3F"
+  ],
+  [
+   "speak",
+   "text=Sprawdzam+teraz+koszty+i+praktyczne+modele+pracy+hybrydowej+lub+stopniowego+otwarcia+oddzia%C5%82u+mi%C4%99dzy+Warszaw%C4%85+a+Krakowem+dla+dziesi%C4%99cioosobowej+firmy%2C+co+zajmie+oko%C5%82o+dw%C3%B3ch+minut."
+  ],
+  [
+   "speak",
+   "text=-+Ile+kosztuj%C4%85+elastyczne+pakiety+coworkingowe+oraz+biura+na+godziny+w+Warszawie+i+Krakowie+dla+dziesi%C4%99cioosobowego+zespo%C5%82u%3F"
+  ],
+  [
+   "speak",
+   "text=-+Jakie+s%C4%85+koszty+przejazd%C3%B3w+poci%C4%85giem+i+delegacji+mi%C4%99dzy+Warszaw%C4%85+a+Krakowem+dla+pracownik%C3%B3w+firmy%3F"
+  ],
+  [
+   "speak",
+   "text=-+Jak+firmy+w+Polsce+organizuj%C4%85+prac%C4%99+hybrydow%C4%85+w+dw%C3%B3ch+miastach%2C+aby+utrzyma%C4%87+obecny+zesp%C3%B3%C5%82+przy+relokacji%3F"
+  ],
+  [
+   "speak",
+   "text=Aby+utrzyma%C4%87+zesp%C3%B3%C5%82+przy+relokacji%2C+polskie+firmy+najcz%C4%99%C5%9Bciej+%C5%82%C4%85cz%C4%85+prac%C4%99+zdaln%C4%85+z+mniejszym+biurem+lokalnym+lub+op%C5%82acaj%C4%85+rzadkie+dojazdy+do+nowej+siedziby."
+  ],
+  [
+   "speak",
+   "text=Wed%C5%82ug+bada%C5%84+firmy+Antal+utrata+ludzi+to+problem+dla+siedemdziesi%C4%99ciu+trzech+procent+firm%2C+a+gotowo%C5%9B%C4%87+specjalist%C3%B3w+do+przeprowadzki+stale+spada."
+  ],
+  [
+   "speak",
+   "text=Pracodawcy+stosuj%C4%85+wi%C4%99c+trzy+g%C5%82%C3%B3wne+modele."
+  ],
+  [
+   "speak",
+   "text=Pierwszy+to+biuro+g%C5%82%C3%B3wne+w+nowym+mie%C5%9Bcie+i+mniejsza%2C+elastyczna+przestrze%C5%84+coworkingowa+w+dotychczasowej+lokalizacji%2C+co+opisuj%C4%85+agencje+Colliers+oraz+Cushman+and+Wakefield."
+  ],
+  [
+   "speak",
+   "text=Drugi+model+to+praca+zdalna+i+zjazdy+integracyjne+raz+lub+dwa+razy+w+miesi%C4%85cu+z+op%C5%82aconym+przejazdem+i+noclegiem%2C+poniewa%C5%BC+wed%C5%82ug+portalu+Just+Join+IT+tylko+dwana%C5%9Bcie+procent+pracownik%C3%B3w+hybrydowych+akceptuje+cztery+dni+pracy+z+biura+w+tygodniu."
+  ],
+  [
+   "speak",
+   "text=Trzeci+spos%C3%B3b+to+pakiety+relokacyjne+dla+kluczowych+os%C3%B3b%2C+gdzie+wed%C5%82ug+Antal+jedna+trzecia+firm+wyp%C5%82aca+jednorazowy+bonus+od+czterech+i+p%C3%B3%C5%82+tysi%C4%85ca+do+dziesi%C4%99ciu+tysi%C4%99cy+z%C5%82otych+brutto%2C+a+dwadzie%C5%9Bcia+dwa+procent+dop%C5%82aca+do+wynajmu+mieszkania."
+  ],
+  [
+   "speak",
+   "text=Koszty+elastycznego+biura+dla+dziesi%C4%99ciu+os%C3%B3b+w+Warszawie+i+Krakowie+zale%C5%BC%C4%85+od+wybranego+z+czterech+wariant%C3%B3w+cenowych+netto."
+  ],
+  [
+   "speak",
+   "text=Pierwszy+wariant+to+wynajem+sali+spotka%C5%84."
+  ],
+  [
+   "speak",
+   "text=W+mniejszych+biurach%2C+jak+Hub+Kolektyw+czy+Coworking+Wilan%C3%B3w%2C+godzina+kosztuje+od+pi%C4%99%C4%87dziesi%C4%99ciu+do+osiemdziesi%C4%99ciu+z%C5%82otych%2C+a+ca%C5%82y+dzie%C5%84+od+sze%C5%9Bciuset+do+siedmiuset+z%C5%82otych%2C+natomiast+w+warszawskim+Brain+Embassy+wed%C5%82ug+platformy+Flexspace+to+trzysta+z%C5%82otych+za+godzin%C4%99+lub+tysi%C4%85c+dziewi%C4%99%C4%87set+dwadzie%C5%9Bcia+z%C5%82otych+za+dzie%C5%84."
+  ],
+  [
+   "speak",
+   "text=Drugi+wariant+to+pojedyncze+wej%C5%9Bci%C3%B3wki+ca%C5%82odniowe."
+  ],
+  [
+   "speak",
+   "text=W+krakowskim+Cowork+by+Memos+czy+warszawskim+Fantastic+Studio+kosztuj%C4%85+one+sze%C5%9B%C4%87set+z%C5%82otych+dziennie+za+ca%C5%82y+zesp%C3%B3%C5%82%2C+a+w+biurach+premium+w+Warszawie%2C+wed%C5%82ug+Flexspace+i+One+Coworking%2C+od+tysi%C4%85ca+dwustu+do+tysi%C4%85ca+o%C5%9Bmiuset+z%C5%82otych."
+  ],
+  [
+   "speak",
+   "text=Trzeci+wariant+to+pakiety+dni+lub+wsp%C3%B3lne+biurka."
+  ],
+  [
+   "speak",
+   "text=W+Fantastic+Studio+pakiet+o%C5%9Bmiu+dni+w+miesi%C4%85cu+dla+dziesi%C4%99ciu+os%C3%B3b+kosztuje+trzy+i+p%C3%B3%C5%82+tysi%C4%85ca+z%C5%82otych%2C+a+szesnastu+dni+pi%C4%99%C4%87+tysi%C4%99cy+trzysta+z%C5%82otych."
+  ],
+  [
+   "speak",
+   "text=Nielimitowany+dost%C4%99p+typu+hot+desk+wed%C5%82ug+Cluster+Offices%2C+Cowork+by+Memos+oraz+A+i+A+Holding+kosztuje+w+Krakowie+od+pi%C4%99ciu+i+p%C3%B3%C5%82+tysi%C4%85ca+do+dziewi%C4%99ciu+tysi%C4%99cy+z%C5%82otych+miesi%C4%99cznie+za+zesp%C3%B3%C5%82%2C+a+w+centrum+Warszawy+od+siedmiu+i+p%C3%B3%C5%82+tysi%C4%85ca+do+pi%C4%99tnastu+tysi%C4%99cy+czterystu+z%C5%82otych."
+  ],
+  [
+   "speak",
+   "text=Czwarty+wariant+to+zamkni%C4%99ty+gabinet+dla+dziesi%C4%99ciu+os%C3%B3b."
+  ],
+  [
+   "speak",
+   "text=Wed%C5%82ug+A+i+A+Holding%2C+ShareSpace+oraz+Cluster+Offices+w+Krakowie+i+poza+centrum+Warszawy+kosztuje+on+od+jedenastu+do+osiemnastu+tysi%C4%99cy+z%C5%82otych+miesi%C4%99cznie%2C+a+w+centrum+Warszawy+od+pi%C4%99tnastu+tysi%C4%99cy+czterystu+do+czterdziestu+jeden+tysi%C4%99cy+z%C5%82otych%2C+przy+czym+umowy+miesi%C4%99czne+s%C4%85+o+pi%C4%99tna%C5%9Bcie+do+trzydziestu+procent+dro%C5%BCsze+ni%C5%BC+roczne."
+  ],
+  [
+   "speak",
+   "text=Je%C5%9Bli+chodzi+o+przejazdy+mi%C4%99dzy+Warszaw%C4%85+a+Krakowem%2C+to+wed%C5%82ug+danych+PKP+Intercity+oraz+EuroPodr%C3%B3%C5%BCe+bilet+w+drugiej+klasie+na+poci%C4%85g+IC+lub+TLK+kosztuje+bazowo+od+sze%C5%9B%C4%87dziesi%C4%99ciu+pi%C4%99ciu+do+siedemdziesi%C4%99ciu+pi%C4%99ciu+z%C5%82otych%2C+na+ekspres+EIC+oko%C5%82o+stu+czterdziestu+dziewi%C4%99ciu+z%C5%82otych%2C+a+na+Pendolino+od+stu+sze%C5%9B%C4%87dziesi%C4%99ciu+dziewi%C4%99ciu+do+stu+dziewi%C4%99%C4%87dziesi%C4%99ciu+z%C5%82otych."
+  ],
+  [
+   "speak",
+   "text=Wcze%C5%9Bniejszy+zakup+obni%C5%BCa+ceny+do+czterdziestu+pi%C4%99ciu+z%C5%82otych+za+poci%C4%85g+IC+i+oko%C5%82o+stu+jeden+z%C5%82otych+za+Pendolino."
+  ],
+  [
+   "speak",
+   "text=Do+tego+dochodz%C4%85+ustawowe+koszty+delegacji%2C+kt%C3%B3re+wed%C5%82ug+serwis%C3%B3w+Poradnik+Przedsi%C4%99biorcy+oraz+HRappka+wynosz%C4%85+czterdzie%C5%9Bci+pi%C4%99%C4%87+z%C5%82otych+pe%C5%82nej+diety+za+dob%C4%99%2C+lub+dwadzie%C5%9Bcia+dwa+z%C5%82ote+i+pi%C4%99%C4%87dziesi%C4%85t+groszy+przy+wyje%C5%BAdzie+od+o%C5%9Bmiu+do+dwunastu+godzin."
+  ],
+  [
+   "speak",
+   "text=Rycza%C5%82t+na+komunikacj%C4%99+miejsk%C4%85+to+dziewi%C4%99%C4%87+z%C5%82otych+za+dob%C4%99%2C+rycza%C5%82t+za+nocleg+bez+rachunku+to+sze%C5%9B%C4%87dziesi%C4%85t+siedem+z%C5%82otych+i+pi%C4%99%C4%87dziesi%C4%85t+groszy%2C+a+limit+zwrotu+za+hotel+z+faktur%C4%85+wynosi+dziewi%C4%99%C4%87set+z%C5%82otych+za+dob%C4%99."
+  ],
+  [
+   "speak",
+   "text=Co+z+tych+informacji+jest+dla+ciebie+najwa%C5%BCniejsze+w+kolejnym+kroku%3F"
+  ],
+  [
+   "voice",
+   ""
+  ],
+  [
+   "reply",
+   "text=Dzi%C4%99kuj%C4%99.+Co+powinienem+sprawdzi%C4%87+najpierw%3F&spoken=1"
+  ],
+  [
+   "speak",
+   "text=Nadal+jeste%C5%9Bmy+w+pierwszym+kroku+metody+WRAP%2C+czyli+poszerzaniu+opcji%2C+a+na+Twoim+miejscu+najpierw+policzy%C5%82bym+Tw%C3%B3j+obecny+koszt+biura+i+sprawdzi%C5%82+trzeci%C4%85+opcj%C4%99%3A+przeprowadzk%C4%99+Ciebie+do+Krakowa+przy+zostawieniu+zespo%C5%82owi+w+Warszawie+pakietu+o%C5%9Bmiu+dni+coworkingowych+za+trzy+i+p%C3%B3%C5%82+tysi%C4%85ca+z%C5%82otych+miesi%C4%99cznie+w+miejscu+takim+jak+Fantastic+Studio%2C+bo+przy+siedemdziesi%C4%99ciu+trzech+procentach+firm+trac%C4%85cych+ludzi+przy+relokacji+wed%C5%82ug+bada%C5%84+Antal+to+najprostsza+droga%2C+by+zatrzyma%C4%87+zesp%C3%B3%C5%82+i+zmie%C5%9Bci%C4%87+si%C4%99+w+pi%C4%99tnastu+procentach+wzrostu+koszt%C3%B3w."
+  ],
+  [
+   "speak",
+   "text=Przeciwko+zaczynaniu+od+samych+wylicze%C5%84+przemawia+jednak+to%2C+%C5%BCe+nawet+najlepszy+bud%C5%BCet+nie+zadzia%C5%82a%2C+je%C5%9Bli+Twoi+pracownicy+nie+zaakceptuj%C4%85+pracy+na+odleg%C5%82o%C5%9B%C4%87+z+rzadkimi+spotkaniami."
+  ],
+  [
+   "speak",
+   "text=Wyb%C3%B3r+nale%C5%BCy+do+Ciebie+%E2%80%94+czy+dopisujemy+taki+model+hybrydowy+jako+Twoj%C4%85+trzeci%C4%85+realn%C4%85+opcj%C4%99+obok+pe%C5%82nej+przeprowadzki+i+zostania+w+Warszawie%3F"
+  ]
+ ],
+ "live": [
+  [
+   "turn user",
+   "Zastanawiam się, czy przenieść moją małą firmę z Warszawy do Krakowa."
+  ],
+  [
+   "turn model",
+   "Zastanawiasz się nad poważnym krokiem, czyli przeniesieniem swojej małej firmy z Warszawy do Krakowa. Możemy podejść do tego na trzy sposoby. Pierwszy to metoda WRAP: pozwoli Ci wyjść poza proste pytanie czy się przenosić, sprawdzić założenia w praktyce, spojrzeć na sprawę z dystansu i przygotować się na ryzyko. Drugi to Unit economics, czyli LTV i CAC: pomoże Ci policzyć koszty pozyskania oraz obsługę klienta w nowym miejscu i sprawdzić, czy zmiana miasta zepnie się finansowo. Trzeci to Weighted Decision Matrix: pozwoli Ci spokojnie zestawić Warszawę i Kraków według najważniejszych dla Ciebie kryteriów i ocenić, gdzie firma zyska więcej. Który z tych sposobów jest Ci teraz bliższy, a może wolisz podejść do tego inaczej?"
+  ],
+  [
+   "turn user",
+   "Wybieram pierwszy sposób."
+  ],
+  [
+   "turn model",
+   "Zaczynamy pracę metodą WRAP i wchodzimy w jej pierwszy krok, czyli poszerzanie opcji. Metodę opracowali w dwa tysiące trzynastym roku bracia Chip i Dan Heath na podstawie badań Larricka, Kahnemana i Kleina. Składa się ona z czterech faz: poszerzenia opcji poza zwykłe tak lub nie, przetestowania założeń w rzeczywistości, nabrania dystansu przed wyborem oraz przygotowania się na ewentualny błąd. W Twojej sytuacji pomoże to uniknąć wąskiego patrzenia tylko na przeprowadzkę albo zostanie w miejscu i znaleźć bezpieczniejsze rozwiązania dla firmy. Wyobraź sobie na chwilę, że z jakiegoś powodu nie możesz ani przenieść firmy na stałe do Krakowa, ani zostawić jej w obecnym kształcie w Warszawie — co innego mógłbyś wtedy zrobić?"
+  ],
+  [
+   "turn user",
+   "Ile teraz kosztuje wynajem biura dla 10 osób w Krakowie?"
+  ],
+  [
+   "turn model",
+   "Według danych z portali Officemarket by Savills oraz Tabela Ofert, tradycyjne biuro dla dziesięciu osób w Krakowie, czyli około osiemdziesięciu do stu metrów kwadratowych, kosztuje ze wszystkimi opłatami eksploatacyjnymi od pięciu do ośmiu tysięcy złotych netto miesięcznie, ale zwykle wymaga umowy na trzy do pięciu lat. Z kolei elastyczne biuro serwisowane z miesięcznym wypowiedzeniem to koszt od sześciu i pół do dwunastu i pół tysiąca złotych netto miesięcznie za dziesięcioosobowy zespół. Wracając do naszego pierwszego kroku, czyli poszerzania opcji poza całkowitą przeprowadzkę albo zostanie w Warszawie, jaką pośrednią opcję dają Ci takie elastyczne biura lub inne formy pracy?\n\nДжерела: [wynajembiur.pl](https://wynajembiur.pl/przestrzenie-biurowe/krakow/), [officemarket.pl](https://officemarket.pl/krakow), [tabelaofert.pl](https://tabelaofert.pl/wynajem/lokale/krakow/stare-miasto)"
+  ],
+  [
+   "turn user",
+   "Zależy mi, żeby zespół został ze mną, a koszty wzrosły najwyżej o 15%."
+  ],
+  [
+   "turn model",
+   "Utrzymanie obecnego zespołu i wzrost kosztów najwyżej o piętnaście procent to bardzo jasne warunki. Nadal jesteśmy w pierwszym kroku metody WRAP, czyli poszerzaniu opcji, żeby mieć co najmniej trzy realne wyjścia zamiast prostego wyboru między Warszawą a Krakowem. Jak można połączyć pracę z obu miast albo wprowadzić zmianę stopniowo, tak aby zespół został z Tobą, a koszty zmieściły się w tym limicie?"
+  ],
+  [
+   "turn user",
+   "Tak, zbadaj to dokładniej."
+  ],
+  [
+   "turn model",
+   "Zaczynam dokładne badanie kosztów i sposobów połączenia pracy między Warszawą a Krakowem dla dziesięcioosobowego zespołu. Zanim zbiorę dane, powiedz mi proszę, ile obecnie wydajesz miesięcznie na utrzymanie biura w Warszawie?\n\nSprawdzam teraz koszty i praktyczne modele pracy hybrydowej lub stopniowego otwarcia oddziału między Warszawą a Krakowem dla dziesięcioosobowej firmy, co zajmie około dwóch minut.\n- Ile kosztują elastyczne pakiety coworkingowe oraz biura na godziny w Warszawie i Krakowie dla dziesięcioosobowego zespołu?\n- Jakie są koszty przejazdów pociągiem i delegacji między Warszawą a Krakowem dla pracowników firmy?\n- Jak firmy w Polsce organizują pracę hybrydową w dwóch miastach, aby utrzymać obecny zespół przy relokacji?\n\nAby utrzymać zespół przy relokacji, polskie firmy najczęściej łączą pracę zdalną z mniejszym biurem lokalnym lub opłacają rzadkie dojazdy do nowej siedziby. Według badań firmy Antal utrata ludzi to problem dla siedemdziesięciu trzech procent firm, a gotowość specjalistów do przeprowadzki stale spada. Pracodawcy stosują więc trzy główne modele. Pierwszy to biuro główne w nowym mieście i mniejsza, elastyczna przestrzeń coworkingowa w dotychczasowej lokalizacji, co opisują agencje Colliers oraz Cushman and Wakefield. Drugi model to praca zdalna i zjazdy integracyjne raz lub dwa razy w miesiącu z opłaconym przejazdem i noclegiem, ponieważ według portalu Just Join IT tylko dwanaście procent pracowników hybrydowych akceptuje cztery dni pracy z biura w tygodniu. Trzeci sposób to pakiety relokacyjne dla kluczowych osób, gdzie według Antal jedna trzecia firm wypłaca jednorazowy bonus od czterech i pół tysiąca do dziesięciu tysięcy złotych brutto, a dwadzieścia dwa procent dopłaca do wynajmu mieszkania. Koszty elastycznego biura dla dziesięciu osób w Warszawie i Krakowie zależą od wybranego z czterech wariantów cenowych netto. Pierwszy wariant to wynajem sali spotkań. W mniejszych biurach, jak Hub Kolektyw czy Coworking Wilanów, godzina kosztuje od pięćdziesięciu do osiemdziesięciu złotych, a cały dzień od sześciuset do siedmiuset złotych, natomiast w warszawskim Brain Embassy według platformy Flexspace to trzysta złotych za godzinę lub tysiąc dziewięćset dwadzieścia złotych za dzień. Drugi wariant to pojedyncze wejściówki całodniowe. W krakowskim Cowork by Memos czy warszawskim Fantastic Studio kosztują one sześćset złotych dziennie za cały zespół, a w biurach premium w Warszawie, według Flexspace i One Coworking, od tysiąca dwustu do tysiąca ośmiuset złotych. Trzeci wariant to pakiety dni lub wspólne biurka. W Fantastic Studio pakiet ośmiu dni w miesiącu dla dziesięciu osób kosztuje trzy i pół tysiąca złotych, a szesnastu dni pięć tysięcy trzysta złotych. Nielimitowany dostęp typu hot desk według Cluster Offices, Cowork by Memos oraz A i A Holding kosztuje w Krakowie od pięciu i pół tysiąca do dziewięciu tysięcy złotych miesięcznie za zespół, a w centrum Warszawy od siedmiu i pół tysiąca do piętnastu tysięcy czterystu złotych. Czwarty wariant to zamknięty gabinet dla dziesięciu osób. Według A i A Holding, ShareSpace oraz Cluster Offices w Krakowie i poza centrum Warszawy kosztuje on od jedenastu do osiemnastu tysięcy złotych miesięcznie, a w centrum Warszawy od piętnastu tysięcy czterystu do czterdziestu jeden tysięcy złotych, przy czym umowy miesięczne są o piętnaście do trzydziestu procent droższe niż roczne. Jeśli chodzi o przejazdy między Warszawą a Krakowem, to według danych PKP Intercity oraz EuroPodróże bilet w drugiej klasie na pociąg IC lub TLK kosztuje bazowo od sześćdziesięciu pięciu do siedemdziesięciu pięciu złotych, na ekspres EIC około stu czterdziestu dziewięciu złotych, a na Pendolino od stu sześćdziesięciu dziewięciu do stu dziewięćdziesięciu złotych. Wcześniejszy zakup obniża ceny do czterdziestu pięciu złotych za pociąg IC i około stu jeden złotych za Pendolino. Do tego dochodzą ustawowe koszty delegacji, które według serwisów Poradnik Przedsiębiorcy oraz HRappka wynoszą czterdzieści pięć złotych pełnej diety za dobę, lub dwadzieścia dwa złote i pięćdziesiąt groszy przy wyjeździe od ośmiu do dwunastu godzin. Ryczałt na komunikację miejską to dziewięć złotych za dobę, ryczałt za nocleg bez rachunku to sześćdziesiąt siedem złotych i pięćdziesiąt groszy, a limit zwrotu za hotel z fakturą wynosi dziewięćset złotych za dobę. Co z tych informacji jest dla ciebie najważniejsze w kolejnym kroku?\n\nДжерела: [hubkolektyw.pl](https://hubkolektyw.pl/sale-spotkan/), [coworking-wilanow.pl](https://coworking-wilanow.pl/wynajem-sali-wilanow/), [hubkolektyw.pl](https://hubkolektyw.pl/sale-spotkan/krakow/), [flexspace.ai](https://partners.flexspace.ai/offerings/brain-embassy-meeting-rooms/spaces/d18b512a-87e1-4e2b-831f-c7e07f3c9d9a?lang=pl&quantity=1), [memos.work](https://www.memos.work/uslugi/hot-desk), [fantastic-studio.com](https://fantastic-studio.com/coworking-warszawa/), [onecoworking.com](https://www.onecoworking.com/venues/brain-embassy-postepu), [flexspace.ai](https://partners.flexspace.ai/offerings/brain-embassy-meeting-rooms/spaces/1a89d967-9d4a-409c-84f0-621f57f3ea4d?lang=pl&quantity=1), [clusteroffices.com](https://www.clusteroffices.com/blog), [aia.pl](https://www.nieruchomosci.aia.pl/coworking-cena/), [sharespace.work](https://www.sharespace.work/en/coworking/poland/warsaw/ochota/brain-embassy-al-jerozolimskie), [polsystem.pl](https://polsystem.pl/blog/delegacja-krajowa-w-2026-roku-jak-przygotowac-poprawne-rozliczenie-delegacji-krajowej/), [europodroze.pl](https://www.europodroze.pl/pendolino/krakow-glowny/warszawa-wschodnia), [intercity.pl](https://www.intercity.pl/pl/site/o-nas/dzial-prasowy/aktualnosci/poniedzialkowy-odjazd-z-pkp-intercity!-tansze-bilety-na-polaczenia-z-krakowa.html), [europodroze.pl](https://www.europodroze.pl/pendolino/krakow-glowny/warszawa-centralna), [europodroze.pl](https://www.europodroze.pl/pendolino/warszawa-wschodnia/krakow-glowny), [hrappka.pl](https://hrappka.pl/blog/ile-wynosi-dieta-krajowa-i-zagraniczna/), [mikunda.com.pl](https://mikunda.com.pl/dieta-nocleg-delegacja-2026-rozliczenie/), [poradnikprzedsiebiorcy.pl](https://poradnikprzedsiebiorcy.pl/-delegacja-krajowa-jak-rozliczyc-ja-w-prawidlowy-sposob), [pragmago.pl](https://pragmago.pl/porada/diety-krajowe-dla-pracownika-ile-wynosza-i-kiedy-przysluguja/), [progressholding.pl](https://progressholding.pl/pl/jak-rozliczyc-podroz-sluzbowa-pracownika-diety-krajowe-i-zagraniczne-limity-i-dokumentacja/), [novum3.pl](https://novum3.pl/poradniki/jak-rozliczyc-delegacje-krajowa.html), [ey.com](https://www.ey.com/pl_pl), [pracujwlogistyce.pl](https://www.pracujwlogistyce.pl/29-opinie-komentarze/9606-mobilnosc-zawodowa-polakow), [antal.pl](https://antal.pl/wiedza/artykul/raport-attrition), [wynajembiur.pl](https://wynajembiur.pl/baza-wiedzy/), [top-oze.pl](https://top-oze.pl/polacy-przeplacaja-za-ogrzewanie-termomodernizacja-moze-obnizyc-rachunki-nawet-o-60-2/), [cushmanwakefield.com](https://www.cushmanwakefield.com/en/poland/industries/office), [justjoin.it](https://justjoin.it/blog/remote-work-nie-zwalnia-tempa-praca-zdalna-dominuje-rynek-it), [lodz.pl](https://uml.lodz.pl/files/public/dla_mieszkanca/Raport_ANTAL_LODZ_v04.pdf), [money.pl](https://www.money.pl/gospodarka/wiadomosci/artykul/relokacja-pracownikow-dodatki,34,0,2410530.html)"
+  ],
+  [
+   "turn user",
+   "Dziękuję. Co powinienem sprawdzić najpierw?"
+  ],
+  [
+   "turn model",
+   "Nadal jesteśmy w pierwszym kroku metody WRAP, czyli poszerzaniu opcji, a na Twoim miejscu najpierw policzyłbym Twój obecny koszt biura i sprawdził trzecią opcję: przeprowadzkę Ciebie do Krakowa przy zostawieniu zespołowi w Warszawie pakietu ośmiu dni coworkingowych za trzy i pół tysiąca złotych miesięcznie w miejscu takim jak Fantastic Studio, bo przy siedemdziesięciu trzech procentach firm tracących ludzi przy relokacji według badań Antal to najprostsza droga, by zatrzymać zespół i zmieścić się w piętnastu procentach wzrostu kosztów. Przeciwko zaczynaniu od samych wyliczeń przemawia jednak to, że nawet najlepszy budżet nie zadziała, jeśli Twoi pracownicy nie zaakceptują pracy na odległość z rzadkimi spotkaniami. Wybór należy do Ciebie — czy dopisujemy taki model hybrydowy jako Twoją trzecią realną opcję obok pełnej przeprowadzki i zostania w Warszawie?"
+  ]
+ ],
+ "error": ""
+}

@@ -418,3 +418,15 @@
   it none (`.engine/artifacts/spikes/spoken-replies-smoke-2026-10-27.txt`)
 - Surprises: none
 - Open for next slice: S2b (resilience), then the live check of the whole mode
+
+## Slice conversation-resilience — S2b of voice-conversation-mode (CODE COMPLETE — BLOCKED 2026-10-27)
+
+- Module: `conversation.js` — `voiceText`, `stableText` (I4 prefix property), `createEarcons`; recognition miss → tone
+  and listen (3 in a row stop), one automatic `/retry` (not on 409), skip a sentence that cannot be voiced, Wake Lock,
+  microphone reopen, sound resume + `#talk-resume` (icon button, task 207's rule)
+- Tests: 48 by the slice-tester in `tests/contract/conversation_resilience/` (sealed), all green; smoke
+  `scripts/smoke_test_conversation_resilience.py` green (`.engine/artifacts/conversation-resilience/smoke.txt`)
+- Blocked: 3 sealed conversation-loop tests encode the old «any error stops» rule; the objection would be that slice's
+  third round, so it is parked — board 718 and question 1 of task 308 (the owner's answer)
+- Live acceptance of the whole mode (AC5): `.engine/artifacts/conversation-mode/live-2026-10-27.md` — 6 turns uk-UA
+  and 6 pl-PL with no touch; latency 15–24 s (uk) and 30–87 s (pl), almost all of it the model
