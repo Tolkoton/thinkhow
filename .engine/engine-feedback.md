@@ -71,3 +71,9 @@ From: lesson #35b77262 (overseer, router, 2026-10-24).
 The slice-tester added '# type: ignore' to a sealed contract test (a helper typed as object); the builder's Stop gate then refuses the turn on the bypass guard, and only an objection round (scarce: 2 per slice) can fix a sealed file. Suggest: the testing hand-in check (handin_errors) refuses a hand-in whose files add a type-ignore, so the tester fixes the typing before sealing.
 
 From: lesson #f6b535ce (gate, step-results, 2026-10-27).
+
+## 2026-10-27 — The Stop gate ran only the tests named after the changed files, so a new learning/ module 
+
+The Stop gate ran only the tests named after the changed files, so a new learning/ module that broke the project's static write guard (tests/test_a3_guards.py, tests/test_ac4.py — they scan every module) passed the gate and was caught only by the overseer. Suggest: project guard tests that read all sources (a list in project.env, e.g. GUARD_TESTS) run on every Stop where code changed.
+
+From: lesson #23b6f003 (overseer, step-results, 2026-10-27).

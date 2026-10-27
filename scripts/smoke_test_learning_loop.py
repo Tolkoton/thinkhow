@@ -8,6 +8,9 @@ the card files byte-for-byte the same. Prints each step and writes the same to
 .engine/artifacts/synthesizer/smoke.txt; exits 1 on a failed check.
 """
 
+import contextlib
+import io
+import json
 import re
 import sys
 import tempfile
@@ -92,7 +95,13 @@ def main() -> int:
     check(rolled.memory == [] and rolled.n == 1, "the note is gone, n = 1")
     check("відкочено (відкат 1)" in client.get("/learning").text, "the page says the change was rolled back")
     rev_now = knowledge.current(storage).rev_pair()
-    check(run("synthesize") == 0, "a second synthesize ran")
+    heard = io.StringIO()
+    with contextlib.redirect_stdout(heard):  # the Job's log line tells the outcome
+        code = run("synthesize")
+    print(heard.getvalue(), end="")
+    done = [json.loads(x) for x in heard.getvalue().splitlines() if '"synthesize_done"' in x]
+    outcome = done[-1]["outcome"] if done else "no synthesize_done line"
+    check(code == 0 and outcome == "nothing_new", f"a second synthesize took nothing new: {outcome}")
     check(len(runs(storage)) == 1, "the second synthesize took nothing new (no second run record)")
     check(knowledge.current(storage).rev_pair() == rev_now, "and wrote no revision")
     check(cards_bytes(root) == before, "the card files are byte-for-byte the same")
