@@ -1482,3 +1482,7 @@ Written by `.claude/hooks/testing.py` only: every decision of the testing manage
 - round 2: tests/contract/conversation_loop/test_cloop_catchup_smoke.py::test_smoke_fails_when_live_holds_no_person_turns — test_wrong; tests/contract/conversation_loop/test_cloop_catchup_disputed_q3_artifact.py::test_smoke_writes_its_output_to_the_artifact — test_right
 - a third round is not held: the slice waits for the owner, the work goes on with the next unblocked slice
 <!-- row: {"utc": "2026-10-27T12:38:47Z", "type": "parked", "slice": "conversation-loop"} -->
+
+## 2026-10-27T13:57:28Z — voice-synthesis — dispute, round 1 of 2
+- tests/contract/voice_synthesis/test_vs_web.py::test_seam5_language_without_voice_is_409_fragment: the contract is ambiguous — the question goes to the slice planner — `NoVoice` → 409 фрагмент «Для вашої мови немає голосу.» (новий рядок `MESSAGES`)
+<!-- row: {"utc": "2026-10-27T13:57:28Z", "type": "round", "slice": "voice-synthesis", "round": 1, "request": "20261027T135658Z-1ecec4", "items": [{"test": "tests/contract/voice_synthesis/test_vs_web.py::test_seam5_language_without_voice_is_409_fragment", "verdict": "contract_ambiguous", "reason": "`NoVoice` → 409 фрагмент «Для вашої мови немає голосу.» (новий рядок `MESSAGES`)"}], "resealed": []} -->
