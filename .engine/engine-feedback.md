@@ -65,3 +65,9 @@ From: task 202, builder.
 After an OVERSEER_BLOCK whose fix touches only tests/ or .engine/ (no file under SOURCE_DIRS), the Stop hook does not inject a new OVERSEER_REQUEST on the re-claim (no code changed since the last request), so the unit stays at BLOCK until the builder runs overseer_verdict.py request by hand. Task 302, slice router: BLOCK 20261024T143036Z-d15c39, fix e62d85c (tests/live, PROGRESS), re-audit only through a hand request 20261024T143846Z-64fadd. Suggest: a re-claim of a unit whose last verdict is BLOCK triggers a request whatever path changed.
 
 From: lesson #35b77262 (overseer, router, 2026-10-24).
+
+## 2026-10-27 — The slice-tester added '# type: ignore' to a sealed contract test (a helper typed as objec
+
+The slice-tester added '# type: ignore' to a sealed contract test (a helper typed as object); the builder's Stop gate then refuses the turn on the bypass guard, and only an objection round (scarce: 2 per slice) can fix a sealed file. Suggest: the testing hand-in check (handin_errors) refuses a hand-in whose files add a type-ignore, so the tester fixes the typing before sealing.
+
+From: lesson #f6b535ce (gate, step-results, 2026-10-27).

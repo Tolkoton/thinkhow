@@ -71,7 +71,7 @@ def test_local_chain_from_a_new_topic_to_the_files(tmp_path: Path) -> None:
     assert set(third) == {"t1-t2.json", "t3-t4.json"} and third["t1-t2.json"] == first["t1-t2.json"]
     newest = json.loads(third["t3-t4.json"])  # a set of observations (learning-loop S2)
     assert (newest["first_turn"], newest["last_turn"]) == (3, 4)
-    assert all(o["turn"] in (3, 4) for o in newest["observations"])
+    assert newest["observations"] and all(o["turn"] in (3, 4) for o in newest["observations"])
     page = client.get(topic).text
     for data in third.values():
         for observation in json.loads(data)["observations"]:

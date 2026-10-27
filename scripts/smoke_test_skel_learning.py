@@ -53,7 +53,7 @@ def main() -> None:
     done = [json.loads(line) for line in second.stdout.splitlines() if '"analyze_done"' in line][-1]
     print("second analyze:", done)
     assert (done["written"], done["skipped"]) == (0, 1)
-    print("OK: seed, analyze → a set of observations whose links open existing turns; a repeat writes nothing")
+    print("OK: seed, analyze → observations whose links open existing turns; a repeat writes nothing")
 
 
 if __name__ == "__main__":
