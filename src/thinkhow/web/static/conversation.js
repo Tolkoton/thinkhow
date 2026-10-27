@@ -2,6 +2,16 @@
 // Text reaches the page through textContent only.
 "use strict";
 
+// The words the script shows; the page puts the person's language in #ui-text (task 208), these are the source.
+const TEXT = {
+  not_sent: "Не вдалося надіслати запис — спробуйте ще раз; якщо не вийде, увійдіть знову в новій вкладці.",
+  no_mic: "Немає доступу до мікрофона.",
+  no_words: "Не почули слів — спробуйте ще раз.",
+  recording: "Запис… натисніть ще раз, щоб зупинити",
+  recognizing: "Розпізнаю…",
+  talk_stopped: "Режим розмови зупинено — спробуйте ще раз.",
+};
+
 // Bytes in → complete events out; an event ends with an empty line; data is one JSON line.
 function createSseParser() {
   const decoder = new TextDecoder("utf-8");
@@ -108,7 +118,7 @@ function createController({ fetch, storage, ui, key }) {
 // The recorder's last chunk and its `stop` event come after recorder.stop() returns, so the Blob is built there.
 function createRecorder({ media, Recorder, fetch, ui, url, limitMs, setTimeout, clearTimeout }) {
   const TYPES = ["audio/webm;codecs=opus", "audio/mp4"];
-  const NOT_SENT = "Не вдалося надіслати запис — спробуйте ще раз; якщо не вийде, увійдіть знову в новій вкладці.";
+  const NOT_SENT = TEXT.not_sent;
   let recorder = null;
   let timer = null;
   let held = null;
@@ -136,7 +146,7 @@ function createRecorder({ media, Recorder, fetch, ui, url, limitMs, setTimeout, 
     try {
       stream = await media.getUserMedia({ audio: true });
     } catch (e) {
-      ui.showError("Немає доступу до мікрофона.");
+      ui.showError(TEXT.no_mic);
       return;
     }
     recorder = new Recorder(stream, options());
@@ -167,7 +177,7 @@ function createRecorder({ media, Recorder, fetch, ui, url, limitMs, setTimeout, 
         ui.insertText(text);
         return ui.idle();
       }
-      return ui.showError("Не почули слів — спробуйте ще раз.");
+      return ui.showError(TEXT.no_words);
     }
     return ui.showError(fragmentText(await response.text()) || NOT_SENT);
   }
@@ -193,6 +203,8 @@ function createRecorder({ media, Recorder, fetch, ui, url, limitMs, setTimeout, 
 function attach(doc, win) {
   const form = doc.getElementById("reply-form");
   if (!form) return;
+  const words = doc.getElementById("ui-text");
+  if (words) Object.assign(TEXT, JSON.parse(words.textContent));
   const field = form.querySelector("textarea");
   const send = doc.getElementById("send");
   const retry = doc.getElementById("retry");
@@ -344,12 +356,12 @@ function attachMic(doc, win, form, field, error) {
       error.textContent = "";
       again.hidden = true;
       show("recording");
-      state.textContent = "Запис… натисніть ще раз, щоб зупинити";
+      state.textContent = TEXT.recording;
     },
     recognizing() {
       mic.disabled = again.disabled = true;
       show("recognizing");
-      state.textContent = "Розпізнаю…";
+      state.textContent = TEXT.recognizing;
     },
     insertText(text) {
       const before = field.value;
@@ -598,9 +610,9 @@ function fragmentOf(body) {
 function createTalk({ media, AudioContext, Recorder, fetch, controller, ui, voiceUrl, speakUrl, setInterval,
   clearInterval, now, mark, makeEarcons = createEarcons, wakeLock = null, doc = null, setTimeout, clearTimeout }) {
   const TYPES = ["audio/webm;codecs=opus", "audio/mp4"];
-  const STOPPED = "Режим розмови зупинено — спробуйте ще раз.";
-  const NO_WORDS = "Не почули слів — спробуйте ще раз.";
-  const NO_MIC = "Немає доступу до мікрофона.";
+  const STOPPED = TEXT.talk_stopped;
+  const NO_WORDS = TEXT.no_words;
+  const NO_MIC = TEXT.no_mic;
   const MAX_MISSES = 3; // recognitions failed in a row before the mode stops (PROVISIONAL, one line)
   const TICK_MS = 10000; // a tick while the answer is prepared (PROVISIONAL)
   const RESUME_MS = 1000; // how long a resume() without a tap may take before the page asks for a tap (PROVISIONAL)

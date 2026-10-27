@@ -3,21 +3,21 @@
 {% block title %}{{ view.title }}{% endblock %}
 {% block body %}
 <h1>{{ view.title }}</h1>
-<aside class="method" aria-label="Модель мислення"><span class="label">Модель мислення:</span> {{ method }}</aside>
+<aside class="method" aria-label="{{ ui.thinking_model }}"><span class="label">{{ ui.thinking_model }}:</span> {{ method }}</aside>
 {% for s in view.sessions %}
 <section class="session">
-  <h2>Сесія {{ s.no }}{% if s.closed_at %} (завершено){% endif %}</h2>
+  <h2>{{ ui.session.format(n=s.no) }}{% if s.closed_at %} {{ ui.session_closed }}{% endif %}</h2>
   {% for t in s.turns %}
   {% for m in marks.get(t.no, []) %}
   <p class="method-mark">{{ m }}</p>
   {% endfor %}
   <article id="t{{ t.no }}" class="turn {{ t.role }}">
-    <p class="who"><a href="#t{{ t.no }}">#{{ t.no }}</a> {% if t.role == "user" %}Ви{% else %}Фасилітатор{% endif %}</p>
+    <p class="who"><a href="#t{{ t.no }}">#{{ t.no }}</a> {% if t.role == "user" %}{{ ui.you }}{% else %}{{ ui.facilitator }}{% endif %}</p>
     <p class="text">{{ t.text | turn_html }}</p>
   </article>
   {% for r in view.research if r.turn == t.no and r.suggestions_html %}
   <iframe class="search-suggestions" sandbox="allow-popups allow-popups-to-escape-sandbox"
-          srcdoc="{{ '<base target="_blank">' ~ r.suggestions_html }}" title="Пошук Google"></iframe>
+          srcdoc="{{ '<base target="_blank">' ~ r.suggestions_html }}" title="{{ ui.google_search }}"></iframe>
   {% endfor %}
   {% endfor %}
 </section>
@@ -29,16 +29,17 @@
       data-key="draft:{{ view.ref.uid }}/{{ view.ref.topic_id }}" data-voice="{{ 'yes' if voice else 'no' }}">
   <textarea name="text"></textarea>
   <div class="actions">
-    <button id="talk" class="icon" type="button" aria-label="Режим розмови" aria-pressed="false" hidden>{{ icon("talk") }}<span class="spinner" aria-hidden="true"></span></button>
-    <button id="talk-resume" class="icon" type="button" aria-label="Торкніться, щоб продовжити" hidden>{{ icon("play") }}</button>
-    <button id="mic" class="icon" type="button" aria-label="Говорити" aria-pressed="false">{{ icon("mic") }}{{ icon("stop") }}<span class="spinner" aria-hidden="true"></span></button>
-    <button id="recognize" class="icon" type="button" aria-label="Розпізнати ще раз" hidden>{{ icon("retry") }}</button>
+    <button id="talk" class="icon" type="button" aria-label="{{ ui.talk_mode }}" aria-pressed="false" hidden>{{ icon("talk") }}<span class="spinner" aria-hidden="true"></span></button>
+    <button id="talk-resume" class="icon" type="button" aria-label="{{ ui.talk_resume }}" hidden>{{ icon("play") }}</button>
+    <button id="mic" class="icon" type="button" aria-label="{{ ui.speak }}" aria-pressed="false">{{ icon("mic") }}{{ icon("stop") }}<span class="spinner" aria-hidden="true"></span></button>
+    <button id="recognize" class="icon" type="button" aria-label="{{ ui.recognize_again }}" hidden>{{ icon("retry") }}</button>
     <span id="mic-state" class="sr-only" aria-live="polite"></span>
-    <button id="send" class="primary icon" type="submit" autocomplete="off" aria-label="Надіслати">{{ icon("send") }}</button>
-    <span id="pending" class="pending" role="status"><span class="spinner" aria-hidden="true"></span><span class="sr-only">Фасилітатор відповідає…</span></span>
-    <button id="retry" class="icon" type="button" autocomplete="off" aria-label="Спробуйте ще раз"{% if not view.awaiting_answer %} hidden{% endif %}>{{ icon("retry") }}</button>
+    <button id="send" class="primary icon" type="submit" autocomplete="off" aria-label="{{ ui.send }}">{{ icon("send") }}</button>
+    <span id="pending" class="pending" role="status"><span class="spinner" aria-hidden="true"></span><span class="sr-only">{{ ui.facilitator_answering }}</span></span>
+    <button id="retry" class="icon" type="button" autocomplete="off" aria-label="{{ ui.retry }}"{% if not view.awaiting_answer %} hidden{% endif %}>{{ icon("retry") }}</button>
   </div>
 </form>
+<script id="ui-text" type="application/json">{{ js_text | tojson }}</script>
 <script src="/static/conversation.js"></script>
 {% with t = view %}{% include "delete.html" %}{% endwith %}
 {% endif %}

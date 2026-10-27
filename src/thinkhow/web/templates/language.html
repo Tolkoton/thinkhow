@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% from "icons.html" import icon %}
-{% block title %}Мова{% endblock %}
+{% block title %}{{ ui.language }}{% endblock %}
 {% block body %}
-<h1>Мова</h1>
-<p>Якою мовою ви говорите й пишете? Нею розпізнаватиметься голос і відповідатиме фасилітатор.</p>
+<h1>{{ ui.language }}</h1>
+<p>{{ ui.language_prompt }}</p>
 <form class="inline" method="post" action="/language">
   <select name="code" required>
-{% if not current %}    <option value="">— оберіть мову —</option>
+{% if not current %}    <option value="">{{ ui.choose_language }}</option>
 {% endif %}{% for lang in languages %}    <option value="{{ lang.code }}"{% if lang.code == current %} selected{% endif %}>{{ lang.name }}</option>
 {% endfor %}  </select>
-  <button class="primary icon" type="submit" aria-label="Зберегти">{{ icon("check") }}</button>
+  <button class="primary icon" type="submit" aria-label="{{ ui.save }}">{{ icon("check") }}</button>
 </form>
 {% endblock %}

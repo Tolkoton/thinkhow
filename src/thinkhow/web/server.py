@@ -29,6 +29,7 @@ from thinkhow.platform.identity import FixedIdentity, IapIdentity, IdentityError
 from thinkhow.platform.speech import Speech, SpeechUnavailable
 from thinkhow.platform.storage import Storage
 from thinkhow.platform.tts import NoVoice, ScriptedTts, Tts, TtsUnavailable
+from thinkhow.web import ui_text
 from thinkhow.web.method import caption, marks
 from thinkhow.web.text import turn_html
 
@@ -60,7 +61,7 @@ def create_app(deps: Deps) -> FastAPI:
     app.add_middleware(RequestLog)
     app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
     _routes(app, deps)
-    _error_handlers(app)
+    _error_handlers(app, deps)
     return app
 
 
@@ -79,12 +80,14 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         mine = workspace.list_topics(deps.storage, user)
         everyone = _all_topics(deps, user) if user.is_owner else []
         context = {"user": user, "mine": mine, "everyone": everyone, "language": language}
-        return TEMPLATES.TemplateResponse(request, "home.html", context)
+        return _page(request, "home.html", context, ui_text.catalog_name(language.code))
 
     @app.get("/language", response_class=HTMLResponse)
     def language_page(request: Request, user: User) -> Response:
-        context = {"languages": workspace.LANGUAGES, "current": _current_code(deps, user)}
-        return TEMPLATES.TemplateResponse(request, "language.html", context)
+        current = _current_code(deps, user)
+        name = ui_text.catalog_name(current) if current else _browser_catalog(request)
+        context = {"languages": workspace.LANGUAGES, "current": current}
+        return _page(request, "language.html", context, name)
 
     @app.post("/language")
     def choose_language(user: User, code: Annotated[str, Form()]) -> Response:
@@ -98,13 +101,15 @@ def _routes(app: FastAPI, deps: Deps) -> None:
 
     @app.get("/topics/{uid}/{topic_id}", response_class=HTMLResponse)
     def topic(request: Request, user: User, uid: str, topic_id: str) -> Response:
-        workspace.language(deps.storage, user)
+        name = ui_text.catalog_name(workspace.language(deps.storage, user).code)
+        words = ui_text.texts(name)
         view = workspace.open_topic(deps.storage, user, workspace.TopicRef(uid, topic_id), deps.now())
-        method = caption(view.routing, view.problem_map.phase_id, deps.cards)
+        method = caption(view.routing, view.problem_map.phase_id, deps.cards, words)
         context = {"view": view, "own": user.id == uid, "method": method}
         context["voice"] = user.id == uid and workspace.has_voice(deps.storage, user)
-        context["marks"] = marks(view.routing, deps.cards)
-        return TEMPLATES.TemplateResponse(request, "topic.html", context)
+        context["marks"] = marks(view.routing, deps.cards, words)
+        context["js_text"] = {key[3:]: text for key, text in words.items() if key.startswith("js_")}
+        return _page(request, "topic.html", context, name)
 
     @app.post("/topics/{uid}/{topic_id}/reply")
     def reply(
@@ -142,6 +147,16 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         """A reply sentence → MP3 in the person's language; the synthesis runs in the thread pool."""
         audio = await run_in_threadpool(workspace.speak, deps.storage, deps.tts, user, text)
         return Response(content=audio, media_type="audio/mpeg", headers={"Cache-Control": "no-store"})
+
+
+def _page(request: Request, template: str, context: dict[str, Any], name: str) -> Response:
+    """A page in the catalog `name`: its words as `ui`, its language and direction on <html> (task 208)."""
+    extra = {"ui": ui_text.texts(name), "lang": name, "dir": ui_text.direction(name)}
+    return TEMPLATES.TemplateResponse(request, template, context | extra)
+
+
+def _browser_catalog(request: Request) -> str:
+    return ui_text.from_header(request.headers.get("accept-language"))
 
 
 def _current_code(deps: Deps, user: CurrentUser) -> str:
@@ -188,55 +203,75 @@ def _format(name: str, data: dict[str, Any]) -> str:
     return f"event: {name}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
 
 
-NOT_ACCEPTED = "Запит не прийнято."
 MESSAGES: list[tuple[type[Exception], int, str]] = [
-    (workspace.TopicNotFound, 404, "Тему не знайдено."),
-    (workspace.PendingAnswer, 409, "Спершу дочекайтеся відповіді або натисніть «Спробуйте ще раз»."),
-    (workspace.NothingToRetry, 409, "Немає репліки, на яку треба відповісти."),
-    (IdentityError, 401, "Потрібно увійти через Google."),
-    (SpeechUnavailable, 502, "Не вдалося розпізнати — спробуйте ще раз."),
-    (NoVoice, 409, "Для вашої мови немає голосу."),
-    (TtsUnavailable, 502, "Не вдалося озвучити — спробуйте ще раз."),
+    (workspace.TopicNotFound, 404, "err_topic_not_found"),
+    (workspace.PendingAnswer, 409, "err_pending"),
+    (workspace.NothingToRetry, 409, "err_nothing_to_retry"),
+    (IdentityError, 401, "err_login"),
+    (SpeechUnavailable, 502, "err_not_recognized"),
+    (NoVoice, 409, "err_no_voice"),
+    (TtsUnavailable, 502, "err_not_voiced"),
 ]
+Handler = Callable[[Request, Exception], Awaitable[Response]]
 
 
-def _error_handlers(app: FastAPI) -> None:
-    """One place turns errors into a fragment of the page (M3 A4)."""
-    for kind, status, text in MESSAGES:
-        app.add_exception_handler(kind, _fixed(status, text))
-    app.add_exception_handler(workspace.NoLanguage, _no_language)
-    app.add_exception_handler(ValueError, _bad_request)
-    app.add_exception_handler(RequestValidationError, _bad_request)
-    app.add_exception_handler(Exception, _fixed(500, "Щось пішло не так — спробуйте ще раз."))
+def _error_handlers(app: FastAPI, deps: Deps) -> None:
+    """One place turns errors into a fragment of the page (M3 A4), in the person's language (task 208)."""
+    for kind, status, key in MESSAGES:
+        app.add_exception_handler(kind, _fixed(deps, status, key))
+    app.add_exception_handler(workspace.NoLanguage, _no_language(deps))
+    bad_request = _bad_request(deps)
+    app.add_exception_handler(ValueError, bad_request)
+    app.add_exception_handler(RequestValidationError, bad_request)
+    app.add_exception_handler(Exception, _fixed(deps, 500, "err_internal"))
 
 
-def _fixed(status: int, text: str) -> Callable[[Request, Exception], Awaitable[Response]]:
+def _words(deps: Deps, request: Request) -> Mapping[str, str]:
+    """The language the person chose; before a choice, or with no person known, the browser's."""
+    try:
+        user = current_user(deps.identity.identify(request.headers), deps.settings)
+        return ui_text.texts(ui_text.catalog_name(workspace.language(deps.storage, user).code))
+    except Exception:  # an error page must not fail on the way to its words
+        return ui_text.texts(_browser_catalog(request))
+
+
+def _fixed(deps: Deps, status: int, key: str) -> Handler:
     async def handler(request: Request, exc: Exception) -> Response:
-        return _fragment(status, text)
+        return _fragment(status, _words(deps, request)[key])
 
     return handler
 
 
-async def _no_language(request: Request, exc: Exception) -> Response:
-    """A page leads to the language choice; any other request gets a fragment it can show (F13 S1 Q5)."""
-    if request.method == "GET":
-        return RedirectResponse("/language", status_code=303)
-    return _fragment(409, "Спершу оберіть мову (сторінка «Мова»).")
+def _no_language(deps: Deps) -> Handler:
+    async def handler(request: Request, exc: Exception) -> Response:
+        """A page leads to the language choice; any other request gets a fragment it can show (F13 S1 Q5)."""
+        if request.method == "GET":
+            return RedirectResponse("/language", status_code=303)
+        return _fragment(409, _words(deps, request)["err_choose_language"])
+
+    return handler
 
 
-async def _bad_request(request: Request, exc: Exception) -> Response:
+def _bad_request(deps: Deps) -> Handler:
+    async def handler(request: Request, exc: Exception) -> Response:
+        return _fragment(400, _words(deps, request)[_bad_request_key(request)])
+
+    return handler
+
+
+def _bad_request_key(request: Request) -> str:
     path = request.url.path
     if request.method == "POST" and path == "/language":
-        return _fragment(400, "Такої мови немає в переліку.")
+        return "err_unknown_language"
     if request.method == "POST" and path == "/topics":
-        return _fragment(400, "Назва теми порожня.")
+        return "err_empty_title"
     if request.method == "POST" and path.endswith("/voice"):
-        return _fragment(400, "Запис не прийнято — спробуйте записати ще раз.")
+        return "err_recording_rejected"
     if request.method == "POST" and path == "/speak":
-        return _fragment(400, "Текст для голосу не прийнято.")
+        return "err_speak_rejected"
     if request.method == "POST" and path.endswith("/reply"):
-        return _fragment(400, "Порожню репліку не надіслано.")
-    return _fragment(400, NOT_ACCEPTED)
+        return "err_empty_reply"
+    return "err_not_accepted"
 
 
 def _fragment(status: int, text: str) -> Response:

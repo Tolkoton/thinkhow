@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% from "icons.html" import icon %}
 {% block body %}
-<p class="meta">Мова: {{ language.name }} · <a href="/language">змінити</a></p>
-<h1>Мої теми</h1>
+<p class="meta">{{ ui.language }}: {{ language.name }} · <a href="/language">{{ ui.change }}</a></p>
+<h1>{{ ui.my_topics }}</h1>
 <ul class="topics">
 {% for t in mine %}  <li><a href="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}">{{ t.title }}</a>
     {% include "delete.html" %}</li>
-{% else %}  <li class="empty">Поки жодної теми.</li>
+{% else %}  <li class="empty">{{ ui.no_topics }}</li>
 {% endfor %}</ul>
-<h2>Нова тема</h2>
+<h2>{{ ui.new_topic }}</h2>
 <form class="inline" method="post" action="/topics">
   <input name="title" required>
-  <button class="primary icon" type="submit" aria-label="Створити">{{ icon("plus") }}</button>
+  <button class="primary icon" type="submit" aria-label="{{ ui.create }}">{{ icon("plus") }}</button>
 </form>
 {% if user.is_owner %}
-<h2>Усі теми</h2>
+<h2>{{ ui.all_topics }}</h2>
 <ul class="topics">
 {% for t in everyone %}  <li><a href="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}">{{ t.title }}</a> <span class="meta">— {{ t.ref.uid }}</span></li>
 {% endfor %}</ul>

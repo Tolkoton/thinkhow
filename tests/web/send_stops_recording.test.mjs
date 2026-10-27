@@ -66,11 +66,12 @@ class FakeRecorder {
 }
 
 // answers: a queue of () => Response | Promise<Response>, one per fetch
-function loadPage(answers) {
+function loadPage(answers, words = null) {
   const byId = {};
   for (const id of ["reply-form", "send", "retry", "live", "error", "mic", "recognize", "mic-state"]) {
     byId[id] = element(id);
   }
+  if (words) byId["ui-text"] = { textContent: JSON.stringify(words) };
   const field = element("");
   byId["reply-form"].dataset.key = "draft:alice-1/t-0123456789ab";
   byId["reply-form"].querySelector = () => field;
@@ -209,4 +210,16 @@ test("the mic leaves its recording state when recognition fails", async () => {
   await flush();
   assert.equal(p.byId.mic.dataset.state, "");
   assert.equal(p.byId.recognize.hidden, false);
+});
+
+// Task 208: the page's #ui-text puts the person's language into what the script says.
+test("the mic speaks the page's language: recording, recognizing, no words", async () => {
+  const words = { recording: "Recording… press again to stop", recognizing: "Recognising…", no_words: "No words." };
+  const p = loadPage([text("")], words);
+  fire(p.byId.mic, "click");
+  await flush();
+  assert.equal(p.byId["mic-state"].textContent, "Recording… press again to stop");
+  fire(p.byId.mic, "click");
+  await flush();
+  assert.equal(p.byId.error.textContent, "No words.");
 });

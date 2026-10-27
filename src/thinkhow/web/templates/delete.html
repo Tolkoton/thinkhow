@@ -1,7 +1,7 @@
 {% from "icons.html" import icon %}<details class="delete">
-  <summary class="icon" aria-label="Видалити">{{ icon("trash") }}</summary>
+  <summary class="icon" aria-label="{{ ui.delete }}">{{ icon("trash") }}</summary>
   <form method="post" action="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}/delete">
-    <p>Видалити тему «{{ t.title }}» разом з усією розмовою? Відновити її не вийде.</p>
-    <button class="danger icon" type="submit" aria-label="Так, видалити">{{ icon("trash") }}</button>
+    <p>{{ ui.delete_confirm.format(title=t.title) }}</p>
+    <button class="danger icon" type="submit" aria-label="{{ ui.delete_yes }}">{{ icon("trash") }}</button>
   </form>
 </details>

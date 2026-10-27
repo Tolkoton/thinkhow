@@ -204,7 +204,7 @@ section.session h2 { color: var(--muted); font-size: 1rem; font-weight: 600; }
 }
 .turn.user {
   background: var(--user-bg);
-  border-left: 4px solid var(--accent);
+  border-inline-start: 4px solid var(--accent);
 }
 .turn .who { margin: 0 0 0.25rem; color: var(--muted); font-size: 0.9rem; font-weight: 600; }
 .turn .who a { color: var(--muted); text-decoration: none; }
@@ -257,8 +257,8 @@ aside.method .label { font-weight: 600; }
   color: var(--muted);
   font-size: 0.85rem;
   margin: 0.25rem 0 0.75rem;
-  padding-left: 0.6rem;
-  border-left: 2px solid var(--border);
+  padding-inline-start: 0.6rem;
+  border-inline-start: 2px solid var(--border);
 }
 
 @media (min-width: 72rem) {

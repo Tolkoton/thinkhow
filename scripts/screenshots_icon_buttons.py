@@ -58,7 +58,7 @@ def main() -> None:
 def walk(page: Any, base: str, out: Path) -> None:
     page.goto(base + "/language")
     page.select_option('select[name="code"]', "uk-UA")
-    page.click('button[aria-label="Зберегти"]')
+    page.click('form[action="/language"] button[type="submit"]')
     page.wait_for_url(base + "/")
     for title in ("Кав'ярня: клієнти не повертаються", "Тест — непотрібна розмова"):
         page.goto(base + "/")

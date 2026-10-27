@@ -15,8 +15,9 @@ from thinkhow.platform.config import load_settings
 from thinkhow.platform.identity import IapIdentity
 from thinkhow.platform.speech import ScriptedSpeech
 from thinkhow.platform.storage import LocalStorage
-from thinkhow.web.method import FREE, caption, marks
+from thinkhow.web.method import caption, marks
 from thinkhow.web.server import Deps, create_app
+from thinkhow.web.ui_text import texts
 from thinkhow.workspace import TopicRef, create_topic, open_topic, reply, set_language
 
 T0 = datetime(2026, 10, 24, 12, 0, 0, tzinfo=UTC)
@@ -47,6 +48,8 @@ def _card(cid: str, title: str, phases: list[str]) -> Card:
 MATRIX = _card("weighted-matrix", "Зважена матриця рішень", ["options", "criteria", "weights", "choice"])
 PREMORTEM = _card("pre-mortem", "Pre-mortem", ["plan", "failure", "steps"])
 CARDS = {c.id: c for c in (MATRIX, PREMORTEM)}
+UK = texts("uk")
+FREE = UK["free_conversation"]
 
 
 def _decision(turn: int, kind: str, card_id: str | None = None, end: str | None = None) -> Decision:
@@ -68,38 +71,38 @@ def _decision(turn: int, kind: str, card_id: str | None = None, end: str | None 
 
 
 def test_no_routing_is_a_free_conversation() -> None:
-    assert caption((), None, CARDS) == FREE == "вільна розмова"
+    assert caption((), None, CARDS, UK) == FREE == "вільна розмова"
 
 
 def test_an_offer_or_ask_without_a_chosen_card_is_a_free_conversation() -> None:
-    assert caption((_decision(1, "offer"), _decision(3, "ask")), None, CARDS) == FREE
+    assert caption((_decision(1, "offer"), _decision(3, "ask")), None, CARDS, UK) == FREE
 
 
 def test_a_chosen_card_shows_its_title_and_the_phase_number_of_all() -> None:
     routing = (_decision(1, "offer"), _decision(3, "choose", "weighted-matrix"))
-    assert caption(routing, "criteria", CARDS) == "Зважена матриця рішень · 2 з 4"
+    assert caption(routing, "criteria", CARDS, UK) == "Зважена матриця рішень · 2 з 4"
 
 
 def test_a_chosen_card_without_a_known_phase_shows_its_title_only() -> None:
     routing = (_decision(3, "choose", "weighted-matrix"),)
-    assert caption(routing, None, CARDS) == "Зважена матриця рішень"
-    assert caption(routing, "gone", CARDS) == "Зважена матриця рішень"
+    assert caption(routing, None, CARDS, UK) == "Зважена матриця рішень"
+    assert caption(routing, "gone", CARDS, UK) == "Зважена матриця рішень"
 
 
 def test_after_the_end_of_a_card_it_is_a_free_conversation_again() -> None:
     routing = (_decision(3, "choose", "pre-mortem"), _decision(9, "end", "pre-mortem", "done"))
-    assert caption(routing, None, CARDS) == FREE
+    assert caption(routing, None, CARDS, UK) == FREE
 
 
 def test_a_card_the_knowledge_no_longer_has_is_a_free_conversation() -> None:
-    assert caption((_decision(3, "choose", "five-whys"),), "x", CARDS) == FREE
+    assert caption((_decision(3, "choose", "five-whys"),), "x", CARDS, UK) == FREE
 
 
 # --- the marks in the history -------------------------------------------------------------------------------
 
 
 def test_a_choice_marks_the_reply_from_which_the_card_leads() -> None:
-    got = marks((_decision(1, "offer"), _decision(3, "choose", "pre-mortem")), CARDS)
+    got = marks((_decision(1, "offer"), _decision(3, "choose", "pre-mortem")), CARDS, UK)
     assert got == {4: ["Далі веде модель мислення «Pre-mortem»"]}
 
 
@@ -110,7 +113,7 @@ def test_an_end_marks_the_next_turn_as_free_and_a_new_choice_marks_its_own_reply
         _decision(11, "choose", "weighted-matrix"),
         _decision(15, "end", "weighted-matrix", "not_fit"),
     )
-    assert marks(routing, CARDS) == {
+    assert marks(routing, CARDS, UK) == {
         4: ["Далі веде модель мислення «Pre-mortem»"],
         11: ["«Pre-mortem» пройдено · далі вільна розмова"],
         12: ["Далі веде модель мислення «Зважена матриця рішень»"],
@@ -120,14 +123,14 @@ def test_an_end_marks_the_next_turn_as_free_and_a_new_choice_marks_its_own_reply
 
 def test_a_choice_and_an_end_in_one_reply_both_mark() -> None:
     routing = (_decision(5, "choose", "pre-mortem"), _decision(5, "end", "pre-mortem", "not_fit"))
-    assert marks(routing, CARDS) == {
+    assert marks(routing, CARDS, UK) == {
         6: ["Далі веде модель мислення «Pre-mortem»"],
         7: ["«Pre-mortem» не підійшла · далі вільна розмова"],
     }
 
 
 def test_a_card_the_knowledge_no_longer_has_is_marked_by_its_id() -> None:
-    assert marks((_decision(3, "choose", "five-whys"),), CARDS) == {
+    assert marks((_decision(3, "choose", "five-whys"),), CARDS, UK) == {
         4: ["Далі веде модель мислення «five-whys»"]
     }
 
