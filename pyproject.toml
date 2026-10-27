@@ -89,7 +89,10 @@ type = "forbidden"
 source_modules = ["thinkhow.facilitation"]
 forbidden_modules = ["thinkhow.access", "thinkhow.platform.storage"]
 # ADR-0003: only the M3 chain facilitation -> knowledge -> storage is exempt; any other path to storage fails
-ignore_imports = ["thinkhow.knowledge.store -> thinkhow.platform.storage"]
+ignore_imports = [
+    "thinkhow.knowledge.store -> thinkhow.platform.storage",
+    "thinkhow.knowledge.versions -> thinkhow.platform.storage",
+]
 
 [[tool.importlinter.contracts]]
 name = "knowledge knows no person"

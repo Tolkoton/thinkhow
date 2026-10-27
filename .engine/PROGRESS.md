@@ -430,3 +430,19 @@
   third round, so it is parked — board 718 and question 1 of task 308 (the owner's answer)
 - Live acceptance of the whole mode (AC5): `.engine/artifacts/conversation-mode/live-2026-10-27.md` — 6 turns uk-UA
   and 6 pl-PL with no touch; latency 15–24 s (uk) and 30–87 s (pl), almost all of it the model
+
+## Slice knowledge-versions — S1 of learning-loop, tracer part 1 (DONE 2026-10-27)
+
+- Module: `src/thinkhow/knowledge/versions.py` (`apply_memory` with the version check — ids, cards, budget,
+  `vet`; `rollback`; `changes`), `store.py` (`current_paths`/`read_history`/`apply_rollbacks` — the rollback rule by
+  provenance, `n` in the revision; `publish` builds memory from the current state), `schema.py` (`audience`,
+  `ChangeRecord.observations/by/replaced`, `Rollback`), `src/thinkhow/learning/vet.py` (`vet_with`, `measure`)
+- Tests: 47 by the slice-tester in `tests/contract/knowledge_versions/` (sealed; Q1–Q6 answered `taken`; objection
+  round 1 `test_wrong`: a typed helper instead of two type-ignores); sealed skel-knowledge and cards-library green
+- Live: `tests/live/test_vet_live.py` — the person-details check refuses «Олена з Львова… 3000 €», passes the
+  general note (`.engine/artifacts/knowledge-versions/vet-live.txt`, PR-32 verified)
+- Smoke: `scripts/smoke_test_knowledge_versions.py` — 25 cards, a note, a rollback, cards byte-for-byte
+  (`.engine/artifacts/knowledge-versions/smoke.txt`, PASS)
+- Surprises: the 307 block test pinned `src/thinkhow/knowledge` against `82e6213` for ever — objection on
+  product-router-eval, bounded to 307's window (`test_wrong`); Vertex gives no `input_token_limit` (PR-31)
+- Open for next slice: S2 analysis-rules

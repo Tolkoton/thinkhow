@@ -1,7 +1,6 @@
 """Seeding revision 1, publishing a new revision from cards/ and reading the current revision of the Knowledge
-(M2 S6, M3 «Посів Знань»; `publish` — slice cards-library).
-
-Does NOT apply rollbacks, check versions or remove version files no revision names (F11).
+(M2 S6, M3 «Посів Знань»; `publish` — slice cards-library); the current state applies the owner's rollbacks by
+their provenance (learning-loop S1). Does NOT check versions or remove version files no revision names.
 """
 
 import re
@@ -11,12 +10,14 @@ from pathlib import Path
 import yaml
 from pydantic import BaseModel
 
-from thinkhow.knowledge.schema import Card, ChangeRecord, MemoryRecord
+from thinkhow.knowledge.schema import Card, ChangeRecord, MemoryRecord, Rollback
 from thinkhow.platform.llm import KnowledgeRev
 from thinkhow.platform.storage import Storage
 
 CHANGES = "knowledge/changes/"
 CHANGE_FILE = re.compile(r"^knowledge/changes/(\d{6})\.json$")
+ROLLBACKS = "knowledge/rollbacks/"
+ROLLBACK_FILE = re.compile(r"^knowledge/rollbacks/(\d{6})\.json$")
 VERSION_FILE = re.compile(r"^v(\d+)\.json$")
 JSON = "application/json"
 
@@ -38,6 +39,24 @@ class CurrentKnowledge:
 
     def rev_pair(self) -> KnowledgeRev:
         return KnowledgeRev(rev=self.rev, n=self.n)
+
+
+@dataclass(frozen=True)
+class History:
+    """Every change record by rev and every rollback by n, as stored."""
+
+    records: dict[int, ChangeRecord]
+    rollbacks: list[Rollback]
+
+
+@dataclass(frozen=True)
+class CurrentPaths:
+    """The current state as version paths: the last change record, then the rollbacks by their rule."""
+
+    rev: int
+    n: int
+    cards: dict[str, str]
+    memory: dict[str, str]
 
 
 def seed(storage: Storage, cards_dir: Path) -> bool:
@@ -63,6 +82,7 @@ def publish(storage: Storage, cards_dir: Path) -> int | None:
 
     None when the folder equals the current revision, or when another run created a file first.
     """
+    paths_now = current_paths(storage)
     rev, record, cards = _current_record(storage)
     folder = _read_cards(cards_dir)
     paths: dict[str, str] = {}
@@ -81,7 +101,7 @@ def publish(storage: Storage, cards_dir: Path) -> int | None:
         what=_what(record.cards, paths),
         why="нова ревізія з теки cards/ репозиторію (Job cards)",
         cards=paths,
-        memory=record.memory,
+        memory=paths_now.memory,
     )
     created = storage.create_if_absent(
         "system", _change_path(rev + 1), change.model_dump_json().encode(), JSON
@@ -118,19 +138,72 @@ def _what(old: dict[str, str], new: dict[str, str]) -> str:
 
 
 def current(storage: Storage) -> CurrentKnowledge:
-    """Flow: the change record with the largest rev → every version it names (I2)."""
+    """Flow: the current paths (the last record minus the rollbacks) → every version they name (I2)."""
+    paths = current_paths(storage)
+    cards = {cid: _read_model(storage, path, Card) for cid, path in paths.cards.items()}
+    memory = sorted(
+        (_read_model(storage, p, MemoryRecord) for p in paths.memory.values()), key=lambda m: m.id
+    )
+    return CurrentKnowledge(rev=paths.rev, n=paths.n, cards=cards, memory=memory)
+
+
+def current_paths(storage: Storage) -> CurrentPaths:
+    """Flow: the history → the last record → its memory with the rollbacks applied."""
+    history = read_history(storage)
+    rev = max(history.records)
+    record = history.records[rev]
+    memory, _ = apply_rollbacks(history, dict(record.memory))
+    n = max((rb.n for rb in history.rollbacks), default=0)
+    return CurrentPaths(rev=rev, n=n, cards=dict(record.cards), memory=memory)
+
+
+def read_history(storage: Storage) -> History:
+    """Every change record (each checked against its name) and every rollback, by n."""
     revs = _change_revs(storage)
     if not revs:
         raise KnowledgeMissing("the Knowledge has no change record: run `seed` first")
-    rev = max(revs)
-    record = _read_model(storage, _change_path(rev), ChangeRecord)
-    if record.rev != rev:
-        raise KnowledgeCorrupt(f"{_change_path(rev)} says rev {record.rev}")
-    cards = {cid: _read_model(storage, path, Card) for cid, path in record.cards.items()}
-    memory = sorted(
-        (_read_model(storage, p, MemoryRecord) for p in record.memory.values()), key=lambda m: m.id
+    records = {rev: _read_model(storage, _change_path(rev), ChangeRecord) for rev in revs}
+    for rev, record in records.items():
+        if record.rev != rev:
+            raise KnowledgeCorrupt(f"{_change_path(rev)} says rev {record.rev}")
+    rollbacks = sorted(
+        (
+            _read_model(storage, p, Rollback)
+            for p in storage.list("system", ROLLBACKS)
+            if ROLLBACK_FILE.match(p)
+        ),
+        key=lambda rb: rb.n,
     )
-    return CurrentKnowledge(rev=rev, n=0, cards=cards, memory=memory)
+    return History(records=records, rollbacks=rollbacks)
+
+
+def apply_rollbacks(history: History, memory: dict[str, str]) -> tuple[dict[str, str], dict[int, list[str]]]:
+    """The rollback rule (learning-loop S1): rollback k of rev R acts on an id only when every later revision
+    that replaced that id was itself rolled back for it by an earlier rollback. Returns the memory and, by n,
+    the ids each rollback acted on."""
+    last = max(history.records)
+    acted: set[tuple[int, str]] = set()
+    by_n: dict[int, list[str]] = {}
+    for rb in history.rollbacks:
+        if rb.rev > last:
+            raise KnowledgeCorrupt(f"rollback {rb.n} names rev {rb.rev}, after the last record {last}")
+        by_n[rb.n] = [mid for mid in sorted(rb.reverts) if _acts(history, acted, rb.rev, mid)]
+        for mid in by_n[rb.n]:
+            _restore(memory, mid, rb.restore.get(mid))
+            acted.add((rb.rev, mid))
+    return memory, by_n
+
+
+def _acts(history: History, acted: set[tuple[int, str]], rev: int, mid: str) -> bool:
+    later = (r for r, record in history.records.items() if r > rev and mid in record.replaced)
+    return all((r, mid) in acted for r in later)
+
+
+def _restore(memory: dict[str, str], mid: str, path: str | None) -> None:
+    if path is None:
+        memory.pop(mid, None)
+    else:
+        memory[mid] = path
 
 
 def _change_revs(storage: Storage) -> list[int]:

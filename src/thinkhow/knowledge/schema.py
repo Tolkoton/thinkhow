@@ -1,9 +1,10 @@
-"""The shape of the Knowledge: cards, memory records, change records (M1 «Знання», M2 S6). Pydantic v2.
+"""The shape of the Knowledge: cards, memory records, change records, rollbacks (M1 «Знання», M2 S6).
 
 Does NOT check a version (completeness, no people's details) — that is F11.
 """
 
-from typing import Annotated
+from datetime import datetime
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
@@ -67,6 +68,7 @@ class MemoryRecord(_Frozen):
     noticed: str
     do: str
     basis: str
+    audience: Literal["router", "facilitator"] = "facilitator"  # learning-loop S1; old records: facilitator
 
 
 class ChangeRecord(_Frozen):
@@ -75,3 +77,18 @@ class ChangeRecord(_Frozen):
     why: str
     cards: dict[str, str]
     memory: dict[str, str]
+    observations: list[str] = []
+    by: str = ""
+    replaced: dict[str, str | None] = {}  # memory id -> the path this revision replaced (None: none)
+
+
+class Rollback(_Frozen):
+    """The owner's rollback of one memory change: `knowledge/rollbacks/<n>.json` (M2 S6)."""
+
+    n: Annotated[int, Field(ge=1)]
+    rev: Annotated[int, Field(ge=1)]
+    reverts: dict[str, str | None]
+    restore: dict[str, str | None]
+    changed: list[str]
+    at: datetime
+    by: str

@@ -1,0 +1,10 @@
+seed: rev 1, cards 25, memory 0, measure 35747
+apply_memory: rev 2; memory ['pre-mortem-facilitator']; n 0
+OK   a new revision
+OK   the note is in current().memory
+rollback: n 1; memory []; rev_pair KnowledgeRev(rev=2, n=1)
+OK   the note is gone, n = 1
+OK   the card files are byte-for-byte the same
+feed: rev 2 'смоук: одна нотатка' rolled_back=1; rev 1 'посів: 25 стартових карток' rolled_back=None
+OK   the feed shows the rollback
+RESULT: PASS

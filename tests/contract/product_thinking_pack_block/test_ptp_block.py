@@ -50,6 +50,9 @@ EVAL = ARTIFACTS / "router-eval"
 REPEATS = EVAL / "repeats"
 CONVERSATIONS = ARTIFACTS / "card-conversations"
 CASES_PATH = "tests/fixtures/routing/cases.yaml"
+# The commit where task 307 closed (S2 done): S2's window is S1_CLOSED..S2_CLOSED; later features
+# (learning-loop, task 309) change the Knowledge code and the eval scripts on their own sealed contracts.
+S2_CLOSED = "15134a2"
 
 
 def drain(events: Iterator[Any]) -> list[Any]:
@@ -121,7 +124,7 @@ def test_s1_to_s2_the_seven_ids_and_their_cases_stand_as_s1_left_them_and_s2_edi
     at_s1 = sorted(Path(p).stem for p in git("ls-tree", "--name-only", S1_CLOSED, "cards/").split())
     assert card_files() == at_s1
     assert git("diff", S1_CLOSED, "--", CASES_PATH) == ""
-    assert git("diff", S1_CLOSED, "--", "src/thinkhow/knowledge") == ""
+    assert git("diff", S1_CLOSED, S2_CLOSED, "--", "src/thinkhow/knowledge") == ""
     assert git("hash-object", str(CARDS / "pre-mortem.yaml")).strip().startswith("8f52b66a")
 
 
@@ -130,7 +133,10 @@ def test_s1_to_s2_the_seven_ids_and_their_cases_stand_as_s1_left_them_and_s2_edi
 def test_s2_router_eval_outcomes_of_the_real_cases_are_what_compare_reads_case_by_case(
     tmp_path: Path,
 ) -> None:
-    assert git("diff", S1_CLOSED, "--", "scripts/router_eval.py", "scripts/card_conversations.py") == ""
+    assert (
+        git("diff", S1_CLOSED, S2_CLOSED, "--", "scripts/router_eval.py", "scripts/card_conversations.py")
+        == ""
+    )
     rev = script("router_eval")
     cmp_mod = script("router_eval_compare")
     _, k = seeded_knowledge(tmp_path)

@@ -1,0 +1,3 @@
+model: gemini-4-argon; region: eu
+personal note -> "У нотатці pre-mortem-facilitator є особисті подробиці: ім'я (Олена), місто і локація (Львів, Площа Ринок), сума (3000 €), подія з життя (запуск кав'ярні) та дата розмови (12 жовтня)."
+general note -> None
