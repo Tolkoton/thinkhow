@@ -217,10 +217,10 @@ def _apply(
 
 
 def _write_run(storage: Storage, run: SynthesisRun) -> None:
-    stem = f"{RUNS}{run.at.strftime('%Y%m%dT%H%M%SZ')}"
-    data = run.model_dump_json().encode()
+    stamp, data = run.at.strftime("%Y%m%dT%H%M%SZ"), run.model_dump_json().encode()
     for k in range(1, 100):
-        if storage.create_if_absent("system", f"{stem}{'' if k == 1 else f'-{k}'}.json", data, JSON):
+        suffix = "" if k == 1 else f"-{k}"
+        if storage.create_if_absent("system", f"learning/synthesis/{stamp}{suffix}.json", data, JSON):
             return
 
 

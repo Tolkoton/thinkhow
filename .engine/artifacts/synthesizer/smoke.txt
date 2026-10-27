@@ -12,5 +12,6 @@ OK   the note is gone, n = 1
 OK   the page says the change was rolled back
 OK   a second synthesize ran
 OK   the second synthesize took nothing new (no second run record)
+OK   and wrote no revision
 OK   the card files are byte-for-byte the same
 RESULT: PASS
