@@ -75,5 +75,6 @@
   "card.unit-economics": "숫자가 맞는가: 고객 한 명이 가져오는 돈과 드는 비용 (LTV와 CAC)",
   "card.value-pricing": "고객이 얻는 가치에서 출발하는 가격 (EVC)",
   "card.weighted-matrix": "나만의 가치 기준으로 선택지를 가중 비교하기",
-  "card.wrap-decision": "어려운 결정 — 선택지 넓히기, 현실 검증, 거리 두기, 대비하기 (WRAP)"
+  "card.wrap-decision": "어려운 결정 — 선택지 넓히기, 현실 검증, 거리 두기, 대비하기 (WRAP)",
+  "learning_link": "학습"
 }

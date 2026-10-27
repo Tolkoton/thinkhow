@@ -463,3 +463,19 @@
   sealed tests of skel-learning and 2 of the walking-skeleton block pin the old single observation; both
   slices used their 2 dispute rounds — `tasks/blocked/720-…`, `721-…` (owner: A — carry over, advised)
 - Open for next slice: S3 synthesizer reads `read_all`
+
+## Slice synthesizer — S3 of learning-loop, tracer part 2 (DONE 2026-10-27)
+
+- Module: `src/thinkhow/learning/synthesize.py` (`synthesize` — new observations under aliases o<k>, one call,
+  the change through `apply_memory`, the run record last; `runs`; `answer_schema`), `learning/job.py`
+  (`synthesize`), `learning/local.py` (three scripted schemas), `src/thinkhow/web/learning.py` + `templates/
+  learning.html` (`/learning`: feed, refused, observations; `POST /learning/rollback/{rev}`, owner only), the home
+  link `learning_link` in 76 catalogs; `docs/deploy.md` §9a and `docs/deploy-sonko.md` — Scheduler
+  `thinkhow-synthesize-daily`; INDEX F12 and the map — daily
+- Tests: 56 by the slice-tester in `tests/contract/synthesizer/` (sealed; Q1, Q2 `taken`), green
+- Live (PR-29 verified): `tests/live/test_synthesize_live.py` — the owner's 7 observations → 3 notes, citing only
+  its input; 200 synthetic → schema accepted (`.engine/artifacts/synthesizer/live.txt`)
+- Smoke (tracer, PR-30 verified): `scripts/smoke_test_learning_loop.py` — PASS (`.engine/artifacts/synthesizer/
+  smoke.txt`)
+- Surprises: pydantic writes `const` for a one-value Literal — the local script reads both
+- Open for next slice: S4 — readers must read the current revision on every reply (the app reads it once at start)

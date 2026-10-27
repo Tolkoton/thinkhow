@@ -75,5 +75,6 @@
   "card.unit-economics": "Hesap tutuyor mu: bir müşteri ne getirir, size kaça mal olur (LTV ve CAC)",
   "card.value-pricing": "Müşteriye sağlanan değerden fiyat (EVC)",
   "card.weighted-matrix": "Seçeneklerin kendi değerlerinize göre ağırlıklı karşılaştırması",
-  "card.wrap-decision": "Zor bir karar — genişletin, gerçekle sınayın, mesafe alın, hazırlanın (WRAP)"
+  "card.wrap-decision": "Zor bir karar — genişletin, gerçekle sınayın, mesafe alın, hazırlanın (WRAP)",
+  "learning_link": "Öğrenme"
 }

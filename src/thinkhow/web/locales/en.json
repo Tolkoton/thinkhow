@@ -75,5 +75,6 @@
   "card.unit-economics": "Does the money add up: what one customer brings and what they cost (LTV and CAC)",
   "card.value-pricing": "A price from the value to the customer (EVC)",
   "card.weighted-matrix": "A weighted comparison of options by your own values",
-  "card.wrap-decision": "A hard decision — widen, reality-test, attain distance, prepare (WRAP)"
+  "card.wrap-decision": "A hard decision — widen, reality-test, attain distance, prepare (WRAP)",
+  "learning_link": "Learning"
 }

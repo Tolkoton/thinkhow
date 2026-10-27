@@ -75,5 +75,6 @@
   "card.unit-economics": "條數計唔計得掂：一個客人帶嚟幾多錢、要用幾多錢（LTV 同 CAC）",
   "card.value-pricing": "按客人得到嘅價值定價（EVC）",
   "card.weighted-matrix": "按你自己嘅價值觀為選項做加權比較",
-  "card.wrap-decision": "艱難嘅決定——擴闊選擇、驗證現實、拉開距離、做好準備（WRAP）"
+  "card.wrap-decision": "艱難嘅決定——擴闊選擇、驗證現實、拉開距離、做好準備（WRAP）",
+  "learning_link": "學習"
 }

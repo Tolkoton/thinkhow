@@ -196,6 +196,25 @@ gcloud scheduler jobs create http thinkhow-analyze-nightly --location=$REGION \
   --oauth-service-account-email=$SCHED
 ```
 
+## 9a. Cloud Scheduler: щодня `synthesize` (задача 309)
+
+Синтезатор щодня бере нові спостереження і сам змінює нотатки до методів (стрічку й «Відкотити» бачить власник на
+`/learning`). Той самий Job, інша команда — через `overrides` у тілі запиту; година — на годину пізніше за
+`analyze` (це зсув часу, не залежність: прогін, що перекрився з `analyze`, просто не бачить новіших спостережень).
+Частота — один рядок `--schedule`.
+
+```bash
+gcloud scheduler jobs create http thinkhow-synthesize-daily --location=$REGION \
+  --schedule="0 4 * * *" --time-zone="Europe/Kyiv" --http-method=POST \
+  --uri="https://run.googleapis.com/v2/projects/$PROJECT/locations/europe-west3/jobs/thinkhow-learning:run" \
+  --headers="Content-Type=application/json" \
+  --message-body='{"overrides":{"containerOverrides":[{"args":["-m","thinkhow.learning.job","synthesize"]}]}}' \
+  --oauth-service-account-email=$SCHED
+```
+
+Перевірка: `gcloud run jobs execute thinkhow-learning --region=$REGION --args=-m,thinkhow.learning.job,synthesize
+--wait` — у журналі рядок `synthesize_done` (outcome, rev, considered) без тексту розмов.
+
 ## 10. Чекліст власника
 
 Кожен пункт має три частини: що зробити, що має вийти, і що записати у відповідь у задачі

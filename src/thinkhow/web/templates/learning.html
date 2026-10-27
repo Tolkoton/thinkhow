@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Навчання — ThinkHow{% endblock %}
+{% block body %}
+<h1>Навчання</h1>
+<p class="meta">Синтезатор щодня змінює нотатки до методів сам; кожну зміну можна відкотити.</p>
+<h2>Стрічка змін</h2>
+<ul class="changes">
+{% for c in view.feed %}  <li id="rev{{ c.rev }}">
+    <p><strong>Ревізія {{ c.rev }}</strong> — {{ c.what }}{% if c.by %} <span class="meta">({{ c.by }})</span>{% endif %}</p>
+    <p class="meta">{{ c.why }}</p>
+{% for r in c.upserted %}    <div class="note"><p><strong>{{ r.title }}</strong> <span class="meta">[{{ r.audience }}; {{ r.cards|join(", ") }}]</span></p>
+      <p>Що помітили: {{ r.noticed }}</p><p>Що робити: {{ r.do }}</p><p class="meta">Підстава: {{ r.basis }}</p></div>
+{% endfor %}{% if c.removed %}    <p>Прибрано: {{ c.removed|join(", ") }}</p>
+{% endif %}{% if c.observations %}    <p class="meta">Спостереження:{% for oid in c.observations %} <a href="{{ view.links.get(oid, '#') }}">{{ oid }}</a>{% endfor %}</p>
+{% endif %}{% if c.rolled_back is not none %}    <p class="meta">{% if c.rollback_changed %}відкочено (відкат {{ c.rolled_back }}){% else %}відкочено — нічого не змінено (відкат {{ c.rolled_back }}){% endif %}</p>
+{% elif c.upserted or c.removed %}    <form method="post" action="/learning/rollback/{{ c.rev }}"><button type="submit">Відкотити</button></form>
+{% endif %}  </li>
+{% else %}  <li class="empty">Змін ще немає.</li>
+{% endfor %}</ul>
+<h2>Відхилено перевіркою</h2>
+<ul class="rejected">
+{% for run in view.rejected %}  <li>{{ run.at.strftime("%Y-%m-%d %H:%M") }} — відхилено перевіркою: {{ run.rejected }}</li>
+{% else %}  <li class="empty">Нічого не відхилено.</li>
+{% endfor %}</ul>
+<h2>Спостереження</h2>
+<ul class="observations">
+{% for o in view.observations %}  <li><a href="{{ o.link }}">{{ o.id }}</a> <span class="meta">{{ o.kind }}; {{ o.cause }}; {{ o.card_id or "—" }}</span> — {{ o.finding }}</li>
+{% else %}  <li class="empty">Спостережень ще немає.</li>
+{% endfor %}</ul>
+{% endblock %}

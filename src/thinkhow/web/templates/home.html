@@ -14,6 +14,7 @@
   <button class="primary icon" type="submit" aria-label="{{ ui.create }}">{{ icon("plus") }}</button>
 </form>
 {% if user.is_owner %}
+<p><a href="/learning">{{ ui.learning_link }}</a></p>
 <h2>{{ ui.all_topics }}</h2>
 <ul class="topics">
 {% for t in everyone %}  <li><a href="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}">{{ t.title }}</a> <span class="meta">— {{ t.ref.uid }}</span></li>

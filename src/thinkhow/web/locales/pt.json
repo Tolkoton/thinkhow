@@ -75,5 +75,6 @@
   "card.unit-economics": "A conta fecha? O que um cliente traz e quanto ele custa (LTV e CAC)",
   "card.value-pricing": "Um preço a partir do valor para o cliente (EVC)",
   "card.weighted-matrix": "Uma comparação ponderada das opções pelos seus próprios valores",
-  "card.wrap-decision": "Uma decisão difícil — amplie, teste a realidade, ganhe distância, prepare-se (WRAP)"
+  "card.wrap-decision": "Uma decisão difícil — amplie, teste a realidade, ganhe distância, prepare-se (WRAP)",
+  "learning_link": "Aprendizagem"
 }

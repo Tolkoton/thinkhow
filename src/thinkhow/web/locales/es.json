@@ -75,5 +75,6 @@
   "card.unit-economics": "¿Cuadran las cuentas?: lo que aporta un cliente y lo que cuesta (LTV y CAC)",
   "card.value-pricing": "Un precio según el valor para el cliente (EVC)",
   "card.weighted-matrix": "Una comparación ponderada de opciones según tus propios valores",
-  "card.wrap-decision": "Una decisión difícil: amplía, contrasta con la realidad, toma distancia, prepárate (WRAP)"
+  "card.wrap-decision": "Una decisión difícil: amplía, contrasta con la realidad, toma distancia, prepárate (WRAP)",
+  "learning_link": "Aprendizaje"
 }

@@ -75,5 +75,6 @@
   "card.unit-economics": "採算は合うか：顧客1人がもたらす額とかかる費用（LTV と CAC）",
   "card.value-pricing": "顧客にとっての価値から決める価格（EVC）",
   "card.weighted-matrix": "自分の価値観で重み付けした選択肢の比較",
-  "card.wrap-decision": "難しい決断 — 選択肢を広げ、現実で検証し、距離を置き、備える（WRAP）"
+  "card.wrap-decision": "難しい決断 — 選択肢を広げ、現実で検証し、距離を置き、備える（WRAP）",
+  "learning_link": "学習"
 }

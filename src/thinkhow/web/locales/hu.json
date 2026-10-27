@@ -75,5 +75,6 @@
   "card.unit-economics": "Kijön-e a matek: mennyit hoz egy vásárló, és mennyibe kerül (LTV és CAC)",
   "card.value-pricing": "Ár a vásárlónak nyújtott érték alapján (EVC)",
   "card.weighted-matrix": "Az opciók súlyozott összehasonlítása a saját értékei szerint",
-  "card.wrap-decision": "Nehéz döntés — tágítson, ellenőrizze a valósággal, távolodjon el, készüljön fel (WRAP)"
+  "card.wrap-decision": "Nehéz döntés — tágítson, ellenőrizze a valósággal, távolodjon el, készüljön fel (WRAP)",
+  "learning_link": "Tanulás"
 }

@@ -75,5 +75,6 @@
   "card.unit-economics": "账算得过来吗：一个客户带来多少钱、要花多少钱（LTV 和 CAC）",
   "card.value-pricing": "根据客户获得的价值定价（EVC）",
   "card.weighted-matrix": "按你自己的价值观对选项做加权比较",
-  "card.wrap-decision": "艰难的决定——拓宽选项、检验现实、拉开距离、做好准备（WRAP）"
+  "card.wrap-decision": "艰难的决定——拓宽选项、检验现实、拉开距离、做好准备（WRAP）",
+  "learning_link": "学习"
 }

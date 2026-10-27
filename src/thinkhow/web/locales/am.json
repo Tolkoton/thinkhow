@@ -75,5 +75,6 @@
   "card.unit-economics": "ሒሳቡ ይሰራል ወይ፦ አንድ ደንበኛ ምን ያህል ያመጣል፣ ምን ያህልስ ያስወጣል (LTV እና CAC)",
   "card.value-pricing": "ለደንበኛው ካለው ዋጋ የሚነሳ ዋጋ ተመን (EVC)",
   "card.weighted-matrix": "አማራጮችን በራስዎ እሴቶች የሚመዝን ንጽጽር",
-  "card.wrap-decision": "ከባድ ውሳኔ — አማራጮችን ያስፉ፣ በእውነታ ይፈትሹ፣ ርቀት ይውሰዱ፣ ይዘጋጁ (WRAP)"
+  "card.wrap-decision": "ከባድ ውሳኔ — አማራጮችን ያስፉ፣ በእውነታ ይፈትሹ፣ ርቀት ይውሰዱ፣ ይዘጋጁ (WRAP)",
+  "learning_link": "መማር"
 }

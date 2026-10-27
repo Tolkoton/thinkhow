@@ -19,7 +19,7 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Resp
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from thinkhow import workspace
+from thinkhow import knowledge, workspace
 from thinkhow.access import CurrentUser, current_user
 from thinkhow.facilitation import Facilitate
 from thinkhow.knowledge import Card
@@ -30,6 +30,7 @@ from thinkhow.platform.speech import Speech, SpeechUnavailable
 from thinkhow.platform.storage import Storage
 from thinkhow.platform.tts import NoVoice, ScriptedTts, Tts, TtsUnavailable
 from thinkhow.web import ui_text
+from thinkhow.web.learning import learning_view
 from thinkhow.web.method import caption, marks
 from thinkhow.web.text import turn_html
 
@@ -142,11 +143,28 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         text = await run_in_threadpool(workspace.transcribe, *call)
         return JSONResponse({"text": text})
 
+    @app.get("/learning", response_class=HTMLResponse)
+    def learning(request: Request, user: User) -> Response:
+        _owner_only(user)
+        return _page(request, "learning.html", {"view": learning_view(deps.storage)}, LEARNING_LANGUAGE)
+
+    @app.post("/learning/rollback/{rev}")
+    def roll_back(user: User, rev: int) -> Response:
+        _owner_only(user)
+        knowledge.rollback(deps.storage, rev, user.email, deps.now())
+        return RedirectResponse("/learning", status_code=303)
+
     @app.post("/speak")
     async def speak(user: User, text: Annotated[str, Form()]) -> Response:
         """A reply sentence → MP3 in the person's language; the synthesis runs in the thread pool."""
         audio = await run_in_threadpool(workspace.speak, deps.storage, deps.tts, user, text)
         return Response(content=audio, media_type="audio/mpeg", headers={"Cache-Control": "no-store"})
+
+
+def _owner_only(user: CurrentUser) -> None:
+    """The learning page is the owner's (G4): anyone else gets the same 404 as a foreign topic."""
+    if not user.is_owner:
+        raise workspace.TopicNotFound("the learning page is the owner's")
 
 
 def _page(request: Request, template: str, context: dict[str, Any], name: str) -> Response:
@@ -213,12 +231,21 @@ MESSAGES: list[tuple[type[Exception], int, str]] = [
     (TtsUnavailable, 502, "err_not_voiced"),
 ]
 Handler = Callable[[Request, Exception], Awaitable[Response]]
+# The learning page and its rollback speak Ukrainian, as the Knowledge (M3 A5; learning-loop S3 Q6).
+LEARNING_LANGUAGE = "uk"
+ROLLBACK_MESSAGES: list[tuple[type[Exception], int, str]] = [
+    (knowledge.AlreadyRolledBack, 409, "Цю зміну вже відкочено."),
+    (knowledge.NotRollbackable, 409, "Цю ревізію не можна відкотити: вона не змінювала нотаток."),
+    (knowledge.UnknownRevision, 404, "Такої ревізії немає."),
+]
 
 
 def _error_handlers(app: FastAPI, deps: Deps) -> None:
     """One place turns errors into a fragment of the page (M3 A4), in the person's language (task 208)."""
     for kind, status, key in MESSAGES:
         app.add_exception_handler(kind, _fixed(deps, status, key))
+    for kind, status, text in ROLLBACK_MESSAGES:
+        app.add_exception_handler(kind, _text_fragment(status, text))
     app.add_exception_handler(workspace.NoLanguage, _no_language(deps))
     bad_request = _bad_request(deps)
     app.add_exception_handler(ValueError, bad_request)
@@ -238,6 +265,13 @@ def _words(deps: Deps, request: Request) -> Mapping[str, str]:
 def _fixed(deps: Deps, status: int, key: str) -> Handler:
     async def handler(request: Request, exc: Exception) -> Response:
         return _fragment(status, _words(deps, request)[key])
+
+    return handler
+
+
+def _text_fragment(status: int, text: str) -> Handler:
+    async def handler(request: Request, exc: Exception) -> Response:
+        return _fragment(status, text)
 
     return handler
 

@@ -75,5 +75,6 @@
   "card.unit-economics": "Riittävätkö rahat: mitä yksi asiakas tuo ja mitä hänen hankkimisensa maksaa (LTV ja CAC)",
   "card.value-pricing": "Hinnoittelu asiakkaan saaman arvon mukaan (EVC)",
   "card.weighted-matrix": "Vaihtoehtojen painotettu vertailu omien arvojesi mukaan",
-  "card.wrap-decision": "Vaikea päätös — laajenna, testaa todellisuutta, ota etäisyyttä, valmistaudu (WRAP)"
+  "card.wrap-decision": "Vaikea päätös — laajenna, testaa todellisuutta, ota etäisyyttä, valmistaudu (WRAP)",
+  "learning_link": "Oppiminen"
 }

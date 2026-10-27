@@ -75,5 +75,6 @@
   "card.unit-economics": "Kas raha klapib: mida üks klient sisse toob ja mida ta maksab (LTV ja CAC)",
   "card.value-pricing": "Hind kliendile loodava väärtuse järgi (EVC)",
   "card.weighted-matrix": "Valikute kaalutud võrdlus teie enda väärtuste järgi",
-  "card.wrap-decision": "Raske otsus — laiendage, kontrollige reaalsusega, võtke distantsi, valmistuge (WRAP)"
+  "card.wrap-decision": "Raske otsus — laiendage, kontrollige reaalsusega, võtke distantsi, valmistuge (WRAP)",
+  "learning_link": "Õppimine"
 }
