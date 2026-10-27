@@ -125,7 +125,7 @@ F12, F6 («запис пам'яті досвіду»), F5 (зворотний ш
   storage, rev, by, now) -> int`, `knowledge.changes(storage) -> list[ChangeView]` · depends on: — ·
   **TRACER BULLET (part 1)** · block: learning-loop
 - **S2 analysis-rules** — delivers: аналізатор за правилами (просувається / застрягла / чи підійшов метод / причина
-  `router`|`method`|`facilitation`|`circumstances`), 1–5 спостережень на тему, картка на якорі з `routing.json`; файл
+  `router`|`method`|`facilitation`|`circumstances`), кілька спостережень на тему (без верхньої межі — уточнено S2), картка на якорі з `routing.json`; файл
   `t<a>-t<b>.json` = набір спостережень з `id`; старі файли читаються; `learning.observations.read_all(storage)`;
   live на `t-84d1517cb1c1` · contract out: `ObservationSet`/`Observation` (нижче) · depends on: — · block: learning-loop
 - **S3 synthesizer** — delivers: `python -m thinkhow.learning.job synthesize`: невраховані спостереження + чинна
@@ -175,7 +175,7 @@ F12, F6 («запис пам'яті досвіду»), F5 (зворотний ш
 - S2 → S3: `learning/observations/<uid>/<topic>/t<a>-t<b>.json` = `ObservationSet(uid, topic_id, first_turn,
   last_turn, analyzed_at, observations: list[Observation])`, `Observation(id="<uid>/<topic>/t<a>-t<b>/<k>", turn, link,
   kind: progress|stuck|method_fit|step, worked, finding, cause: router|method|facilitation|circumstances, card_id:
-  str|None)`; старий файл (одне спостереження) читається як набір з одного (`kind` = `progress`/`stuck` за
+  str|None, analyzed_at)` (`analyzed_at` — уточнено S2); старий файл (одне спостереження) читається як набір з одного (`kind` = `progress`/`stuck` за
   `worked`, `card_id` None); старий `s<n>.json` — так само (вміст `Observation` skel-learning, з `session_no`, без
   `first_turn`/`last_turn`). Читач: `learning.observations.read_all(storage) -> list[Observation]`.
 - S6 змінює аналізатор (`analyze.py`, побудований у S2): результати кроків ідуть у вхід аналізатора, `kind: step`

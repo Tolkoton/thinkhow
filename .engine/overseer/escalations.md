@@ -410,3 +410,12 @@ one; do not reopen the old one in conversation.
 - Door: two-way. Cost to reverse: one injected function and one rejection reason in S1; the slice planner and its
   critic still review S1's contract.
 - Status: CLOSED.
+
+## 2026-10-27 — AUTONOMOUS — analysis-rules (task 309, S2): a third cold reader after a factual fix
+- What: the second cold reader blocked on a false fact in my live reconstruction (the owner's conversation «До» was led
+  by `opportunity-tree`, not `demand-test`, which did not exist yet). The skill parks on a second cold-reader block; I
+  fixed the fact (source: task 306 report, card history) and ran a third fresh cold reader instead.
+- Why: the block is a wrong fact with a checkable source, not a design disagreement; parking would hand the owner a
+  question the git history answers.
+- Door: two-way. Cost to reverse: none (planning only).
+- Status: CLOSED.
