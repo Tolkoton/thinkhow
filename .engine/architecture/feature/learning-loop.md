@@ -159,9 +159,9 @@ F12, F6 («запис пам'яті досвіду»), F5 (зворотний ш
   `by: str = ""` (старі записи читаються).
 - S1 → S3 (відкат): `Rollback(n, rev, restore: dict[str, str | None], reverts: dict[str, str | None], at, by)` у
   `knowledge/rollbacks/<n>.json`; `reverts` — що зміна `rev` поставила для кожного id (шлях або None — прибрала),
-  `restore` — що було до неї. `current()` = останній запис змін, потім кожен відкат за номером: id, який досі має
-  значення з `reverts` (той самий шлях; для прибраного — досі відсутній), отримує `restore` (None — прибрати); id,
-  змінений пізнішою ревізією, не чіпається. `n` — найбільший номер відкату. Другий відкат тієї самої `rev` —
+  `restore` — що було до неї. `current()` = останній запис змін, потім кожен відкат за номером: id отримує `restore` (None — прибрати), якщо
+  жодна пізніша чинна (не відкочена) ревізія не має цього id у `replaced` — за походженням, не за значенням
+  (уточнено S1). `n` — найбільший номер відкату. Другий відкат тієї самої `rev` —
   відмова (`AlreadyRolledBack`); відкат, після якого жоден id не змінився (усе вже замінено пізнішими ревізіями),
   записується, а стрічка пише «нічого не змінено».
 - Нова ревізія будується з **`current()` після відкатів** (не з сирого попереднього запису) — і в `apply_memory`, і
@@ -185,6 +185,10 @@ F12, F6 («запис пам'яті досвіду»), F5 (зворотний ш
   `MapItem.id` пункту `chosen_step`; питають про **останній** за реплікою пункт `chosen_step` без результату.
   Розпізнавання результату — модель, а `workspace` моделі не має: шов — `facilitation.recognize_step(step, question,
   text, llm) -> StepOutcome | None`, який `workspace.reply` отримує ін'єкцією, як `facilitate`.
+
+- Уточнено slice-контрактом S1 (`.engine/slices/knowledge-versions.md`): `apply_memory(storage, change, vet, measure)
+  -> int | None` (None — нічого не змінює або інший прогін першим), `MemoryChange.by`, `ChangeRecord.replaced`,
+  правило відкату за походженням (`replaced` пізніших чинних ревізій), `ChangeView.rollback_changed`; `measure` — ін'єкція бюджету з `learning/vet.py`.
 
 ## Integration exit criterion
 `scripts/smoke_test_learning_loop.py` (локальний режим, сценарна модель): розмова в темі → `analyze` →
