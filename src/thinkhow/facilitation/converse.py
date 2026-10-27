@@ -1,6 +1,7 @@
 """The router before the facilitator (F5 without the experience path): who leads the reply, when a card ends.
 
-Does NOT read steps.json or the experience memory, plan a route ahead or store anything (workspace does).
+Does NOT read steps.json, plan a route ahead or store anything (workspace does); the notes are read by
+`route` and `respond`.
 """
 
 from collections.abc import Callable, Iterator

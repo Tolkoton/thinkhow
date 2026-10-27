@@ -72,9 +72,9 @@ def test_measure_is_the_length_of_the_longest_reader_instruction() -> None:
     router = len(router_instruction(k, None))
     assert all(router > len(system_instruction(c, k.memory, None, True)) for c in k.cards.values())
     assert measure(k) == router
-    # a long memory record: every facilitator instruction carries the whole memory today
+    # a long memory record of one card: the facilitator instruction of that card is the longest
     k = knowledge_of([card("alpha"), card("beta")], [rec("m1", "п" * 60_000, cards=["beta"]), rec("m2")])
-    alpha = len(system_instruction(k.cards["alpha"], k.memory, None, True))
-    assert alpha > 60_000 > len(router_instruction(k, None))
-    assert alpha >= len(system_instruction(k.cards["beta"], k.memory, None, True))
-    assert measure(k) == alpha
+    beta = len(system_instruction(k.cards["beta"], k.memory, None, True))
+    assert beta > 60_000 > len(router_instruction(k, None))
+    assert beta >= len(system_instruction(k.cards["alpha"], k.memory, None, True))
+    assert measure(k) == beta

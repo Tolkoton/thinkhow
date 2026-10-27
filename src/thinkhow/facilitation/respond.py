@@ -79,11 +79,12 @@ def system_instruction(
     spoken: bool = False,
 ) -> str:
     """The rules, the person's language (F13), whether they listen (task 308), under the router its section,
-    then the card and the memory."""
+    then the card and its `facilitator` notes (learning-loop S4)."""
     head = f"{RULES}\n\n# Мова відповіді\n{language_rule(language)}\n{listening_rule(spoken)}"
     if routed:
         head += f"\n{ROUTED_SECTION}\n\n{RESEARCH_SECTION}\n\n{DEEP_FIELD}\n"
-    return f"{head}\n# Картка\n{card_prompt(card)}\n# Пам'ять досвіду\n{_memory_text(memory)}\n"
+    mine = [r for r in memory if r.audience == "facilitator" and card.id in r.cards]
+    return f"{head}\n# Картка\n{card_prompt(card)}\n# Пам'ять досвіду\n{_memory_text(mine)}\n"
 
 
 def answer_schema(card: Card) -> type[FacilitatorUpdate]:

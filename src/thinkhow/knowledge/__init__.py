@@ -16,6 +16,7 @@ from thinkhow.knowledge.store import (
     KnowledgeCorrupt,
     KnowledgeMissing,
     current,
+    latest_pair,
     publish,
     seed,
 )
@@ -61,6 +62,7 @@ __all__ = [
     "changes",
     "card_prompt",
     "current",
+    "latest_pair",
     "publish",
     "rollback",
     "seed",

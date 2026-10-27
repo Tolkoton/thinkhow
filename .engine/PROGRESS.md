@@ -479,3 +479,20 @@
   smoke.txt`)
 - Surprises: pydantic writes `const` for a one-value Literal — the local script reads both
 - Open for next slice: S4 — readers must read the current revision on every reply (the app reads it once at start)
+
+## Slice notes-readers — S4 of learning-loop (CODE COMPLETE — 2 old sealed tests wait for the owner, 2026-10-27)
+
+- Module: `facilitation/route.py` (`router` notes as «Досвід:» lines in their cards' sections, the reading rule after
+  `CARDS_HEAD` only with notes of a current card), `facilitation/respond.py` (the facilitator's memory — only its own
+  card's `facilitator` notes), `converse.py` docstring; self-added B-live (`.engine/slices/notes-readers.behaviors.md`):
+  `web/app.py` `LiveKnowledge` — facilitation reads the current revision on every reply (a new card revision still
+  waits for the restart), `knowledge.latest_pair`
+- Tests: 13 by the slice-tester in `tests/contract/notes_readers/` (sealed; Q2, Q3 `taken`), green; B-live —
+  `tests/web/test_live_knowledge.py` (3); objections: spoken-replies round 1 (2 `test_wrong`, the oracle
+  `respond|beta|one|…`), knowledge-versions round 2 (`measure` test, `test_wrong`)
+- Smoke: `scripts/smoke_test_notes_readers.py` — PASS (`.engine/artifacts/notes-readers/smoke.txt`)
+- Blocked: 2 sealed tests of skel-facilitation pin «all memory, no filter by card»; that slice used its 2 rounds —
+  `tasks/blocked/724-…` (owner: A — carry over, advised)
+- Surprises: three sealed block tests pin `deps.facilitate` as `functools.partial(..., knowledge=…)` and that a
+  started service keeps its cards — B-live keeps both
+- Open for next slice: S5 starting notes (the router eval with notes)

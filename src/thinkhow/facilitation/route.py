@@ -1,6 +1,7 @@
 """The router: one model call from the cards' router halves to a decision — offer, ask or choose (F5).
 
-Reads only `card.router` and `card.title` (S1 → S2). Does NOT stream, store or read the experience memory.
+Reads `card.router`, `card.title` and the `router` notes of the experience memory beside each card they name
+(learning-loop S4). Does NOT stream or store.
 """
 
 from collections.abc import Callable, Sequence
@@ -19,11 +20,15 @@ from thinkhow.facilitation.types import (
     _Frozen,
     clean_question,
 )
-from thinkhow.knowledge import Card, CurrentKnowledge
+from thinkhow.knowledge import Card, CurrentKnowledge, MemoryRecord
 from thinkhow.platform import llm as model
 
 ROUTER_RULES = (Path(__file__).with_name("router.md")).read_text(encoding="utf-8").rstrip("\n")
 CARDS_HEAD = "# Картка за карткою — для вибору"
+NOTES_RULE = (
+    "Рядки «Досвід:» біля картки — що помітили в розмовах інших людей: коли цей спосіб справді допомагав "
+    "і з чим його плутають; враховуй їх, обираючи, але не називай людині."
+)
 
 
 class RouterAnswer(_Frozen):
@@ -80,12 +85,18 @@ def router_schema(knowledge: CurrentKnowledge) -> type[RouterAnswer]:
 
 def router_instruction(knowledge: CurrentKnowledge, language: str | None, spoken: bool = False) -> str:
     """The router rules, the person's language, whether they listen, then the router half of every card."""
-    cards = "\n\n".join(_card_text(card) for _, card in sorted(knowledge.cards.items()))
+    notes = [
+        r
+        for r in sorted(knowledge.memory, key=lambda r: r.id)
+        if r.audience == "router" and set(r.cards) & set(knowledge.cards)
+    ]
+    cards = "\n\n".join(_card_text(card, notes) for _, card in sorted(knowledge.cards.items()))
     rules = f"{ROUTER_RULES}\n\n# Мова відповіді\n{language_rule(language)}\n{listening_rule(spoken)}"
-    return f"{rules}\n{CARDS_HEAD}\n{cards}\n"
+    head = f"{CARDS_HEAD}\n{NOTES_RULE}" if notes else CARDS_HEAD
+    return f"{rules}\n{head}\n{cards}\n"
 
 
-def _card_text(card: Card) -> str:
+def _card_text(card: Card, notes: Sequence[MemoryRecord] = ()) -> str:
     half = card.router
     lines = [
         f"### {card.id} — {card.title}",
@@ -98,7 +109,14 @@ def _card_text(card: Card) -> str:
         "Ознаки:",
         *(f"- {item}" for item in half.signals),
     ]
+    mine = [r for r in notes if card.id in r.cards]
+    if mine:
+        lines += ["Досвід:", *(f"- {_one_line(f'{r.title}. {r.noticed} {r.do}')}" for r in mine)]
     return "\n".join(lines)
+
+
+def _one_line(text: str) -> str:
+    return " ".join(text.split())
 
 
 def _contents(ctx: FacilitationContext) -> list[model.Turn]:

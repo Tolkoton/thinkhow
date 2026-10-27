@@ -147,6 +147,12 @@ def current(storage: Storage) -> CurrentKnowledge:
     return CurrentKnowledge(rev=paths.rev, n=paths.n, cards=cards, memory=memory)
 
 
+def latest_pair(storage: Storage) -> tuple[int, int]:
+    """The largest rev and the largest rollback n, from the file names alone (two listings, no reads)."""
+    rollbacks = [int(m.group(1)) for p in storage.list("system", ROLLBACKS) if (m := ROLLBACK_FILE.match(p))]
+    return max(_change_revs(storage), default=0), max(rollbacks, default=0)
+
+
 def current_paths(storage: Storage) -> CurrentPaths:
     """Flow: the history → the last record → its memory with the rollbacks applied."""
     history = read_history(storage)
