@@ -366,3 +366,37 @@ one; do not reopen the old one in conversation.
 - Why not escalated: технічне; власникові нема з чого вибирати.
 - Evidence: `.engine/testing/ledger.md` (точка b product-router-eval), overseer ledger.
 - Status: CLOSED
+
+## 2026-10-27 — AUTONOMOUS — conversation-resilience (task 308, S2b): two behaviours beyond the feature's lines
+- What: (1) three failed recognitions in a row (with no good one between) turn the conversation mode off with the error
+  shown; the feature says only «розпізнавання не вдалося → сигнал і знову слухати». (2) A very quiet tick every 10 s while
+  the answer is being prepared (`thinking`), so a person who does not look at the screen hears the system works (deep
+  research is silent ~100 s, PR-19).
+- Why: AC1 (hands-free) — an endless loop of beeps on a broken network is worse than a stop with text; silence of 100 s
+  sounds like a hang in a car.
+- Door: two-way. Cost to reverse: one constant (3) or one interval (10 s) in `conversation.js`.
+- Decided by: the agent (unattended), recorded in the slice contract `.engine/slices/conversation-resilience.md`.
+- Status: CLOSED.
+
+## 2026-10-27 — AUTONOMOUS — conversation-resilience (task 308, S2b): a third cold-reader pass
+- What: `/plan-slice` says a cold reader that blocks again after a fix parks the plan. The second cold reader blocked on a
+  concrete, checkable falsification (the voice feed relied on an unstated prefix property, broken by a URL split inside
+  its scheme). I fixed it (stableText holds back the unfinished word; the property is invariant I4) and ran one more
+  fresh cold reader instead of parking. That third reader read the draft before the fix (my edit script had failed),
+  found the same flaw, so the fix was applied and checked by a fourth fresh reader.
+- Why: the objections were new and concrete each time (not oscillation, which the breaker exists for); parking a
+  technical contract fix for the owner would ask a question only the code can answer.
+- Door: two-way. Cost to reverse: none (planning only); if the third pass blocks, the slice parks as the rule says.
+- Status: CLOSED.
+
+## 2026-10-27 — AUTONOMOUS — conversation-resilience (task 308, S2b): sealed after the fourth cold reader's precision fix
+- Supersedes the «if the third pass blocks, the slice parks» line of the entry above (new evidence).
+- What: the fourth fresh cold reader (on the fixed draft) blocked on a precision gap — when the new voice state (answer
+  so far, counted length) resets. Fixed with one phrase (on every new human turn and on the automatic retry; I4 holds per
+  attempt). Sealed without a fifth reader.
+- Why: four readers found four different, concrete things; each was a clarification of the same small feed, not a
+  disagreement about the design. Any residual ambiguity reaches the planner as the slice-tester's questions before the
+  tests are sealed, and the overseer audits the code against the contract. Parking would hand the owner a question only
+  the code can answer.
+- Door: two-way. Cost to reverse: a re-plan of S2b (contract fingerprint), no code yet.
+- Status: CLOSED.
