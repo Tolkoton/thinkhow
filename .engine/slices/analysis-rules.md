@@ -14,7 +14,9 @@ contract S2 → S3 and «Build parameters»; nothing asked.
 вигляд одного спостереження, змінено лише objection-пакетом (`test_wrong`, посилання на цей контракт); (2) live
 `scripts/analyze_owner_conversation.py` на розмові власника `t-84d1517cb1c1` у стані «До»
 (`.engine/artifacts/advice-live/2026-10-25T174143Z-t-84d1517cb1c1/conversation.md`, розділ «До») пише набір, у якому
-є спостереження `kind: stuck` з якорями `t5`, `t11` і `t15` (кожен якір — хоча б одне `stuck`), і поруч — що сказав
+є спостереження `kind: stuck` з якорями `t5`, `t11` і `t15` (кожен якір — хоча б одне `stuck`) і **немає** `stuck`
+на `t9` («в межах місяця» — рішення) і `t13` (перелік болів — нове розуміння) — інакше аналізатор, що позначає все
+«застрягла», пройшов би; і поруч — що сказав
 старий аналізатор (той самий вхід, інструкція й схема до цього slice-а, з git) → `.engine/artifacts/analysis-rules/
 owner-t-84d1517cb1c1.md` (acceptance AC3 фічі, слова задачі); (3) `scripts/smoke_test_skel_learning.py` і
 `tests/smoke/test_e2e_local.py` зелені з новим файлом; (4) ruff, mypy, import-linter, швидкий набір — зелені.
@@ -43,7 +45,8 @@ owner-t-84d1517cb1c1.md` (acceptance AC3 фічі, слова задачі); (3)
 ## Seam (contract)
 - **Інструкція `ANALYZER`** (українською) — правила аналізу (вибір архітектора за планом у задачі):
   - **просувається** — у новій репліці людини з'явилось нове розуміння, рішення чи крок;
-  - **застрягла** — кілька «не знаю» поспіль (або «звідки мені знати», «то якраз треба вияснити»), те саме питання
+  - **застрягла** — людина каже, що не знає чи не може знати відповіді, і питання лишається відкритим (особливо
+    кілька разів поспіль у розмові, не обов'язково в сусідніх репліках), те саме питання
     фасилітатора вдруге, людина відповідає не на питання, людина просить того, у чому система їй відмовила;
   - **чи підійшов метод** — чи метод, що вів, допоміг з тим, із чим людина прийшла;
   - **причина** — `router` (запропоновано чи обрано не той спосіб), `method` (метод сам не підійшов до ситуації),
@@ -89,7 +92,7 @@ owner-t-84d1517cb1c1.md` (acceptance AC3 фічі, слова задачі); (3)
   тему з `conversation.md` (18 реплік) і `routing.json` (`offer` на 1 — `jobs-to-be-done`, `opportunity-tree`, `goal-to-plan`; `choose` `opportunity-tree` на 3), посів 25 карток;
   кличе новий `analyze` і старий (інструкція й схема з `git show c14fd9b:src/thinkhow/learning/analyze.py`) на тому
   самому вході; пише `.engine/artifacts/analysis-rules/owner-t-84d1517cb1c1.md` (commit старого, модель, регіон, дата,
-  сирий JSON обох, таблиця kind/anchor/card_id/cause) і виходить з 1, якщо `stuck` на t5, t11 чи t15 немає.
+  сирий JSON обох, таблиця kind/anchor/card_id/cause) і виходить з 1, якщо `stuck` на t5, t11 чи t15 немає або `stuck` є на t9 чи t13.
 - `analyze()` — та сама сигнатура і `AnalyzeReport`; невдача моделі — як зараз (`failed`, нічого не записано).
 - `learning/local.py` — сценарна відповідь у новій схемі (одне спостереження `progress`, якір — перший з `enum`).
 - Errors: як зараз (`ValidationError`, `LlmUnavailable` → `failed`).
@@ -123,13 +126,15 @@ owner-t-84d1517cb1c1.md` (acceptance AC3 фічі, слова задачі); (3)
   мокнутого `topic_routing`.
 - **Seam 2: вхід моделі.** Сценарний `llm` ловить `contents`: рядки `[Метод: …]` стоять перед реплікою з номером
   рішення, у контексті й у нових; без `routing.json` — жодного такого рядка.
-- **Seam 3: читач трьох виглядів.** Справжні байти старих файлів (як їх писали skel-learning і continuous-analysis —
-  з їхніх фікстур), не створені новим кодом.
+- **Seam 3: читач трьох виглядів.** Байти старих файлів — буквальний JSON за моделлю `Observation` з `669a07e`
+  (`s<n>.json`) і з `c14fd9b` (`t<a>-t<b>.json`), не створені новим кодом.
 - **Seam 4: live на справжній розмові.** Вхід — розділ «До» артефакту (18 реплік, #1–#18), розібраний у
   `conversation.md` теми в локальній теці; скрипт відтворює `routing.json` з тексту: `offer` на #1 (`jobs-to-be-done`,
   `opportunity-tree`, `goal-to-plan`), `choose` на #3 картки `opportunity-tree` (друга з трьох у #2).
   Перевірка — по `kind`, `anchor` і `card_id` (для t5, t11, t15 — `opportunity-tree`), не по тексту. Артефакт пише модель,
-  регіон, дату і сирий JSON кожного прогону; «три спроби» PR-27 — три різні правки інструкції, не повтори тієї самої.
+  регіон, дату і сирий JSON кожного прогону; «три спроби» PR-27 — три різні правки інструкції, не повтори тієї самої; жодна правка не
+  додає слів чи прикладів з розмови `t-84d1517cb1c1` (інакше перевірка міряє підгонку, а не правило). Один прогін на
+  кожну версію інструкції; номер спроби — в артефакті.
 
 ## Invariants (rules that hold for every input of the stated domain)
 - **I1** — Кожен якір — нова репліка: для кожного спостереження файлу `first_turn ≤ turn ≤ last_turn` і `link`
@@ -158,14 +163,16 @@ owner-t-84d1517cb1c1.md` (acceptance AC3 фічі, слова задачі); (3)
 - Контрактні тести (поведінки Seam, I1–I4) — зелені; objection-пакет до запечатаних тестів skel-learning,
   continuous-analysis, walking-skeleton-block розглянуто тестувальником (`test_wrong` → змінено), решта — зелені.
 - `scripts/analyze_owner_conversation.py` (live, `gemini-4-argon`/`eu`): новий аналізатор на розмові `t-84d1517cb1c1`
-  «До» → набір з `stuck` на `t5`, `t11`, `t15`; старий аналізатор (з `git show c14fd9b:src/thinkhow/learning/analyze.py`
+  «До» → набір з `stuck` на `t5`, `t11`, `t15` і без `stuck` на `t9`, `t13`; старий аналізатор (з `git show c14fd9b:src/thinkhow/learning/analyze.py`
   — інструкція й схема) на тому самому вході — для порівняння; обидва — у `.engine/artifacts/analysis-rules/
   owner-t-84d1517cb1c1.md`. Умова — так/ні з AC3 фічі (слова задачі), без порогу.
 - `scripts/smoke_test_skel_learning.py` і `tests/smoke/test_e2e_local.py` (оновлені до набору) — зелені.
 - ruff, mypy, `lint-imports`, швидкий набір — зелені.
 
 ## Deferred to later slices
-- `kind: step` і результати кроків — S6 — revisit trigger: S6 починається.
+- `kind: step` і результати кроків — S6 — revisit trigger: S6 починається. Тип `Observation.kind` у цьому slice-і —
+  `progress|stuck|method_fit|step` (читач приймає `step` уже зараз, щоб S3 не закріпив вужчого); схема моделі — без
+  `step`, його додає S6.
 - Сторінка спостережень для власника — S3 — revisit trigger: S3.
 - `kind` старих файлів виведено з `worked` (наближення: старе `worked: false` могло бути й `method_fit`) — revisit
   trigger: власник побачить старі спостереження в `/learning` (S3).
@@ -181,4 +188,7 @@ owner-t-84d1517cb1c1.md` (acceptance AC3 фічі, слова задачі); (3)
   ним → поле додано для всіх трьох виглядів; notes: Seam-рядок скрипта live, сильніший «Broken by» I2. Cold reader 2:
   REVISE — відтворений `routing.json` називав `demand-test`, якої тоді не було → `opportunity-tree` і три кандидати з
   джерелом у «Premise verified»; notes: порядок старих `s<n>.json`. Третій cold reader — AUTONOMOUS (escalations.md):
-  виправлення фактичне, не розвилка.
+  виправлення фактичне, не розвилка. Cold reader 3: REVISE — перевірка live проходила б для аналізатора, що все
+  позначає «застрягла», а правило «застрягла» мало слова з самої розмови → загальне правило, заборона слів розмови в
+  правках, перевірка «немає `stuck` на t9, t13»; notes: `kind` приймає `step`, байти старих файлів з commit-ів, один
+  прогін на версію. Запечатано без четвертого читача — AUTONOMOUS (escalations.md).

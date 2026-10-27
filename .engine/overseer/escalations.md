@@ -419,3 +419,13 @@ one; do not reopen the old one in conversation.
   question the git history answers.
 - Door: two-way. Cost to reverse: none (planning only).
 - Status: CLOSED.
+
+## 2026-10-27 — AUTONOMOUS — analysis-rules (task 309, S2): sealed after the third cold reader's fix, without a fourth
+- Supersedes nothing; follows the entry above.
+- What: the third cold reader blocked on the live check (an all-«stuck» analyzer would pass; the stuck rule quoted the
+  owner's conversation). I applied exactly its fix (general rule, no words from the conversation in any prompt edit,
+  «no stuck on t9, t13») and sealed.
+- Why: three readers, three different concrete defects, each fixed as named; the sealed tests and the overseer still
+  stand between the contract and the code.
+- Door: two-way. Cost to reverse: a re-plan of S2 before its code.
+- Status: CLOSED.
