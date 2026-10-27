@@ -40,7 +40,9 @@ JUST_CHOSEN_LINE = "[Стан] Метод щойно обрано: почни з
 def respond(
     ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm
 ) -> Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent]:
-    """The app's Facilitate: without routing — leading by the card, as before; with it — converse."""
+    """The app's Facilitate: without routing — leading by the card, as before; with it — converse.
+    The Knowledge is taken once for the whole reply (`now()`: one revision per reply, learning-loop S4)."""
+    knowledge = knowledge.now()
     if ctx.routing is None:
         return lead(ctx, knowledge, llm)
     return converse(ctx, knowledge, llm, lead)

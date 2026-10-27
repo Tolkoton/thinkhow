@@ -40,6 +40,10 @@ class CurrentKnowledge:
     def rev_pair(self) -> KnowledgeRev:
         return KnowledgeRev(rev=self.rev, n=self.n)
 
+    def now(self) -> "CurrentKnowledge":
+        """The state to read for one reply: a plain revision is itself (a live one takes its snapshot)."""
+        return self
+
 
 @dataclass(frozen=True)
 class History:

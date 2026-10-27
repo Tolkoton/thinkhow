@@ -8,7 +8,6 @@ import functools
 from collections.abc import Mapping
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, cast
 
 from fastapi import FastAPI
 
@@ -24,7 +23,6 @@ from thinkhow.web.local import local_found, local_script, local_search
 from thinkhow.web.server import Deps, create_app
 
 CARDS_DIR = Path(__file__).resolve().parents[3] / "cards"
-LIVE_FIELDS = frozenset({"rev", "n", "cards", "memory"})
 
 
 def build_deps(environ: Mapping[str, str], cards_dir: Path) -> Deps:
@@ -51,33 +49,29 @@ def build_deps(environ: Mapping[str, str], cards_dir: Path) -> Deps:
 
 
 class LiveKnowledge(knowledge.CurrentKnowledge):
-    """The current revision on every reply (learning-loop S4, B-live): the four fields are read from the
-    Knowledge again whenever a newer change record or rollback is listed (two listings, no reads otherwise),
-    so a note the synthesizer added or the owner rolled back acts at once (M2 S6). A revision with other cards
-    (`job cards`) is not taken: new cards come with the restart of the service, as before (the method
-    captions of `Deps.cards` too). It stays a CurrentKnowledge, so facilitation reads it as before."""
+    """The current revision for every reply (learning-loop S4, B-live): `now()` lists the newest change record
+    and rollback once (`latest_pair`, two listings) and, when they are newer, reads the Knowledge again, so a
+    note the synthesizer added or the owner rolled back acts at once (M2 S6). `respond` calls `now()` once per
+    reply and reads a plain snapshot. A revision with other cards (`job cards`) is not taken: new cards come
+    with the restart of the service, as before (the method captions of `Deps.cards` too)."""
+
+    _storage: Storage
+    _pair: tuple[int, int]
 
     def __init__(self, storage: Storage, first: knowledge.CurrentKnowledge) -> None:
         super().__init__(first.rev, first.n, first.cards, first.memory)
         object.__setattr__(self, "_storage", storage)
-        object.__setattr__(self, "_held", (knowledge.latest_pair(storage), first))
+        object.__setattr__(self, "_pair", knowledge.latest_pair(storage))
 
-    def __getattribute__(self, name: str) -> Any:
-        if name in LIVE_FIELDS:
-            return getattr(object.__getattribute__(self, "_fresh")(), name)
-        return object.__getattribute__(self, name)
-
-    def _fresh(self) -> knowledge.CurrentKnowledge:
-        storage = object.__getattribute__(self, "_storage")
-        pair, held = cast(
-            tuple[tuple[int, int], knowledge.CurrentKnowledge], object.__getattribute__(self, "_held")
-        )
-        latest = knowledge.latest_pair(storage)
-        if latest != pair:
-            fresh = knowledge.current(storage)
-            held = fresh if fresh.cards == held.cards else held  # new cards wait for the restart, as before
-            object.__setattr__(self, "_held", (latest, held))
-        return held
+    def now(self) -> knowledge.CurrentKnowledge:
+        latest = knowledge.latest_pair(self._storage)
+        if latest != self._pair:
+            fresh = knowledge.current(self._storage)
+            if fresh.cards == self.cards:  # new cards wait for the restart, as before
+                for name in ("rev", "n", "memory"):
+                    object.__setattr__(self, name, getattr(fresh, name))
+            object.__setattr__(self, "_pair", latest)
+        return knowledge.CurrentKnowledge(rev=self.rev, n=self.n, cards=self.cards, memory=self.memory)
 
 
 def __getattr__(name: str) -> FastAPI:
