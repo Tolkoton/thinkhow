@@ -66,7 +66,7 @@ function createController({ fetch, storage, ui, key }) {
     }
     const type = response.headers.get("content-type") || "";
     if (!response.ok || !type.startsWith("text/event-stream")) {
-      ui.showError(errorText(await response.text()));
+      ui.showError(errorText(await response.text()), response.status);
       ui.enable();
       return;
     }
@@ -98,8 +98,8 @@ function createController({ fetch, storage, ui, key }) {
       storage.setItem(name, text);
       return run(base + "/reply", new URLSearchParams({ text, ...fields }));
     },
-    retry() {
-      return run(base + "/retry", new URLSearchParams());
+    retry(fields = {}) {
+      return run(base + "/retry", new URLSearchParams(fields));
     },
   };
 }
@@ -234,7 +234,7 @@ function attach(doc, win) {
     appendDelta: (text) => talk.delta(text),
     reload: () => talk.finished(),
     showRetry: () => talk.failed(),
-    showError: (text) => talk.failed(text),
+    showError: (text, status) => talk.failed(text, status),
     setDraft() {},
   };
   const routed = {};
@@ -263,6 +263,7 @@ function attachTalk(doc, win, form, field, controller, live, error) {
   const Context = win.AudioContext || win.webkitAudioContext;
   if (!button || form.dataset.voice !== "yes" || !Context || !win.navigator || !win.navigator.mediaDevices) return null;
   const controls = [doc.getElementById("mic"), doc.getElementById("send"), field].filter(Boolean);
+  const resume = doc.getElementById("talk-resume");
   let answer = null;
   const ui = {
     state(name) {
@@ -279,6 +280,12 @@ function attachTalk(doc, win, form, field, controller, live, error) {
       p.textContent = text;
       live.appendChild(p);
       answer = null;
+    },
+    newAnswer() {
+      answer = null;
+    },
+    needTap(on) {
+      if (resume) resume.hidden = !on;
     },
     modelDelta(text) {
       if (!answer) {
@@ -306,7 +313,12 @@ function attachTalk(doc, win, form, field, controller, live, error) {
     clearInterval: win.clearInterval.bind(win),
     now: () => win.performance.now(),
     mark: (name, t) => win.performance.mark(name, { startTime: t }),
+    wakeLock: win.navigator.wakeLock || null,
+    doc,
+    setTimeout: win.setTimeout.bind(win),
+    clearTimeout: win.clearTimeout.bind(win),
   });
+  if (resume) resume.addEventListener("click", () => talk.resumeTap());
   button.hidden = false;
   button.addEventListener("click", () => {
     error.textContent = "";
@@ -495,28 +507,133 @@ function longestHead(text) {
   return text.slice(0, end);
 }
 
+const SOURCES = "\n\nДжерела: "; // the sources line the server's code writes (settle.SOURCES_HEAD)
+
+// The text the voice may say (task 308, S2b): no sources line (up to the next blank line), links by their names,
+// no bare addresses.
+function voiceText(answer) {
+  let out = "";
+  let at = 0;
+  for (;;) {
+    const line = answer.indexOf(SOURCES, at);
+    if (line < 0) {
+      out += answer.slice(at);
+      break;
+    }
+    out += answer.slice(at, line);
+    const next = answer.indexOf("\n\n", line + SOURCES.length);
+    if (next < 0) break;
+    at = next;
+  }
+  return out.replace(/\[([^\[\]]*)\]\([^)]*\)/g, "$1").replace(/https?:\/\/\S*/g, "");
+}
+
+// The start of the answer with nothing unfinished at its end — a word, a link, the sources literal or line —
+// so the voice text only grows by appending (I4). The cuts go round until the text stops getting shorter.
+function stableText(answer) {
+  let text = answer;
+  for (;;) {
+    const before = text.length;
+    text = cutOpenSources(cutLiteralStart(cutLink(cutWord(text))));
+    if (text.length === before) return text;
+  }
+}
+
+function cutWord(text) {
+  if (text === "" || /\s$/.test(text)) return text;
+  const space = Math.max(text.lastIndexOf(" "), text.lastIndexOf("\n"));
+  return text.slice(0, space + 1);
+}
+
+function cutLink(text) {
+  const open = text.lastIndexOf("[");
+  if (open < 0) return text;
+  const rest = text.slice(open);
+  if (!rest.includes("]")) return text.slice(0, open);
+  const target = /^\[[^\]]*\]\(/.exec(rest);
+  return target && !rest.slice(target[0].length).includes(")") ? text.slice(0, open) : text;
+}
+
+function cutLiteralStart(text) {
+  for (let n = SOURCES.length - 1; n > 0; n--) if (text.endsWith(SOURCES.slice(0, n))) return text.slice(0, -n);
+  return text;
+}
+
+function cutOpenSources(text) {
+  const line = text.lastIndexOf(SOURCES);
+  return line >= 0 && text.indexOf("\n\n", line + SOURCES.length) < 0 ? text.slice(0, line) : text;
+}
+
+// Short tones instead of words (any language): listening, a tick while thinking, an error.
+function createEarcons(ctx) {
+  function tone(frequency, start, seconds, volume) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.frequency.setValueAtTime(frequency, start);
+    gain.gain.setValueAtTime(volume, start);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + seconds);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(start);
+    osc.stop(start + seconds);
+  }
+  return {
+    listening: () => tone(880, ctx.currentTime, 0.12, 0.15),
+    tick: () => tone(660, ctx.currentTime, 0.06, 0.05),
+    error() {
+      tone(440, ctx.currentTime, 0.15, 0.2);
+      tone(330, ctx.currentTime + 0.15, 0.15, 0.2);
+    },
+  };
+}
+
 function fragmentOf(body) {
   const m = /^\s*<p class="error">([\s\S]*)<\/p>\s*$/.exec(body);
   return m ? m[1].replace(/<[^>]*>/g, "").trim() : null;
 }
 
 // The mode's loop. States: off → listening → hearing → thinking → speaking → listening; half duplex.
+// Resilience (S2b): a failed recognition beeps and listens again (three in a row stop); a failed answer is retried
+// once; a sentence that cannot be voiced is skipped; the screen is kept on; a lost microphone or sound comes back.
 function createTalk({ media, AudioContext, Recorder, fetch, controller, ui, voiceUrl, speakUrl, setInterval,
-  clearInterval, now, mark }) {
+  clearInterval, now, mark, makeEarcons = createEarcons, wakeLock = null, doc = null, setTimeout, clearTimeout }) {
   const TYPES = ["audio/webm;codecs=opus", "audio/mp4"];
   const STOPPED = "Режим розмови зупинено — спробуйте ще раз.";
+  const NO_WORDS = "Не почули слів — спробуйте ще раз.";
+  const NO_MIC = "Немає доступу до мікрофона.";
+  const MAX_MISSES = 3; // recognitions failed in a row before the mode stops (PROVISIONAL, one line)
+  const TICK_MS = 10000; // a tick while the answer is prepared (PROVISIONAL)
+  const RESUME_MS = 1000; // how long a resume() without a tap may take before the page asks for a tap (PROVISIONAL)
   let state = "off";
   let run = 0; // every stop starts a new run: answers of an older run are dropped
-  let ctx, stream, analyser, frame, timer, detector, recorder, source;
+  let ctx, stream, source, analyser, frame, timer, detector, recorder, sound, earcons, lock, tickTimer, resumeTimer;
   let queue = [];
   let tail = "";
+  let answer = ""; // the attempt's text so far
+  let counted = 0; // how much of its voice text went to the queue
   let answered = false;
   let playing = false;
   let first = true;
+  let retried = false;
+  let misses = 0;
+  let attempt = 0; // every answer attempt (a turn, a retry) has its own number: an older one's sentences are dropped
 
   function setState(name) {
     state = name;
     ui.state(name === "off" ? "" : name);
+    if (name === "thinking" && !tickTimer) tickTimer = setInterval(() => tone("tick"), TICK_MS);
+    if (name !== "thinking" && tickTimer) {
+      clearInterval(tickTimer);
+      tickTimer = null;
+    }
+  }
+
+  function tone(name) {
+    try {
+      earcons[name]();
+    } catch (e) {
+      // a tone that cannot play never stops the conversation
+    }
   }
 
   async function start() {
@@ -524,21 +641,78 @@ function createTalk({ media, AudioContext, Recorder, fetch, controller, ui, voic
     const mine = ++run;
     ctx = new AudioContext();
     ctx.resume();
+    earcons = makeEarcons(ctx);
+    keepScreenOn(mine);
+    if (doc) doc.onvisibilitychange = onVisible;
+    ctx.onstatechange = onSound;
     try {
       stream = await media.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
     } catch (e) {
-      ctx.close();
-      ctx = null;
-      return ui.error("Немає доступу до мікрофона.");
+      return fail(NO_MIC, mine);
     }
     if (mine !== run) return;
     analyser = ctx.createAnalyser();
     analyser.fftSize = 1024;
-    ctx.createMediaStreamSource(stream).connect(analyser);
+    connect(stream);
     frame = new Float32Array(analyser.fftSize);
     detector = createSilenceDetector();
     timer = setInterval(onFrame, 50);
     listen();
+    onSound();
+  }
+
+  function keepScreenOn(mine) {
+    if (!wakeLock) return;
+    wakeLock.request("screen").then(
+      (sentinel) => (mine === run ? (lock = sentinel) : sentinel.release()),
+      () => {},
+    );
+  }
+
+  function onVisible() {
+    if (state !== "off" && doc.visibilityState === "visible" && (!lock || lock.released)) keepScreenOn(run);
+  }
+
+  function connect(newStream) {
+    if (source) source.disconnect();
+    source = ctx.createMediaStreamSource(newStream);
+    source.connect(analyser);
+    for (const track of newStream.getTracks()) track.onended = () => reopen(newStream);
+  }
+
+  async function reopen(dead) {
+    if (state === "off" || dead !== stream) return;
+    const mine = run;
+    let fresh;
+    try {
+      fresh = await media.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+    } catch (e) {
+      return fail(NO_MIC, mine);
+    }
+    if (mine !== run) return;
+    stream = fresh;
+    connect(fresh);
+    if (state === "listening" || state === "hearing") {
+      drop(recorder);
+      listen(); // the turn spoken onto the dead stream is lost; listen again on the new one
+    }
+  }
+
+  function onSound() {
+    if (state === "off" || !ctx) return;
+    if (ctx.state === "running") return ui.needTap(false);
+    if (ctx.state !== "suspended" && ctx.state !== "interrupted") return;
+    ctx.resume();
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      if (state !== "off" && ctx && ctx.state !== "running") ui.needTap(true);
+    }, RESUME_MS);
+  }
+
+  function resumeTap() {
+    if (!ctx) return;
+    ctx.resume();
+    ui.needTap(false);
   }
 
   function level() {
@@ -562,6 +736,7 @@ function createTalk({ media, AudioContext, Recorder, fetch, controller, ui, voic
     detector.reset();
     recorder = record();
     setState("listening");
+    tone("listening");
   }
 
   function record() {
@@ -581,6 +756,13 @@ function createTalk({ media, AudioContext, Recorder, fetch, controller, ui, voic
     return rec;
   }
 
+  function drop(rec) {
+    if (rec && rec.state === "recording") {
+      rec.wanted = false;
+      rec.stop();
+    }
+  }
+
   function endTurn() {
     setState("thinking");
     const rec = recorder;
@@ -594,36 +776,75 @@ function createTalk({ media, AudioContext, Recorder, fetch, controller, ui, voic
     let text;
     try {
       const response = await fetch(voiceUrl, { method: "POST", body: blob, headers: { "Content-Type": blob.type } });
-      if (!response.ok) return fail(fragmentOf(await response.text()), mine);
+      if (!response.ok) return missed(fragmentOf(await response.text()) || STOPPED, mine);
       text = ((await response.json()).text || "").trim();
     } catch (e) {
-      return fail(null, mine);
+      return missed(STOPPED, mine);
     }
     if (mine !== run) return;
-    if (!text) return listen();
+    if (!text) return missed(NO_WORDS, mine);
+    misses = 0;
     ui.userTurn(text);
+    retried = false;
+    fresh();
+    controller.send(text, { spoken: "1" });
+  }
+
+  // A recognition that gave no text: a tone and listen again; the third in a row stops the mode.
+  function missed(text, mine) {
+    if (mine !== run || state === "off") return;
+    misses++;
+    ui.error(text);
+    tone("error");
+    if (misses >= MAX_MISSES) return halt();
+    listen();
+  }
+
+  function fresh() {
+    attempt++;
     queue = [];
     tail = "";
+    answer = "";
+    counted = 0;
     answered = false;
     first = true;
-    controller.send(text, { spoken: "1" });
   }
 
   function delta(text) {
     if (state === "off") return;
+    answer += text;
     ui.modelDelta(text);
-    const { sentences, rest } = splitSentences(tail + text, false);
+    feed(voiceText(stableText(answer)), false);
+  }
+
+  function finished() {
+    if (state === "off") return;
+    feed(voiceText(answer), true);
+    answered = true;
+    pump();
+  }
+
+  function feed(voice, final) {
+    const added = voice.slice(counted);
+    counted = voice.length;
+    const { sentences, rest } = splitSentences(tail + added, final);
     tail = rest;
     queue.push(...sentences);
     pump();
   }
 
-  function finished() {
+  // The answer failed: one automatic retry of the same turn; a 409 (an older turn waits) or a second failure stops.
+  function failed(text, status) {
     if (state === "off") return;
-    queue.push(...splitSentences(tail, true).sentences);
-    tail = "";
-    answered = true;
-    pump();
+    if (retried || status === 409) {
+      ui.error(text || STOPPED);
+      tone("error");
+      return halt();
+    }
+    retried = true;
+    fresh();
+    ui.newAnswer();
+    controller.retry({ spoken: "1" });
   }
 
   function pump() {
@@ -641,24 +862,35 @@ function createTalk({ media, AudioContext, Recorder, fetch, controller, ui, voic
 
   async function speak(text) {
     const mine = run;
+    const ours = attempt;
+    await null; // the rest of this stream's events first: a failure in the same chunk drops this sentence unsent
+    if (ours !== attempt) return skip(mine);
     let buffer;
     try {
       const response = await fetch(speakUrl, { method: "POST", body: new URLSearchParams({ text }) });
-      if (!response.ok) return fail(fragmentOf(await response.text()), mine);
+      if (!response.ok) return skip(mine);
       buffer = await ctx.decodeAudioData(await response.arrayBuffer());
     } catch (e) {
-      return fail(null, mine);
+      return skip(mine);
     }
     if (mine !== run) return;
+    if (ours !== attempt) return skip(mine);
     play(buffer);
   }
 
+  // A sentence that cannot be voiced is skipped: its text is on the screen, the voice goes on.
+  function skip(mine) {
+    if (mine !== run || state === "off") return;
+    playing = false;
+    pump();
+  }
+
   function play(buffer) {
-    source = ctx.createBufferSource();
-    source.buffer = buffer;
-    source.connect(ctx.destination);
-    source.addEventListener("ended", () => {
-      source = null;
+    sound = ctx.createBufferSource();
+    sound.buffer = buffer;
+    sound.connect(ctx.destination);
+    sound.addEventListener("ended", () => {
+      sound = null;
       playing = false;
       pump();
     });
@@ -667,11 +899,11 @@ function createTalk({ media, AudioContext, Recorder, fetch, controller, ui, voic
       setState("speaking");
       mark("talk:voice-start", now());
     }
-    source.start();
+    sound.start();
   }
 
   function fail(text, mine = run) {
-    if (mine !== run || state === "off") return;
+    if (mine !== run || state === "off" && !ctx) return;
     ui.error(text || STOPPED);
     halt();
   }
@@ -679,15 +911,19 @@ function createTalk({ media, AudioContext, Recorder, fetch, controller, ui, voic
   function halt() {
     run++;
     clearInterval(timer);
-    if (recorder && recorder.state === "recording") recorder.stop();
+    clearTimeout(resumeTimer);
+    drop(recorder);
     recorder = null;
     if (stream) for (const track of stream.getTracks()) track.stop();
-    if (source) source.stop();
+    if (sound) sound.stop();
+    if (lock) lock.release();
+    if (doc && doc.onvisibilitychange === onVisible) doc.onvisibilitychange = null;
     if (ctx) ctx.close();
-    ctx = stream = source = null;
+    ctx = stream = source = sound = lock = null;
     queue = [];
     tail = "";
     playing = answered = false;
+    ui.needTap(false);
     setState("off");
   }
 
@@ -700,11 +936,12 @@ function createTalk({ media, AudioContext, Recorder, fetch, controller, ui, voic
     state: () => state,
     delta,
     finished,
-    failed: (text) => fail(text),
+    failed,
+    resumeTap,
   };
 }
 
-const ThinkHow = { createSseParser, createController, createRecorder, createSilenceDetector, splitSentences, createTalk };
+const ThinkHow = { createSseParser, createController, createRecorder, createSilenceDetector, splitSentences, createTalk, voiceText, stableText, createEarcons };
 if (typeof module !== "undefined") {
   module.exports = ThinkHow;
 } else {

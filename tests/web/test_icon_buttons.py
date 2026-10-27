@@ -102,6 +102,7 @@ def test_the_pages_name_every_button_the_task_lists(tmp_path: Path) -> None:
     assert labels["language"] == {"Зберегти"}
     assert labels["topic"] == {
         "Режим розмови",
+        "Торкніться, щоб продовжити",
         "Говорити",
         "Розпізнати ще раз",
         "Надіслати",
