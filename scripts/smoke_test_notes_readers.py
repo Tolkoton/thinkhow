@@ -20,6 +20,7 @@ from thinkhow.facilitation.route import router_instruction  # noqa: E402
 from thinkhow.knowledge import Card, CurrentKnowledge, MemoryRecord  # noqa: E402
 
 OUT = ROOT / ".engine" / "artifacts" / "notes-readers" / "smoke.txt"
+MEMORY_HEAD = "\n# Пам'ять досвіду\n"
 ROUTER_NOTE = MemoryRecord(
     id="pre-mortem-router",
     title="План уже обрано",
@@ -60,14 +61,17 @@ def main() -> int:
     router = router_instruction(k, None)
     parts = router.split("\n### ")[1:]
     sections = {part.split(" — ", 1)[0]: "### " + part.split("\n\n", 1)[0] for part in parts}
+    say("## Інструкція роутера (повністю)\n" + router)
     say("## Роутер, розділ pre-mortem\n" + sections["pre-mortem"])
     check(ROUTER_NOTE.title in sections["pre-mortem"], "the router note stands in the pre-mortem section")
     others = [cid for cid, text in sections.items() if ROUTER_NOTE.title in text and cid != "pre-mortem"]
     check(len(sections) == 25 and not others, "and in no other of the 25 sections")
     check(FACILITATOR_NOTE.title not in router, "the facilitator note is not in the router's instruction")
     for cid in ("five-whys", "pre-mortem"):
-        memory = system_instruction(cards[cid], k.memory, None, True).split("# Пам'ять досвіду\n", 1)[1]
-        say(f"## Фасилітатор {cid}, пам'ять досвіду\n{memory.strip()}")
+        whole = system_instruction(cards[cid], k.memory, None, True)
+        say(f"## Інструкція фасилітатора {cid} (повністю)\n{whole}")
+        memory = whole.split(MEMORY_HEAD, 1)[1].strip()
+        say(f"## Фасилітатор {cid}, пам'ять досвіду\n{memory}")
     five = system_instruction(cards["five-whys"], k.memory, None, True)
     pre = system_instruction(cards["pre-mortem"], k.memory, None, True)
     check(FACILITATOR_NOTE.title in five, "five-whys' facilitator has its note")
