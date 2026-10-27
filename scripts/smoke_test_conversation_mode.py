@@ -11,6 +11,14 @@ from talk_harness import ROOT, Run, latencies, serve, talk
 
 OUT = ROOT / ".engine" / "artifacts" / "conversation-loop"
 TURNS = 3
+LINES: list[str] = []
+
+
+def say(*parts: object) -> None:
+    """Print a step and keep it for `smoke.txt`."""
+    line = " ".join(str(p) for p in parts)
+    LINES.append(line)
+    print(line)
 
 
 def main() -> None:
@@ -27,20 +35,21 @@ def main() -> None:
     (OUT / "smoke-run.json").write_text(
         json.dumps(run.__dict__, ensure_ascii=False, indent=1), encoding="utf-8"
     )
-    print(f"OK: one click, {TURNS} cycles without a touch; files under {data}")
+    say(f"OK: one click, {TURNS} cycles without a touch; files under {data}")
+    (OUT / "smoke.txt").write_text("\n".join(LINES) + "\n", encoding="utf-8")
 
 
 def check(run: Run) -> None:
     states = [e[1] for e in run.log if e[0] == "state"]
-    print("states:", " → ".join(s or "off" for s in states))
+    say("states:", " → ".join(s or "off" for s in states))
     assert not run.error, run.error
     names = [name for name, _ in run.requests]
     voice, reply = names.count("voice"), [body for name, body in run.requests if name == "reply"]
-    print(f"requests: /voice ×{voice}, /reply ×{len(reply)}, /speak ×{names.count('speak')}")
+    say(f"requests: /voice ×{voice}, /reply ×{len(reply)}, /speak ×{names.count('speak')}")
     assert voice == TURNS and len(reply) == TURNS and names.count("speak") >= TURNS, names
     assert all("spoken=1" in body for body in reply), reply
     kinds = [kind for kind, _ in run.live]
-    print("#live:", kinds)
+    say("#live:", kinds)
     assert kinds == ["turn user", "turn model"] * TURNS, kinds
     for _ in range(TURNS):
         for state in ("listening", "hearing", "thinking", "speaking"):
@@ -52,7 +61,7 @@ def check(run: Run) -> None:
         run.marks
     )
     for row in latencies(run):
-        print("turn", row)
+        say("turn", row)
 
 
 if __name__ == "__main__":
