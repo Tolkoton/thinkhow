@@ -41,6 +41,8 @@ OLD_COMMIT = "c14fd9b"
 UID, TOPIC = "owner", "t-84d1517cb1c1"
 HEAD = re.compile(r"^### #(\d+) (Людина|ThinkHow)")
 STUCK_AT, NOT_STUCK_AT = (5, 11, 15), (9, 13)
+ATTEMPT_HEAD = "## Спроба "
+ATTEMPT = re.compile(r"^## Спроба (\d+)$", re.M)
 
 
 Role = Literal["user", "model"]
@@ -94,6 +96,16 @@ def topic_folder(storage: LocalStorage, turns: list[tuple[int, Role, str]], star
     )
 
 
+def earlier_attempts(path: Path) -> dict[int, str]:
+    """The sections of the attempts already in the artifact, by number (each run keeps the others)."""
+    if not path.is_file():
+        return {}
+    text = path.read_text(encoding="utf-8")
+    starts = [(int(m.group(1)), m.start()) for m in ATTEMPT.finditer(text)]
+    ends = [start for _, start in starts[1:]] + [len(text)] * bool(starts)
+    return {no: text[start:end].rstrip("\n") + "\n" for (no, start), end in zip(starts, ends, strict=True)}
+
+
 def old_analyzer() -> types.ModuleType:
     code = subprocess.run(
         ["git", "show", f"{OLD_COMMIT}:src/thinkhow/learning/analyze.py"],
@@ -138,18 +150,25 @@ def main() -> int:
     old = run(old_analyzer(), llm, turns, now)
     stuck = {o["turn"] for o in new if o["kind"] == "stuck"}
     ok = all(t in stuck for t in STUCK_AT) and not any(t in stuck for t in NOT_STUCK_AT)
-    lines = [
+    head = [
         "# Аналізатор на розмові власника t-84d1517cb1c1 «До» (задача 309, AC3)",
         "",
-        f"Дата: {now.isoformat(timespec='seconds')}; модель: {settings.model}; регіон: {settings.location}; "
-        f"спроба інструкції: {attempt}; старий аналізатор — `{OLD_COMMIT}:src/thinkhow/learning/analyze.py`.",
-        f"Вхід: {len(turns)} реплік розділу «До»; routing: offer на #1 (jobs-to-be-done, opportunity-tree, "
+        f"Старий аналізатор — `{OLD_COMMIT}:src/thinkhow/learning/analyze.py`.",
+        f"Вхід: {len(turns)} реплік розділу «До»; routing: offer на #1 (jobs-to-be-done, opportunity-tree,",
         "goal-to-plan), choose opportunity-tree на #3.",
+        "Кожна спроба (версія інструкції) — свій розділ; новий прогін лишає розділи інших спроб.",
+        "",
+    ]
+    section = [
+        f"{ATTEMPT_HEAD}{attempt}",
+        "",
+        f"Дата: {now.isoformat(timespec='seconds')}; модель: {settings.model}; регіон: {settings.location}; "
+        f"спроба інструкції: {attempt}.",
         "",
         f"Перевірка: `stuck` на {', '.join(f't{t}' for t in STUCK_AT)} і немає `stuck` на "
         f"{', '.join(f't{t}' for t in NOT_STUCK_AT)} — **{'так' if ok else 'ні'}** (stuck: {sorted(stuck)}).",
         "",
-        "## Новий аналізатор",
+        "### Новий аналізатор",
         "",
         "| id | kind | якір | card_id | cause | worked | finding |",
         "|---|---|---|---|---|---|---|",
@@ -159,20 +178,23 @@ def main() -> int:
             for o in new
         ),
         "",
-        "## Старий аналізатор (одне спостереження)",
+        "### Старий аналізатор (одне спостереження)",
         "",
         *(f"- t{o['turn']}, cause {o['cause']}, worked {o['worked']}: {o['finding']}" for o in old),
         "",
-        "## Сирий JSON",
+        "### Сирий JSON",
         "",
         "```json",
         json.dumps({"new": new, "old": old}, ensure_ascii=False, indent=1),
         "```",
         "",
     ]
+    sections = earlier_attempts(OUT) | {attempt: "\n".join(section)}
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text("\n".join(lines), encoding="utf-8")
-    print("\n".join(lines[:8]))
+    OUT.write_text(
+        "\n".join(head) + "\n" + "\n".join(sections[k] for k in sorted(sections)), encoding="utf-8"
+    )
+    print("\n".join(section[:6]))
     return 0 if ok else 1
 
 
