@@ -31,6 +31,7 @@ from thinkhow.workspace.topics import (
     open_topic,
     reply,
     retry,
+    topic_routing,
     topic_sessions,
 )
 from thinkhow.workspace.voice import transcribe
@@ -69,6 +70,7 @@ __all__ = [
     "retry",
     "set_language",
     "speak",
+    "topic_routing",
     "topic_sessions",
     "transcribe",
 ]

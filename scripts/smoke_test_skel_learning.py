@@ -45,14 +45,15 @@ def main() -> None:
     assert first.returncode == 0
     uid, topic_id = topic.split("/")[2:4]
     path = Path(data) / "system" / "learning" / "observations" / uid / topic_id / "t1-t2.json"
-    observation = json.loads(path.read_text(encoding="utf-8"))
-    print("observation:", json.dumps(observation, ensure_ascii=False, indent=2))
-    assert f'id="t{observation["turn"]}"' in client.get(topic).text
+    found = json.loads(path.read_text(encoding="utf-8"))  # a set of observations (learning-loop S2)
+    print("observations:", json.dumps(found, ensure_ascii=False, indent=2))
+    page = client.get(topic).text
+    assert found["observations"] and all(f'id="t{o["turn"]}"' in page for o in found["observations"])
     second = job("analyze", env)
     done = [json.loads(line) for line in second.stdout.splitlines() if '"analyze_done"' in line][-1]
     print("second analyze:", done)
     assert (done["written"], done["skipped"]) == (0, 1)
-    print("OK: seed, analyze → one observation whose link opens an existing turn; a repeat writes nothing")
+    print("OK: seed, analyze → a set of observations whose links open existing turns; a repeat writes nothing")
 
 
 if __name__ == "__main__":

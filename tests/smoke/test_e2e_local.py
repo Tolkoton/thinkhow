@@ -69,13 +69,14 @@ def test_local_chain_from_a_new_topic_to_the_files(tmp_path: Path) -> None:
     assert sse_events(stream.text)[-1] == ("answered", {"turn": 4})
     third = analyze()
     assert set(third) == {"t1-t2.json", "t3-t4.json"} and third["t1-t2.json"] == first["t1-t2.json"]
-    newest = json.loads(third["t3-t4.json"])
-    assert (newest["first_turn"], newest["last_turn"]) == (3, 4) and newest["turn"] in (3, 4)
+    newest = json.loads(third["t3-t4.json"])  # a set of observations (learning-loop S2)
+    assert (newest["first_turn"], newest["last_turn"]) == (3, 4)
+    assert all(o["turn"] in (3, 4) for o in newest["observations"])
     page = client.get(topic).text
     for data in third.values():
-        observation = json.loads(data)
-        assert observation["link"] == f"{topic}#t{observation['turn']}"
-        assert f'id="t{observation["turn"]}"' in page
+        for observation in json.loads(data)["observations"]:
+            assert observation["link"] == f"{topic}#t{observation['turn']}"
+            assert f'id="t{observation["turn"]}"' in page
 
 
 def test_local_chain_with_the_doubles_search_writes_sources_research_and_a_fact(tmp_path: Path) -> None:

@@ -3,8 +3,9 @@
 - Topics are made through workspace itself (`create_topic`, `reply`, `retry`) with an injected `now`;
   a legacy topic (a `closed` marker, written by an earlier version) is a hand-written `conversation.md`
   in the format of ADR-0004 laid over a topic made by `create_topic`.
-- FakeLlm: an `Llm` double for `generate_json`; records every call; answers with the last (or the first)
-  anchor of the schema's enum, or raises the exception planned for the run.
+- FakeLlm: an `Llm` double for `generate_json`; records every call; answers `{observations: [one]}`
+  (analysis-rules) anchored on the last (or the first) of the schema's enum, or raises the exception
+  planned for the run.
 - SpyStorage: a `LocalStorage` that records every write (`write` and `create_if_absent`).
 - observations(): the file names under `system/learning/observations/<uid>/<topic>/` and their JSON.
 - make_client: the web app over the same storage (a person with a chosen language).
@@ -182,6 +183,13 @@ def obs(storage: LocalStorage, ref: TopicRef, name: str) -> dict[str, Any]:
     return data
 
 
+def items(storage: LocalStorage, ref: TopicRef, name: str) -> list[dict[str, Any]]:
+    """The observations of a set file `t<a>-t<b>.json` (analysis-rules, «Файл»)."""
+    got = obs(storage, ref, name)["observations"]
+    assert isinstance(got, list) and got, f"{name}: no observations"
+    return got
+
+
 def put_obs(storage: LocalStorage, ref: TopicRef, name: str, data: bytes | None = None) -> bytes:
     body = data if data is not None else b'{"legacy": true}'
     storage.write("system", obs_dir(ref) + name, body, "application/json")
@@ -227,8 +235,13 @@ class SpyStorage(LocalStorage):
 
 
 def enum_of(schema: type[BaseModel]) -> list[str]:
-    prop = schema.model_json_schema()["properties"]["anchor"]
-    return list(prop["enum"])
+    """The `anchor` enum of one observation of the answer `{observations: list[{..., anchor}]}`
+    (analysis-rules, «Схема відповіді»), whether the item schema is inline or a `$ref`."""
+    js = schema.model_json_schema()
+    item = js["properties"]["observations"]["items"]
+    if "$ref" in item:
+        item = js["$defs"][item["$ref"].rsplit("/", 1)[-1]]
+    return list(item["properties"]["anchor"]["enum"])
 
 
 def validation_error(schema: type[BaseModel]) -> ValidationError:
@@ -285,10 +298,15 @@ class FakeLlm:
         anchor = anchors[-1] if self.pick == "last" else anchors[0]
         return schema.model_validate(
             {
-                "finding": "Фасилітатор поставив одне питання.",
-                "worked": False,
-                "cause": "method",
-                "anchor": anchor,
+                "observations": [
+                    {
+                        "kind": "stuck",
+                        "finding": "Фасилітатор поставив одне питання.",
+                        "worked": False,
+                        "cause": "method",
+                        "anchor": anchor,
+                    }
+                ]
             }
         )
 

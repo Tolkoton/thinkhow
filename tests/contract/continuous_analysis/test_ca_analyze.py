@@ -17,6 +17,7 @@ from ca_fakes import (
     M,
     answer_now,
     install_log_capture,
+    items,
     legacy_topic,
     new_topic,
     obs,
@@ -71,7 +72,7 @@ def test_seam1_the_cursor_comes_from_file_names_across_runs(tmp_path: Path) -> N
     ]
     assert llm3.calls[0].anchors() == ["t3", "t4"]
     assert obs_names(storage, ref) == {"t1-t2.json", "t3-t4.json"}
-    assert obs(storage, ref, "t3-t4.json")["turn"] in (3, 4)
+    assert [o["turn"] in (3, 4) for o in items(storage, ref, "t3-t4.json")] == [True]
 
 
 def test_seam1_turns_after_24h_of_silence_open_a_session_and_go_without_context(tmp_path: Path) -> None:
@@ -260,14 +261,22 @@ def test_observation_file_has_the_range_the_anchor_and_link_and_no_session_field
     assert got["topic_id"] == ref.topic_id
     assert got["first_turn"] == 3
     assert got["last_turn"] == 4
-    assert got["turn"] == 3
-    assert got["link"] == f"/topics/{ALICE.id}/{ref.topic_id}#t3"
-    assert got["worked"] is False
-    assert got["finding"] == "Фасилітатор поставив одне питання."
-    assert got["cause"] == "method"
     assert "analyzed_at" in got
     assert "session_no" not in got
     assert "closed_at" not in got
+    assert len(got["observations"]) == 1
+    one = got["observations"][0]
+    assert one["id"] == f"{ALICE.id}/{ref.topic_id}/t3-t4/1"
+    assert one["turn"] == 3
+    assert one["link"] == f"/topics/{ALICE.id}/{ref.topic_id}#t3"
+    assert one["kind"] == "stuck"
+    assert one["worked"] is False
+    assert one["finding"] == "Фасилітатор поставив одне питання."
+    assert one["cause"] == "method"
+    assert one["card_id"] is None  # no routing.json in this topic
+    assert one["analyzed_at"] == got["analyzed_at"]
+    assert "session_no" not in one
+    assert "closed_at" not in one
 
 
 def test_report_counts_written_skipped_failed_per_topic(tmp_path: Path) -> None:
@@ -324,13 +333,13 @@ def test_any_other_file_name_does_not_move_the_cursor(tmp_path: Path) -> None:
 
 
 def test_analyzer_instructions_speak_of_new_turns_and_the_context(tmp_path: Path) -> None:
+    # analysis-rules rewrote the instruction: «тільки про нові репліки (рядок «Контекст» лишається, як у
+    # continuous-analysis)» — the old sentences are no longer pinned, the context line is.
     text = " ".join(ANALYZER.split())
-    assert (
-        "Ти читаєш нові репліки однієї теми (з часу минулого аналізу), у яких фасилітатор вів людину" in text
-    )
-    assert "у нових репліках" in text
+    assert "нові репліки" in text
     assert "у цій сесії" not in text
-    assert (
-        "Репліки під рядком «Контекст» уже проаналізовано — вони лише для розуміння; "
-        "висновок і якір — лише про нові" in text
-    )
+    # the context sentence stays; «висновок і якір» may be plural now that one answer carries several
+    # observations (analysis-rules Q6: the single-observation shape is not pinned)
+    assert "Репліки під рядком «Контекст» уже проаналізовано — вони лише для розуміння;" in text
+    context = text.split("Репліки під рядком «Контекст» уже проаналізовано — вони лише для розуміння;", 1)[1]
+    assert context.split(".", 1)[0].rstrip().endswith("— лише про нові"), context[:120]

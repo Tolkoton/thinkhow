@@ -446,3 +446,19 @@
 - Surprises: the 307 block test pinned `src/thinkhow/knowledge` against `82e6213` for ever — objection on
   product-router-eval, bounded to 307's window (`test_wrong`); Vertex gives no `input_token_limit` (PR-31)
 - Open for next slice: S2 analysis-rules
+
+## Slice analysis-rules — S2 of learning-loop (CODE COMPLETE — 22 old sealed tests wait for the owner, 2026-10-27)
+
+- Module: `src/thinkhow/learning/analyze.py` (rules of analysis in `ANALYZER`, several observations a run, state lines
+  of the method from `routing.json`, `card_at` by the decision numbers), `src/thinkhow/learning/observations.py`
+  (`ObservationSet`, `Observation`, `read_all` of the new and two old shapes), `workspace.topic_routing`,
+  `learning/local.py` (new schema)
+- Tests: 25 by the slice-tester in `tests/contract/analysis_rules/` (sealed; Q1, Q2 `taken`), green;
+  continuous-analysis: objection round 1, 17 `test_wrong` — carried over to the set, green
+- Live (AC3, PR-27 verified): `scripts/analyze_owner_conversation.py` → `.engine/artifacts/analysis-rules/
+  owner-t-84d1517cb1c1.md` — attempt 1 no (stuck t15, t17 only); attempt 2 after one general edit of the
+  instruction: stuck t5, t11, t15, progress t9, t13, card opportunity-tree; the old analyzer — one observation, t18
+- Smoke: `scripts/smoke_test_skel_learning.py`, `tests/smoke/test_e2e_local.py` carried over to the set — green
+- Blocked: 20 sealed tests of skel-learning and 2 of the walking-skeleton block pin the old single observation; both
+  slices used their 2 dispute rounds — `tasks/blocked/720-…`, `721-…` (owner: A — carry over, advised)
+- Open for next slice: S3 synthesizer reads `read_all`

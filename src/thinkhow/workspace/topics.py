@@ -193,6 +193,13 @@ def topic_sessions(storage: Storage, ref: TopicRef, now: datetime) -> list[Sessi
     return [_session(s, now) for s in _read_conversation(storage, ref).sessions]
 
 
+def topic_routing(storage: Storage, ref: TopicRef) -> tuple[Decision, ...]:
+    """Read only, no access rule: the router's decisions of the topic for learning (refs from
+    all_topics_for_learning); none without routing.json."""
+    _check_ref(ref)
+    return _read_routing(storage, ref)
+
+
 def _reply_flow(
     storage: Storage,
     facilitate: Facilitate,

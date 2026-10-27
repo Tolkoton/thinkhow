@@ -1,4 +1,4 @@
-"""The scripted analyzer of local mode: a fixed observation anchored to the first turn of the schema."""
+"""The scripted analyzer of local mode: one fixed observation anchored to the first turn of the schema."""
 
 import json
 from collections.abc import Sequence
@@ -11,6 +11,7 @@ FINDING = "(локальний режим) Людина назвала план;
 
 
 def local_script(system: str, contents: Sequence[Turn], schema: type[BaseModel]) -> str:
-    first = schema.model_json_schema()["properties"]["anchor"]["enum"][0]
-    answer = {"finding": FINDING, "worked": True, "cause": "facilitation", "anchor": first}
-    return json.dumps(answer, ensure_ascii=False)
+    item = schema.model_json_schema()["$defs"]["ObservationAnswerItem"]
+    first = item["properties"]["anchor"]["enum"][0]
+    one = {"kind": "progress", "finding": FINDING, "worked": True, "cause": "facilitation", "anchor": first}
+    return json.dumps({"observations": [one]}, ensure_ascii=False)

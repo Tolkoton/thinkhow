@@ -17,6 +17,7 @@ from ca_fakes import (
     SpyStorage,
     answer_now,
     conv_path,
+    items,
     legacy_topic,
     make_client,
     new_topic,
@@ -195,16 +196,17 @@ def test_I4_the_anchor_lies_in_its_range_and_the_link_opens_that_turn_on_the_pag
     by_path: dict[str, set[str]] = {}
     turns = []
     for name in sorted(names):
-        o = obs(storage, ref, name)
-        assert o["first_turn"] <= o["turn"] <= o["last_turn"], name
-        assert o["link"] == f"/topics/{ALICE.id}/{ref.topic_id}#t{o['turn']}", name
-        link = urlparse(o["link"])
-        if link.path not in by_path:
-            r = client.get(link.path, headers=H_ALICE)
-            assert r.status_code == 200
-            by_path[link.path] = Ids(r.text).ids
-        assert link.fragment in by_path[link.path], name
-        turns.append(o["turn"])
+        s = obs(storage, ref, name)
+        for o in items(storage, ref, name):
+            assert s["first_turn"] <= o["turn"] <= s["last_turn"], name
+            assert o["link"] == f"/topics/{ALICE.id}/{ref.topic_id}#t{o['turn']}", name
+            link = urlparse(o["link"])
+            if link.path not in by_path:
+                r = client.get(link.path, headers=H_ALICE)
+                assert r.status_code == 200
+                by_path[link.path] = Ids(r.text).ids
+            assert link.fragment in by_path[link.path], name
+            turns.append(o["turn"])
     assert sorted(turns) == [1, 3, 5, 6]
 
 
