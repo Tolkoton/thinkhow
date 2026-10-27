@@ -1,0 +1,217 @@
+{
+ "log": [
+  [
+   "state",
+   "listening",
+   183.80000019073486
+  ],
+  [
+   "clip-start",
+   0,
+   6.695986394557823,
+   802.6000001430511
+  ],
+  [
+   "state",
+   "hearing",
+   1483.4000000953674
+  ],
+  [
+   "clip-end",
+   0,
+   7494.600000143051
+  ],
+  [
+   "state",
+   "thinking",
+   8834.700000047684
+  ],
+  [
+   "state",
+   "speaking",
+   8862.900000095367
+  ],
+  [
+   "state",
+   "listening",
+   10974.300000190735
+  ],
+  [
+   "clip-start",
+   1,
+   1.847981859410431,
+   11580.300000190735
+  ],
+  [
+   "state",
+   "hearing",
+   12183.300000190735
+  ],
+  [
+   "clip-end",
+   1,
+   13424.5
+  ],
+  [
+   "state",
+   "thinking",
+   14834.200000047684
+  ],
+  [
+   "state",
+   "speaking",
+   14857.100000143051
+  ],
+  [
+   "state",
+   "listening",
+   16974.10000014305
+  ],
+  [
+   "clip-start",
+   2,
+   4.487981859410431,
+   17586
+  ],
+  [
+   "state",
+   "hearing",
+   18583.300000190735
+  ],
+  [
+   "clip-end",
+   2,
+   22074.60000014305
+  ],
+  [
+   "state",
+   "thinking",
+   23434.200000047684
+  ],
+  [
+   "state",
+   "speaking",
+   23456.800000190735
+  ],
+  [
+   "state",
+   "listening",
+   25574.200000047684
+  ]
+ ],
+ "marks": [
+  {
+   "name": "talk:speech-end",
+   "t": 7233.200000047684
+  },
+  {
+   "name": "talk:voice-start",
+   "t": 8862.900000095367
+  },
+  {
+   "name": "talk:speech-end",
+   "t": 13183.300000190735
+  },
+  {
+   "name": "talk:voice-start",
+   "t": 14857
+  },
+  {
+   "name": "talk:speech-end",
+   "t": 21833.200000047684
+  },
+  {
+   "name": "talk:voice-start",
+   "t": 23456.800000190735
+  }
+ ],
+ "requests": [
+  [
+   "t-941a43d63f0d",
+   ""
+  ],
+  [
+   "style.css",
+   ""
+  ],
+  [
+   "conversation.js",
+   ""
+  ],
+  [
+   "voice",
+   ""
+  ],
+  [
+   "reply",
+   "text=%28%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%B9+%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%29+%D1%80%D0%BE%D0%B7%D0%BF%D1%96%D0%B7%D0%BD%D0%B0%D0%BD%D0%B8%D0%B9+%D1%82%D0%B5%D0%BA%D1%81%D1%82&spoken=1"
+  ],
+  [
+   "speak",
+   "text=%28%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%B9+%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%29+%D0%A3%D1%8F%D0%B2%D1%96%D1%82%D1%8C%2C+%D1%89%D0%BE+%D0%BF%D0%BB%D0%B0%D0%BD+%D0%BF%D1%80%D0%BE%D0%B2%D0%B0%D0%BB%D0%B8%D0%B2%D1%81%D1%8F."
+  ],
+  [
+   "speak",
+   "text=%D0%A9%D0%BE+%D1%81%D1%82%D0%B0%D0%BB%D0%BE%D1%81%D1%8F+%D0%BF%D0%B5%D1%80%D1%88%D0%B8%D0%BC%3F"
+  ],
+  [
+   "voice",
+   ""
+  ],
+  [
+   "reply",
+   "text=%28%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%B9+%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%29+%D1%80%D0%BE%D0%B7%D0%BF%D1%96%D0%B7%D0%BD%D0%B0%D0%BD%D0%B8%D0%B9+%D1%82%D0%B5%D0%BA%D1%81%D1%82&spoken=1"
+  ],
+  [
+   "speak",
+   "text=%28%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%B9+%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%29+%D0%A3%D1%8F%D0%B2%D1%96%D1%82%D1%8C%2C+%D1%89%D0%BE+%D0%BF%D0%BB%D0%B0%D0%BD+%D0%BF%D1%80%D0%BE%D0%B2%D0%B0%D0%BB%D0%B8%D0%B2%D1%81%D1%8F."
+  ],
+  [
+   "speak",
+   "text=%D0%A9%D0%BE+%D1%81%D1%82%D0%B0%D0%BB%D0%BE%D1%81%D1%8F+%D0%BF%D0%B5%D1%80%D1%88%D0%B8%D0%BC%3F"
+  ],
+  [
+   "voice",
+   ""
+  ],
+  [
+   "reply",
+   "text=%28%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%B9+%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%29+%D1%80%D0%BE%D0%B7%D0%BF%D1%96%D0%B7%D0%BD%D0%B0%D0%BD%D0%B8%D0%B9+%D1%82%D0%B5%D0%BA%D1%81%D1%82&spoken=1"
+  ],
+  [
+   "speak",
+   "text=%28%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%B9+%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%29+%D0%A3%D1%8F%D0%B2%D1%96%D1%82%D1%8C%2C+%D1%89%D0%BE+%D0%BF%D0%BB%D0%B0%D0%BD+%D0%BF%D1%80%D0%BE%D0%B2%D0%B0%D0%BB%D0%B8%D0%B2%D1%81%D1%8F."
+  ],
+  [
+   "speak",
+   "text=%D0%A9%D0%BE+%D1%81%D1%82%D0%B0%D0%BB%D0%BE%D1%81%D1%8F+%D0%BF%D0%B5%D1%80%D1%88%D0%B8%D0%BC%3F"
+  ]
+ ],
+ "live": [
+  [
+   "turn user",
+   "(локальний режим) розпізнаний текст"
+  ],
+  [
+   "turn model",
+   "(локальний режим) Уявіть, що план провалився. Що сталося першим?"
+  ],
+  [
+   "turn user",
+   "(локальний режим) розпізнаний текст"
+  ],
+  [
+   "turn model",
+   "(локальний режим) Уявіть, що план провалився. Що сталося першим?"
+  ],
+  [
+   "turn user",
+   "(локальний режим) розпізнаний текст"
+  ],
+  [
+   "turn model",
+   "(локальний режим) Уявіть, що план провалився. Що сталося першим?"
+  ]
+ ],
+ "error": ""
+}

@@ -29,6 +29,7 @@
       data-key="draft:{{ view.ref.uid }}/{{ view.ref.topic_id }}" data-voice="{{ 'yes' if voice else 'no' }}">
   <textarea name="text"></textarea>
   <div class="actions">
+    <button id="talk" class="icon" type="button" aria-label="Режим розмови" aria-pressed="false" hidden>{{ icon("talk") }}<span class="spinner" aria-hidden="true"></span></button>
     <button id="mic" class="icon" type="button" aria-label="Говорити" aria-pressed="false">{{ icon("mic") }}{{ icon("stop") }}<span class="spinner" aria-hidden="true"></span></button>
     <button id="recognize" class="icon" type="button" aria-label="Розпізнати ще раз" hidden>{{ icon("retry") }}</button>
     <span id="mic-state" class="sr-only" aria-live="polite"></span>

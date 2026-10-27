@@ -389,3 +389,18 @@
 - Surprises: Gemini-TTS takes at most 4000 bytes and gives 502 already at ~3900 (`gemini_limit.out`) — the limit is
   4000, the client sends ≤ 1000 bytes; `tests/web/test_current_model.py` passed `cards` by position — now by name
 - Open for next slice: S2a — the loop in the browser
+
+## Slice conversation-loop — S2a of voice-conversation-mode, tracer part 2 (DONE 2026-10-27)
+
+- Module: `src/thinkhow/web/static/conversation.js` — `createSilenceDetector` (RMS, calibration on the minimum of
+  300 ms, threshold max(0.02, 3×noise), 1.6 s of silence, 14.5 min cap), `splitSentences` (≤ 1000 bytes UTF-8),
+  `createTalk` (listening → hearing → thinking → speaking, half duplex, one AudioContext and one mic stream per mode),
+  `attachTalk`; `createController.send(text, fields)`; button `#talk` (icon, CSS states)
+- Tests: 42 by the slice-tester in `tests/contract/conversation_loop/` (sealed; Q1, Q2, Q4 `taken`; one objection
+  ruled `test_wrong`: helper and wrapper names collided with cards_library); full suite 1060 passed
+- Smoke: `scripts/smoke_test_conversation_mode.py` (stand `scripts/talk_harness.py`) — one click, 3 cycles with no
+  touch; local doubles: end of speech → voice 1.62–1.67 s (of it 1.6 s is the silence window)
+  (`.engine/artifacts/conversation-loop/smoke.txt`); PR-25 verified
+- Surprises: the old page test runs conversation.js in a vm without TextEncoder — bytes are counted by code points;
+  `tests/web/test_icon_buttons.py` lists the topic page's buttons — «Режим розмови» added
+- Open for next slice: S2b (resilience), S3 (spoken replies), then the live check
