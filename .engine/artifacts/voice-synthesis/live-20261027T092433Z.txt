@@ -1,0 +1,6 @@
+{"severity": "INFO", "voice": "Kore", "model": "gemini-2.5-flash-tts", "language": "ka-GE", "chars": 64, "bytes": 24480, "latency_ms": 4932, "attempts": 1, "outcome": "ok", "event": "tts_call", "request_id": null}
+ka-GE: 24480 bytes in 4.93 s
+.{"severity": "INFO", "voice": "uk-UA-Chirp3-HD-Kore", "model": "chirp3-hd", "language": "uk-UA", "chars": 58, "bytes": 15264, "latency_ms": 1234, "attempts": 1, "outcome": "ok", "event": "tts_call", "request_id": null}
+uk-UA: 15264 bytes in 1.23 s
+.
+2 passed in 6.67s

@@ -1,4 +1,4 @@
-"""The one retry rule of Vertex calls (M3 A4), shared by platform.llm and platform.speech.
+"""The one retry rule of Vertex calls (M3 A4), shared by platform.llm, platform.speech and platform.tts.
 
 Kept apart so that platform.speech never imports platform.llm (workspace may not reach it, even indirectly).
 """
@@ -14,6 +14,9 @@ def retryable(exc: Exception) -> bool:
     """A timeout, 429 or a 5xx is worth another attempt; anything else is not."""
     if isinstance(exc, (httpx.TimeoutException, httpx2.TimeoutException)):
         return True
+    if isinstance(exc, httpx.HTTPStatusError):
+        status = exc.response.status_code
+        return status == 429 or status >= 500
     return isinstance(exc, errors.APIError) and (exc.code == 429 or exc.code >= 500)
 
 

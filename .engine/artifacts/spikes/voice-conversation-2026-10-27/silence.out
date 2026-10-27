@@ -1,0 +1,11 @@
+ssml chirp3: 200 
+bytes 4224
+bad voice: 400 {
+  "error": {
+    "code": 400,
+    "message": "Voice 'uk-UA-Chirp3-HD-Nope' does not exist. Is it misspelled?",
+    "status": "INVALID_ARGUMENT"
+  }
+}
+
+no auth: 403

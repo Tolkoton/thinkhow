@@ -1,0 +1,5 @@
+uk-UA: topic page → 200, data-voice="yes"
+uk-UA: POST /speak → 200 audio/mpeg, 4224 bytes (the local double's silence)
+kk-KZ: topic page → 200, data-voice="no"
+kk-KZ: POST /speak → 409 «Для вашої мови немає голосу.»
+OK: data-voice follows the language; /speak gives the double's MP3 or 409; files under /tmp/thinkhow-tts-dl6z_nym

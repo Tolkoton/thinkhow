@@ -31,6 +31,9 @@ class Settings(BaseSettings):
     llm_attempts: int = 3
     speech_model: str = "gemini-3.5-transcribe"
     speech_timeout_s: float = 120.0
+    tts_endpoint: str = "https://eu-texttospeech.googleapis.com"
+    tts_voice: str = "Kore"
+    tts_timeout_s: float = 30.0
 
     @classmethod
     def settings_customise_sources(

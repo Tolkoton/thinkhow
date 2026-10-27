@@ -18,6 +18,7 @@ from thinkhow.platform.identity import make_identity
 from thinkhow.platform.llm import make_llm
 from thinkhow.platform.speech import make_speech
 from thinkhow.platform.storage import make_storage
+from thinkhow.platform.tts import make_tts
 from thinkhow.web.local import local_found, local_script, local_search
 from thinkhow.web.server import Deps, create_app
 
@@ -34,7 +35,16 @@ def build_deps(environ: Mapping[str, str], cards_dir: Path) -> Deps:
     llm = make_llm(settings, local_script, search=True, found_script=local_found, search_script=local_search)
     facilitate = functools.partial(respond, knowledge=current, llm=llm)
     identity, speech = make_identity(settings), make_speech(settings)
-    return Deps(storage, identity, settings, facilitate, lambda: datetime.now(UTC), speech, current.cards)
+    return Deps(
+        storage,
+        identity,
+        settings,
+        facilitate,
+        lambda: datetime.now(UTC),
+        speech,
+        make_tts(settings),
+        current.cards,
+    )
 
 
 def __getattr__(name: str) -> FastAPI:

@@ -28,6 +28,7 @@ from thinkhow.platform.config import Settings
 from thinkhow.platform.identity import FixedIdentity, IapIdentity, IdentityError
 from thinkhow.platform.speech import Speech, SpeechUnavailable
 from thinkhow.platform.storage import Storage
+from thinkhow.platform.tts import NoVoice, ScriptedTts, Tts, TtsUnavailable
 from thinkhow.web.method import caption, marks
 from thinkhow.web.text import turn_html
 
@@ -49,6 +50,7 @@ class Deps:
     facilitate: Facilitate
     now: Callable[[], datetime]
     speech: Speech
+    tts: Tts = field(default_factory=ScriptedTts)
     cards: Mapping[str, Card] = field(default_factory=dict)
 
 
@@ -100,6 +102,7 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         view = workspace.open_topic(deps.storage, user, workspace.TopicRef(uid, topic_id), deps.now())
         method = caption(view.routing, view.problem_map.phase_id, deps.cards)
         context = {"view": view, "own": user.id == uid, "method": method}
+        context["voice"] = user.id == uid and workspace.has_voice(deps.storage, user)
         context["marks"] = marks(view.routing, deps.cards)
         return TEMPLATES.TemplateResponse(request, "topic.html", context)
 
@@ -126,6 +129,12 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         call = (deps.storage, deps.speech, user, ref, audio, mime)
         text = await run_in_threadpool(workspace.transcribe, *call)
         return JSONResponse({"text": text})
+
+    @app.post("/speak")
+    async def speak(user: User, text: Annotated[str, Form()]) -> Response:
+        """A reply sentence → MP3 in the person's language; the synthesis runs in the thread pool."""
+        audio = await run_in_threadpool(workspace.speak, deps.storage, deps.tts, user, text)
+        return Response(content=audio, media_type="audio/mpeg", headers={"Cache-Control": "no-store"})
 
 
 def _current_code(deps: Deps, user: CurrentUser) -> str:
@@ -179,6 +188,8 @@ MESSAGES: list[tuple[type[Exception], int, str]] = [
     (workspace.NothingToRetry, 409, "Немає репліки, на яку треба відповісти."),
     (IdentityError, 401, "Потрібно увійти через Google."),
     (SpeechUnavailable, 502, "Не вдалося розпізнати — спробуйте ще раз."),
+    (NoVoice, 409, "Для вашої мови немає голосу."),
+    (TtsUnavailable, 502, "Не вдалося озвучити — спробуйте ще раз."),
 ]
 
 
@@ -214,6 +225,8 @@ async def _bad_request(request: Request, exc: Exception) -> Response:
         return _fragment(400, "Назва теми порожня.")
     if request.method == "POST" and path.endswith("/voice"):
         return _fragment(400, "Запис не прийнято — спробуйте записати ще раз.")
+    if request.method == "POST" and path == "/speak":
+        return _fragment(400, "Текст для голосу не прийнято.")
     if request.method == "POST" and path.endswith("/reply"):
         return _fragment(400, "Порожню репліку не надіслано.")
     return _fragment(400, NOT_ACCEPTED)

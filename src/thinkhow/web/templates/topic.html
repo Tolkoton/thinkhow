@@ -26,7 +26,7 @@
 <p id="error" class="error"></p>
 {% if own %}
 <form id="reply-form" class="reply" method="post" action="/topics/{{ view.ref.uid }}/{{ view.ref.topic_id }}/reply"
-      data-key="draft:{{ view.ref.uid }}/{{ view.ref.topic_id }}">
+      data-key="draft:{{ view.ref.uid }}/{{ view.ref.topic_id }}" data-voice="{{ 'yes' if voice else 'no' }}">
   <textarea name="text"></textarea>
   <div class="actions">
     <button id="mic" class="icon" type="button" aria-label="Говорити" aria-pressed="false">{{ icon("mic") }}{{ icon("stop") }}<span class="spinner" aria-hidden="true"></span></button>

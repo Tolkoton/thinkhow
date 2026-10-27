@@ -21,6 +21,7 @@ from thinkhow.workspace.model import (
     TopicView,
 )
 from thinkhow.workspace.profile import NoLanguage, language, set_language
+from thinkhow.workspace.speak import MAX_SPEAK_BYTES, has_voice, speak
 from thinkhow.workspace.topics import (
     all_topics_for_learning,
     create_topic,
@@ -37,6 +38,7 @@ from thinkhow.workspace.voice import transcribe
 __all__ = [
     "CARD_ID",
     "LANGUAGES",
+    "MAX_SPEAK_BYTES",
     "SILENCE",
     "Answered",
     "Delta",
@@ -59,12 +61,14 @@ __all__ = [
     "create_topic",
     "delete_topic",
     "ensure_profile",
+    "has_voice",
     "language",
     "list_topics",
     "open_topic",
     "reply",
     "retry",
     "set_language",
+    "speak",
     "topic_sessions",
     "transcribe",
 ]

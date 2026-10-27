@@ -374,3 +374,18 @@
   files stay unsealed, all green); 11 block tests `tests/contract/product_thinking_pack_block/` (sealed, all green)
 - Surprises: the contract put I3 into a test helper; measurement before tests made RED impossible — next time a
   measuring slice runs its live steps after the tester's hand-in
+
+## Slice voice-synthesis — S1 of voice-conversation-mode, tracer part 1 (DONE 2026-10-27)
+
+- Module: `src/thinkhow/platform/tts.py` (port `Tts`, `CloudTts` — Cloud TTS `eu`, Chirp 3 HD / Gemini-TTS by
+  language, `ScriptedTts` with 1 s silence MP3), `src/thinkhow/workspace/speak.py` (`speak`, `has_voice`), route
+  `POST /speak`, `data-voice` on the reply form; `_retry.retryable` knows `httpx.HTTPStatusError` 429/5xx
+- Tests: 48 by the slice-tester in `tests/contract/voice_synthesis/` (sealed; Q1, Q2 answered `taken`), all green;
+  full suite 1010 passed; ruff, mypy, import-linter clean
+- Live: `tests/live/test_tts_live.py` — uk-UA 16 224 B in 1.21 s (Chirp 3 HD), ka-GE 23 616 B in 5.15 s (Gemini-TTS)
+  (`.engine/artifacts/voice-synthesis/live-*.txt`)
+- Smoke: `scripts/smoke_test_voice_synthesis.py` — `data-voice` yes/no by language, `/speak` 200 `audio/mpeg` / 409
+  (`.engine/artifacts/voice-synthesis/smoke.txt`)
+- Surprises: Gemini-TTS takes at most 4000 bytes and gives 502 already at ~3900 (`gemini_limit.out`) — the limit is
+  4000, the client sends ≤ 1000 bytes; `tests/web/test_current_model.py` passed `cards` by position — now by name
+- Open for next slice: S2a — the loop in the browser

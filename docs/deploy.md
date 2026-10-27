@@ -21,8 +21,12 @@ export OWNER_EMAIL=leskivmr@gmail.com
 export IMAGE=$REGION-docker.pkg.dev/$PROJECT/thinkhow/thinkhow:skeleton
 gcloud config set project $PROJECT
 gcloud services enable run.googleapis.com iap.googleapis.com aiplatform.googleapis.com \
-  cloudbuild.googleapis.com artifactregistry.googleapis.com cloudscheduler.googleapis.com
+  cloudbuild.googleapis.com artifactregistry.googleapis.com cloudscheduler.googleapis.com \
+  texttospeech.googleapis.com
 ```
+
+Cloud Text-to-Speech (голос відповіді в режимі розмови, задача 308) у проєкті вже ввімкнений; рядок вище нічого не
+змінює, якщо API вже ввімкнено.
 
 ## 2. Журнали в ЄС
 
@@ -238,6 +242,16 @@ gcloud scheduler jobs create http thinkhow-analyze-nightly --location=$REGION \
 Нових API і прав голос не потребує: розпізнавання йде через той самий Vertex AI (`aiplatform.googleapis.com`,
 `roles/aiplatform.user`, ADR-0005). Якщо текст не з'являється, натисніть «Розпізнати ще раз» — запис лишається на
 сторінці, доки не з'явиться текст.
+
+**Голос у відповідь — синтез (задача 308)**
+15. У своїй темі відкрийте код сторінки або інструменти розробника: у формі відповіді стоїть `data-voice="yes"` (для
+    мови, яку Google озвучує). У журналах після першої озвученої репліки — рядок `tts_call` з `outcome: "ok"`
+    (`voice`, `model`, `language`, `chars`, `latency_ms`) — без тексту. Синтез — Cloud Text-to-Speech на ендпоінті
+    `eu-texttospeech.googleapis.com`. Змінні `THINKHOW_TTS_ENDPOINT`, `THINKHOW_TTS_VOICE` (`Kore`),
+    `THINKHOW_TTS_TIMEOUT_S` (30) мають типові значення — задавати їх не треба. Чи вистачає service account
+    `thinkhow-web` наявних прав на Cloud Text-to-Speech, агент на розгортанні не перевіряв (локально виклик ішов з
+    ADC без окремої ролі): якщо в `tts_call` — `unavailable`, а в журналі помилка 403, service account бракує
+    права на Cloud Text-to-Speech у проєкті.
 
 **Що відповісти.** Якщо все так, відповідайте «так», і агент запише `SKELETON_VERIFIED`, PR-04 і PR-07 — `verified`.
 Якщо щось не так, назвіть номер пункту і що побачили. Тоді premise стає `falsified`, і задача повертається до M2/M3

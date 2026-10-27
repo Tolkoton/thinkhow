@@ -180,7 +180,7 @@ def _client(tmp_path: Path, store: LocalStorage, cards: dict[str, Card]) -> Test
     tokens = {"tok-alice": {"sub": "accounts.google.com:alice-1", "email": "alice@example.com"}}
     identity = IapIdentity("aud", lambda token, audience: tokens[token])
     speech = ScriptedSpeech("текст")
-    deps = Deps(store, identity, settings, Script(), lambda: T0, speech, cards)
+    deps = Deps(store, identity, settings, Script(), lambda: T0, speech, cards=cards)
     return TestClient(create_app(deps), raise_server_exceptions=False)
 
 
