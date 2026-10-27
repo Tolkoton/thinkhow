@@ -496,3 +496,19 @@
 - Surprises: three sealed block tests pin `deps.facilitate` as `functools.partial(..., knowledge=…)` and that a
   started service keeps its cards — B-live keeps both
 - Open for next slice: S5 starting notes (the router eval with notes)
+
+## Slice starting-notes — S5 of learning-loop (DONE 2026-10-27)
+
+- Content: `notes/<card>.yaml` × 25 — 50 notes (router: typical situations and the neighbour it is confused with;
+  facilitator: where people get stuck and how to lead out without a ready answer), from desk research with 64
+  sources (`.engine/artifacts/starting-notes/research.yaml`, `sources.md`); unopened sources marked in `basis`
+- Module: `knowledge.read_notes`, Job `notes` (`learning/job.py` — adds only ids `notes` never published and no other
+  writer holds; one revision through the version check), `scripts/router_eval.py --notes`, `Dockerfile` copies
+  `notes/`, `docs/deploy.md` §8a, `docs/deploy-sonko.md`
+- Tests: 29 by the slice-tester in `tests/contract/starting_notes/` (sealed; Q1–Q4 `taken`), green
+- Job: `.engine/artifacts/starting-notes/job.txt` — rev 2 with 50 notes, a second run nothing; the real person-
+  details check (`gemini-4-argon`, `eu`) passes all 50
+- Router eval (AC2, PR-28 verified): base 118/119, with notes 118/119; ×5: `jt-3` 4/5 → 4/5, `wr-1` 3/5 → 4/5
+  (`router-eval.compare.md`)
+- Surprises: `router_eval.py` had old type errors (CountingLlm without `search_text`, the log patch) — fixed
+- Open for next slice: S6 step results
