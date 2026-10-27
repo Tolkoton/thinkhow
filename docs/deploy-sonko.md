@@ -77,7 +77,9 @@
 
 ## Синтезатор щодня (задача 309)
 
-Після розгортання версії з задачі 309: крок 9a `docs/deploy.md` — Scheduler `thinkhow-synthesize-daily` (той самий
+Після розгортання версії з задачі 309: спершу крок 8a `docs/deploy.md` — один раз
+`gcloud run jobs execute thinkhow-learning --region=europe-west3 --wait --args=-m,thinkhow.learning.job,notes`
+(стартові нотатки, `notes_published` з `count` 50); потім крок 9a `docs/deploy.md` — Scheduler `thinkhow-synthesize-daily` (той самий
 Job `thinkhow-learning`, `args` `-m,thinkhow.learning.job,synthesize` через `overrides`, щодня о 04:00 Europe/Kyiv),
 потім один ручний запуск з перевіркою з того самого кроку. Запит на це пише власник («передай Сонькові»).
 

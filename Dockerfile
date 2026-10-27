@@ -13,6 +13,7 @@ RUN uv sync --frozen --no-dev
 
 COPY src/ /app/src/
 COPY cards/ /app/cards/
+COPY notes/ /app/notes/
 
 RUN useradd --system --uid 10001 thinkhow
 USER thinkhow

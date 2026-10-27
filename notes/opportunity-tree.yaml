@@ -1,0 +1,35 @@
+- id: opportunity-tree-router
+  audience: router
+  cards:
+  - opportunity-tree
+  title: Продуктова метрика або гора ідей
+  noticed: 'Типові ситуації: продакт-менеджер має завдання підняти утримання чи активацію і не знає, через що; команда
+    хоче будувати фічу на квартал і спершу перевірити, чи вона спрацює; у беклозі двадцять ідей, і треба вирішити,
+    з чого почати; згадано спринт, реліз, експерименти.'
+  do: 'Плутають з jobs-to-be-done: якщо ще незрозуміло, навіщо клієнти купують і з чим продукт конкурує, — спершу
+    jobs-to-be-done; якщо потреби видно і треба обрати рішення та його ризикове припущення — opportunity-tree. Плутають
+    з demand-test: продукту і метрики ще немає, питання одне — чи заплатять — demand-test. Якщо варіантів три-п''ять
+    і їх порівнюють за власними цінностями людини, а не за впливом на клієнтів, — weighted-matrix. Одне велике незворотне
+    рішення («брати інвестора?») — wrap-decision.'
+  basis: Torres T., "Opportunity Solution Tree", Product Talk — https://www.producttalk.org/glossary-discovery-opportunity-solution-tree/
+    ; Bland D. J., "How assumptions mapping can focus your teams…", Strategyzer, 2020 — https://www.strategyzer.com/library/how-assumptions-mapping-can-focus-your-teams-on-running-experiments-that-matter
+    ; McBride S., "RICE", Intercom — https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/
+    .
+- id: opportunity-tree-facilitator
+  audience: facilitator
+  cards:
+  - opportunity-tree
+  title: Можливість — це потреба, не рішення
+  noticed: 'Найбільше допомагає команді з метрикою і доступом до клієнтів. Застрягають так: на «який результат рухаємо?»
+    називають фічу; «можливості» формулюють як рішення («потрібен онбординг»); болі клієнтів називають без жодної
+    розмови з ними; закохуються в одне рішення; тест не може провалитися, бо поріг успіху не названо. Bland пише,
+    що команди часто запускають лендинги чи інтерв''ю, ігноруючи найризиковіші припущення; McBride радить ставити
+    впевненість 50 % і нижче, коли даних мало.'
+  do: 'Для результату: «яке число зміниться, якщо ми впораємося?». Якщо можливість звучить як рішення — «яку проблему
+    клієнта це розв''яже? звідки ви знаєте, що вона є — з розмови чи з припущення?». Для рішень — не менше трьох
+    на одну можливість. Для припущення: «що має бути правдою, щоб це спрацювало? на що з цього найменше доказів,
+    і що станеться, якщо воно хибне?». Поріг тесту назвати наперед. При понад шести ідеях — коротка оцінка RICE,
+    але числа ставить людина.'
+  basis: Torres T., Product Talk — https://www.producttalk.org/glossary-discovery-opportunity-solution-tree/ ; Bland
+    D. J., Strategyzer, 2020 — https://www.strategyzer.com/library/how-assumptions-mapping-can-focus-your-teams-on-running-experiments-that-matter
+    ; McBride S., Intercom — https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/ .

@@ -1,0 +1,34 @@
+- id: weighted-matrix-router
+  audience: router
+  cards:
+  - weighted-matrix
+  title: Два–чотири чіткі варіанти, спокійний тон
+  noticed: 'Типові ситуації: людина обирає між двома-трьома пропозиціями роботи; сім''я порівнює квартири; власник
+    бізнесу обирає постачальника чи сервіс із трьох; студент вибирає між університетами. Ознаки — названо варіанти
+    і їхні характеристики (ціна, відстань, зарплата), тон рівний, без паніки.'
+  do: 'Плутають з wrap-decision: якщо варіант один («чи робити X?») або варіантів ще немає — wrap-decision, щоб
+    розширити вибір; якщо варіанти чіткі — weighted-matrix. Плутають з evaporating-cloud: якщо кожен варіант захищає
+    справжню потребу і будь-який вибір щось руйнує — evaporating-cloud. Плутають з reversible-doors: тривога, параліч
+    чи брак часу — reversible-doors, бо таблиця лише посилить страх. Якщо варіантів понад шість у продуктовому беклозі
+    — opportunity-tree.'
+  basis: Stacey D. et al., "Decision aids for people facing health treatment or screening decisions", Cochrane Database
+    of Systematic Reviews, 2024 — https://www.textbookofdigitalhealth.com/references/stacey2024decisionaids.html
+    (сторінку Cochrane не відкрито, 403); Ottawa Personal Decision Guide — https://decisionaid.ohri.ca/decguide.html
+    .
+- id: weighted-matrix-facilitator
+  audience: facilitator
+  cards:
+  - weighted-matrix
+  title: Критерії з власних цінностей і звірка з відчуттям
+  noticed: 'Найбільше допомагає людям, які хочуть розібратися ґрунтовно. Застрягають так: критерії «як прийнято»
+    («престиж», «стабільність»), а не свої; критерії дублюють одне одного (зарплата і дохід); людина підкручує ваги,
+    поки не виграє «потрібний» варіант; таблиця підміняє людину. Ottawa Personal Decision Guide просить оцінити,
+    наскільки кожна перевага і ризик важить саме для людини; огляд Stacey та ін. (2024) пов''язує такі посібники
+    з ясністю власних цінностей.'
+  do: 'Для критеріїв: «що з цього ви відчуєте в звичайний вівторок через рік?», «чому вам це важливо?» — поки не
+    прозвучить своя цінність. Для дублів: «якщо один варіант виграє за першим, чи виграє він автоматично і за другим?».
+    Ваги — до оцінок варіантів. Якщо людина підкручує — назвати це спокійно: «схоже, якийсь варіант вам уже ближчий
+    — що в ньому?». Наприкінці: «таблиця каже А — як вам від цього?»; рішення за людиною.'
+  basis: Ottawa Personal Decision Guide — https://decisionaid.ohri.ca/decguide.html ; Stacey et al., 2024 — https://www.textbookofdigitalhealth.com/references/stacey2024decisionaids.html
+    ; Cochrane evidence bulletin 2024 — https://decisionaid.ohri.ca/docs/develop/Evidence%20Bulletin-%20Decision%20aids%20August%202024.pdf
+    (PDF не відкривав, лише видача).

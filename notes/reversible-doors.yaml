@@ -1,0 +1,35 @@
+- id: reversible-doors-router
+  audience: router
+  cards:
+  - reversible-doors
+  title: Застряг перед вибором, часу мало
+  noticed: 'Типові ситуації: людина тиждень не може вирішити, чи брати пропозицію, і не спить; треба відповісти
+    роботодавцю чи орендодавцю до завтра; дрібне за суттю рішення (курс, підписка, пробний місяць) подається як
+    катастрофа «назавжди»; людина боїться помилитися і через страх нічого не обирає. Bezos пише, що багато рішень
+    оборотні — «двері в обидва боки» — і для них годиться легкий процес.'
+  do: 'Плутають з wrap-decision: якщо людина спокійна, має час, а рішення справді незворотне і важливе — wrap-decision;
+    якщо тривога, часу обмаль або рішення можна скасувати — reversible-doors. Плутають з weighted-matrix: варіанти
+    чіткі, людина спокійна і хоче ґрунтовно зважити — weighted-matrix. Якщо це дилема двох справжніх потреб — evaporating-cloud;
+    якщо людина знає, що правильно, і боїться лише дії — mental-contrasting.'
+  basis: 'Bezos J., "2016 Letter to Shareholders", Amazon — https://www.aboutamazon.com/news/company-news/2016-letter-to-shareholders
+    ; Farnam Street, "Reversible and Irreversible Decisions" (цитата Bezos про Type 1/Type 2) — https://fs.blog/reversible-irreversible-decisions/
+    ; Welch S., "10-10-10", 2009 — опис: https://www.nbforum.com/newsroom/blog/suzy-welch-the-10-10-10-technique/
+    .'
+- id: reversible-doors-facilitator
+  audience: facilitator
+  cards:
+  - reversible-doors
+  title: Що можна скасувати і чого це коштує
+  noticed: 'Найбільше допомагає при паралічі від страху. Застрягають так: людина вважає незворотним усе рішення,
+    хоча незворотна лише його частина; або, навпаки, «оборотне» стає приводом не думати про ціну повернення; погляд
+    через 10 років лякає ще більше. Welch каже, що 10-10-10 змушує зрозуміти, що для людини справді важить; у листі
+    Bezos радить вирішувати, маючи приблизно 70 % потрібної інформації.'
+  do: 'Для оборотності: «що станеться, якщо через місяць ви захочете повернутися? що з цього можна скасувати, а
+    що ні? чого це коштуватиме — грошима, стосунками, часом?». Якщо «все незворотне» — розібрати на частини і спитати
+    про кожну. Для 10/10/10: «як ви почуватиметеся щодо цього варіанта через десять хвилин? через десять місяців?
+    через десять років?»; якщо далеке майбутнє лякає — лишити 10 місяців. Наступний крок відповідно до типу дверей
+    обирає людина.'
+  basis: 'Bezos J., 2016 Letter — https://www.aboutamazon.com/news/company-news/2016-letter-to-shareholders (перевірено:
+    «Many decisions are reversible, two-way doors» і «around 70%»; терміни Type 1/Type 2 — за https://fs.blog/reversible-irreversible-decisions/
+    , рік листа там не вказано); Welch S. — https://www.nbforum.com/newsroom/blog/suzy-welch-the-10-10-10-technique/
+    .'

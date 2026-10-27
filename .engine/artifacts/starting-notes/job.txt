@@ -1,0 +1,14 @@
+# Job notes на локальній теці (2026-10-27T22:24:47Z)
+$ python -m thinkhow.learning.job seed
+{"severity": "INFO", "created": true, "event": "seed_done", "request_id": null}
+exit 0
+$ python -m thinkhow.learning.job notes
+{"severity": "INFO", "rev": 2, "count": 50, "event": "notes_published", "request_id": null}
+exit 0
+$ python -m thinkhow.learning.job notes
+{"severity": "INFO", "rev": null, "count": 0, "event": "notes_published", "request_id": null}
+exit 0
+current: rev 2, cards 25, memory 50 (25 router, 25 facilitator)
+feed: [(2, 'notes', 'стартові нотатки до методів: 50'), (1, '', 'посів: 25 стартових карток')]
+model gemini-4-argon, region eu; notes 50
+all 50 at once -> None

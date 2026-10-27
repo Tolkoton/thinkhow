@@ -1,0 +1,35 @@
+- id: demand-test-router
+  audience: router
+  cards:
+  - demand-test
+  title: Чи заплатять, поки не збудовано
+  noticed: 'Типові ситуації: людина збирається кілька місяців писати онлайн-курс чи застосунок і хоче знати, чи
+    його куплять; майстер думає орендувати приміщення під нову послугу; друзі й опитування кажуть «супер», але жодної
+    оплати ще не було; команда хоче наперед вирішити, скільки відгуків означає «продовжуємо».'
+  do: 'Плутають з customer-interviews: якщо людина ще нічого не знає про клопоти клієнтів — спершу розмови (customer-interviews);
+    якщо задум сформульовано і треба перевірити, чи віддадуть щось за нього, — demand-test. Від opportunity-tree
+    відрізняє стан продукту: у opportunity-tree продукт уже працює, є метрика і кілька рішень, а тут продукту ще
+    немає. Якщо люди вже купують і питання — де взяти ще, це traction-channels. Якщо незрозуміло саме, що в пропозиції,
+    — спершу offer-design.'
+  basis: 'Savoia A., "The Right It", 2019; виступ "Build the Right It", Stanford eCorner, 2019 — https://stvp.stanford.edu/av/build-right-it-entire-talk
+    ; Camuffo A., Cordova A., Gambardella A., Spina C., RCT наукового підходу в підприємництві, Management Science,
+    2020 — опис: https://www.innovationgrowthlab.org/blog/confused-or-unimaginative-how-adoption-scientific-approach-improves-entrepreneurial
+    .'
+- id: demand-test-facilitator
+  audience: facilitator
+  cards:
+  - demand-test
+  title: Числа в гіпотезі і поріг до запуску
+  noticed: 'Найбільше допомагає перед великими вкладеннями часу чи грошей. Застрягають так: на «щонайменше X % з
+    Y зроблять Z» людина не може назвати X («не знаю, скільки — це нормально»); пропонує опитування чи лайки як
+    тест; «тест» розростається до справжнього продукту на місяці; поріг рішення не названо наперед, і після тесту
+    будь-який результат здається «обнадійливим». Savoia наголошує: шукати дані, а не думки; рахувати те, що люди
+    віддають, а не кажуть.'
+  do: 'Якщо X не названо — спитати, за якої частки людина сама б зупинилася, і за якої точно продовжила б; середина
+    між ними і є робочим порогом. Якщо пропонує опитування — спитати, що людина в тесті віддасть: гроші, передоплату,
+    контакт, час. Якщо тест довший за кілька днів — спитати, яку частину можна зробити вручну замість продукту.
+    Поріг записати до запуску словами людини; рішення після тесту теж її.'
+  basis: 'Savoia A., "The Right It", 2019; Stanford eCorner, 2019 — https://stvp.stanford.edu/av/build-right-it-entire-talk
+    ; The Product Compass, стаття про Savoia (skin in the game; формула XYZ — у вторинному описі) — https://www.productcompass.pm/p/how-to-build-the-right-product-with
+    ; Camuffo et al., реплікація на 759 фірмах, Strategic Management Journal, 2024 — https://repositorio.ie.edu/entities/publication/6aae4961-2c1d-45ed-97eb-e8bee19a2471
+    . Знайдено лише пошуком, сторінок не відкривав: https://repositorio.ie.edu/entities/publication/6aae4961-2c1d-45ed-97eb-e8bee19a2471.'

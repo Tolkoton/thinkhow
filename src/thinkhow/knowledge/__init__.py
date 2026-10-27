@@ -18,6 +18,7 @@ from thinkhow.knowledge.store import (
     current,
     latest_pair,
     publish,
+    read_notes,
     seed,
 )
 from thinkhow.knowledge.versions import (
@@ -64,6 +65,7 @@ __all__ = [
     "current",
     "latest_pair",
     "publish",
+    "read_notes",
     "rollback",
     "seed",
 ]

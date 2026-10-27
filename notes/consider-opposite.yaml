@@ -1,0 +1,38 @@
+- id: consider-opposite-router
+  audience: router
+  cards:
+  - consider-opposite
+  title: Тверде судження про світ чи іншу людину
+  noticed: 'Типові ситуації: менеджер упевнений, що «клієнти йдуть через ціну», і шукає підтвердження; людина перед
+    перемовинами чи в конфлікті вважає позицію іншої сторони безглуздою; засновник просить «просто підтвердити»,
+    що план правильний; після розбору досвіду людина різко перейшла до протилежного висновку. Спільне — вже є висновок,
+    і людина наводить лише факти на його користь.'
+  do: 'Найчастіше плутають з socratic-questioning: якщо переконання про саму людину («я ні на що не здатний», «мене
+    не візьмуть») — це socratic-questioning; якщо висновок про зовнішню ситуацію, ринок чи позицію опонента — consider-opposite.
+    Від pre-mortem відрізняє предмет: pre-mortem розтинає план, який ще не почався, а consider-opposite перевіряє
+    судження. Від evaporating-cloud — те, що людина хоче зрозуміти чужу позицію, а не розв''язати власну дилему
+    двох потреб.'
+  basis: 'Lord C. G., Lepper M. R., Preston E., "Considering the opposite: A corrective strategy for social judgment",
+    Journal of Personality and Social Psychology, 1984 — https://causeweb.org/cause/node/7638 ; Larrick R. P., "Debiasing",
+    Blackwell Handbook of Judgment and Decision Making, 2004 — https://scholars.duke.edu/publication/1056892 . Знайдено
+    лише пошуком, сторінок не відкривав: https://causeweb.org/cause/node/7638, https://scholars.duke.edu/publication/1056892.'
+- id: consider-opposite-facilitator
+  audience: facilitator
+  cards:
+  - consider-opposite
+  title: Протилежне без опудала і без маятника
+  noticed: 'Допомагає найбільше, коли людина дуже впевнена і просить підтвердження. Застрягають так: будують слабку
+    «протилежну» версію, яку легко відкинути; на питання про найсильніший аргумент іншої сторони кажуть «не знаю,
+    вони просто не розуміють»; або, навпаки, після вправи кидаються в протилежний висновок. Schwarz із колегами,
+    посилаючись на Larrick (2004), описують і зворотний ефект: коли людині важко придумати багато контраргументів,
+    вона може ще більше переконатися у своєму.'
+  do: 'Просити не «багато» контраргументів, а один-два найсильніші: «як би це пояснила розумна людина, яка з вами
+    не згодна, — так, щоб вона підписалася під вашим викладом?». Якщо «не знаю» — запитати, що бачить та сторона,
+    чого не бачить людина, або що мало б статися, щоб людина сама змінила думку. У суперечці — спершу перекази позиції
+    опонента, потім факти, що розрізняють версії. Ведучий не оголошує, яка версія правильна: людина сама переглядає
+    свою певність.'
+  basis: 'Lord, Lepper, Preston, 1984 — https://causeweb.org/cause/node/7638 ; Larrick R. P., "Debiasing", 2004
+    — https://stafforini.com/works/larrick-2004-debiasing/ ; Schwarz N. та ін., огляд про виправлення хибних уявлень
+    (у ньому посилання на Larrick 2004, с. 323, про зворотний ефект) — https://dornsife.usc.edu/norbert-schwarz/wp-content/uploads/sites/231/2023/11/07_aep_schwarz_et_al_setting-people-straight.pdf
+    (точну назву статті не перевірено; файл названо «setting people straight»). Знайдено лише пошуком, сторінок
+    не відкривав: https://causeweb.org/cause/node/7638, https://stafforini.com/works/larrick-2004-debiasing/, https://dornsife.usc.edu/norbert-schwarz/wp-content/uploads/sites/231/2023/11/07_aep_schwarz_et_al_setting-people-straight.pdf.'

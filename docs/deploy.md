@@ -196,6 +196,18 @@ gcloud scheduler jobs create http thinkhow-analyze-nightly --location=$REGION \
   --oauth-service-account-email=$SCHED
 ```
 
+## 8a. Стартові нотатки до методів — один раз (задача 309)
+
+Після розгортання версії з задачею 309 (і після `seed` / `cards`) Job кладе в Знання стартові нотатки до 25 методів з
+теки `notes/` образу — однією ревізією, через перевірку версії. Повторний запуск нічого не пише; відкочене чи змінене
+синтезатором не повертає.
+
+```bash
+gcloud run jobs execute thinkhow-learning --region=$REGION --wait --args=-m,thinkhow.learning.job,notes
+```
+
+У журналі має з'явитися `notes_published` з `rev` і `count` 50 (повторно — `rev` null, `count` 0).
+
 ## 9a. Cloud Scheduler: щодня `synthesize` (задача 309)
 
 Синтезатор щодня бере нові спостереження і сам змінює нотатки до методів (стрічку й «Відкотити» бачить власник на

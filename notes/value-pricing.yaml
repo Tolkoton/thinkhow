@@ -1,0 +1,34 @@
+- id: value-pricing-router
+  audience: router
+  cards:
+  - value-pricing
+  title: Скільки брати — від цінності, не від витрат
+  noticed: 'Типові ситуації: фрилансер не знає, брати 300 чи 1500, і рахує від своїх годин; консультант відчуває,
+    що для частини клієнтів його робота варта набагато більше; майстер бере «як усі на ринку»; людина хоче підняти
+    ціну і «спитала клієнтів, чи нормально».'
+  do: 'Плутають з offer-design: якщо клієнт не бачить, що отримає, і ціна лише здається проблемою — спершу offer-design.
+    Плутають з positioning: без знання, з чим порівнюють і для кого людина найкраща, ціні нема на що спертися —
+    positioning. Плутають з unit-economics: ціну названо, а питання — чи сходиться бізнес загалом — unit-economics.
+    Особиста покупка — не ця картка.'
+  basis: 'Forbis J. L., Mehta N. T., "Value-based strategies for industrial products", Business Horizons, 1981 (McKinsey
+    staff paper 1979) — опис EVC: McKinsey Quarterly, "Delivering value to customers" — https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/delivering-value-to-customers
+    ; Nagle T. T., Müller G., "The Strategy and Tactics of Pricing" — https://www.goodreads.com/book/show/4522828
+    . Знайдено лише пошуком, сторінок не відкривав: https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/delivering-value-to-customers,
+    https://www.goodreads.com/book/show/4522828.'
+- id: value-pricing-facilitator
+  audience: facilitator
+  cards:
+  - value-pricing
+  title: Найближча альтернатива — точка відліку
+  noticed: 'Найбільше допомагає, коли зміст пропозиції ясний. Застрягають так: людина не може назвати, що клієнт
+    обрав би без неї («нічого», «конкурент»), і забуває «зробити самому» чи найняти когось; не знає, скільки варта
+    кожна відмінність; рахує від собівартості; підтверджує ціну опитуванням. Відповіді на «скільки б заплатили?»
+    завищені в середньому приблизно на 21 % (Schmidt і Bijmolt, 2020), особливо для дорожчих товарів.'
+  do: 'Для альтернативи: «що зробив би клієнт, якби вас не було? скільки це коштувало б йому грошима і часом?».
+    Для відмінностей: «чим ви кращі — і що це заощаджує чи приносить клієнту? чим гірші?». Якщо «не знаю, скільки
+    варта» — спитати про конкретного клієнта: що в нього змінилося після роботи. Стеля — альтернатива плюс відмінності;
+    де під нею поставити ціну, вирішує людина. Перевірка — справжня пропозиція, не опитування.'
+  basis: 'McKinsey Quarterly, "Delivering value to customers" (EVC, Forbis і Mehta) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/delivering-value-to-customers
+    ; Schmidt J., Bijmolt T. H. A., Journal of the Academy of Marketing Science, 2020 — https://cris-portal.uni-muenster.de/portal/en/publication/60727941
+    . Знайдено лише пошуком, сторінок не відкривав: https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/delivering-value-to-customers,
+    https://cris-portal.uni-muenster.de/portal/en/publication/60727941.'

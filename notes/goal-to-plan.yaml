@@ -1,0 +1,34 @@
+- id: goal-to-plan-router
+  audience: router
+  cards:
+  - goal-to-plan
+  title: Мета є, шляху немає
+  noticed: 'Типові ситуації: людина хоче змінити професію за рік і не знає, з чого почати; фрилансер хоче вийти
+    на певний дохід, але кроків не бачить; студент має велику мету (вступ, переїзд) на кілька років і не може пов''язати
+    її з цим тижнем; після розбору ситуації обрано напрям, і його треба перетворити на перші кроки.'
+  do: 'Плутають з mental-contrasting: якщо людина не знає, як дійти, — goal-to-plan; якщо знає і навіть має план,
+    але відкладає чи кидає — mental-contrasting. Плутають з pre-mortem: план уже є і його перевіряють на провал
+    — pre-mortem; плану ще немає — goal-to-plan. Якщо мета — продуктова метрика, яку рухають через потреби клієнтів,
+    — opportunity-tree. Якщо мету ще не обрано і людина вагається між варіантами — weighted-matrix або wrap-decision.'
+  basis: 'Whitmore J., "Coaching for Performance" (GROW) — опис: Performance Consultants, "GROW Model" — https://www.performanceconsultants.com/grow-model
+    ; Robinson J. B., "Energy backcasting: a proposed method of policy analysis", Energy Policy, 1982 — https://ideas.repec.org/r/eee/enepol/v10y1982i4p337-344.html
+    . Знайдено лише пошуком, сторінок не відкривав: https://ideas.repec.org/r/eee/enepol/v10y1982i4p337-344.html.'
+- id: goal-to-plan-facilitator
+  audience: facilitator
+  cards:
+  - goal-to-plan
+  title: Мета-туман і список замість кроку
+  noticed: 'Найбільше допомагає, коли мета названа, а кроків немає. Застрягають так: мета розмита («бути щасливішим»,
+    «розвиватися»), і на питання «як ви зрозумієте, що досягли?» людина каже «не знаю»; у «де я зараз» перелічує
+    лише перешкоди, забуваючи ресурси; на шляхах бере перший-ліпший або чужий («так зробив знайомий»); замість одного
+    кроку з датою виходить список із десяти. Performance Consultants наводять застереження Вітмора: «будь-який диктатор
+    може використати GROW» — модель без коучингових навичок перетворюється на вказівки.'
+  do: 'Для мети: «що буде інакше в той день, коли мету досягнуто? що ви побачите чи зробите?». Якщо мета далека
+    — запропонувати напрям назад: описати стан досягнутої мети і спитати, що мало бути за рік, за пів року до нього.
+    Для реальності: «що вже є і що вже пробували?». Для шляхів — не менше трьох різних, перш ніж вибирати. Наприкінці:
+    «що одне ви зробите і коли? наскільки від 1 до 10 ви готові це зробити?». Шлях обирає людина.'
+  basis: 'Performance Consultants, "GROW Model" — https://www.performanceconsultants.com/grow-model ; Theeboom T.,
+    Beersma B., van Vianen A. E. M., "Does coaching work? A meta-analysis…", Journal of Positive Psychology, 2014
+    — https://research.vu.nl/en/publications/does-coaching-work-a-meta-analysis-on-the-effects-of-coaching-on- ;
+    Wikipedia, "Backcasting" — https://en.wikipedia.org/wiki/Backcasting . Знайдено лише пошуком, сторінок не відкривав:
+    https://en.wikipedia.org/wiki/Backcasting.'

@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import yaml
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 
 from thinkhow.knowledge.schema import Card, ChangeRecord, MemoryRecord, Rollback
 from thinkhow.platform.llm import KnowledgeRev
@@ -218,6 +218,24 @@ def _restore(memory: dict[str, str], mid: str, path: str | None) -> None:
 
 def _change_revs(storage: Storage) -> list[int]:
     return [int(m.group(1)) for path in storage.list("system", CHANGES) if (m := CHANGE_FILE.match(path))]
+
+
+def read_notes(notes_dir: Path) -> list[MemoryRecord]:
+    """The starting notes of the repository: every `*.yaml` of `notes_dir` by name, each a list of records
+    (learning-loop S5). A file that is not a list or a record off the schema → ValueError naming the file."""
+    records: list[MemoryRecord] = []
+    for file in sorted(notes_dir.glob("*.yaml")):
+        data = yaml.safe_load(file.read_text(encoding="utf-8"))
+        if not isinstance(data, list):
+            raise ValueError(f"{file.name} is not a list of notes")
+        try:
+            records += [MemoryRecord.model_validate(item) for item in data]
+        except ValidationError as exc:
+            raise ValueError(f"{file.name}: a note off the schema: {exc}") from exc
+    ids = [r.id for r in records]
+    if len(set(ids)) != len(ids):
+        raise ValueError("two notes with one id")
+    return records
 
 
 def _read_cards(cards_dir: Path) -> list[Card]:

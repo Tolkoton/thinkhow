@@ -1,0 +1,32 @@
+- id: reflective-cycle-router
+  audience: router
+  cards:
+  - reflective-cycle
+  title: Епізод, який досі зачіпає
+  noticed: 'Типові ситуації: людина посварилася з колегою і досі злиться; провалила співбесіду чи виступ і соромиться;
+    помічає, що в схожих ситуаціях знову робить те саме («знову та сама історія»); керівник після невдалої розмови
+    з підлеглим хоче зрозуміти свою роль. Спільне — конкретний минулий епізод з участю людини і почуття щодо нього.'
+  do: 'Плутають з five-whys: якщо зламався процес, продукт чи техніка і треба знайти механізм збою — five-whys;
+    якщо людина хоче зрозуміти себе в цій історії — reflective-cycle. Плутають із socratic-questioning: якщо перевіряють
+    одне переконання саме по собі, без конкретного епізоду, — socratic-questioning. Якщо подія ще не сталася і людина
+    дивиться вперед — goal-to-plan чи pre-mortem. Якщо треба швидко обрати — reversible-doors або weighted-matrix.'
+  basis: 'Gibbs G., "Learning by Doing", 1988 — опис: University of Edinburgh, Reflection Toolkit, "Gibbs'' reflective
+    cycle" — https://reflection.ed.ac.uk/reflectors-toolkit/reflecting-on-experience/gibbs-reflective-cycle ; Argyris
+    C., "Double Loop Learning in Organizations", Harvard Business Review, 1977 — бібліографію підтверджено через
+    https://en.wikipedia.org/wiki/Double-loop_learning ; сторінку HBR не відкривав.'
+- id: reflective-cycle-facilitator
+  audience: facilitator
+  cards:
+  - reflective-cycle
+  title: Почуття окремо, правило — наприкінці
+  noticed: 'Найбільше допомагає, коли почуття заважають тверезо подивитися на пережите. Застрягають так: опис епізоду
+    перетворюється на нескінченну сповідь з оцінками; почуття змішуються з фактами; людина картає себе замість шукати
+    урок; висновок хитається в протилежний бік; план розмитий. University of Edinburgh радить тримати опис фактичним,
+    оцінки лишати на потім, не відповідати на всі допоміжні питання і робити план конкретним.'
+  do: 'Для опису: «що було сказано і зроблено — так, ніби це зняла камера?»; оцінки м''яко відкладати до етапу «що
+    вийшло». Для почуттів: «що ви відчували тоді? а що зараз?». Якщо самобичування — «що в цьому епізоді вийшло,
+    хай навіть мало?». Для другої петлі: «яке правило ви тоді виконували — «я мушу…», «не можна…»? звідки воно і
+    чи служить вам досі?». Наприкінці одна дія для схожої ситуації — словами людини.'
+  basis: 'University of Edinburgh, Reflection Toolkit, "Gibbs'' reflective cycle" — https://reflection.ed.ac.uk/reflectors-toolkit/reflecting-on-experience/gibbs-reflective-cycle
+    ; Wikipedia, "Double-loop learning" (Argyris 1977) — https://en.wikipedia.org/wiki/Double-loop_learning . Знайдено
+    лише пошуком, сторінок не відкривав: https://en.wikipedia.org/wiki/Double-loop_learning.'

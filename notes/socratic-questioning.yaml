@@ -1,0 +1,34 @@
+- id: socratic-questioning-router
+  audience: router
+  cards:
+  - socratic-questioning
+  title: Переконання, що звучить як аксіома
+  noticed: 'Типові ситуації: людина каже «я завжди все завалюю» перед новим проєктом; вважає, що «просити допомоги
+    — слабкість», і тягне все сама; план тримається на неперевіреному «бо так роблять усі» чи «без цього нічого
+    не вийде»; катастрофізує: «мене ніколи не візьмуть». Ознака — «завжди», «ніколи», «усі», оцінка подана як факт.'
+  do: 'Плутають з consider-opposite: якщо висновок про зовнішню ситуацію чи позицію опонента — consider-opposite;
+    якщо переконання людини про себе, інших чи світ, яке звужує її вибір, — socratic-questioning. Плутають з mental-contrasting:
+    якщо переконання вже перевірене і людина просто не починає — mental-contrasting. Якщо засади задачі («так заведено
+    в галузі») — first-principles. Якщо людина дуже засмучена і хоче, щоб її вислухали, — не розбирати думки.'
+  basis: 'Braun J. D., Strunk D. R., Sasso K. E., Cooper A. A., "Therapist use of Socratic questioning predicts
+    session-to-session symptom change in cognitive therapy for depression", Behaviour Research and Therapy, 2015
+    — https://pmc.ncbi.nlm.nih.gov/articles/PMC4449800 ; Padesky C. A., "Socratic Questioning: Changing Minds or
+    Guiding Discovery?", 1993 — https://padesky.com/wp-content/uploads/2012/11/socquest.pdf .'
+- id: socratic-questioning-facilitator
+  audience: facilitator
+  cards:
+  - socratic-questioning
+  title: Відкривати, а не переконувати
+  noticed: 'Найбільше допомагає, коли переконання звужує вибір, а людина готова думати. Padesky (1993) обстоює,
+    що мета сократівських питань — допомогти відкрити, а не змінити думку; Beck зі співавторами радили питати замість
+    сперечатися. Застрягають так: питання шикуються в допит, і людина захищається; ведучий непомітно підставляє
+    свою «правильну» думку; розмова зсувається в почуття замість думки; на «звідки ви це знаєте?» людина каже «просто
+    знаю».'
+  do: 'Почати з точного формулювання: «як би ви сказали це одним реченням?». Далі по одному питанню: «на чому це
+    тримається — факти, досвід, чиїсь слова?», «чи був випадок, коли це не справдилося?», «як ще можна пояснити
+    те саме?», «що б ви сказали другові з такою думкою?». Якщо «просто знаю» — «коли ви вперше так подумали?». Точнішу
+    версію переконання формулює людина; ведучий не оголошує думку хибною. Це інструмент мислення, не терапія.'
+  basis: Padesky C. A., 1993 — https://padesky.com/wp-content/uploads/2012/11/socquest.pdf (PDF зашифрований, зміст
+    — за описом https://www.psychologytools.com/professional/techniques/socratic-questioning-socratic-dialogue );
+    Braun et al., 2015 — https://pmc.ncbi.nlm.nih.gov/articles/PMC4449800 (спостережне дослідження, 55 пацієнтів,
+    причинності не доводить).

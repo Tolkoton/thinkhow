@@ -35,7 +35,8 @@ from thinkhow.facilitation import (
     Turn,
     route,
 )
-from thinkhow.knowledge import CurrentKnowledge, current, seed
+from thinkhow.knowledge import CurrentKnowledge, MemoryChange, apply_memory, current, read_notes, seed
+from thinkhow.learning.vet import measure as instruction_measure
 from thinkhow.platform import llm as model
 from thinkhow.platform import log
 from thinkhow.platform.config import Settings
@@ -330,6 +331,10 @@ class CountingLlm:
         self._count()
         return self.inner.stream_json(system, contents, schema, rev)
 
+    def search_text(self, system: str, prompt: str, rev: model.KnowledgeRev | None) -> tuple[str, Any]:
+        self._count()
+        return self.inner.search_text(system, prompt, rev)
+
 
 def cards_hash(folder: Path) -> str:
     digest = hashlib.sha256()
@@ -349,21 +354,27 @@ def main() -> None:
     parser.add_argument("--label", default="прогін")
     parser.add_argument("--only", nargs="*", default=None)
     parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument("--notes", type=Path, default=None)
     args = parser.parse_args()
     cases = [c for c in load_cases(args.cases) if not args.only or c["id"] in args.only]
     storage = LocalStorage(Path(tempfile.mkdtemp(prefix="thinkhow-eval-")))
     seed(storage, ROOT / "cards")
+    if args.notes is not None:  # the starting notes (task 309): checked by `notes` already, no model vet here
+        change = MemoryChange(what="нотатки для прогону", why="router_eval --notes", by="notes",
+                              upsert=read_notes(args.notes), remove=[])  # fmt: skip
+        apply_memory(storage, change, lambda records: None, instruction_measure)
     knowledge = current(storage)
     settings = product_settings()
     llm = CountingLlm(model.make_llm(settings, lambda *_: ""))
     log_lines: list[str] = []
-    original = model.log_event
+    patched: Any = model  # the llm module's own name for the log (Q5), replaced for the run
+    original = patched.log_event
 
-    def recording(event: str, **fields: Any) -> None:
+    def recording(event: str, stream: Any = None, **fields: object) -> None:
         line = {"severity": "INFO", **fields, "event": event, "request_id": log.request_id.get()}
         log_lines.append(json.dumps(line, ensure_ascii=False, default=str))
 
-    model.log_event = recording  # the llm module's own name for the log (Q5)
+    patched.log_event = recording
     try:
         outcomes = run(cases, knowledge, llm, args.workers)
         down = [o for o in outcomes if o.action == "unavailable"]
@@ -374,7 +385,7 @@ def main() -> None:
             }
             outcomes = sorted([again.get(o.case_id, o) for o in outcomes], key=lambda o: o.case_id)
     finally:
-        model.log_event = original
+        patched.log_event = original
     calls = [line for line in log_lines if '"llm_call"' in line]
     summ = summary(outcomes, sorted(knowledge.cards))
     stamp = datetime.now(UTC).strftime("%Y-%m-%dT%H%M%SZ")
