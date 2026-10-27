@@ -400,3 +400,13 @@ one; do not reopen the old one in conversation.
   the code can answer.
 - Door: two-way. Cost to reverse: a re-plan of S2b (contract fingerprint), no code yet.
 - Status: CLOSED.
+
+## 2026-10-27 — AUTONOMOUS — feature learning-loop (task 309): the round-2 BLOCK applied without a third critic round
+- What: the feature-critic's round 2 (the last) blocked on the version check missing «без подробиць людей» (M2 S6, A5,
+  F11, domain-map §4, G4). I applied exactly the fix it named (S1: `apply_memory(..., vet)`, a model check over the
+  records added; S3: the rule in the synthesizer's instruction; a rejected version shown in `/learning`) and its notes.
+- Why: the fix restores what the master map already requires — it is conformance, not a new design; the owner's rule
+  allows no third round on the same plan.
+- Door: two-way. Cost to reverse: one injected function and one rejection reason in S1; the slice planner and its
+  critic still review S1's contract.
+- Status: CLOSED.

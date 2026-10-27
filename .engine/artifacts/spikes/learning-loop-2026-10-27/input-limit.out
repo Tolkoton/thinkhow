@@ -1,0 +1,7 @@
+gemini-4-argon input_token_limit= None output_token_limit= None
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+ModuleNotFoundError: No module named 'thinkhow'
+router instruction chars= 35923 tokens= 12346 chars/token= 2.91
+facilitator opportunity-tree chars= 12903 tokens= 4328 chars/token= 2.98
+input_token_limit not in Vertex metadata (models.get gives None); documented Gemini Pro-class limit 1 048 576
