@@ -12,7 +12,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, ValidationError
 
-from thinkhow.facilitation.language import language_rule
+from thinkhow.facilitation.language import language_rule, listening_rule
 from thinkhow.facilitation.settle import frame, sources_line
 from thinkhow.facilitation.types import (
     DeepPlan,
@@ -152,7 +152,7 @@ def _grown(
 
 
 def _system(rule: str, ctx: FacilitationContext) -> str:
-    return f"{RULES[rule]}\n\n# Мова відповіді\n{language_rule(ctx.language)}\n"
+    return f"{RULES[rule]}\n\n# Мова відповіді\n{language_rule(ctx.language)}\n{listening_rule(ctx.spoken)}"
 
 
 def _plan_contents(ctx: FacilitationContext, question: str) -> list[model.Turn]:

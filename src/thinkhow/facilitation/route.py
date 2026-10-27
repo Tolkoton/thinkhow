@@ -9,7 +9,7 @@ from typing import Any, Literal, cast
 
 from pydantic import ValidationError, create_model, field_validator, model_validator
 
-from thinkhow.facilitation.language import language_rule
+from thinkhow.facilitation.language import language_rule, listening_rule
 from thinkhow.facilitation.types import (
     Candidate,
     Decision,
@@ -60,7 +60,7 @@ class RouterAnswer(_Frozen):
 
 def route(ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm) -> RouterAnswer:
     """Flow: instruction → frame → generate_json on the narrowed schema (one retry) → a plain RouterAnswer."""
-    system = router_instruction(knowledge, ctx.language)
+    system = router_instruction(knowledge, ctx.language, ctx.spoken)
     contents, schema, rev = _contents(ctx), router_schema(knowledge), knowledge.rev_pair()
     answer = _twice(lambda: llm.generate_json(system, contents, schema, rev))
     return RouterAnswer.model_validate(answer.model_dump())
@@ -78,10 +78,11 @@ def router_schema(knowledge: CurrentKnowledge) -> type[RouterAnswer]:
     )
 
 
-def router_instruction(knowledge: CurrentKnowledge, language: str | None) -> str:
-    """The router rules, the person's language, then the router half of every card."""
+def router_instruction(knowledge: CurrentKnowledge, language: str | None, spoken: bool = False) -> str:
+    """The router rules, the person's language, whether they listen, then the router half of every card."""
     cards = "\n\n".join(_card_text(card) for _, card in sorted(knowledge.cards.items()))
-    return f"{ROUTER_RULES}\n\n# Мова відповіді\n{language_rule(language)}\n\n{CARDS_HEAD}\n{cards}\n"
+    rules = f"{ROUTER_RULES}\n\n# Мова відповіді\n{language_rule(language)}\n{listening_rule(spoken)}"
+    return f"{rules}\n{CARDS_HEAD}\n{cards}\n"
 
 
 def _card_text(card: Card) -> str:

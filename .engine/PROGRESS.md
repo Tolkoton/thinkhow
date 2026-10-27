@@ -404,3 +404,17 @@
 - Surprises: the old page test runs conversation.js in a vm without TextEncoder — bytes are counted by code points;
   `tests/web/test_icon_buttons.py` lists the topic page's buttons — «Режим розмови» added
 - Open for next slice: S2b (resilience), S3 (spoken replies), then the live check
+
+## Slice spoken-replies — S3 of voice-conversation-mode (DONE 2026-10-27)
+
+- Module: `src/thinkhow/facilitation/listening.md` + `language.listening_rule`; the section «# Людина слухає» right
+  after «# Мова відповіді» in the facilitator, router, fact answer and deep cycle instructions, only with
+  `FacilitationContext.spoken`; `workspace.reply/retry(..., spoken)`; `/reply`, `/retry` take the form field `spoken`
+- Tests: 16 by the slice-tester in `tests/contract/spoken_replies/` (sealed; Seam 1 oracle — the 42 strings of
+  commit cefcb02); full suite 1090 passed
+- Live (PR-26 verified): `.engine/artifacts/spikes/spoken-replies-live-2026-10-27T113010Z.txt` — offer in words
+  «перший… другий… третій», sources «за даними AutoScout24… ADAC», «Ми обрали метод WRAP, і перший крок…»
+- Smoke: `scripts/smoke_test_spoken_replies.py` — with `spoken=1` every system instruction has the section, without
+  it none (`.engine/artifacts/spikes/spoken-replies-smoke-2026-10-27.txt`)
+- Surprises: none
+- Open for next slice: S2b (resilience), then the live check of the whole mode

@@ -13,6 +13,7 @@ from thinkhow.facilitation.converse import converse
 from thinkhow.facilitation.deep import with_deep
 from thinkhow.facilitation.language import NO_LANGUAGE_RULE as NO_LANGUAGE_RULE
 from thinkhow.facilitation.language import language_rule as language_rule
+from thinkhow.facilitation.language import listening_rule
 from thinkhow.facilitation.settle import RESEARCH_SECTION as RESEARCH_SECTION
 from thinkhow.facilitation.settle import frame, settle, with_research
 from thinkhow.facilitation.settle import sources_line as sources_line
@@ -52,7 +53,7 @@ def lead(
     card = knowledge.cards.get(ctx.card_id)
     if card is None:
         raise ValueError(f"no card {ctx.card_id!r} in the Knowledge")
-    system = system_instruction(card, knowledge.memory, ctx.language, ctx.routing is not None)
+    system = system_instruction(card, knowledge.memory, ctx.language, ctx.routing is not None, ctx.spoken)
     contents, rev = _contents(ctx), knowledge.rev_pair()
     shown: list[str] = []
     raw, found = "", None
@@ -71,10 +72,15 @@ def lead(
 
 
 def system_instruction(
-    card: Card, memory: Sequence[MemoryRecord], language: str | None = None, routed: bool = False
+    card: Card,
+    memory: Sequence[MemoryRecord],
+    language: str | None = None,
+    routed: bool = False,
+    spoken: bool = False,
 ) -> str:
-    """The rules, the person's language (F13), under the router its section, then the card and the memory."""
-    head = f"{RULES}\n\n# Мова відповіді\n{language_rule(language)}\n"
+    """The rules, the person's language (F13), whether they listen (task 308), under the router its section,
+    then the card and the memory."""
+    head = f"{RULES}\n\n# Мова відповіді\n{language_rule(language)}\n{listening_rule(spoken)}"
     if routed:
         head += f"\n{ROUTED_SECTION}\n\n{RESEARCH_SECTION}\n\n{DEEP_FIELD}\n"
     return f"{head}\n# Картка\n{card_prompt(card)}\n# Пам'ять досвіду\n{_memory_text(memory)}\n"

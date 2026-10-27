@@ -1,0 +1,3 @@
+spoken=1: 200 SSE answered; model calls 2, section in each: [True, True]
+spoken=—: 200 SSE answered; model calls 1, section in each: [False]
+OK: with spoken=1 every system instruction has «# Людина слухає», without it none has

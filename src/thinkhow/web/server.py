@@ -107,14 +107,21 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         return TEMPLATES.TemplateResponse(request, "topic.html", context)
 
     @app.post("/topics/{uid}/{topic_id}/reply")
-    def reply(user: User, uid: str, topic_id: str, text: Annotated[str, Form()] = "") -> Response:
+    def reply(
+        user: User,
+        uid: str,
+        topic_id: str,
+        text: Annotated[str, Form()] = "",
+        spoken: Annotated[str, Form()] = "",
+    ) -> Response:
         ref = workspace.TopicRef(uid, topic_id)
-        return _stream(workspace.reply(deps.storage, deps.facilitate, user, ref, text, deps.now()))
+        events = workspace.reply(deps.storage, deps.facilitate, user, ref, text, deps.now(), spoken == "1")
+        return _stream(events)
 
     @app.post("/topics/{uid}/{topic_id}/retry")
-    def retry(user: User, uid: str, topic_id: str) -> Response:
+    def retry(user: User, uid: str, topic_id: str, spoken: Annotated[str, Form()] = "") -> Response:
         ref = workspace.TopicRef(uid, topic_id)
-        return _stream(workspace.retry(deps.storage, deps.facilitate, user, ref, deps.now()))
+        return _stream(workspace.retry(deps.storage, deps.facilitate, user, ref, deps.now(), spoken == "1"))
 
     @app.post("/topics/{uid}/{topic_id}/delete")
     def delete(user: User, uid: str, topic_id: str) -> Response:

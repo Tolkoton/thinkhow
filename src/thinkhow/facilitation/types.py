@@ -197,6 +197,7 @@ class FacilitationContext:
     text: str
     language: str | None = None
     routing: tuple[Decision, ...] | None = field(default=None, compare=False)
+    spoken: bool = False
 
 
 Facilitate = Callable[

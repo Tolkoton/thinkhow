@@ -7,7 +7,7 @@ from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
 
-from thinkhow.facilitation.language import language_rule
+from thinkhow.facilitation.language import language_rule, listening_rule
 from thinkhow.facilitation.settle import RESEARCH_SECTION, frame, settle, with_research
 from thinkhow.facilitation.types import (
     FacilitationContext,
@@ -28,7 +28,7 @@ def answer_fact(
     ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm
 ) -> Iterator[ReplyDelta | FacilitatorUpdate | ResearchEvent]:
     """Flow: the instruction → one streamed call → the deltas on → settle the update → what search found."""
-    system, contents, rev = answer_instruction(ctx.language), frame(ctx), knowledge.rev_pair()
+    system, contents, rev = answer_instruction(ctx.language, ctx.spoken), frame(ctx), knowledge.rev_pair()
     shown: list[str] = []
     raw, found = "", None
     for event in llm.stream_json(system, contents, FactAnswer, rev):
@@ -43,9 +43,10 @@ def answer_fact(
     yield from with_research(settled, found)
 
 
-def answer_instruction(language: str | None) -> str:
-    """`answer.md`, the person's language, then the facts-about-the-world rule; no card, no facilitator."""
-    return f"{ANSWER_RULES}\n\n# Мова відповіді\n{language_rule(language)}\n\n{RESEARCH_SECTION}\n"
+def answer_instruction(language: str | None, spoken: bool = False) -> str:
+    """`answer.md`, the person's language, whether they listen, then the facts-about-the-world rule."""
+    head = f"{ANSWER_RULES}\n\n# Мова відповіді\n{language_rule(language)}\n{listening_rule(spoken)}"
+    return f"{head}\n{RESEARCH_SECTION}\n"
 
 
 def _no_card(fields: dict[str, Any]) -> dict[str, Any]:

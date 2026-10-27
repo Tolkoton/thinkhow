@@ -126,7 +126,13 @@ def open_topic(storage: Storage, user: CurrentUser, ref: TopicRef, now: datetime
 
 
 def reply(
-    storage: Storage, facilitate: Facilitate, user: CurrentUser, ref: TopicRef, text: str, now: datetime
+    storage: Storage,
+    facilitate: Facilitate,
+    user: CurrentUser,
+    ref: TopicRef,
+    text: str,
+    now: datetime,
+    spoken: bool = False,
 ) -> Iterator[ReplyEvent]:
     """Checks now (Q4, eager); the returned iterator saves the turn, then streams and writes the answer."""
     _check_now(now)
@@ -137,11 +143,16 @@ def reply(
     conv = _read_conversation(storage, ref)
     if _awaiting(conv, now):
         raise PendingAnswer("the last turn has no answer yet: retry it first")
-    return _reply_flow(storage, facilitate, ref, conv, clean, now, _language_of(storage, user))
+    return _reply_flow(storage, facilitate, ref, conv, clean, now, _language_of(storage, user), spoken)
 
 
 def retry(
-    storage: Storage, facilitate: Facilitate, user: CurrentUser, ref: TopicRef, now: datetime
+    storage: Storage,
+    facilitate: Facilitate,
+    user: CurrentUser,
+    ref: TopicRef,
+    now: datetime,
+    spoken: bool = False,
 ) -> Iterator[ReplyEvent]:
     _check_now(now)
     _can_write(user, ref)
@@ -149,7 +160,8 @@ def retry(
     if not _awaiting(conv, now):
         raise NothingToRetry("no unanswered turn in an open session")
     last = conv.sessions[-1].turns[-1]
-    return _answer(storage, facilitate, ref, conv, last.no, last.text, now, _language_of(storage, user))
+    lang = _language_of(storage, user)
+    return _answer(storage, facilitate, ref, conv, last.no, last.text, now, lang, spoken)
 
 
 def delete_topic(storage: Storage, user: CurrentUser, ref: TopicRef) -> None:
@@ -189,6 +201,7 @@ def _reply_flow(
     text: str,
     now: datetime,
     lang: str | None,
+    spoken: bool = False,
 ) -> Iterator[ReplyEvent]:
     """Flow (M2): the person's turn into conversation.md → Saved → the answer (I4)."""
     if _closed_at(conv.sessions[-1], now) is not None:
@@ -197,7 +210,7 @@ def _reply_flow(
     conv.sessions[-1].turns.append(conv_file.Turn(turn_no, "user", conv_file.second(now), text))
     _write_conversation(storage, ref, conv)
     yield Saved(turn_no)
-    yield from _answer(storage, facilitate, ref, conv, turn_no, text, now, lang)
+    yield from _answer(storage, facilitate, ref, conv, turn_no, text, now, lang, spoken)
 
 
 def _answer(
@@ -209,13 +222,14 @@ def _answer(
     text: str,
     now: datetime,
     lang: str | None,
+    spoken: bool = False,
 ) -> Iterator[ReplyEvent]:
     """Flow: facilitate → deltas → answer into conversation.md → map, routing, research.json → Answered."""
     session = conv.sessions[-1]
     history = [FacilitationTurn(t.role, t.text) for t in session.turns if t.no < turn_no]
     problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
     card_id = current_card(routing) or CARD_ID
-    ctx = FacilitationContext(card_id, history, problem_map, turn_no, text, lang, routing)
+    ctx = FacilitationContext(card_id, history, problem_map, turn_no, text, lang, routing, spoken)
     update: FacilitatorUpdate | None = None
     decisions: list[Decision] = []
     research: list[ResearchEvent] = []
