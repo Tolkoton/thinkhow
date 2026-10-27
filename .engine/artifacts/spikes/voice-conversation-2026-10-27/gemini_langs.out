@@ -1,0 +1,41 @@
+af-ZA OK 3.81
+rup-BG HTTP 400 Requested language code 'rup-BG' is not supported for Gemini voices.
+az-AZ OK 4.26
+bs-BA HTTP 400 Requested language code 'bs-BA' is not supported for Gemini voices.
+ca-ES OK 3.77
+ceb HTTP 400 Requested language code 'ceb' is not supported for Gemini voices.
+es-419 OK 4.35
+fil-PH OK 3.73
+gl-ES OK 4.23
+ha-NG HTTP 400 Requested language code 'ha-NG' is not supported for Gemini voices.
+is-IS OK 3.99
+jv-ID HTTP 400 Requested language code 'jv-ID' is not supported for Gemini voices.
+kea-CV HTTP 400 Requested language code 'kea-CV' is not supported for Gemini voices.
+ln-CD HTTP 400 Requested language code 'ln-CD' is not supported for Gemini voices.
+mt-MT HTTP 400 Requested language code 'mt-MT' is not supported for Gemini voices.
+ms-MY OK 4.0
+uz-UZ HTTP 400 Requested language code 'uz-UZ' is not supported for Gemini voices.
+pt-PT OK 3.35
+be-BY OK 3.72
+ky-KG HTTP 400 Requested language code 'ky-KG' is not supported for Gemini voices.
+mk-MK OK 3.94
+mn-MN OK 3.11
+tg-TJ HTTP 400 Requested language code 'tg-TJ' is not supported for Gemini voices.
+kk-KZ HTTP 400 Requested language code 'kk-KZ' is not supported for Gemini voices.
+hy-AM OK 3.49
+ar-EG OK 3.98
+sd-Arab-IN HTTP 400 Requested language code 'sd-Arab-IN' is not supported for Gemini voices.
+fa-IR OK 3.35
+ne-NP OK 4.72
+as-IN HTTP 400 Requested language code 'as-IN' is not supported for Gemini voices.
+bn-BD OK 3.57
+pa-Guru-IN HTTP 400 Requested language code 'pa-Guru-IN' is not supported for Gemini voices.
+or-IN OK 3.22
+my-MM OK 4.07
+ka-GE OK 4.95
+am-ET OK 4.12
+km-KH HTTP 400 Requested language code 'km-KH' is not supported for Gemini voices.
+cmn-Hans-CN HTTP 400 Requested language code 'cmn-Hans-CN' is not supported for Gemini voices.
+yue-Hant-HK HTTP 400 Requested language code 'yue-Hant-HK' is not supported for Gemini voices.
+gemini-tts accepts: 21 ['af-ZA', 'az-AZ', 'ca-ES', 'es-419', 'fil-PH', 'gl-ES', 'is-IS', 'ms-MY', 'pt-PT', 'be-BY', 'mk-MK', 'mn-MN', 'hy-AM', 'ar-EG', 'fa-IR', 'ne-NP', 'bn-BD', 'or-IN', 'my-MM', 'ka-GE', 'am-ET']
+refused: 18 ['rup-BG', 'bs-BA', 'ceb', 'ha-NG', 'jv-ID', 'kea-CV', 'ln-CD', 'mt-MT', 'uz-UZ', 'ky-KG', 'tg-TJ', 'kk-KZ', 'sd-Arab-IN', 'as-IN', 'pa-Guru-IN', 'km-KH', 'cmn-Hans-CN', 'yue-Hant-HK']

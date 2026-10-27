@@ -152,3 +152,13 @@ Nothing listed here was removed.
 ### confirm (0)
 
 ### flag_only (0)
+
+## 2026-10-27T09:01:47Z — voice-conversation-mode plan: prefetch of the next sentence
+
+### confirm (0)
+
+### flag_only (1)
+- APPLIED BY THE ARCHITECT `F-592add92` **.engine/architecture/feature/voice-conversation-mode.md:128** — speculative_slice: S2b can drop 'наступне речення береться наперед, поки грає поточне'. Without it the loop still meets AC1-AC6: one sentence at a time through /speak, and latency still recorded.
+  - applied to the plan 2026-10-27T09:02:01Z: prefetch of the next sentence removed from S2b, moved to Deferred — nothing is asked of the owner
+  - evidence: read .engine/architecture/feature/voice-conversation-mode.md:82 the plan says: 'Узяти наступне речення наперед (S2b) — вибір архітектора заради затримки, не вимога'; read .engine/architecture/feature/voice-conversation-mode.md:31 'Порогів часу власник не назвав; затримку записуємо (P4), не обмежуємо'; read .engine/goals.md:40 P4: quality over speed; time is only recorded; read .engine/goals.md:41 P5: what may be needed later is noted, not built now
+  - test safety none, reversal risk medium, protected false, traces to: none found: the plan's own line 82 says it is not a requirement; P4 and P5 argue against it

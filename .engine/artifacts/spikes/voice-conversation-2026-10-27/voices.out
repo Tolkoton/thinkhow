@@ -1,0 +1,87 @@
+voices: 2066 language codes: 63
+af-ZA	Afrikaans	Standard	
+rup-BG	Armãneashti	—	
+az-AZ	Azərbaycan	—	
+bs-BA	Bosanski	—	
+ca-ES	Català	Standard	
+ceb	Cebuano	—	
+cs-CZ	Čeština	Chirp3-HD,Standard,Wavenet	
+da-DK	Dansk	Chirp3-HD,Neural2,Standard,Wavenet	
+de-DE	Deutsch	Chirp-HD,Chirp3-HD,Neural2,Polyglot,Standard,Studio,Wavenet	
+et-EE	Eesti	Chirp3-HD,Standard	
+en-AU	English (Australia)	Chirp-HD,Chirp3-HD,Neural2,News,Polyglot,Standard,Wavenet	
+en-IN	English (India)	Chirp-HD,Chirp3-HD,Neural2,Standard,Wavenet	
+en-GB	English (United Kingdom)	Chirp-HD,Chirp3-HD,Neural2,News,Standard,Studio,Wavenet	
+en-US	English (United States)	Chirp-HD,Chirp3-HD,Neural2,News,Polyglot,Standard,Studio,Wavenet,other	
+es-ES	Español (España)	Chirp-HD,Chirp3-HD,Neural2,Polyglot,Standard,Studio,Wavenet	
+es-US	Español (Estados Unidos)	Chirp-HD,Chirp3-HD,Neural2,News,Polyglot,Standard,Studio,Wavenet	
+es-419	Español (Latinoamérica)	—	es-ES,es-US
+fil-PH	Filipino	Neural2,Standard,Wavenet	
+fr-CA	Français (Canada)	Chirp-HD,Chirp3-HD,Neural2,Standard,Wavenet	
+fr-FR	Français (France)	Chirp-HD,Chirp3-HD,Neural2,Polyglot,Standard,Studio,Wavenet	
+gl-ES	Galego	Standard	
+ha-NG	Hausa	—	
+hr-HR	Hrvatski	Chirp3-HD	
+id-ID	Indonesia	Chirp3-HD,Standard,Wavenet	
+is-IS	Íslenska	Standard	
+it-IT	Italiano	Chirp-HD,Chirp3-HD,Neural2,Standard,Wavenet	
+jv-ID	Jawa	—	
+kea-CV	Kabuverdianu	—	
+sw-KE	Kiswahili	Chirp3-HD	
+lv-LV	Latviešu	Chirp3-HD,Standard	
+lt-LT	Lietuvių	Chirp3-HD,Standard	
+ln-CD	Lingála	—	
+hu-HU	Magyar	Chirp3-HD,Standard,Wavenet	
+mt-MT	Malti	—	
+ms-MY	Melayu	Standard,Wavenet	
+nl-NL	Nederlands	Chirp3-HD,Standard,Wavenet	
+nb-NO	Norsk bokmål	Chirp3-HD,Standard,Wavenet	
+uz-UZ	O‘zbek	—	
+pl-PL	Polski	Chirp3-HD,Standard,Wavenet	
+pt-BR	Português (Brasil)	Chirp3-HD,Neural2,Standard,Wavenet	
+pt-PT	Português (Portugal)	Standard,Wavenet	
+ro-RO	Română	Chirp3-HD,Standard,Wavenet	
+sk-SK	Slovenčina	Chirp3-HD,Standard,Wavenet	
+sl-SI	Slovenščina	Chirp3-HD	
+fi-FI	Suomi	Chirp3-HD,Standard,Wavenet	
+sv-SE	Svenska	Chirp3-HD,Standard,Wavenet	
+vi-VN	Tiếng Việt	Chirp3-HD,Neural2,Standard,Wavenet	
+tr-TR	Türkçe	Chirp3-HD,Standard,Wavenet	
+el-GR	Ελληνικά	Chirp3-HD,Standard,Wavenet	
+be-BY	Беларуская	—	
+bg-BG	Български	Chirp3-HD,Standard	
+ky-KG	Кыргызча	—	
+mk-MK	Македонски	—	
+mn-MN	Монгол	—	
+sr-RS	Српски	Chirp3-HD,Standard	
+tg-TJ	Тоҷикӣ	—	
+uk-UA	Українська	Chirp3-HD,Standard,Wavenet	
+kk-KZ	Қазақ тілі	—	
+hy-AM	Հայերեն	—	
+he-IL	עברית	Chirp3-HD,Standard,Wavenet	
+ar-EG	العربية	—	ar-XA
+sd-Arab-IN	سنڌي (ڀارت)	—	
+fa-IR	فارسی	—	
+ne-NP	नेपाली	—	
+mr-IN	मराठी	Chirp3-HD,Standard,Wavenet	
+hi-IN	हिन्दी	Chirp3-HD,Neural2,Standard,Wavenet	
+as-IN	অসমীয়া	—	
+bn-BD	বাংলা (বাংলাদেশ)	—	bn-IN
+bn-IN	বাংলা (ভারত)	Chirp3-HD,Standard,Wavenet	
+pa-Guru-IN	ਪੰਜਾਬੀ (ਗੁਰਮੁਖੀ)	—	pa-IN
+pa-IN	ਪੰਜਾਬੀ (ਭਾਰਤ)	Chirp3-HD,Standard,Wavenet	
+gu-IN	ગુજરાતી	Chirp3-HD,Standard,Wavenet	
+or-IN	ଓଡ଼ିଆ	—	
+te-IN	తెలుగు	Chirp3-HD,Standard	
+kn-IN	ಕನ್ನಡ	Chirp3-HD,Standard,Wavenet	
+ml-IN	മലയാളം	Chirp3-HD,Standard,Wavenet	
+th-TH	ไทย	Chirp3-HD,Neural2,Standard	
+my-MM	မြန်မာ	—	
+ka-GE	ქართული	—	
+ko-KR	한국어	Chirp3-HD,Neural2,Standard,Wavenet	
+am-ET	አማርኛ	Standard,Wavenet	
+km-KH	ខ្មែរ	—	
+cmn-Hans-CN	中文 (简体)	—	cmn-CN,cmn-TW
+ja-JP	日本語	Chirp3-HD,Neural2,Standard,Wavenet	
+yue-Hant-HK	粵語	—	yue-HK
+with Chirp3-HD: 46 with any voice: 54 no exact voice: ['rup-BG', 'az-AZ', 'bs-BA', 'ceb', 'es-419', 'ha-NG', 'jv-ID', 'kea-CV', 'ln-CD', 'mt-MT', 'uz-UZ', 'be-BY', 'ky-KG', 'mk-MK', 'mn-MN', 'tg-TJ', 'kk-KZ', 'hy-AM', 'ar-EG', 'sd-Arab-IN', 'fa-IR', 'ne-NP', 'as-IN', 'bn-BD', 'pa-Guru-IN', 'or-IN', 'my-MM', 'ka-GE', 'km-KH', 'cmn-Hans-CN', 'yue-Hant-HK']

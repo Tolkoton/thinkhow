@@ -1,0 +1,35 @@
+uk-UA s0 chars=58 cloud-chirp3hd-opus: 1.17 14691
+uk-UA s0 chars=58 cloud-chirp3hd-mp3: 1.23 17952
+uk-UA s0 chars=58 cloud-gemini-flash-tts: 4.32 22338
+uk-UA s0 chars=58 vertex-ew4-flash-tts: 4.53 234766
+uk-UA s0 chars=58 vertex-ew4-flash-tts-stream-first: 1.29 total 2.95s bytes 260714
+uk-UA s1 chars=105 cloud-chirp3hd-opus: 1.74 33899
+uk-UA s1 chars=105 cloud-chirp3hd-mp3: 1.73 32832
+uk-UA s1 chars=105 cloud-gemini-flash-tts: 5.52 38252
+uk-UA s1 chars=105 vertex-ew4-flash-tts: 7.02 296206
+uk-UA s1 chars=105 vertex-ew4-flash-tts-stream-first: 1.34 total 4.65s bytes 427754
+uk-UA s2 chars=156 cloud-chirp3hd-opus: 2.36 49034
+uk-UA s2 chars=156 cloud-chirp3hd-mp3: 2.0 44832
+uk-UA s2 chars=156 cloud-gemini-flash-tts: 7.7 56602
+uk-UA s2 chars=156 vertex-ew4-flash-tts: 8.02 559246
+uk-UA s2 chars=156 vertex-ew4-flash-tts-stream-first: 1.45 total 5.76s bytes 613994
+pl-PL s0 chars=64 cloud-chirp3hd-opus: 1.22 19729
+pl-PL s0 chars=64 cloud-chirp3hd-mp3: 1.25 19104
+pl-PL s0 chars=64 cloud-gemini-flash-tts: 4.21 22338
+pl-PL s0 chars=64 vertex-ew4-flash-tts: 4.73 265486
+pl-PL s0 chars=64 vertex-ew4-flash-tts-stream-first: 1.26 total 2.92s bytes 245354
+pl-PL s1 chars=122 cloud-chirp3hd-opus: 1.54 31761
+pl-PL s1 chars=122 cloud-chirp3hd-mp3: 1.54 30144
+pl-PL s1 chars=122 cloud-gemini-flash-tts: 5.81 35939
+pl-PL s1 chars=122 vertex-ew4-flash-tts: 6.26 422926
+pl-PL s1 chars=122 vertex-ew4-flash-tts-stream-first: 1.31 total 3.67s bytes 412394
+pl-PL s2 chars=176 cloud-chirp3hd-opus: 2.24 50516
+pl-PL s2 chars=176 cloud-chirp3hd-mp3: 2.21 52032
+pl-PL s2 chars=176 cloud-gemini-flash-tts: 7.84 61777
+pl-PL s2 chars=176 vertex-ew4-flash-tts: 8.18 628366
+pl-PL s2 chars=176 vertex-ew4-flash-tts-stream-first: 1.35 total 5.77s bytes 654314
+cloud-chirp3hd-opus median 1.64 max 2.36 n 6
+cloud-chirp3hd-mp3 median 1.63 max 2.21 n 6
+cloud-gemini-flash-tts median 5.66 max 7.84 n 6
+vertex-ew4-flash-tts median 6.64 max 8.18 n 6
+vertex-ew4-flash-tts-stream-first median 1.33 max 1.45 n 6
