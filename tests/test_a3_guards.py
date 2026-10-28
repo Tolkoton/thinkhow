@@ -117,6 +117,12 @@ def test_the_guards_see_a_planted_breach() -> None:
     assert system_writes_outside(ok, "learning/") == []
 
 
+def test_a_bucket_built_by_an_expression_is_unnamed() -> None:
+    for bucket in ("self.buckets['users']", "bucket_for(k)", "f'us{k}'"):
+        source = f"def h(self, storage, k):\n    storage.write({bucket}, 'u/x', b'', 't')\n"
+        assert unnamed_buckets(source) == [2], bucket
+
+
 def _is_method_call(node: ast.AST) -> TypeGuard[ast.Call]:
     return isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and node.func.attr in METHODS
 
@@ -131,8 +137,8 @@ def _constant_bucket(node: ast.Call) -> object:
 
 
 def _looks_like_bucket(arg: ast.expr) -> bool:
-    """A name or an attribute as the first argument of a Storage method (a variable bucket)."""
-    return isinstance(arg, ast.Name | ast.Attribute)
+    """A name, an attribute, a subscript, a call or an f-string as the first argument (a variable bucket)."""
+    return isinstance(arg, ast.Name | ast.Attribute | ast.Subscript | ast.Call | ast.JoinedStr)
 
 
 def _string_assignments(func: ast.AST) -> dict[str, ast.expr]:

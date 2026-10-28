@@ -1,4 +1,0 @@
-states: listening → hearing → thinking → speaking → listening → hearing → thinking → speaking → listening → hearing → thinking → speaking → listening
-/speak statuses: [200, 502, 200, 200, 200, 200]
-wake lock requests: ['screen']; tones started (Hz): [880, 880, 880, 880]
-OK: one /speak failed and was skipped; 3 cycles without a touch; files under /tmp/thinkhow-resilience-utx1yrn8
