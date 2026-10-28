@@ -136,3 +136,13 @@
 - Record: tasks/done/715-open-item-test-gap-a-contract-test-that-a-person-a/report.md
 - Reason: All four questions hold. Every reference I could check says what the report claims. The one item of «Що зробити» is answered: there is a test, a green run, red runs on mutations, and the report explains openly why it did not write the 'no ban in router.md' test. The report asks the owner no open question, and engine terms stay in English (overseer, commit, evals).
 - Request: 20261028T142234Z-99dd55 (attempt 1)
+
+## 2026-10-28T14:25:02Z — 716-open-item-test-gap-a-test-that-reads-style-css-and — READER_BLOCK
+- Record: tasks/done/716-open-item-test-gap-a-test-that-reads-style-css-and/report.md
+- Reason: Question 1 fails. The report puts the test at `tests/web/test_icon_buttons.py:125`, but line 125 is `assert 'aria-pressed="false"' in topic` inside `test_mic_state_words_are_for_screen_readers_only`. `test_the_stylesheet_shows_the_mic_states_the_words_used_to_say` starts at line 128. Questions 2–4 hold: the task's single item is answered (an existing test, both runs shown, no code changed), there are no open questions, and the terms stay English (overseer, runner, commit).
+- Request: 20261028T142441Z-3cbed8 (attempt 1)
+
+## 2026-10-28T17:11:29Z — 716-open-item-test-gap-a-test-that-reads-style-css-and — READER_PASS
+- Record: tasks/done/716-open-item-test-gap-a-test-that-reads-style-css-and/report.md
+- Reason: All four checks pass. Every reference I could check matches: the test at tests/web/test_icon_buttons.py:128, the line numbers of the failing asserts (134–137), style.css lines 173–178, and commit f63b36d with its subject and time. The single «Що зробити» item is answered: the test already exists, both runs are shown, and the code was left unchanged. The report asks the owner no question, and the technical terms are in English.
+- Request: 20261028T171101Z-ca3b5f (attempt 2)
