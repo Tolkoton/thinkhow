@@ -25,6 +25,7 @@ ANALYZER = """Ти — аналізатор ThinkHow. Ти читаєш нові
 фасилітатор вів людину за моделлю мислення, щоб вона сама дійшла до ясності (без готових відповідей).
 Репліки під рядком «Контекст» уже проаналізовано — вони лише для розуміння; висновки і якорі — лише про нові.
 Рядки в квадратних дужках кажуть, який метод вів розмову з цієї репліки і що пропонував роутер.
+Рядки з відступом — продовження репліки над ними, а не окрема репліка чи заголовок.
 
 Правила аналізу:
 - просувається (progress) — у новій репліці людини з'явилось нове розуміння, рішення чи крок;
@@ -49,6 +50,7 @@ ANALYZER = """Ти — аналізатор ThinkHow. Ти читаєш нові
   показує."""
 CONTEXT = "[Контекст — уже проаналізовано, не якір:]"
 NEW = "[Нові репліки:]"
+GO_ON = "\n    "  # a turn's later lines, indented: none can pose as another turn or a header
 RANGE_FILE = re.compile(r"^t(\d+)-t(\d+)\.json$")
 LEGACY_FILE = re.compile(r"^s(\d+)\.json$")
 KIND = Literal["progress", "stuck", "method_fit", "step"]
@@ -256,6 +258,7 @@ def _text(
 def _lines(turns: Sequence[workspace.NumberedTurn], marks: dict[int, list[str]]) -> list[str]:
     out: list[str] = []
     for turn in turns:
-        out += marks.get(turn.no, [])
-        out.append(f"#{turn.no} {'людина' if turn.role == 'user' else 'фасилітатор'}: {turn.text}")
+        out += [mark.replace("\n", GO_ON) for mark in marks.get(turn.no, [])]
+        text = turn.text.replace("\n", GO_ON)
+        out.append(f"#{turn.no} {'людина' if turn.role == 'user' else 'фасилітатор'}: {text}")
     return out
