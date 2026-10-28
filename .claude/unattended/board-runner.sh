@@ -890,9 +890,9 @@ run_task() {
     if [ -f "$(reader_marker "$stem")" ]; then   # board 099, 100: three readers in a row refused the sketch's record or the task's report
       park_task "$stem" reader-blocks "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("record", ""))' "$(reader_marker "$stem")" 2>/dev/null)"; return 0
     fi
-    # if [ "$(memo get "$stem" age_sec)" -ge "$TASK_MAX" ]; then
-    #   park_task "$stem" deadline "$((TASK_MAX / 3600))"; return 0
-    # fi
+    if [ "$(memo get "$stem" age_sec)" -ge "$TASK_MAX" ]; then
+      park_task "$stem" deadline "$((TASK_MAX / 3600))"; return 0
+    fi
     if [ "$(memo get "$stem" idle)" -ge "$STALL_ATTEMPTS" ]; then
       park_task "$stem" no-commit "$STALL_ATTEMPTS"; return 0
     fi
