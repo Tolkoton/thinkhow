@@ -5,6 +5,12 @@ session — every topic with turns after the last analyzed one gets one call, th
 `t<first>-t<last>.json`, `Observation` carries `first_turn`/`last_turn`, `analyze_failed` carries
 `first_turn`/`last_turn` and no `session_no`. A session boundary is set up by 24 h of silence (the injected
 `now`) or by a hand-written legacy `closed` marker — never by the button, which is gone.
+
+Carried over by objection (task 720, answer A) to analysis-rules: the model answers
+`{"observations": [...]}` with `kind`; the file is an `ObservationSet` whose observations carry `id`,
+`turn`, `link`, `kind`, `card_id` (None without `routing.json`) and the set's `analyzed_at`. The context of
+a new session is every analyzed turn of the topic (one-conversation, Q2). Every other check — calls,
+report, cursor, failure, log — is unchanged.
 """
 
 from datetime import datetime, timedelta
@@ -29,7 +35,8 @@ from skell_fakes import (
     write_topic,
 )
 
-from thinkhow.learning.analyze import ANALYZER, AnalyzeReport, Observation, analyze
+from thinkhow.learning.analyze import ANALYZER, AnalyzeReport, analyze
+from thinkhow.learning.observations import Observation, ObservationSet
 from thinkhow.platform.llm import LlmUnavailable, Turn
 from thinkhow.platform.storage import LocalStorage
 
@@ -129,18 +136,26 @@ def test_observation_carries_the_range_the_answer_and_now(tmp_path: Path) -> Non
         rec = by_path[range_path(uid, topic_id, 1, 2)]
         assert rec.op == "write"
         assert rec.content_type == "application/json"
-        got = Observation.model_validate_json(rec.data)
-        assert got == Observation(
+        got = ObservationSet.model_validate_json(rec.data)
+        assert got == ObservationSet(
             uid=uid,
             topic_id=topic_id,
             first_turn=1,
             last_turn=2,
-            turn=2,  # FakeLlm answers the last anchor of the enum
-            link=f"/topics/{uid}/{topic_id}#t2",
-            worked=False,
-            finding="Фасилітатор поставив одне питання.",
-            cause="method",
             analyzed_at=NOW,
+            observations=[
+                Observation(
+                    id=f"{uid}/{topic_id}/t1-t2/1",
+                    turn=2,  # FakeLlm answers the last anchor of the enum
+                    link=f"/topics/{uid}/{topic_id}#t2",
+                    kind="stuck",
+                    worked=False,
+                    finding="Фасилітатор поставив одне питання.",
+                    cause="method",
+                    card_id=None,  # no routing.json
+                    analyzed_at=NOW,
+                )
+            ],
         )
 
 
@@ -154,10 +169,12 @@ def lines_of(llm: FakeLlm) -> list[str]:
     return [line for line in call.contents[0].text.split("\n") if line.strip()]
 
 
-def test_one_generate_json_call_with_analyzer_one_user_turn_of_numbered_lines_without_headers(
+def test_one_generate_json_call_with_analyzer_one_user_turn_of_numbered_lines_earlier_session_as_context(
     tmp_path: Path,
 ) -> None:
-    """The first new turn opens a session (after 24 h of silence): only the new turns, no headers."""
+    """The first new turn opens a session (after 24 h of silence): the analyzed turns of the earlier
+    session come as context, then the new ones (one-conversation, Q2: «Контекст аналізатора — усі вже
+    проаналізовані репліки теми перед першою новою»; was: only the new turns, no headers)."""
     storage = LocalStorage(tmp_path)
     write_topic(
         storage,
@@ -183,6 +200,10 @@ def test_one_generate_json_call_with_analyzer_one_user_turn_of_numbered_lines_wi
     llm = FakeLlm()
     analyze(storage, llm, NOW)
     assert lines_of(llm) == [
+        CONTEXT,
+        "#1 людина: перша-сесія",
+        "#2 фасилітатор: Так?",
+        NEW,
         "#3 людина: Хочу відкрити кав'ярню за три місяці.",
         "#4 фасилітатор: Що може піти не так?",
     ]

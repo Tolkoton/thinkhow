@@ -6,6 +6,9 @@ file of its own: the app of S5 in local mode, then `job.run(["analyze"], …)` o
 Corrected by objection (round 2, slice continuous-analysis, task 202): no `POST …/close` (the route is gone;
 its 404 is checked by tests/contract/continuous_analysis/); the open conversation is analyzed at once into
 `t1-t2.json`.
+
+Carried over by objection (task 720, answer A) to analysis-rules: the file is an
+`ObservationSet`; every observation of it links to a turn the page has.
 """
 
 import re
@@ -15,8 +18,8 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 from skell_fakes import CARDS, local_environ
 
-from thinkhow.learning.analyze import Observation
 from thinkhow.learning.job import run
+from thinkhow.learning.observations import ObservationSet
 from thinkhow.web.app import build_deps
 from thinkhow.web.server import create_app
 
@@ -35,11 +38,14 @@ def test_seam4_local_chain_ends_in_an_observation_whose_link_opens_an_existing_t
 
     file = tmp_path / "system" / "learning" / "observations" / "local-owner" / topic_id / "t1-t2.json"
     assert file.is_file()
-    obs = Observation.model_validate_json(file.read_bytes())
-    assert (obs.first_turn, obs.last_turn) == (1, 2)
-    assert obs.turn in {1, 2}
-    assert obs.link == f"/topics/local-owner/{topic_id}#t{obs.turn}"
-    path, anchor = obs.link.split("#", 1)
-    page = client.get(path)
-    assert page.status_code == 200
-    assert re.search(rf"""\bid=["']{anchor}["']""", page.text), page.text
+    got = ObservationSet.model_validate_json(file.read_bytes())
+    assert (got.uid, got.topic_id) == ("local-owner", topic_id)
+    assert (got.first_turn, got.last_turn) == (1, 2)
+    assert got.observations
+    for obs in got.observations:
+        assert obs.turn in {1, 2}
+        assert obs.link == f"/topics/local-owner/{topic_id}#t{obs.turn}"
+        path, anchor = obs.link.split("#", 1)
+        page = client.get(path)
+        assert page.status_code == 200
+        assert re.search(rf"""\bid=["']{anchor}["']""", page.text), page.text

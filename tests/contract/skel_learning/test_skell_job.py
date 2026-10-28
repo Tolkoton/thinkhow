@@ -3,6 +3,9 @@
 Corrected by objection (round 2, slice continuous-analysis, task 202): `closed_sessions` → `topic_sessions`,
 `s<n>.json` → `t<first>-t<last>.json`, `session_no`/`closed_at` → `first_turn`/`last_turn`; the topics need
 no closing. `learning/job.py` itself is unchanged by that slice.
+
+Carried over by objection (task 720, answer A) to analysis-rules: the file is an
+`ObservationSet`; the local script answers one `progress` observation on the first value of the enum.
 """
 
 from datetime import timedelta
@@ -25,8 +28,8 @@ from skell_fakes import (
     write_topic,
 )
 
-from thinkhow.learning.analyze import Observation
 from thinkhow.learning.job import run
+from thinkhow.learning.observations import Observation, ObservationSet
 from thinkhow.platform.config import ConfigError
 from thinkhow.platform.storage import LocalStorage
 from thinkhow.workspace import TopicRef, topic_sessions
@@ -83,17 +86,25 @@ def test_run_analyze_in_local_mode_writes_the_scripted_observation_and_returns_0
     assert run(["analyze"], local_environ(tmp_path), CARDS, lambda: NOW) == 0
     raw = storage.read("system", range_path(ALICE, "t-a00000000001", 3, 4))
     assert raw is not None
-    assert Observation.model_validate_json(raw) == Observation(
+    assert ObservationSet.model_validate_json(raw) == ObservationSet(
         uid=ALICE,
         topic_id="t-a00000000001",
         first_turn=3,
         last_turn=4,
-        turn=3,  # the first value of the schema's enum
-        link=f"/topics/{ALICE}/t-a00000000001#t3",
-        worked=True,
-        finding="(локальний режим) Людина назвала план; фасилітатор поставив одне питання.",
-        cause="facilitation",
         analyzed_at=NOW,
+        observations=[
+            Observation(
+                id=f"{ALICE}/t-a00000000001/t3-t4/1",
+                turn=3,  # the first value of the schema's enum
+                link=f"/topics/{ALICE}/t-a00000000001#t3",
+                kind="progress",
+                worked=True,
+                finding="(локальний режим) Людина назвала план; фасилітатор поставив одне питання.",
+                cause="facilitation",
+                card_id=None,  # no routing.json
+                analyzed_at=NOW,
+            )
+        ],
     )
     done = logs.events("analyze_done")
     assert len(done) == 1

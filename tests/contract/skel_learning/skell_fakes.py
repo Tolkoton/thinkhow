@@ -1,10 +1,13 @@
 """Helpers for the skel-learning contract tests (slice tester). Built from the contract, not the code.
 
+Carried over to the set shape of analysis-rules (task 720, owner's answer A): the answer
+`{"observations": [...]}` with `kind`, the file `ObservationSet`, four causes.
+
 - write_topic: a hand-written `conversation.md` in the format of S4 (ADR-0004) in the `users` bucket.
 - SpyStorage: a `LocalStorage` that records every write (`write` and `create_if_absent`) in order.
-- FakeLlm: an `Llm` double for `generate_json`; records every call; answers with the LAST anchor of the
-  schema's enum (or a chosen one), or raises the exception planned for a session (found by a token that
-  appears in that session's turns).
+- FakeLlm: an `Llm` double for `generate_json`; records every call; answers a set of ONE observation
+  (`kind: stuck`, `cause: method`) on the LAST anchor of the schema's enum (or a chosen answer), or raises
+  the exception planned for a session (found by a token that appears in that session's turns).
 - LogCapture: every JSON line written by `log_event` (its default stream redirected) or on stdout.
 """
 
@@ -93,21 +96,31 @@ def range_path(uid: str, topic_id: str, first: int, last: int) -> str:
 
 
 def observation_bytes(uid: str, topic_id: str, first: int, last: int, analyzed_at: datetime) -> bytes:
-    """A present observation of turns `first..last` (anchored on `first`), as a JSON file of the new shape."""
-    from thinkhow.learning.analyze import Observation
+    """A present observation file of turns `first..last`: a set of one observation anchored on `first`
+    (analysis-rules, Seam «Файл»: `ObservationSet(uid, topic_id, first_turn, last_turn, analyzed_at,
+    observations)`)."""
+    from thinkhow.learning.observations import Observation, ObservationSet
 
     return (
-        Observation(
+        ObservationSet(
             uid=uid,
             topic_id=topic_id,
             first_turn=first,
             last_turn=last,
-            turn=first,
-            link=f"/topics/{uid}/{topic_id}#t{first}",
-            worked=True,
-            finding="Вже проаналізовано раніше.",
-            cause="circumstances",
             analyzed_at=analyzed_at,
+            observations=[
+                Observation(
+                    id=f"{uid}/{topic_id}/t{first}-t{last}/1",
+                    turn=first,
+                    link=f"/topics/{uid}/{topic_id}#t{first}",
+                    kind="progress",
+                    worked=True,
+                    finding="Вже проаналізовано раніше.",
+                    cause="circumstances",
+                    card_id=None,
+                    analyzed_at=analyzed_at,
+                )
+            ],
         )
         .model_dump_json()
         .encode("utf-8")
@@ -144,9 +157,30 @@ def tree(root: Path) -> dict[str, bytes]:
     return {p.relative_to(root).as_posix(): p.read_bytes() for p in root.rglob("*") if p.is_file()}
 
 
+def item_properties(schema: type[BaseModel]) -> dict[str, Any]:
+    """The properties of one item of `observations` in the answer schema (analysis-rules, «Схема відповіді»),
+    `$ref` resolved."""
+    js = schema.model_json_schema()
+    items = js["properties"]["observations"]["items"]
+    if "$ref" in items:
+        items = js["$defs"][items["$ref"].rsplit("/", 1)[-1]]
+    return dict(items["properties"])
+
+
 def enum_of(schema: type[BaseModel]) -> list[str]:
-    prop = schema.model_json_schema()["properties"]["anchor"]
-    return list(prop["enum"])
+    return list(item_properties(schema)["anchor"]["enum"])
+
+
+def one(
+    anchor: str,
+    kind: str = "stuck",
+    worked: bool = False,
+    cause: str = "method",
+    finding: str = "Фасилітатор поставив одне питання.",
+) -> dict[str, Any]:
+    """One observation of the answer, fields in the contract's order `kind, finding, worked, cause,
+    anchor`."""
+    return {"kind": kind, "finding": finding, "worked": worked, "cause": cause, "anchor": anchor}
 
 
 def validation_error(schema: type[BaseModel]) -> ValidationError:
@@ -181,6 +215,9 @@ class FakeLlm:
     def stream_json(self, *args: Any, **kwargs: Any) -> Any:
         raise AssertionError("the analyzer must use generate_json, not stream_json")
 
+    def search_text(self, *args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("the analyzer must use generate_json, not search_text")
+
     def generate_json(
         self, system: str, contents: Sequence[Turn], schema: Any, rev: KnowledgeRev | None
     ) -> Any:
@@ -190,16 +227,7 @@ class FakeLlm:
             if token in call.text:
                 raise exc(schema) if callable(exc) and not isinstance(exc, BaseException) else exc
         anchors = enum_of(schema)
-        data = (
-            self.answer(anchors)
-            if self.answer is not None
-            else {
-                "finding": "Фасилітатор поставив одне питання.",
-                "worked": False,
-                "cause": "method",
-                "anchor": anchors[-1],
-            }
-        )
+        data = self.answer(anchors) if self.answer is not None else {"observations": [one(anchors[-1])]}
         return schema.model_validate(data)
 
     def calls_with(self, token: str) -> list[LlmCall]:

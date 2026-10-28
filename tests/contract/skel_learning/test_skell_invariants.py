@@ -6,6 +6,11 @@ Corrected by objection (round 2, slice continuous-analysis, task 202): each inva
 new turns and `t<first>-t<last>.json` files instead of closed sessions and `s<n>.json`. I1: the anchor is a
 turn of the new range and the numbering runs through the topic. I2: unchanged in purpose. I3: turns already
 covered by an observation file are never sent to the model as new again, over runs with non-decreasing `now`.
+
+Carried over by objection (task 720, answer A) to analysis-rules: the answer is
+`{"observations": [...]}` with `kind`, the file an `ObservationSet`; I1 is checked on each observation of
+the set. I3 counts the turns sent as new — after `[Нові репліки:]` — because one-conversation (Q2) sends
+every analyzed turn of the topic as marked context; the anchor enum of the later run is the new turn only.
 """
 
 from datetime import timedelta
@@ -25,6 +30,7 @@ from skell_fakes import (
     T,
     enum_of,
     observation_bytes,
+    one,
     range_path,
     tree,
     validation_error,
@@ -32,19 +38,27 @@ from skell_fakes import (
 )
 
 from thinkhow.knowledge import seed
-from thinkhow.learning.analyze import AnalyzeReport, Observation, analyze
+from thinkhow.learning.analyze import AnalyzeReport, analyze
+from thinkhow.learning.observations import ObservationSet
 from thinkhow.platform.llm import LlmUnavailable
 from thinkhow.platform.storage import LocalStorage
 
 H = timedelta(hours=1)
+CONTEXT = "[Контекст — уже проаналізовано, не якір:]"
+NEW = "[Нові репліки:]"
 
 
 def first_anchor(anchors: list[str]) -> dict[str, Any]:
     return {
-        "finding": "Питання прояснило план.",
-        "worked": True,
-        "cause": "facilitation",
-        "anchor": anchors[0],
+        "observations": [
+            one(
+                anchors[0],
+                kind="progress",
+                worked=True,
+                cause="facilitation",
+                finding="Питання прояснило план.",
+            )
+        ]
     }
 
 
@@ -121,10 +135,11 @@ def test_I1_anchor_is_a_turn_of_its_new_range_and_link_leads_to_it(tmp_path: Pat
         assert enum_of(calls[0].schema) == enum, token
         raw = storage.read("system", range_path(uid, topic_id, first, last))
         assert raw is not None, token
-        got = Observation.model_validate_json(raw)
+        got = ObservationSet.model_validate_json(raw)
         assert (got.first_turn, got.last_turn) == (first, last), token
-        assert got.turn == turn, token
-        assert got.link == f"/topics/{uid}/{topic_id}#t{turn}", token
+        assert len(got.observations) == 1, token
+        assert got.observations[0].turn == turn, token
+        assert got.observations[0].link == f"/topics/{uid}/{topic_id}#t{turn}", token
 
     # the last anchor too: turns 3-4 of the first topic, answered with "t4"
     storage2 = LocalStorage(tmp_path / "again")
@@ -141,8 +156,8 @@ def test_I1_anchor_is_a_turn_of_its_new_range_and_link_leads_to_it(tmp_path: Pat
     analyze(storage2, FakeLlm(), NOW)
     raw2 = storage2.read("system", range_path(ALICE, "t-a00000000001", 3, 4))
     assert raw2 is not None
-    got2 = Observation.model_validate_json(raw2)
-    assert (got2.turn, got2.link) == (4, f"/topics/{ALICE}/t-a00000000001#t4")
+    got2 = ObservationSet.model_validate_json(raw2)
+    assert [(o.turn, o.link) for o in got2.observations] == [(4, f"/topics/{ALICE}/t-a00000000001#t4")]
 
 
 def test_I2_analyze_writes_nothing_outside_system_learning_observations(tmp_path: Path) -> None:
@@ -207,9 +222,15 @@ def test_I3_turns_with_an_observation_are_never_sent_to_the_model_as_new_again(t
     observed(storage, BOB, "t-b00000000002", 1, 1)
 
     def tokens(llm: FakeLlm) -> list[str]:
+        """Tokens of the turns sent as NEW: after the `[Нові репліки:]` line when there is context (since
+        one-conversation the context is every analyzed turn of the topic, marked «уже проаналізовано»)."""
         found = []
         for call in llm.calls:
-            found += [w for w in call.text.split() if w.startswith("i3-")]
+            text = call.text
+            if CONTEXT in text:
+                assert NEW in text, text
+                text = text.split(NEW, 1)[1]
+            found += [w for w in text.split() if w.startswith("i3-")]
         return sorted(found)
 
     run1 = FakeLlm(fail={"i3-a2-s1": LlmUnavailable("down")})
@@ -226,6 +247,7 @@ def test_I3_turns_with_an_observation_are_never_sent_to_the_model_as_new_again(t
     run3 = FakeLlm()  # thirty days later: only the new turn
     assert analyze(storage, run3, NOW + 30 * H24) == AnalyzeReport(written=1, skipped=3, failed=0)
     assert tokens(run3) == ["i3-a1-s2"]
+    assert [enum_of(c.schema) for c in run3.calls] == [["t3"]]
 
     run4 = FakeLlm()  # and once more, later still: nothing
     assert analyze(storage, run4, NOW + 31 * H24) == AnalyzeReport(written=0, skipped=4, failed=0)

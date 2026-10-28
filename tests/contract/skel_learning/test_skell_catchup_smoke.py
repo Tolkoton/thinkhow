@@ -6,6 +6,9 @@ repository root — and judged by its exit code, its stdout and what it leaves i
 
 Corrected by objection (round 2, slice continuous-analysis, task 202): the observation carries
 `first_turn`/`last_turn` (1, 2) instead of `session_no`.
+
+Carried over by objection (task 720, answer A) to analysis-rules: the printed
+file is an `ObservationSet`; the local script's answer is one `progress` observation.
 """
 
 import json
@@ -17,7 +20,7 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from thinkhow.learning.analyze import Observation
+from thinkhow.learning.observations import ObservationSet
 
 REPO = Path(__file__).resolve().parents[3]
 SCRIPT = REPO / "scripts" / "smoke_test_skel_learning.py"
@@ -38,10 +41,10 @@ def run_smoke(tmp: Path) -> subprocess.CompletedProcess[str]:
     )
 
 
-def printed_observations(out: str) -> list[Observation]:
-    """Every JSON object in `out` that is an Observation (pretty-printed or on one line)."""
+def printed_sets(out: str) -> list[ObservationSet]:
+    """Every JSON object in `out` that is an ObservationSet (pretty-printed or on one line)."""
     decoder = json.JSONDecoder()
-    found: list[Observation] = []
+    found: list[ObservationSet] = []
     i = out.find("{")
     while i != -1:
         try:
@@ -51,7 +54,7 @@ def printed_observations(out: str) -> list[Observation]:
             continue
         if isinstance(value, dict):
             try:
-                found.append(Observation.model_validate(value))
+                found.append(ObservationSet.model_validate(value))
             except ValidationError:
                 pass
         i = out.find("{", end)
@@ -75,22 +78,26 @@ def test_smoke_succeeds_and_prints_the_observation_file_with_a_link_to_a_turn_of
 ) -> None:
     result = run_smoke(tmp_path)
     assert result.returncode == 0, result.stdout + result.stderr
-    observations = printed_observations(result.stdout)
-    assert observations, result.stdout
-    obs = observations[0]
-    assert obs.uid == "local-owner"
-    assert (obs.first_turn, obs.last_turn) == (1, 2)
-    assert obs.turn in {1, 2}
-    assert obs.link == f"/topics/local-owner/{obs.topic_id}#t{obs.turn}"
-    assert re.fullmatch(r"/topics/local-owner/[^/#]+#t[12]", obs.link)
+    sets = printed_sets(result.stdout)
+    assert sets, result.stdout
+    got = sets[0]
+    assert got.uid == "local-owner"
+    assert (got.first_turn, got.last_turn) == (1, 2)
+    assert got.observations, result.stdout
+    for obs in got.observations:
+        assert obs.turn in {1, 2}
+        assert obs.link == f"/topics/local-owner/{got.topic_id}#t{obs.turn}"
+        assert re.fullmatch(r"/topics/local-owner/[^/#]+#t[12]", obs.link)
 
 
 def test_smoke_observation_is_the_local_scripted_answer(tmp_path: Path) -> None:
     result = run_smoke(tmp_path)
     assert result.returncode == 0, result.stdout + result.stderr
-    observations = printed_observations(result.stdout)
-    assert observations, result.stdout
-    obs = observations[0]
+    sets = printed_sets(result.stdout)
+    assert sets, result.stdout
+    assert len(sets[0].observations) == 1, result.stdout
+    obs = sets[0].observations[0]
+    assert obs.kind == "progress"
     assert obs.finding == LOCAL_FINDING
     assert obs.worked is True
     assert obs.cause == "facilitation"
