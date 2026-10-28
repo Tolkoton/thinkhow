@@ -51,7 +51,7 @@ TOKENS: dict[str, dict[str, str]] = {
 H_ALICE = {IAP: "tok-alice"}
 
 # The texts of the contract.
-NO_VOICE_TEXT = "Для вашої мови немає голосу."
+NO_VOICE_TEXT = "There is no voice for your language."
 NOT_ACCEPTED_TEXT = "Текст для голосу не прийнято."
 UNAVAILABLE_TEXT = "Не вдалося озвучити — спробуйте ще раз."
 FIRST_CHOOSE = "Спершу оберіть мову (сторінка «Мова»)."

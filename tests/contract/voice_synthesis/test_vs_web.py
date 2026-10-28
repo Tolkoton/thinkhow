@@ -55,6 +55,11 @@ def test_seam5_language_without_voice_is_409_fragment(tmp_path: Path) -> None:
     r = app.client.post("/speak", data={"text": "Сәлем"}, headers=H_ALICE)
     assert r.status_code == 409
     assert NO_VOICE_TEXT in r.text
+    # «англійською для будь-якої мови»: a second language without a voice, the same English text.
+    set_language(app.storage, ALICE, "ky-KG")
+    r = app.client.post("/speak", data={"text": "Салам"}, headers=H_ALICE)
+    assert r.status_code == 409
+    assert NO_VOICE_TEXT in r.text
 
 
 def test_seam5_empty_text_is_400_fragment(tmp_path: Path) -> None:

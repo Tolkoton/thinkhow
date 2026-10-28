@@ -24,8 +24,9 @@ from vcm_fakes import (
     serve,
 )
 
-NO_VOICE_FRAGMENT = '<p class="error">Для вашої мови немає голосу.</p>'
-NO_VOICE_TEXT = "Для вашої мови немає голосу."
+# English for every language: the feature artifact, S1 -> S2a (owner, task 208, 2026-10-27).
+NO_VOICE_FRAGMENT = '<p class="error">There is no voice for your language.</p>'
+NO_VOICE_TEXT = "There is no voice for your language."
 
 
 def test_s1_to_s2a_speak_409_fragment_for_a_language_without_voice_reaches_the_page_and_nothing_plays() -> (
