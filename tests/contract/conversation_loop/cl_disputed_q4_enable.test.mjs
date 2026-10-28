@@ -6,9 +6,16 @@ import { loadPage, utter, state, tapTalk, fragment } from "./cl_page_fakes.mjs";
 
 test("after the mode stopped on an error #mic, #send and the field are enabled again", async () => {
   const p = loadPage();
-  p.voice.push(fragment("Не вдалося розпізнати — спробуйте ще раз.", 502));
+  // S2b: one /voice failure no longer stops the mode; three in a row do (objection, owner's answer A)
+  p.voice.push(
+    fragment("Не вдалося розпізнати — спробуйте ще раз.", 502),
+    fragment("Не вдалося розпізнати — спробуйте ще раз.", 502),
+    fragment("Не вдалося розпізнати — спробуйте ще раз.", 502),
+  );
   await tapTalk(p);
   assert.equal(p.byId.send.disabled, true, "the mode did not disable #send");
+  await utter(p);
+  await utter(p);
   await utter(p);
   assert.equal(state(p), "");
   assert.equal(p.byId.mic.disabled, false, "#mic");

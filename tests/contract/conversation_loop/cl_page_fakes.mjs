@@ -150,6 +150,7 @@ export function loadPage({ voice = "yes", audio = true, media = true, supported 
     voice: [],
     reply: [],
     speak: [],
+    retry: [],
     denyMic: false,
     decodeFails: false,
   };
@@ -330,7 +331,15 @@ export function loadPage({ voice = "yes", audio = true, media = true, supported 
     fetch: (url, init = {}) => {
       p.calls.push({ url: String(url), init });
       const u = String(url);
-      const queue = u.endsWith("/voice") ? p.voice : u.endsWith("/speak") ? p.speak : u.endsWith("/reply") ? p.reply : null;
+      const queue = u.endsWith("/voice")
+        ? p.voice
+        : u.endsWith("/speak")
+          ? p.speak
+          : u.endsWith("/reply")
+            ? p.reply
+            : u.endsWith("/retry")
+              ? p.retry
+              : null;
       if (u.endsWith("/speak") && p.speak.length === 0) return Promise.resolve().then(mp3);
       const a = queue && queue.shift();
       if (!a) return Promise.reject(new Error("fetch not planned by the test: " + u));
@@ -421,6 +430,7 @@ export function state(p) {
 export const voiceCalls = (p) => p.calls.filter((c) => c.url.endsWith("/voice"));
 export const replyCalls = (p) => p.calls.filter((c) => c.url.endsWith("/reply"));
 export const speakCalls = (p) => p.calls.filter((c) => c.url.endsWith("/speak"));
+export const retryCalls = (p) => p.calls.filter((c) => c.url.endsWith("/retry"));
 
 export function formText(init, name = "text") {
   const b = init.body;

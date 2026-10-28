@@ -19,6 +19,7 @@ import {
   voiceCalls,
   replyCalls,
   speakCalls,
+  retryCalls,
   formText,
   contentType,
   playing,
@@ -214,60 +215,64 @@ test("empty text from /voice: listening again with a new recorder, no reply sent
   assert.equal(formText(replyCalls(p)[0].init), "Тепер чути");
 });
 
-test("an error with a fragment (/voice or /speak not 200): its text in #error, the mode stops, no reload", async () => {
-  // /voice 502
+// S2b (conversation-resilience) replaced the S2a rule «any error stops the mode» (objection, owner's answer A,
+// 2026-10-27): one /voice failure or one /speak failure no longer stops it, and a failed answer gets one automatic
+// /retry. These two tests keep every check of S2a on the paths where the mode really stops under S2b.
+test("an error with a fragment (3 /voice not 200 in a row, /reply 409): its text, the mode stops", async () => {
+  // three /voice 502 in a row, no successful recognition between: the mode stops with the last text
   const a = loadPage();
-  a.voice.push(fragment("Не вдалося розпізнати — спробуйте ще раз.", 502));
+  a.voice.push(
+    fragment("Перша помилка розпізнавання.", 502),
+    fragment("Друга помилка розпізнавання.", 502),
+    fragment("Не вдалося розпізнати — спробуйте ще раз.", 502),
+  );
   await tapTalk(a);
   await utter(a);
+  assert.equal(state(a), "listening", "one /voice failure stopped the mode");
+  await utter(a);
+  assert.equal(state(a), "listening", "two /voice failures stopped the mode");
+  await utter(a);
+  assert.equal(voiceCalls(a).length, 3);
   assert.equal(a.byId.error.textContent, "Не вдалося розпізнати — спробуйте ще раз.");
   assert.equal(state(a), "");
-  assert.ok(a.streams[0].tracks[0].stopped, "the microphone track was not stopped");
+  assert.ok(a.streams.every((s) => s.tracks[0].stopped), "the microphone track was not stopped");
   assert.ok(a.ctxs[0].closed, "the AudioContext was not closed");
   assert.ok(a.intervals.every((i) => i.cleared), "the interval was not cleared");
   assert.equal(a.reloads, 0);
-  // /speak 409
+  // /reply 409: no automatic retry, the error and the stop
   const b = loadPage();
   b.voice.push(json({ text: "Привіт" }));
-  b.reply.push(reply("Речення. "));
-  b.speak.push(fragment("Озвучення недоступне.", 409));
+  b.reply.push(fragment("Спершу дочекайтеся відповіді.", 409));
   await tapTalk(b);
   await utter(b);
-  assert.equal(b.byId.error.textContent, "Озвучення недоступне.");
+  assert.equal(retryCalls(b).length, 0, "409 was retried");
+  assert.equal(b.byId.error.textContent, "Спершу дочекайтеся відповіді.");
   assert.equal(state(b), "");
   assert.ok(b.ctxs[0].closed);
   assert.equal(b.reloads, 0);
 });
 
-test("an error without a fragment (failed, decodeAudioData, network): the stop text, the mode stops", async () => {
-  // failed in the reply stream
+test("an error without a fragment (failed or network, its retry too): the stop text, the mode stops", async () => {
+  // failed in the reply stream, and failed again in the automatic retry
   const a = loadPage();
   a.voice.push(json({ text: "Привіт" }));
   a.reply.push(sse([["saved", {}], ["failed", {}]]));
+  a.retry.push(sse([["saved", {}], ["failed", {}]]));
   await tapTalk(a);
   await utter(a);
+  assert.equal(retryCalls(a).length, 1);
   assert.equal(a.byId.error.textContent, STOPPED);
   assert.equal(state(a), "");
   assert.ok(a.ctxs[0].closed);
   assert.equal(a.reloads, 0);
-  // decodeAudioData fails
-  const b = loadPage();
-  b.voice.push(json({ text: "Привіт" }));
-  b.reply.push(reply("Речення. "));
-  b.decodeFails = true;
-  await tapTalk(b);
-  await utter(b);
-  assert.equal(b.byId.error.textContent, STOPPED);
-  assert.equal(state(b), "");
-  assert.ok(b.ctxs[0].closed);
-  assert.equal(b.reloads, 0);
-  // the network fails on /speak
+  // the network fails on /reply, and again on the automatic retry
   const c = loadPage();
   c.voice.push(json({ text: "Привіт" }));
-  c.reply.push(reply("Речення. "));
-  c.speak.push(() => Promise.reject(new TypeError("Failed to fetch")));
+  c.reply.push(() => Promise.reject(new TypeError("Failed to fetch")));
+  c.retry.push(() => Promise.reject(new TypeError("Failed to fetch")));
   await tapTalk(c);
   await utter(c);
+  assert.equal(retryCalls(c).length, 1);
   assert.equal(c.byId.error.textContent, STOPPED);
   assert.equal(state(c), "");
   assert.ok(c.ctxs[0].closed);

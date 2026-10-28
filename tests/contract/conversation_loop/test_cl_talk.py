@@ -56,14 +56,14 @@ def test_empty_text_listens_again_without_a_reply() -> None:
 def test_error_with_a_fragment_shows_its_text_and_stops() -> None:
     run_node_test(
         FILE,
-        "an error with a fragment (/voice or /speak not 200): its text in #error, the mode stops, no reload",
+        "an error with a fragment (3 /voice not 200 in a row, /reply 409): its text, the mode stops",
     )
 
 
 def test_error_without_a_fragment_shows_the_stop_text_and_stops() -> None:
     run_node_test(
         FILE,
-        "an error without a fragment (failed, decodeAudioData, network): the stop text, the mode stops",
+        "an error without a fragment (failed or network, its retry too): the stop text, the mode stops",
     )
 
 
