@@ -319,7 +319,10 @@ def test_s4_learning_reads_every_topic_and_topic_sessions_numbered_across_the_to
             ).read_text()
         )
         assert (obs["first_turn"], obs["last_turn"]) == (first, last)
-        assert first <= obs["turn"] <= last
+        # analysis-rules, Seam «Файл»: the file is an ObservationSet; the anchor is per observation (I1)
+        assert len(obs["observations"]) >= 1
+        for item in obs["observations"]:
+            assert first <= item["turn"] <= last
 
 
 # S6 → owner (G6)
@@ -334,14 +337,16 @@ def test_s6_observation_link_of_a_persons_topic_opens_the_turn_for_the_owner(tmp
     file = tmp_path / "system" / "learning" / "observations" / "alice-1" / topic_id / "t1-t2.json"
     obs = json.loads(file.read_text(encoding="utf-8"))
     assert (obs["uid"], obs["topic_id"], obs["first_turn"], obs["last_turn"]) == ("alice-1", topic_id, 1, 2)
-    assert obs["turn"] in (1, 2)
-    assert obs["link"] == f"/topics/alice-1/{topic_id}#t{obs['turn']}"
-
+    # analysis-rules, Seam «Файл»: `turn` and `link` are per observation of the set
+    assert len(obs["observations"]) >= 1
     owner = client_as(environ)
-    path, anchor = obs["link"].split("#", 1)
-    page = owner.get(path)
-    assert page.status_code == 200
-    assert f'id="{anchor}"' in page.text
+    for item in obs["observations"]:
+        assert item["turn"] in (1, 2)
+        assert item["link"] == f"/topics/alice-1/{topic_id}#t{item['turn']}"
+        path, anchor = item["link"].split("#", 1)
+        page = owner.get(path)
+        assert page.status_code == 200
+        assert f'id="{anchor}"' in page.text
 
 
 # S5, S6 → S7 — packages and entry points
