@@ -126,3 +126,8 @@
 - Record: tasks/done/713-open-item-test-gap-a-switch-conversation-where-aft/report.md
 - Reason: The report passes all four checks. Every reference I could check says what the report claims (test file line 13, the _marks fix at card_conversations.py:340, the commits, 394ea75's «same 26 red as before», lesson #dec79025). The single «Що зробити» item is answered: a red run and a green run, the code fix justified by a real defect, and the move to a separate test file explained. There are no open owner questions, and the engine terms stay in English.
 - Request: 20261028T130400Z-e86091 (attempt 1)
+
+## 2026-10-28T13:29:14Z — 714-open-item-test-gap-the-index-row-of-a-switch-conve — READER_PASS
+- Record: tasks/done/714-open-item-test-gap-the-index-row-of-a-switch-conve/report.md
+- Reason: All four checks pass. The references I could check say what the report claims. The one item in «Що зробити» is covered: a real defect was found, so it was fixed, with a red run and a green run, and the 26 failures in the full suite are named as the same pre-existing ones from 713. The report has no open questions, and the technical terms are in English.
+- Request: 20261028T132842Z-507b4a (attempt 1)
