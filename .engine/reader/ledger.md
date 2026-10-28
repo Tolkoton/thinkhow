@@ -151,3 +151,8 @@
 - Record: tasks/done/409-cleanup-2026-10-28/report.md
 - Reason: .engine/to-engine/unused-dependency-misses-namespace-packages.md changed while the report tasks/done/409-cleanup-2026-10-28/report.md was read
 - Request: 20261028T171507Z-aafb54 (attempt 1)
+
+## 2026-10-28T17:17:25Z — 409-cleanup-2026-10-28 — READER_PASS
+- Record: tasks/done/409-cleanup-2026-10-28/report.md
+- Reason: All four questions hold. Every reference I could check says what the report ascribes to it. The four items of «Що зробити» are each answered (nightly output, one simplifier pass, no auto_remove so nothing removed, the confirm finding left alone and routed to proposal 734). There is no open question for the owner. Engine terms stay in English.
+- Request: 20261028T171621Z-1f4de8 (attempt 1)
