@@ -37,3 +37,17 @@ Run the facilitator call to the end on the server even with no one watching, and
    по-своєму. Якщо поспішаєте — (B), він безпечний: міняє лише список запечатаних файлів цього slice-а.
    (`testing.py` порівнює саме SHA-256 файлу: `digest`, `.claude/hooks/testing.py`:1130.)
    Відповідь: (A) — чекати релізу двигуна з виправленням <!-- записано Claude зі слів власника 2026-10-28, сесія thinkhow-desk: «Так» — на пропозицію Claude «відповісти на всі 11 питань так, як радить runner; Сонько виконає дві команди, які заново фіксують змінені контракти» -->
+
+2. **Виправлення двигуна вже є, але в ThinkHow його ще немає — задача чекає далі, як ви вирішили в (A).**
+   Перевірено 2026-10-28: engine-задача 306 «objection-rename-leaves-stale-seal» закрита (commit `4327cd7` у
+   `~/engine`, поле `renamed` у раунді objection). Але `git tag --contains 4327cd7` у `~/engine` не дає жодного тегу
+   (останній — v0.14.2), а в ThinkHow встановлено engine v0.13.0 (commit `c636460`): `grep -c renamed
+   .claude/hooks/testing.py` → `0`, `testing.py check finish-answer` і далі каже `CHANGED`. Без цього overseer не
+   почне audit.
+   Варіанти:
+   (A) Випустити версію двигуна з `4327cd7` і встановити її в ThinkHow (`engine.py install`/update — ваша дія або
+       Сонька), потім відповісти «далі». Тоді я проведу один раунд objection з `renamed` (останній, другий для
+       slice-а), overseer зробить audit, задача закриється.
+   (B) Не чекати: команда з питання 1 (B) у вашому терміналі, і відповідь «B».
+   Раджу (A): виправлення готове, лишилось лише випустити й встановити.
+   Відповідь:
