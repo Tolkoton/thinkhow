@@ -77,3 +77,9 @@ From: lesson #f6b535ce (gate, step-results, 2026-10-27).
 The Stop gate ran only the tests named after the changed files, so a new learning/ module that broke the project's static write guard (tests/test_a3_guards.py, tests/test_ac4.py — they scan every module) passed the gate and was caught only by the overseer. Suggest: project guard tests that read all sources (a list in project.env, e.g. GUARD_TESTS) run on every Stop where code changed.
 
 From: lesson #23b6f003 (overseer, step-results, 2026-10-27).
+
+## 2026-10-28 — commit_checkpoint.sh takes any first argument as the node id, --help included, and then ru
+
+commit_checkpoint.sh takes any first argument as the node id, --help included, and then runs git add -u, sweeping in the owner's uncommitted changes (happened in tasks 703 and 713). The script should reject an unknown argument starting with '-' (and print its usage on --help) before staging anything.
+
+From: lesson #dec79025 (agent, finish-answer, 2026-10-28).
