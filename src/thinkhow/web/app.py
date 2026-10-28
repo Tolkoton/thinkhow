@@ -13,7 +13,7 @@ from fastapi import FastAPI
 
 from thinkhow import knowledge
 from thinkhow.facilitation import recognize_step, respond
-from thinkhow.platform.config import load_settings
+from thinkhow.platform.config import load_settings, refuse_web_without_iap_audience
 from thinkhow.platform.identity import make_identity
 from thinkhow.platform.llm import make_llm
 from thinkhow.platform.speech import make_speech
@@ -28,6 +28,7 @@ CARDS_DIR = Path(__file__).resolve().parents[3] / "cards"
 def build_deps(environ: Mapping[str, str], cards_dir: Path) -> Deps:
     """Flow: settings → storage → (local: seed) → Knowledge → model → facilitate → identity, speech (Q2)."""
     settings = load_settings(environ)
+    refuse_web_without_iap_audience(settings)
     storage = make_storage(settings)
     if settings.local:
         knowledge.seed(storage, cards_dir)

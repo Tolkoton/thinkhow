@@ -76,3 +76,9 @@ def _refuse_cloud_without_resources(settings: Settings) -> None:
     missing = [name for name in required if not getattr(settings, name)]
     if missing:
         raise ConfigError(f"set THINKHOW_{', THINKHOW_'.join(m.upper() for m in missing)}")
+
+
+def refuse_web_without_iap_audience(settings: Settings) -> None:
+    """Only the web service identifies people: with no audience every IAP login would fail at verification."""
+    if not settings.local and not settings.iap_audience:
+        raise ConfigError("set THINKHOW_IAP_AUDIENCE: the web service verifies IAP logins against it")
