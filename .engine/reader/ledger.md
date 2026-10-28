@@ -86,3 +86,13 @@
 - Record: tasks/done/701-open-item-adr-0002-poc-101-result/report.md
 - Reason: Every reference I could check is correct: the ADR line ranges, the sketch output lines, the owner's «так» answers, the threshold removal, the premises and both commits. Every part of «Що зробити» is done in docs/adr/0002 (Status and Confirmation), there are no open questions for the owner, and the technical terms stay English (Status, Confirmation, endpoint, commit, PoC).
 - Request: 20261028T063212Z-c4fac8 (attempt 1)
+
+## 2026-10-28T07:07:02Z — 702-open-item-test-gap-a-test-that-calls-reply-with-an — READER_BLOCK
+- Record: tasks/done/702-open-item-test-gap-a-test-that-calls-reply-with-an/report.md
+- Reason: Question 1 fails. The report says the 25 failing sealed tests are waiting on the owner's answers in blocked tasks 208, 308 and 309. The file it cites for this, tasks/blocked/308-voice-conversation-mode.md:61-62, says something else: two of the failures belong to voice-conversation, and the other 23 wait on 720 (skel_learning), 721 (walking_skeleton_block) and 724 (skel_facilitation). Questions 2-4 hold: the one item in «Що зробити» is answered with a green run, a red run on the mutant, the sealed suite passing on that mutant, and no change to working code; there is no open question; the engine
+- Request: 20261028T070611Z-258b13 (attempt 1)
+
+## 2026-10-28T07:07:50Z — 702-open-item-test-gap-a-test-that-calls-reply-with-an — READER_PASS
+- Record: tasks/done/702-open-item-test-gap-a-test-that-calls-reply-with-an/report.md
+- Reason: Every reference I could open checks out. The one «Що зробити» item is done: the test is in tests/workspace/test_ws_gaps.py and both runs are reported. There are no open questions, and the engine terms are in English (overseer, slice tester, sealed tests, turn marker, commit). The test-run outputs themselves were never recorded in a file, so I could not check them.
+- Request: 20261028T070714Z-86d558 (attempt 2)
