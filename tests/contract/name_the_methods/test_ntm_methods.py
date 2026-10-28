@@ -104,10 +104,10 @@ def test_a_card_without_a_method_gives_the_router_no_empty_line() -> None:
     assert "Метод:" not in router_instruction(_knowledge(ALPHA), "uk").split("# Картка за карткою")[1]
 
 
-def test_the_router_rules_ask_to_name_each_method_and_no_longer_forbid_it() -> None:
+def test_the_router_rules_no_longer_forbid_names_and_leave_naming_to_the_facilitator() -> None:
+    """Task 310: the router writes no list of methods any more; the chosen one is named by the facilitator."""
     assert "ніколи не називай методів" not in ROUTER_RULES
-    assert "називай назвою його методу" in ROUTER_RULES
-    assert "простими словами" in ROUTER_RULES
+    assert "що це за метод і чому він" in ROUTER_RULES and "скаже фасилітатор" in ROUTER_RULES
 
 
 # --- the facilitator names it and explains how it leads ---

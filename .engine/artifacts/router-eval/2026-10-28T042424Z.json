@@ -1,0 +1,3562 @@
+{
+ "meta": {
+  "label": "задача 310 — роутер обирає сам (остаточний текст)",
+  "stamp": "2026-10-28T042424Z",
+  "model": "gemini-4-argon",
+  "rev": {
+   "rev": 1,
+   "n": 0
+  },
+  "cases_blob": "c0bce57e405e7b2dae257e5f000e6a3e641b0e57",
+  "cards_hash": "67cebe230958d53b45d4b3255fb95a1e820645e5708467b6b242e9b31be97cfd",
+  "model_calls": 119,
+  "cards": 25
+ },
+ "summary": {
+  "cases": 119,
+  "graded": 119,
+  "first_ok": 119,
+  "offered_ok": 117,
+  "held_out": {
+   "n": 25,
+   "first": 25,
+   "offered": 25
+  },
+  "rest": {
+   "n": 94,
+   "first": 94,
+   "offered": 92
+  },
+  "negatives_broken": [],
+  "absent_broken": [],
+  "chooses": 119,
+  "offers": 0,
+  "asks": 0,
+  "first_ok_via_ask": 0,
+  "invalid": 0,
+  "unavailable": 0,
+  "by_card": {
+   "complexity-sensemaking": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "consider-opposite": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "customer-interviews": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "demand-test": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "evaporating-cloud": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "first-principles": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "five-whys": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "goal-to-plan": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "is-is-not": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "issue-tree": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "jobs-to-be-done": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "mental-contrasting": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "offer-design": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "opportunity-tree": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "positioning": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "pre-mortem": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "reflective-cycle": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "reversible-doors": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "scamper": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "socratic-questioning": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "traction-channels": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "unit-economics": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "value-pricing": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "weighted-matrix": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   },
+   "wrap-decision": {
+    "n": 3,
+    "first": 3,
+    "offered": 3,
+    "held_out_first": 1,
+    "held_out_offered": 1
+   }
+  },
+  "confusions": []
+ },
+ "outcomes": [
+  {
+   "case_id": "ci-1",
+   "kind": "positive",
+   "expect": "customer-interviews",
+   "action": "choose",
+   "first": "customer-interviews",
+   "offered": [
+    "customer-interviews",
+    "demand-test",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ci-2",
+   "kind": "positive",
+   "expect": "customer-interviews",
+   "action": "choose",
+   "first": "customer-interviews",
+   "offered": [
+    "customer-interviews",
+    "demand-test",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ci-3",
+   "kind": "positive",
+   "expect": "customer-interviews",
+   "action": "choose",
+   "first": "customer-interviews",
+   "offered": [
+    "customer-interviews",
+    "demand-test"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ci-neg-1",
+   "kind": "negative",
+   "expect": "jobs-to-be-done",
+   "action": "choose",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "customer-interviews"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ci-neg-2",
+   "kind": "negative",
+   "expect": "customer-interviews",
+   "action": "choose",
+   "first": "customer-interviews",
+   "offered": [
+    "customer-interviews",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "co-1",
+   "kind": "positive",
+   "expect": "consider-opposite",
+   "action": "choose",
+   "first": "consider-opposite",
+   "offered": [
+    "consider-opposite",
+    "socratic-questioning",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overconfident_attached",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "co-2",
+   "kind": "positive",
+   "expect": "consider-opposite",
+   "action": "choose",
+   "first": "consider-opposite",
+   "offered": [
+    "consider-opposite",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overconfident_attached",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "co-3",
+   "kind": "positive",
+   "expect": "consider-opposite",
+   "action": "choose",
+   "first": "consider-opposite",
+   "offered": [
+    "consider-opposite",
+    "pre-mortem",
+    "wrap-decision"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overconfident_attached",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "co-neg-1",
+   "kind": "negative",
+   "expect": "mental-contrasting",
+   "action": "choose",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "cs-1",
+   "kind": "positive",
+   "expect": "complexity-sensemaking",
+   "action": "choose",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "overwhelmed_fatigued",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "cs-2",
+   "kind": "positive",
+   "expect": "complexity-sensemaking",
+   "action": "choose",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "issue-tree",
+    "demand-test"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "cs-3",
+   "kind": "positive",
+   "expect": "complexity-sensemaking",
+   "action": "choose",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "reflective-cycle"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "wicked",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "unclear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "cs-neg-1",
+   "kind": "negative",
+   "expect": "five-whys",
+   "action": "choose",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "dt-1",
+   "kind": "positive",
+   "expect": "demand-test",
+   "action": "choose",
+   "first": "demand-test",
+   "offered": [
+    "demand-test",
+    "customer-interviews"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "dt-2",
+   "kind": "positive",
+   "expect": "demand-test",
+   "action": "choose",
+   "first": "demand-test",
+   "offered": [
+    "demand-test",
+    "customer-interviews"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "dt-3",
+   "kind": "positive",
+   "expect": "demand-test",
+   "action": "choose",
+   "first": "demand-test",
+   "offered": [
+    "demand-test",
+    "customer-interviews"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "dt-neg-1",
+   "kind": "negative",
+   "expect": "opportunity-tree",
+   "action": "choose",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "dt-neg-2",
+   "kind": "negative",
+   "expect": "demand-test",
+   "action": "choose",
+   "first": "demand-test",
+   "offered": [
+    "demand-test",
+    "customer-interviews"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ec-1",
+   "kind": "positive",
+   "expect": "evaporating-cloud",
+   "action": "choose",
+   "first": "evaporating-cloud",
+   "offered": [
+    "evaporating-cloud",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "resolve_dilemma",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "neutral_analytical",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "ec-2",
+   "kind": "positive",
+   "expect": "evaporating-cloud",
+   "action": "choose",
+   "first": "evaporating-cloud",
+   "offered": [
+    "evaporating-cloud",
+    "wrap-decision"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "resolve_dilemma",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "ec-3",
+   "kind": "positive",
+   "expect": "evaporating-cloud",
+   "action": "choose",
+   "first": "evaporating-cloud",
+   "offered": [
+    "evaporating-cloud",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "resolve_dilemma",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ec-neg-1",
+   "kind": "negative",
+   "expect": "weighted-matrix",
+   "action": "choose",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fp-1",
+   "kind": "positive",
+   "expect": "first-principles",
+   "action": "choose",
+   "first": "first-principles",
+   "offered": [
+    "first-principles",
+    "scamper"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fp-2",
+   "kind": "positive",
+   "expect": "first-principles",
+   "action": "choose",
+   "first": "first-principles",
+   "offered": [
+    "first-principles",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fp-3",
+   "kind": "positive",
+   "expect": "first-principles",
+   "action": "choose",
+   "first": "first-principles",
+   "offered": [
+    "first-principles",
+    "scamper"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fp-neg-1",
+   "kind": "negative",
+   "expect": "mental-contrasting",
+   "action": "choose",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fw-1",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "choose",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fw-2",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "choose",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "mental-contrasting"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "fw-3",
+   "kind": "positive",
+   "expect": "five-whys",
+   "action": "choose",
+   "first": "five-whys",
+   "offered": [
+    "five-whys",
+    "is-is-not",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "fw-neg-1",
+   "kind": "negative",
+   "expect": "scamper",
+   "action": "choose",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "first-principles"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "gp-1",
+   "kind": "positive",
+   "expect": "goal-to-plan",
+   "action": "choose",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "gp-2",
+   "kind": "positive",
+   "expect": "goal-to-plan",
+   "action": "choose",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "traction-channels"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "gp-3",
+   "kind": "positive",
+   "expect": "goal-to-plan",
+   "action": "choose",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "gp-neg-1",
+   "kind": "negative",
+   "expect": "issue-tree",
+   "action": "choose",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-1",
+   "kind": "positive",
+   "expect": "is-is-not",
+   "action": "choose",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-2",
+   "kind": "positive",
+   "expect": "is-is-not",
+   "action": "choose",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-3",
+   "kind": "positive",
+   "expect": "is-is-not",
+   "action": "choose",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ii-neg-1",
+   "kind": "negative",
+   "expect": "issue-tree",
+   "action": "choose",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "overwhelmed_fatigued",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-1",
+   "kind": "positive",
+   "expect": "issue-tree",
+   "action": "choose",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "unit-economics"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-2",
+   "kind": "positive",
+   "expect": "issue-tree",
+   "action": "choose",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-3",
+   "kind": "positive",
+   "expect": "issue-tree",
+   "action": "choose",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "five-whys",
+    "complexity-sensemaking"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "it-neg-1",
+   "kind": "negative",
+   "expect": "reversible-doors",
+   "action": "choose",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "unclear",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "overwhelmed_fatigued",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "jt-1",
+   "kind": "positive",
+   "expect": "jobs-to-be-done",
+   "action": "choose",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "customer-interviews",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "jt-2",
+   "kind": "positive",
+   "expect": "jobs-to-be-done",
+   "action": "choose",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "customer-interviews",
+    "positioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "unclear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "jt-3",
+   "kind": "positive",
+   "expect": "jobs-to-be-done",
+   "action": "choose",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "issue-tree",
+    "customer-interviews"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "jt-neg-1",
+   "kind": "negative",
+   "expect": "opportunity-tree",
+   "action": "choose",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "mc-1",
+   "kind": "positive",
+   "expect": "mental-contrasting",
+   "action": "choose",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "goal-to-plan"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mc-2",
+   "kind": "positive",
+   "expect": "mental-contrasting",
+   "action": "choose",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "data_rich",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mc-3",
+   "kind": "positive",
+   "expect": "mental-contrasting",
+   "action": "choose",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mc-neg-1",
+   "kind": "negative",
+   "expect": "goal-to-plan",
+   "action": "choose",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "unit-economics"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "mid-after-choice",
+   "kind": "midway",
+   "expect": "pre-mortem",
+   "action": "choose",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "demand-test"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "mid-after-premortem",
+   "kind": "midway",
+   "expect": "goal-to-plan",
+   "action": "choose",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "demand-test"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "mid-not-fit",
+   "kind": "midway",
+   "expect": "issue-tree",
+   "action": "choose",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "is-is-not"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "of-1",
+   "kind": "positive",
+   "expect": "offer-design",
+   "action": "choose",
+   "first": "offer-design",
+   "offered": [
+    "offer-design",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "of-2",
+   "kind": "positive",
+   "expect": "offer-design",
+   "action": "choose",
+   "first": "offer-design",
+   "offered": [
+    "offer-design",
+    "positioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "unclear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "of-3",
+   "kind": "positive",
+   "expect": "offer-design",
+   "action": "choose",
+   "first": "offer-design",
+   "offered": [
+    "offer-design",
+    "positioning",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "of-neg-1",
+   "kind": "negative",
+   "expect": "value-pricing",
+   "action": "choose",
+   "first": "value-pricing",
+   "offered": [
+    "value-pricing",
+    "unit-economics"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "of-neg-2",
+   "kind": "negative",
+   "expect": "offer-design",
+   "action": "choose",
+   "first": "offer-design",
+   "offered": [
+    "offer-design",
+    "positioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-1",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "choose",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-2",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "choose",
+   "first": "demand-test",
+   "offered": [
+    "demand-test",
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-3",
+   "kind": "positive",
+   "expect": "opportunity-tree",
+   "action": "choose",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ot-neg-1",
+   "kind": "negative",
+   "expect": "weighted-matrix",
+   "action": "choose",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "one_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "other-1",
+   "kind": "other",
+   "expect": "pre-mortem",
+   "action": "choose",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_rich",
+    "options": "multiple_clear",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "pm-1",
+   "kind": "positive",
+   "expect": "pre-mortem",
+   "action": "choose",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "demand-test",
+    "unit-economics"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pm-2",
+   "kind": "positive",
+   "expect": "pre-mortem",
+   "action": "choose",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "consider-opposite"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pm-3",
+   "kind": "positive",
+   "expect": "pre-mortem",
+   "action": "choose",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem",
+    "unit-economics",
+    "wrap-decision"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "pm-neg-1",
+   "kind": "negative",
+   "expect": "reflective-cycle",
+   "action": "choose",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "issue-tree",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pm-neg-2",
+   "kind": "negative",
+   "expect": "wrap-decision",
+   "action": "choose",
+   "first": "goal-to-plan",
+   "offered": [
+    "goal-to-plan",
+    "issue-tree",
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": false,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "ill_structured",
+    "reversibility": "two_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "pos-1",
+   "kind": "positive",
+   "expect": "positioning",
+   "action": "choose",
+   "first": "positioning",
+   "offered": [
+    "positioning",
+    "offer-design"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pos-2",
+   "kind": "positive",
+   "expect": "positioning",
+   "action": "choose",
+   "first": "positioning",
+   "offered": [
+    "positioning",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pos-3",
+   "kind": "positive",
+   "expect": "positioning",
+   "action": "choose",
+   "first": "positioning",
+   "offered": [
+    "positioning",
+    "jobs-to-be-done",
+    "offer-design"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "unclear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pos-neg-1",
+   "kind": "negative",
+   "expect": "offer-design",
+   "action": "choose",
+   "first": "offer-design",
+   "offered": [
+    "offer-design",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "pos-neg-2",
+   "kind": "negative",
+   "expect": "positioning",
+   "action": "choose",
+   "first": "positioning",
+   "offered": [
+    "positioning",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "rc-1",
+   "kind": "positive",
+   "expect": "reflective-cycle",
+   "action": "choose",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "rc-2",
+   "kind": "positive",
+   "expect": "reflective-cycle",
+   "action": "choose",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rc-3",
+   "kind": "positive",
+   "expect": "reflective-cycle",
+   "action": "choose",
+   "first": "reflective-cycle",
+   "offered": [
+    "reflective-cycle",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "reflect_on_experience",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rc-neg-1",
+   "kind": "negative",
+   "expect": "pre-mortem",
+   "action": "choose",
+   "first": "pre-mortem",
+   "offered": [
+    "pre-mortem"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "rd-1",
+   "kind": "positive",
+   "expect": "reversible-doors",
+   "action": "choose",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rd-2",
+   "kind": "positive",
+   "expect": "reversible-doors",
+   "action": "choose",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "rd-3",
+   "kind": "positive",
+   "expect": "reversible-doors",
+   "action": "choose",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "rd-neg-1",
+   "kind": "negative",
+   "expect": "wrap-decision",
+   "action": "choose",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sc-1",
+   "kind": "positive",
+   "expect": "scamper",
+   "action": "choose",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "first-principles"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sc-2",
+   "kind": "positive",
+   "expect": "scamper",
+   "action": "choose",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sc-3",
+   "kind": "positive",
+   "expect": "scamper",
+   "action": "choose",
+   "first": "scamper",
+   "offered": [
+    "scamper",
+    "jobs-to-be-done",
+    "offer-design"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sc-neg-1",
+   "kind": "negative",
+   "expect": "jobs-to-be-done",
+   "action": "choose",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "customer-interviews",
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "sq-1",
+   "kind": "positive",
+   "expect": "socratic-questioning",
+   "action": "choose",
+   "first": "socratic-questioning",
+   "offered": [
+    "socratic-questioning",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sq-2",
+   "kind": "positive",
+   "expect": "socratic-questioning",
+   "action": "choose",
+   "first": "socratic-questioning",
+   "offered": [
+    "socratic-questioning",
+    "mental-contrasting"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sq-3",
+   "kind": "positive",
+   "expect": "socratic-questioning",
+   "action": "choose",
+   "first": "socratic-questioning",
+   "offered": [
+    "socratic-questioning",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "overwhelmed_fatigued",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "sq-neg-1",
+   "kind": "negative",
+   "expect": "is-is-not",
+   "action": "choose",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tc-1",
+   "kind": "positive",
+   "expect": "traction-channels",
+   "action": "choose",
+   "first": "traction-channels",
+   "offered": [
+    "traction-channels"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tc-2",
+   "kind": "positive",
+   "expect": "traction-channels",
+   "action": "choose",
+   "first": "traction-channels",
+   "offered": [
+    "traction-channels",
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_rich",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tc-3",
+   "kind": "positive",
+   "expect": "traction-channels",
+   "action": "choose",
+   "first": "traction-channels",
+   "offered": [
+    "traction-channels",
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tc-neg-1",
+   "kind": "negative",
+   "expect": "demand-test",
+   "action": "choose",
+   "first": "demand-test",
+   "offered": [
+    "demand-test",
+    "customer-interviews"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-ambivalent-commit",
+   "kind": "tie",
+   "expect": "mental-contrasting",
+   "action": "choose",
+   "first": "mental-contrasting",
+   "offered": [
+    "mental-contrasting",
+    "socratic-questioning"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "overcome_block",
+    "structuredness": "well_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "tie-anxious-choice",
+   "kind": "tie",
+   "expect": "reversible-doors",
+   "action": "choose",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "multiple_clear",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "tie-broad-cause",
+   "kind": "tie",
+   "expect": "issue-tree",
+   "action": "choose",
+   "first": "issue-tree",
+   "offered": [
+    "issue-tree",
+    "complexity-sensemaking"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-many-options",
+   "kind": "tie",
+   "expect": "opportunity-tree",
+   "action": "choose",
+   "first": "opportunity-tree",
+   "offered": [
+    "opportunity-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "unclear",
+    "options": "too_many_unfiltered",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-price-or-offer",
+   "kind": "tie",
+   "expect": "offer-design",
+   "action": "choose",
+   "first": "offer-design",
+   "offered": [
+    "offer-design",
+    "value-pricing",
+    "jobs-to-be-done"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-product-ideas",
+   "kind": "tie",
+   "expect": "jobs-to-be-done",
+   "action": "choose",
+   "first": "jobs-to-be-done",
+   "offered": [
+    "jobs-to-be-done",
+    "opportunity-tree",
+    "scamper"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "generate_ideas",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-sell-package",
+   "kind": "tie",
+   "expect": "positioning",
+   "action": "choose",
+   "first": "offer-design",
+   "offered": [
+    "offer-design",
+    "demand-test",
+    "customer-interviews"
+   ],
+   "first_ok": true,
+   "offered_ok": false,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "plan_execution",
+    "structuredness": "ill_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "data_poor_speculative",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-single-ultimatum",
+   "kind": "tie",
+   "expect": "wrap-decision",
+   "action": "choose",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "reversible-doors",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "ill_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "tie-unknown-mechanism",
+   "kind": "tie",
+   "expect": "is-is-not",
+   "action": "choose",
+   "first": "is-is-not",
+   "offered": [
+    "is-is-not",
+    "five-whys"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "find_cause",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "tie-urgent-chaos",
+   "kind": "tie",
+   "expect": "complexity-sensemaking",
+   "action": "choose",
+   "first": "complexity-sensemaking",
+   "offered": [
+    "complexity-sensemaking",
+    "issue-tree"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "ill_structured",
+    "reversibility": "unclear",
+    "stakes": "unclear",
+    "data": "unclear",
+    "options": "none_exist",
+    "emotion": "overwhelmed_fatigued",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ue-1",
+   "kind": "positive",
+   "expect": "unit-economics",
+   "action": "choose",
+   "first": "unit-economics",
+   "offered": [
+    "unit-economics",
+    "value-pricing"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ue-2",
+   "kind": "positive",
+   "expect": "unit-economics",
+   "action": "choose",
+   "first": "unit-economics",
+   "offered": [
+    "unit-economics"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "medium",
+    "data": "data_rich",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ue-3",
+   "kind": "positive",
+   "expect": "unit-economics",
+   "action": "choose",
+   "first": "unit-economics",
+   "offered": [
+    "unit-economics",
+    "demand-test"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "stress_test",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "ue-neg-1",
+   "kind": "negative",
+   "expect": "weighted-matrix",
+   "action": "choose",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix",
+    "wrap-decision"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "data_rich",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "vp-1",
+   "kind": "positive",
+   "expect": "value-pricing",
+   "action": "choose",
+   "first": "value-pricing",
+   "offered": [
+    "value-pricing",
+    "unit-economics"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "vp-2",
+   "kind": "positive",
+   "expect": "value-pricing",
+   "action": "choose",
+   "first": "value-pricing",
+   "offered": [
+    "value-pricing",
+    "positioning",
+    "offer-design"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "unclear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "vp-3",
+   "kind": "positive",
+   "expect": "value-pricing",
+   "action": "choose",
+   "first": "value-pricing",
+   "offered": [
+    "value-pricing",
+    "demand-test"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "binary_dilemma",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "vp-neg-1",
+   "kind": "negative",
+   "expect": "positioning",
+   "action": "choose",
+   "first": "positioning",
+   "offered": [
+    "positioning",
+    "value-pricing"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "understand_situation",
+    "structuredness": "moderately_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "qualitative_only",
+    "options": "none_exist",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "wm-1",
+   "kind": "positive",
+   "expect": "weighted-matrix",
+   "action": "choose",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_rich",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wm-2",
+   "kind": "positive",
+   "expect": "weighted-matrix",
+   "action": "choose",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix",
+    "wrap-decision"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wm-3",
+   "kind": "positive",
+   "expect": "weighted-matrix",
+   "action": "choose",
+   "first": "weighted-matrix",
+   "offered": [
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "medium",
+    "data": "data_rich",
+    "options": "multiple_clear",
+    "emotion": "neutral_analytical",
+    "social": "product_or_team"
+   }
+  },
+  {
+   "case_id": "wm-neg-1",
+   "kind": "negative",
+   "expect": "reversible-doors",
+   "action": "choose",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "unclear",
+    "stakes": "high",
+    "data": "unclear",
+    "options": "multiple_clear",
+    "emotion": "anxious",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wr-1",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "choose",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "reversible-doors",
+    "weighted-matrix"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wr-2",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "choose",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "moderately_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "individual_personal"
+   }
+  },
+  {
+   "case_id": "wr-3",
+   "kind": "positive",
+   "expect": "wrap-decision",
+   "action": "choose",
+   "first": "wrap-decision",
+   "offered": [
+    "wrap-decision",
+    "evaporating-cloud"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "ill_structured",
+    "reversibility": "one_way_door",
+    "stakes": "high",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "ambivalent",
+    "social": "interpersonal_dyad"
+   }
+  },
+  {
+   "case_id": "wr-neg-1",
+   "kind": "negative",
+   "expect": "reversible-doors",
+   "action": "choose",
+   "first": "reversible-doors",
+   "offered": [
+    "reversible-doors",
+    "value-pricing"
+   ],
+   "first_ok": true,
+   "offered_ok": true,
+   "negative_ok": true,
+   "absent_ok": true,
+   "reply": "",
+   "reason": "",
+   "profile": {
+    "intent": "choose_between_options",
+    "structuredness": "well_structured",
+    "reversibility": "two_way_door",
+    "stakes": "low",
+    "data": "qualitative_only",
+    "options": "single_ultimatum",
+    "emotion": "anxious",
+    "social": "product_or_team"
+   }
+  }
+ ],
+ "llm_call": [
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13553, \"output_tokens\": 345, \"thought_tokens\": 0, \"latency_ms\": 7369, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13536, \"output_tokens\": 314, \"thought_tokens\": 0, \"latency_ms\": 7879, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13536, \"output_tokens\": 229, \"thought_tokens\": 0, \"latency_ms\": 8770, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13548, \"output_tokens\": 356, \"thought_tokens\": 0, \"latency_ms\": 9241, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fp-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13550, \"output_tokens\": 389, \"thought_tokens\": 0, \"latency_ms\": 7959, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13542, \"output_tokens\": 357, \"thought_tokens\": 0, \"latency_ms\": 7463, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13527, \"output_tokens\": 274, \"thought_tokens\": 0, \"latency_ms\": 6575, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13544, \"output_tokens\": 428, \"thought_tokens\": 0, \"latency_ms\": 7956, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"it-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13553, \"output_tokens\": 314, \"thought_tokens\": 0, \"latency_ms\": 6271, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13546, \"output_tokens\": 352, \"thought_tokens\": 0, \"latency_ms\": 7300, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13545, \"output_tokens\": 354, \"thought_tokens\": 0, \"latency_ms\": 8203, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13534, \"output_tokens\": 345, \"thought_tokens\": 0, \"latency_ms\": 8737, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"cs-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13547, \"output_tokens\": 352, \"thought_tokens\": 0, \"latency_ms\": 7952, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13531, \"output_tokens\": 360, \"thought_tokens\": 0, \"latency_ms\": 7536, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13532, \"output_tokens\": 421, \"thought_tokens\": 0, \"latency_ms\": 7683, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13531, \"output_tokens\": 246, \"thought_tokens\": 0, \"latency_ms\": 7181, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"fw-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13538, \"output_tokens\": 256, \"thought_tokens\": 0, \"latency_ms\": 6113, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13543, \"output_tokens\": 378, \"thought_tokens\": 0, \"latency_ms\": 8149, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13537, \"output_tokens\": 409, \"thought_tokens\": 0, \"latency_ms\": 8111, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13538, \"output_tokens\": 357, \"thought_tokens\": 0, \"latency_ms\": 14326, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ii-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13520, \"output_tokens\": 269, \"thought_tokens\": 0, \"latency_ms\": 6095, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13535, \"output_tokens\": 290, \"thought_tokens\": 0, \"latency_ms\": 9626, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13537, \"output_tokens\": 379, \"thought_tokens\": 0, \"latency_ms\": 9537, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13531, \"output_tokens\": 295, \"thought_tokens\": 0, \"latency_ms\": 6904, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wr-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13542, \"output_tokens\": 286, \"thought_tokens\": 0, \"latency_ms\": 6744, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13533, \"output_tokens\": 297, \"thought_tokens\": 0, \"latency_ms\": 6446, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13526, \"output_tokens\": 286, \"thought_tokens\": 0, \"latency_ms\": 6444, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13542, \"output_tokens\": 212, \"thought_tokens\": 0, \"latency_ms\": 6476, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13530, \"output_tokens\": 373, \"thought_tokens\": 0, \"latency_ms\": 7286, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"wm-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13533, \"output_tokens\": 285, \"thought_tokens\": 0, \"latency_ms\": 5986, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13547, \"output_tokens\": 275, \"thought_tokens\": 0, \"latency_ms\": 6140, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13553, \"output_tokens\": 353, \"thought_tokens\": 0, \"latency_ms\": 6945, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13536, \"output_tokens\": 370, \"thought_tokens\": 0, \"latency_ms\": 8323, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rd-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13542, \"output_tokens\": 379, \"thought_tokens\": 0, \"latency_ms\": 8766, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13518, \"output_tokens\": 175, \"thought_tokens\": 0, \"latency_ms\": 4944, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13531, \"output_tokens\": 363, \"thought_tokens\": 0, \"latency_ms\": 7435, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ec-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13548, \"output_tokens\": 409, \"thought_tokens\": 0, \"latency_ms\": 8743, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13533, \"output_tokens\": 351, \"thought_tokens\": 0, \"latency_ms\": 7645, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13530, \"output_tokens\": 412, \"thought_tokens\": 0, \"latency_ms\": 8294, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13532, \"output_tokens\": 290, \"thought_tokens\": 156, \"latency_ms\": 8936, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13545, \"output_tokens\": 442, \"thought_tokens\": 0, \"latency_ms\": 8069, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pm-neg-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13537, \"output_tokens\": 323, \"thought_tokens\": 0, \"latency_ms\": 6916, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13525, \"output_tokens\": 318, \"thought_tokens\": 0, \"latency_ms\": 6981, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13533, \"output_tokens\": 428, \"thought_tokens\": 0, \"latency_ms\": 9636, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13529, \"output_tokens\": 337, \"thought_tokens\": 0, \"latency_ms\": 7664, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"co-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13531, \"output_tokens\": 371, \"thought_tokens\": 0, \"latency_ms\": 7547, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13533, \"output_tokens\": 298, \"thought_tokens\": 0, \"latency_ms\": 8250, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13533, \"output_tokens\": 325, \"thought_tokens\": 0, \"latency_ms\": 8367, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13526, \"output_tokens\": 336, \"thought_tokens\": 0, \"latency_ms\": 8384, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sq-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13525, \"output_tokens\": 249, \"thought_tokens\": 0, \"latency_ms\": 6281, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13531, \"output_tokens\": 297, \"thought_tokens\": 0, \"latency_ms\": 6430, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13530, \"output_tokens\": 330, \"thought_tokens\": 0, \"latency_ms\": 7097, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13532, \"output_tokens\": 353, \"thought_tokens\": 0, \"latency_ms\": 8239, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13536, \"output_tokens\": 260, \"thought_tokens\": 0, \"latency_ms\": 6400, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13546, \"output_tokens\": 483, \"thought_tokens\": 0, \"latency_ms\": 9519, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"sc-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13531, \"output_tokens\": 340, \"thought_tokens\": 0, \"latency_ms\": 8059, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13543, \"output_tokens\": 204, \"thought_tokens\": 0, \"latency_ms\": 5058, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13534, \"output_tokens\": 319, \"thought_tokens\": 0, \"latency_ms\": 6860, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13535, \"output_tokens\": 333, \"thought_tokens\": 0, \"latency_ms\": 7468, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mc-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13541, \"output_tokens\": 346, \"thought_tokens\": 0, \"latency_ms\": 6972, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13525, \"output_tokens\": 287, \"thought_tokens\": 0, \"latency_ms\": 6711, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"rc-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13523, \"output_tokens\": 275, \"thought_tokens\": 0, \"latency_ms\": 6110, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13525, \"output_tokens\": 346, \"thought_tokens\": 0, \"latency_ms\": 7303, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13526, \"output_tokens\": 363, \"thought_tokens\": 0, \"latency_ms\": 7298, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13532, \"output_tokens\": 287, \"thought_tokens\": 0, \"latency_ms\": 6795, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"gp-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13545, \"output_tokens\": 417, \"thought_tokens\": 0, \"latency_ms\": 7806, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13542, \"output_tokens\": 295, \"thought_tokens\": 0, \"latency_ms\": 5999, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13540, \"output_tokens\": 399, \"thought_tokens\": 0, \"latency_ms\": 8614, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13527, \"output_tokens\": 203, \"thought_tokens\": 0, \"latency_ms\": 7136, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"jt-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13540, \"output_tokens\": 266, \"thought_tokens\": 0, \"latency_ms\": 6072, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13546, \"output_tokens\": 344, \"thought_tokens\": 0, \"latency_ms\": 6578, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13539, \"output_tokens\": 211, \"thought_tokens\": 0, \"latency_ms\": 5694, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13518, \"output_tokens\": 186, \"thought_tokens\": 0, \"latency_ms\": 5212, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ot-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13561, \"output_tokens\": 422, \"thought_tokens\": 0, \"latency_ms\": 8278, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ci-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13554, \"output_tokens\": 350, \"thought_tokens\": 0, \"latency_ms\": 8436, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ci-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13553, \"output_tokens\": 273, \"thought_tokens\": 0, \"latency_ms\": 6099, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ci-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13541, \"output_tokens\": 431, \"thought_tokens\": 0, \"latency_ms\": 9739, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ci-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13556, \"output_tokens\": 269, \"thought_tokens\": 0, \"latency_ms\": 5904, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"dt-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13544, \"output_tokens\": 351, \"thought_tokens\": 0, \"latency_ms\": 7298, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"dt-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13555, \"output_tokens\": 260, \"thought_tokens\": 0, \"latency_ms\": 10054, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ci-neg-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13550, \"output_tokens\": 365, \"thought_tokens\": 0, \"latency_ms\": 7773, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"dt-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13549, \"output_tokens\": 269, \"thought_tokens\": 0, \"latency_ms\": 6690, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"dt-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13549, \"output_tokens\": 253, \"thought_tokens\": 0, \"latency_ms\": 5373, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pos-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13551, \"output_tokens\": 341, \"thought_tokens\": 14, \"latency_ms\": 8068, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"dt-neg-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13556, \"output_tokens\": 359, \"thought_tokens\": 0, \"latency_ms\": 7878, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pos-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13556, \"output_tokens\": 411, \"thought_tokens\": 0, \"latency_ms\": 7493, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pos-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13556, \"output_tokens\": 326, \"thought_tokens\": 0, \"latency_ms\": 7609, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pos-neg-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13554, \"output_tokens\": 373, \"thought_tokens\": 0, \"latency_ms\": 7592, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"of-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13555, \"output_tokens\": 363, \"thought_tokens\": 0, \"latency_ms\": 11512, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"pos-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13551, \"output_tokens\": 359, \"thought_tokens\": 0, \"latency_ms\": 7721, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"of-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13552, \"output_tokens\": 322, \"thought_tokens\": 0, \"latency_ms\": 7310, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"of-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13559, \"output_tokens\": 352, \"thought_tokens\": 0, \"latency_ms\": 7061, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"of-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13553, \"output_tokens\": 332, \"thought_tokens\": 0, \"latency_ms\": 8114, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"of-neg-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13550, \"output_tokens\": 340, \"thought_tokens\": 0, \"latency_ms\": 7946, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"vp-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13555, \"output_tokens\": 335, \"thought_tokens\": 0, \"latency_ms\": 7788, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"vp-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13562, \"output_tokens\": 383, \"thought_tokens\": 0, \"latency_ms\": 7621, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"vp-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13549, \"output_tokens\": 362, \"thought_tokens\": 0, \"latency_ms\": 7612, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"vp-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13552, \"output_tokens\": 202, \"thought_tokens\": 0, \"latency_ms\": 5409, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tc-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13549, \"output_tokens\": 354, \"thought_tokens\": 0, \"latency_ms\": 7527, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tc-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13551, \"output_tokens\": 347, \"thought_tokens\": 0, \"latency_ms\": 7833, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tc-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13549, \"output_tokens\": 406, \"thought_tokens\": 0, \"latency_ms\": 7788, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tc-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13566, \"output_tokens\": 354, \"thought_tokens\": 0, \"latency_ms\": 7331, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ue-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13569, \"output_tokens\": 193, \"thought_tokens\": 0, \"latency_ms\": 4820, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ue-2\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13565, \"output_tokens\": 349, \"thought_tokens\": 0, \"latency_ms\": 6846, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ue-3\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13536, \"output_tokens\": 313, \"thought_tokens\": 0, \"latency_ms\": 6258, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"ue-neg-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13525, \"output_tokens\": 482, \"thought_tokens\": 0, \"latency_ms\": 8475, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-sell-package\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13541, \"output_tokens\": 472, \"thought_tokens\": 0, \"latency_ms\": 8273, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-price-or-offer\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13533, \"output_tokens\": 226, \"thought_tokens\": 0, \"latency_ms\": 6078, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-anxious-choice\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13526, \"output_tokens\": 356, \"thought_tokens\": 0, \"latency_ms\": 7348, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-ambivalent-commit\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13527, \"output_tokens\": 229, \"thought_tokens\": 0, \"latency_ms\": 5772, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-many-options\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13520, \"output_tokens\": 299, \"thought_tokens\": 0, \"latency_ms\": 6993, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-broad-cause\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13520, \"output_tokens\": 309, \"thought_tokens\": 0, \"latency_ms\": 8093, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-single-ultimatum\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13528, \"output_tokens\": 255, \"thought_tokens\": 0, \"latency_ms\": 6343, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-urgent-chaos\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13524, \"output_tokens\": 429, \"thought_tokens\": 0, \"latency_ms\": 7955, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-product-ideas\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13534, \"output_tokens\": 272, \"thought_tokens\": 0, \"latency_ms\": 6034, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"tie-unknown-mechanism\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13662, \"output_tokens\": 304, \"thought_tokens\": 0, \"latency_ms\": 8058, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"other-1\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13689, \"output_tokens\": 262, \"thought_tokens\": 0, \"latency_ms\": 7190, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mid-after-choice\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13625, \"output_tokens\": 322, \"thought_tokens\": 0, \"latency_ms\": 8435, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mid-after-premortem\"}",
+  "{\"severity\": \"INFO\", \"model\": \"gemini-4-argon\", \"prompt_tokens\": 13660, \"output_tokens\": 404, \"thought_tokens\": 0, \"latency_ms\": 7437, \"attempts\": 1, \"rev\": 1, \"n\": 0, \"outcome\": \"ok\", \"search\": false, \"queries\": 0, \"event\": \"llm_call\", \"request_id\": \"mid-not-fit\"}"
+ ]
+}

@@ -235,6 +235,8 @@ def summary(outcomes: list[Outcome], card_ids: list[str]) -> dict[str, Any]:
             o.case_id for o in graded if o.kind in ("negative", "tie") and not o.negative_ok
         ],
         "absent_broken": [o.case_id for o in graded if not o.absent_ok],
+        "chooses": sum(o.action == "choose" for o in outcomes),
+        "offers": sum(o.action == "offer" for o in outcomes),
         "asks": sum(o.action == "ask" for o in outcomes),
         "first_ok_via_ask": sum(o.first_ok for o in outcomes if o.action == "ask"),
         "invalid": sum(o.action == "invalid" for o in outcomes),
@@ -261,7 +263,9 @@ def report(outcomes: list[Outcome], summ: dict[str, Any], meta: dict[str, Any], 
         "",
         f"- Очікувана картка (або справжня нічия) **перша**: {_pct(summ['first_ok'], g)};",
         f"  орієнтир research 01 §10.2 — {REFERENCE:.0%} (PROVISIONAL, не поріг).",
-        f"- Очікувана картка **серед запропонованих**: {_pct(summ['offered_ok'], g)}.",
+        f"- Роутер сам обрав один метод: {summ['chooses']}; запропонував людині вибір зі списку (offer): "
+        f"{summ['offers']} (задача 310: має бути 0).",
+        f"- Очікувана картка **серед запропонованих** (другорядна міра): {_pct(summ['offered_ok'], g)}.",
         f"- Відкладена частина (`*-3`, незалежна перевірка): перша {_pct(held['first'], held['n'])},"
         f" серед запропонованих {_pct(held['offered'], held['n'])}.",
         f"- Решта набору (той самий набір — не незалежна перевірка): перша {_pct(rest['first'], rest['n'])},"

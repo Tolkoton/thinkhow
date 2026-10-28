@@ -1,4 +1,7 @@
-"""The router: one model call from the cards' router halves to a decision — offer, ask or choose (F5).
+"""The router: one model call from the cards' router halves to a decision — choose, ask or answer (F5).
+
+Since task 310 the router chooses one card itself; an offer is still read and validated, for the routing state
+written before it.
 
 Reads `card.router`, `card.title` and the `router` notes of the experience memory beside each card they name
 (learning-loop S4). Does NOT stream or store.
@@ -140,7 +143,7 @@ def _decision_line(d: Decision) -> str:
         how = "пройдено" if d.end == "done" else "не підходить"
         return f"- репліка #{d.turn}: end {d.card_id} — {d.end} ({how})"
     if d.kind == "choose":
-        return f"- репліка #{d.turn}: choose {d.card_id} (людина обрала)"
+        return f"- репліка #{d.turn}: choose {d.card_id} (обрано)"
     if d.kind == "answer":
         return f"- репліка #{d.turn}: answer (відповідь фактом)"
     if d.kind == "offer":

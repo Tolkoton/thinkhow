@@ -35,6 +35,7 @@ ROUTED_SECTION = (Path(__file__).with_name("routed.md")).read_text(encoding="utf
 DEEP_FIELD = (Path(__file__).with_name("deep_field.md")).read_text(encoding="utf-8").rstrip("\n")
 FREE_MODE_LINE = "[Стан] Вільний режим уже триває: людина чула, що картка не підходить. Не кажи цього знову."
 JUST_CHOSEN_LINE = "[Стан] Метод щойно обрано: почни з його пояснення за правилом вище, далі — перше питання."
+FIRST_REPLY_LINE = "[Стан] Перша відповідь у темі: скажи про це за правилом вище."
 
 
 def respond(
@@ -142,13 +143,15 @@ def _contents(ctx: FacilitationContext) -> list[model.Turn]:
 
 
 def _state(ctx: FacilitationContext) -> str:
-    """A state line in the frame: the card chosen on this very turn (task 205), or free mode under way (I4).
+    """A state line in the frame: the card chosen on this very turn (task 205), on the topic's first reply
+    with the first-reply line (task 310); or free mode under way (I4).
 
     Free mode only without the router: under it a card that does not fit goes back to the router.
     """
     routing = ctx.routing or ()
     if routing and routing[-1].kind == "choose" and routing[-1].turn == ctx.turn_no:
-        return f"{JUST_CHOSEN_LINE}\n\n"
+        first = ctx.routing is not None and not any(t.role == "model" for t in ctx.history)
+        return f"{JUST_CHOSEN_LINE}\n{FIRST_REPLY_LINE}\n\n" if first else f"{JUST_CHOSEN_LINE}\n\n"
     problem_map = ctx.problem_map
     if ctx.routing is None and problem_map.phase_id is None and problem_map.last_turn > 0:
         return f"{FREE_MODE_LINE}\n\n"

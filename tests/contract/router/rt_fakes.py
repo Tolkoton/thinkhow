@@ -243,6 +243,11 @@ class RouterLlm:
             raise AssertionError("generate_json was called more times than the scenario planned")
         return schema.model_validate_json(self.generate.pop(0))
 
+    def search_text(
+        self, system: str, prompt: str, rev: pl.KnowledgeRev | None
+    ) -> tuple[str, pl.Found | None]:
+        raise AssertionError("search_text is not part of a router scenario")
+
 
 def fac_answer(reply: str, phase: str | None, exit_met: bool = False) -> str:
     """A full facilitator answer, `reply` first."""

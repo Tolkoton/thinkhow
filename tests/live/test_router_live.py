@@ -1,9 +1,10 @@
 """Live tracer of slice router (`-m live`): the owner's topic t-d824f508a729 through the router, real model.
 
-The person's turns of the owner's topic go in one by one while the router asks; after the first offer the
-person answers «Давай перше.». Every run writes its conversation, routing.json and the record of the model
-calls to a new file in .engine/artifacts/spikes/ (none is overwritten). The detector of method names is
-tested here too, without the `live` mark, against all 18 cards of cards/.
+The person's turns of the owner's topic go in one by one while the router asks, until the router chooses a
+method itself (task 310; before it the router offered a list and the person answered «Давай перше.»). Every
+run writes its conversation, routing.json and the record of the model calls to a new file in
+.engine/artifacts/spikes/ (none is overwritten). The detector of method names is tested here too, without the
+`live` mark, against all 18 cards of cards/.
 """
 
 import functools
@@ -36,7 +37,6 @@ SPIKES = ROOT / ".engine" / "artifacts" / "spikes"
 OWNER_TOPIC = json.loads(
     (ROOT / "tests" / "fixtures" / "facilitator_free_mode" / "owner_topic.json").read_text("utf-8")
 )
-CHOICE = "Давай перше."
 
 # (а) the detector of task 301, on the normalised text
 METHOD_301 = "|".join(
@@ -279,24 +279,19 @@ def _classify(
     if any(not row["answered"] for row in rows):
         return "iv"
     kinds = [d["kind"] for d in routing]
-    if "offer" not in kinds:
-        return "ii: no offer"
-    first_offer = kinds.index("offer")
-    if "choose" in kinds[:first_offer]:
-        return "ii: choose before an offer"
-    last_offer = max(i for i, k in enumerate(kinds) if k == "offer")
-    offer = routing[last_offer]
-    if offer["candidates"][0]["card_id"] == "pre-mortem":
-        return "ii: pre-mortem first"
-    texts = [row["answer"] for row in rows if row["who"] == "router"]
-    if not any(names_a_method(t) for t in texts):  # task 205: the offer names each method
+    if "offer" in kinds:  # task 310: the router chooses one method itself, no list to choose from
+        return "ii: an offer"
+    if "choose" not in kinds:
+        return "ii: no choose"
+    choose = routing[kinds.index("choose")]
+    if choose["card_id"] == "pre-mortem":
+        return "ii: pre-mortem chosen"
+    texts = [row["answer"] for row in rows if row["who"] == "фасилітатор"]
+    if not any(names_a_method(t) for t in texts):  # task 205: the facilitator names the chosen method
         return "ii: no method named"
-    chooses = [d for d in routing[last_offer + 1 :] if d["kind"] == "choose"]
-    if not chooses or chooses[0]["card_id"] != offer["candidates"][0]["card_id"]:
-        return "ii: «Давай перше.» did not choose the first candidate"
-    if rows[-1]["phase"] not in card_phases[chooses[0]["card_id"]]:
+    if rows[-1]["phase"] not in card_phases[choose["card_id"]]:
         return "ii: the facilitator's phase is not of the chosen card"
-    if offer["rev"] != rev or chooses[0]["rev"] != rev:
+    if choose["rev"] != rev:
         return "ii: routing.json without the run's revision"
     return "iii"
 
@@ -323,13 +318,9 @@ def test_the_owners_topic_goes_through_the_router(tmp_path: Path, capfd: pytest.
     turns = list(OWNER_TOPIC["person_turns"])
     while True:
         routing = _routing(storage, ref)
-        offered = any(d["kind"] == "offer" for d in routing)
-        if offered and not any(d["kind"] == "choose" for d in routing):
-            text = CHOICE
-        elif offered or not turns:
+        if any(d["kind"] == "choose" for d in routing) or not turns:
             break
-        else:
-            text = turns.pop(0)
+        text = turns.pop(0)
         now += timedelta(minutes=1)
         before = len(routing)
         events = list(reply(storage, facilitate, user, ref, text, now))
@@ -347,7 +338,7 @@ def test_the_owners_topic_goes_through_the_router(tmp_path: Path, capfd: pytest.
                 "phase": problem_map.get("phase_id"),
             }
         )
-        if not answered or text == CHOICE:
+        if not answered:
             break
     routing = _routing(storage, ref)
     phases = {cid: [p.id for p in card.facilitator.phases] for cid, card in knowledge.cards.items()}
