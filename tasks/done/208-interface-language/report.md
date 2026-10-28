@@ -1,4 +1,4 @@
-# Звіт задачі 208 — Інтерфейс мовою, яку обрала людина (зупинено на одному питанні)
+# Звіт задачі 208 — Інтерфейс мовою, яку обрала людина
 
 ## Що змінилось для власника
 - **Усі написи інтерфейсу тепер мовою, яку людина обрала на сторінці «Мова»**, для всіх 85 мов переліку. Це заголовки
@@ -9,9 +9,8 @@
   браузера не з переліку — англійською. Список мов, як і раніше, показує кожну мову її власною назвою.
 - **Арабська, перська, іврит і сіндхі** показуються справа наліво (`dir="rtl"`), смужка біля репліки — з правого боку.
 - **Повідомлення «немає голосу» — англійською для всіх мов** («There is no voice for your language.»), як ви відповіли
-  на питання 1. Рядок 85 контракту voice-synthesis змінено. **Не закрито:** відбиток (fingerprint) контракту треба
-  перепечатати вашою командою (питання 2 у задачі); тоді свіжий tester перепише два sealed tests, що чекають
-  українського тексту.
+  на питання 1. Рядок 85 контракту voice-synthesis змінено, ви перепечатали відбиток (fingerprint), і свіжі tester-и
+  переписали обидва sealed tests під англійський текст. Задача закрита.
 - Відповіді фасилітатора не змінилися: він і далі відповідає мовою людини. На знімках у local mode відповідь українська,
   бо це заготовка local mode, а не інтерфейс.
 - На прототипі зміна з'явиться після нового deploy. Запиту Сонькові я не писав: такі запити — лише з вашого слова.
@@ -41,12 +40,9 @@
 Додаткових сесій Claude і платних викликів моделей не було.
 
 ## Commit-и
-`181a17c..b4560fa` (код), далі — commit перенесення в `blocked/`.
+`181a17c..b4560fa` (інтерфейс), `9a76780` (англійське «немає голосу»), `baf389a` (два sealed tests переписано), далі — commit перенесення в `done/`.
 
 ## Відкладене
-- Заперечення для spoken-replies (`.engine/testing/objections/spoken-replies-208-interface-language.md`) написане, але
-  не подане: воно спирається на той самий рядок контракту voice-synthesis, тож без вашої відповіді tester розсудив би
-  так само, а кількість раундів обмежена (два на slice).
 - Переклади зробили агенти. Найменш певні, за їхніми власними словами: арумунська, кабувердіану, лінгала, мальтійська,
   киргизька, таджицька, сіндхі, бірманська. Варто показати носієві мови, коли буде нагода.
 
@@ -73,3 +69,22 @@
 - Повний `pytest`: 28 failed, 1443 passed. Через цю задачу падають лише два sealed tests про українське повідомлення
   «немає голосу» (`test_vs_web.py::test_seam5_…`, `test_vcm_block_disputed_q1_q2.py::test_s1_to_s2a_…`). Решта падала й
   до цього commit-у (перевірено на `c21469d`: skel_learning, walking_skeleton_block — старі sealed tests задач 309/718).
+
+## Третя сесія (2026-10-28) — закриття
+- Відбиток контракту voice-synthesis після вашої перепечатки: `python3 .claude/hooks/contract_fingerprint.py check
+  .engine/slices/voice-synthesis.md` → `Match`.
+- Заперечення раунду 2: `.engine/testing/objections/voice-synthesis-208-r2.md` і `spoken-replies-208-r2.md`. Свіжі
+  slice-tester-и (запити `20261028T185027Z-a5f040`, `20261028T185121Z-98358a`) розсудили обидва як `test_wrong`. Вони
+  переписали очікуваний текст на «There is no voice for your language.» (`tests/contract/voice_synthesis/vs_fakes.py`,
+  `test_vs_web.py` — ще й друга мова без голосу ky-KG; `tests/contract/voice_conversation_mode_block/test_vcm_block_disputed_q1_q2.py`)
+  і запечатали тести заново. Commit `baf389a`.
+- `uv run pytest -q tests/contract/voice_synthesis tests/contract/voice_conversation_mode_block tests/web/test_interface_language.py`
+  → `97 passed, 1 deselected`. `ruff` і `mypy src` — чисто.
+- Повний `uv run pytest -q` → `24 failed, 1500 passed, 36 deselected`. Жоден із 24 не стосується цієї задачі:
+  `test_ocb_block.py::test_acceptance_4…` (`mypy src tests`, задача «Одна розмова» в `blocked/`), `skel_learning` 19 і
+  `skel_facilitation` 2 (відкладені тести задач 720 і 724), `walking_skeleton_block` 2 (старі sealed tests, 309/718).
+- Overseer: PASS `20261028T191021Z-ff6491`. Перша спроба того самого запиту — INVALID: повний `pytest` overseer-а сам
+  переписав `.engine/artifacts/*/smoke.txt` під час аудиту. Другий overseer перевіряв на копії і дав PASS.
+- Витрати третьої сесії: два slice-tester-и і два overseer-и. Додаткових сесій Claude і платних викликів моделей не було.
+- Знімки екрана мовами uk-UA, en-US, ja-JP і ar-EG — ті самі (`.engine/artifacts/interface-language/`). Текст «немає
+  голосу» на них не видно, тому знімати заново не довелося.
