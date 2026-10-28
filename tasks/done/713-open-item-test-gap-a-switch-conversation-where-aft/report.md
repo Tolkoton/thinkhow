@@ -19,7 +19,7 @@
   `uv run pytest tests/contract/router_eval/test_rev_switch_row.py -q` → `1 failed`,
   `AssertionError: assert 'після «давай інакше»: end — так, нове offer без картки — ні' in '…обрано іншу картку (five-whys); після «давай інакше»: end — ні, нове offer без картки — ні |…'`.
 - Зелений прогін на виправленому коді: той самий тест → `1 passed`; увесь `tests/contract/router_eval` → `50 passed`
-  (до появи нового файлу, з тестом у ньому теж зелений).
+  (49 тестів tester-а і новий). У повідомленні commit-у `01d32ed` помилково написано «51 green»: правильне число — 50.
 - `python3 .claude/hooks/testing.py check router-eval` → `match: 6 sealed test file(s) of router-eval`: sealed tests
   tester-а не змінено.
 - `uv run ruff check` і `ruff format --check` обох файлів — чисто; `uv run mypy scripts/card_conversations.py` → `Success`.
