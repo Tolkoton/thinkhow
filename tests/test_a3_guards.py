@@ -118,7 +118,13 @@ def test_the_guards_see_a_planted_breach() -> None:
 
 
 def test_a_bucket_built_by_an_expression_is_unnamed() -> None:
-    for bucket in ("self.buckets['users']", "bucket_for(k)", "f'us{k}'"):
+    for bucket in (
+        "self.buckets['users']",
+        "bucket_for(k)",
+        "f'us{k}'",
+        "'us' + 'ers'",
+        "'users' if k else 'system'",
+    ):
         source = f"def h(self, storage, k):\n    storage.write({bucket}, 'u/x', b'', 't')\n"
         assert unnamed_buckets(source) == [2], bucket
 
@@ -137,8 +143,8 @@ def _constant_bucket(node: ast.Call) -> object:
 
 
 def _looks_like_bucket(arg: ast.expr) -> bool:
-    """A name, an attribute, a subscript, a call or an f-string as the first argument (a variable bucket)."""
-    return isinstance(arg, ast.Name | ast.Attribute | ast.Subscript | ast.Call | ast.JoinedStr)
+    """Anything but a constant as the first argument of a Storage method (a variable bucket)."""
+    return not isinstance(arg, ast.Constant)
 
 
 def _string_assignments(func: ast.AST) -> dict[str, ast.expr]:
