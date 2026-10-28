@@ -1,5 +1,5 @@
 OK   after 25 h the page asks how the step went
-steps.json: [{'step_id': 's1', 'step': "поговорити з трьома власниками кав'ярень", 'asked_turn': 3, 'outcome': 'worked', 'clearer': 'yes', 'said': 'Вийшло: поговорив з трьома, двоє готові платити, стало ясніше.', 'at': '2026-10-29T01:26:48.685273Z'}]
+steps.json: [{'step_id': 's1', 'step': "поговорити з трьома власниками кав'ярень", 'asked_turn': 3, 'outcome': 'worked', 'clearer': 'yes', 'said': 'Вийшло: поговорив з трьома, двоє готові платити, стало ясніше.', 'at': '2026-10-29T21:35:11.601614Z'}]
 OK   the answer is a step result
 turns: [(1, 'user'), (2, 'model'), (3, 'model'), (4, 'user'), (5, 'model')]
 OK   the question is ThinkHow's turn, right before the person's answer
@@ -21,5 +21,5 @@ OK   the page says the change was rolled back
 OK   a second synthesize took nothing new: nothing_new
 OK   the second synthesize took nothing new (no second run record)
 OK   and wrote no revision
-OK   the card files are byte-for-byte the same
-RESULT: PASS
+FAIL the card files are byte-for-byte the same
+RESULT: FAIL
