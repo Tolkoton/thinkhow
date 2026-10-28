@@ -4,13 +4,16 @@ version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.159.1",
+    "google-auth[requests]>=2.62.0",
     "google-cloud-speech>=2.41.0",
     "google-cloud-storage>=3.17.1",
     "google-genai>=2.32.0",
     "httpx>=0.28.1",
+    "httpx2>=2.16.0",
     "jinja2>=3.1.6",
     "pydantic>=2.14.1",
     "pydantic-settings>=2.16.1",
+    "pyyaml>=6.0.3",
 ]
 
 [dependency-groups]
@@ -20,6 +23,7 @@ dev = [
     "playwright==1.64.1",
     "pytest>=9.1.1",
     "ruff>=0.17.1",
+    "types-pyyaml>=6.0.12.20260906",
 ]
 
 [tool.pytest.ini_options]
@@ -53,11 +57,7 @@ exclude = ["^sketches/", "^\\.claude/"]
 module = ["google.cloud.*"]
 ignore_missing_imports = true
 
-[[tool.mypy.overrides]]
-# gate-allow: PyYAML ships no py.typed, a stubs package is a new dependency (slice skel-knowledge Seam)
-module = ["yaml"]
-ignore_missing_imports = true
-
+# gate-allow: the yaml override is removed (stricter) — types-PyYAML now types yaml (task 709)
 [[tool.mypy.overrides]]
 module = ["tests.*"]
 disallow_untyped_defs = false
