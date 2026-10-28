@@ -1,0 +1,416 @@
+LENS: code
+SCOPE: src
+
+DETERMINISTIC SIGNALS (cite a signal by its id):
+[
+ {
+  "id": "S-28ebe46d",
+  "tool": "ast",
+  "kind": "complexity",
+  "file": "src/thinkhow/facilitation/respond.py",
+  "line": 156,
+  "message": "_state: complexity 11, the limit is 10"
+ },
+ {
+  "id": "S-d033de4d",
+  "tool": "ast",
+  "kind": "complexity",
+  "file": "src/thinkhow/facilitation/route.py",
+  "line": 52,
+  "message": "RouterAnswer._fits_its_action: complexity 17, the limit is 10"
+ },
+ {
+  "id": "S-a3d03b56",
+  "tool": "ast",
+  "kind": "complexity",
+  "file": "src/thinkhow/learning/analyze.py",
+  "line": 114,
+  "message": "_topic: complexity 13, the limit is 10"
+ },
+ {
+  "id": "S-a379ac6d",
+  "tool": "ast",
+  "kind": "nesting",
+  "file": "src/thinkhow/learning/analyze.py",
+  "line": 157,
+  "message": "_marks: nesting 4, the limit is 3"
+ },
+ {
+  "id": "S-65605d8c",
+  "tool": "ast",
+  "kind": "nesting",
+  "file": "src/thinkhow/learning/job.py",
+  "line": 29,
+  "message": "run: nesting 4, the limit is 3"
+ },
+ {
+  "id": "S-204f9849",
+  "tool": "ast",
+  "kind": "complexity",
+  "file": "src/thinkhow/learning/job.py",
+  "line": 50,
+  "message": "_notes: complexity 11, the limit is 10"
+ },
+ {
+  "id": "S-4b8579f5",
+  "tool": "ast",
+  "kind": "complexity",
+  "file": "src/thinkhow/learning/synthesize.py",
+  "line": 138,
+  "message": "_text: complexity 11, the limit is 10"
+ },
+ {
+  "id": "S-2a00ae99",
+  "tool": "ast",
+  "kind": "nesting",
+  "file": "src/thinkhow/platform/llm.py",
+  "line": 127,
+  "message": "VertexLlm.stream_json: nesting 5, the limit is 3"
+ },
+ {
+  "id": "S-97cd4bb5",
+  "tool": "ast",
+  "kind": "complexity",
+  "file": "src/thinkhow/web/server.py",
+  "line": 370,
+  "message": "_bad_request_key: complexity 11, the limit is 10"
+ },
+ {
+  "id": "S-59d7b5c2",
+  "tool": "ast",
+  "kind": "complexity",
+  "file": "src/thinkhow/workspace/topics.py",
+  "line": 232,
+  "message": "_recognize: complexity 13, the limit is 10"
+ },
+ {
+  "id": "S-9b5339b8",
+  "tool": "ast",
+  "kind": "complexity",
+  "file": "src/thinkhow/workspace/topics.py",
+  "line": 299,
+  "message": "_answer: complexity 17, the limit is 10"
+ },
+ {
+  "id": "S-4f31afba",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/facilitation/route.py",
+  "line": 46,
+  "message": "unused method '_trimmed' (60% confidence)"
+ },
+ {
+  "id": "S-8c9b2ccd",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/facilitation/route.py",
+  "line": 51,
+  "message": "unused method '_fits_its_action' (60% confidence)"
+ },
+ {
+  "id": "S-7506c2cb",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/facilitation/types.py",
+  "line": 40,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-96b0b117",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/facilitation/types.py",
+  "line": 101,
+  "message": "unused variable 'intent' (60% confidence)"
+ },
+ {
+  "id": "S-6de54c01",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/facilitation/types.py",
+  "line": 114,
+  "message": "unused variable 'structuredness' (60% confidence)"
+ },
+ {
+  "id": "S-d3eee12c",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/facilitation/types.py",
+  "line": 115,
+  "message": "unused variable 'reversibility' (60% confidence)"
+ },
+ {
+  "id": "S-ddb93bb7",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/facilitation/types.py",
+  "line": 116,
+  "message": "unused variable 'stakes' (60% confidence)"
+ },
+ {
+  "id": "S-271df4d5",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/facilitation/types.py",
+  "line": 121,
+  "message": "unused variable 'emotion' (60% confidence)"
+ },
+ {
+  "id": "S-bc8c7f04",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/facilitation/types.py",
+  "line": 129,
+  "message": "unused variable 'social' (60% confidence)"
+ },
+ {
+  "id": "S-447e3251",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/knowledge/schema.py",
+  "line": 15,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-877229bc",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/knowledge/schema.py",
+  "line": 48,
+  "message": "unused method '_distinct_phase_ids' (60% confidence)"
+ },
+ {
+  "id": "S-74691a5e",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/knowledge/versions.py",
+  "line": 66,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-08ee31bb",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/learning/observations.py",
+  "line": 22,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-08ee31bb",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/learning/observations.py",
+  "line": 36,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-41b57b43",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/learning/synthesize.py",
+  "line": 47,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-5af1dd33",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/learning/vet.py",
+  "line": 25,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-771df671",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 17,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-7ea8c546",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 38,
+  "message": "unused method 'settings_customise_sources' (60% confidence)"
+ },
+ {
+  "id": "S-54be1e6a",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 41,
+  "message": "unused variable 'settings_cls' (100% confidence)"
+ },
+ {
+  "id": "S-b63d8199",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 43,
+  "message": "unused variable 'env_settings' (100% confidence)"
+ },
+ {
+  "id": "S-4a2e11b5",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 44,
+  "message": "unused variable 'dotenv_settings' (100% confidence)"
+ },
+ {
+  "id": "S-158db69f",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/platform/config.py",
+  "line": 45,
+  "message": "unused variable 'file_secret_settings' (100% confidence)"
+ },
+ {
+  "id": "S-39347750",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/web/app.py",
+  "line": 78,
+  "message": "unused function '__getattr__' (60% confidence)"
+ },
+ {
+  "id": "S-46dfaba5",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/web/server.py",
+  "line": 90,
+  "message": "unused function 'language_page' (60% confidence)"
+ },
+ {
+  "id": "S-fe206581",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/workspace/model.py",
+  "line": 104,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-fe206581",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/workspace/model.py",
+  "line": 116,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-be70214e",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/workspace/topics.py",
+  "line": 66,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-be70214e",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/workspace/topics.py",
+  "line": 71,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-be70214e",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/workspace/topics.py",
+  "line": 79,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-be70214e",
+  "tool": "vulture",
+  "kind": "dead-code",
+  "file": "src/thinkhow/workspace/topics.py",
+  "line": 92,
+  "message": "unused variable 'model_config' (60% confidence)"
+ },
+ {
+  "id": "S-738ec8ee",
+  "tool": "pyproject",
+  "kind": "unused-dependency",
+  "file": "pyproject.toml",
+  "line": 7,
+  "message": "google-auth is declared and no module named google_auth is imported"
+ },
+ {
+  "id": "S-c4ffaf73",
+  "tool": "pyproject",
+  "kind": "unused-dependency",
+  "file": "pyproject.toml",
+  "line": 8,
+  "message": "google-cloud-speech is declared and no module named google_cloud_speech is imported"
+ },
+ {
+  "id": "S-0411a0a7",
+  "tool": "pyproject",
+  "kind": "unused-dependency",
+  "file": "pyproject.toml",
+  "line": 9,
+  "message": "google-cloud-storage is declared and no module named google_cloud_storage is imported"
+ },
+ {
+  "id": "S-18535cf9",
+  "tool": "pyproject",
+  "kind": "unused-dependency",
+  "file": "pyproject.toml",
+  "line": 10,
+  "message": "google-genai is declared and no module named google_genai is imported"
+ },
+ {
+  "id": "S-0d4b52d2",
+  "tool": "pyproject",
+  "kind": "unused-dependency",
+  "file": "pyproject.toml",
+  "line": 13,
+  "message": "jinja2 is declared and no module named jinja2 is imported"
+ },
+ {
+  "id": "S-3eb45e60",
+  "tool": "history",
+  "kind": "trend",
+  "file": null,
+  "line": null,
+  "message": "files grew from 39 (median of the last 5 runs) to 54"
+ },
+ {
+  "id": "S-05bfe464",
+  "tool": "history",
+  "kind": "trend",
+  "file": null,
+  "line": null,
+  "message": "lines grew from 3219 (median of the last 5 runs) to 5928"
+ },
+ {
+  "id": "S-e9768d3f",
+  "tool": "history",
+  "kind": "trend",
+  "file": null,
+  "line": null,
+  "message": "functions grew from 219 (median of the last 5 runs) to 389"
+ },
+ {
+  "id": "S-f36e170d",
+  "tool": "history",
+  "kind": "trend",
+  "file": null,
+  "line": null,
+  "message": "complexity grew from 3 (median of the last 5 runs) to 8"
+ },
+ {
+  "id": "S-b57fd929",
+  "tool": "history",
+  "kind": "trend",
+  "file": null,
+  "line": null,
+  "message": "dead-code grew from 20 (median of the last 5 runs) to 30"
+ }
+]
+
+Answer with the JSON list of findings and nothing else.

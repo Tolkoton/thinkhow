@@ -162,3 +162,12 @@ Nothing listed here was removed.
   - applied to the plan 2026-10-27T09:02:01Z: prefetch of the next sentence removed from S2b, moved to Deferred — nothing is asked of the owner
   - evidence: read .engine/architecture/feature/voice-conversation-mode.md:82 the plan says: 'Узяти наступне речення наперед (S2b) — вибір архітектора заради затримки, не вимога'; read .engine/architecture/feature/voice-conversation-mode.md:31 'Порогів часу власник не назвав; затримку записуємо (P4), не обмежуємо'; read .engine/goals.md:40 P4: quality over speed; time is only recorded; read .engine/goals.md:41 P5: what may be needed later is noted, not built now
   - test safety none, reversal risk medium, protected false, traces to: none found: the plan's own line 82 says it is not a requirement; P4 and P5 argue against it
+
+## 2026-10-28T17:13:26Z — code, nightly 2026-10-28
+
+### confirm (1)
+- `F-3e5af977` **pyproject.toml:8** — redundant_dependency: The google-cloud-speech dependency can go: speech recognition runs on a Gemini transcribe model through google-genai (platform/speech.py), nothing in src, tests or scripts imports google.cloud.speech, and the app would behave the same without it. uv.lock and the stale SDK list at .engine/architecture/architecture-map.md:603 would need updating in the same change.
+  - evidence: signal S-c4ffaf73 pyproject: google-cloud-speech is declared and no module named google_cloud_speech is imported; grep src/thinkhow/platform/speech.py:121 speech builds a google.genai client. The only imports of google.cloud.speech_v2 in the repository are in the spike probe .engine/artifacts/spikes/voice-stt-2026-10-23/chirp3_probe.py:2, which is outside src; read docs/adr/0005-speech-gemini-transcribe.md:61 the ADR that chose Gemini transcribe says the google-cloud-speech package is no longer needed; judgement  The other four dependency signals are false. google-auth is imported as google.auth (platform/tts.py:167, identity.py:74). google-cloud-storage is imported as google.cloud.storage (storage.py:128). google-genai is imported as google.genai (llm.py:14). jinja2 is needed by fastapi.templating.Jinja2Templates (web/server.py:23). The vulture model_config, validator, settings_customise_sources, route-function and Profile-field signals are pydantic, FastAPI or LLM-schema uses, so they are traps.
+  - test safety characterization_exists, reversal risk low, protected false, traces to: docs/adr/0005-speech-gemini-transcribe.md:61
+
+### flag_only (0)

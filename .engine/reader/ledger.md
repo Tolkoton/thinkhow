@@ -146,3 +146,8 @@
 - Record: tasks/done/716-open-item-test-gap-a-test-that-reads-style-css-and/report.md
 - Reason: All four checks pass. Every reference I could check matches: the test at tests/web/test_icon_buttons.py:128, the line numbers of the failing asserts (134–137), style.css lines 173–178, and commit f63b36d with its subject and time. The single «Що зробити» item is answered: the test already exists, both runs are shown, and the code was left unchanged. The report asks the owner no question, and the technical terms are in English.
 - Request: 20261028T171101Z-ca3b5f (attempt 2)
+
+## 2026-10-28T17:15:52Z — 409-cleanup-2026-10-28 — READER_INVALID
+- Record: tasks/done/409-cleanup-2026-10-28/report.md
+- Reason: .engine/to-engine/unused-dependency-misses-namespace-packages.md changed while the report tasks/done/409-cleanup-2026-10-28/report.md was read
+- Request: 20261028T171507Z-aafb54 (attempt 1)
