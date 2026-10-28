@@ -71,3 +71,8 @@
 - Record: tasks/done/718-open-item-testing-parked-conversation-loop/report.md
 - Reason: Every reference I could check says what the report says it does: the ledger round, engine-feedback lines 53–59, testing.py lines 938–939, commit f8e999f, task 308's question 3 and task 708. The task's one item (carry out the owner's answer and close the task) is answered. The task has no open question left, and the technical terms are in English.
 - Request: 20261028T034039Z-f426c5 (attempt 1)
+
+## 2026-10-28T06:30:20Z — 407-maintain-2026-10-27 — READER_PASS
+- Record: tasks/done/407-maintain-2026-10-27/report.md
+- Reason: All four questions hold. The figures and file:line references match the maintain report and the code. The «Що зробити» item is done: the report is written, and the report.md explains why the file is named 2026-10-28 and why the task goes to done/ and not blocked/. There is no open question for the owner, and the technical terms are in English. The only thing I could not check is the output of `uv pip list --outdated` (16 packages).
+- Request: 20261028T062936Z-dc54ff (attempt 1)
