@@ -76,3 +76,8 @@
 - Record: tasks/done/407-maintain-2026-10-27/report.md
 - Reason: All four questions hold. The figures and file:line references match the maintain report and the code. The «Що зробити» item is done: the report is written, and the report.md explains why the file is named 2026-10-28 and why the task goes to done/ and not blocked/. There is no open question for the owner, and the technical terms are in English. The only thing I could not check is the output of `uv pip list --outdated` (16 packages).
 - Request: 20261028T062936Z-dc54ff (attempt 1)
+
+## 2026-10-28T06:31:20Z — 408-remove-proposal-104 — READER_PASS
+- Record: tasks/done/408-remove-proposal-104/report.md
+- Reason: The task's one item (delete tasks/proposed/104-sketch-voice-stt.md in a separate commit) is done: the file is gone from tasks/proposed/, and commit fccb39c is in the package with a matching subject. There are no open owner questions, and the report keeps the technical terms (commit, runner) in English.
+- Request: 20261028T063104Z-229b97 (attempt 1)
