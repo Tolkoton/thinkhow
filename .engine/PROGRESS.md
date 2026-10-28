@@ -419,15 +419,18 @@
 - Surprises: none
 - Open for next slice: S2b (resilience), then the live check of the whole mode
 
-## Slice conversation-resilience — S2b of voice-conversation-mode (CODE COMPLETE — BLOCKED 2026-10-27)
+## Slice conversation-resilience — S2b of voice-conversation-mode (DONE 2026-10-28)
 
 - Module: `conversation.js` — `voiceText`, `stableText` (I4 prefix property), `createEarcons`; recognition miss → tone
   and listen (3 in a row stop), one automatic `/retry` (not on 409), skip a sentence that cannot be voiced, Wake Lock,
   microphone reopen, sound resume + `#talk-resume` (icon button, task 207's rule)
 - Tests: 48 by the slice-tester in `tests/contract/conversation_resilience/` (sealed), all green; smoke
   `scripts/smoke_test_conversation_resilience.py` green (`.engine/artifacts/conversation-resilience/smoke.txt`)
-- Blocked: 3 sealed conversation-loop tests encode the old «any error stops» rule; the objection would be that slice's
-  third round, so it is parked — board 718 and question 1 of task 308 (the owner's answer)
+- Was blocked: 3 sealed conversation-loop tests encoded the old «any error stops» rule (board 718). The owner answered
+  «А» (task 308, question 1); a fresh slice-tester rewrote them to the S2b rule through an objection filed under
+  conversation-resilience (round 1, test_wrong ×3; commit f8e999f). Overseer PASS 20261028T024534Z-8ed82b
+- Left in the engine: `testing.py check conversation-loop` → CHANGED (the objection reseals only the slice it is filed
+  under; conversation-loop is parked) — the same limit as skel-web (task 708)
 - Live acceptance of the whole mode (AC5): `.engine/artifacts/conversation-mode/live-2026-10-27.md` — 6 turns uk-UA
   and 6 pl-PL with no touch; latency 15–24 s (uk) and 30–87 s (pl), almost all of it the model
 
