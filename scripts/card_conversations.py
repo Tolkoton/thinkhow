@@ -336,10 +336,12 @@ def _marks(c: Conversation) -> str:
     if c.named:
         marks.append("людина назвала метод")
     if c.switched:
-        after = [d for d in c.routing if d["kind"] == "end" and d["card_id"] == c.led]
+        # the switch follows the first choose, so the row judges the card switched FROM, not the last one led
+        left = next(d["card_id"] for d in c.routing if d["kind"] == "choose")
+        after = [d for d in c.routing if d["kind"] == "end" and d["card_id"] == left]
         new_offer = (
             any(
-                d["kind"] == "offer" and c.led not in [x["card_id"] for x in d["candidates"]]
+                d["kind"] == "offer" and left not in [x["card_id"] for x in d["candidates"]]
                 for d in c.routing[c.routing.index(after[-1]) + 1 :]
             )
             if after

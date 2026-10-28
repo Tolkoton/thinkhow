@@ -1,7 +1,0 @@
-states: listening → hearing → thinking → speaking → listening → hearing → thinking → speaking → listening → hearing → thinking → speaking → listening
-requests: /voice ×3, /reply ×3, /speak ×6
-#live: ['turn user', 'turn model', 'turn user', 'turn model', 'turn user', 'turn model']
-turn {'turn': 1, 'speech_end_to_voice_s': 1.63, 'clip_end_to_voice_s': 1.37}
-turn {'turn': 2, 'speech_end_to_voice_s': 1.67, 'clip_end_to_voice_s': 1.43}
-turn {'turn': 3, 'speech_end_to_voice_s': 1.62, 'clip_end_to_voice_s': 1.38}
-OK: one click, 3 cycles without a touch; files under /tmp/thinkhow-talk-ygvs33sn
