@@ -80,9 +80,16 @@ def test_reply_at_silence_opens_session_2_and_closes_session_1(tmp_path: Path) -
         Answered(4),
     ]
     assert "<!-- thinkhow:session 2 -->" in conv_lines(store, ref)
-    assert fac.calls[1].context.history == [] and fac.calls[1].context.turn_no == 3
+    # one-conversation I1: the history is every earlier turn of the topic, whatever the session.
+    assert fac.calls[1].context.history == [Turn("user", ASK), Turn("model", ANS)]
+    assert fac.calls[1].context.turn_no == 3
     drain(reply(store, fac, ALICE, ref, "далі", at + timedelta(hours=1)))
-    assert fac.calls[2].context.history == [Turn("user", "повернувся"), Turn("model", "Нова сесія?")]
+    assert fac.calls[2].context.history == [
+        Turn("user", ASK),
+        Turn("model", ANS),
+        Turn("user", "повернувся"),
+        Turn("model", "Нова сесія?"),
+    ]
     view = open_topic(store, ALICE, ref, at + timedelta(hours=1))
     assert [s.no for s in view.sessions] == [1, 2]
     assert view.sessions[0].turns == s1_turns and view.sessions[0].closed_at == T0 + H24

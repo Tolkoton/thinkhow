@@ -125,8 +125,7 @@ def _topic(storage: Storage, llm: Llm, ref: workspace.TopicRef, now: datetime, t
     new = [t for s in sessions for t in s.turns if t.no > seen]
     if not new:
         return "skipped"
-    context = next(s for s in sessions if new[0] in s.turns).turns
-    context = [t for t in context if t.no < new[0].no]
+    context = [t for s in sessions for t in s.turns if t.no < new[0].no]
     schema = answer_schema([t.no for t in new])
     marks = _marks(routing, titles)
     for record in steps:  # the result of a step before the person's answer to its question (S6), no `clearer`
@@ -250,7 +249,7 @@ def _text(
     new: Sequence[workspace.NumberedTurn],
     marks: dict[int, list[str]],
 ) -> str:
-    """The new turns, after the analyzed turns of their session as context, with the method's state lines."""
+    """The new turns, after the analyzed turns of the topic as context, with the method's state lines."""
     lines = [CONTEXT, *_lines(context, marks), NEW] if context else []
     return "\n".join(lines + _lines(new, marks))
 

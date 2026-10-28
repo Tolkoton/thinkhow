@@ -75,7 +75,9 @@ def test_seam1_the_cursor_comes_from_file_names_across_runs(tmp_path: Path) -> N
     assert [o["turn"] in (3, 4) for o in items(storage, ref, "t3-t4.json")] == [True]
 
 
-def test_seam1_turns_after_24h_of_silence_open_a_session_and_go_without_context(tmp_path: Path) -> None:
+def test_seam1_turns_after_24h_of_silence_open_a_session_and_go_with_the_whole_topic_as_context(
+    tmp_path: Path,
+) -> None:
     storage = LocalStorage(tmp_path)
     t0 = NOW - 3 * DAY
     ref = new_topic(storage, ALICE, t0 - M)
@@ -87,7 +89,17 @@ def test_seam1_turns_after_24h_of_silence_open_a_session_and_go_without_context(
     llm = FakeLlm()
     analyze(storage, llm, t0 + 3 * H + DAY)
     assert len(llm.calls) == 1
-    assert llm.calls[0].lines() == ["#5 людина: Повернувся через добу.", "#6 фасилітатор: Що змінилось?"]
+    # one-conversation I2: the context is every earlier turn of the topic, whatever the session.
+    assert llm.calls[0].lines() == [
+        CTX,
+        "#1 людина: Перша думка.",
+        "#2 фасилітатор: Перше питання?",
+        "#3 людина: Друга думка.",
+        "#4 фасилітатор: Друге питання?",
+        NEW,
+        "#5 людина: Повернувся через добу.",
+        "#6 фасилітатор: Що змінилось?",
+    ]
     assert llm.calls[0].anchors() == ["t5", "t6"]
     assert obs_names(storage, ref) == {"t1-t2.json", "t3-t4.json", "t5-t6.json"}
 
@@ -125,7 +137,16 @@ def test_seam2_legacy_s_files_move_the_cursor_and_stay_untouched(tmp_path: Path)
     calls = llm.calls_with("а-")
     assert len(calls) == 1
     call_a = calls[0]
-    assert call_a.lines() == ["#3 людина: а-друга людина 3", "#4 фасилітатор: а-друга фасилітатор 4"]
+    # one-conversation I2: the turns before the cursor are context, the new ones only after it.
+    assert call_a.lines() == [
+        CTX,
+        "#1 людина: а-перша людина 1",
+        "#2 фасилітатор: а-перша фасилітатор 2",
+        NEW,
+        "#3 людина: а-друга людина 3",
+        "#4 фасилітатор: а-друга фасилітатор 4",
+    ]
+    assert call_a.anchors() == ["t3", "t4"]
     assert obs_names(storage, a) == {"s1.json", "t3-t4.json"}
     assert storage.read("system", f"learning/observations/{a.uid}/{a.topic_id}/s1.json") == a_s1
 
@@ -144,8 +165,17 @@ def test_seam2_legacy_s_files_move_the_cursor_and_stay_untouched(tmp_path: Path)
     calls = llm.calls_with("б-")
     assert len(calls) == 1
     call_b = calls[0]
-    assert call_b.lines() == ["#5 людина: б-третя людина 5", "#6 фасилітатор: б-третя фасилітатор 6"]
-    assert llm.calls_with("б-перша") == []
+    assert call_b.lines() == [
+        CTX,
+        "#1 людина: б-перша людина 1",
+        "#2 фасилітатор: б-перша фасилітатор 2",
+        "#3 людина: б-друга людина 3",
+        "#4 фасилітатор: б-друга фасилітатор 4",
+        NEW,
+        "#5 людина: б-третя людина 5",
+        "#6 фасилітатор: б-третя фасилітатор 6",
+    ]
+    assert call_b.anchors() == ["t5", "t6"]
     assert obs_names(storage, b) == {"s2.json", "t5-t6.json"}
     assert len(llm.calls) == 4
 

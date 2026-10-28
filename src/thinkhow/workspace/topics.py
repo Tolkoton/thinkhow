@@ -311,7 +311,7 @@ def _answer(
     """Flow: facilitate → deltas → answer into conversation.md → map, routing, research.json → the result of a
     step from the answer to its question (S6) → Answered."""
     session = conv.sessions[-1]
-    history = [FacilitationTurn(t.role, t.text) for t in session.turns if t.no < turn_no]
+    history = [FacilitationTurn(t.role, t.text) for s in conv.sessions for t in s.turns if t.no < turn_no]
     problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
     card_id = current_card(routing) or CARD_ID
     ctx = FacilitationContext(card_id, history, problem_map, turn_no, text, lang, routing, spoken)
@@ -331,14 +331,14 @@ def _answer(
                 continue
             yield Delta(item.text)
     except Exception as exc:
-        yield Failed(type(exc).__name__)
+        yield _failed(ref, turn_no, type(exc).__name__, len(history))
         return
     if update is None:
-        yield Failed("NoUpdate")
+        yield _failed(ref, turn_no, "NoUpdate", len(history))
         return
     answer = conv_file.normalize(update.reply)
     if not answer:
-        yield Failed("EmptyReply")
+        yield _failed(ref, turn_no, "EmptyReply", len(history))
         return
     session.turns.append(conv_file.Turn(turn_no + 1, "model", conv_file.second(now), answer))
     _write_conversation(storage, ref, conv)
@@ -367,6 +367,20 @@ def _apply_one(items: list[MapItem], change: MapUpdate) -> list[MapItem]:
     if at is not None:
         return items[:at] + [new] + items[at + 1 :]
     return items + [new] if change.op == "add" else items
+
+
+def _failed(ref: TopicRef, turn_no: int, reason: str, history_turns: int) -> Failed:
+    """The failure the person sees, and a log line the owner can tie to the topic (one-conversation Q7)."""
+    log_event(
+        "reply_failed",
+        severity="WARNING",
+        uid=ref.uid,
+        topic_id=ref.topic_id,
+        turn=turn_no,
+        reason=reason,
+        history_turns=history_turns,
+    )
+    return Failed(reason)
 
 
 def _session(doc: conv_file.SessionDoc, now: datetime) -> Session:

@@ -165,8 +165,8 @@ def test_a_status_line_that_falls_outside_the_shown_turns_is_not_written(tmp_pat
     ref = new_topic(storage, ALICE, t0 - M)
     say(storage, ALICE, ref, "людина 1", "фасилітатор 2", t0, [d_offer(1, "alpha", "beta")])
     analyze(storage, SetLlm(), t0 + H)
-    # a new session (more than 24 h of silence): no context; the offer's line (before #2) is not shown;
-    # the end on 3 acts from #5, which does not exist yet
+    # a new session (more than 24 h of silence): #1-#2 come as context (one-conversation I2), with the
+    # offer's line before #2; the end on 3 acts from #5, which does not exist yet, and is not written
     later = t0 + DAY + H
     say(
         storage,
@@ -180,10 +180,16 @@ def test_a_status_line_that_falls_outside_the_shown_turns_is_not_written(tmp_pat
     llm = SetLlm()
     assert analyze(storage, llm, later + H) == AnalyzeReport(written=1, skipped=0, failed=0)
     assert llm.calls[0].lines() == [
+        CTX,
+        "#1 людина: людина 1",
+        "[Роутер: запропоновано alpha, beta]",
+        "#2 фасилітатор: фасилітатор 2",
+        NEW,
         "#3 людина: людина 3",
         "[Метод: Бета (beta)]",
         "#4 фасилітатор: фасилітатор 4",
     ]
+    assert llm.calls[0].anchors() == ["t3", "t4"]
 
 
 def test_a_card_missing_from_knowledge_or_no_knowledge_gives_the_id_only_and_the_topic_does_not_fail(

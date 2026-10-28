@@ -7,9 +7,11 @@ from urllib.parse import urlparse
 from ca_fakes import (
     ALICE,
     BOB,
+    CTX,
     DAY,
     H_ALICE,
     LS,
+    NEW,
     NOW,
     FakeLlm,
     H,
@@ -267,7 +269,19 @@ def test_I5_legacy_s_files_set_the_starting_cursor_and_new_ranges_cover_the_rest
     assert first == AnalyzeReport(written=5, skipped=2, failed=1)
     llm = FakeLlm()
     analyze(storage, llm, NOW + H)  # B again
-    assert len(llm.calls) == 1 and "B-3" in llm.calls[0].text and "B-2" not in llm.calls[0].text
+    # one-conversation I2: B-1 and B-2 come again only as context; the new turns are B-3's alone.
+    assert len(llm.calls) == 1
+    assert llm.calls[0].lines() == [
+        CTX,
+        "#1 людина: B-1 людина 1",
+        "#2 фасилітатор: B-1 фасилітатор 2",
+        "#3 людина: B-2 людина 3",
+        "#4 фасилітатор: B-2 фасилітатор 4",
+        NEW,
+        "#5 людина: B-3 людина 5",
+        "#6 фасилітатор: B-3 фасилітатор 6",
+    ]
+    assert llm.calls[0].anchors() == ["t5", "t6"]
     say(storage, ALICE, topics["A"], "A-нова", "A-питання?", NOW + 2 * H)  # 5, 6 in session 2
     say(storage, ALICE, topics["C"], "C-нова", "C-питання?", NOW + 2 * H + DAY)  # 3, 4 in a new session
     analyze(storage, FakeLlm(), NOW + 3 * H + DAY)

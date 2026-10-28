@@ -83,7 +83,7 @@ def sources_line(sources: Sequence[Source]) -> str:
 
 
 def frame(ctx: FacilitationContext, state: str = "") -> list[model.Turn]:
-    """The session's history, then one frame: the map now, a state line if any, the person's turn."""
+    """The topic's history, then one frame: the map now, a state line if any, the person's turn."""
     last = (
         f"[Карта проблеми зараз]\n{ctx.problem_map.model_dump_json()}\n\n{state}"
         f"[Репліка людини #{ctx.turn_no}]\n{ctx.text}"

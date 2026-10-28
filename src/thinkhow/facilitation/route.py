@@ -123,7 +123,7 @@ def _one_line(text: str) -> str:
 
 
 def _contents(ctx: FacilitationContext) -> list[model.Turn]:
-    """The session's history as the facilitator sees it, then one frame: routing state, map, the turn."""
+    """The topic's history as the facilitator sees it, then one frame: routing state, map, the turn."""
     frame = (
         f"[Стан вибору способу]\n{_routing_state(ctx.routing or ())}\n\n"
         f"[Карта проблеми зараз]\n{ctx.problem_map.model_dump_json()}\n\n"
