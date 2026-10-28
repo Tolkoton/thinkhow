@@ -131,3 +131,8 @@
 - Record: tasks/done/714-open-item-test-gap-the-index-row-of-a-switch-conve/report.md
 - Reason: All four checks pass. The references I could check say what the report claims. The one item in «Що зробити» is covered: a real defect was found, so it was fixed, with a red run and a green run, and the 26 failures in the full suite are named as the same pre-existing ones from 713. The report has no open questions, and the technical terms are in English.
 - Request: 20261028T132842Z-507b4a (attempt 1)
+
+## 2026-10-28T14:23:16Z — 715-open-item-test-gap-a-contract-test-that-a-person-a — READER_PASS
+- Record: tasks/done/715-open-item-test-gap-a-contract-test-that-a-person-a/report.md
+- Reason: All four questions hold. Every reference I could check says what the report claims. The one item of «Що зробити» is answered: there is a test, a green run, red runs on mutations, and the report explains openly why it did not write the 'no ban in router.md' test. The report asks the owner no open question, and engine terms stay in English (overseer, commit, evals).
+- Request: 20261028T142234Z-99dd55 (attempt 1)
