@@ -81,3 +81,8 @@
 - Record: tasks/done/408-remove-proposal-104/report.md
 - Reason: The task's one item (delete tasks/proposed/104-sketch-voice-stt.md in a separate commit) is done: the file is gone from tasks/proposed/, and commit fccb39c is in the package with a matching subject. There are no open owner questions, and the report keeps the technical terms (commit, runner) in English.
 - Request: 20261028T063104Z-229b97 (attempt 1)
+
+## 2026-10-28T06:32:37Z — 701-open-item-adr-0002-poc-101-result — READER_PASS
+- Record: tasks/done/701-open-item-adr-0002-poc-101-result/report.md
+- Reason: Every reference I could check is correct: the ADR line ranges, the sketch output lines, the owner's «так» answers, the threshold removal, the premises and both commits. Every part of «Що зробити» is done in docs/adr/0002 (Status and Confirmation), there are no open questions for the owner, and the technical terms stay English (Status, Confirmation, endpoint, commit, PoC).
+- Request: 20261028T063212Z-c4fac8 (attempt 1)
