@@ -116,3 +116,8 @@
 - Record: tasks/done/706-open-item-playwright-dev-dependency/report.md
 - Reason: The report passes all four checks. Every file, line and commit reference I could check says what the report claims. All four items of «Що зробити» are done: uv add --dev, a plain import, playwright install chromium, and the new smoke command. There are no open questions for the owner. Engine terms in the report stay in English.
 - Request: 20261028T094847Z-77910f (attempt 2)
+
+## 2026-10-28T10:08:28Z — 709-open-item-explicit-deps-105 — READER_PASS
+- Record: tasks/done/709-open-item-explicit-deps-105/report.md
+- Reason: All four questions hold. The references check out: the file lines, the commits, the uv.lock versions and the 25 known failures from task 706. The report does everything «Що зробити» asks: uv add, the dev stubs, removing the yaml override, and running ruff, mypy and pytest. It asks the owner no questions, and the technical terms stay in English.
+- Request: 20261028T100749Z-dabc1a (attempt 1)
