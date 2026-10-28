@@ -1,0 +1,25 @@
+OK   after 25 h the page asks how the step went
+steps.json: [{'step_id': 's1', 'step': "поговорити з трьома власниками кав'ярень", 'asked_turn': 3, 'outcome': 'worked', 'clearer': 'yes', 'said': 'Вийшло: поговорив з трьома, двоє готові платити, стало ясніше.', 'at': '2026-10-29T01:26:37.349015Z'}]
+OK   the answer is a step result
+turns: [(1, 'user'), (2, 'model'), (3, 'model'), (4, 'user'), (5, 'model')]
+OK   the question is ThinkHow's turn, right before the person's answer
+OK   the topic page shows the block «Кроки»
+OK   no question about it again
+OK   analyze ran
+OK   the analyzer's input carries the step result
+OK   synthesize ran
+revision 1 → 2; memory ['complexity-sensemaking-local']
+OK   a new revision with one note
+OK   the change is the synthesizer's and cites observations
+/learning: 2 links into conversations; button True
+OK   the page shows the change, its observation links and the button
+OK   the link opens the turn t1
+OK   rollback over HTTP → 303
+after rollback: memory []; rev_pair KnowledgeRev(rev=2, n=1)
+OK   the note is gone, n = 1
+OK   the page says the change was rolled back
+OK   a second synthesize took nothing new: nothing_new
+OK   the second synthesize took nothing new (no second run record)
+OK   and wrote no revision
+FAIL the card files are byte-for-byte the same
+RESULT: FAIL

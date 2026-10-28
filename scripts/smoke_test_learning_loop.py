@@ -17,6 +17,7 @@ import sys
 import tempfile
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -30,9 +31,11 @@ from thinkhow.platform.config import load_settings  # noqa: E402
 from thinkhow.platform.storage import make_storage  # noqa: E402
 from thinkhow.web.app import build_deps  # noqa: E402
 from thinkhow.web.server import create_app  # noqa: E402
+from thinkhow.workspace import conversation as conv_file  # noqa: E402
 
 CARDS = ROOT / "cards"
 OUT = ROOT / ".engine" / "artifacts" / "synthesizer" / "smoke.txt"
+STEPS_OUT = ROOT / ".engine" / "artifacts" / "step-results" / "smoke.txt"  # the same run, S6's exit criterion
 STEP = "поговорити з трьома власниками кав'ярень"
 
 
@@ -85,17 +88,41 @@ def main() -> int:
     say(f"steps.json: {steps}")
     check(steps[0]["outcome"] == "worked" and steps[0]["clearer"] == "yes", "the answer is a step result")
     conversation = (folder / "conversation.md").read_text(encoding="utf-8")
-    check("Як він вийшов" in conversation, "the question is ThinkHow's turn in the conversation")
+    turns = [t for session in conv_file.parse(conversation).sessions for t in session.turns]
+    asked = next((t for t in turns if t.role == "model" and "Як він вийшов" in t.text), None)
+    answer_turn = next((t for t in turns if asked and t.no == asked.no + 1), None)
+    say(f"turns: {[(t.no, t.role) for t in turns]}")
+    check(
+        asked is not None
+        and answer_turn is not None
+        and answer_turn.role == "user"
+        and answer_turn.text.startswith("Вийшло"),
+        "the question is ThinkHow's turn, right before the person's answer",
+    )
     check("Кроки" in client.get(topic).text, "the topic page shows the block «Кроки»")
     clock[0] += timedelta(hours=25)
-    check("Як він вийшов" not in client.get(topic).text.split("Кроки", 1)[-1], "no question about it again")
+    check('class="turn model step-question"' not in client.get(topic).text, "no question about it again")
     before = cards_bytes(root)
     rev_before = knowledge.current(storage).rev
 
     def run(command: str) -> int:
         return job.run([command], environ, CARDS, lambda: clock[0])
 
-    check(run("analyze") == 0, "analyze ran")
+    analyzer_input: list[str] = []
+    the_job: Any = job  # the Job's own name for the local script, replaced for this run
+    real_script = the_job.local_script
+
+    def listening(system: str, contents: Any, schema: Any) -> str:
+        analyzer_input.extend(turn.text for turn in contents)
+        return str(real_script(system, contents, schema))
+
+    the_job.local_script = listening  # the analyzer's input, as the Job hands it to the model
+    try:
+        check(run("analyze") == 0, "analyze ran")
+    finally:
+        the_job.local_script = real_script
+    result = f"[Результат кроку «{STEP}»: вийшло — "
+    check(any(result in text for text in analyzer_input), "the analyzer's input carries the step result")
     check(run("synthesize") == 0, "synthesize ran")
     after = knowledge.current(storage)
     say(f"revision {rev_before} → {after.rev}; memory {[m.id for m in after.memory]}")
@@ -132,8 +159,9 @@ def main() -> int:
     check(knowledge.current(storage).rev_pair() == rev_now, "and wrote no revision")
     check(cards_bytes(root) == before, "the card files are byte-for-byte the same")
     say("RESULT: " + ("PASS" if ok else "FAIL"))
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    for out in (OUT, STEPS_OUT):
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return 0 if ok else 1
 
 
