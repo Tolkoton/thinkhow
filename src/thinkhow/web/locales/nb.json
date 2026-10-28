@@ -76,5 +76,14 @@
   "card.value-pricing": "En pris basert på verdien for kunden (EVC)",
   "card.weighted-matrix": "En vektet sammenligning av alternativer etter dine egne verdier",
   "card.wrap-decision": "En vanskelig beslutning — utvid, test mot virkeligheten, få avstand, forbered deg (WRAP)",
-  "learning_link": "Læring"
+  "learning_link": "Læring",
+  "step_question": "Sist gang valgte du et steg: «{step}». Hvordan gikk det, og er det blitt klarere hva du skal gjøre videre? Du trenger ikke svare — bare skriv videre.",
+  "steps_title": "Steg",
+  "step_worked": "det gikk",
+  "step_not_worked": "det gikk ikke",
+  "step_unexpected": "det gikk annerledes enn ventet",
+  "step_no_answer": "ikke besvart",
+  "clearer_yes": "det ble klarere",
+  "clearer_partly": "litt klarere",
+  "clearer_no": "ikke klarere"
 }

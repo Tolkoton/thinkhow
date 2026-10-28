@@ -76,5 +76,14 @@
   "card.value-pricing": "Un presu a partir di valor pa klienti (EVC)",
   "card.weighted-matrix": "Un komparason ponderadu di opson segundu bu própi valoris",
   "card.wrap-decision": "Un disizãu difísil — alarga, testa ku realidadi, toma distánsia, prepara (WRAP)",
-  "learning_link": "Aprendizajen"
+  "learning_link": "Aprendizajen",
+  "step_question": "Kel últimu bes nhos skodje un pasu: “{step}”. Modi ki kóre? Dja sta más klaru kuzé ki nhos ta faze dipôs? Nhos ka meste rasponde — kontinua skrebe só.",
+  "steps_title": "Pasus",
+  "step_worked": "da diretu",
+  "step_not_worked": "ka da diretu",
+  "step_unexpected": "kóre diferenti di kel ki nu staba ta spera",
+  "step_no_answer": "sen resposta",
+  "clearer_yes": "fika más klaru",
+  "clearer_partly": "un poku más klaru",
+  "clearer_no": "ka fika más klaru"
 }

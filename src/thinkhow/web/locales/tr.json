@@ -76,5 +76,14 @@
   "card.value-pricing": "Müşteriye sağlanan değerden fiyat (EVC)",
   "card.weighted-matrix": "Seçeneklerin kendi değerlerinize göre ağırlıklı karşılaştırması",
   "card.wrap-decision": "Zor bir karar — genişletin, gerçekle sınayın, mesafe alın, hazırlanın (WRAP)",
-  "learning_link": "Öğrenme"
+  "learning_link": "Öğrenme",
+  "step_question": "Geçen sefer bir adım seçmiştiniz: “{step}”. Nasıl geçti, bundan sonra ne yapacağınız daha açık hâle geldi mi? Yanıt vermek zorunda değilsiniz — yazmaya devam edebilirsiniz.",
+  "steps_title": "Adımlar",
+  "step_worked": "işe yaradı",
+  "step_not_worked": "işe yaramadı",
+  "step_unexpected": "beklenenden farklı gitti",
+  "step_no_answer": "yanıt yok",
+  "clearer_yes": "daha açık hâle geldi",
+  "clearer_partly": "biraz daha açık",
+  "clearer_no": "daha açık olmadı"
 }

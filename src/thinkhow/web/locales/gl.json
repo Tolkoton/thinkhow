@@ -76,5 +76,14 @@
   "card.value-pricing": "Un prezo segundo o valor para o cliente (EVC)",
   "card.weighted-matrix": "Unha comparación ponderada das opcións segundo os teus propios valores",
   "card.wrap-decision": "Unha decisión difícil — amplía, contrasta coa realidade, toma distancia, prepárate (WRAP)",
-  "learning_link": "Aprendizaxe"
+  "learning_link": "Aprendizaxe",
+  "step_question": "A última vez escolleu un paso: «{step}». Como lle foi e ten máis claro que facer agora? Non fai falta que responda: siga escribindo.",
+  "steps_title": "Pasos",
+  "step_worked": "funcionou",
+  "step_not_worked": "non funcionou",
+  "step_unexpected": "saíu doutro xeito do que se esperaba",
+  "step_no_answer": "sen resposta",
+  "clearer_yes": "quedou máis claro",
+  "clearer_partly": "un pouco máis claro",
+  "clearer_no": "non quedou máis claro"
 }

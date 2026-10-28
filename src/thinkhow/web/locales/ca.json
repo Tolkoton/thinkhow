@@ -76,5 +76,14 @@
   "card.value-pricing": "Un preu segons el valor per al client (EVC)",
   "card.weighted-matrix": "Una comparació ponderada d'opcions segons els vostres valors",
   "card.wrap-decision": "Una decisió difícil — amplieu, contrasteu amb la realitat, preneu distància, prepareu-vos (WRAP)",
-  "learning_link": "Aprenentatge"
+  "learning_link": "Aprenentatge",
+  "step_question": "L'última vegada va triar un pas: «{step}». Com ha anat, i té més clar què fer ara? No cal que respongui — continuï escrivint.",
+  "steps_title": "Passos",
+  "step_worked": "ha funcionat",
+  "step_not_worked": "no ha funcionat",
+  "step_unexpected": "ha anat diferent del que s'esperava",
+  "step_no_answer": "sense resposta",
+  "clearer_yes": "ha quedat més clar",
+  "clearer_partly": "una mica més clar",
+  "clearer_no": "no ha quedat més clar"
 }

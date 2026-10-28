@@ -76,5 +76,14 @@
   "card.value-pricing": "Ár a vásárlónak nyújtott érték alapján (EVC)",
   "card.weighted-matrix": "Az opciók súlyozott összehasonlítása a saját értékei szerint",
   "card.wrap-decision": "Nehéz döntés — tágítson, ellenőrizze a valósággal, távolodjon el, készüljön fel (WRAP)",
-  "learning_link": "Tanulás"
+  "learning_link": "Tanulás",
+  "step_question": "Legutóbb ezt a lépést választotta: „{step}”. Hogyan sikerült, és világosabb-e, mi a következő teendő? Nem kötelező válaszolnia — nyugodtan írjon tovább.",
+  "steps_title": "Lépések",
+  "step_worked": "sikerült",
+  "step_not_worked": "nem sikerült",
+  "step_unexpected": "a vártnál másképp alakult",
+  "step_no_answer": "nincs válasz",
+  "clearer_yes": "világosabb lett",
+  "clearer_partly": "kicsit világosabb",
+  "clearer_no": "nem lett világosabb"
 }

@@ -76,5 +76,14 @@
   "card.value-pricing": "Prezz ibbażat fuq il-valur għall-klijent (EVC)",
   "card.weighted-matrix": "Paragun ippeżat tal-għażliet skont il-valuri tiegħek stess",
   "card.wrap-decision": "Deċiżjoni diffiċli — wessa', ittestja r-realtà, ħu d-distanza, ipprepara ruħek (WRAP)",
-  "learning_link": "Tagħlim"
+  "learning_link": "Tagħlim",
+  "step_question": "L-aħħar darba għażilt pass: “{step}”. Kif mar, u issa huwa iktar ċar x’għandek tagħmel wara? M’għandekx għalfejn twieġeb — kompli ikteb biss.",
+  "steps_title": "Passi",
+  "step_worked": "irnexxa",
+  "step_not_worked": "ma rnexxiex",
+  "step_unexpected": "mar b’mod differenti milli kien mistenni",
+  "step_no_answer": "ebda tweġiba",
+  "clearer_yes": "sar iktar ċar",
+  "clearer_partly": "ftit iktar ċar",
+  "clearer_no": "ma sarx iktar ċar"
 }

@@ -512,3 +512,23 @@
   (`router-eval.compare.md`)
 - Surprises: `router_eval.py` had old type errors (CountingLlm without `search_text`, the log patch) — fixed
 - Open for next slice: S6 step results
+
+## Slice step-results — S6 of learning-loop (DONE 2026-10-28)
+
+- Module: `workspace/steps.py` (`pending_step`, `steps.json` read/write, `step_results_for_learning`),
+  `workspace/topics.py` (on a return after a break with a chosen step not asked about: the question as ThinkHow's
+  turn `#N+1`, the person `#N+2`, a record `asked_turn`; `recognize` after the answer `#N+3` and before `Answered`, in
+  `reply` and `retry`; `TopicView.steps`, `.step_question` for the topic's owner), `facilitation/steps.py`
+  (`recognize_step`, one `generate_json`, `StepOutcome` in `facilitation.types`), `web/server.py` (the question in the
+  person's language, `Deps.recognize`), `web/app.py`, `templates/topic.html` (block «Кроки», the question line),
+  9 words × 76 catalogs, `web/local.py` (scripted recognition), `learning/analyze.py` (the result line before
+  `#N+2` without `clearer`, `kind: step`, the rule of analysis)
+- Tests: 32 by the slice-tester in `tests/contract/step_results/` (sealed; Q2 `taken`; objection round 1: typed
+  helpers instead of type-ignores); analysis-rules objection round 1: `kind` takes `step` (2 `test_wrong`)
+- Live: `tests/live/test_step_recognize_live.py` — not_worked, unexpected, «про інше» → not answered
+  (`.engine/artifacts/step-results/live.txt`)
+- Smoke (the whole cycle, AC7): `scripts/smoke_test_learning_loop.py` — conversation → return after 25 h with the
+  question → step result in `steps.json` and «Кроки» → no question again → analyze → synthesize → `/learning` →
+  rollback, cards byte-for-byte (`.engine/artifacts/synthesizer/smoke.txt`, PASS)
+- Surprises: the question's words live in `web` catalogs, `workspace` cannot import them — `open_topic`/`reply` take a
+  `question` callable (the planner's reading of the seam)

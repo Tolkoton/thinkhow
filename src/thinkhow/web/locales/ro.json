@@ -76,5 +76,14 @@
   "card.value-pricing": "Un preț pornind de la valoarea pentru client (EVC)",
   "card.weighted-matrix": "O comparație ponderată a opțiunilor după propriile valori",
   "card.wrap-decision": "O decizie grea — lărgiți opțiunile, testați realitatea, luați distanță, pregătiți-vă (WRAP)",
-  "learning_link": "Învățare"
+  "learning_link": "Învățare",
+  "step_question": "Data trecută ați ales un pas: „{step}”. Cum a mers și este acum mai clar ce aveți de făcut în continuare? Nu trebuie să răspundeți — continuați pur și simplu să scrieți.",
+  "steps_title": "Pași",
+  "step_worked": "a mers",
+  "step_not_worked": "nu a mers",
+  "step_unexpected": "a ieșit altfel decât se aștepta",
+  "step_no_answer": "fără răspuns",
+  "clearer_yes": "a devenit mai clar",
+  "clearer_partly": "puțin mai clar",
+  "clearer_no": "nu a devenit mai clar"
 }

@@ -222,7 +222,8 @@ def test_answer_schema_has_the_fields_in_order_and_the_enums(tmp_path: Path) -> 
             p = top["$defs"][p["$ref"].rsplit("/", 1)[-1]]
         return list(p["enum"])
 
-    assert sorted(enum("kind")) == ["method_fit", "progress", "stuck"]
+    # S6 (step-results) adds "step", as S2's «Deferred» foresaw: «схема моделі — без `step`, його додає S6».
+    assert sorted(enum("kind")) == ["method_fit", "progress", "step", "stuck"]
     assert sorted(enum("cause")) == ["circumstances", "facilitation", "method", "router"]
     assert enum("anchor") == ["t3", "t4", "t5"]
     assert props["finding"]["minLength"] == 1
@@ -245,7 +246,7 @@ def test_answer_schema_needs_at_least_one_observation_and_has_no_upper_bound(tmp
     assert len(got.model_dump()["observations"]) == 12
     for bad in (
         {**one("t1"), "anchor": "t3"},
-        {**one("t1"), "kind": "step"},
+        {**one("t1"), "kind": "insight"},
         {**one("t1"), "cause": "luck"},
         {**one("t1"), "finding": ""},
     ):

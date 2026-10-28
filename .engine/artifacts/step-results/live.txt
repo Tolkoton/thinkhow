@@ -1,0 +1,7 @@
+model: gemini-4-argon; region: eu
+not_worked: 'Не вийшло: ніхто з трьох не захотів говорити, тож я досі нічого не знаю про оренду.'
+  -> StepOutcome(answered=True, outcome='not_worked', clearer='no', said='Не вийшло: ніхто з трьох власників не захотів говорити, тому досі нічого не відомо про оренду.')
+unexpected: 'Поговорив, але несподівано: оренда — дрібниця, усі скаржаться на брак персоналу. Стало трохи ясніше.'
+  -> StepOutcome(answered=True, outcome='unexpected', clearer='partly', said='Поговорив, але несподівано виявилося, що оренда — дрібниця, а всі скаржаться на брак персоналу. Стало трохи ясніше.')
+other: "Слухай, а скільки взагалі коштує хороша кавомашина для маленької кав'ярні?"
+  -> StepOutcome(answered=False, outcome=None, clearer=None, said='')

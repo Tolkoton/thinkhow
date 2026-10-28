@@ -76,5 +76,14 @@
   "card.value-pricing": "Een prijs op basis van de waarde voor de klant (EVC)",
   "card.weighted-matrix": "Een gewogen vergelijking van opties op basis van je eigen waarden",
   "card.wrap-decision": "Een moeilijke beslissing — verbreden, toetsen aan de realiteit, afstand nemen, voorbereiden (WRAP)",
-  "learning_link": "Leren"
+  "learning_link": "Leren",
+  "step_question": "De vorige keer koos u een stap: ‘{step}’. Hoe ging het, en is het nu duidelijker wat u verder kunt doen? U hoeft niet te antwoorden — schrijf gerust verder.",
+  "steps_title": "Stappen",
+  "step_worked": "gelukt",
+  "step_not_worked": "niet gelukt",
+  "step_unexpected": "anders gegaan dan verwacht",
+  "step_no_answer": "geen antwoord",
+  "clearer_yes": "duidelijker geworden",
+  "clearer_partly": "iets duidelijker",
+  "clearer_no": "niet duidelijker"
 }

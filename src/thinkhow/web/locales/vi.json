@@ -76,5 +76,14 @@
   "card.value-pricing": "Định giá theo giá trị đối với khách hàng (EVC)",
   "card.weighted-matrix": "So sánh có trọng số các phương án theo giá trị của riêng bạn",
   "card.wrap-decision": "Một quyết định khó — mở rộng, kiểm chứng thực tế, tạo khoảng cách, chuẩn bị (WRAP)",
-  "learning_link": "Học hỏi"
+  "learning_link": "Học hỏi",
+  "step_question": "Lần trước bạn đã chọn một bước: “{step}”. Mọi việc thế nào, và giờ bạn đã rõ hơn nên làm gì tiếp theo chưa? Bạn không cần trả lời — cứ tiếp tục viết nhé.",
+  "steps_title": "Các bước",
+  "step_worked": "đã thành công",
+  "step_not_worked": "không thành công",
+  "step_unexpected": "diễn ra khác với dự kiến",
+  "step_no_answer": "không trả lời",
+  "clearer_yes": "đã rõ hơn",
+  "clearer_partly": "rõ hơn một chút",
+  "clearer_no": "không rõ hơn"
 }

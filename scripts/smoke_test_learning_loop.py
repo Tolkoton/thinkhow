@@ -9,12 +9,13 @@ the card files byte-for-byte the same. Prints each step and writes the same to
 """
 
 import contextlib
+import dataclasses
 import io
 import json
 import re
 import sys
 import tempfile
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +33,7 @@ from thinkhow.web.server import create_app  # noqa: E402
 
 CARDS = ROOT / "cards"
 OUT = ROOT / ".engine" / "artifacts" / "synthesizer" / "smoke.txt"
+STEP = "поговорити з трьома власниками кав'ярень"
 
 
 def cards_bytes(root: Path) -> dict[str, bytes]:
@@ -58,16 +60,40 @@ def main() -> int:
         "THINKHOW_LOCAL_DIR": str(root),
         "THINKHOW_OWNER_EMAIL": "owner@localhost",
     }
-    client = TestClient(create_app(build_deps(environ, CARDS)), follow_redirects=False)
+    clock = [datetime.now(UTC)]
+    deps = dataclasses.replace(build_deps(environ, CARDS), now=lambda: clock[0])
+    client = TestClient(create_app(deps), follow_redirects=False)
     storage = make_storage(load_settings(environ))
     client.post("/language", data={"code": "uk-UA"})
     topic = client.post("/topics", data={"title": "Кав'ярня"}).headers["location"]
     client.post(f"{topic}/reply", data={"text": "Хочу відкрити кав'ярню за три місяці."})
+    # S6: the person chose a step (the scripted facilitator of local mode never does — the map gets it here)
+    folder = root / "users" / "local-owner" / topic.rsplit("/", 1)[-1]
+    chosen = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+    chosen["items"].append({"id": "s1", "type": "chosen_step", "text": STEP, "turn": "t1"})
+    (folder / "map.json").write_text(json.dumps(chosen, ensure_ascii=False), encoding="utf-8")
+    clock[0] += timedelta(hours=25)
+    page = client.get(topic).text
+    check(
+        STEP.split(" кав")[0] in page and "Як він вийшов" in page,
+        "after 25 h the page asks how the step went",
+    )
+    client.post(
+        f"{topic}/reply", data={"text": "Вийшло: поговорив з трьома, двоє готові платити, стало ясніше."}
+    )
+    steps = json.loads((folder / "steps.json").read_text(encoding="utf-8"))["steps"]
+    say(f"steps.json: {steps}")
+    check(steps[0]["outcome"] == "worked" and steps[0]["clearer"] == "yes", "the answer is a step result")
+    conversation = (folder / "conversation.md").read_text(encoding="utf-8")
+    check("Як він вийшов" in conversation, "the question is ThinkHow's turn in the conversation")
+    check("Кроки" in client.get(topic).text, "the topic page shows the block «Кроки»")
+    clock[0] += timedelta(hours=25)
+    check("Як він вийшов" not in client.get(topic).text.split("Кроки", 1)[-1], "no question about it again")
     before = cards_bytes(root)
     rev_before = knowledge.current(storage).rev
 
     def run(command: str) -> int:
-        return job.run([command], environ, CARDS, lambda: datetime.now(UTC))
+        return job.run([command], environ, CARDS, lambda: clock[0])
 
     check(run("analyze") == 0, "analyze ran")
     check(run("synthesize") == 0, "synthesize ran")

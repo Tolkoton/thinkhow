@@ -7,6 +7,7 @@ from thinkhow.facilitation.answer import answer_fact
 from thinkhow.facilitation.converse import converse
 from thinkhow.facilitation.respond import respond
 from thinkhow.facilitation.route import RouterAnswer, route
+from thinkhow.facilitation.steps import recognize_step
 from thinkhow.facilitation.types import (
     Candidate,
     Decision,
@@ -26,11 +27,14 @@ from thinkhow.facilitation.types import (
     Rev,
     RoutingEvent,
     Source,
+    StepOutcome,
     Turn,
     current_card,
 )
 
 __all__ = [
+    "StepOutcome",
+    "recognize_step",
     "answer_fact",
     "Candidate",
     "Decision",

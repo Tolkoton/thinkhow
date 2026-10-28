@@ -76,5 +76,14 @@
   "card.value-pricing": "گراهڪ لاءِ قدر مطابق قيمت (EVC)",
   "card.weighted-matrix": "پنهنجن قدرن مطابق اختيارن جي وزن واري ڀيٽ",
   "card.wrap-decision": "ڏکيو فيصلو — دائرو وڌايو، حقيقت سان پرکيو، فاصلو رکو، تيار ٿيو (WRAP)",
-  "learning_link": "سکيا"
+  "learning_link": "سکيا",
+  "step_question": "گذريل دفعي توهان هڪ قدم چونڊيو هو: “{step}”. اهو ڪيئن ٿيو، ۽ ڇا هاڻي وڌيڪ واضح آهي ته اڳتي ڇا ڪجي؟ جواب ڏيڻ ضروري ناهي — بس لکندا رهو.",
+  "steps_title": "قدم",
+  "step_worked": "ڪامياب ٿيو",
+  "step_not_worked": "ڪامياب نه ٿيو",
+  "step_unexpected": "سوچ کان مختلف ٿيو",
+  "step_no_answer": "ڪو جواب ناهي",
+  "clearer_yes": "وڌيڪ واضح ٿيو",
+  "clearer_partly": "ٿورو واضح ٿيو",
+  "clearer_no": "واضح نه ٿيو"
 }

@@ -76,5 +76,14 @@
   "card.value-pricing": "Cena podle hodnoty pro zákazníka (EVC)",
   "card.weighted-matrix": "Vážené srovnání možností podle vašich vlastních hodnot",
   "card.wrap-decision": "Těžké rozhodnutí — rozšiřte možnosti, ověřte realitou, získejte odstup, připravte se (WRAP)",
-  "learning_link": "Učení"
+  "learning_link": "Učení",
+  "step_question": "Minule jste si zvolili krok: „{step}“. Jak se vydařil a je vám jasnější, co dělat dál? Nemusíte odpovídat — klidně pište dál.",
+  "steps_title": "Kroky",
+  "step_worked": "vyšlo to",
+  "step_not_worked": "nevyšlo to",
+  "step_unexpected": "dopadlo to jinak, než se čekalo",
+  "step_no_answer": "bez odpovědi",
+  "clearer_yes": "je to jasnější",
+  "clearer_partly": "trochu jasnější",
+  "clearer_no": "není to jasnější"
 }

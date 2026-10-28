@@ -76,5 +76,14 @@
   "card.value-pricing": "Hind kliendile loodava väärtuse järgi (EVC)",
   "card.weighted-matrix": "Valikute kaalutud võrdlus teie enda väärtuste järgi",
   "card.wrap-decision": "Raske otsus — laiendage, kontrollige reaalsusega, võtke distantsi, valmistuge (WRAP)",
-  "learning_link": "Õppimine"
+  "learning_link": "Õppimine",
+  "step_question": "Eelmisel korral valisite sammu: „{step}“. Kuidas läks ja kas on nüüd selgem, mida edasi teha? Te ei pea vastama — kirjutage lihtsalt edasi.",
+  "steps_title": "Sammud",
+  "step_worked": "õnnestus",
+  "step_not_worked": "ei õnnestunud",
+  "step_unexpected": "läks teisiti, kui oodati",
+  "step_no_answer": "vastuseta",
+  "clearer_yes": "sai selgemaks",
+  "clearer_partly": "veidi selgem",
+  "clearer_no": "ei saanud selgemaks"
 }

@@ -76,5 +76,14 @@
   "card.value-pricing": "Hinnoittelu asiakkaan saaman arvon mukaan (EVC)",
   "card.weighted-matrix": "Vaihtoehtojen painotettu vertailu omien arvojesi mukaan",
   "card.wrap-decision": "Vaikea päätös — laajenna, testaa todellisuutta, ota etäisyyttä, valmistaudu (WRAP)",
-  "learning_link": "Oppiminen"
+  "learning_link": "Oppiminen",
+  "step_question": "Viime kerralla valitsitte askeleen: ”{step}”. Miten se meni, ja onko nyt selvempää, mitä tehdä seuraavaksi? Teidän ei tarvitse vastata — jatkakaa vain kirjoittamista.",
+  "steps_title": "Askeleet",
+  "step_worked": "onnistui",
+  "step_not_worked": "ei onnistunut",
+  "step_unexpected": "meni toisin kuin odotettiin",
+  "step_no_answer": "ei vastausta",
+  "clearer_yes": "selkeni",
+  "clearer_partly": "vähän selkeämpää",
+  "clearer_no": "ei selkeytynyt"
 }

@@ -4,6 +4,8 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Literal
 
+from pydantic import BaseModel, ConfigDict
+
 from thinkhow.facilitation.types import Decision, ProblemMap
 
 TopicId = str
@@ -67,6 +69,8 @@ class TopicView:
     awaiting_answer: bool
     routing: tuple[Decision, ...] = ()
     research: tuple[ResearchView, ...] = ()
+    steps: tuple["StepResult", ...] = ()
+    step_question: str | None = None
 
 
 @dataclass(frozen=True)
@@ -90,3 +94,25 @@ class Failed:
 
 
 ReplyEvent = Saved | Delta | Answered | Failed
+
+
+Outcome = Literal["worked", "not_worked", "unexpected"]
+Clearer = Literal["yes", "partly", "no"]
+
+
+class StepResult(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    step_id: str
+    step: str
+    asked_turn: int
+    outcome: Outcome | None
+    clearer: Clearer | None
+    said: str
+    at: datetime
+
+
+class StepsFile(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    steps: list[StepResult]

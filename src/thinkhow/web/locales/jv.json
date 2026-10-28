@@ -76,5 +76,14 @@
   "card.value-pricing": "Rega miturut aji tumrap pelanggan (EVC)",
   "card.weighted-matrix": "Pambandhing pilihan mawi bobot miturut aji-aji panjenengan piyambak",
   "card.wrap-decision": "Putusan ingkang awrat — ambakaken, uji kaliyan kasunyatan, jaga jarak, cecawis (WRAP)",
-  "learning_link": "Sinau"
+  "learning_link": "Sinau",
+  "step_question": "Wingi panjenengan milih langkah: “{step}”. Kados pundi asilipun, lan punapa sampun langkung cetha menapa ingkang badhe dipuntindakaken salajengipun? Mboten perlu mangsuli — mangga lajengaken nyerat kemawon.",
+  "steps_title": "Langkah-langkah",
+  "step_worked": "kasil",
+  "step_not_worked": "mboten kasil",
+  "step_unexpected": "dados benten kaliyan ingkang dipunkinten",
+  "step_no_answer": "tanpa wangsulan",
+  "clearer_yes": "dados langkung cetha",
+  "clearer_partly": "rada langkung cetha",
+  "clearer_no": "mboten langkung cetha"
 }

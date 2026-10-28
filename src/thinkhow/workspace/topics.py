@@ -6,7 +6,7 @@ Paths are built here only, from the server's ids. Read rule: own or the owner; w
 import json
 import re
 import secrets
-from collections.abc import Iterator
+from collections.abc import Iterator, Sequence
 from datetime import datetime
 from typing import Literal
 
@@ -26,6 +26,7 @@ from thinkhow.facilitation.types import (
     current_card,
 )
 from thinkhow.facilitation.types import Turn as FacilitationTurn
+from thinkhow.platform.log import log_event
 from thinkhow.platform.storage import Storage
 from thinkhow.workspace import conversation as conv_file
 from thinkhow.workspace._paths import JSON, UID, _uid
@@ -42,6 +43,7 @@ from thinkhow.workspace.model import (
     ResearchView,
     Saved,
     Session,
+    StepResult,
     TopicId,
     TopicNotFound,
     TopicRef,
@@ -49,6 +51,13 @@ from thinkhow.workspace.model import (
     TopicView,
 )
 from thinkhow.workspace.profile import NoLanguage, language
+from thinkhow.workspace.steps import (
+    Question,
+    Recognize,
+    _write_steps,
+    pending_step,
+    read_steps,
+)
 
 
 class RoutingFile(BaseModel):
@@ -115,14 +124,28 @@ def all_topics_for_learning(storage: Storage) -> Iterator[TopicRef]:
     yield from _refs(storage, "")
 
 
-def open_topic(storage: Storage, user: CurrentUser, ref: TopicRef, now: datetime) -> TopicView:
+def open_topic(
+    storage: Storage, user: CurrentUser, ref: TopicRef, now: datetime, question: Question | None = None
+) -> TopicView:
     _check_now(now)
     _can_read(user, ref)
     conv = _read_conversation(storage, ref)
     sessions = [_session(s, now) for s in conv.sessions]
     problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
     research = tuple(ResearchView(e.turn, e.suggestions_html) for e in _read_research(storage, ref))
-    return TopicView(ref, conv.title, sessions, problem_map, _awaiting(conv, now), routing, research)
+    steps = tuple(read_steps(storage, ref))
+    asked = _question_due(conv, problem_map, steps, now) if question and user.id == ref.uid else None
+    return TopicView(
+        ref,
+        conv.title,
+        sessions,
+        problem_map,
+        _awaiting(conv, now),
+        routing,
+        research,
+        steps,
+        question(asked.text) if question and asked else None,
+    )
 
 
 def reply(
@@ -133,6 +156,8 @@ def reply(
     text: str,
     now: datetime,
     spoken: bool = False,
+    recognize: Recognize | None = None,
+    question: Question | None = None,
 ) -> Iterator[ReplyEvent]:
     """Checks now (Q4, eager); the returned iterator saves the turn, then streams and writes the answer."""
     _check_now(now)
@@ -143,7 +168,8 @@ def reply(
     conv = _read_conversation(storage, ref)
     if _awaiting(conv, now):
         raise PendingAnswer("the last turn has no answer yet: retry it first")
-    return _reply_flow(storage, facilitate, ref, conv, clean, now, _language_of(storage, user), spoken)
+    lang = _language_of(storage, user)
+    return _reply_flow(storage, facilitate, ref, conv, clean, now, lang, spoken, recognize, question)
 
 
 def retry(
@@ -153,6 +179,7 @@ def retry(
     ref: TopicRef,
     now: datetime,
     spoken: bool = False,
+    recognize: Recognize | None = None,
 ) -> Iterator[ReplyEvent]:
     _check_now(now)
     _can_write(user, ref)
@@ -161,7 +188,7 @@ def retry(
         raise NothingToRetry("no unanswered turn in an open session")
     last = conv.sessions[-1].turns[-1]
     lang = _language_of(storage, user)
-    return _answer(storage, facilitate, ref, conv, last.no, last.text, now, lang, spoken)
+    return _answer(storage, facilitate, ref, conv, last.no, last.text, now, lang, spoken, recognize)
 
 
 def delete_topic(storage: Storage, user: CurrentUser, ref: TopicRef) -> None:
@@ -193,6 +220,41 @@ def topic_sessions(storage: Storage, ref: TopicRef, now: datetime) -> list[Sessi
     return [_session(s, now) for s in _read_conversation(storage, ref).sessions]
 
 
+def _question_due(
+    conv: conv_file.Conversation, problem_map: ProblemMap, steps: Sequence[StepResult], now: datetime
+) -> MapItem | None:
+    """The step to ask about: a pending one, when the next turn opens a new session (the return, S6)."""
+    if not conv.sessions or not conv.sessions[-1].turns or _closed_at(conv.sessions[-1], now) is None:
+        return None
+    return pending_step(problem_map, steps)
+
+
+def _recognize(
+    storage: Storage,
+    ref: TopicRef,
+    conv: conv_file.Conversation,
+    turn_no: int,
+    text: str,
+    recognize: Recognize,
+) -> None:
+    """The answer right after the question about a step: recognize it into the record (before Answered)."""
+    steps = read_steps(storage, ref)
+    open_ones = [s for s in steps if s.asked_turn == turn_no - 1 and s.outcome is None]
+    if not open_ones:
+        return
+    record = open_ones[0]
+    asked = next((t.text for s in conv.sessions for t in s.turns if t.no == record.asked_turn), "")
+    try:
+        found = recognize(record.step, asked, text)
+    except Exception as exc:  # the answer is given already; the record stays as asked
+        log_event("step_recognize_failed", severity="WARNING", error=type(exc).__name__)
+        return
+    if found is None or not found.answered:
+        return
+    done = record.model_copy(update={"outcome": found.outcome, "clearer": found.clearer, "said": found.said})
+    _write_steps(storage, ref, [done if s is record else s for s in steps])
+
+
 def topic_routing(storage: Storage, ref: TopicRef) -> tuple[Decision, ...]:
     """Read only, no access rule: the router's decisions of the topic for learning (refs from
     all_topics_for_learning); none without routing.json."""
@@ -209,15 +271,29 @@ def _reply_flow(
     now: datetime,
     lang: str | None,
     spoken: bool = False,
+    recognize: Recognize | None = None,
+    question: Question | None = None,
 ) -> Iterator[ReplyEvent]:
-    """Flow (M2): the person's turn into conversation.md → Saved → the answer (I4)."""
+    """Flow (M2): the person's turn into conversation.md → Saved → the answer (I4). On a return after a break
+    with a chosen step not asked about yet, the question about it goes first, as ThinkHow's turn (S6)."""
+    steps = read_steps(storage, ref)
+    due = _question_due(conv, _read_map(storage, ref), steps, now) if question else None
     if _closed_at(conv.sessions[-1], now) is not None:
         conv.sessions.append(conv_file.SessionDoc(no=conv.sessions[-1].no + 1))
+    if due is not None and question is not None:
+        asked = conv.last_no() + 1
+        conv.sessions[-1].turns.append(
+            conv_file.Turn(asked, "model", conv_file.second(now), question(due.text))
+        )
+        record = StepResult(
+            step_id=due.id, step=due.text, asked_turn=asked, outcome=None, clearer=None, said="", at=now
+        )
+        _write_steps(storage, ref, [*steps, record])
     turn_no = conv.last_no() + 1
     conv.sessions[-1].turns.append(conv_file.Turn(turn_no, "user", conv_file.second(now), text))
     _write_conversation(storage, ref, conv)
     yield Saved(turn_no)
-    yield from _answer(storage, facilitate, ref, conv, turn_no, text, now, lang, spoken)
+    yield from _answer(storage, facilitate, ref, conv, turn_no, text, now, lang, spoken, recognize)
 
 
 def _answer(
@@ -230,8 +306,10 @@ def _answer(
     now: datetime,
     lang: str | None,
     spoken: bool = False,
+    recognize: Recognize | None = None,
 ) -> Iterator[ReplyEvent]:
-    """Flow: facilitate → deltas → answer into conversation.md → map, routing, research.json → Answered."""
+    """Flow: facilitate → deltas → answer into conversation.md → map, routing, research.json → the result of a
+    step from the answer to its question (S6) → Answered."""
     session = conv.sessions[-1]
     history = [FacilitationTurn(t.role, t.text) for t in session.turns if t.no < turn_no]
     problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
@@ -269,6 +347,8 @@ def _answer(
         _write_routing(storage, ref, (*routing, *decisions))
     if research:
         _append_research(storage, ref, [_entry(event, turn_no + 1) for event in research])
+    if recognize is not None:
+        _recognize(storage, ref, conv, turn_no, text, recognize)
     yield Answered(turn_no + 1)
 
 

@@ -22,7 +22,16 @@
   {% endfor %}
 </section>
 {% endfor %}
-<div id="live"></div>
+{% if view.steps %}
+<section class="steps">
+  <h2>{{ ui.steps_title }}</h2>
+  <ul>
+  {% for s in view.steps %}  <li><strong>{{ s.step }}</strong> — {{ ui["step_" + s.outcome] if s.outcome else ui.step_no_answer }}{% if s.clearer %}; {{ ui["clearer_" + s.clearer] }}{% endif %}{% if s.said %}: «{{ s.said }}»{% endif %}</li>
+  {% endfor %}</ul>
+</section>
+{% endif %}
+{% if view.step_question %}<section class="turn model step-question"><p>{{ view.step_question }}</p></section>
+{% endif %}<div id="live"></div>
 <p id="error" class="error"></p>
 {% if own %}
 <form id="reply-form" class="reply" method="post" action="/topics/{{ view.ref.uid }}/{{ view.ref.topic_id }}/reply"

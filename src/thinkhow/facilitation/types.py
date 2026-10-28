@@ -207,3 +207,12 @@ Facilitate = Callable[
 
 class FacilitationError(Exception):
     """The model answered, but its update stayed invalid after the one retry of the update."""
+
+
+class StepOutcome(_Frozen):
+    """What `recognize` found in the person's answer."""
+
+    answered: bool
+    outcome: Literal["worked", "not_worked", "unexpected"] | None
+    clearer: Literal["yes", "partly", "no"] | None
+    said: str

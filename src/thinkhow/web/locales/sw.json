@@ -76,5 +76,14 @@
   "card.value-pricing": "Bei kutokana na thamani kwa mteja (EVC)",
   "card.weighted-matrix": "Ulinganisho wa chaguo kwa uzito kulingana na maadili yako mwenyewe",
   "card.wrap-decision": "Uamuzi mgumu — panua, pima dhidi ya uhalisia, jiweke mbali, jiandae (WRAP)",
-  "learning_link": "Kujifunza"
+  "learning_link": "Kujifunza",
+  "step_question": "Mara ya mwisho ulichagua hatua: “{step}”. Ilikwendaje, na je, sasa ni wazi zaidi nini cha kufanya baadaye? Si lazima ujibu — endelea tu kuandika.",
+  "steps_title": "Hatua",
+  "step_worked": "ilifanikiwa",
+  "step_not_worked": "haikufanikiwa",
+  "step_unexpected": "ilienda tofauti na ilivyotarajiwa",
+  "step_no_answer": "hakuna jibu",
+  "clearer_yes": "imekuwa wazi zaidi",
+  "clearer_partly": "wazi kidogo zaidi",
+  "clearer_no": "haijawa wazi zaidi"
 }

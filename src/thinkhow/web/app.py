@@ -12,7 +12,7 @@ from pathlib import Path
 from fastapi import FastAPI
 
 from thinkhow import knowledge
-from thinkhow.facilitation import respond
+from thinkhow.facilitation import recognize_step, respond
 from thinkhow.platform.config import load_settings
 from thinkhow.platform.identity import make_identity
 from thinkhow.platform.llm import make_llm
@@ -45,6 +45,7 @@ def build_deps(environ: Mapping[str, str], cards_dir: Path) -> Deps:
         speech,
         make_tts(settings),
         current.cards,
+        lambda step, question, text: recognize_step(step, question, text, llm),
     )
 
 

@@ -76,5 +76,14 @@
   "card.value-pricing": "고객이 얻는 가치에서 출발하는 가격 (EVC)",
   "card.weighted-matrix": "나만의 가치 기준으로 선택지를 가중 비교하기",
   "card.wrap-decision": "어려운 결정 — 선택지 넓히기, 현실 검증, 거리 두기, 대비하기 (WRAP)",
-  "learning_link": "학습"
+  "learning_link": "학습",
+  "step_question": "지난번에 “{step}” 단계를 선택하셨어요. 어떻게 되었나요? 다음에 무엇을 할지 더 분명해졌나요? 답하지 않으셔도 괜찮아요. 계속 써 주세요.",
+  "steps_title": "단계",
+  "step_worked": "잘됨",
+  "step_not_worked": "안 됨",
+  "step_unexpected": "생각과 다르게 됨",
+  "step_no_answer": "답변 없음",
+  "clearer_yes": "더 분명해짐",
+  "clearer_partly": "조금 분명해짐",
+  "clearer_no": "분명해지지 않음"
 }

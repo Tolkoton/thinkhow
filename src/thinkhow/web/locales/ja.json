@@ -76,5 +76,14 @@
   "card.value-pricing": "顧客にとっての価値から決める価格（EVC）",
   "card.weighted-matrix": "自分の価値観で重み付けした選択肢の比較",
   "card.wrap-decision": "難しい決断 — 選択肢を広げ、現実で検証し、距離を置き、備える（WRAP）",
-  "learning_link": "学習"
+  "learning_link": "学習",
+  "step_question": "前回、「{step}」というステップを選ばれました。やってみてどうでしたか？次に何をすればよいか、はっきりしてきましたか？答えなくても大丈夫です。そのまま書き続けてください。",
+  "steps_title": "ステップ",
+  "step_worked": "うまくいった",
+  "step_not_worked": "うまくいかなかった",
+  "step_unexpected": "思っていたのと違った",
+  "step_no_answer": "回答なし",
+  "clearer_yes": "はっきりした",
+  "clearer_partly": "少しはっきりした",
+  "clearer_no": "はっきりしなかった"
 }

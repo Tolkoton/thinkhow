@@ -76,5 +76,14 @@
   "card.value-pricing": "按客人得到嘅價值定價（EVC）",
   "card.weighted-matrix": "按你自己嘅價值觀為選項做加權比較",
   "card.wrap-decision": "艱難嘅決定——擴闊選擇、驗證現實、拉開距離、做好準備（WRAP）",
-  "learning_link": "學習"
+  "learning_link": "學習",
+  "step_question": "上次你揀咗一個步驟：「{step}」。結果點樣？而家清唔清楚下一步做咩？唔答都得——繼續寫就得。",
+  "steps_title": "步驟",
+  "step_worked": "成功咗",
+  "step_not_worked": "唔成功",
+  "step_unexpected": "同預期唔同",
+  "step_no_answer": "冇回答",
+  "clearer_yes": "清楚咗",
+  "clearer_partly": "清楚咗少少",
+  "clearer_no": "冇清楚到"
 }

@@ -14,6 +14,8 @@ from thinkhow.workspace.model import (
     ResearchView,
     Saved,
     Session,
+    StepResult,
+    StepsFile,
     TopicId,
     TopicNotFound,
     TopicRef,
@@ -22,6 +24,7 @@ from thinkhow.workspace.model import (
 )
 from thinkhow.workspace.profile import NoLanguage, language, set_language
 from thinkhow.workspace.speak import MAX_SPEAK_BYTES, has_voice, speak
+from thinkhow.workspace.steps import Question, Recognize, pending_step, step_results_for_learning
 from thinkhow.workspace.topics import (
     all_topics_for_learning,
     create_topic,
@@ -37,6 +40,12 @@ from thinkhow.workspace.topics import (
 from thinkhow.workspace.voice import transcribe
 
 __all__ = [
+    "Question",
+    "Recognize",
+    "StepResult",
+    "StepsFile",
+    "pending_step",
+    "step_results_for_learning",
     "CARD_ID",
     "LANGUAGES",
     "MAX_SPEAK_BYTES",

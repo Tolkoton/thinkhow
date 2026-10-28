@@ -76,5 +76,14 @@
   "card.value-pricing": "Presyong batay sa halaga para sa customer (EVC)",
   "card.weighted-matrix": "May-timbang na paghahambing ng mga opsyon ayon sa sarili mong mga pinahahalagahan",
   "card.wrap-decision": "Isang mahirap na desisyon — palawakin, subukin sa realidad, lumayo muna, maghanda (WRAP)",
-  "learning_link": "Pagkatuto"
+  "learning_link": "Pagkatuto",
+  "step_question": "Noong nakaraan, pumili kayo ng hakbang: “{step}”. Kumusta po ito, at mas malinaw na ba kung ano ang susunod na gagawin? Hindi ninyo kailangang sumagot — magpatuloy lang po sa pagsulat.",
+  "steps_title": "Mga hakbang",
+  "step_worked": "gumana",
+  "step_not_worked": "hindi gumana",
+  "step_unexpected": "iba ang nangyari kaysa inaasahan",
+  "step_no_answer": "walang sagot",
+  "clearer_yes": "luminaw",
+  "clearer_partly": "medyo luminaw",
+  "clearer_no": "hindi luminaw"
 }

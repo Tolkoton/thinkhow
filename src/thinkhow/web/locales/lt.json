@@ -76,5 +76,14 @@
   "card.value-pricing": "Kaina pagal vertę klientui (EVC)",
   "card.weighted-matrix": "Svertinis variantų palyginimas pagal jūsų vertybes",
   "card.wrap-decision": "Sunkus sprendimas — praplėskite, patikrinkite realybe, atsitraukite, pasiruoškite (WRAP)",
-  "learning_link": "Mokymasis"
+  "learning_link": "Mokymasis",
+  "step_question": "Praėjusį kartą pasirinkote žingsnį: „{step}“. Kaip sekėsi ir ar dabar aiškiau, ką daryti toliau? Atsakyti nebūtina — tiesiog rašykite toliau.",
+  "steps_title": "Žingsniai",
+  "step_worked": "pavyko",
+  "step_not_worked": "nepavyko",
+  "step_unexpected": "išėjo kitaip, nei tikėtasi",
+  "step_no_answer": "be atsakymo",
+  "clearer_yes": "tapo aiškiau",
+  "clearer_partly": "šiek tiek aiškiau",
+  "clearer_no": "netapo aiškiau"
 }

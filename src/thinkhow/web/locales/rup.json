@@ -76,5 +76,14 @@
   "card.value-pricing": "Un pretsu dupã valoarea trã client (EVC)",
   "card.weighted-matrix": "Unã comparari cu greatsã a optsiunilor dupã valorli a tali",
   "card.wrap-decision": "Unã apofasi greauã — lãrdzeashti, ncearcã cu realitatea, lja distantsã, ndreadzi-ti (WRAP)",
-  "learning_link": "Învitsari"
+  "learning_link": "Învitsari",
+  "step_question": "Data ditu soni alidzeț un pas: „{step}”. Cum ișe, și easti ma limpidi ți s-faț ma nclo? Nu easti nivoie s-dați apandisi — ma scriț ninti.",
+  "steps_title": "Pași",
+  "step_worked": "ișe ghini",
+  "step_not_worked": "nu ișe",
+  "step_unexpected": "ișe altă soi di cum s-minta",
+  "step_no_answer": "fără apandisi",
+  "clearer_yes": "s-feați ma limpidi",
+  "clearer_partly": "niheamă ma limpidi",
+  "clearer_no": "nu s-feați ma limpidi"
 }

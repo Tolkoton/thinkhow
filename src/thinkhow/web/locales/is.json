@@ -76,5 +76,14 @@
   "card.value-pricing": "Verð út frá virði fyrir viðskiptavininn (EVC)",
   "card.weighted-matrix": "Veginn samanburður valkosta eftir þínum eigin gildum",
   "card.wrap-decision": "Erfið ákvörðun — víkka, prófa við raunveruleikann, taka fjarlægð, búa sig undir (WRAP)",
-  "learning_link": "Nám"
+  "learning_link": "Nám",
+  "step_question": "Síðast valdir þú skref: „{step}“. Hvernig gekk það, og er orðið skýrara hvað á að gera næst? Þú þarft ekki að svara — haltu bara áfram að skrifa.",
+  "steps_title": "Skref",
+  "step_worked": "það tókst",
+  "step_not_worked": "það tókst ekki",
+  "step_unexpected": "það fór öðruvísi en búist var við",
+  "step_no_answer": "ekkert svar",
+  "clearer_yes": "það varð skýrara",
+  "clearer_partly": "aðeins skýrara",
+  "clearer_no": "ekki skýrara"
 }

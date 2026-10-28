@@ -54,6 +54,7 @@ class Deps:
     speech: Speech
     tts: Tts = field(default_factory=ScriptedTts)
     cards: Mapping[str, Card] = field(default_factory=dict)
+    recognize: workspace.Recognize | None = None  # the result of a step from the answer (learning-loop S6)
 
 
 def create_app(deps: Deps) -> FastAPI:
@@ -104,7 +105,8 @@ def _routes(app: FastAPI, deps: Deps) -> None:
     def topic(request: Request, user: User, uid: str, topic_id: str) -> Response:
         name = ui_text.catalog_name(workspace.language(deps.storage, user).code)
         words = ui_text.texts(name)
-        view = workspace.open_topic(deps.storage, user, workspace.TopicRef(uid, topic_id), deps.now())
+        ref = workspace.TopicRef(uid, topic_id)
+        view = workspace.open_topic(deps.storage, user, ref, deps.now(), question=_question(words))
         method = caption(view.routing, view.problem_map.phase_id, deps.cards, words)
         context = {"view": view, "own": user.id == uid, "method": method}
         context["voice"] = user.id == uid and workspace.has_voice(deps.storage, user)
@@ -121,13 +123,26 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         spoken: Annotated[str, Form()] = "",
     ) -> Response:
         ref = workspace.TopicRef(uid, topic_id)
-        events = workspace.reply(deps.storage, deps.facilitate, user, ref, text, deps.now(), spoken == "1")
+        events = workspace.reply(
+            deps.storage,
+            deps.facilitate,
+            user,
+            ref,
+            text,
+            deps.now(),
+            spoken == "1",
+            recognize=deps.recognize,
+            question=_question_of(deps, user),
+        )
         return _stream(events)
 
     @app.post("/topics/{uid}/{topic_id}/retry")
     def retry(user: User, uid: str, topic_id: str, spoken: Annotated[str, Form()] = "") -> Response:
         ref = workspace.TopicRef(uid, topic_id)
-        return _stream(workspace.retry(deps.storage, deps.facilitate, user, ref, deps.now(), spoken == "1"))
+        events = workspace.retry(
+            deps.storage, deps.facilitate, user, ref, deps.now(), spoken == "1", recognize=deps.recognize
+        )
+        return _stream(events)
 
     @app.post("/topics/{uid}/{topic_id}/delete")
     def delete(user: User, uid: str, topic_id: str) -> Response:
@@ -159,6 +174,24 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         """A reply sentence → MP3 in the person's language; the synthesis runs in the thread pool."""
         audio = await run_in_threadpool(workspace.speak, deps.storage, deps.tts, user, text)
         return Response(content=audio, media_type="audio/mpeg", headers={"Cache-Control": "no-store"})
+
+
+def _question(words: Mapping[str, str]) -> workspace.Question:
+    """The question about a chosen step in the person's language (learning-loop S6)."""
+    return lambda step: words["step_question"].format(step=step)
+
+
+def _question_of(deps: Deps, user: CurrentUser) -> workspace.Question:
+    """The question in the person's language, its words looked up only when a question is due."""
+
+    def question(step: str) -> str:
+        try:
+            name = ui_text.catalog_name(workspace.language(deps.storage, user).code)
+        except workspace.NoLanguage:
+            name = ui_text.SOURCE
+        return _question(ui_text.texts(name))(step)
+
+    return question
 
 
 def _owner_only(user: CurrentUser) -> None:

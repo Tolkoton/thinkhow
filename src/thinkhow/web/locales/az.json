@@ -76,5 +76,14 @@
   "card.value-pricing": "Müştəri üçün dəyərə əsaslanan qiymət (EVC)",
   "card.weighted-matrix": "Variantların öz dəyərlərinizə görə çəkili müqayisəsi",
   "card.wrap-decision": "Çətin qərar — genişləndirin, reallıqla yoxlayın, məsafə alın, hazırlaşın (WRAP)",
-  "learning_link": "Öyrənmə"
+  "learning_link": "Öyrənmə",
+  "step_question": "Keçən dəfə bir addım seçmişdiniz: «{step}». Necə keçdi və bundan sonra nə edəcəyiniz daha aydın oldumu? Cavab verməyə bilərsiniz — sadəcə yazmağa davam edin.",
+  "steps_title": "Addımlar",
+  "step_worked": "alındı",
+  "step_not_worked": "alınmadı",
+  "step_unexpected": "gözləniləndən fərqli oldu",
+  "step_no_answer": "cavabsız",
+  "clearer_yes": "daha aydın oldu",
+  "clearer_partly": "bir az aydın oldu",
+  "clearer_no": "aydın olmadı"
 }

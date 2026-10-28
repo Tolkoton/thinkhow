@@ -76,5 +76,14 @@
   "card.value-pricing": "Presyo base sa bili alang sa kustomer (EVC)",
   "card.weighted-matrix": "Gitimbang nga pagtandi sa mga kapilian sumala sa imong kaugalingong mga gipabilhan",
   "card.wrap-decision": "Lisod nga desisyon — palapda, sulayi sa kamatuoran, pagdistansya, pangandam (WRAP)",
-  "learning_link": "Pagkat-on"
+  "learning_link": "Pagkat-on",
+  "step_question": "Sa miaging higayon mipili ka og lakang: “{step}”. Kumusta kini, ug mas klaro na ba kung unsay sunod nga buhaton? Dili nimo kinahanglan motubag — padayon lang sa pagsulat.",
+  "steps_title": "Mga lakang",
+  "step_worked": "milampos",
+  "step_not_worked": "wala milampos",
+  "step_unexpected": "lahi ang nahitabo kaysa gidahom",
+  "step_no_answer": "walay tubag",
+  "clearer_yes": "mas klaro na",
+  "clearer_partly": "medyo mas klaro",
+  "clearer_no": "dili mas klaro"
 }

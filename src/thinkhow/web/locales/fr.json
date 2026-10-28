@@ -76,5 +76,14 @@
   "card.value-pricing": "Un prix fondé sur la valeur pour le client (EVC)",
   "card.weighted-matrix": "Une comparaison pondérée des options selon vos propres valeurs",
   "card.wrap-decision": "Une décision difficile — élargir, confronter à la réalité, prendre du recul, se préparer (WRAP)",
-  "learning_link": "Apprentissage"
+  "learning_link": "Apprentissage",
+  "step_question": "La dernière fois, vous avez choisi une étape : « {step} ». Comment cela s’est-il passé, et voyez-vous plus clairement quoi faire ensuite ? Vous n’avez pas besoin de répondre — continuez simplement à écrire.",
+  "steps_title": "Étapes",
+  "step_worked": "ça a marché",
+  "step_not_worked": "ça n’a pas marché",
+  "step_unexpected": "ça s’est passé autrement que prévu",
+  "step_no_answer": "sans réponse",
+  "clearer_yes": "c’est plus clair",
+  "clearer_partly": "un peu plus clair",
+  "clearer_no": "pas plus clair"
 }

@@ -76,5 +76,14 @@
   "card.value-pricing": "Cijena prema vrijednosti za kupca (EVC)",
   "card.weighted-matrix": "Ponderisano poređenje opcija prema vašim vrijednostima",
   "card.wrap-decision": "Teška odluka — proširite, provjerite stvarnost, napravite odmak, pripremite se (WRAP)",
-  "learning_link": "Učenje"
+  "learning_link": "Učenje",
+  "step_question": "Prošli put ste izabrali korak: „{step}“. Kako je prošlo i je li vam jasnije šta dalje? Ne morate odgovoriti — samo nastavite pisati.",
+  "steps_title": "Koraci",
+  "step_worked": "uspjelo je",
+  "step_not_worked": "nije uspjelo",
+  "step_unexpected": "ispalo je drugačije nego što se očekivalo",
+  "step_no_answer": "bez odgovora",
+  "clearer_yes": "jasnije je",
+  "clearer_partly": "malo jasnije",
+  "clearer_no": "nije jasnije"
 }

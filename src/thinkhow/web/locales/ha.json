@@ -76,5 +76,14 @@
   "card.value-pricing": "Farashi bisa darajar da abokin ciniki ke samu (EVC)",
   "card.weighted-matrix": "Kwatanta zaɓuɓɓuka da ma'auni bisa ga darajojinku",
   "card.wrap-decision": "Shawara mai wuya — faɗaɗa, gwada da gaskiya, ja da baya, shirya (WRAP)",
-  "learning_link": "Koyo"
+  "learning_link": "Koyo",
+  "step_question": "A karon baya kun zaɓi mataki: “{step}”. Yaya ya kasance, kuma ko ya fi bayyana me za ku yi a gaba? Ba dole ne ku amsa ba — ku ci gaba da rubutu kawai.",
+  "steps_title": "Matakai",
+  "step_worked": "ya yi nasara",
+  "step_not_worked": "bai yi nasara ba",
+  "step_unexpected": "ya faru daban da yadda aka zata",
+  "step_no_answer": "babu amsa",
+  "clearer_yes": "ya ƙara bayyana",
+  "clearer_partly": "ya ɗan ƙara bayyana",
+  "clearer_no": "bai ƙara bayyana ba"
 }

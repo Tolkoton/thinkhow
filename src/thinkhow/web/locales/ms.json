@@ -76,5 +76,14 @@
   "card.value-pricing": "Harga berdasarkan nilai kepada pelanggan (EVC)",
   "card.weighted-matrix": "Perbandingan berwajaran pilihan mengikut nilai anda sendiri",
   "card.wrap-decision": "Keputusan sukar — luaskan, uji realiti, ambil jarak, bersedia (WRAP)",
-  "learning_link": "Pembelajaran"
+  "learning_link": "Pembelajaran",
+  "step_question": "Kali terakhir anda memilih satu langkah: “{step}”. Bagaimana hasilnya, dan adakah kini lebih jelas apa yang perlu dilakukan seterusnya? Anda tidak perlu menjawab — teruskan sahaja menulis.",
+  "steps_title": "Langkah",
+  "step_worked": "berjaya",
+  "step_not_worked": "tidak berjaya",
+  "step_unexpected": "berlaku berbeza daripada jangkaan",
+  "step_no_answer": "tiada jawapan",
+  "clearer_yes": "menjadi lebih jelas",
+  "clearer_partly": "sedikit lebih jelas",
+  "clearer_no": "tidak lebih jelas"
 }

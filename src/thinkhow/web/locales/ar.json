@@ -76,5 +76,14 @@
   "card.value-pricing": "سعر مبني على قيمة المنتج لدى العميل (EVC)",
   "card.weighted-matrix": "مقارنة مرجّحة بين الخيارات وفق قيمك",
   "card.wrap-decision": "قرار صعب — وسّع الخيارات، اختبرها بالواقع، ابتعد قليلًا، استعدّ (WRAP)",
-  "learning_link": "التعلّم"
+  "learning_link": "التعلّم",
+  "step_question": "في المرة السابقة اخترتم خطوة: «{step}». كيف سارت، وهل أصبح أوضح ما ينبغي فعله بعد ذلك؟ لا داعي للإجابة — تابعوا الكتابة فحسب.",
+  "steps_title": "الخطوات",
+  "step_worked": "نجحت",
+  "step_not_worked": "لم تنجح",
+  "step_unexpected": "سارت على غير المتوقع",
+  "step_no_answer": "بلا إجابة",
+  "clearer_yes": "أصبح الأمر أوضح",
+  "clearer_partly": "أوضح قليلًا",
+  "clearer_no": "لم يصبح أوضح"
 }

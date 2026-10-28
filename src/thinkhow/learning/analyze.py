@@ -32,13 +32,15 @@ ANALYZER = """Ти — аналізатор ThinkHow. Ти читаєш нові
   (особливо кілька разів у розмові, не обов'язково в сусідніх репліках); фасилітатор питає те саме вдруге;
   людина відповідає не на питання; людина просить того, у чому система їй відмовила;
 - чи підійшов метод (method_fit) — чи метод, що вів, допоміг людині з тим, із чим вона прийшла;
+- step — рядок «[Результат кроку …]» стоїть перед реплікою людини, і правило таке:
+  результат кроку — що він каже про спосіб думати, яким людина дійшла до кроку;
 - причина (cause): router — запропоновано чи обрано не той спосіб думати; method — сам метод не підійшов до
   ситуації; facilitation — як ставились питання і як вели; circumstances — обставини людини.
 
 Напиши кілька спостережень українською, кожне — про одне місце. Якщо те саме (наприклад, застрягання)
 повторюється в різних репліках, кожне таке місце — окреме спостереження зі своїм якорем, а не одне спільне про
 останнє; не пропускай жодного місця, де людина застрягла чи просунулась.
-- kind — progress, stuck чи method_fit;
+- kind — progress, stuck, method_fit чи step;
 - finding — що там сталося у веденні людини до ясності, коротко, своїми словами; не цитуй людину і не
   переказуй подробиць її життя понад потрібне для висновку;
 - worked — чи спрацювало ведення в цьому місці;
@@ -49,7 +51,8 @@ CONTEXT = "[Контекст — уже проаналізовано, не як�
 NEW = "[Нові репліки:]"
 RANGE_FILE = re.compile(r"^t(\d+)-t(\d+)\.json$")
 LEGACY_FILE = re.compile(r"^s(\d+)\.json$")
-KIND = Literal["progress", "stuck", "method_fit"]
+KIND = Literal["progress", "stuck", "method_fit", "step"]
+OUTCOME_WORDS = {"worked": "вийшло", "not_worked": "не вийшло", "unexpected": "несподіванка"}
 CAUSE = Literal["router", "method", "facilitation", "circumstances"]
 END_WORDS = {"done": "пройдено", "not_fit": "не підходить"}
 
@@ -112,6 +115,7 @@ def _topic(storage: Storage, llm: Llm, ref: workspace.TopicRef, now: datetime, t
     try:
         sessions = workspace.topic_sessions(storage, ref, now)
         routing = workspace.topic_routing(storage, ref)
+        steps = workspace.step_results_for_learning(storage, ref)
         seen = _seen(storage.list("system", folder), folder, sessions)
     except Exception as exc:
         _failed(ref, exc)
@@ -123,6 +127,10 @@ def _topic(storage: Storage, llm: Llm, ref: workspace.TopicRef, now: datetime, t
     context = [t for t in context if t.no < new[0].no]
     schema = answer_schema([t.no for t in new])
     marks = _marks(routing, titles)
+    for record in steps:  # the result of a step before the person's answer to its question (S6), no `clearer`
+        if record.outcome is not None:
+            line = f"[Результат кроку «{record.step}»: {OUTCOME_WORDS[record.outcome]} — {record.said}]"
+            marks.setdefault(record.asked_turn + 1, []).append(line)
     try:
         answer = llm.generate_json(ANALYZER, [Turn("user", _text(context, new, marks))], schema, None)
     except (ValidationError, LlmUnavailable) as exc:

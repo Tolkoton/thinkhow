@@ -76,5 +76,14 @@
   "card.value-pricing": "根据客户获得的价值定价（EVC）",
   "card.weighted-matrix": "按你自己的价值观对选项做加权比较",
   "card.wrap-decision": "艰难的决定——拓宽选项、检验现实、拉开距离、做好准备（WRAP）",
-  "learning_link": "学习"
+  "learning_link": "学习",
+  "step_question": "上次您选择了一个步骤：“{step}”。进展如何？接下来该做什么是否更清楚了？您可以不回答——继续写就好。",
+  "steps_title": "步骤",
+  "step_worked": "成功了",
+  "step_not_worked": "没成功",
+  "step_unexpected": "结果和预想的不一样",
+  "step_no_answer": "未回答",
+  "clearer_yes": "更清楚了",
+  "clearer_partly": "清楚了一些",
+  "clearer_no": "没有更清楚"
 }

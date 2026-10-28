@@ -31,6 +31,8 @@ def local_script(system: str, contents: Sequence[Turn], schema: type[BaseModel])
     """Flow: router schema → choose pre-mortem; else the frame's turn and text → first phase → JSON."""
     if "action" in schema.model_fields:
         return json.dumps(ROUTER_CHOICE, ensure_ascii=False)
+    if schema.__name__ == "StepOutcome":
+        return json.dumps(_step_outcome(contents), ensure_ascii=False)
     turn_no, text = _frame(contents)
     answer: dict[str, Any] = {"reply": REPLY} if "reply" in schema.model_fields else {}
     answer["current_phase_id"] = _first_phase(schema)
@@ -39,6 +41,18 @@ def local_script(system: str, contents: Sequence[Turn], schema: type[BaseModel])
         {"op": "add", "id": f"i{turn_no}", "type": _item_type(text), "text": text, "turn": f"t{turn_no}"}
     ]
     return json.dumps(answer, ensure_ascii=False)
+
+
+def _step_outcome(contents: Sequence[Turn]) -> dict[str, Any]:
+    """The local double's step result: «вийшло» / «не вийшло» and «ясніше» in the person's words."""
+    text = contents[-1].text.rsplit("Репліка людини:", 1)[-1].strip() if contents else ""
+    lower = text.lower()
+    worked = "не вийшло" not in lower and "вийшло" in lower
+    outcome = "not_worked" if "не вийшло" in lower else "worked" if worked else None
+    clearer = "yes" if "ясніше" in lower else None
+    answered = outcome is not None or clearer is not None
+    said = text[:200] if answered else ""
+    return {"answered": answered, "outcome": outcome, "clearer": clearer, "said": said}
 
 
 def _frame(contents: Sequence[Turn]) -> tuple[int, str]:

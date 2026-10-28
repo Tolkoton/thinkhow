@@ -76,5 +76,14 @@
   "card.value-pricing": "מחיר לפי הערך ללקוח (EVC)",
   "card.weighted-matrix": "השוואה משוקללת של אפשרויות לפי הערכים האישיים",
   "card.wrap-decision": "החלטה קשה — להרחיב, לבחון מול המציאות, לקחת מרחק, להתכונן (WRAP)",
-  "learning_link": "למידה"
+  "learning_link": "למידה",
+  "step_question": "בפעם הקודמת בחרת צעד: „{step}”. איך זה הלך, והאם ברור יותר מה לעשות הלאה? לא חייבים לענות — אפשר פשוט להמשיך לכתוב.",
+  "steps_title": "צעדים",
+  "step_worked": "הצליח",
+  "step_not_worked": "לא הצליח",
+  "step_unexpected": "יצא אחרת מהמצופה",
+  "step_no_answer": "ללא תשובה",
+  "clearer_yes": "נעשה ברור יותר",
+  "clearer_partly": "קצת יותר ברור",
+  "clearer_no": "לא נעשה ברור יותר"
 }

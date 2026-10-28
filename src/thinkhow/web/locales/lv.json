@@ -76,5 +76,14 @@
   "card.value-pricing": "Cena pēc vērtības klientam (EVC)",
   "card.weighted-matrix": "Svērts variantu salīdzinājums pēc jūsu vērtībām",
   "card.wrap-decision": "Grūts lēmums — paplašiniet, pārbaudiet ar realitāti, ieturiet distanci, sagatavojieties (WRAP)",
-  "learning_link": "Mācīšanās"
+  "learning_link": "Mācīšanās",
+  "step_question": "Pagājušajā reizē jūs izvēlējāties soli: „{step}”. Kā tas izdevās, un vai tagad ir skaidrāks, ko darīt tālāk? Atbildēt nav obligāti — vienkārši rakstiet tālāk.",
+  "steps_title": "Soļi",
+  "step_worked": "izdevās",
+  "step_not_worked": "neizdevās",
+  "step_unexpected": "izdevās citādi, nekā gaidīts",
+  "step_no_answer": "bez atbildes",
+  "clearer_yes": "kļuva skaidrāks",
+  "clearer_partly": "mazliet skaidrāks",
+  "clearer_no": "nekļuva skaidrāks"
 }

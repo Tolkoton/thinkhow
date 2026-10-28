@@ -76,5 +76,14 @@
   "card.value-pricing": "Ntalo kolanda motuya mpo na mokiliya (EVC)",
   "card.weighted-matrix": "Kokokanisa maponi na kilo kolanda makambo na yo ya motuya",
   "card.wrap-decision": "Ekateli ya mpasi — fungola, meka na makambo ya solo, mikabola mwa mosika, mibongisa (WRAP)",
-  "learning_link": "Koyekola"
+  "learning_link": "Koyekola",
+  "step_question": "Mbala oyo eleki, boponaki etape moko: “{step}”. Ekendaki ndenge nini? Sikoyo eyebani polele koleka nini bosengeli kosala na nsima? Bosengeli koyanola te — bokoba kaka kokoma.",
+  "steps_title": "Ba etape",
+  "step_worked": "elongaki",
+  "step_not_worked": "elongaki te",
+  "step_unexpected": "esalemaki ndenge mosusu na oyo tozelaki",
+  "step_no_answer": "kozanga eyano",
+  "clearer_yes": "ekomi polele",
+  "clearer_partly": "ekomi polele moke",
+  "clearer_no": "ekomi polele te"
 }

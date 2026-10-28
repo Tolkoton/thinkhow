@@ -76,5 +76,14 @@
   "card.value-pricing": "Mijoz uchun qiymatdan kelib chiqqan narx (EVC)",
   "card.weighted-matrix": "Variantlarni o‘z qadriyatlaringiz bo‘yicha vaznli taqqoslash",
   "card.wrap-decision": "Qiyin qaror — kengaytiring, haqiqat bilan sinang, masofa oling, tayyorlaning (WRAP)",
-  "learning_link": "Oʻrganish"
+  "learning_link": "Oʻrganish",
+  "step_question": "O‘tgan safar siz bir qadamni tanladingiz: «{step}». U qanday o‘tdi va endi nima qilish kerakligi aniqroq bo‘ldimi? Javob berishingiz shart emas — shunchaki yozishda davom eting.",
+  "steps_title": "Qadamlar",
+  "step_worked": "muvaffaqiyatli bo‘ldi",
+  "step_not_worked": "muvaffaqiyatsiz bo‘ldi",
+  "step_unexpected": "kutilganidan boshqacha bo‘ldi",
+  "step_no_answer": "javobsiz",
+  "clearer_yes": "aniqroq bo‘ldi",
+  "clearer_partly": "biroz aniqroq",
+  "clearer_no": "aniqroq bo‘lmadi"
 }
