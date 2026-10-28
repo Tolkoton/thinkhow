@@ -1,0 +1,64 @@
+# Spike finish-answer — what happens to a sync SSE generator when the client disconnects (2026-10-28)
+# starlette 1.9.0, uvicorn 0.54.0 (h11, ASGI http spec_version 2.3 → StreamingResponse cancels on http.disconnect)
+# client: reads the first event, closes the connection. Generator: 5 events × 0.4 s, logs end or GeneratorExit.
+
+## run 1: plain StreamingResponse(sync generator) — as web/server.py:_stream today
+client got data: plain 0 / client closed the connection
+server log after 6 s: (empty — the generator is neither finished nor closed; abandoned)
+server log after shutdown: plain: GeneratorExit — closed mid-stream (answer lost)
+
+## run 2: worker thread runs the generator to its end; the response reads a queue; __call__ joins the worker in finally
+client got data: finishing 0 / client closed the connection
+finishing: generator ran to the end (answer would be written)
+finishing: response returned after the worker joined
+
+## the spike code
+import queue, threading, time, anyio
+from starlette.applications import Starlette
+from starlette.responses import StreamingResponse
+from starlette.routing import Route
+
+LOG = open("/tmp/spike712/server.log", "a", buffering=1)
+
+def events(tag):
+    try:
+        for i in range(5):
+            time.sleep(0.4)
+            yield f"data: {tag} {i}\n\n"
+        LOG.write(f"{tag}: generator ran to the end (answer would be written)\n")
+    except GeneratorExit:
+        LOG.write(f"{tag}: GeneratorExit — closed mid-stream (answer lost)\n")
+        raise
+
+async def plain(request):
+    return StreamingResponse(events("plain"), media_type="text/event-stream")
+
+class Finishing(StreamingResponse):
+    def __init__(self, it):
+        self._q = queue.Queue()
+        def run():
+            for chunk in it:
+                self._q.put(chunk)
+            self._q.put(None)
+        self._t = threading.Thread(target=run)
+        self._t.start()
+        def drain():
+            while (c := self._q.get()) is not None:
+                yield c
+        super().__init__(drain(), media_type="text/event-stream")
+    async def __call__(self, scope, receive, send):
+        try:
+            await super().__call__(scope, receive, send)
+        finally:
+            await anyio.to_thread.run_sync(self._t.join)
+            LOG.write("finishing: response returned after the worker joined\n")
+
+async def finishing(request):
+    return Finishing(events("finishing"))
+
+app = Starlette(routes=[Route("/plain", plain), Route("/finishing", finishing)])
+import httpx, sys
+with httpx.stream("GET", f"http://127.0.0.1:8712/{sys.argv[1]}", timeout=10) as r:
+    for line in r.iter_lines():
+        if line: print("client got", line); break
+print("client closed the connection")

@@ -3,7 +3,10 @@
 The person comes only from the verified identity of the request, never from the address or a form.
 """
 
+import contextvars
 import json
+import queue
+import threading
 import time
 import uuid
 from collections.abc import Awaitable, Callable, Iterator, Mapping, MutableMapping
@@ -227,7 +230,43 @@ def _all_topics(deps: Deps, user: CurrentUser) -> list[workspace.TopicSummary]:
 
 def _stream(events: Iterator[workspace.ReplyEvent]) -> Response:
     headers = {"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
-    return StreamingResponse(_sse(events), media_type="text/event-stream", headers=headers)
+    return _Finishing(_sse(events), headers)
+
+
+class _Finishing(StreamingResponse):
+    """Runs the stream to its end in a worker thread whether or not anyone still reads it, so the answer is
+    written when the window was closed (finish-answer Q1): the response reads the worker's queue, and its ASGI
+    call returns only after the worker ended (Q2). The worker runs in a copy of the request's context: its log
+    lines keep the request id (I3)."""
+
+    def __init__(self, chunks: Iterator[str], headers: Mapping[str, str]) -> None:
+        self._queue: queue.Queue[str | None] = queue.Queue()
+        context = contextvars.copy_context()
+        self._worker = threading.Thread(target=context.run, args=(self._run, chunks), daemon=True)
+        self._worker.start()
+        super().__init__(self._drain(), media_type="text/event-stream", headers=headers)
+
+    def _run(self, chunks: Iterator[str]) -> None:
+        try:
+            for chunk in chunks:
+                self._queue.put(chunk)
+        finally:
+            self._queue.put(None)
+
+    def _drain(self) -> Iterator[str]:
+        while (chunk := self._queue.get()) is not None:
+            yield chunk
+
+    async def __call__(
+        self,
+        scope: Scope,
+        receive: Callable[[], Awaitable[Message]],
+        send: Callable[[Message], Awaitable[None]],
+    ) -> None:
+        try:
+            await super().__call__(scope, receive, send)
+        finally:
+            await run_in_threadpool(self._worker.join)
 
 
 def _sse(events: Iterator[workspace.ReplyEvent]) -> Iterator[str]:

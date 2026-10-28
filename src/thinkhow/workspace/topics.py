@@ -310,7 +310,6 @@ def _answer(
 ) -> Iterator[ReplyEvent]:
     """Flow: facilitate → deltas → answer into conversation.md → map, routing, research.json → the result of a
     step from the answer to its question (S6) → Answered."""
-    session = conv.sessions[-1]
     history = [FacilitationTurn(t.role, t.text) for s in conv.sessions for t in s.turns if t.no < turn_no]
     problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
     card_id = current_card(routing) or CARD_ID
@@ -340,7 +339,13 @@ def _answer(
     if not answer:
         yield _failed(ref, turn_no, "EmptyReply", len(history))
         return
-    session.turns.append(conv_file.Turn(turn_no + 1, "model", conv_file.second(now), answer))
+    fresh = _still_awaiting(storage, ref, turn_no)
+    if fresh is None:
+        log_event("reply_superseded", uid=ref.uid, topic_id=ref.topic_id, turn=turn_no)
+        yield Failed("Superseded")
+        return
+    conv = fresh
+    conv.sessions[-1].turns.append(conv_file.Turn(turn_no + 1, "model", conv_file.second(now), answer))
     _write_conversation(storage, ref, conv)
     _write_map(storage, ref, apply_updates(problem_map, update, turn_no + 1))
     if decisions:
@@ -367,6 +372,19 @@ def _apply_one(items: list[MapItem], change: MapUpdate) -> list[MapItem]:
     if at is not None:
         return items[:at] + [new] + items[at + 1 :]
     return items + [new] if change.op == "add" else items
+
+
+def _still_awaiting(storage: Storage, ref: TopicRef, turn_no: int) -> conv_file.Conversation | None:
+    """The conversation as it is now, if its last turn is still the person's `turn_no` without an answer; else
+    None: an answer that finished late never overwrites what was written meanwhile (finish-answer Q5)."""
+    try:
+        conv = _read_conversation(storage, ref)
+    except TopicNotFound:
+        return None
+    turns = conv.sessions[-1].turns
+    if turns and turns[-1].no == turn_no and turns[-1].role == "user":
+        return conv
+    return None
 
 
 def _failed(ref: TopicRef, turn_no: int, reason: str, history_turns: int) -> Failed:
