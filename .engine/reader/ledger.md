@@ -121,3 +121,8 @@
 - Record: tasks/done/709-open-item-explicit-deps-105/report.md
 - Reason: All four questions hold. The references check out: the file lines, the commits, the uv.lock versions and the 25 known failures from task 706. The report does everything «Що зробити» asks: uv add, the dev stubs, removing the yaml override, and running ruff, mypy and pytest. It asks the owner no questions, and the technical terms stay in English.
 - Request: 20261028T100749Z-dabc1a (attempt 1)
+
+## 2026-10-28T13:04:43Z — 713-open-item-test-gap-a-switch-conversation-where-aft — READER_PASS
+- Record: tasks/done/713-open-item-test-gap-a-switch-conversation-where-aft/report.md
+- Reason: The report passes all four checks. Every reference I could check says what the report claims (test file line 13, the _marks fix at card_conversations.py:340, the commits, 394ea75's «same 26 red as before», lesson #dec79025). The single «Що зробити» item is answered: a red run and a green run, the code fix justified by a real defect, and the move to a separate test file explained. There are no open owner questions, and the engine terms stay in English.
+- Request: 20261028T130400Z-e86091 (attempt 1)
