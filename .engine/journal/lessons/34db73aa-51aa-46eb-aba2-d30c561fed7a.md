@@ -1,0 +1,1 @@
+- 2026-10-28 | overseer | finish-answer | BLOCK no.11 scope drift — b04fdd3 added a test to tests/contract/step_results/test_stp_analyze.py. That file is one of the step-results tester's sealed contract files, and the builder does not edit th #e9be6ed8
