@@ -96,3 +96,13 @@
 - Record: tasks/done/702-open-item-test-gap-a-test-that-calls-reply-with-an/report.md
 - Reason: Every reference I could open checks out. The one «Що зробити» item is done: the test is in tests/workspace/test_ws_gaps.py and both runs are reported. There are no open questions, and the engine terms are in English (overseer, slice tester, sealed tests, turn marker, commit). The test-run outputs themselves were never recorded in a file, so I could not check them.
 - Request: 20261028T070714Z-86d558 (attempt 2)
+
+## 2026-10-28T07:46:11Z — 703-open-item-test-gap-a-test-in-tests-test-a3-guards — READER_BLOCK
+- Record: tasks/done/703-open-item-test-gap-a-test-in-tests-test-a3-guards/report.md
+- Reason: Question 1 fails. The report gives `tests/test_a3_guards.py:118` as the location of the new test `test_a_bucket_built_by_an_expression_is_unnamed`, but line 118 of that file is blank and the test is defined at line 120. Questions 2–4 hold: the code change is explained under the task's own condition («код не міняти, якщо тест не знайде справжньої вади»), there are no open questions for the owner, and the technical terms stay English.
+- Request: 20261028T074550Z-7b9d4c (attempt 1)
+
+## 2026-10-28T07:46:45Z — 703-open-item-test-gap-a-test-in-tests-test-a3-guards — READER_PASS
+- Record: tasks/done/703-open-item-test-gap-a-test-in-tests-test-a3-guards/report.md
+- Reason: The references I could check say what the report claims: the new test at tests/test_a3_guards.py:120, the guard at :145, the slice contract quote at .engine/slices/skel-guards-deploy.md:40, the 25 failed in tasks/blocked/308 and all four commits. The «Що зробити» item is done: the test was added, and the report explains that the guard was fixed because the test found a real defect. The report says the 25 full-suite failures were already there before this task. There are no open owner questions, and the technical terms stay in English.
+- Request: 20261028T074616Z-dcb06f (attempt 2)
