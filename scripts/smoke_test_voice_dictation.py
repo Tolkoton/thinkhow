@@ -1,10 +1,10 @@
 """Smoke of slice voice-dictation: real uvicorn in local mode + real Chromium with a fake microphone.
 
-Run: `uv run --with playwright==1.64.1 python scripts/smoke_test_voice_dictation.py` (Playwright is no project
-dependency). Chromium: `THINKHOW_CHROMIUM`, else the cached chromium-1208. Asserts by itself; prints steps.
+Run: `uv run python scripts/smoke_test_voice_dictation.py` (Playwright is a dev dependency; once per machine:
+`uv run playwright install chromium`). Chromium: `THINKHOW_CHROMIUM`, else Playwright's own.
+Asserts by itself; prints steps.
 """
 
-import importlib
 import os
 import socket
 import subprocess
@@ -15,15 +15,12 @@ from pathlib import Path
 from typing import Any
 
 import httpx
-
-# Playwright is no project dependency (run with `uv run --with playwright…`), so it is loaded by name.
-sync_playwright = importlib.import_module("playwright.sync_api").sync_playwright
+from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCAL_TEXT = "(локальний режим) розпізнаний текст"
 FLAGS = ["--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"]
-CACHED = Path.home() / ".cache/ms-playwright/chromium-1208/chrome-linux64/chrome"
-CHROMIUM = os.environ.get("THINKHOW_CHROMIUM", str(CACHED))
+CHROMIUM = os.environ.get("THINKHOW_CHROMIUM") or None
 
 
 def free_port() -> int:
