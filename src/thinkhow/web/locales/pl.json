@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Nie ma wiadomości, która czeka na odpowiedź.",
   "err_login": "Zaloguj się przez Google.",
   "err_not_recognized": "Nie udało się rozpoznać — spróbuj ponownie.",
-  "err_no_voice": "Brak głosu dla Twojego języka.",
   "err_not_voiced": "Nie udało się odczytać na głos — spróbuj ponownie.",
   "err_internal": "Coś poszło nie tak — spróbuj ponownie.",
   "err_choose_language": "Najpierw wybierz język (strona „Język”).",

@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Nema poruke koja čeka odgovor.",
   "err_login": "Prijavite se putem Googlea.",
   "err_not_recognized": "Prepoznavanje nije uspjelo — pokušajte ponovno.",
-  "err_no_voice": "Za vaš jezik nema glasa.",
   "err_not_voiced": "Čitanje naglas nije uspjelo — pokušajte ponovno.",
   "err_internal": "Nešto je pošlo po zlu — pokušajte ponovno.",
   "err_choose_language": "Najprije odaberite svoj jezik (stranica „Jezik”).",

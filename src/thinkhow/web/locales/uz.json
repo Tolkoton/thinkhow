@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Javob kutayotgan xabar yo‘q.",
   "err_login": "Google orqali kiring.",
   "err_not_recognized": "Tanib bo‘lmadi — qayta urinib ko‘ring.",
-  "err_no_voice": "Tilingiz uchun ovoz mavjud emas.",
   "err_not_voiced": "Ovozga aylantirib bo‘lmadi — qayta urinib ko‘ring.",
   "err_internal": "Nimadir xato ketdi — qayta urinib ko‘ring.",
   "err_choose_language": "Avval tilingizni tanlang (“Til” sahifasi).",

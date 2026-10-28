@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "没有等待回答的消息。",
   "err_login": "请使用 Google 登录。",
   "err_not_recognized": "未能识别，请重试。",
-  "err_no_voice": "暂无适用于您所选语言的语音。",
   "err_not_voiced": "未能朗读，请重试。",
   "err_internal": "出了点问题，请重试。",
   "err_choose_language": "请先选择您的语言（“语言”页面）。",

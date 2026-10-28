@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Es gibt keine Nachricht, die auf eine Antwort wartet.",
   "err_login": "Bitte melden Sie sich mit Google an.",
   "err_not_recognized": "Das konnte nicht erkannt werden — bitte versuchen Sie es erneut.",
-  "err_no_voice": "Für Ihre Sprache gibt es keine Stimme.",
   "err_not_voiced": "Das konnte nicht vorgelesen werden — bitte versuchen Sie es erneut.",
   "err_internal": "Etwas ist schiefgelaufen — bitte versuchen Sie es erneut.",
   "err_choose_language": "Wählen Sie zuerst Ihre Sprache (Seite „Sprache“).",

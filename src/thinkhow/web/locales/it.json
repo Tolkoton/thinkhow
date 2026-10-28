@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Nessun messaggio in attesa di risposta.",
   "err_login": "Accedi con Google.",
   "err_not_recognized": "Impossibile riconoscere — riprova.",
-  "err_no_voice": "Non c'è una voce per la tua lingua.",
   "err_not_voiced": "Impossibile leggere ad alta voce — riprova.",
   "err_internal": "Si è verificato un problema — riprova.",
   "err_choose_language": "Scegli prima la tua lingua (pagina «Lingua»).",

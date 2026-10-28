@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Ni sporočila, ki bi čakalo na odgovor.",
   "err_login": "Prijavite se z računom Google.",
   "err_not_recognized": "Prepoznava ni uspela — poskusite znova.",
-  "err_no_voice": "Za vaš jezik ni glasu.",
   "err_not_voiced": "Branje na glas ni uspelo — poskusite znova.",
   "err_internal": "Prišlo je do napake — poskusite znova.",
   "err_choose_language": "Najprej izberite jezik (stran „Jezik“).",

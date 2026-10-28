@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "冇等緊回覆嘅訊息。",
   "err_login": "請用 Google 登入。",
   "err_not_recognized": "辨識唔到，請再試一次。",
-  "err_no_voice": "你嘅語言暫時冇可用嘅語音。",
   "err_not_voiced": "讀唔出嚟，請再試一次。",
   "err_internal": "出咗啲問題，請再試一次。",
   "err_choose_language": "請先揀選你嘅語言（「語言」頁面）。",

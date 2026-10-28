@@ -3,7 +3,6 @@
 Run: `uv run python scripts/smoke_test_voice_synthesis.py`. Asserts by itself; prints each step.
 """
 
-import json
 import os
 import socket
 import subprocess
@@ -15,7 +14,7 @@ from pathlib import Path
 import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
-LOCALES = ROOT / "src" / "thinkhow" / "web" / "locales"
+NO_VOICE = "There is no voice for your language."
 SILENCE = (ROOT / "src" / "thinkhow" / "platform" / "silence.mp3").read_bytes()
 
 
@@ -59,11 +58,8 @@ def check_language(client: httpx.Client, code: str, voice: str) -> None:
         assert spoken.headers["content-type"] == "audio/mpeg" and spoken.content == SILENCE, spoken.headers
         print(f"{code}: POST /speak → 200 audio/mpeg, {len(spoken.content)} bytes (the double's silence)")
     else:
-        no_voice = json.loads((LOCALES / f"{code.split('-')[0]}.json").read_text(encoding="utf-8"))[
-            "err_no_voice"
-        ]
-        assert spoken.status_code == 409 and no_voice in spoken.text, spoken.status_code
-        print(f"{code}: POST /speak → 409 «{no_voice}» (in the person's language, task 208)")
+        assert spoken.status_code == 409 and NO_VOICE in spoken.text, spoken.status_code
+        print(f"{code}: POST /speak → 409 «{NO_VOICE}» (in English for every language, task 208)")
 
 
 def wait_for(url: str) -> httpx.Response:

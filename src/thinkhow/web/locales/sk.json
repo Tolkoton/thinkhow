@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Nie je tu žiadna správa, ktorá čaká na odpoveď.",
   "err_login": "Prihláste sa cez Google.",
   "err_not_recognized": "Nepodarilo sa rozpoznať — skúste to znova.",
-  "err_no_voice": "Pre váš jazyk nie je k dispozícii hlas.",
   "err_not_voiced": "Nepodarilo sa prečítať nahlas — skúste to znova.",
   "err_internal": "Niečo sa pokazilo — skúste to znova.",
   "err_choose_language": "Najprv si vyberte jazyk (stránka „Jazyk“).",

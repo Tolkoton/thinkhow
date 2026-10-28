@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "No hi ha cap missatge que esperi resposta.",
   "err_login": "Inicieu la sessió amb Google.",
   "err_not_recognized": "No s'ha pogut reconèixer — torneu-ho a provar.",
-  "err_no_voice": "No hi ha cap veu per a la vostra llengua.",
   "err_not_voiced": "No s'ha pogut llegir en veu alta — torneu-ho a provar.",
   "err_internal": "Alguna cosa ha anat malament — torneu-ho a provar.",
   "err_choose_language": "Primer trieu la vostra llengua (pàgina «Llengua»).",

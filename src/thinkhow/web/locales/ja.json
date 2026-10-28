@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "回答待ちのメッセージはありません。",
   "err_login": "Google でログインしてください。",
   "err_not_recognized": "認識できませんでした。もう一度お試しください。",
-  "err_no_voice": "選択した言語の音声がありません。",
   "err_not_voiced": "読み上げできませんでした。もう一度お試しください。",
   "err_internal": "問題が発生しました。もう一度お試しください。",
   "err_choose_language": "先に言語を選択してください（「言語」ページ）。",

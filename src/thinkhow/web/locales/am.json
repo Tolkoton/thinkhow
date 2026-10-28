@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "መልስ የሚጠብቅ መልእክት የለም።",
   "err_login": "እባክዎ በGoogle ይግቡ።",
   "err_not_recognized": "መለየት አልተቻለም — እባክዎ እንደገና ይሞክሩ።",
-  "err_no_voice": "ለቋንቋዎ የሚሆን ድምጽ የለም።",
   "err_not_voiced": "በድምጽ ማንበብ አልተቻለም — እባክዎ እንደገና ይሞክሩ።",
   "err_internal": "የሆነ ችግር ተፈጥሯል — እባክዎ እንደገና ይሞክሩ።",
   "err_choose_language": "መጀመሪያ ቋንቋዎን ይምረጡ (የ«ቋንቋ» ገጽ)።",

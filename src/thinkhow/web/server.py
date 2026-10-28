@@ -260,7 +260,6 @@ MESSAGES: list[tuple[type[Exception], int, str]] = [
     (workspace.NothingToRetry, 409, "err_nothing_to_retry"),
     (IdentityError, 401, "err_login"),
     (SpeechUnavailable, 502, "err_not_recognized"),
-    (NoVoice, 409, "err_no_voice"),
     (TtsUnavailable, 502, "err_not_voiced"),
 ]
 Handler = Callable[[Request, Exception], Awaitable[Response]]
@@ -271,6 +270,8 @@ ROLLBACK_MESSAGES: list[tuple[type[Exception], int, str]] = [
     (knowledge.NotRollbackable, 409, "Цю ревізію не можна відкотити: вона не змінювала нотаток."),
     (knowledge.UnknownRevision, 404, "Такої ревізії немає."),
 ]
+# A language with no voice gets the message in English, whatever the language (owner, task 208, 2026-10-27).
+NO_VOICE_MESSAGE = "There is no voice for your language."
 
 
 def _error_handlers(app: FastAPI, deps: Deps) -> None:
@@ -279,6 +280,7 @@ def _error_handlers(app: FastAPI, deps: Deps) -> None:
         app.add_exception_handler(kind, _fixed(deps, status, key))
     for kind, status, text in ROLLBACK_MESSAGES:
         app.add_exception_handler(kind, _text_fragment(status, text))
+    app.add_exception_handler(NoVoice, _text_fragment(409, NO_VOICE_MESSAGE))
     app.add_exception_handler(workspace.NoLanguage, _no_language(deps))
     bad_request = _bad_request(deps)
     app.add_exception_handler(ValueError, bad_request)

@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Non hai ningunha mensaxe á espera de resposta.",
   "err_login": "Inicia sesión con Google.",
   "err_not_recognized": "Non se puido recoñecer — téntao de novo.",
-  "err_no_voice": "Non hai voz para o teu idioma.",
   "err_not_voiced": "Non se puido ler en voz alta — téntao de novo.",
   "err_internal": "Algo saíu mal — téntao de novo.",
   "err_choose_language": "Escolle primeiro o teu idioma (páxina «Idioma»).",

@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Walang mensaheng naghihintay ng sagot.",
   "err_login": "Mag-sign in gamit ang Google.",
   "err_not_recognized": "Hindi ito makilala — pakisubukang muli.",
-  "err_no_voice": "Walang boses para sa iyong wika.",
   "err_not_voiced": "Hindi ito mabasa nang malakas — pakisubukang muli.",
   "err_internal": "May nangyaring mali — pakisubukang muli.",
   "err_choose_language": "Piliin muna ang iyong wika (ang pahinang “Wika”).",

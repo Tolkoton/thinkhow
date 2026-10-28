@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Mikään viesti ei odota vastausta.",
   "err_login": "Kirjaudu sisään Google-tilillä.",
   "err_not_recognized": "Tunnistus ei onnistunut — yritä uudelleen.",
-  "err_no_voice": "Kielellesi ei ole ääntä.",
   "err_not_voiced": "Ääneen lukeminen ei onnistunut — yritä uudelleen.",
   "err_internal": "Jokin meni vikaan — yritä uudelleen.",
   "err_choose_language": "Valitse ensin kieli (sivu ”Kieli”).",

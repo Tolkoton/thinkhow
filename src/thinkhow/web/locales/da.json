@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Der er ingen besked, der venter på svar.",
   "err_login": "Log ind med Google.",
   "err_not_recognized": "Det kunne ikke genkendes — prøv igen.",
-  "err_no_voice": "Der er ingen stemme til dit sprog.",
   "err_not_voiced": "Det kunne ikke læses op — prøv igen.",
   "err_internal": "Noget gik galt — prøv igen.",
   "err_choose_language": "Vælg først dit sprog (siden »Sprog«).",

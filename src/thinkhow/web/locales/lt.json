@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Nėra žinutės, laukiančios atsakymo.",
   "err_login": "Prisijunkite su „Google“.",
   "err_not_recognized": "Nepavyko atpažinti — bandykite dar kartą.",
-  "err_no_voice": "Jūsų kalbai nėra balso.",
   "err_not_voiced": "Nepavyko įgarsinti — bandykite dar kartą.",
   "err_internal": "Kažkas nepavyko — bandykite dar kartą.",
   "err_choose_language": "Pirmiausia pasirinkite savo kalbą (puslapis „Kalba“).",

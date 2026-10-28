@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Nu ari vãrã mesaj tsi ashteaptã apandisi.",
   "err_login": "Intrã cu Google, ti plãcãrsescu.",
   "err_not_recognized": "Nu putum s-u cunoashtem — ncearcã dinoaua.",
-  "err_no_voice": "Nu ari boatsi trã limba a ta.",
   "err_not_voiced": "Nu putum s-u dzãtsem cu boatsi — ncearcã dinoaua.",
   "err_internal": "Tsiva nu alãgã ghini — ncearcã dinoaua.",
   "err_choose_language": "Alidzi ninti limba a ta (frãndza „Limbã”).",

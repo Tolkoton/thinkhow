@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "답변을 기다리는 메시지가 없습니다.",
   "err_login": "Google 계정으로 로그인하세요.",
   "err_not_recognized": "인식하지 못했습니다. 다시 시도해 주세요.",
-  "err_no_voice": "선택한 언어에 사용할 수 있는 음성이 없습니다.",
   "err_not_voiced": "음성으로 읽지 못했습니다. 다시 시도해 주세요.",
   "err_internal": "문제가 발생했습니다. 다시 시도해 주세요.",
   "err_choose_language": "먼저 언어를 선택하세요(“언어” 페이지).",

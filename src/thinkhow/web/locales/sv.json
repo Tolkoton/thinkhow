@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Det finns inget meddelande som väntar på svar.",
   "err_login": "Logga in med Google.",
   "err_not_recognized": "Det gick inte att känna igen — försök igen.",
-  "err_no_voice": "Det finns ingen röst för ditt språk.",
   "err_not_voiced": "Det gick inte att läsa upp — försök igen.",
   "err_internal": "Något gick fel — försök igen.",
   "err_choose_language": "Välj först ditt språk (sidan ”Språk”).",

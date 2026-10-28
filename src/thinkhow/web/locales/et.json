@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Pole ühtegi sõnumit, mis vastust ootaks.",
   "err_login": "Palun logige sisse Google'i kaudu.",
   "err_not_recognized": "Tuvastamine ebaõnnestus — palun proovige uuesti.",
-  "err_no_voice": "Teie keele jaoks pole häält.",
   "err_not_voiced": "Ettelugemine ebaõnnestus — palun proovige uuesti.",
   "err_internal": "Midagi läks valesti — palun proovige uuesti.",
   "err_choose_language": "Valige esmalt oma keel (leht „Keel“).",

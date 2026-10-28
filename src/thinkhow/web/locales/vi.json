@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Không có tin nhắn nào đang chờ trả lời.",
   "err_login": "Vui lòng đăng nhập bằng Google.",
   "err_not_recognized": "Không nhận dạng được — vui lòng thử lại.",
-  "err_no_voice": "Không có giọng đọc cho ngôn ngữ của bạn.",
   "err_not_voiced": "Không đọc thành tiếng được — vui lòng thử lại.",
   "err_internal": "Đã xảy ra lỗi — vui lòng thử lại.",
   "err_choose_language": "Hãy chọn ngôn ngữ của bạn trước (trang “Ngôn ngữ”).",

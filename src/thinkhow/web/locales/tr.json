@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Yanıt bekleyen bir mesaj yok.",
   "err_login": "Lütfen Google ile oturum açın.",
   "err_not_recognized": "Tanınamadı — lütfen tekrar deneyin.",
-  "err_no_voice": "Diliniz için bir ses yok.",
   "err_not_voiced": "Seslendirilemedi — lütfen tekrar deneyin.",
   "err_internal": "Bir şeyler ters gitti — lütfen tekrar deneyin.",
   "err_choose_language": "Önce dilinizi seçin (“Dil” sayfası).",

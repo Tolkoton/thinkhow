@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Nav ziņas, kas gaida atbildi.",
   "err_login": "Lūdzu, piesakieties ar Google.",
   "err_not_recognized": "Neizdevās atpazīt — lūdzu, mēģiniet vēlreiz.",
-  "err_no_voice": "Jūsu valodai nav balss.",
   "err_not_voiced": "Neizdevās nolasīt balsī — lūdzu, mēģiniet vēlreiz.",
   "err_internal": "Kaut kas nogāja greizi — lūdzu, mēģiniet vēlreiz.",
   "err_choose_language": "Vispirms izvēlieties savu valodu (lapa „Valoda”).",

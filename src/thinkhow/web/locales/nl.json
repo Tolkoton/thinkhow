@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Er is geen bericht dat op een antwoord wacht.",
   "err_login": "Log in met Google.",
   "err_not_recognized": "Herkennen is niet gelukt — probeer het opnieuw.",
-  "err_no_voice": "Er is geen stem voor jouw taal.",
   "err_not_voiced": "Voorlezen is niet gelukt — probeer het opnieuw.",
   "err_internal": "Er ging iets mis — probeer het opnieuw.",
   "err_choose_language": "Kies eerst je taal (de pagina “Taal”).",

@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Engin skilaboð bíða eftir svari.",
   "err_login": "Skráðu þig inn með Google.",
   "err_not_recognized": "Ekki tókst að greina það — reyndu aftur.",
-  "err_no_voice": "Engin rödd er til fyrir tungumálið þitt.",
   "err_not_voiced": "Ekki tókst að lesa það upp — reyndu aftur.",
   "err_internal": "Eitthvað fór úrskeiðis — reyndu aftur.",
   "err_choose_language": "Veldu fyrst tungumálið þitt (síðan „Tungumál“).",

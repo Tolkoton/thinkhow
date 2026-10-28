@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Nsango moko te ezali kozela eyano.",
   "err_login": "Kota na Google.",
   "err_not_recognized": "Ekoki koyebana te — meka lisusu.",
-  "err_no_voice": "Mongongo ezali te mpo na lokota na yo.",
   "err_not_voiced": "Ekoki kotangama na mongongo te — meka lisusu.",
   "err_internal": "Likambo moko esalemi mabe — meka lisusu.",
   "err_choose_language": "Pona liboso lokota na yo (lokasa «Lokota»).",

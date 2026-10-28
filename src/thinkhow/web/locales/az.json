@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Cavab gözləyən mesaj yoxdur.",
   "err_login": "Zəhmət olmasa, Google ilə daxil olun.",
   "err_not_recognized": "Tanımaq alınmadı — yenidən cəhd edin.",
-  "err_no_voice": "Sizin diliniz üçün səs yoxdur.",
   "err_not_voiced": "Səsləndirmək alınmadı — yenidən cəhd edin.",
   "err_internal": "Nəsə səhv getdi — yenidən cəhd edin.",
   "err_choose_language": "Əvvəlcə dilinizi seçin («Dil» səhifəsi).",

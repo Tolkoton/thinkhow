@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Tidak ada pesan yang menunggu jawaban.",
   "err_login": "Silakan masuk dengan Google.",
   "err_not_recognized": "Tidak dapat dikenali — silakan coba lagi.",
-  "err_no_voice": "Belum ada suara untuk bahasa Anda.",
   "err_not_voiced": "Tidak dapat disuarakan — silakan coba lagi.",
   "err_internal": "Terjadi kesalahan — silakan coba lagi.",
   "err_choose_language": "Pilih bahasa Anda terlebih dahulu (halaman “Bahasa”).",

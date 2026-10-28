@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Nu există niciun mesaj care să aștepte un răspuns.",
   "err_login": "Conectați-vă cu Google.",
   "err_not_recognized": "Nu s-a putut recunoaște — încercați din nou.",
-  "err_no_voice": "Nu există o voce pentru limba dvs.",
   "err_not_voiced": "Nu s-a putut reda vocal — încercați din nou.",
   "err_internal": "Ceva nu a mers bine — încercați din nou.",
   "err_choose_language": "Alegeți mai întâi limba (pagina „Limbă”).",

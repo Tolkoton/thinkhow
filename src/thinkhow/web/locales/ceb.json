@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Walay mensahe nga naghulat og tubag.",
   "err_login": "Palihug pag-sign in gamit ang Google.",
   "err_not_recognized": "Dili kini mailhan — palihug sulayi pag-usab.",
-  "err_no_voice": "Walay tingog para sa imong pinulongan.",
   "err_not_voiced": "Dili kini mabasa sa tingog — palihug sulayi pag-usab.",
   "err_internal": "Adunay sayop nga nahitabo — palihug sulayi pag-usab.",
   "err_choose_language": "Pilia una ang imong pinulongan (ang panid nga “Pinulongan”).",

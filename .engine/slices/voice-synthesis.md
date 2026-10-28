@@ -82,7 +82,7 @@ Chirp 3 HD (або Gemini-TTS для 21 мови без Chirp 3 HD) з Cloud Tex
   — `make_tts(settings)`.
 - `POST /speak` (форма `text`) — `async def`, синхронний `workspace.speak` через `run_in_threadpool` → 200
   `Response(content=mp3, media_type="audio/mpeg")`, `Cache-Control: no-store`. Помилки — єдиний шар: `NoLanguage` →
-  409 (наявний), `NoVoice` → 409 фрагмент «Для вашої мови немає голосу.» (новий рядок `MESSAGES`), `ValueError` → 400
+  409 (наявний), `NoVoice` → 409 фрагмент «There is no voice for your language.» англійською для будь-якої мови (окремий обробник, не `MESSAGES`; власник, задача 208, 2026-10-27), `ValueError` → 400
   фрагмент «Текст для голосу не прийнято.» (гілка `_bad_request` для шляху `/speak`), `TtsUnavailable` → 502
   фрагмент «Не вдалося озвучити — спробуйте ще раз.».
 - Сторінка теми: `<form id="reply-form" … data-voice="yes|no">` за `workspace.has_voice` (`topic` — лише для власної

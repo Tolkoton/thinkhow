@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Não há nenhuma mensagem aguardando resposta.",
   "err_login": "Entre com sua conta Google.",
   "err_not_recognized": "Não foi possível reconhecer — tente novamente.",
-  "err_no_voice": "Não há voz disponível para o seu idioma.",
   "err_not_voiced": "Não foi possível gerar o áudio — tente novamente.",
   "err_internal": "Algo deu errado — tente novamente.",
   "err_choose_language": "Escolha seu idioma primeiro (página “Idioma”).",

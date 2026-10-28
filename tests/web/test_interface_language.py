@@ -76,7 +76,11 @@ def _client(tmp_path: Path, code: str | None) -> tuple[TestClient, TopicRef]:
             }
         )
         update = FacilitatorUpdate(reply="?", current_phase_id=None, phase_exit_met=False, map_updates=[])
-        answer = [RoutingEvent(choose), ReplyDelta("?"), update]
+        answer: list[ReplyDelta | FacilitatorUpdate | RoutingEvent] = [
+            RoutingEvent(choose),
+            ReplyDelta("?"),
+            update,
+        ]
         list(reply(store, lambda ctx: iter(answer), ALICE, ref, "Lorem.", T0))
     return TestClient(create_app(deps)), ref
 
@@ -136,6 +140,13 @@ def test_an_error_comes_in_the_chosen_language(tmp_path: Path) -> None:
     assert r.status_code == 400 and ui_text.texts("de")["err_empty_title"] in r.text
     r = client.get("/topics/alice-1/t-000000000000", headers=H_ALICE)
     assert r.status_code == 404 and ui_text.texts("de")["err_topic_not_found"] in r.text
+
+
+@pytest.mark.parametrize("code", ["kk-KZ", "mt-MT"])
+def test_a_language_without_a_voice_is_told_so_in_english(tmp_path: Path, code: str) -> None:
+    client, _ = _client(tmp_path, code)
+    r = client.post("/speak", data={"text": "Lorem."}, headers=H_ALICE)
+    assert r.status_code == 409 and "There is no voice for your language." in r.text
 
 
 @pytest.mark.parametrize(

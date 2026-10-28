@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "There is no message waiting for an answer.",
   "err_login": "Please sign in with Google.",
   "err_not_recognized": "Could not recognise it — please try again.",
-  "err_no_voice": "There is no voice for your language.",
   "err_not_voiced": "Could not voice it — please try again.",
   "err_internal": "Something went wrong — please try again.",
   "err_choose_language": "Choose your language first (the “Language” page).",

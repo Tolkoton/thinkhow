@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Nincs válaszra váró üzenet.",
   "err_login": "Jelentkezzen be a Google-lel.",
   "err_not_recognized": "Nem sikerült felismerni — próbálja újra.",
-  "err_no_voice": "Az Ön nyelvéhez nincs hang.",
   "err_not_voiced": "Nem sikerült felolvasni — próbálja újra.",
   "err_internal": "Valami hiba történt — próbálja újra.",
   "err_choose_language": "Előbb válassza ki a nyelvét (a „Nyelv” oldalon).",

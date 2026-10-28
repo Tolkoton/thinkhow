@@ -36,7 +36,6 @@
   "err_nothing_to_retry": "Hakuna ujumbe unaosubiri jibu.",
   "err_login": "Tafadhali ingia kwa kutumia Google.",
   "err_not_recognized": "Imeshindwa kutambua — tafadhali jaribu tena.",
-  "err_no_voice": "Hakuna sauti kwa lugha yako.",
   "err_not_voiced": "Imeshindwa kusoma kwa sauti — tafadhali jaribu tena.",
   "err_internal": "Hitilafu fulani imetokea — tafadhali jaribu tena.",
   "err_choose_language": "Chagua lugha yako kwanza (ukurasa wa “Lugha”).",
