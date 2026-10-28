@@ -106,3 +106,13 @@
 - Record: tasks/done/703-open-item-test-gap-a-test-in-tests-test-a3-guards/report.md
 - Reason: The references I could check say what the report claims: the new test at tests/test_a3_guards.py:120, the guard at :145, the slice contract quote at .engine/slices/skel-guards-deploy.md:40, the 25 failed in tasks/blocked/308 and all four commits. The «Що зробити» item is done: the test was added, and the report explains that the guard was fixed because the test found a real defect. The report says the 25 full-suite failures were already there before this task. There are no open owner questions, and the technical terms stay in English.
 - Request: 20261028T074616Z-dcb06f (attempt 2)
+
+## 2026-10-28T09:48:31Z — 706-open-item-playwright-dev-dependency — READER_BLOCK
+- Record: tasks/done/706-open-item-playwright-dev-dependency/report.md
+- Reason: Question 1 fails: the deferred section of the report says «Ще вісім browser-скриптів» have the docstring command `uv run --with playwright==1.64.1`, and lists talk_harness.py among them. In fact nine scripts have that exact command (live_conversation_mode.py and screenshots_interface_language.py are among them, but neither the report nor proposal 731 names them), and talk_harness.py has only `uv run --with …`. Questions 2–4 hold: every item of «Що зробити» is done and checkable, there are no open questions, and the terms are in English.
+- Request: 20261028T094754Z-e6dd2f (attempt 1)
+
+## 2026-10-28T09:49:36Z — 706-open-item-playwright-dev-dependency — READER_PASS
+- Record: tasks/done/706-open-item-playwright-dev-dependency/report.md
+- Reason: The report passes all four checks. Every file, line and commit reference I could check says what the report claims. All four items of «Що зробити» are done: uv add --dev, a plain import, playwright install chromium, and the new smoke command. There are no open questions for the owner. Engine terms in the report stay in English.
+- Request: 20261028T094847Z-77910f (attempt 2)
