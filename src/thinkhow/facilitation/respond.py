@@ -3,11 +3,11 @@
 The rules are PoC 101's instruction (`rules.md`, two lines changed: skel-facilitation Q5).
 """
 
-from collections.abc import Iterator, Sequence
+from collections.abc import Callable, Iterator, Sequence
 from pathlib import Path
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, create_model
+from pydantic import BaseModel, Field, create_model
 
 from thinkhow.facilitation.converse import converse
 from thinkhow.facilitation.deep import with_deep
@@ -109,7 +109,18 @@ def update_schema(card: Card) -> type[BaseModel]:
 
 def _phases(card: Card) -> Any:
     """A phase of the card, or None: the card does not fit (free mode, facilitator-free-mode Q1)."""
-    return Literal[tuple(phase.id for phase in card.facilitator.phases)] | None
+    ids = [phase.id for phase in card.facilitator.phases]
+    return Annotated[Literal[tuple(ids)], Field(json_schema_extra=_enum_of(ids))] | None
+
+
+def _enum_of(ids: list[str]) -> Callable[[dict[str, Any]], None]:
+    """pydantic writes `const` for a one-value Literal; Vertex gets the `enum` it was verified with."""
+
+    def fix(schema: dict[str, Any]) -> None:
+        schema.pop("const", None)
+        schema.update({"type": "string", "enum": list(ids)})
+
+    return fix
 
 
 class _Asked:
