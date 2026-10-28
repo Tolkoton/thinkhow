@@ -16,7 +16,8 @@ derived from the task, the goals and the code, not asked. The task is the propos
 `FacilitationContext.history` усі репліки попередніх сесій теми в порядку номерів; (2) нічний `analyze`, коли нові
 репліки починаються в новій сесії, дає моделі як контекст усі вже проаналізовані репліки теми (`#1…#k`), а висновок
 і якір — лише про нові; (3) `scripts/smoke_test_one_conversation.py` на локальному сховищі проходить цей шлях
-наскрізь і друкує `OK`; (4) повний `uv run pytest`, `ruff`, `mypy`, `lint-imports` — зелені.
+наскрізь і друкує `OK`; (4) `ruff check .`, `mypy src` і `lint-imports` — зелені; `mypy src tests` і повний
+`uv run pytest` — не гірші, ніж на `5249680` (P3), а файли цього slice-а — без помилок mypy (Exit criterion).
 
 ## Premise verified
 - P1: у проєкті немає зовнішньої системи, поведінку якої змінює цей slice: історія і контекст — це списки реплік, що
@@ -26,6 +27,13 @@ derived from the task, the goals and the code, not asked. The task is the propos
   knowledge` (вікно контексту сучасних моделей Gemini — сотні тисяч токенів і більше; тема на тижні розмов — десятки
   тисяч). Ризик прийнято як OPEN item без числової межі (див. Deferred). Ознаку для відповіді цей slice додає сам
   (Q7: рядок `reply_failed`) — досі `Failed` бачив лише браузер людини; у нічному прогоні є `analyze_failed`.
+
+- P3 (дописано після запечатування, за відповіддю власника (A) на питання задачі 711, 2026-10-28): на `5249680`,
+  до цього slice-а, `uv run mypy src tests` уже давав 208 помилок у 33 файлах — усі в тестах інших slice-ів (зокрема
+  `FakeLlm` без `search_text` у `tests/contract/continuous_analysis/test_ca_analyze.py`); `mypy src` — чистий; частина
+  contract-тестів інших slice-ів (задачі 720/721/724) — червона. Тоді цього не записали, і рядок «`mypy src tests` …
+  зелені» вимагав того, що забороняв другий рядок Exit criterion (tester, раунд 2: `contract_ambiguous`). Борг — окрема
+  пропозиція `tasks/proposed/733-open-item-tests-mypy-red.md`.
 
 ## Out of scope (deliberately)
 - Сесії як такі: межа 24 год тиші, заголовки «Сесія N» і «(завершено)» на сторінці, «Спробуйте ще раз» лише у
@@ -130,8 +138,14 @@ derived from the task, the goals and the code, not asked. The task is the propos
 - `uv run python scripts/smoke_test_one_conversation.py` (локальне сховище, local-mode facilitate і llm-двійники
   проєкту) друкує `OK: …`: тема, репліка, 24 год тиші, репліка → історія другої відповіді дорівнює всім репліками першої сесії;
   `analyze` → контекст містить усі проаналізовані репліки, якорі — лише нові.
-- Повний `uv run pytest -q`, `uv run ruff check .`, `uv run mypy src tests`, `PYTHONPATH=src uv run lint-imports` —
-  зелені.
+- `uv run ruff check .`, `uv run mypy src`, `PYTHONPATH=src uv run lint-imports` — зелені.
+- `uv run mypy src tests` — не гірший, ніж на `5249680` (P3): жодна пара (файл, код помилки) не має більше помилок, ніж
+  там, і файли цього slice-а — `tests/contract/one_conversation/`, `tests/contract/one_conversation_block/` (у цьому
+  прогоні) і `scripts/smoke_test_one_conversation.py` (`uv run mypy scripts/smoke_test_one_conversation.py`) — без помилок.
+- Повний `uv run pytest -q`: тести цього slice-а (`tests/contract/one_conversation/`, `tests/contract/one_conversation_block/`)
+  і тести, змінені за Q5, — зелені; кожен інший червоний тест — червоний і на `5249680` (тест, якого на `5249680` не було,
+  червоним бути не може).
+gate-allow: noqa — only # noqa: E402 in tests/contract/one_conversation/oc_fakes.py and tests/contract/one_conversation_block/test_ocb_block.py: imports after a sys.path insert, as in research_in_conversation_block/ric_fakes.py; any other noqa is not covered
 
 ## Deferred to later slices
 - Межа історії й контексту (P2) — why later: число-поріг, якого власник не хоче, і нового класу витрат немає, поки

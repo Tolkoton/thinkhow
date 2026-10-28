@@ -2,8 +2,10 @@
 
 The slice stands alone: no feature artifact names it, so it is one block and the work is closed with it. The
 tests follow the contract `.engine/slices/one-conversation.md` — the four measurable items of «Goal», the
-«Exit criterion», and the one connection inside the block that the contract names (Q2: the analyzer's context
-goes after the history the facilitator gets) — and the public signatures, not the bodies.
+«Exit criterion» as amended by P3 (`mypy src tests` no worse than on `5249680`, the slice's files clean), and
+the one connection inside the block that the contract names (Q2: the analyzer's context goes after the
+history the facilitator gets) — and the public signatures, not the bodies. The full `pytest -q` line of the
+Exit criterion is the run these tests are part of, not a test of its own.
 
 The person's turns go the way a person sends them: through the web app (`POST …/reply`, `POST …/retry`) with
 an injected clock; the nightly run is the real `analyze` on the same storage. Helpers are the sealed ones of
@@ -12,10 +14,14 @@ earlier slices (`ca_fakes` of continuous-analysis, `oc_fakes` of one-conversatio
 
 from __future__ import annotations
 
+import io
 import os
+import re
 import shutil
 import subprocess
 import sys
+import tarfile
+from collections import Counter
 from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
@@ -200,16 +206,16 @@ def test_acceptance_3_the_smoke_script_run_by_its_own_command_prints_ok() -> Non
     assert any(line.startswith("OK: ") for line in done.stdout.splitlines()), done.stdout[-2000:]
 
 
-# --- acceptance (4): ruff, mypy, lint-imports green (the full pytest is the run this test is part of) ---
+# --- acceptance (4): ruff, `mypy src` and lint-imports green ----------------------------------------
 
 
-def test_acceptance_4_ruff_mypy_and_lint_imports_are_green() -> None:
+def test_acceptance_4_ruff_mypy_src_and_lint_imports_are_green() -> None:
     uv = shutil.which("uv")
     assert uv is not None, "uv is not on PATH"
     env = dict(os.environ)
     commands = {
         "ruff": ([uv, "run", "ruff", "check", "."], env),
-        "mypy": ([uv, "run", "mypy", "src", "tests"], env),
+        "mypy src": ([uv, "run", "mypy", "src"], env),
         "lint-imports": ([uv, "run", "lint-imports"], {**env, "PYTHONPATH": "src"}),
     }
     failed = []
@@ -218,3 +224,64 @@ def test_acceptance_4_ruff_mypy_and_lint_imports_are_green() -> None:
         if done.returncode != 0:
             failed.append(f"{name} (exit {done.returncode}):\n{(done.stdout + done.stderr)[-1500:]}")
     assert not failed, "\n\n".join(failed)
+
+
+# --- acceptance (4): `mypy src tests` no worse than on 5249680 (P3), the slice's files clean -------------
+
+BASE = "5249680"
+SLICE_DIRS = ("tests/contract/one_conversation/", "tests/contract/one_conversation_block/")
+ERROR_RE = re.compile(r"^(?P<file>[^:\s][^:]*):\d+(?::\d+)?: error: .*?(?:\[(?P<code>[\w-]+)\])?\s*$")
+
+
+def mypy_errors(uv: str, cwd: Path, cache: Path) -> Counter[tuple[str, str]]:
+    """`mypy src tests` in `cwd` with this project's environment: error count per (file, error code)."""
+    done = subprocess.run(
+        [uv, "run", "--project", str(ROOT), "mypy", "--cache-dir", str(cache), "src", "tests"],
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        timeout=900,
+        env={k: v for k, v in os.environ.items() if k != "PYTHONPATH"},
+    )
+    out = done.stdout + done.stderr
+    assert done.returncode in (0, 1), f"mypy did not run in {cwd} (exit {done.returncode}):\n{out[-1500:]}"
+    found: Counter[tuple[str, str]] = Counter()
+    for line in out.splitlines():
+        m = ERROR_RE.match(line)
+        if m:
+            found[(m["file"].replace(os.sep, "/"), m["code"] or "")] += 1
+    if done.returncode == 1:
+        assert found, f"mypy exited 1 with no error line that could be read:\n{out[-1500:]}"
+    return found
+
+
+def test_acceptance_4_mypy_src_tests_is_no_worse_than_on_5249680_and_the_slices_files_are_clean(
+    tmp_path: Path,
+) -> None:
+    uv = shutil.which("uv")
+    git = shutil.which("git")
+    assert uv is not None and git is not None, "uv and git must be on PATH"
+
+    base = tmp_path / "base"
+    base.mkdir()
+    archive = subprocess.run([git, "archive", BASE], cwd=ROOT, capture_output=True, timeout=300)
+    assert archive.returncode == 0, archive.stderr.decode(errors="replace")[-1500:]
+    with tarfile.open(fileobj=io.BytesIO(archive.stdout)) as tar:
+        tar.extractall(base, filter="data")
+
+    before = mypy_errors(uv, base, tmp_path / "cache-base")
+    now = mypy_errors(uv, ROOT, tmp_path / "cache-now")
+
+    worse = {pair: (before[pair], n) for pair, n in now.items() if n > before[pair]}
+    assert worse == {}, f"(file, code): (errors on {BASE}, errors now) — more than on {BASE}: {worse}"
+    in_slice = {pair: n for pair, n in now.items() if pair[0].startswith(SLICE_DIRS)}
+    assert in_slice == {}, f"mypy errors in the slice's test files: {in_slice}"
+
+    smoke = subprocess.run(
+        [uv, "run", "mypy", "scripts/smoke_test_one_conversation.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        timeout=600,
+    )
+    assert smoke.returncode == 0, (smoke.stdout + smoke.stderr)[-1500:]
