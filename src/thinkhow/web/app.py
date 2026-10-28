@@ -28,7 +28,6 @@ CARDS_DIR = Path(__file__).resolve().parents[3] / "cards"
 def build_deps(environ: Mapping[str, str], cards_dir: Path) -> Deps:
     """Flow: settings → storage → (local: seed) → Knowledge → model → facilitate → identity, speech (Q2)."""
     settings = load_settings(environ)
-    refuse_web_without_iap_audience(settings)
     storage = make_storage(settings)
     if settings.local:
         knowledge.seed(storage, cards_dir)
@@ -81,4 +80,5 @@ def __getattr__(name: str) -> FastAPI:
         raise AttributeError(name)
     import os
 
+    refuse_web_without_iap_audience(load_settings(os.environ))
     return create_app(build_deps(os.environ, CARDS_DIR))
