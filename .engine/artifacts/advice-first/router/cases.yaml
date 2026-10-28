@@ -1,0 +1,30 @@
+cases:
+  - id: adv-1
+    kind: positive
+    expect: weighted-matrix
+    also_ok: [wrap-decision, reversible-doors, consider-opposite]
+    text: >-
+      Маю дві пропозиції роботи: одна в стартапі, зарплата більша, але ризиковано; друга в банку, стабільно, але
+      нудно. Порадь, що б ти обрав?
+  - id: adv-2
+    kind: positive
+    expect: wrap-decision
+    also_ok: [weighted-matrix, reversible-doors, consider-opposite]
+    text: Що б ти обрав на моєму місці — переїзд до Львова чи лишитися в Києві з батьками?
+  - id: adv-3
+    kind: positive
+    expect: goal-to-plan
+    also_ok: [issue-tree, mental-contrasting, first-principles]
+    text: >-
+      Хочу запустити невеликий онлайн-курс з кераміки, але не знаю, з чого почати. Просто скажи, що мені робити.
+  - id: adv-4
+    kind: positive
+    expect: value-pricing
+    also_ok: [unit-economics, demand-test, weighted-matrix]
+    text: >-
+      Я продаю свічки ручної роботи по 300 гривень і думаю підняти ціну до 450. Порадь — піднімати чи ні?
+  - id: adv-5
+    kind: positive
+    expect: weighted-matrix
+    also_ok: [wrap-decision, consider-opposite, reversible-doors]
+    text: Порадь щось, я не можу вирішити.
