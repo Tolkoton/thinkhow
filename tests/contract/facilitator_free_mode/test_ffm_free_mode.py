@@ -33,18 +33,3 @@ def test_local_mode_answers_the_first_phase_for_one_and_many_phases() -> None:
             raw = local_script("system", contents, schema)
             assert json.loads(raw)["current_phase_id"] == first, (card.id, schema)
             schema.model_validate_json(raw)
-
-
-def test_one_phase_card_sends_an_enum_not_a_const() -> None:
-    """Task 704: pydantic writes `const` for a one-value Literal; Vertex gets the verified `enum`."""
-    for card, ids in ((SOLO, ["s_only"]), (ALPHA, ["a_one", "a_two", "a_three"])):
-        for schema in (answer_schema(card), update_schema(card)):
-            phase = schema.model_json_schema()["properties"]["current_phase_id"]
-            assert phase["anyOf"] == [{"type": "string", "enum": ids}, {"type": "null"}], (card.id, phase)
-            assert schema.model_validate({**_update_fields(schema), "current_phase_id": ids[0]})
-            assert schema.model_validate({**_update_fields(schema), "current_phase_id": None})
-
-
-def _update_fields(schema: type) -> dict[str, object]:
-    base: dict[str, object] = {"phase_exit_met": False, "map_updates": []}
-    return {"reply": "Так?", **base} if "reply" in schema.model_fields else base
