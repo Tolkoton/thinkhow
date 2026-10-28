@@ -272,8 +272,10 @@ def _judge(conv: Conversation, knowledge: CurrentKnowledge, routing: list[dict[s
         conv.done = any(
             d["kind"] == "end" and d["card_id"] == conv.led and d["end"] == "done" for d in routing
         )
-    if conv.target and conv.led and conv.led != conv.target and not conv.note:
-        conv.note = f"обрано іншу картку ({conv.led})"
+    # the router's own pick is its first choose after the offer; a later choose follows «Давай інакше»
+    picked = next((d["card_id"] for d in routing if d["kind"] == "choose" and d["turn"] > 0), conv.led)
+    if conv.target and picked and picked != conv.target and not conv.note:
+        conv.note = f"обрано іншу картку ({picked})"
     return conv
 
 

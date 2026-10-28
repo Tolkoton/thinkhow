@@ -38,3 +38,34 @@ def test_switch_then_another_card_chosen_and_unfinished_the_row_judges_the_card_
     assert kinds[-1] == ("choose", "five-whys", None)
     assert conv.led == "five-whys"
     assert "після «давай інакше»: end — так, нове offer без картки — ні" in cc.index([conv], STAMP)
+
+
+def test_switch_conversation_that_led_the_target_first_is_not_marked_another_card(tmp_path: Path) -> None:
+    """Task 714 (overseer test gap): the router chooses the target weighted-matrix after its offer and leads
+    it; after «Давай інакше» it chooses five-whys. «обрано іншу картку» comes from the first choose after the
+    offer, so the row does not carry it."""
+
+    cc = script("card_conversations")
+
+    def router(no: int, text: str) -> str:
+        if no == 1:
+            return offer_raw("weighted-matrix", "issue-tree")
+        if text.startswith("Давай"):
+            return choose_raw("weighted-matrix")
+        return choose_raw("five-whys")
+
+    def fac(no: int, text: str) -> str:
+        if text == cc.SWITCH_TEXT:
+            return fac_raw(None, reply="Ви вже з'ясували два варіанти. Що для вас зараз найважливіше далі?")
+        return fac_raw("phase_1_frame_options" if no < 5 else "phase_1_define_problem")
+
+    llm = ProductLlm(router=router, facilitator=fac)
+    conv = cc.converse_card(
+        knowledge(tmp_path), llm, PersonLlm(), "weighted-matrix", OPENER, turns=8, switch=True
+    )
+    chosen = [d["card_id"] for d in conv.routing if d["kind"] == "choose"]
+    assert chosen[0] == "weighted-matrix"
+    assert chosen[-1] == "five-whys"
+    row = cc.index([conv], STAMP)
+    assert "обрано іншу картку" not in row
+    assert "після «давай інакше»" in row
