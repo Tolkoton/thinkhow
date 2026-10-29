@@ -34,9 +34,9 @@ FIRST_REPLY = "[Стан] Перша відповідь у темі"
 
 
 def test_the_router_rules_choose_one_card_itself_and_never_ask_for_an_offer() -> None:
-    """No offer item; the one mention left is fact-answer's sealed sentence (contract line 52)."""
+    """No offer item, no "offer" at all: fact-answer's sentence names "choose" (contract line 52, 729)."""
     assert '- "offer"' not in ROUTER_RULES and "2 або 3 картки" not in ROUTER_RULES
-    assert ROUTER_RULES.count('"offer"') == 1 and 'не "answer", а "offer" чи "ask".' in ROUTER_RULES
+    assert '"offer"' not in ROUTER_RULES and 'не "answer", а "choose" чи "ask".' in ROUTER_RULES
     assert "обери сам одну картку" in ROUTER_RULES
     assert "Людина не обирає зі списку" in ROUTER_RULES
 
