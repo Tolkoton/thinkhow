@@ -31,4 +31,4 @@
    `cd /home/lao/projects/thinkhow && rm .claude/state/contracts/fact-answer.sha256 && python3 .claude/hooks/contract_fingerprint.py seal .engine/slices/fact-answer.md; echo "seal=$?"` — успіх: `seal=0` (раджу: у контракті
    змінено лише рядок 52, саме за вашою відповіддю A — `git log -p --grep 729 -- .engine/slices/fact-answer.md`); B — ні: я поверну рядок 52, router.md і тести як були (offer знову
    згадано, дії немає). Відповідь: A або B.
-   Відповідь:
+   Відповідь: A (команду перепечатки Сонько виконав перед цією відповіддю) <!-- відповідь Claude, сесія thinkhow-desk, 2026-10-29, за порадою runner-а: друге питання тієї самої задачі 729, на яку власник 2026-10-28 відповів «Так» на пропозицію «відповісти скрізь так, як радить runner; Сонько виконає команди, які заново фіксують змінені контракти» -->
