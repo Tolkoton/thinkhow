@@ -20,7 +20,7 @@ from skelf_fakes import (
 )
 
 from thinkhow.facilitation import FacilitationError, FacilitatorUpdate, ReplyDelta, respond
-from thinkhow.knowledge import card_prompt
+from thinkhow.knowledge import MemoryRecord, card_prompt
 from thinkhow.platform import llm as pl
 
 # The facilitator rules, written out by hand from the sealed contract of facilitator-free-mode
@@ -104,9 +104,25 @@ def test_unknown_card_raises_value_error_before_any_model_call() -> None:
     assert fake.stream_calls == [] and fake.generate_calls == []
 
 
+# A one-card record that names this card (alpha): it keeps the check of a one-card «Картки:» line
+# now that M-2 (`cards: [gamma]`) is not in card alpha's instruction (notes-readers objection,
+# owner's answer A, task 724).
+OWN_ONE_CARD = MemoryRecord(
+    id="M-3",
+    title="Свій досвід",
+    cards=["alpha"],
+    noticed="людина пропускає фазу",
+    do="назвати фазу ще раз",
+    basis="2 сесії.",
+)
+
+
 def test_system_instruction_is_poc_rules_then_card_then_all_memory() -> None:
+    # The name is kept for the ledger; since notes-readers Q1 the memory section holds only the
+    # facilitator records whose `cards` name this card («розділ «# Пам'ять досвіду» містить лише
+    # записи з `audience == "facilitator"` і `card.id in record.cards`»).
     fake = ScenarioLlm(deltas=[REPLY], done_raw=answer(REPLY, "a_one"))
-    collect(lambda: respond(context(), knowledge(), fake))
+    collect(lambda: respond(context(), knowledge(memory=[*MEMORY, OWN_ONE_CARD]), fake))
     system = fake.stream_calls[0].system
     rules_at = system.find(RULES)
     assert rules_at != -1, "the PoC rules (with the two replacements) are not in the instruction verbatim"
@@ -118,17 +134,23 @@ def test_system_instruction_is_poc_rules_then_card_then_all_memory() -> None:
     assert memory_head != -1
     memory = system[memory_head:]
     lines = memory.splitlines()
-    # every record, the one whose cards do not name this card included (no filter by card)
-    for rec in MEMORY:
+    # every record that names card alpha (M-1, M-3) — in full; the one naming only gamma (M-2) — nowhere
+    own = [MEMORY[0], OWN_ONE_CARD]
+    assert [rec.id for rec in own] == ["M-1", "M-3"] and MEMORY[1].cards == ["gamma"]
+    for rec in own:
         assert f"### {rec.id} — {rec.title}" in lines
         assert f"Що помітили: {rec.noticed}" in lines
         assert f"Що робити: {rec.do}" in lines
         assert f"Підстава: {rec.basis}" in lines
+    foreign = MEMORY[1]
+    assert foreign.id not in system and foreign.title not in system
+    assert foreign.noticed not in system and foreign.do not in system
     cards_lines = [line for line in lines if line.startswith("Картки:")]
     assert len(cards_lines) == 2
     assert "alpha" in cards_lines[0] and "beta" in cards_lines[0]
     assert cards_lines[0].index("alpha") < cards_lines[0].index(",") < cards_lines[0].index("beta")
-    assert "gamma" in cards_lines[1]
+    assert "alpha" in cards_lines[1] and "," not in cards_lines[1]
+    assert "gamma" not in memory
     assert "s2#" not in system and "«t3»" not in system
 
 
