@@ -1,1 +1,34 @@
-[{"target": "pyproject.toml:8", "category": "redundant_dependency", "claim": "The google-cloud-speech dependency can go: speech recognition runs on a Gemini transcribe model through google-genai (platform/speech.py), nothing in src, tests or scripts imports google.cloud.speech, and the app would behave the same without it. uv.lock and the stale SDK list at .engine/architecture/architecture-map.md:603 would need updating in the same change.", "evidence": [{"source": "signal", "ref": "S-c4ffaf73", "detail": "pyproject: google-cloud-speech is declared and no module named google_cloud_speech is imported"}, {"source": "grep", "ref": "src/thinkhow/platform/speech.py:121", "detail": "speech builds a google.genai client. The only imports of google.cloud.speech_v2 in the repository are in the spike probe .engine/artifacts/spikes/voice-stt-2026-10-23/chirp3_probe.py:2, which is outside src"}, {"source": "read", "ref": "docs/adr/0005-speech-gemini-transcribe.md:61", "detail": "the ADR that chose Gemini transcribe says the google-cloud-speech package is no longer needed"}, {"source": "judgement", "ref": "", "detail": "The other four dependency signals are false. google-auth is imported as google.auth (platform/tts.py:167, identity.py:74). google-cloud-storage is imported as google.cloud.storage (storage.py:128). google-genai is imported as google.genai (llm.py:14). jinja2 is needed by fastapi.templating.Jinja2Templates (web/server.py:23). The vulture model_config, validator, settings_customise_sources, route-function and Profile-field signals are pydantic, FastAPI or LLM-schema uses, so they are traps."}], "protected": false, "chesterton_checked": true, "test_safety": "characterization_exists", "proposed_action": "confirm", "traceability": "docs/adr/0005-speech-gemini-transcribe.md:61", "reversal_risk": "low"}]
+[
+  {
+    "target": "pyproject.toml:8",
+    "category": "redundant_dependency",
+    "claim": "The google-cloud-speech dependency can go. Speech recognition runs on google-genai (src/thinkhow/platform/speech.py:121-124), nothing in src or tests imports google.cloud.speech, and the app would behave the same without the package. uv.lock and the SDK list at .engine/architecture/architecture-map.md:603 would change in the same commit.",
+    "evidence": [
+      {"source": "signal", "ref": "S-c4ffaf73", "detail": "google-cloud-speech is declared and no module named google_cloud_speech is imported"},
+      {"source": "grep", "ref": "src/thinkhow/platform/speech.py:121", "detail": "speech uses 'from google import genai'. The only google.cloud.speech imports in the repo are in .engine/artifacts/spikes/voice-stt-2026-10-23/chirp3_probe.py"},
+      {"source": "grep", "ref": "tasks/proposed/734-open-item-remove-google-cloud-speech.md:8", "detail": "already proposed to the owner and still waiting. ADR-0005 says the package is no longer needed"}
+    ],
+    "protected": false,
+    "chesterton_checked": true,
+    "test_safety": "none",
+    "proposed_action": "confirm",
+    "traceability": "none found (added for the walking skeleton in tasks/done/105-walking-skeleton/task.md:23 and replaced by Gemini transcribe per docs/adr/0005)",
+    "reversal_risk": "low"
+  },
+  {
+    "target": "src/thinkhow/facilitation/route.py:154-162",
+    "category": "duplication",
+    "claim": "route._twice and deep._twice (src/thinkhow/facilitation/deep.py:232-240) apply the same rule step by step: call, retry once on a pydantic ValidationError, raise FacilitationError on the second failure, with an unreachable AssertionError at the end. Only the message text differs, so a change to the retry rule would have to be made in both places.",
+    "evidence": [
+      {"source": "read", "ref": "src/thinkhow/facilitation/route.py:154", "detail": "for attempt in (1, 2): try call(); on ValidationError at attempt 2 raise FacilitationError('the router's answer stayed invalid after one retry')"},
+      {"source": "read", "ref": "src/thinkhow/facilitation/deep.py:232", "detail": "the same loop, the same exception, the same docstring; the message is 'the deep cycle's answer stayed invalid after one retry'"},
+      {"source": "read", "ref": "src/thinkhow/facilitation/settle.py:114", "detail": "settle._retry is a different rule (no loop, a single attempt), so it is not part of this finding"}
+    ],
+    "protected": false,
+    "chesterton_checked": true,
+    "test_safety": "none",
+    "proposed_action": "flag_only",
+    "traceability": "the one-retry rule of the router and the deep-cycle contracts",
+    "reversal_risk": "low"
+  }
+]

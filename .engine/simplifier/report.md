@@ -171,3 +171,15 @@ Nothing listed here was removed.
   - test safety characterization_exists, reversal risk low, protected false, traces to: docs/adr/0005-speech-gemini-transcribe.md:61
 
 ### flag_only (0)
+
+## 2026-10-29T01:17:30Z — code, nightly 2026-10-29
+
+### confirm (1)
+- `F-b8fdafbc` **pyproject.toml:8** — redundant_dependency: The google-cloud-speech dependency can go. Speech recognition runs on google-genai (src/thinkhow/platform/speech.py:121-124), nothing in src or tests imports google.cloud.speech, and the app would behave the same without the package. uv.lock and the SDK list at .engine/architecture/architecture-map.md:603 would change in the same commit.
+  - evidence: signal S-c4ffaf73 google-cloud-speech is declared and no module named google_cloud_speech is imported; grep src/thinkhow/platform/speech.py:121 speech uses 'from google import genai'. The only google.cloud.speech imports in the repo are in .engine/artifacts/spikes/voice-stt-2026-10-23/chirp3_probe.py; grep tasks/proposed/734-open-item-remove-google-cloud-speech.md:8 already proposed to the owner and still waiting. ADR-0005 says the package is no longer needed
+  - test safety none, reversal risk low, protected false, traces to: none found (added for the walking skeleton in tasks/done/105-walking-skeleton/task.md:23 and replaced by Gemini transcribe per docs/adr/0005)
+
+### flag_only (1)
+- `F-2759dd4b` **src/thinkhow/facilitation/route.py:154-162** — duplication: route._twice and deep._twice (src/thinkhow/facilitation/deep.py:232-240) apply the same rule step by step: call, retry once on a pydantic ValidationError, raise FacilitationError on the second failure, with an unreachable AssertionError at the end. Only the message text differs, so a change to the retry rule would have to be made in both places.
+  - evidence: read src/thinkhow/facilitation/route.py:154 for attempt in (1, 2): try call(); on ValidationError at attempt 2 raise FacilitationError('the router's answer stayed invalid after one retry'); read src/thinkhow/facilitation/deep.py:232 the same loop, the same exception, the same docstring; the message is 'the deep cycle's answer stayed invalid after one retry'; read src/thinkhow/facilitation/settle.py:114 settle._retry is a different rule (no loop, a single attempt), so it is not part of this finding
+  - test safety none, reversal risk low, protected false, traces to: the one-retry rule of the router and the deep-cycle contracts

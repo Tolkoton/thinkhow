@@ -1,0 +1,3 @@
+51 signal(s) in .claude/state/simplifier/signals-full.json
+SIMPLIFIER CALL: files grew from 39 (median of the last 5 runs) to 54; lines grew from 3219 (median of the last 5 runs) to 5928; functions grew from 219 (median of the last 5 runs) to 389; complexity grew from 3 (median of the last 5 runs) to 8; dead-code grew from 20 (median of the last 5 runs) to 30
+Reversal rate: 0 of the last 0 removals came back (0.0 %; the corridor is 5-20 %) — too few removals to judge (0 of the 10 needed)
