@@ -181,3 +181,8 @@
 - Record: tasks/done/724-open-item-testing-parked-skel-facilitation/report.md
 - Reason: All four questions hold. The report's references check out against the files I could read. Both of the owner's answers (А, Б) are recorded in the task file and carried out in test_skelf_respond.py. The task file has no question still open. The technical terms are in English.
 - Request: 20261029T011109Z-2e443a (attempt 1)
+
+## 2026-10-29T01:13:24Z — 729-open-item-fact-answer-offer-sentence — READER_PASS
+- Record: tasks/done/729-open-item-fact-answer-offer-sentence/report.md
+- Reason: Every reference I could check matches. The task's one item (carry out the owner's answers) is done for both questions, both questions are answered, and the report keeps engine terms in English (commit, seal, overseer, runner, reader). The only things I could not check are this session's command outputs.
+- Request: 20261029T011235Z-6b509f (attempt 1)
