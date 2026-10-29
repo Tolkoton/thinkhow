@@ -18,3 +18,17 @@
 ## Питання до власника
 1. Змінити рядок 52 контракту fact-answer (і fa_fakes.ROUTER_ANSWER_ITEM) і запечатати знову? Варіанти: A — «… — не "answer", а "choose" чи "ask".» (раджу: ask лишився дією роутера); B — «… — не "answer", а "choose".»; C — лишити як є (offer згадано, але дії немає). Відповідь: A, B або C.
    Відповідь: A <!-- записано Claude зі слів власника 2026-10-28, сесія thinkhow-desk: «Так» — на пропозицію Claude «відповісти на всі 11 питань так, як радить runner; Сонько виконає дві команди, які заново фіксують змінені контракти» -->
+
+2. Відповідь A виконано (commit-и — у `git log --grep "729"`): у рядку 52 контракту `.engine/slices/fact-answer.md`
+   і в `src/thinkhow/facilitation/router.md` тепер «… — не "answer", а "choose" чи "ask".»; так само
+   `fa_fakes.ROUTER_ANSWER_ITEM`, оракул `tests/contract/spoken_replies/sr_oracle.py` (6 рядків роутера) і тест
+   `tests/contract/router/test_rt_310_leads_one_method.py` (тепер: слова "offer" у правилах роутера немає зовсім).
+   Тести fact_answer, research_deep, router, spoken_replies, router_eval — 187 passed. Лишилось одне: контракт змінено
+   після затвердження, і `python3 .claude/hooks/contract_fingerprint.py check .engine/slices/fact-answer.md` каже
+   `CHANGED` (код 3). Старий fingerprint може видалити лише людина; без нового seal overseer не прийме жодної
+   майбутньої роботи з fact-answer. Рядок 126 запечатаного контракту `.engine/slices/research-deep.md` цитує старе
+   речення лише як місце вставки; його я не чіпав (тести від нього не залежать). Перепечатати контракт? Варіанти: A — так, команда (вам чи Сонькові):
+   `cd /home/lao/projects/thinkhow && rm .claude/state/contracts/fact-answer.sha256 && python3 .claude/hooks/contract_fingerprint.py seal .engine/slices/fact-answer.md; echo "seal=$?"` — успіх: `seal=0` (раджу: у контракті
+   змінено лише рядок 52, саме за вашою відповіддю A — `git log -p --grep 729 -- .engine/slices/fact-answer.md`); B — ні: я поверну рядок 52, router.md і тести як були (offer знову
+   згадано, дії немає). Відповідь: A або B.
+   Відповідь:
