@@ -600,7 +600,7 @@ walking skeleton.
 Дозволені залежності — діаграма вище. Автоматично (import-linter + тести, у звичайному прогоні
 тестів) перевіряються лише 4 речі, бо від них залежить продукт:
 1. **Немає циклів** між частинами (§3.3, §10.6).
-2. **Лише `platform` імпортує SDK Google** (`google.cloud.storage`, `google.genai`, `google.cloud.speech`, `google.auth`) —
+2. **Лише `platform` імпортує SDK Google** (`google.cloud.storage`, `google.genai`, `google.auth`) —
    фреймворк не розповзається в логіку (§10.7).
 3. **Теки людей пише лише `workspace`**, а `facilitation` не імпортує `workspace` і `learning` (вона
    отримує контекст значеннями) — тест + контракт: шляхи `users/…` будує лише `workspace`, з

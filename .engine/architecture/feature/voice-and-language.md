@@ -117,7 +117,7 @@
   діаграми в `architecture-map.md` і рядка F13 в INDEX (Chirp 3 → `gemini-3.5-transcribe`, `google-genai`). ADR
   прямо каже: Chirp 3 і інші моделі Speech-to-Text v2 не порівнювали — API вимкнений у проєкті власника; варіант
   для власника — увімкнути `speech.googleapis.com` і порівняти. Пакет `google-cloud-speech` лишається (прибирання
-  пакета — дія з дозволу; пропозиція в звіті). ·
+  пакета — дія з дозволу; пропозиція в звіті; прибрано задачею 734, 2026-11-01). ·
   contract out: маршрут і JSON вище · depends on: S1 · **TRACER BULLET part 2**
 - **S3 voice-reply-language** — delivers: фасилітатор відповідає мовою з профілю, ніколи російською:
   нове поле `FacilitationContext.language: str` — назва мови для інструкції моделі (`Language.name` з кодом,
