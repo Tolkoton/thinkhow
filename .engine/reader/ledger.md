@@ -191,3 +191,8 @@
 - Record: tasks/done/410-cleanup-2026-10-29/report.md
 - Reason: Every reference I could check matches its source: the nightly output, the findings, the code lines, the metrics, the 734 proposal and the commits. All four items of «Що зробити» are answered. The report has no open question, and the technical terms are in English.
 - Request: 20261029T011802Z-355a23 (attempt 1)
+
+## 2026-11-01T12:48:22Z — 734-open-item-remove-google-cloud-speech — READER_PASS
+- Record: tasks/done/734-open-item-remove-google-cloud-speech/report.md
+- Reason: All four checks hold. Every reference I could check says what the report claims. Each of the four items in «Що зробити» is done: uv remove with uv.lock, the architecture-map SDK list, one full suite run compared with task 724, and the change named in the report. There are no open owner questions, and the technical terms are in English.
+- Request: 20261101T124745Z-54fb8d (attempt 1)
