@@ -1,0 +1,3 @@
+45 signal(s) in .claude/state/simplifier/signals-full.json
+no sharp growth: the nightly cleanup reviews the signals only
+Reversal rate: 0 of the last 0 removals came back (0.0 %; the corridor is 5-20 %) — too few removals to judge (0 of the 10 needed)
