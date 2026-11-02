@@ -201,3 +201,8 @@
 - Record: tasks/done/411-cleanup-2026-11-01/report.md
 - Reason: All four questions hold. The nightly output in the report matches the saved file exactly. The metrics numbers and both commits check out. Items 1–4 of «Що зробити» each have an answer. There are no open questions for the owner, and the engine terms are in English.
 - Request: 20261101T124919Z-f0e6c0 (attempt 1)
+
+## 2026-11-02T10:07:36Z — 412-cleanup-2026-11-02 — READER_PASS
+- Record: tasks/done/412-cleanup-2026-11-02/report.md
+- Reason: Every reference I could check matches: the nightly output, the metrics numbers for both heads, commit 77b89f8 «engine v0.14.3», the new mapping in simplify_signals.py, and the signal count 41 = 30+8+3. All four «Що зробити» items have an answer, the report raises no question for the owner, and the engine terms are in English.
+- Request: 20261102T100648Z-502549 (attempt 1)
