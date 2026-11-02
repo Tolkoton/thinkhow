@@ -536,7 +536,7 @@
 - Surprises: the question's words live in `web` catalogs, `workspace` cannot import them — `open_topic`/`reply` take a
   `question` callable (the planner's reading of the seam)
 
-## Slice finish-answer — task 712 (CODE COMPLETE — the audit waits for the owner: a stale test seal, 2026-10-28)
+## Slice finish-answer — task 712 (DONE 2026-11-02 — overseer PASS 20261102T094721Z-151e9d)
 
 - Module: `web/server.py` — `_stream` returns `_Finishing`: a worker thread (in a copy of the request's context) runs
   `_sse(events)` to its end into a queue the response reads; the ASGI call returns only after the worker ended, so
@@ -548,5 +548,6 @@
 - Smoke: `scripts/smoke_test_finish_answer.py` — real uvicorn, the client closes after `saved`; OK (the answer is
   there 3.5 s later, `http_request` latency 3507 ms); on the old `server.py` the same smoke exits 1
 - Surprises: the objection's rename left the old paths in the seal — `testing.py` reports CHANGED and blocks the
-  audit; engine note `.engine/to-engine/objection-rename-leaves-stale-seal.md`
+  audit; engine note `.engine/to-engine/objection-rename-leaves-stale-seal.md`. Fixed in engine v0.14.3 (`renamed`):
+  objection round 2 (2026-11-02) moved the seal to `test_fin_*`; `testing.py check` → Match; full suite 1525 passed
 - Open: P3 (Cloud Run keeps CPU while the request is open) — check on the next deploy
