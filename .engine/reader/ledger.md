@@ -206,3 +206,8 @@
 - Record: tasks/done/412-cleanup-2026-11-02/report.md
 - Reason: Every reference I could check matches: the nightly output, the metrics numbers for both heads, commit 77b89f8 «engine v0.14.3», the new mapping in simplify_signals.py, and the signal count 41 = 30+8+3. All four «Що зробити» items have an answer, the report raises no question for the owner, and the engine terms are in English.
 - Request: 20261102T100648Z-502549 (attempt 1)
+
+## 2026-11-03T22:09:53Z — 413-maintain-2026-11-03 — READER_PASS
+- Record: tasks/done/413-maintain-2026-11-03/report.md
+- Reason: All four questions hold. Every reference I could check matches its source: the numbers, the file and line, the signals and the commit b087ce3. The one task item is done, and the report says why the task went to done/ and not blocked/. There is no open question for the owner, and the report keeps engine terms in English (gates, commit, simplifier, Dependencies, Hot places, Snapshot).
+- Request: 20261103T220924Z-b9ee98 (attempt 1)
