@@ -83,3 +83,15 @@ From: lesson #23b6f003 (overseer, step-results, 2026-10-27).
 commit_checkpoint.sh takes any first argument as the node id, --help included, and then runs git add -u, sweeping in the owner's uncommitted changes (happened in tasks 703 and 713). The script should reject an unknown argument starting with '-' (and print its usage on --help) before staging anything.
 
 From: lesson #dec79025 (agent, finish-answer, 2026-10-28).
+
+## 2026-11-03 — The Stop gate type-checks a slice-tester's RED contract tests before the builder's skeleto
+
+The Stop gate type-checks a slice-tester's RED contract tests before the builder's skeleton exists (attr-defined/import-not-found on names the sealed contract promises); the tester's own hand-in is refused for the same reason until a NotImplementedError skeleton exists. Suggest: when testing.py has a pending contract request, the gate skips typecheck of that request's new test files, and the tester's instructions say the builder adds the skeleton first (task 311, 2026-11-03).
+
+From: lesson #d34aa232 (gate, document-upload, 2026-11-03).
+
+## 2026-11-03 — The Stop gate type-checks spike scripts under .engine/artifacts/spikes/ although pyproject
+
+The Stop gate type-checks spike scripts under .engine/artifacts/spikes/ although pyproject's ruff excludes .engine as 'spike and probe scripts, not working code'; mypy has no such exclusion (task 311, 2026-11-03).
+
+From: lesson #95f78217 (gate, document-upload, 2026-11-03).

@@ -552,7 +552,7 @@
   objection round 2 (2026-11-02) moved the seal to `test_fin_*`; `testing.py check` → Match; full suite 1525 passed
 - Open: P3 (Cloud Run keeps CPU while the request is open) — check on the next deploy
 
-## Slice document-upload — task 311 (built 2026-11-03; overseer audit pending)
+## Slice document-upload — task 311 (DONE 2026-11-03 — overseer PASS 20261103T205526Z-d75f29)
 
 - Modules: `platform/documents.py` — `extract(name, data)`: PDF (pypdf), DOCX (`word/document.xml` by the stdlib),
   TXT/MD (UTF-8, UTF-16 with a BOM); `Unreadable(format|empty|broken|encrypted)`. `facilitation/types.py` —
