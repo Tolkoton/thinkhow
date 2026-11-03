@@ -6,6 +6,7 @@ from thinkhow.workspace.model import (
     SILENCE,
     Answered,
     Delta,
+    DocumentTooLarge,
     Failed,
     NothingToRetry,
     NumberedTurn,
@@ -26,6 +27,7 @@ from thinkhow.workspace.profile import NoLanguage, language, set_language
 from thinkhow.workspace.speak import MAX_SPEAK_BYTES, has_voice, speak
 from thinkhow.workspace.steps import Question, Recognize, pending_step, step_results_for_learning
 from thinkhow.workspace.topics import (
+    add_document,
     all_topics_for_learning,
     create_topic,
     delete_topic,
@@ -52,6 +54,7 @@ __all__ = [
     "SILENCE",
     "Answered",
     "Delta",
+    "DocumentTooLarge",
     "Failed",
     "Language",
     "NoLanguage",
@@ -67,6 +70,7 @@ __all__ = [
     "TopicRef",
     "TopicSummary",
     "TopicView",
+    "add_document",
     "all_topics_for_learning",
     "create_topic",
     "delete_topic",

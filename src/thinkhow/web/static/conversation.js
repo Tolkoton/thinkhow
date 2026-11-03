@@ -10,7 +10,10 @@ const TEXT = {
   recording: "Запис… натисніть ще раз, щоб зупинити",
   recognizing: "Розпізнаю…",
   talk_stopped: "Режим розмови зупинено — спробуйте ще раз.",
+  document_too_large: "Файл завеликий для завантаження — понад 32 МБ.",
 };
+// Cloud Run takes a request of at most 32 MiB (HTTP/1); a larger file is not sent (task 311).
+const UPLOAD_LIMIT = 32 * 1024 * 1024;
 
 // Bytes in → complete events out; an event ends with an empty line; data is one JSON line.
 function createSseParser() {
@@ -64,7 +67,8 @@ function createController({ fetch, storage, ui, key }) {
     return body.replace(/<[^>]*>/g, "").trim();
   }
 
-  async function run(url, body) {
+  // keepDraft: the turn is not the field's text (a document); tooLarge: the words for a 413 without our fragment.
+  async function run(url, body, { keepDraft = false, tooLarge = null } = {}) {
     ui.disable();
     let response;
     try {
@@ -76,7 +80,9 @@ function createController({ fetch, storage, ui, key }) {
     }
     const type = response.headers.get("content-type") || "";
     if (!response.ok || !type.startsWith("text/event-stream")) {
-      ui.showError(errorText(await response.text()), response.status);
+      const text = await response.text();
+      const ours = text.includes('<p class="error">');
+      ui.showError(response.status === 413 && tooLarge && !ours ? tooLarge : errorText(text), response.status);
       ui.enable();
       return;
     }
@@ -87,7 +93,7 @@ function createController({ fetch, storage, ui, key }) {
         const { done, value } = await reader.read();
         if (done) break;
         for (const { event, data } of parser.push(value)) {
-          if (event === "saved") storage.removeItem(name);
+          if (event === "saved" && !keepDraft) storage.removeItem(name);
           else if (event === "delta") ui.appendDelta(data.text);
           else if (event === "answered") return ui.reload();
           else if (event === "failed") {
@@ -110,6 +116,11 @@ function createController({ fetch, storage, ui, key }) {
     },
     retry(fields = {}) {
       return run(base + "/retry", new URLSearchParams(fields));
+    },
+    upload(file) {
+      const body = new FormData();
+      body.append("file", file, file.name);
+      return run(base + "/document", body, { keepDraft: true, tooLarge: TEXT.document_too_large });
     },
   };
 }
@@ -210,13 +221,15 @@ function attach(doc, win) {
   const retry = doc.getElementById("retry");
   const live = doc.getElementById("live");
   const error = doc.getElementById("error");
+  const clip = doc.getElementById("attach");
+  const pick = doc.getElementById("document");
   let answer = null;
   const ui = {
     disable() {
-      for (const b of [send, retry]) if (b) b.disabled = true;
+      for (const b of [send, retry, clip]) if (b) b.disabled = true;
     },
     enable() {
-      for (const b of [send, retry]) if (b) b.disabled = false;
+      for (const b of [send, retry, clip]) if (b) b.disabled = false;
     },
     appendDelta(text) {
       if (!answer) {
@@ -258,6 +271,7 @@ function attach(doc, win) {
     key: form.dataset.key,
   });
   if (retry) retry.addEventListener("click", () => controller.retry());
+  if (clip && pick) attachDocument(clip, pick, controller, error);
   const recorder = attachMic(doc, win, form, field, error);
   // While the microphone is busy «Надіслати» only stops the recording; the next press sends the text (task 206).
   talk = attachTalk(doc, win, form, field, controller, live, error);
@@ -266,6 +280,22 @@ function attach(doc, win) {
     if (recorder && recorder.busy()) return recorder.stop();
     error.textContent = "";
     controller.send(field.value);
+  });
+}
+
+// The paperclip: choose a file → it goes to the topic as the person's turn; over Cloud Run's limit it is not sent.
+function attachDocument(clip, pick, controller, error) {
+  clip.addEventListener("click", () => pick.click());
+  pick.addEventListener("change", () => {
+    const file = pick.files && pick.files[0];
+    pick.value = "";
+    if (!file) return;
+    error.textContent = "";
+    if (file.size > UPLOAD_LIMIT) {
+      error.textContent = TEXT.document_too_large;
+      return;
+    }
+    controller.upload(file);
   });
 }
 

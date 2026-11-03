@@ -21,6 +21,10 @@ class PendingAnswer(Exception):
     """The last turn of the open session is the person's and has no answer yet: retry first."""
 
 
+class DocumentTooLarge(Exception):
+    """The topic's documents together with this one would exceed MAX_DOCUMENT_CHARS (task 311)."""
+
+
 class NothingToRetry(Exception):
     """There is no unanswered turn of the person in an open session."""
 

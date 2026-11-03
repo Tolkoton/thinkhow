@@ -43,6 +43,8 @@
     <button id="mic" class="icon" type="button" aria-label="{{ ui.speak }}" aria-pressed="false">{{ icon("mic") }}{{ icon("stop") }}<span class="spinner" aria-hidden="true"></span></button>
     <button id="recognize" class="icon" type="button" aria-label="{{ ui.recognize_again }}" hidden>{{ icon("retry") }}</button>
     <span id="mic-state" class="sr-only" aria-live="polite"></span>
+    <button id="attach" class="icon" type="button" aria-label="{{ ui.upload_document }}">{{ icon("clip") }}</button>
+    <input id="document" type="file" accept=".pdf,.docx,.txt,.md,.markdown" hidden>
     <button id="send" class="primary icon" type="submit" autocomplete="off" aria-label="{{ ui.send }}">{{ icon("send") }}</button>
     <span id="pending" class="pending" role="status"><span class="spinner" aria-hidden="true"></span><span class="sr-only">{{ ui.facilitator_answering }}</span></span>
     <button id="retry" class="icon" type="button" autocomplete="off" aria-label="{{ ui.retry }}"{% if not view.awaiting_answer %} hidden{% endif %}>{{ icon("retry") }}</button>

@@ -551,3 +551,20 @@
   audit; engine note `.engine/to-engine/objection-rename-leaves-stale-seal.md`. Fixed in engine v0.14.3 (`renamed`):
   objection round 2 (2026-11-02) moved the seal to `test_fin_*`; `testing.py check` → Match; full suite 1525 passed
 - Open: P3 (Cloud Run keeps CPU while the request is open) — check on the next deploy
+
+## Slice document-upload — task 311 (built 2026-11-03; overseer audit pending)
+
+- Modules: `platform/documents.py` — `extract(name, data)`: PDF (pypdf), DOCX (`word/document.xml` by the stdlib),
+  TXT/MD (UTF-8, UTF-16 with a BOM); `Unreadable(format|empty|broken|encrypted)`. `facilitation/types.py` —
+  `document_turn(name, text)`, the frame the model reads. `workspace/documents.py` — `documents.json` (entries
+  turn, name, text), `clean_name`, `MAX_DOCUMENT_CHARS = 200_000`, `model_text` (the swap only on a `📎 <X>` user turn
+  with an entry named X at its number, the last wins). `workspace/topics.py` — `add_document` (checks, then
+  `_reply_flow` with the entry before the turn), `_answer` swaps document turns in history and the current turn and
+  skips `recognize` on a document turn. `web/server.py` — `POST /topics/{uid}/{topic}/document`, 422/413 fragments.
+  Page: `#attach` paperclip, hidden `#document` input, `controller.upload`, 32 MiB check, 413 words. 4 words × 76.
+- Tests: 48 by the slice-tester in `tests/contract/document_upload/` (sealed; 11 questions, all readings taken)
+- Smoke: `scripts/smoke_test_document_upload.py` — PDF and DOCX → `📎` turns and answers, reload keeps both, the
+  local model's map item holds the text; scan, > 32 MiB, Cloud Run's 413, the topic's limit — none adds a turn
+  (`.engine/artifacts/document-upload/smoke.txt`, screenshots beside it)
+- Surprises: point (a) waited for finish-answer's point (b) (catch-up done first, `33c336b`); the tester's first
+  hand-in was refused until a NotImplementedError skeleton made the tests fail for the right reason

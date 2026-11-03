@@ -216,3 +216,14 @@ class StepOutcome(_Frozen):
     outcome: Literal["worked", "not_worked", "unexpected"] | None
     clearer: Literal["yes", "partly", "no"] | None
     said: str
+
+
+def document_turn(name: str, text: str) -> str:
+    """A document the person gave the topic, as the model reads that turn (task 311): its name, its text
+    between a begin and an end line, then the ask — first what it shows for the topic, then one question."""
+    return (
+        f"[Людина дала темі документ «{name}»]\n"
+        f"--- початок документа «{name}» ---\n{text}\n--- кінець документа «{name}» ---\n"
+        "Спершу скажи, що конкретно з цього документа бачиш щодо цієї теми (з нього, не загальні слова), "
+        "потім одне питання. Вирішує людина."
+    )

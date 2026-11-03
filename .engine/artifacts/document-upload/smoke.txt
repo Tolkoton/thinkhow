@@ -1,0 +1,52 @@
+INFO:     Started server process [301414]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:47677 (Press CTRL+C to quit)
+INFO:     127.0.0.1:48208 - "GET /language HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/language", "status": 200, "latency_ms": 25, "event": "http_request", "request_id": "b2431b7bf9324f6eb21ee030cf3a03f5"}
+INFO:     127.0.0.1:48218 - "GET /language HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/language", "status": 200, "latency_ms": 1, "event": "http_request", "request_id": "4ea8c20de1144cb0a2e8914482f52454"}
+INFO:     127.0.0.1:48218 - "GET /static/style.css HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/static/style.css", "status": 200, "latency_ms": 4, "event": "http_request", "request_id": "0f596eb984714f55a0473294e799a360"}
+INFO:     127.0.0.1:48218 - "POST /language HTTP/1.1" 303 See Other
+{"severity": "INFO", "method": "POST", "route": "/language", "status": 303, "latency_ms": 1, "event": "http_request", "request_id": "040d39b1bc6e4d9bbbf534b7f7ad06ec"}
+INFO:     127.0.0.1:48218 - "GET / HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/", "status": 200, "latency_ms": 5, "event": "http_request", "request_id": "8beb5518b47b44f7a1e2bca7165d0c93"}
+INFO:     127.0.0.1:48218 - "POST /topics HTTP/1.1" 303 See Other
+{"severity": "INFO", "method": "POST", "route": "/topics", "status": 303, "latency_ms": 2, "event": "http_request", "request_id": "458c2c65300140408cc808f596160f1c"}
+INFO:     127.0.0.1:48218 - "GET /topics/local-owner/t-ab4042225584 HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/topics/{uid}/{topic_id}", "status": 200, "latency_ms": 16, "event": "http_request", "request_id": "e9ac303f480448d587c44bf70d0ed0b2"}
+INFO:     127.0.0.1:48218 - "GET /static/conversation.js HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/static/conversation.js", "status": 200, "latency_ms": 5, "event": "http_request", "request_id": "73e60c05fffc47b4b16477cccc8daa40"}
+INFO:     127.0.0.1:48218 - "POST /topics/local-owner/t-ab4042225584/document HTTP/1.1" 200 OK
+{"severity": "INFO", "uid": "local-owner", "topic_id": "t-ab4042225584", "turn": 1, "format": "pdf", "bytes": 25854, "chars": 177, "event": "document_added", "request_id": "a2765924a0f141bc9107e682acfa2938"}
+{"severity": "INFO", "method": "POST", "route": "/topics/{uid}/{topic_id}/document", "status": 200, "latency_ms": 25, "event": "http_request", "request_id": "a2765924a0f141bc9107e682acfa2938"}
+INFO:     127.0.0.1:48218 - "GET /topics/local-owner/t-ab4042225584 HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/topics/{uid}/{topic_id}", "status": 200, "latency_ms": 2, "event": "http_request", "request_id": "3627c2702bcc443aad99e02d8a5149fe"}
+INFO:     127.0.0.1:48218 - "POST /topics/local-owner/t-ab4042225584/document HTTP/1.1" 200 OK
+{"severity": "INFO", "uid": "local-owner", "topic_id": "t-ab4042225584", "turn": 3, "format": "docx", "bytes": 848, "chars": 29, "event": "document_added", "request_id": "7eb13ac712ce4175b73b3593a7752e8b"}
+{"severity": "INFO", "method": "POST", "route": "/topics/{uid}/{topic_id}/document", "status": 200, "latency_ms": 16, "event": "http_request", "request_id": "7eb13ac712ce4175b73b3593a7752e8b"}
+INFO:     127.0.0.1:48218 - "GET /topics/local-owner/t-ab4042225584 HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/topics/{uid}/{topic_id}", "status": 200, "latency_ms": 2, "event": "http_request", "request_id": "642de56c1df940aab16f13335194c59d"}
+INFO:     127.0.0.1:48218 - "GET /topics/local-owner/t-ab4042225584 HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/topics/{uid}/{topic_id}", "status": 200, "latency_ms": 2, "event": "http_request", "request_id": "e805179999a6427e8238d6c0ee4caa8c"}
+{"severity": "WARNING", "format": "pdf", "reason": "empty", "bytes": 854, "event": "document_unreadable", "request_id": "6fd1d8b60a7344838070ce24ced59eaa"}
+INFO:     127.0.0.1:48218 - "POST /topics/local-owner/t-ab4042225584/document HTTP/1.1" 422 Unprocessable Content
+{"severity": "INFO", "method": "POST", "route": "/topics/{uid}/{topic_id}/document", "status": 422, "latency_ms": 3, "event": "http_request", "request_id": "6fd1d8b60a7344838070ce24ced59eaa"}
+INFO:     127.0.0.1:51482 - "POST /topics/local-owner/t-ab4042225584/document HTTP/1.1" 413 Content Too Large
+{"severity": "INFO", "method": "POST", "route": "/topics/{uid}/{topic_id}/document", "status": 413, "latency_ms": 4, "event": "http_request", "request_id": "b518acbc9304447f9ac2ae68c4a12cf5"}
+INFO:     127.0.0.1:51482 - "GET /topics/local-owner/t-ab4042225584 HTTP/1.1" 200 OK
+{"severity": "INFO", "method": "GET", "route": "/topics/{uid}/{topic_id}", "status": 200, "latency_ms": 2, "event": "http_request", "request_id": "3322a6958fc84036a3889c66324318c5"}
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [301414]
+page: #attach with aria-label Завантажити документ
+resume.pdf: a 📎 turn and an answer — 2 turns
+resume.docx: a 📎 turn and an answer — 4 turns
+reload: both turns stay; documents.json holds both texts; the model's map item holds the text
+scan.pdf: err_document_unreadable shown
+over 32 MiB: js_document_too_large shown, nothing sent
+Cloud Run's 413: js_document_too_large shown
+the topic's limit: err_document_too_large shown
+OK: the paperclip uploads PDF and DOCX, both stay after reload, 4 refusals add no turn; ../.engine/artifacts/document-upload/smoke

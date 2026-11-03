@@ -26,15 +26,27 @@ from thinkhow.facilitation.types import (
     current_card,
 )
 from thinkhow.facilitation.types import Turn as FacilitationTurn
+from thinkhow.platform import documents as files
 from thinkhow.platform.log import log_event
 from thinkhow.platform.storage import Storage
 from thinkhow.workspace import conversation as conv_file
 from thinkhow.workspace._paths import JSON, UID, _uid
+from thinkhow.workspace.documents import (
+    DocumentEntry,
+    NewDocument,
+    append_document,
+    clean_name,
+    model_text,
+    read_documents,
+    too_large,
+    turn_text,
+)
 from thinkhow.workspace.model import (
     CARD_ID,
     SILENCE,
     Answered,
     Delta,
+    DocumentTooLarge,
     Failed,
     NothingToRetry,
     NumberedTurn,
@@ -191,6 +203,49 @@ def retry(
     return _answer(storage, facilitate, ref, conv, last.no, last.text, now, lang, spoken, recognize)
 
 
+def add_document(
+    storage: Storage,
+    facilitate: Facilitate,
+    user: CurrentUser,
+    ref: TopicRef,
+    name: str,
+    data: bytes,
+    now: datetime,
+    recognize: Recognize | None = None,
+    question: Question | None = None,
+) -> Iterator[ReplyEvent]:
+    """Checks now (as `reply`, then the file: its name, its text, the topic's limit); nothing is written
+    before all passed. The iterator is `reply`'s flow with the turn `📎 <name>` and its entry."""
+    _check_now(now)
+    _can_write(user, ref)
+    conv = _read_conversation(storage, ref)
+    if _awaiting(conv, now):
+        raise PendingAnswer("the last turn has no answer yet: retry it first")
+    clean = clean_name(name)
+    kind = files.file_format(clean)
+    try:
+        text = files.extract(clean, data)
+    except files.Unreadable as exc:
+        log_event("document_unreadable", severity="WARNING", format=kind, reason=exc.reason, bytes=len(data))
+        raise
+    if too_large(read_documents(storage, ref), text):
+        raise DocumentTooLarge(ref.topic_id)
+    doc = NewDocument(clean, text, kind, len(data))
+    lang = _language_of(storage, user)
+    return _reply_flow(
+        storage,
+        facilitate,
+        ref,
+        conv,
+        turn_text(clean),
+        now,
+        lang,
+        recognize=recognize,
+        question=question,
+        document=doc,
+    )
+
+
 def delete_topic(storage: Storage, user: CurrentUser, ref: TopicRef) -> None:
     """Own topics only, the owner's too (task 204); conversation.md goes last, so a broken delete leaves
     the topic listed and the person can delete it again."""
@@ -273,9 +328,11 @@ def _reply_flow(
     spoken: bool = False,
     recognize: Recognize | None = None,
     question: Question | None = None,
+    document: NewDocument | None = None,
 ) -> Iterator[ReplyEvent]:
-    """Flow (M2): the person's turn into conversation.md → Saved → the answer (I4). On a return after a break
-    with a chosen step not asked about yet, the question about it goes first, as ThinkHow's turn (S6)."""
+    """Flow (M2): (a document's entry into documents.json — before its turn, Q7a) the person's turn into
+    conversation.md → Saved → the answer (I4). On a return after a break with a chosen step not asked about
+    yet, the question about it goes first, as ThinkHow's turn (S6)."""
     steps = read_steps(storage, ref)
     due = _question_due(conv, _read_map(storage, ref), steps, now) if question else None
     if _closed_at(conv.sessions[-1], now) is not None:
@@ -290,8 +347,20 @@ def _reply_flow(
         )
         _write_steps(storage, ref, [*steps, record])
     turn_no = conv.last_no() + 1
+    if document is not None:
+        append_document(storage, ref, DocumentEntry(turn=turn_no, name=document.name, text=document.text))
     conv.sessions[-1].turns.append(conv_file.Turn(turn_no, "user", conv_file.second(now), text))
     _write_conversation(storage, ref, conv)
+    if document is not None:
+        log_event(
+            "document_added",
+            uid=ref.uid,
+            topic_id=ref.topic_id,
+            turn=turn_no,
+            format=document.format,
+            bytes=document.size,
+            chars=len(document.text),
+        )
     yield Saved(turn_no)
     yield from _answer(storage, facilitate, ref, conv, turn_no, text, now, lang, spoken, recognize)
 
@@ -310,7 +379,16 @@ def _answer(
 ) -> Iterator[ReplyEvent]:
     """Flow: facilitate → deltas → answer into conversation.md → map, routing, research.json → the result of a
     step from the answer to its question (S6) → Answered."""
-    history = [FacilitationTurn(t.role, t.text) for s in conv.sessions for t in s.turns if t.no < turn_no]
+    entries = read_documents(storage, ref)
+    history = [
+        FacilitationTurn(t.role, model_text(entries, t.no, t.role, t.text) or t.text)
+        for s in conv.sessions
+        for t in s.turns
+        if t.no < turn_no
+    ]
+    framed = model_text(entries, turn_no, "user", text)
+    if framed is not None:
+        text, recognize = framed, None  # a document is not the person's answer to a step question (Q8)
     problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
     card_id = current_card(routing) or CARD_ID
     ctx = FacilitationContext(card_id, history, problem_map, turn_no, text, lang, routing, spoken)

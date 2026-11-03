@@ -15,7 +15,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Annotated, Any
 
-from fastapi import Depends, FastAPI, Form, Request
+from fastapi import Depends, FastAPI, Form, Request, UploadFile
 from fastapi.concurrency import run_in_threadpool
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Response, StreamingResponse
@@ -28,6 +28,7 @@ from thinkhow.facilitation import Facilitate
 from thinkhow.knowledge import Card
 from thinkhow.platform import log
 from thinkhow.platform.config import Settings
+from thinkhow.platform.documents import Unreadable
 from thinkhow.platform.identity import FixedIdentity, IapIdentity, IdentityError
 from thinkhow.platform.speech import Speech, SpeechUnavailable
 from thinkhow.platform.storage import Storage
@@ -144,6 +145,17 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         ref = workspace.TopicRef(uid, topic_id)
         events = workspace.retry(
             deps.storage, deps.facilitate, user, ref, deps.now(), spoken == "1", recognize=deps.recognize
+        )
+        return _stream(events)
+
+    @app.post("/topics/{uid}/{topic_id}/document")
+    async def document(user: User, uid: str, topic_id: str, file: UploadFile) -> Response:
+        """A file the person gives the topic → its turn and the answer as `/reply` streams them (task 311)."""
+        data, name = await file.read(), file.filename or ""
+        ref = workspace.TopicRef(uid, topic_id)
+        call = (deps.storage, deps.facilitate, user, ref, name, data, deps.now())
+        events = await run_in_threadpool(
+            workspace.add_document, *call, recognize=deps.recognize, question=_question_of(deps, user)
         )
         return _stream(events)
 
@@ -297,6 +309,8 @@ MESSAGES: list[tuple[type[Exception], int, str]] = [
     (workspace.TopicNotFound, 404, "err_topic_not_found"),
     (workspace.PendingAnswer, 409, "err_pending"),
     (workspace.NothingToRetry, 409, "err_nothing_to_retry"),
+    (Unreadable, 422, "err_document_unreadable"),
+    (workspace.DocumentTooLarge, 413, "err_document_too_large"),
     (IdentityError, 401, "err_login"),
     (SpeechUnavailable, 502, "err_not_recognized"),
     (TtsUnavailable, 502, "err_not_voiced"),
