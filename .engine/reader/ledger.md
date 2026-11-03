@@ -211,3 +211,8 @@
 - Record: tasks/done/413-maintain-2026-11-03/report.md
 - Reason: All four questions hold. Every reference I could check matches its source: the numbers, the file and line, the signals and the commit b087ce3. The one task item is done, and the report says why the task went to done/ and not blocked/. There is no open question for the owner, and the report keeps engine terms in English (gates, commit, simplifier, Dependencies, Hot places, Snapshot).
 - Request: 20261103T220924Z-b9ee98 (attempt 1)
+
+## 2026-11-03T22:11:18Z — 414-cleanup-2026-11-03 — READER_PASS
+- Record: tasks/done/414-cleanup-2026-11-03/report.md
+- Reason: All four questions hold. The nightly output, the metrics numbers and the two vulture signals at documents.py:26 and :33 match the files. Every item of «Що зробити» is answered (items 2–4 do not apply after `no sharp growth`, and the report says so). There are no open questions, and the technical terms stay in English.
+- Request: 20261103T221057Z-30e73f (attempt 1)
