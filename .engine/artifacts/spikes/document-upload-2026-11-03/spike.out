@@ -1,0 +1,13 @@
+EOF marker not found
+invalid pdf header: b'hello'
+EOF marker not found
+EOF marker not found
+PDF text (0.01s): 'Олена Коваль\nПродакт-менеджерка, 7 років у fintech.\n2019–2024 — Monobank: запустила кешбек-сервіс, 1,2 млн користувачів\nSQL, Amplitude, A/B-тести\nEnglish: Product manager, Kyiv.'
+image-only PDF text: ''
+broken -> pypdf.errors PdfStreamError Stream has ended unexpectedly
+not pdf -> pypdf.errors PdfStreamError Stream has ended unexpectedly
+encrypted is_encrypted True
+encrypted -> pypdf.errors FileNotDecryptedError File has not been decrypted
+DOCX paragraphs: ['Олена Коваль', 'Досвід: Monobank']
+pypdf 6.21.4
+wrote resume.pdf scan.pdf encrypted.pdf resume.docx

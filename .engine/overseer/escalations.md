@@ -429,3 +429,26 @@ one; do not reopen the old one in conversation.
   stand between the contract and the code.
 - Door: two-way. Cost to reverse: a re-plan of S2 before its code.
 - Status: CLOSED.
+
+## 2026-11-03 — AUTONOMOUS — document-upload (task 311): the topic's documents take half of the conversation's reserve
+- Supersedes nothing.
+- What: the feature critic (round 1) showed the first draft's limit (1 697 152 characters) was the knowledge's share of
+  the model window (`knowledge/versions.py` `BUDGET_CHARS`), counted twice. Documents live in the conversation, whose
+  reserve is 200 000 tokens = 400 000 characters at 2 a token (PR-31). I gave the topic's documents together half of
+  it: `MAX_DOCUMENT_CHARS = 200_000`, beside its source, PROVISIONAL.
+- Why: the limit exists only because the platform's window requires it (P5); a half split leaves the conversation room
+  to go on after a large document. A résumé is 5–10 thousand characters, far below.
+- Door: two-way. Cost to reverse: one constant and its test.
+- Status: CLOSED.
+
+## 2026-11-03 — AUTONOMOUS — document-upload (task 311): phase 3 closed by the cold reader after its fourth round
+- Supersedes nothing.
+- What: the phase-3 critic's round 4 blocked on a test that could not tell «the last entry of a number wins» from
+  «the first wins». I applied exactly its fix (a separate scenario with the same number and a different text) and its
+  note (the last entry of the number whose name matches wins), and sent the whole contract to the fresh cold reader
+  instead of parking the phase on the four-round breaker.
+- Why: no oscillation — every phase-3 round named a new, concrete defect, two of them caused by my own phase-2 changes
+  (the write order flipped after the phase-2 critic's round 2), and each was fixed as named. The cold reader is a fresh
+  full check; the sealed tests and the overseer still stand between the contract and the code.
+- Door: two-way. Cost to reverse: a re-plan of the slice before its code.
+- Status: CLOSED.

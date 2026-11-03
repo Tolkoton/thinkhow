@@ -183,3 +183,18 @@ Nothing listed here was removed.
 - `F-2759dd4b` **src/thinkhow/facilitation/route.py:154-162** — duplication: route._twice and deep._twice (src/thinkhow/facilitation/deep.py:232-240) apply the same rule step by step: call, retry once on a pydantic ValidationError, raise FacilitationError on the second failure, with an unreachable AssertionError at the end. Only the message text differs, so a change to the retry rule would have to be made in both places.
   - evidence: read src/thinkhow/facilitation/route.py:154 for attempt in (1, 2): try call(); on ValidationError at attempt 2 raise FacilitationError('the router's answer stayed invalid after one retry'); read src/thinkhow/facilitation/deep.py:232 the same loop, the same exception, the same docstring; the message is 'the deep cycle's answer stayed invalid after one retry'; read src/thinkhow/facilitation/settle.py:114 settle._retry is a different rule (no loop, a single attempt), so it is not part of this finding
   - test safety none, reversal risk low, protected false, traces to: the one-retry rule of the router and the deep-cycle contracts
+
+## 2026-11-03T20:01:15Z — 311 requirements
+
+### confirm (0)
+
+### flag_only (1)
+- `F-ac934bc8` **tasks/doing/311-document-upload.md:35** — invented_requirement: The bullet that leaves it to the agent whether the nightly `analyze` sees the document and how G6 observations cite it is something no owner statement asks for. The owner only wants the document analysed in the conversation so the topic can move on. The bullet can go, or be narrowed to 'analyze is unchanged', and the deliverable stays the same.
+  - evidence: read tasks/doing/311-document-upload.md:11-14 the owner's words ask for a button to give the facilitator input material, which 'he would analyse and we would move on' (example: a CV in a job-search topic). They say nothing about the nightly analyze or observations; read tasks/doing/311-document-upload.md:21 the task itself marks every bullet, this one included, as Claude's wording [не слова власника]; read .engine/goals.md:33 G6 covers references from the system's self-improvement conclusions to their source. It does not require uploaded documents to feed analyze; read .engine/goals.md:41 P5 says to build the simplest form: what may be needed later is noted, not built now; read .engine/architecture/feature/document-upload.md:88 the draft architecture already picks the minimal option (analyze sees only a '📎 <name>' line, not the text). So the bullet's open question has resolved to near-no-change, which shows the bullet was not needed; judgement  as written, the bullet invites extending the nightly pipeline beyond what the task asks for. It is not a guard, a security check or a contract field, so none of the traps apply
+  - test safety none, reversal risk low, protected false, traces to: none found in the owner's words of 2026-11-03; G6 is cited by the task author, not by the owner
+
+## 2026-11-03T20:01:15Z — 311 architecture
+
+### confirm (0)
+
+### flag_only (0)
