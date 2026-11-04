@@ -1,12 +1,12 @@
-"""Screenshots and checks of task 209: renaming a topic in the list and on its page (uvicorn + Chromium).
+"""Screenshots and checks of task 209: renaming a topic in the list, its only place since 211.
 
 Run: `PYTHONPATH=src uv run --with playwright==1.64.1 python scripts/screenshots_rename_topic.py --out <dir>`
 (Playwright is no project dependency). Chromium: `THINKHOW_CHROMIUM`, else the cached chromium-1208.
 Puts another person's topic into the local `users` bucket, makes two own topics in the browser, renames one
-in the list (Enter) and one on its page (the check icon), checks Esc puts the old title back, an empty title
-is not saved, both new titles stand in both places after a reload, the conversation is untouched, and the
-other person's topic, which the owner may read, has no pencil and refuses a rename with 404. Leaves the PNGs
-in <dir>, ends with `OK:`.
+in the list by Enter and one by the check icon (its page has no pencil), checks Esc puts the old
+title back, an empty title is not saved, both new titles stand in both places after a reload, the
+conversation is untouched, and the other person's topic, which the owner may read, has no pencil and
+refuses a rename with 404. Leaves the PNGs in <dir>, ends with `OK:`.
 """
 
 import argparse
@@ -66,7 +66,7 @@ def main() -> None:
             not_foreign(page, base, foreign, out)
             browser.close()
         print(
-            f"OK: renamed in the list and on the page, kept after a reload, empty and foreign refused: {out}"
+            f"OK: renamed in the list, no pencil on the page, kept on reload, empty, foreign refused: {out}"
         )
     finally:
         server.terminate()
@@ -111,20 +111,21 @@ def in_list(page: Any, base: str, topic_id: str, out: Path) -> None:
 
 
 def on_page(browser: Any, base: str, topic_id: str, out: Path) -> None:
+    """Task 211: the page has no pencil any more; the second topic is renamed in the list by the check."""
     page = new_page(browser, PHONE, "light")
-    url = f"{base}/topics/{UID}/{topic_id}"
-    page.goto(url)
-    page.screenshot(path=str(out / "topic-pencil-phone.png"))
-    page.locator("details.rename summary").click()
-    assert not page.locator("h1").is_visible(), "the title did not give its place to the field"
-    field = page.locator('details.rename input[name="new_title"]')
+    page.goto(f"{base}/topics/{UID}/{topic_id}")
+    assert page.locator("details.rename").count() == 0, "the topic page still has the pencil"
+    page.screenshot(path=str(out / "topic-no-pencil-phone.png"))
+    page.goto(base + "/")
+    item = page.locator("ul.topics").first.locator("li", has=page.locator(f'a[href$="/{topic_id}"]'))
+    item.locator("details.rename summary").click()
+    field = item.locator('details.rename input[name="new_title"]')
     assert field.input_value() == OLD[1]
     field.fill(NEW[1])
-    page.screenshot(path=str(out / "topic-rename-field-phone.png"))
-    page.click('details.rename button[aria-label="Зберегти"]')
-    page.wait_for_url(url)
-    assert page.locator("h1").inner_text() == NEW[1], page.locator("h1").inner_text()
-    page.screenshot(path=str(out / "topic-after-rename-phone.png"))
+    page.screenshot(path=str(out / "home-rename-field-phone.png"))
+    item.locator('details.rename button[aria-label="Зберегти"]').click()
+    page.wait_for_url(base + "/")
+    assert item.locator("a").inner_text() == NEW[1], item.locator("a").inner_text()
     page.context.close()
 
 

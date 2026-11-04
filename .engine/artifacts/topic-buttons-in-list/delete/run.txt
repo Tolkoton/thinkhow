@@ -1,0 +1,18 @@
+files before:
+  users/local-owner/profile.json
+  users/local-owner/t-5c6dd6ff77fc/conversation.md
+  users/local-owner/t-5c6dd6ff77fc/map.json
+  users/local-owner/t-5c6dd6ff77fc/routing.json
+  users/local-owner/t-c7095b19d002/conversation.md
+  users/local-owner/t-c7095b19d002/map.json
+  users/local-owner/t-c7095b19d002/routing.json
+  users/local-owner/t-eeaf76e9e628/conversation.md
+  users/local-owner/t-eeaf76e9e628/map.json
+  users/local-owner/t-eeaf76e9e628/routing.json
+list confirmation: Видалити тему «Тест — непотрібна розмова» разом з усією розмовою? Відновити її не вийде.
+files after:
+  users/local-owner/profile.json
+  users/local-owner/t-c7095b19d002/conversation.md
+  users/local-owner/t-c7095b19d002/map.json
+  users/local-owner/t-c7095b19d002/routing.json
+OK: deleted from the list, no bin on the page, folders empty, the kept topic whole; .engine/artifacts/topic-buttons-in-list/delete

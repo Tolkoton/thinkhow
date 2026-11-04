@@ -1,11 +1,11 @@
-"""Screenshots and checks of task 204: deleting a topic from the list and from its page (uvicorn + Chromium).
+"""Screenshots and checks of task 204: deleting a topic from the list, its only place since 211.
 
 Run: `PYTHONPATH=src uv run --with playwright==1.64.1 python scripts/screenshots_delete_topic.py --out <dir>`
 (Playwright is no project dependency). Chromium: `THINKHOW_CHROMIUM`, else the cached chromium-1208.
 Makes three topics in the browser, each with one reply of the local model (so map.json and routing.json
-exist), deletes one from the list and one from its page, each through the one confirmation, and checks the
-folder of a deleted topic in the local `users` bucket is empty while the kept topic keeps its files. Leaves
-the PNGs in <dir>, ends with `OK:`.
+exist), deletes two from the list (desktop and phone; the page has no bin), each through the one
+confirmation, and checks the folder of a deleted topic in the local `users` bucket is empty while the
+kept topic keeps its files. Leaves the PNGs in <dir>, ends with `OK:`.
 """
 
 import argparse
@@ -58,7 +58,7 @@ def main() -> None:
             assert {"conversation.md", "map.json", "routing.json"} <= set(kept), kept
             print_files("after", users)
             browser.close()
-        print(f"OK: deleted from the list and from the page, folders empty, the kept topic intact; in {out}")
+        print(f"OK: deleted from the list, no bin on the page, folders empty, the kept topic whole; {out}")
     finally:
         server.terminate()
         server.wait(timeout=10)
@@ -95,14 +95,18 @@ def from_list(page: Any, base: str, topic_id: str, users: Path, out: Path) -> No
 
 
 def from_page(browser: Any, base: str, topic_id: str, users: Path, out: Path) -> None:
+    """Task 211: the page has no bin any more; the topic is deleted from the list on a phone."""
     page = new_page(browser, PHONE, "light")
     page.goto(f"{base}/topics/{UID}/{topic_id}")
-    page.locator("details.delete summary").click()
-    text = page.locator("details.delete p").inner_text()
+    assert page.locator("details.delete").count() == 0, "the topic page still has the bin"
+    page.screenshot(path=str(out / "topic-no-bin-phone.png"), full_page=True)
+    page.goto(base + "/")
+    item = page.locator("ul.topics li", has=page.locator(f'a[href$="/{topic_id}"]'))
+    item.locator("details.delete summary").click()
+    text = item.locator("details.delete p").inner_text()
     assert TITLES[2] in text, text
-    print("page confirmation:", text)
-    page.screenshot(path=str(out / "topic-delete-confirm-phone.png"), full_page=True)
-    page.click('button[aria-label="Так, видалити"]')
+    page.screenshot(path=str(out / "home-delete-confirm-phone.png"), full_page=True)
+    item.locator('button[aria-label="Так, видалити"]').click()
     page.wait_for_url(base + "/")
     assert TITLES[2] not in page.locator("ul.topics").first.inner_text()
     assert files(users / topic_id) == [], files(users / topic_id)

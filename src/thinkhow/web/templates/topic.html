@@ -2,10 +2,7 @@
 {% from "icons.html" import icon %}
 {% block title %}{{ view.title }}{% endblock %}
 {% block body %}
-<div class="title-row">
 <h1>{{ view.title }}</h1>
-{% if own %}{% with t = view, back = "topic" %}{% include "rename.html" %}{% endwith %}{% endif %}
-</div>
 <aside class="method" aria-label="{{ ui.thinking_model }}"><span class="label">{{ ui.thinking_model }}:</span> {{ method }}</aside>
 {% for s in view.sessions %}
 <section class="session">
@@ -55,6 +52,5 @@
 </form>
 <script id="ui-text" type="application/json">{{ js_text | tojson }}</script>
 <script src="/static/conversation.js?v={{ static_v }}"></script>
-{% with t = view %}{% include "delete.html" %}{% endwith %}
 {% endif %}
 {% endblock %}

@@ -1,7 +1,6 @@
 {% from "icons.html" import icon %}<details class="rename">
   <summary class="icon" aria-label="{{ ui.rename }}">{{ icon("pencil") }}</summary>
   <form class="inline" method="post" action="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}/rename">
-    <input type="hidden" name="back" value="{{ back }}">
     <input name="new_title" value="{{ t.title }}" required pattern=".*\S.*" aria-label="{{ ui.topic_title }}">
     <button class="primary icon" type="submit" aria-label="{{ ui.save }}">{{ icon("check") }}</button>
   </form>

@@ -147,16 +147,13 @@ def _rename_forms(html: str) -> list[str]:
     return re.findall(r'<form[^>]*action="(/topics/[^"]+/rename)"', html)
 
 
-@pytest.mark.parametrize(("back", "location"), [("home", "/"), ("topic", "page"), ("", "/"), ("//evil", "/")])
-def test_post_rename_saves_the_title_and_goes_back_where_it_came_from(
-    tmp_path: Path, back: str, location: str
-) -> None:
+def test_post_rename_saves_the_title_and_goes_back_to_the_list(tmp_path: Path) -> None:
     store = LocalStorage(tmp_path)
     client = _client(tmp_path, store)
     ref = _topic(store, ALICE, "Стара назва")
-    data = {"new_title": "Нова назва", "back": back}
+    data = {"new_title": "Нова назва"}
     r = client.post(_url(ref) + "/rename", data=data, headers=H_ALICE, follow_redirects=False)
-    assert (r.status_code, r.headers["location"]) == (303, _url(ref) if location == "page" else location)
+    assert (r.status_code, r.headers["location"]) == (303, "/")
     home, page = client.get("/", headers=H_ALICE).text, client.get(_url(ref), headers=H_ALICE).text
     assert "Нова назва" in home and "Стара назва" not in home
     assert "<h1>Нова назва</h1>" in page and "Стара назва" not in page
@@ -192,21 +189,22 @@ def test_home_has_a_rename_form_with_the_current_title_for_each_own_topic_only(t
     form = page[page.index('<details class="rename">') :]
     form = form[: form.index("</details>")]
     assert 'aria-label="Перейменувати"' in form and 'value="Моя тема"' in form and "required" in form
-    assert 'name="back" value="home"' in form
 
 
-def test_the_own_topic_page_has_the_rename_form_beside_the_title_and_a_foreign_one_has_none(
-    tmp_path: Path,
-) -> None:
+def test_the_topic_page_has_no_pencil_and_no_bin_and_the_list_has_both(tmp_path: Path) -> None:
+    """Task 211: the owner's words — renaming and deleting live only in the list of topics."""
     store = LocalStorage(tmp_path)
     client = _client(tmp_path, store)
     ref = _topic(store, ALICE, "Тема Аліси")
-    own = client.get(_url(ref), headers=H_ALICE).text
-    foreign = client.get(_url(ref), headers=H_OWNER).text
-    assert _rename_forms(own) == [_url(ref) + "/rename"] and 'name="back" value="topic"' in own
-    row = own[own.index('<div class="title-row">') :]
-    assert row.index("<h1>") < row.index('<details class="rename">') < row.index("</div>")
-    assert _rename_forms(foreign) == [] and "Перейменувати" not in foreign
+    home = client.get("/", headers=H_ALICE).text
+    for page in (client.get(_url(ref), headers=H_ALICE).text, client.get(_url(ref), headers=H_OWNER).text):
+        assert _rename_forms(page) == [] and 'action="' + _url(ref) + '/delete"' not in page
+        assert "Перейменувати" not in page and "Видалити" not in page and "<details" not in page
+        assert "<h1>Тема Аліси</h1>" in page
+    item = home[home.index('<ul class="topics">') :]
+    item = item[: item.index("</li>")]
+    assert _rename_forms(item) == [_url(ref) + "/rename"] and 'action="' + _url(ref) + '/delete"' in item
+    assert 'aria-label="Перейменувати"' in item and 'aria-label="Видалити"' in item
 
 
 def test_a_title_with_markup_is_escaped_in_the_field(tmp_path: Path) -> None:

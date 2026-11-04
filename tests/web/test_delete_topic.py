@@ -258,11 +258,12 @@ def test_home_has_a_delete_form_with_one_confirmation_for_each_own_topic_only(tm
     assert "<summary" in form and "Моя тема" in form and 'type="submit"' in form
 
 
-def test_the_own_topic_page_has_the_delete_form_and_a_foreign_one_has_none(tmp_path: Path) -> None:
+def test_neither_the_own_nor_a_foreign_topic_page_has_the_delete_form(tmp_path: Path) -> None:
+    """Task 211: deleting lives only in the list «Мої теми»."""
     store = LocalStorage(tmp_path)
     client = _client(tmp_path, store)
     ref = _topic(store, ALICE, "Тема Аліси")
     own = client.get(_url(ref), headers=H_ALICE).text
     foreign = client.get(_url(ref), headers=H_OWNER).text
-    assert _delete_forms(own) == [_url(ref) + "/delete"] and "Так, видалити" in own
+    assert _delete_forms(own) == [] and "Так, видалити" not in own
     assert _delete_forms(foreign) == [] and "Так, видалити" not in foreign

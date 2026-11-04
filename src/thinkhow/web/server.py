@@ -176,12 +176,11 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         uid: str,
         topic_id: str,
         new_title: Annotated[str, Form()] = "",
-        back: Annotated[str, Form()] = "",
     ) -> Response:
-        """The new title of an own topic; back to the page the person renamed it on (task 209). The field is
-        `new_title`, not `title`: the page's form of a new topic keeps the one `title` field."""
+        """The new title of an own topic, back to the list: only the list renames (tasks 209, 211). The
+        field is `new_title`, not `title`: the page's form of a new topic keeps the one `title` field."""
         workspace.rename_topic(deps.storage, user, workspace.TopicRef(uid, topic_id), new_title)
-        return RedirectResponse(f"/topics/{uid}/{topic_id}" if back == "topic" else "/", status_code=303)
+        return RedirectResponse("/", status_code=303)
 
     @app.post("/topics/{uid}/{topic_id}/voice")
     async def voice(request: Request, user: User, uid: str, topic_id: str) -> Response:
