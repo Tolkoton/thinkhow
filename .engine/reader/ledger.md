@@ -221,3 +221,8 @@
 - Record: tasks/done/415-cleanup-2026-11-04/report.md
 - Reason: The nightly output quoted in the report matches the saved file. The metrics figures match the two metrics.jsonl entries. Each of the four «Що зробити» items has its answer, given that the output says no sharp growth and nothing was removed. The report has no open question for the owner, and its technical terms are in English.
 - Request: 20261104T121715Z-32ac9e (attempt 1)
+
+## 2026-11-04T20:33:37Z — 601-auto-deploy-after-done — READER_PASS
+- Record: tasks/done/601-auto-deploy-after-done/report.md
+- Reason: Every reference I could check says what the report claims. All five items of «Що зробити» and both «Готово, коли» items are covered in the report, docs/deploy.md §11 and the code. The report has no open question for the owner. Technical terms (overseer, runner, commit, task board, Job, cron) stay in English.
+- Request: 20261104T203257Z-0afd70 (attempt 1)
