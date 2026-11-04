@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>{% block title %}ThinkHow{% endblock %}</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/style.css?v={{ static_v }}">
 </head>
 <body>
 <header class="site"><a class="brand" href="/">ThinkHow</a> <a class="icon-link" href="/language" aria-label="{{ ui.language }}">{{ icon("globe") }}</a></header>
 <main>
 {% block body %}{% endblock %}
 </main>
-<script src="/static/rename.js" defer></script>
+<script src="/static/rename.js?v={{ static_v }}" defer></script>
 </body>
 </html>

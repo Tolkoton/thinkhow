@@ -4,6 +4,7 @@ The person comes only from the verified identity of the request, never from the 
 """
 
 import contextvars
+import hashlib
 import json
 import queue
 import threading
@@ -41,6 +42,11 @@ from thinkhow.web.text import turn_html
 HERE = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=HERE / "templates")
 TEMPLATES.env.filters["turn_html"] = turn_html
+# The version of /static in its URLs: the files' hash, so a deploy that changes them gives the browser new
+# addresses and it never runs the old image's script from its cache (bug 001).
+TEMPLATES.env.globals["static_v"] = hashlib.sha256(
+    b"".join(f.read_bytes() for f in sorted((HERE / "static").iterdir()) if f.is_file())
+).hexdigest()[:12]
 Scope = MutableMapping[str, Any]
 Message = MutableMapping[str, Any]
 ASGIApp = Callable[

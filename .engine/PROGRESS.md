@@ -583,3 +583,7 @@
   proves the new title is used
 - Tests: `tests/web/test_rename_topic.py` (17); `tests/web/test_icon_buttons.py` lists the two new buttons
 - Screens: `scripts/screenshots_rename_topic.py` → `.engine/artifacts/rename-topic/` (8 PNGs + `run.txt`)
+
+## Bugfix 001-stale-static-cache — task 210 (DONE 2026-11-04 — overseer PASS 20261104T114955Z-4006de)
+
+- Record: `.engine/bugs/001-stale-static-cache.md` (task 210: the paperclip on the server does nothing)
