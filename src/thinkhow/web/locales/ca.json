@@ -9,6 +9,8 @@
   "delete": "Suprimeix",
   "delete_confirm": "Voleu suprimir el tema «{title}» amb tota la conversa? No es podrà recuperar.",
   "delete_yes": "Sí, suprimeix",
+  "rename": "Canvia el nom",
+  "topic_title": "Títol del tema",
   "language_prompt": "En quina llengua parleu i escriviu? La interfície serà en aquesta llengua, s'hi reconeixerà la vostra veu i el facilitador us respondrà en aquesta llengua.",
   "choose_language": "— trieu una llengua —",
   "save": "Desa",

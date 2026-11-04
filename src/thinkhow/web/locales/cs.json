@@ -9,6 +9,8 @@
   "delete": "Smazat",
   "delete_confirm": "Smazat téma „{title}“ i s celým rozhovorem? Nepůjde ho obnovit.",
   "delete_yes": "Ano, smazat",
+  "rename": "Přejmenovat",
+  "topic_title": "Název tématu",
   "language_prompt": "Jakým jazykem mluvíte a píšete? V tomto jazyce bude rozhraní, bude se v něm rozpoznávat váš hlas a bude v něm odpovídat facilitátor.",
   "choose_language": "— vyberte jazyk —",
   "save": "Uložit",

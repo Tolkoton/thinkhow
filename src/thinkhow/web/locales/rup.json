@@ -9,6 +9,8 @@
   "delete": "Ashtearghi",
   "delete_confirm": "S-ashtearghi tema „{title}” deadun cu tutã zburãrea? Nu va s-poatã s-hibã turnatã nãpoi.",
   "delete_yes": "Ahã, ashtearghi",
+  "rename": "Alãxeashti numa",
+  "topic_title": "Titlul-a tematiljei",
   "language_prompt": "Tsi limbã zburãshti shi scrii? Interfatsa va s-hibã tu aestã limbã, boatsea a ta va s-hibã cunoscutã tu ea shi facilitatorlu va s-ts-apandiseascã tu ea.",
   "choose_language": "— alidzi unã limbã —",
   "save": "Tsãni",

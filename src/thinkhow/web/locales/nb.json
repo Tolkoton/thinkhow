@@ -9,6 +9,8 @@
   "delete": "Slett",
   "delete_confirm": "Vil du slette emnet «{title}» med hele samtalen? Det kan ikke gjenopprettes.",
   "delete_yes": "Ja, slett",
+  "rename": "Gi nytt navn",
+  "topic_title": "Emnets tittel",
   "language_prompt": "Hvilket språk snakker og skriver du? Grensesnittet vises på dette språket, stemmen din gjenkjennes på det, og fasilitatoren svarer på det.",
   "choose_language": "— velg et språk —",
   "save": "Lagre",

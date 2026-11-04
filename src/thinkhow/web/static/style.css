@@ -250,6 +250,17 @@ button.danger { color: var(--error); border-color: var(--error); font-weight: 60
 button.danger.icon { background: var(--error); color: var(--surface); }
 form.reply ~ details.delete { margin-top: 2rem; }
 
+/* Renaming a topic (task 209): a quiet pencil; open, the title gives its place to the field */
+details.rename summary { color: var(--muted); cursor: pointer; list-style: none; border-radius: 0.5rem; }
+details.rename summary::-webkit-details-marker { display: none; }
+details.rename summary:hover, details.rename[open] summary { color: var(--accent); }
+details.rename[open] { display: flex; flex: 1 1 0; align-items: center; gap: 0.5rem; min-width: 0; }
+details.rename[open]::details-content { flex: 1 1 0; min-width: 0; }
+details.rename form { flex-wrap: nowrap; }
+ul.topics li:has(> details.rename[open]) > a, .title-row:has(> details.rename[open]) h1 { display: none; }
+.title-row { display: flex; align-items: center; gap: 0.5rem; margin: 1.5rem 0 1rem; }
+.title-row h1 { margin: 0; }
+
 /* The thinking model that leads (task 203): a quiet caption beside the conversation, marks in the history */
 aside.method { color: var(--muted); font-size: 0.9rem; margin: -0.5rem 0 1rem; }
 aside.method .label { font-weight: 600; }

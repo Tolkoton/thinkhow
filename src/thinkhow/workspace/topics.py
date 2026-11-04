@@ -259,6 +259,18 @@ def delete_topic(storage: Storage, user: CurrentUser, ref: TopicRef) -> None:
     storage.delete("users", conversation)
 
 
+def rename_topic(storage: Storage, user: CurrentUser, ref: TopicRef, title: str) -> None:
+    """Own topics only, as delete (task 209); the title is checked as a new topic's, and only the title
+    line of conversation.md changes."""
+    _can_write(user, ref)
+    clean = conv_file.normalize_title(title)
+    if not clean:
+        raise ValueError("a topic needs a title")
+    conv = _read_conversation(storage, ref)
+    conv.title = clean
+    _write_conversation(storage, ref, conv)
+
+
 def _language_of(storage: Storage, user: CurrentUser) -> str | None:
     """The person's language as the model reads it, «name (code)», or None before the first choice (F13)."""
     try:

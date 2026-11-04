@@ -9,6 +9,8 @@
   "delete": "Kustuta",
   "delete_confirm": "Kas kustutada teema „{title}“ koos kogu vestlusega? Seda ei saa taastada.",
   "delete_yes": "Jah, kustuta",
+  "rename": "Nimeta ümber",
+  "topic_title": "Teema pealkiri",
   "language_prompt": "Mis keeles te räägite ja kirjutate? Selles keeles on kasutajaliides, selles tuvastatakse teie häält ja selles vastab juhendaja.",
   "choose_language": "— valige keel —",
   "save": "Salvesta",

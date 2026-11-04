@@ -9,6 +9,8 @@
   "delete": "Ħassar",
   "delete_confirm": "Tħassar is-suġġett “{title}” flimkien mal-konversazzjoni kollha tiegħu? Ma jkunx jista' jiġi rkuprat.",
   "delete_yes": "Iva, ħassar",
+  "rename": "Erġa' semmi",
+  "topic_title": "Titlu tas-suġġett",
   "language_prompt": "B'liema lingwa titkellem u tikteb? L-interfaċċa se tkun b'din il-lingwa, il-vuċi tiegħek se tiġi rikonoxxuta biha u l-faċilitatur se jwieġbek biha.",
   "choose_language": "— agħżel lingwa —",
   "save": "Salva",

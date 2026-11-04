@@ -9,6 +9,8 @@
   "delete": "Apaga",
   "delete_confirm": "Apaga tema «{title}» ku tudu se kónversa? Dipôs ka ta da pa rekupera-l.",
   "delete_yes": "Sin, apaga",
+  "rename": "Muda nomi",
+  "topic_title": "Títulu di tema",
   "language_prompt": "Ki língua ki bu ta papia y ta skrebe? Interfasi ta fika na es língua, bu vos ta ser rekonhesidu na el y fasilitador ta responde-bu na el.",
   "choose_language": "— skodje un língua —",
   "save": "Guarda",

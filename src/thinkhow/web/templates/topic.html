@@ -2,7 +2,10 @@
 {% from "icons.html" import icon %}
 {% block title %}{{ view.title }}{% endblock %}
 {% block body %}
+<div class="title-row">
 <h1>{{ view.title }}</h1>
+{% if own %}{% with t = view, back = "topic" %}{% include "rename.html" %}{% endwith %}{% endif %}
+</div>
 <aside class="method" aria-label="{{ ui.thinking_model }}"><span class="label">{{ ui.thinking_model }}:</span> {{ method }}</aside>
 {% for s in view.sessions %}
 <section class="session">

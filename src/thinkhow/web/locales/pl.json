@@ -9,6 +9,8 @@
   "delete": "Usuń",
   "delete_confirm": "Usunąć temat „{title}” wraz z całą rozmową? Nie będzie można go przywrócić.",
   "delete_yes": "Tak, usuń",
+  "rename": "Zmień nazwę",
+  "topic_title": "Tytuł tematu",
   "language_prompt": "W jakim języku mówisz i piszesz? W tym języku będzie interfejs, w nim będzie rozpoznawany Twój głos i w nim będzie odpowiadać facylitator.",
   "choose_language": "— wybierz język —",
   "save": "Zapisz",

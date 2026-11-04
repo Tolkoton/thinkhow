@@ -9,6 +9,8 @@
   "delete": "Hapus",
   "delete_confirm": "Hapus topik “{title}” beserta seluruh percakapannya? Topik ini tidak dapat dipulihkan.",
   "delete_yes": "Ya, hapus",
+  "rename": "Ganti nama",
+  "topic_title": "Judul topik",
   "language_prompt": "Bahasa apa yang Anda gunakan untuk berbicara dan menulis? Antarmuka akan ditampilkan dalam bahasa ini, suara Anda akan dikenali dalam bahasa ini, dan fasilitator akan menjawab dalam bahasa ini.",
   "choose_language": "— pilih bahasa —",
   "save": "Simpan",

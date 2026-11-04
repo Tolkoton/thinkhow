@@ -9,6 +9,8 @@
   "delete": "Eyða",
   "delete_confirm": "Eyða efninu „{title}“ ásamt öllu samtalinu? Ekki verður hægt að endurheimta það.",
   "delete_yes": "Já, eyða",
+  "rename": "Endurnefna",
+  "topic_title": "Titill efnis",
   "language_prompt": "Hvaða tungumál talar þú og skrifar? Viðmótið verður á því, rödd þín verður greind á því og leiðbeinandinn svarar á því.",
   "choose_language": "— veldu tungumál —",
   "save": "Vista",

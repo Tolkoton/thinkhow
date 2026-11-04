@@ -9,6 +9,8 @@
   "delete": "Burahin",
   "delete_confirm": "Burahin ang paksang “{title}” kasama ang buong usapan? Hindi na ito maibabalik.",
   "delete_yes": "Oo, burahin",
+  "rename": "Palitan ang pangalan",
+  "topic_title": "Pamagat ng paksa",
   "language_prompt": "Anong wika ang ginagamit mo sa pagsasalita at pagsusulat? Ito ang gagamitin sa interface, dito makikilala ang iyong boses at dito sasagot ang facilitator.",
   "choose_language": "— pumili ng wika —",
   "save": "I-save",

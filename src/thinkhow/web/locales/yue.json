@@ -9,6 +9,8 @@
   "delete": "刪除",
   "delete_confirm": "要刪除話題「{title}」同佢嘅全部對話嗎？刪除之後無法還原。",
   "delete_yes": "係，刪除",
+  "rename": "改名",
+  "topic_title": "話題標題",
   "language_prompt": "你講嘢同寫嘢用邊種語言？介面會用呢種語言，系統會用佢嚟辨識你把聲，引導者亦會用佢回覆你。",
   "choose_language": "— 揀選語言 —",
   "save": "儲存",

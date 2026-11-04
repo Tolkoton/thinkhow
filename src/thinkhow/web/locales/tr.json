@@ -9,6 +9,8 @@
   "delete": "Sil",
   "delete_confirm": "“{title}” konusu tüm konuşmasıyla birlikte silinsin mi? Geri alınamaz.",
   "delete_yes": "Evet, sil",
+  "rename": "Yeniden adlandır",
+  "topic_title": "Konu başlığı",
   "language_prompt": "Hangi dilde konuşuyor ve yazıyorsunuz? Arayüz bu dilde olacak, sesiniz bu dilde tanınacak ve kolaylaştırıcı bu dilde yanıt verecek.",
   "choose_language": "— bir dil seçin —",
   "save": "Kaydet",

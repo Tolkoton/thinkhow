@@ -8,6 +8,7 @@ checked against the language's catalog and for the absence of the Ukrainian word
 """
 
 import argparse
+import importlib
 import os
 import re
 import subprocess
@@ -17,7 +18,9 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from smoke_test_voice_dictation import CHROMIUM, FLAGS, ROOT, free_port, sync_playwright, wait_for
+from smoke_test_voice_dictation import CHROMIUM, FLAGS, ROOT, free_port, wait_for
+
+sync_playwright = importlib.import_module("playwright.sync_api").sync_playwright
 
 sys.path.insert(0, str(ROOT / "src"))
 from thinkhow.web import ui_text  # noqa: E402
@@ -96,7 +99,7 @@ def walk(page: Any, base: str, out: Path, code: str, title: str, text: str) -> N
     page.goto(base + "/")
     check(page, words, name, "my topics")
     assert page.inner_text("h1") == words["my_topics"], code
-    page.locator("ul.topics li", has_text="Test").locator("summary").click()
+    page.locator("ul.topics li", has_text="Test").locator("details.delete summary").click()
     assert words["delete_confirm"].format(title="Test") in page.inner_text("ul.topics"), code
     page.screenshot(path=str(out / "my-topics.png"), full_page=True)
     page.goto(base + "/language")

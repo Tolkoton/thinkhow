@@ -9,6 +9,8 @@
   "delete": "Busak",
   "delete_confirm": "Busak topik “{title}” sakwicalan obrolanipun? Topik punika mboten saged dipunwangsulaken malih.",
   "delete_yes": "Inggih, busak",
+  "rename": "Ganti jeneng",
+  "topic_title": "Irah-irahan topik",
   "language_prompt": "Basa punapa ingkang panjenengan ginakaken kanggé wicanten lan nyerat? Antarmuka badhé ngginakaken basa punika, swanten panjenengan badhé dipuntepangi ing basa punika, lan fasilitator badhé mangsuli ing basa punika.",
   "choose_language": "— pilih basa —",
   "save": "Simpen",

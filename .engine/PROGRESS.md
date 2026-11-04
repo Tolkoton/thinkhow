@@ -568,3 +568,18 @@
   (`.engine/artifacts/document-upload/smoke.txt`, screenshots beside it)
 - Surprises: point (a) waited for finish-answer's point (b) (catch-up done first, `33c336b`); the tester's first
   hand-in was refused until a NotImplementedError skeleton made the tests fail for the right reason
+
+## Slice rename-topic — task 209 (DONE 2026-11-04) — one slice without /plan-slice (as tasks 203, 204)
+
+- Modules: `workspace/topics.py` — `rename_topic(storage, user, ref, title)`: own topics only (the owner too, as
+  delete), the title through `normalize_title` (empty → `ValueError`), only the title line of `conversation.md`
+  rewritten; `web/server.py` — `POST /topics/{uid}/{topic_id}/rename` (`new_title`, `back`) → 303 to the topic page
+  (`back=topic`) or `/`; an empty title → 400 `err_empty_title`; `web/templates/rename.html` — `<details>` with a
+  pencil and a form (field with the current title, `required pattern=".*\S.*"`, a check icon), in the home list
+  beside the bin and on the own topic page beside the `<h1>`; `static/rename.js` — focus on open, Esc closes and
+  puts the title back; `style.css` — the open form takes the title's place; two words (`rename`, `topic_title`) in
+  all 76 catalogs
+- Voice hints (`workspace/voice.py`) read the title from `conversation.md` on each call: no change needed, a test
+  proves the new title is used
+- Tests: `tests/web/test_rename_topic.py` (17); `tests/web/test_icon_buttons.py` lists the two new buttons
+- Screens: `scripts/screenshots_rename_topic.py` → `.engine/artifacts/rename-topic/` (8 PNGs + `run.txt`)

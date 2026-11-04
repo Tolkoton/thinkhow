@@ -1,0 +1,4 @@
+empty title refused in the list
+after a reload: Кав'ярня: чому не повертаються постійні гості | Переїзд до Львова
+foreign topic: no pencil, rename answered 404 <p class="error">Тему не знайдено.</p>
+OK: renamed in the list and on the page, kept after a reload, empty and foreign refused: .engine/artifacts/rename-topic

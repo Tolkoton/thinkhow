@@ -9,6 +9,8 @@
   "delete": "Sil",
   "delete_confirm": "«{title}» mövzusu bütün söhbəti ilə birlikdə silinsin? Onu bərpa etmək mümkün olmayacaq.",
   "delete_yes": "Bəli, sil",
+  "rename": "Adını dəyiş",
+  "topic_title": "Mövzunun adı",
   "language_prompt": "Hansı dildə danışır və yazırsınız? İnterfeys bu dildə olacaq, səsiniz bu dildə tanınacaq və fasilitator bu dildə cavab verəcək.",
   "choose_language": "— dil seçin —",
   "save": "Yadda saxla",

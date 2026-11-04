@@ -9,6 +9,8 @@
   "delete": "Supprimer",
   "delete_confirm": "Supprimer le sujet « {title} » avec toute sa conversation ? Il ne pourra pas être restauré.",
   "delete_yes": "Oui, supprimer",
+  "rename": "Renommer",
+  "topic_title": "Titre du sujet",
   "language_prompt": "Dans quelle langue parlez-vous et écrivez-vous ? L'interface sera dans cette langue, votre voix y sera reconnue et le facilitateur vous répondra dans cette langue.",
   "choose_language": "— choisissez une langue —",
   "save": "Enregistrer",

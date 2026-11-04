@@ -164,6 +164,19 @@ def _routes(app: FastAPI, deps: Deps) -> None:
         workspace.delete_topic(deps.storage, user, workspace.TopicRef(uid, topic_id))
         return RedirectResponse("/", status_code=303)
 
+    @app.post("/topics/{uid}/{topic_id}/rename")
+    def rename(
+        user: User,
+        uid: str,
+        topic_id: str,
+        new_title: Annotated[str, Form()] = "",
+        back: Annotated[str, Form()] = "",
+    ) -> Response:
+        """The new title of an own topic; back to the page the person renamed it on (task 209). The field is
+        `new_title`, not `title`: the page's form of a new topic keeps the one `title` field."""
+        workspace.rename_topic(deps.storage, user, workspace.TopicRef(uid, topic_id), new_title)
+        return RedirectResponse(f"/topics/{uid}/{topic_id}" if back == "topic" else "/", status_code=303)
+
     @app.post("/topics/{uid}/{topic_id}/voice")
     async def voice(request: Request, user: User, uid: str, topic_id: str) -> Response:
         """The recording's raw bytes → text; the model call runs in the thread pool, not on the event loop."""
@@ -385,7 +398,7 @@ def _bad_request_key(request: Request) -> str:
     path = request.url.path
     if request.method == "POST" and path == "/language":
         return "err_unknown_language"
-    if request.method == "POST" and path == "/topics":
+    if request.method == "POST" and (path == "/topics" or path.endswith("/rename")):
         return "err_empty_title"
     if request.method == "POST" and path.endswith("/voice"):
         return "err_recording_rejected"

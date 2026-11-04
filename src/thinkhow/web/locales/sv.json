@@ -9,6 +9,8 @@
   "delete": "Radera",
   "delete_confirm": "Radera ämnet ”{title}” med hela samtalet? Det går inte att återställa.",
   "delete_yes": "Ja, radera",
+  "rename": "Byt namn",
+  "topic_title": "Ämnets titel",
   "language_prompt": "Vilket språk talar och skriver du? Gränssnittet visas på det språket, din röst känns igen på det och facilitatorn svarar på det.",
   "choose_language": "— välj ett språk —",
   "save": "Spara",

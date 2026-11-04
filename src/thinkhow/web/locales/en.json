@@ -9,6 +9,8 @@
   "delete": "Delete",
   "delete_confirm": "Delete the topic “{title}” with its whole conversation? It cannot be restored.",
   "delete_yes": "Yes, delete",
+  "rename": "Rename",
+  "topic_title": "Topic title",
   "language_prompt": "Which language do you speak and write? The interface will be in it, your voice will be recognised in it and the facilitator will answer in it.",
   "choose_language": "— choose a language —",
   "save": "Save",

@@ -98,7 +98,7 @@ def test_every_button_is_an_icon_with_no_words_and_a_name_for_screen_readers(tmp
 def test_the_pages_name_every_button_the_task_lists(tmp_path: Path) -> None:
     pages = _pages(tmp_path)
     labels = {name: {c["attrs"].get("aria-label") for c in page.found} for name, page in pages.items()}
-    assert labels["home"] == {"Створити", "Видалити", "Так, видалити"}
+    assert labels["home"] == {"Створити", "Перейменувати", "Зберегти", "Видалити", "Так, видалити"}
     assert labels["language"] == {"Зберегти"}
     assert labels["topic"] == {
         "Режим розмови",
@@ -108,6 +108,8 @@ def test_the_pages_name_every_button_the_task_lists(tmp_path: Path) -> None:
         "Завантажити документ",
         "Надіслати",
         "Спробуйте ще раз",
+        "Перейменувати",
+        "Зберегти",
         "Видалити",
         "Так, видалити",
     }

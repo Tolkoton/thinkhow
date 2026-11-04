@@ -9,6 +9,8 @@
   "delete": "删除",
   "delete_confirm": "要删除话题“{title}”及其全部对话吗？删除后无法恢复。",
   "delete_yes": "是，删除",
+  "rename": "重命名",
+  "topic_title": "话题标题",
   "language_prompt": "您用哪种语言说话和书写？界面将使用这种语言，系统会用它识别您的语音，引导者也会用它回答。",
   "choose_language": "— 选择语言 —",
   "save": "保存",

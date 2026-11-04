@@ -9,6 +9,8 @@
   "delete": "Löschen",
   "delete_confirm": "Das Thema „{title}“ mit dem gesamten Gespräch löschen? Es kann nicht wiederhergestellt werden.",
   "delete_yes": "Ja, löschen",
+  "rename": "Umbenennen",
+  "topic_title": "Titel des Themas",
   "language_prompt": "Welche Sprache sprechen und schreiben Sie? In dieser Sprache erscheint die Oberfläche, wird Ihre Stimme erkannt und antwortet der Facilitator.",
   "choose_language": "— Sprache wählen —",
   "save": "Speichern",

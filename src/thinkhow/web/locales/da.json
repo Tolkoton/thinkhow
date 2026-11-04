@@ -9,6 +9,8 @@
   "delete": "Slet",
   "delete_confirm": "Vil du slette emnet »{title}« med hele samtalen? Det kan ikke gendannes.",
   "delete_yes": "Ja, slet",
+  "rename": "Omdøb",
+  "topic_title": "Emnets titel",
   "language_prompt": "Hvilket sprog taler og skriver du? Brugerfladen vil være på det sprog, din stemme vil blive genkendt på det, og facilitatoren vil svare på det.",
   "choose_language": "— vælg et sprog —",
   "save": "Gem",

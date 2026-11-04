@@ -9,6 +9,8 @@
   "delete": "Törlés",
   "delete_confirm": "Törli a(z) „{title}” témát a teljes beszélgetéssel együtt? Később nem lehet visszaállítani.",
   "delete_yes": "Igen, törlés",
+  "rename": "Átnevezés",
+  "topic_title": "A téma címe",
   "language_prompt": "Milyen nyelven beszél és ír? Ezen a nyelven jelenik meg a felület, ezen a nyelven ismerjük fel a hangját, és ezen a nyelven válaszol a facilitátor.",
   "choose_language": "— válasszon nyelvet —",
   "save": "Mentés",

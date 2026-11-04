@@ -9,6 +9,8 @@
   "delete": "Futa",
   "delete_confirm": "Ungependa kufuta mada “{title}” pamoja na mazungumzo yake yote? Haitaweza kurejeshwa.",
   "delete_yes": "Ndiyo, futa",
+  "rename": "Badilisha jina",
+  "topic_title": "Kichwa cha mada",
   "language_prompt": "Unazungumza na kuandika kwa lugha gani? Kiolesura kitakuwa kwa lugha hiyo, sauti yako itatambuliwa kwa lugha hiyo na mwezeshaji atakujibu kwa lugha hiyo.",
   "choose_language": "— chagua lugha —",
   "save": "Hifadhi",

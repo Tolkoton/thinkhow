@@ -9,6 +9,8 @@
   "delete": "Papasa",
   "delete_confirm": "Papason ba ang topiko nga “{title}” uban sa tibuok panag-istorya? Dili na kini mabalik.",
   "delete_yes": "Oo, papasa",
+  "rename": "Usba ang ngalan",
+  "topic_title": "Titulo sa topiko",
   "language_prompt": "Unsang pinulongan ang imong ginasulti ug ginasulat? Kini ang gamiton sa interface, niini mailhan ang imong tingog ug niini motubag ang facilitator.",
   "choose_language": "— pagpili og pinulongan —",
   "save": "I-save",

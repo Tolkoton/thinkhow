@@ -9,6 +9,8 @@
   "delete": "O‘chirish",
   "delete_confirm": "“{title}” mavzusi butun suhbati bilan o‘chirilsinmi? Uni qayta tiklab bo‘lmaydi.",
   "delete_yes": "Ha, o‘chirish",
+  "rename": "Nomini oʻzgartirish",
+  "topic_title": "Mavzu nomi",
   "language_prompt": "Qaysi tilda gapirasiz va yozasiz? Interfeys shu tilda bo‘ladi, ovozingiz shu tilda taniladi va fasilitator shu tilda javob beradi.",
   "choose_language": "— tilni tanlang —",
   "save": "Saqlash",

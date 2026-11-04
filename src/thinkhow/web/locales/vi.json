@@ -9,6 +9,8 @@
   "delete": "Xóa",
   "delete_confirm": "Xóa chủ đề “{title}” cùng toàn bộ cuộc trò chuyện? Bạn sẽ không thể khôi phục lại.",
   "delete_yes": "Có, xóa",
+  "rename": "Đổi tên",
+  "topic_title": "Tiêu đề chủ đề",
   "language_prompt": "Bạn nói và viết bằng ngôn ngữ nào? Giao diện sẽ hiển thị bằng ngôn ngữ đó, giọng nói của bạn sẽ được nhận dạng bằng ngôn ngữ đó và người điều phối sẽ trả lời bằng ngôn ngữ đó.",
   "choose_language": "— chọn ngôn ngữ —",
   "save": "Lưu",

@@ -9,6 +9,8 @@
   "delete": "Skrap",
   "delete_confirm": "Skrap die onderwerp “{title}” saam met die hele gesprek? Dit kan nie herstel word nie.",
   "delete_yes": "Ja, skrap",
+  "rename": "Hernoem",
+  "topic_title": "Onderwerptitel",
   "language_prompt": "Watter taal praat en skryf jy? Die koppelvlak sal in daardie taal wees, jou stem sal daarin herken word en die fasiliteerder sal daarin antwoord.",
   "choose_language": "— kies 'n taal —",
   "save": "Stoor",

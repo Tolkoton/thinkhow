@@ -81,7 +81,7 @@ def from_list(page: Any, base: str, topic_id: str, users: Path, out: Path) -> No
     confirm = item.locator('button[aria-label="Так, видалити"]')
     assert not confirm.is_visible(), "the confirmation shows before «Видалити» is pressed"
     page.screenshot(path=str(out / "home-delete-button.png"))
-    item.locator("summary").click()
+    item.locator("details.delete summary").click()
     assert confirm.is_visible()
     text = item.locator("details.delete p").inner_text()
     assert TITLES[1] in text, text

@@ -9,6 +9,8 @@
   "delete": "삭제",
   "delete_confirm": "“{title}” 주제를 대화 전체와 함께 삭제할까요? 삭제하면 복구할 수 없습니다.",
   "delete_yes": "예, 삭제합니다",
+  "rename": "이름 바꾸기",
+  "topic_title": "주제 제목",
   "language_prompt": "어떤 언어로 말하고 쓰시나요? 인터페이스가 그 언어로 표시되고, 음성도 그 언어로 인식되며, 퍼실리테이터도 그 언어로 답합니다.",
   "choose_language": "— 언어 선택 —",
   "save": "저장",

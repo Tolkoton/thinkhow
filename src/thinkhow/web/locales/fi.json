@@ -9,6 +9,8 @@
   "delete": "Poista",
   "delete_confirm": "Poistetaanko aihe ”{title}” koko keskusteluineen? Sitä ei voi palauttaa.",
   "delete_yes": "Kyllä, poista",
+  "rename": "Nimeä uudelleen",
+  "topic_title": "Aiheen otsikko",
   "language_prompt": "Mitä kieltä puhut ja kirjoitat? Käyttöliittymä näytetään tällä kielellä, äänesi tunnistetaan tällä kielellä ja fasilitaattori vastaa tällä kielellä.",
   "choose_language": "— valitse kieli —",
   "save": "Tallenna",

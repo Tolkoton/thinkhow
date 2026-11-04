@@ -9,6 +9,8 @@
   "delete": "Padam",
   "delete_confirm": "Padam topik “{title}” bersama seluruh perbualannya? Ia tidak dapat dipulihkan.",
   "delete_yes": "Ya, padam",
+  "rename": "Namakan semula",
+  "topic_title": "Tajuk topik",
   "language_prompt": "Dalam bahasa apakah anda bercakap dan menulis? Antara muka akan dipaparkan dalam bahasa itu, suara anda akan dikenal pasti dalam bahasa itu dan fasilitator akan menjawab dalam bahasa itu.",
   "choose_language": "— pilih bahasa —",
   "save": "Simpan",

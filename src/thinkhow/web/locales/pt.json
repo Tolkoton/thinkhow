@@ -9,6 +9,8 @@
   "delete": "Excluir",
   "delete_confirm": "Excluir o tema “{title}” com toda a conversa? Não será possível restaurá-lo.",
   "delete_yes": "Sim, excluir",
+  "rename": "Mudar o nome",
+  "topic_title": "Título do tema",
   "language_prompt": "Em que idioma você fala e escreve? A interface ficará nesse idioma, sua voz será reconhecida nele e o facilitador responderá nele.",
   "choose_language": "— escolha um idioma —",
   "save": "Salvar",

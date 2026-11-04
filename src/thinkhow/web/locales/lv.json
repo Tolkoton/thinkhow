@@ -9,6 +9,8 @@
   "delete": "Dzēst",
   "delete_confirm": "Dzēst tēmu „{title}” kopā ar visu sarunu? To nevarēs atjaunot.",
   "delete_yes": "Jā, dzēst",
+  "rename": "Pārdēvēt",
+  "topic_title": "Tēmas nosaukums",
   "language_prompt": "Kādā valodā jūs runājat un rakstāt? Tajā būs saskarne, tajā tiks atpazīta jūsu balss un tajā atbildēs fasilitators.",
   "choose_language": "— izvēlieties valodu —",
   "save": "Saglabāt",

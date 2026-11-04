@@ -9,6 +9,8 @@
   "delete": "Verwijderen",
   "delete_confirm": "Het onderwerp “{title}” met het hele gesprek verwijderen? Dit kan niet ongedaan worden gemaakt.",
   "delete_yes": "Ja, verwijderen",
+  "rename": "Hernoemen",
+  "topic_title": "Titel van het onderwerp",
   "language_prompt": "In welke taal spreek en schrijf je? De interface wordt in die taal getoond, je stem wordt in die taal herkend en de facilitator antwoordt in die taal.",
   "choose_language": "— kies een taal —",
   "save": "Opslaan",

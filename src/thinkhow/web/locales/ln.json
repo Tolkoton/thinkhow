@@ -9,6 +9,8 @@
   "delete": "Longola",
   "delete_confirm": "Olongola likambo «{title}» elongo na lisolo na yango mobimba? Ekozonga lisusu te.",
   "delete_yes": "Ee, longola",
+  "rename": "Kobongola nkombo",
+  "topic_title": "Motó ya likambo",
   "language_prompt": "Olobaka mpe okomaka na lokota nini? Interface ekozala na lokota yango, mongongo na yo ekoyebana na lokota yango mpe mokambi akozongisela yo na lokota yango.",
   "choose_language": "— pona lokota —",
   "save": "Bomba",

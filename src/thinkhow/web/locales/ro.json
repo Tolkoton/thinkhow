@@ -9,6 +9,8 @@
   "delete": "Șterge",
   "delete_confirm": "Ștergeți subiectul „{title}” împreună cu toată conversația? Nu va mai putea fi restaurat.",
   "delete_yes": "Da, șterge",
+  "rename": "Redenumește",
+  "topic_title": "Titlul subiectului",
   "language_prompt": "În ce limbă vorbiți și scrieți? Interfața va fi în această limbă, vocea dvs. va fi recunoscută în ea, iar facilitatorul vă va răspunde în ea.",
   "choose_language": "— alegeți o limbă —",
   "save": "Salvează",

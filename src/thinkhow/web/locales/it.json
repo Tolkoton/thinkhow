@@ -9,6 +9,8 @@
   "delete": "Elimina",
   "delete_confirm": "Eliminare l'argomento «{title}» con tutta la conversazione? Non sarà possibile recuperarlo.",
   "delete_yes": "Sì, elimina",
+  "rename": "Rinomina",
+  "topic_title": "Titolo dell'argomento",
   "language_prompt": "In quale lingua parli e scrivi? L'interfaccia sarà in questa lingua, la tua voce verrà riconosciuta in questa lingua e il facilitatore risponderà in questa lingua.",
   "choose_language": "— scegli una lingua —",
   "save": "Salva",

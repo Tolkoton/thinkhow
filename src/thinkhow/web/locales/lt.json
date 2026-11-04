@@ -9,6 +9,8 @@
   "delete": "Ištrinti",
   "delete_confirm": "Ištrinti temą „{title}“ kartu su visu pokalbiu? Jos nebus galima atkurti.",
   "delete_yes": "Taip, ištrinti",
+  "rename": "Pervadinti",
+  "topic_title": "Temos pavadinimas",
   "language_prompt": "Kokia kalba kalbate ir rašote? Ja bus sąsaja, ja bus atpažįstamas jūsų balsas ir ja atsakys fasilitatorius.",
   "choose_language": "— pasirinkite kalbą —",
   "save": "Išsaugoti",

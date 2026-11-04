@@ -9,6 +9,8 @@
   "delete": "Odstrániť",
   "delete_confirm": "Odstrániť tému „{title}“ aj s celým rozhovorom? Nebude ju možné obnoviť.",
   "delete_yes": "Áno, odstrániť",
+  "rename": "Premenovať",
+  "topic_title": "Názov témy",
   "language_prompt": "Akým jazykom hovoríte a píšete? V ňom bude rozhranie, v ňom sa bude rozpoznávať váš hlas a v ňom bude odpovedať facilitátor.",
   "choose_language": "— vyberte jazyk —",
   "save": "Uložiť",

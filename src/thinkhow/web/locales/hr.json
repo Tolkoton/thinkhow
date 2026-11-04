@@ -9,6 +9,8 @@
   "delete": "Izbriši",
   "delete_confirm": "Izbrisati temu „{title}” zajedno s cijelim razgovorom? Neće se moći vratiti.",
   "delete_yes": "Da, izbriši",
+  "rename": "Preimenuj",
+  "topic_title": "Naslov teme",
   "language_prompt": "Na kojem jeziku govorite i pišete? Na njemu će biti sučelje, na njemu će se prepoznavati vaš glas i na njemu će odgovarati facilitator.",
   "choose_language": "— odaberite jezik —",
   "save": "Spremi",

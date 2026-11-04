@@ -5,6 +5,7 @@
 <h1>{{ ui.my_topics }}</h1>
 <ul class="topics">
 {% for t in mine %}  <li><a href="/topics/{{ t.ref.uid }}/{{ t.ref.topic_id }}">{{ t.title }}</a>
+    {% with back = "home" %}{% include "rename.html" %}{% endwith %}
     {% include "delete.html" %}</li>
 {% else %}  <li class="empty">{{ ui.no_topics }}</li>
 {% endfor %}</ul>
