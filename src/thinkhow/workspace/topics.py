@@ -6,7 +6,8 @@ Paths are built here only, from the server's ids. Read rule: own or the owner; w
 import json
 import re
 import secrets
-from collections.abc import Iterator, Sequence
+from collections.abc import Generator, Iterator, Sequence
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Literal
 
@@ -21,6 +22,7 @@ from thinkhow.facilitation.types import (
     MapItem,
     MapUpdate,
     ProblemMap,
+    ReplyDelta,
     ResearchEvent,
     RoutingEvent,
     current_card,
@@ -392,36 +394,19 @@ def _answer(
     """Flow: facilitate → deltas → answer into conversation.md → map, routing, research.json → the result of a
     step from the answer to its question (S6) → Answered."""
     entries = read_documents(storage, ref)
-    history = [
-        FacilitationTurn(t.role, model_text(entries, t.no, t.role, t.text) or t.text)
-        for s in conv.sessions
-        for t in s.turns
-        if t.no < turn_no
-    ]
+    history = _history(entries, conv, turn_no)
     framed = model_text(entries, turn_no, "user", text)
     if framed is not None:
         text, recognize = framed, None  # a document is not the person's answer to a step question (Q8)
     problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
     card_id = current_card(routing) or CARD_ID
     ctx = FacilitationContext(card_id, history, problem_map, turn_no, text, lang, routing, spoken)
-    update: FacilitatorUpdate | None = None
-    decisions: list[Decision] = []
-    research: list[ResearchEvent] = []
     try:
-        for item in facilitate(ctx):
-            if isinstance(item, FacilitatorUpdate):
-                update = item
-                break
-            if isinstance(item, RoutingEvent):
-                decisions.append(item.decision)
-                continue
-            if isinstance(item, ResearchEvent):
-                research.append(item)
-                continue
-            yield Delta(item.text)
+        facilitated = yield from _stream(facilitate(ctx))
     except Exception as exc:
         yield _failed(ref, turn_no, type(exc).__name__, len(history))
         return
+    update = facilitated.update
     if update is None:
         yield _failed(ref, turn_no, "NoUpdate", len(history))
         return
@@ -434,17 +419,70 @@ def _answer(
         log_event("reply_superseded", uid=ref.uid, topic_id=ref.topic_id, turn=turn_no)
         yield Failed("Superseded")
         return
-    conv = fresh
-    conv.sessions[-1].turns.append(conv_file.Turn(turn_no + 1, "model", conv_file.second(now), answer))
-    _write_conversation(storage, ref, conv)
-    _write_map(storage, ref, apply_updates(problem_map, update, turn_no + 1))
-    if decisions:
-        _write_routing(storage, ref, (*routing, *decisions))
-    if research:
-        _append_research(storage, ref, [_entry(event, turn_no + 1) for event in research])
+    fresh.sessions[-1].turns.append(conv_file.Turn(turn_no + 1, "model", conv_file.second(now), answer))
+    _write_conversation(storage, ref, fresh)
+    _write_after_answer(storage, ref, turn_no + 1, problem_map, routing, update, facilitated)
     if recognize is not None:
-        _recognize(storage, ref, conv, turn_no, text, recognize)
+        _recognize(storage, ref, fresh, turn_no, text, recognize)
     yield Answered(turn_no + 1)
+
+
+def _history(
+    entries: list[DocumentEntry], conv: conv_file.Conversation, turn_no: int
+) -> list[FacilitationTurn]:
+    """The turns before `turn_no` as the model sees them: a document's turn with its text (Q7a)."""
+    return [
+        FacilitationTurn(t.role, model_text(entries, t.no, t.role, t.text) or t.text)
+        for s in conv.sessions
+        for t in s.turns
+        if t.no < turn_no
+    ]
+
+
+@dataclass(frozen=True)
+class _Facilitated:
+    """What the facilitator gave besides the text: its update (none if it never came), the router's decisions
+    and the searches behind the answer."""
+
+    update: FacilitatorUpdate | None
+    decisions: tuple[Decision, ...]
+    research: tuple[ResearchEvent, ...]
+
+
+def _stream(
+    items: Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent],
+) -> Generator[Delta, None, _Facilitated]:
+    """Yields the text as deltas and collects the rest, up to the update (what follows it is not read)."""
+    decisions: list[Decision] = []
+    research: list[ResearchEvent] = []
+    for item in items:
+        if isinstance(item, FacilitatorUpdate):
+            return _Facilitated(item, tuple(decisions), tuple(research))
+        if isinstance(item, RoutingEvent):
+            decisions.append(item.decision)
+            continue
+        if isinstance(item, ResearchEvent):
+            research.append(item)
+            continue
+        yield Delta(item.text)
+    return _Facilitated(None, tuple(decisions), tuple(research))
+
+
+def _write_after_answer(
+    storage: Storage,
+    ref: TopicRef,
+    answer_no: int,
+    problem_map: ProblemMap,
+    routing: tuple[Decision, ...],
+    update: FacilitatorUpdate,
+    facilitated: _Facilitated,
+) -> None:
+    """After the answer is in conversation.md: the map, the router's new decisions, the searches (A7)."""
+    _write_map(storage, ref, apply_updates(problem_map, update, answer_no))
+    if facilitated.decisions:
+        _write_routing(storage, ref, (*routing, *facilitated.decisions))
+    if facilitated.research:
+        _append_research(storage, ref, [_entry(event, answer_no) for event in facilitated.research])
 
 
 def apply_updates(problem_map: ProblemMap, update: FacilitatorUpdate, last_turn: int) -> ProblemMap:
