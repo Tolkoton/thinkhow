@@ -1,0 +1,5 @@
+- 2026-11-06 | parked | simplify-topics-recognize | simplify-topics-recognize: Спростити _recognize у workspace/topics.py #c47e25f5
+- 2026-11-06 | resolved:discard | discard #cbc2245f
+- 2026-11-06 | resolved:discard | discard #d4dd325c
+- 2026-11-06 | resolved:discard | discard #6496460a
+- 2026-11-06 | resolved:discard | discard #c47e25f5
