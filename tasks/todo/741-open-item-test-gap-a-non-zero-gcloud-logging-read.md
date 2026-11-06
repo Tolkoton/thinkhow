@@ -1,8 +1,16 @@
 # 741 — Брак тесту (overseer): a non-zero `gcloud logging read` produces 'failed <sha>: logging', a notify call and a journal line, and makes no build call
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: test-gap-a-non-zero-gcloud-logging-read-produces-failed-sha-logging-a-439f82ad
+
+## Рішення власника
+Слова власника (2026-11-06, сесія Thinkhow; записано Claude зі слів власника) — на питання Claude «Ставити в роботу
+пункти 1–4 (тести автоматичного розгортання, хибне «FAIL» після повного прогону, спрощення `_answer`, перевірка
+застарілих залежностей)?»: «Бери все». Пункт 1 — пропозиції 738–741, пункт 2 — пропозиція 737.
 
 ## Що сталося
 Overseer прийняв юніт `-|601-auto-deploy-after-done|unit 1` (PASS, запит `20261104T203040Z-b97f67`) і знайшов брак тесту: an implementation that treats a failed logging read as 'nobody writes' and deploys anyway (deploying while a user may be writing) passes every current test Де: `tests/test_auto_deploy.py`. Вердикт — у ledger: `python3 .claude/hooks/journal.py show ledger`.

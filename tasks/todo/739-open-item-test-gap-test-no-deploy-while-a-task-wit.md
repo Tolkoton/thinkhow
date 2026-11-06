@@ -1,8 +1,16 @@
 # 739 — Брак тесту (overseer): test_no_deploy_while_a_task_with_uncommitted_code_is_in_doing sets the service to an older commit, so a build does happen, and asserts the build context holds the → done commit's src/app.py, not the u
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: test-gap-test-no-deploy-while-a-task-with-uncommitted-code-is-in-doin-d580a712
+
+## Рішення власника
+Слова власника (2026-11-06, сесія Thinkhow; записано Claude зі слів власника) — на питання Claude «Ставити в роботу
+пункти 1–4 (тести автоматичного розгортання, хибне «FAIL» після повного прогону, спрощення `_answer`, перевірка
+застарілих залежностей)?»: «Бери все». Пункт 1 — пропозиції 738–741, пункт 2 — пропозиція 737.
 
 ## Що сталося
 Overseer прийняв юніт `-|601-auto-deploy-after-done|unit 1` (PASS, запит `20261104T203040Z-b97f67`) і знайшов брак тесту: with running=done[:7] the test returns 'up to date' before any build, so an implementation that built from the working tree would still pass this test (only test_deploys_the_snapshot_of_the_done_commit_not_the_working_tree catches it) Де: `tests/test_auto_deploy.py`. Вердикт — у ledger: `python3 .claude/hooks/journal.py show ledger`.

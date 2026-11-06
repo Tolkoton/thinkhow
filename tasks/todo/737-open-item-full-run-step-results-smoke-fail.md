@@ -1,8 +1,16 @@
 # 737 — Повний прогін тестів переписує step-results/smoke.txt на RESULT: FAIL, і жоден тест не падає
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: full-run-step-results-smoke-fail
+
+## Рішення власника
+Слова власника (2026-11-06, сесія Thinkhow; записано Claude зі слів власника) — на питання Claude «Ставити в роботу
+пункти 1–4 (тести автоматичного розгортання, хибне «FAIL» після повного прогону, спрощення `_answer`, перевірка
+застарілих залежностей)?»: «Бери все». Пункт 1 — пропозиції 738–741, пункт 2 — пропозиція 737.
 
 ## Що сталося
 У задачі 721 повний uv run pytest (2 failed — обидва skel-facilitation, 1523 passed) переписав .engine/artifacts/step-results/smoke.txt (його пише scripts/smoke_test_learning_loop.py, STEPS_OUT): рядок «FAIL the card files are byte-for-byte the same» і «RESULT: FAIL». Окремий запуск uv run python scripts/smoke_test_learning_loop.py дає RESULT: PASS. Отже, якийсь тест запускає smoke в умовах, де картки змінюються між двома synthesize, і не перевіряє RESULT. Артефакт відновлено з git (як у задачі 308, commit b7c1d04).

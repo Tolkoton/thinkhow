@@ -1,8 +1,16 @@
 # 738 — Брак тесту (overseer): a test that renders a page (e.g. GET / via TestClient) and asserts every /static/ URL in it, including /static/rename.js, carries ?v= equal to the content hash, and that the hash changes when a file i
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: test-gap-a-test-that-renders-a-page-e-g-get-via-testclient-and-assert-ed77468f
+
+## Рішення власника
+Слова власника (2026-11-06, сесія Thinkhow; записано Claude зі слів власника) — на питання Claude «Ставити в роботу
+пункти 1–4 (тести автоматичного розгортання, хибне «FAIL» після повного прогону, спрощення `_answer`, перевірка
+застарілих залежностей)?»: «Бери все». Пункт 1 — пропозиції 738–741, пункт 2 — пропозиція 737.
 
 ## Що сталося
 Overseer прийняв юніт `-|210-paperclip-does-nothing|unit 1` (PASS, запит `20261104T114955Z-4006de`) і знайшов брак тесту: a version only on conversation.js and style.css (rename.js left unversioned and stale after a deploy), or a constant/commit-time version, passes today's test because it only checks the paperclip and --stale Де: `tests/web/test_static_cache.py`. Вердикт — у ledger: `python3 .claude/hooks/journal.py show ledger`.
