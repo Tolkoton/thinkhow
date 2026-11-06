@@ -241,3 +241,8 @@
 - Record: tasks/done/602-auto-deploy-cron-python/report.md
 - Reason: Every reference I could check holds. Both items of «Що зробити» are done: the docs/deploy.md §11 line and the auto_deploy.py docstring now give the PATH=/home/lao/engine-ops/bin… python3 line, and a test holds that line's interpreter to requires-python. There is no open question for the owner, and the technical terms stay English.
 - Request: 20261106T221318Z-0daa50 (attempt 1)
+
+## 2026-11-06T23:56:50Z — 417-deps-outdated-cmd — READER_PASS
+- Record: tasks/done/417-deps-outdated-cmd/report.md
+- Reason: All four questions hold. The references I could check match the files: maintain.py has parse_outdated, dependencies, the section wording and the class words; the 2026-11-03 report has the 30 packages at lines 58–60; project.env:192 holds the quoted command; commit fd670e9 is in commits; updates.json is absent. The task's two «Що зробити» items and its «Готово, коли» are answered (command, its output, what /maintain reads), there is no open question, and the engine terms are English (runner, commit, extra). «догляд», «латка» and «мала версія» are the engine script's own output words, not invent
+- Request: 20261106T235612Z-94b866 (attempt 1)
