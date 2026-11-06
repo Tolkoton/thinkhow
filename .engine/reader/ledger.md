@@ -226,3 +226,8 @@
 - Record: tasks/done/601-auto-deploy-after-done/report.md
 - Reason: Every reference I could check says what the report claims. All five items of «Що зробити» and both «Готово, коли» items are covered in the report, docs/deploy.md §11 and the code. The report has no open question for the owner. Technical terms (overseer, runner, commit, task board, Job, cron) stay in English.
 - Request: 20261104T203257Z-0afd70 (attempt 1)
+
+## 2026-11-06T20:45:18Z — 416-cleanup-2026-11-06 — READER_PASS
+- Record: tasks/done/416-cleanup-2026-11-06/report.md
+- Reason: All four questions hold. The nightly output in the report matches the saved file. The metrics for heads 4e77c17 and 0c6e05c match line for line. Every item of «Що зробити» is answered (1–4 at report.md:21-25, full tests explained at :26). There are no open questions for the owner, and the technical terms stay English (simplifier, nightly, commit, hook, subagent, deploy).
+- Request: 20261106T204449Z-af9b29 (attempt 1)
