@@ -236,3 +236,8 @@
 - Record: tasks/done/602-auto-deploy-cron-python/report.md
 - Reason: All four questions hold. Every reference I could check matches. Both «Що зробити» items are done: the docs/deploy.md §11 cron line and its paragraph, the auto_deploy.py docstring, and a test that holds the doc's cron line to requires-python. There are no open questions for the owner, and the report keeps engine terms in English (cron, commit, board runner, PATH, dry-run).
 - Request: 20261106T221154Z-9f2bef (attempt 1)
+
+## 2026-11-06T22:13:50Z — 602-auto-deploy-cron-python — READER_PASS
+- Record: tasks/done/602-auto-deploy-cron-python/report.md
+- Reason: Every reference I could check holds. Both items of «Що зробити» are done: the docs/deploy.md §11 line and the auto_deploy.py docstring now give the PATH=/home/lao/engine-ops/bin… python3 line, and a test holds that line's interpreter to requires-python. There is no open question for the owner, and the technical terms stay English.
+- Request: 20261106T221318Z-0daa50 (attempt 1)
