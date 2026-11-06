@@ -2,6 +2,7 @@
 
 import importlib.util
 import re
+import shutil
 import subprocess
 import sys
 from collections.abc import Sequence
@@ -285,3 +286,17 @@ def test_image_paths_are_what_the_dockerfile_copies() -> None:
         for src in line.split()[:-1]
     }
     assert copied | {"Dockerfile"} == set(ad.IMAGE_PATHS)
+
+
+def test_the_cron_line_of_the_doc_runs_a_python_that_meets_requires_python() -> None:
+    doc = (ROOT / "docs" / "deploy.md").read_text(encoding="utf-8")
+    (line,) = re.findall(r"echo '(\*/5 [^']+)'", doc)
+    cron = re.search(r"PATH=(\S+) (\S+) /home/lao/projects/thinkhow/scripts/auto_deploy\.py", line)
+    required = re.search(r'requires-python = ">=(\d+)\.(\d+)"', (ROOT / "pyproject.toml").read_text())
+    assert cron and required
+    found = shutil.which(cron[2], path=cron[1])
+    assert found, cron.groups()
+    version = subprocess.run(
+        [found, "-c", "import sys; print(*sys.version_info[:2])"], capture_output=True, text=True, check=True
+    ).stdout.split()
+    assert tuple(map(int, version)) >= tuple(map(int, required.groups())), (found, version)

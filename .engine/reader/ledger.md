@@ -231,3 +231,8 @@
 - Record: tasks/done/416-cleanup-2026-11-06/report.md
 - Reason: All four questions hold. The nightly output in the report matches the saved file. The metrics for heads 4e77c17 and 0c6e05c match line for line. Every item of «Що зробити» is answered (1–4 at report.md:21-25, full tests explained at :26). There are no open questions for the owner, and the technical terms stay English (simplifier, nightly, commit, hook, subagent, deploy).
 - Request: 20261106T204449Z-af9b29 (attempt 1)
+
+## 2026-11-06T22:12:28Z — 602-auto-deploy-cron-python — READER_PASS
+- Record: tasks/done/602-auto-deploy-cron-python/report.md
+- Reason: All four questions hold. Every reference I could check matches. Both «Що зробити» items are done: the docs/deploy.md §11 cron line and its paragraph, the auto_deploy.py docstring, and a test that holds the doc's cron line to requires-python. There are no open questions for the owner, and the report keeps engine terms in English (cron, commit, board runner, PATH, dry-run).
+- Request: 20261106T221154Z-9f2bef (attempt 1)

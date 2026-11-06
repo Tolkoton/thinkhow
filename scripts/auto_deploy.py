@@ -11,7 +11,9 @@ Does what Сонько did by hand (`~/sonko/done/2026-11-04-thinkhow-deploy-311
   `notes/` changed, the Job's `cards` / `notes` runs between the two (both repeat safely; never `seed`);
 - on an error nothing is rolled back: a line in the journal, a question in `tasks/blocked/`, and that
   commit is not tried again (`--retry` does).
-Only the standard library: cron runs it with the system python3.
+Only the standard library. Cron runs `python3` from a PATH whose first directory, /home/lao/engine-ops/bin,
+holds Python 3.12 (the system /usr/bin/python3 is 3.10, below requires-python); the board question's
+`python3` comes from the same PATH. tests/test_auto_deploy.py holds the cron line of docs/deploy.md to it.
 """
 
 from __future__ import annotations

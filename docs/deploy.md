@@ -322,9 +322,12 @@ gcloud scheduler jobs create http thinkhow-synthesize-daily --location=$REGION \
 **Вимкнути.** `touch ~/.local/state/thinkhow-deploy/off` — механізм нічого не робить, доки файл є (`rm` вмикає
 знову). Прибрати зовсім — видалити рядок `auto_deploy.py` з `crontab -e`.
 
-**Встановлення** (один раз; рядок cron):
+**Встановлення** (один раз; рядок cron). `python3` у ньому — з `PATH`, і перша тека,
+`/home/lao/engine-ops/bin`, дає Python 3.12: проєкт вимагає `>=3.12` (`pyproject.toml`), а системний `/usr/bin/python3`
+на сервері — 3.10, на якому скрипт падає (задача 602). Тим самим `python3` з `PATH` скрипт запускає й `board.py`.
+`tests/test_auto_deploy.py` перевіряє, що `python3` з цього рядка задовольняє `requires-python`:
 
 ```bash
 mkdir -p ~/.local/state/thinkhow-deploy
-( crontab -l 2>/dev/null; echo '*/5 * * * * PATH=/snap/bin:/usr/bin:/bin /usr/bin/python3 /home/lao/projects/thinkhow/scripts/auto_deploy.py >> /home/lao/.local/state/thinkhow-deploy/cron.log 2>&1' ) | crontab -
+( crontab -l 2>/dev/null; echo '*/5 * * * * PATH=/home/lao/engine-ops/bin:/snap/bin:/usr/bin:/bin python3 /home/lao/projects/thinkhow/scripts/auto_deploy.py >> /home/lao/.local/state/thinkhow-deploy/cron.log 2>&1' ) | crontab -
 ```
