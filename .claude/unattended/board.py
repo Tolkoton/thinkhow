@@ -1017,12 +1017,12 @@ def gate_question(board: Board, stamp: str, blocks: int, slice_name: str, files:
 
 ## Що зробити
 Це питання поставили gates, а не агент. Агент на нього не відповідає і сам ескалацію не
-закриває: відповідь «так» виконує runner. Якщо власник відповів інакше — це
+закриває: відповідь «так» виконує runner, а в сесії з власником без runner-а — сам Stop gate. Якщо власник відповів інакше — це
 вказівка агентові: виконай її, допиши внизу нове питання «Тепер закрити ескалацію?» з порожнім
 рядком відповіді й поверни задачу в `tasks/blocked/`.
 
 ## Готово, коли
-Власник відповів «так», і runner закрив ескалацію.
+Власник відповів «так», і ескалацію закрито.
 
 ## Питання до власника
 Варіанти відповіді:
@@ -1198,27 +1198,43 @@ def gate_task(board: Board, name: str) -> Path | None:
     return path if path.is_file() and TASK_NAME.match(path.name) and read(path).gate else None
 
 
-def gate_done(board: Board, path: Path, outcome: str) -> Path:
-    """A gate question the runner has acted on: done/NNN-name/ with task.md and a report.md."""
+def gate_done(board: Board, path: Path, outcome: str, by: str = "") -> Path:
+    """A gate question the runner has acted on: done/NNN-name/ with task.md and a report.md. `by`
+    names who acted when it was not the runner: the Stop gate of the session the owner answered
+    in (board 310)."""
     stamp = read(path).gate
     now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     if outcome == "closed":
-        changed = (f"Ескалацію gates {stamp} закрито за вашою відповіддю «так» ({now}, runner). "
+        changed = (f"Ескалацію gates {stamp} закрито за вашою відповіддю «так» ({now}, {by or 'runner'}). "
                    "Overseer знову приймає роботу з цими файлами.")
     elif outcome == "elsewhere":
         changed = (f"Ескалацію gates {stamp} закрито іншим шляхом — командою `gate.py --close-escalation` у терміналі, "
                    f"а не відповіддю на це питання. Питання більше нічого не питає, тому runner сам прибрав його з task board ({now}).")
     else:
         changed = (f"Ескалація gates {stamp} на момент вашої відповіді вже не була відкрита (її закрито раніше "
-                   f"або запису про неї немає). Питання прибрано з task board ({now}, runner).")
+                   f"або запису про неї немає). Питання прибрано з task board ({now}, {by or 'runner'}).")
     target = board.tasks / "done" / path.stem
     target.mkdir(parents=True, exist_ok=True)
     path.rename(target / "task.md")
     (target / "report.md").write_text(
         f"# Звіт: {path.stem}\n\n## Що змінилось для власника\n- {changed}\n\n"
-        "Цей звіт написав runner, не агент: жодної роботи тут не було"
+        + (f"Цей звіт написав {by}, не агент" if by else "Цей звіт написав runner, не агент") + ": жодної роботи тут не було"
         + (".\n" if outcome == "elsewhere" else ", лише ваша відповідь.\n"), encoding="utf-8")
     return target
+
+
+def gate_repeat(path: Path, stamp: str, blocks: int, reasons: list[str], report: str) -> None:
+    """One cause, one card (board 310): the gate gave up again on a file and line whose question is
+    still open, so the new time is told under the old question, not in a new card. Written above
+    `## Питання до власника`, so the question and its answer line stay where they are."""
+    text = path.read_text(encoding="utf-8")
+    shown = "\n".join(f"  - {r.replace('<!--', '<! --').strip()}" for r in reasons) or "  - (причину не записано)"
+    part = (f"## Повтор {stamp}\n"
+            f"Gates знову не пройшли {blocks} раз(и) поспіль на тому самому місці. Нової картки не відкрито: "
+            f"відповідь на питання нижче закриває і цей раз.\n\n- На чому зупинилося:\n{shown}\n"
+            f"- Повний звіт (на сервері): `{report}`\n\n")
+    head, mark, rest = text.partition("## Питання до власника")
+    path.write_text(head + part + mark + rest if mark else text.rstrip("\n") + "\n\n" + part, encoding="utf-8")
 
 
 def owner_actions(board: Board) -> list[str]:
@@ -1499,13 +1515,15 @@ def _text(path: Path) -> str:
         return ""
 
 
-def gate_reject(path: Path, word: str = CONSENT) -> None:
-    """Wipe an answer that did not come from the owner and say so under the question."""
+def gate_reject(path: Path, word: str = CONSENT, by: str = "", why: str = "") -> None:
+    """Wipe an answer that did not come from the owner and say so under the question. `by` and
+    `why` replace the runner's note when someone else refuses it (board 310: the Stop gate)."""
     lines = path.read_text(encoding="utf-8").splitlines()
     last = max(i for i, line in enumerate(lines) if ANSWER.match(line))
     now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     lines[last] = lines[last][: lines[last].index("Відповідь:")] + "Відповідь:"
-    lines.insert(last, f"Примітка runner-а ({now}): відповідь «{word}» з'явилася на сервері, а не прийшла "
+    lines.insert(last, f"Примітка {by} ({now}): {why}" if by else
+                       f"Примітка runner-а ({now}): відповідь «{word}» з'явилася на сервері, а не прийшла "
                        "через гілку чи inbox, тому її не прийнято. Дайте відповідь ще раз.")
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 

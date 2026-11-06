@@ -109,6 +109,13 @@ unreadable lock, a lock written before `seeds` existed: nothing is taken on trus
 keeps `protected_guard.py`, compared with HEAD, from reporting the untouched constitution,
 settings and `.engine/rules.md` of such an install.
 
+**An update not yet committed** (board 120, item 1750). `engine.py update` in a project whose
+engine is already committed rewrites files the base has, so the rule above does not reach them.
+Such a file is left out too when the base's own lock recorded exactly the base's blob (the
+engine's file as it shipped, untouched) **and** the working lock records exactly the working
+content. The owner's committed edit of an engine file fails the first condition, a turn's edit
+after the update the second — and then the whole file is judged, the update's own lines with it.
+
 ## The bypass guard (stop, pre_commit)
 
 A block when the turn's diff **adds** a `# type: ignore`, a `# noqa`, `pytest.mark.skip` /

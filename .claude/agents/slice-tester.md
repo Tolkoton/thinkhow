@@ -43,7 +43,17 @@ test written from the code checks the reading the builder already made.
 1. **Questions to the contract** — first, not last. Every place where two honest readings give
    two different tests ("over 50" — is 50 itself allowed? "rounded" — to how many places?
    "truthy" or exactly `True`?). For each: the question, the reading your test takes, and which
-   tests depend on it. No questions is a legitimate answer; an invented question is not.
+   tests depend on it. **Every question has a test of the reading taken** — in the disputed file
+   (item 3), carrying the question's id, sealed after the planner's answer; a question no test
+   fixes leaves that reading unchecked, and the script refuses it (board 311: 8 of 18 gaps the
+   overseer found stood on such a question). No questions is a legitimate answer; an invented
+   question is not.
+   - **A universal line of «Seam» with `Invariants: None`.** A line of «Seam (contract)» that
+     speaks of every input — "every", "any", "always", "each call…" — while the «Invariants»
+     section says `None` is a question: is it an invariant, and over which domain? Its tests
+     take inputs by the invariant rule of item 3 (both edges, the other forms an obvious
+     implementation misses — a call, a subscript, an f-string, not only a name), never only
+     the examples the contract shows. You still add no invariant of your own: no `test_I<n>_`.
 2. **The list of behaviours** — every externally observable behaviour the contract guarantees,
    each with the line of the contract it follows from, copied word for word. A behaviour with
    no line behind it is an invented requirement: leave it out. **One test per behaviour.**
@@ -86,6 +96,11 @@ test written from the code checks the reading the builder already made.
    word, is the proof. With `expect: "recorded"` (catch-up: the code exists) RED cannot be
    shown, so every test names in `catches` the breakage it would catch; a test that fails
    against the existing code is a finding — hand it in as it is, do not bend it to pass.
+   **Lint and type-check too.** Run the project's lint and type-check — the ones the gate runs
+   (`LINT_CMD`, `TYPECHECK_CMD` in `.claude/project.env`, else ruff and mypy where the project
+   configures them) — over your own test files and helpers, and fix what they find. No
+   `noqa` or `type: ignore` to hush them. The script runs them before RED and refuses a hand-in
+   they fail on (board 311: 20 of 128 `test_wrong` verdicts were this).
 
 Your last message is this object, in a ```json fence:
 
@@ -161,7 +176,9 @@ dispute.
 
 - You do not decide whether you are called, and you do not write the implementation: a hook
   refuses every file of yours that is not a test file.
-- You do not write unit tests of helpers or the smoke script; those are the builder's.
+- You do not write unit tests of helpers or the smoke script; those are the builder's. With
+  SOURCE_DIRS set, a smoke script or a spike probe outside it calls for no catch-up either: the
+  overseer runs it with the exit criterion.
 - You do not reuse a basename: a test file or helper whose name another folder under `tests/`
   already has (neither a package) stops pytest at collection, and the script refuses the hand-in.
 - You do not judge code, and you do not edit the contract — a doubt about it is a question.

@@ -603,11 +603,23 @@ def proposed_lines(src: Source) -> list[str]:
             *(f"- `{posixpath.basename(path)}` — {title_of(src.show(path), posixpath.basename(path))}" for path in offered)]
 
 
+def unverified_lines(asked: list[Asked]) -> list[str]:
+    """A task whose answers are all written but one is a record of the owner's words that cannot be checked
+    (board 405, `board.Task.unverified`): the runner keeps it in blocked/, so the review says why (proposal 1768)."""
+    held = [posixpath.basename(path) for path, _, task in asked if task.unverified]
+    if not held:
+        return []
+    return [(f"Відповідь записано, але її не можна перевірити — задача стоїть: {', '.join(f'`{name}`' for name in held)}. Відповідь "
+             "«записано … зі слів власника» без дати, місця чи дослівної цитати в «» — це не відповідь, і runner лишає задачу в "
+             "`tasks/blocked/`; потрібен рядок «записано Claude зі слів власника <рік-місяць-день>, <сесія чи канал>: «<слова власника>»»."), ""]
+
+
 def waiting_section(src: Source, state: Path) -> list[str]:
     asked: list[Asked] = [(path, text, board.parse(text)) for path in src.column("blocked") for text in [src.show(path)]]
     total = sum(task.answers.count("") for _, _, task in asked)
     return [(f"Незаповнених відповідей: {total}, у задачах: {sum(1 for _, _, task in asked if '' in task.answers)} (тека `tasks/blocked/`). Відповідь пишеться в "
              "рядок «Відповідь:» файла задачі — у гілці або копією файла в inbox; задача повертається в роботу, коли заповнено всі."), "",
+            *unverified_lines(asked),
             *question_lines(src, asked),
             "### Задачі, що потребують вашої присутності", "", *attended_lines(src), "",
             "### Пропозиції налаштувань", "", *settings_lines(src, asked), "",

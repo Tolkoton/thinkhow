@@ -10,6 +10,7 @@
     python3 .claude/hooks/testing.py invariants CONTRACT.md              # the «Invariants» section: 0 well-formed, 1 not
     python3 .claude/hooks/testing.py answer <slug> <Q> --reading taken|other --text "…"
     python3 .claude/hooks/testing.py seal <slug> | check <slug> | gate <slug> | status [<slug>] | ledger
+    python3 .claude/hooks/testing.py reseal <slug> --owner-answer <card>  # the owner's «так» in a board card
     python3 .claude/hooks/testing.py feature-close <feature>             # 0 the feature may close, 3 it may not
     python3 .claude/hooks/testing.py mutation <slug> [--timeout S] | mutation-result <slug> --survived N --handled N
 
@@ -35,7 +36,8 @@ MANDATORY CASES — the manager cannot cancel them; `validate` refuses any other
                                                                           -> catch-up tests now (b)
   O8  the slice changes working code no test touches — at (a) by what the contract's «Seam»
       names and already exists, at (b) by the real diff, the slice's own tests counted; measured
-      by test_touch.py, the way the delete guard measures it          -> the tester (a), catch-up now (b)
+      by test_touch.py, the way the delete guard measures it; with SOURCE_DIRS set, code under it
+      only (board 311: a smoke script is not the tester's)            -> the tester (a), catch-up now (b)
 
 RED IS RUN HERE, NOT CLAIMED. `record` runs every contract test of a hand-in itself: each must
 fail, and not on an import; a test marked `keeps` (behaviour the contract tells to preserve) must
@@ -52,6 +54,11 @@ new contract, with a counter of its own for that pair: two rounds, the third par
 test, and the old slice's seal follows. A round that supersedes and leaves no question unparks a
 parked old slice and closes its open item `testing-parked-<slug>` (`board.py close-item`): the old
 slice's own counter is not reset, so a dispute of its own that is left parks it again.
+
+THE OWNER'S WORD RESEALS (board 310). The owner may allow a sealed test to change. `reseal <slug>
+--owner-answer <card>` seals the changed files again when that board card names the slice and every
+changed file and its last answer is the one word «так»: no objection round, no round counted, a line
+in the ledger. One card reseals once; a later change is a new question.
 
 INVARIANTS (board 048, built by board 064). A contract planned by `/plan-slice` has a section
 «Invariants»: numbered rules (I1, I2…) that hold for every input of a stated domain, each with
@@ -421,9 +428,14 @@ def finished(root: Path, item: Slice) -> bool:
 
 
 def is_working_code(env: dict[str, str], rel: str) -> bool:
+    """The delete guard's working code, and — when SOURCE_DIRS is set — under one of those dirs only
+    (board 311): a smoke script or a spike probe outside them is the builder's, and the overseer runs
+    it with the exit criterion; the tester writes no test of it, so it calls for no catch-up."""
     import delete_guard
 
-    return delete_guard.is_working_code(env, rel)
+    dirs = [d.strip("/") for d in re.split(r"[\s,]+", env.get("SOURCE_DIRS", "")) if d.strip("/")]
+    inside = not dirs or any(f"/{d}/" in "/" + rel.removeprefix("./") for d in dirs)
+    return inside and delete_guard.is_working_code(env, rel)
 
 
 def touch(root: Path, env: dict[str, str], files: dict[str, set[int]], overlay: dict[str, str]) -> list[JsonObj]:
@@ -455,7 +467,7 @@ def named_code(root: Path, env: dict[str, str], text: str) -> dict[str, set[int]
     does not count: the slice's own tests will cover it."""
     found: dict[str, set[int]] = {}
     for candidate in PATH_RE.findall(text):
-        rel = candidate.lstrip("./")
+        rel = candidate.removeprefix("./")
         if (root / rel).is_file() and is_working_code(env, rel):
             found[rel] = set()
     return found
@@ -513,22 +525,31 @@ def tree_overlay(root: Path) -> dict[str, str]:
 # ------------------------------------------------------------------ the facts
 
 
-def overseer_blocks_4(root: Path, slug: str) -> int:
-    count = 0
+def overseer_check_4(root: Path, slug: str) -> tuple[int, int]:
+    """The overseer's verdicts on this slice that concern check #4: (BLOCKs on #4, PASSes with `test_gaps`).
+    Told apart for the owner (board 311): since board 077 a test gap is a PASS, not a block."""
+    blocks = gaps = 0
     try:
         lines = (root / OVERSEER_ROWS_REL).read_text(encoding="utf-8").splitlines()
     except OSError:
-        return 0
+        return 0, 0
     for line in lines:
         try:
             row = json.loads(line)
         except ValueError:
             continue
-        # A test gap counts as much as a BLOCK on #4 did: since board 077 it is a PASS with `test_gaps`.
-        if isinstance(row, dict) and row.get("slice") == slug and (
-                (row.get("verdict") == "BLOCK" and row.get("check") == 4) or row.get("test_gaps")):
-            count += 1
-    return count
+        if not isinstance(row, dict) or row.get("slice") != slug:
+            continue
+        if row.get("verdict") == "BLOCK" and row.get("check") == 4:
+            blocks += 1
+        elif row.get("test_gaps"):
+            gaps += 1
+    return blocks, gaps
+
+
+def overseer_blocks_4(root: Path, slug: str) -> int:
+    # A test gap counts as much as a BLOCK on #4 did for O4 and O7: since board 077 it is a PASS with `test_gaps`.
+    return sum(overseer_check_4(root, slug))
 
 
 def history(root: Path, slug: str) -> JsonObj:
@@ -861,6 +882,28 @@ def opened_slice(root: Path, task: str) -> str | None:
     return slug
 
 
+def sealed_by_task(root: Path, task: str) -> str | None:
+    """The one sealed contract the board task wrote itself — added or changed since the commit that brought
+    tasks/doing/<task>.md in, committed or not — when no slice was ever opened under it (board 1753): the
+    builder who skipped point (a) still meets the testing gate. None with two such contracts (planned ahead,
+    no choice), with a slice opened under the task, with no task or no git; a contract from before the task is never its."""
+    if not task or any(r.get("task") == task for r in rows(root, kind="opened")):
+        return None
+
+    def git(*args: str) -> list[str]:
+        done = subprocess.run(["git", "-C", str(root), *args], capture_output=True, text=True, check=False)
+        return done.stdout.split("\n") if done.returncode == 0 else []
+
+    came = [c for c in git("log", "-1", "--format=%H", "--diff-filter=A", "--no-renames", "--", f"tasks/doing/{task}.md") if c]
+    if not came:
+        return None
+    written = git("diff", "--name-only", "--no-renames", came[0], "--", ".engine/slices/") + git(
+        "ls-files", "--others", "--exclude-standard", "--", ".engine/slices/")
+    slugs = sorted({Path(rel).stem for rel in written if re.fullmatch(r"\.engine/slices/[\w.-]+\.md", rel) and not rel.endswith(".behaviors.md")})
+    mine = [s for s in slugs if contract_path(root, s).is_file() and contract_sealed(root, s) and not is_parked(root, s)]
+    return mine[0] if len(mine) == 1 else None
+
+
 def undone(root: Path, slug: str) -> list[str]:
     """The checks the manager said to do NOW at point (b) of this slice that nobody did since:
     a decision is not the check. Empty when there is no such decision or everything was done."""
@@ -1126,6 +1169,19 @@ def handin_errors(root: Path, request: JsonObj, handin: JsonObj) -> list[str]:
         if request.get("expect") == "recorded" and not str(test.get("catches", "")).strip():
             errors.append(f"{name}: the code exists, so RED cannot be shown — `catches` names the breakage this test would catch")
         by_file.setdefault(rel, set()).add(test.get("question") is not None)
+    def names(name: str, ident: str) -> bool:   # a question may name a test by its id or by its last part
+        return ident == name or ident.endswith(("." + name, "::" + name))
+
+    for question in questions:
+        ident, named = str(question["id"]), question.get("tests")
+        named = [str(t) for t in named] if isinstance(named, list) else []
+        disputed = [str(t.get("test")) for t in tests if str(t.get("question")) == ident]
+        if not any(names(name, d) for name in named for d in disputed):
+            errors.append(f"{ident}: a question to the contract with no test of the reading taken — every question names in `tests` "
+                          f"a test of this hand-in that fixes that reading and carries `\"question\": \"{ident}\"` (it goes into the "
+                          "disputed file and is sealed after the planner's answer); an unanswered reading nobody tests is a gap (board 311)")
+        errors += [f"{ident}: `tests` names {name}, which is not a test of this hand-in" for name in named
+                   if not any(names(name, known_test) for known_test in seen)]
     if request.get("mode") == "contract":
         errors += invariant_test_errors(sources[0], seen)
     errors += clash_errors(root, handed_files(root, set(by_file)))
@@ -1183,6 +1239,24 @@ def invariant_test_errors(contract: str, tests: set[str]) -> list[str]:
     return errors
 
 
+def hygiene_errors(root: Path, files: set[str]) -> list[str]:
+    """The gate's lint and type-check over the hand-in's own files (board 311): a hand-in they fail on
+    is refused here, not argued over in a round of objections. A failure that names none of these
+    files is the builder's code or the project's snapshot, not the tester's, and is not held against it."""
+    import gate
+
+    report = gate.Report(layer="testing", root=root)
+    errors = []
+    for kind, command in gate.check_steps(root, load_env(root), sorted(files), False, report):
+        if kind == "tests":
+            continue
+        code, out, _ = gate.run_shell(root, command)
+        own = [line.strip() for line in out.splitlines() if any(rel in line for rel in files)]
+        if code != 0 and own:
+            errors.append(f"{kind} ({command}) fails on your own files — run it and fix them before the hand-in: " + " | ".join(own[:10]))
+    return errors
+
+
 def red_errors(root: Path, request: JsonObj, handin: JsonObj) -> tuple[list[str], list[JsonObj]]:
     """Run every test. Before code exists each must FAIL in its body; one marked `keeps` must pass."""
     errors, results = [], []
@@ -1215,7 +1289,7 @@ def seal_files(root: Path, slug: str, files: list[str], held: dict[str, list[str
 
 def record_tests(root: Path, request: JsonObj, handin: JsonObj) -> list[str]:
     """A contract or block hand-in: shape, the run, the seal. Returns the reasons it is refused."""
-    errors = handin_errors(root, request, handin)
+    errors = handin_errors(root, request, handin) or hygiene_errors(root, handed_files(root, {str(t["file"]) for t in handin["tests"]}))
     if errors:
         return errors
     errors, results = red_errors(root, request, handin)
@@ -1349,7 +1423,15 @@ def close_parked_item(root: Path, slug: str, by: str) -> str:
          "--why", (f"новий запечатаний slice contract {by} змінив поведінку, яку тримали sealed tests slice-а {slug}; незалежний tester "
                    f"нового контракту виправив ці тести, slice {slug} знову в роботі. Журнал: .engine/testing/ledger.md.")],
         cwd=root, capture_output=True, text=True, check=False)
-    return f"closed — {done.stdout.strip()}" if done.returncode == 0 else "none waited unanswered in blocked/ (an answered item is the owner's)"
+    if done.returncode == 0:
+        return f"closed — {done.stdout.strip()}"
+    # close-item leaves only an answered item: one still carrying the key is the owner's answer (proposal 1765)
+    answered = sorted(path.name for path in (root / "tasks" / "blocked").glob("*.md")
+                      if f"Відкритий пункт: testing-parked-{slug}\n" in path.read_text(encoding="utf-8").split("\n## ", 1)[0] + "\n")
+    if answered:
+        return (f"the owner already answered it ({', '.join(answered)}) — left in blocked/ for the runner to return; "
+                "read that answer before building on this unpark")
+    return "none waited in blocked/"
 
 
 # ------------------------------------------------------------------ the manager's decision
@@ -1364,7 +1446,8 @@ def review_numbers(root: Path, slugs: set[str]) -> str:
     return (f"Invariants: записано {sum(n['count'] for n in named)} у {sum(1 for n in named if n['section'] == 'named')} slice-ах; "
             f"«немає — причина» — {sum(1 for n in named if n['section'] == 'none')}; slice contract без розділу — "
             f"{sum(1 for n in named if n['section'] == 'absent')}. Помилки в коді, який уже пройшов contract tests tester-а ({len(tested)} slice-ів): "
-            f"overseer заблокував за перевіркою №4 — {sum(overseer_blocks_4(root, slug) for slug in sorted(tested))}; "
+            f"overseer заблокував за перевіркою №4 — {sum(overseer_check_4(root, slug)[0] for slug in sorted(tested))}, "
+            f"пропустив (PASS) із test gaps — {sum(overseer_check_4(root, slug)[1] for slug in sorted(tested))}; "
             f"інтеграційних тестів упало — {late}.")
 
 
@@ -1536,8 +1619,60 @@ def check_seal(root: Path, slug: str) -> tuple[int, str]:
     if changed:
         return 3, (f"CHANGED: the sealed contract tests of {slug} differ from what the tester handed in: {', '.join(changed)}. The builder "
                    "does not edit them. An objection goes as one package: `python3 .claude/hooks/testing.py request "
-                   f"{slug} --tester objection --package FILE`.")
+                   f"{slug} --tester objection --package FILE`; a change the owner allowed («так» in a board card naming the slice "
+                   f"and the file) is sealed again with `python3 .claude/hooks/testing.py reseal {slug} --owner-answer <card>`.")
     return 0, f"match: {len(files)} sealed test file(s) of {slug}"
+
+
+def board_item(root: Path, item: str) -> Path | None:
+    """The task file a board item names: a path, or a name in blocked/, doing/, todo/ or done/."""
+    tasks = root / "tasks"
+    stem = Path(item).name.removesuffix(".md")
+    for path in (Path(item) if Path(item).is_absolute() else root / item,
+                 *(tasks / column / f"{stem}.md" for column in ("blocked", "doing", "todo")), tasks / "done" / stem / "task.md"):
+        if path.is_file():
+            return path
+    return None
+
+
+def reseal(root: Path, slug: str, item: str) -> tuple[int, str]:
+    """Seal the changed contract tests of `slug` again on the owner's word (board 310): the board
+    card `item` asks about this change — it names the slice and every changed file — and its last
+    answer is the one word «так». No round of objections and no round counted: the owner decided.
+    One card reseals once; a later change needs a new question."""
+    path = root / SEALS_REL / f"{slug}.json"
+    state = read_json(path)
+    files = state.get("files", {})
+    if not files:
+        return 4, f"no sealed contract tests for {slug}"
+    changed = [rel for rel, value in files.items() if not (root / rel).is_file() or digest(root / rel) != value]
+    if not changed:
+        return 0, f"nothing to reseal: the {len(files)} sealed test file(s) of {slug} match"
+    card = board_item(root, item)
+    if card is None:
+        return 1, f"REFUSED: no board card {item} in tasks/blocked/, doing/, todo/ or done/"
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "unattended"))
+    import board
+
+    shown = card.relative_to(root).as_posix() if card.is_relative_to(root) else str(card)
+    if not board.read(card).says(board.CONSENT):
+        return 1, f"REFUSED: the last answer in {shown} is not the owner's one word «так» — without it a sealed test is not resealed"
+    text = card.read_text(encoding="utf-8")
+    unnamed = [name for name in (slug, *changed) if name not in text]
+    if unnamed:
+        return 1, (f"REFUSED: the question in {shown} does not name {', '.join(unnamed)}: the owner's «так» reseals the change "
+                   "it was asked about, so the card names the slice and every changed file")
+    stem = card.parent.name if card.name == "task.md" else card.stem
+    if any(row.get("card") == stem for row in state.get("resealed", []) if isinstance(row, dict)):
+        return 1, f"REFUSED: the owner's answer in {shown} has resealed {slug} once already; a new change is a new question"
+    present = [rel for rel in changed if (root / rel).is_file()]
+    seal_files(root, slug, present, {}, dropped=tuple(rel for rel in changed if rel not in present))
+    state = read_json(path)
+    state["resealed"] = [*state.get("resealed", []), {"card": stem, "files": {rel: state["files"].get(rel, "removed") for rel in changed}, "utc": utc_now()}]
+    write_json(path, state)
+    ledger(root, f"{slug} — resealed on the owner's word", [f"{rel}: sealed again as it is now" if rel in present else f"{rel}: removed, dropped from the seal"
+                                                             for rel in changed] + [f"the owner's «так»: `{shown}`; no objection round, no round counted"])
+    return 0, f"resealed on the owner's word ({shown}): {', '.join(changed)}"
 
 
 def audit_block(root: Path, slug: str | None) -> str | None:
@@ -1688,6 +1823,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--text", required=True)
     for name in ("seal", "check", "gate"):
         sub.add_parser(name).add_argument("slug")
+    p = sub.add_parser("reseal")
+    p.add_argument("slug")
+    p.add_argument("--owner-answer", required=True, metavar="CARD", help="the board card whose «так» allows the change (board 310)")
     sub.add_parser("status").add_argument("slug", nargs="?")
     sub.add_parser("ledger")
     sub.add_parser("feature-close").add_argument("feature")
@@ -1761,6 +1899,8 @@ def main(argv: list[str] | None = None) -> int:
         return finish(seal_held(root, args.slug))
     if args.command == "check":
         return finish(check_seal(root, args.slug))
+    if args.command == "reseal":
+        return finish(reseal(root, args.slug, args.owner_answer))
     if args.command == "gate":
         reason = audit_block(root, args.slug)
         return finish((3, "BLOCKED: " + reason) if reason else (0, f"testing does not stand in the way of an audit of {args.slug}"))

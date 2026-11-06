@@ -107,12 +107,23 @@ if have python3 && [ -f "$ROOT/.claude/hooks/lesson_queue.py" ]; then
   CLAUDE_PROJECT_DIR="$ROOT" python3 "$ROOT/.claude/hooks/lesson_queue.py" session-start 2>/dev/null || true
 fi
 
+# The envelope on stdin names the session, its transcript and why it starts; nothing above reads
+# stdin, and the two below both need it, so it is read once here.
+ENVELOPE=""
+[ -t 0 ] || ENVELOPE="$(cat 2>/dev/null || true)"
+
+# Board 310: the owner's «так» under a gate question in tasks/blocked/ closes its escalation at once,
+# in an attended session, not only when a board runner next runs. One line per question acted on.
+GATE="$(dirname "${BASH_SOURCE[0]}")/gate.py"
+if have python3 && [ -f "$GATE" ] && [ -d "$ROOT/tasks" ]; then
+  printf '%s' "$ENVELOPE" | CLAUDE_PROJECT_DIR="$ROOT" python3 "$GATE" --owner-answers 2>/dev/null || true
+fi
+
 # Board 724: the snapshot of the guarded files (the constitution, the settings, .engine/rules.md,
-# migrations, CI workflows) the Stop gate compares with at the end of every turn. The envelope on
-# stdin names the session and why it starts; nothing above reads stdin. Taken at a start, a resume
-# and a clear — not after a compaction, which is the middle of a turn. Silent.
+# migrations, CI workflows) the Stop gate compares with at the end of every turn. Taken at a start,
+# a resume and a clear — not after a compaction, which is the middle of a turn. Silent.
 GUARD="$(dirname "${BASH_SOURCE[0]}")/protected_guard.py"   # beside this hook, as the list it reads is
 if have python3 && [ -f "$GUARD" ]; then
-  python3 "$GUARD" --root "$ROOT" session-start 2>/dev/null || true
+  printf '%s' "$ENVELOPE" | python3 "$GUARD" --root "$ROOT" session-start 2>/dev/null || true
 fi
 exit 0
