@@ -199,6 +199,17 @@ def test_no_deploy_when_somebody_writes(repo: Path) -> None:
     assert all("--freshness=15m" in c for c in gcloud.calls if c[1:3] == ["logging", "read"])
 
 
+def test_a_failed_logging_read_is_a_failure_not_nobody_writes(repo: Path) -> None:
+    done = commit(repo, "board: 100-a → done", {"src/app.py": "v2\n"})
+    gcloud = Gcloud(fail="logging read")
+    outcome, told = deploy(repo, gcloud)
+    assert outcome == f"failed {done[:7]}: logging"
+    assert told and told[0][:2] == (done[:7], "100-a") and "ERROR: boom" in told[0][2]
+    assert f"failed {done[:7]} 100-a logging" in journal(repo)
+    assert [c for c in gcloud.calls if c[1:3] == ["logging", "read"]]
+    assert gcloud.steps() == []
+
+
 def test_no_update_when_somebody_started_writing_during_the_build(repo: Path) -> None:
     commit(repo, "board: 100-a → done", {"src/app.py": "v2\n"})
     gcloud = Gcloud(writing=[False, True])
