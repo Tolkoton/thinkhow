@@ -256,3 +256,8 @@
 - Record: tasks/done/738-open-item-test-gap-a-test-that-renders-a-page-e-g/report.md
 - Reason: Every reference I could check matches. The one «Що зробити» item is done: there is a test for both red cases, and the report shows the two red runs and the green run, with no code changed. There are no open owner questions. Technical terms stay English (overseer, runner, commit).
 - Request: 20261107T014948Z-984165 (attempt 1)
+
+## 2026-11-07T04:03:17Z — 739-open-item-test-gap-test-no-deploy-while-a-task-wit — READER_PASS
+- Record: tasks/done/739-open-item-test-gap-test-no-deploy-while-a-task-wit/report.md
+- Reason: All four questions hold. The changed test in tests/test_auto_deploy.py is what the report describes: `running=older` is set from the commit before `→ done`, and the test asserts `deployed <done>`, src/app.py == v2 and that tasks/doing/101-b.md is absent. The task's one item (red and green runs shown, no code change, fast suite green) is answered in the report. There is no open question, and engine terms (overseer, runner, commit, build, deploy) stay in English.
+- Request: 20261107T040250Z-a2e5f8 (attempt 1)

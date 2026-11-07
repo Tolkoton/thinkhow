@@ -153,13 +153,15 @@ def test_only_the_image_changes_on_the_service_and_the_job(repo: Path) -> None:
 
 
 def test_no_deploy_while_a_task_with_uncommitted_code_is_in_doing(repo: Path) -> None:
+    older = git(repo, "rev-parse", "--short=7", "HEAD")
     done = commit(repo, "board: 100-a → done", {"src/app.py": "v2\n"})
     commit(repo, "board: 101-b → doing", {"tasks/doing/101-b.md": "b\n"})
     (repo / "src" / "app.py").write_text("v3-uncommitted\n")
-    gcloud = Gcloud(running=done[:7])
+    gcloud = Gcloud(running=older)
     outcome, _ = deploy(repo, gcloud)
-    assert outcome == f"up to date: {done[:7]}"
-    assert gcloud.steps() == []
+    assert outcome == f"deployed {done[:7]}"
+    assert gcloud.built["src/app.py"] == "v2\n"
+    assert "tasks/doing/101-b.md" not in gcloud.built
 
 
 def test_no_deploy_of_a_done_commit_whose_tree_still_holds_a_task_in_doing(repo: Path) -> None:
