@@ -7,8 +7,10 @@ wraps the public names the tracer goes through: `analyze` and `synthesize` as th
 real functions, record what happened, and — when `SYN_BREAK` names a breakage — damage exactly one value the
 contract says the smoke checks. A script that "checks" a value has to exit non-zero when the value is wrong.
 
-The artifact `.engine/artifacts/synthesizer/smoke.txt` is kept as it was: every run is wrapped by
-`keep_artifact`, and the text the run wrote there is returned to the test.
+The run writes its artifacts into the test's tmp folder (`THINKHOW_SMOKE_ARTIFACTS`), not over the records
+of the real run in `.engine/artifacts/` — a broken run there used to leave `step-results/smoke.txt` at
+`RESULT: FAIL` (task 737); `run_smoke` fails if the repository's records change. The text the run wrote to
+its `synthesizer/smoke.txt` is returned to the test.
 """
 
 from __future__ import annotations
@@ -17,14 +19,12 @@ import json
 import os
 import subprocess
 import sys
-from collections.abc import Iterator
-from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
 REPO = Path(__file__).resolve().parents[3]
 SCRIPT = REPO / "scripts" / "smoke_test_learning_loop.py"
-ARTIFACT = REPO / ".engine" / "artifacts" / "synthesizer" / "smoke.txt"
+KEPT = [REPO / ".engine" / "artifacts" / d / "smoke.txt" for d in ("synthesizer", "step-results")]
 
 BOOT = r"""
 import json
@@ -146,20 +146,6 @@ runpy.run_path(str(SCRIPT), run_name="__main__")
 """
 
 
-@contextmanager
-def keep_artifact() -> Iterator[None]:
-    """The repository's smoke.txt is the same after the test as before it."""
-    before = ARTIFACT.read_bytes() if ARTIFACT.exists() else None
-    try:
-        yield
-    finally:
-        if before is None:
-            ARTIFACT.unlink(missing_ok=True)
-        else:
-            ARTIFACT.parent.mkdir(parents=True, exist_ok=True)
-            ARTIFACT.write_bytes(before)
-
-
 def run_smoke(
     tmp: Path, breakage: str = ""
 ) -> tuple[subprocess.CompletedProcess[str], dict[str, Any], str | None]:
@@ -183,17 +169,21 @@ def run_smoke(
     )
     env.pop("PYTHONSAFEPATH", None)
     env["PYTHONPATH"] = os.pathsep.join(filter(None, [str(REPO / "src"), os.environ.get("PYTHONPATH", "")]))
-    with keep_artifact():
-        ARTIFACT.unlink(missing_ok=True)
-        result = subprocess.run(
-            [sys.executable, str(boot), str(SCRIPT)],
-            cwd=REPO,
-            env=env,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            timeout=600,
-        )
-        artifact = ARTIFACT.read_text(encoding="utf-8") if ARTIFACT.exists() else None
+    artifacts = tmp / "artifacts"
+    env["THINKHOW_SMOKE_ARTIFACTS"] = str(artifacts)
+    kept = {p: p.read_bytes() if p.exists() else None for p in KEPT}
+    result = subprocess.run(
+        [sys.executable, str(boot), str(SCRIPT)],
+        cwd=REPO,
+        env=env,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=600,
+    )
+    changed = [str(p) for p, data in kept.items() if (p.read_bytes() if p.exists() else None) != data]
+    assert not changed, f"the smoke run wrote over the records of the real run: {changed}"
+    out = artifacts / "synthesizer" / "smoke.txt"
+    artifact = out.read_text(encoding="utf-8") if out.exists() else None
     seen: dict[str, Any] = json.loads(record.read_text(encoding="utf-8")) if record.exists() else {}
     return result, seen, artifact

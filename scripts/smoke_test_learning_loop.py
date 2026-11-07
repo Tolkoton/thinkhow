@@ -5,13 +5,17 @@ local mode, the real app and the real Job: turns in a topic → `analyze` → `s
 memory only → `/learning` shows the change with a link into the conversation → «Відкотити» →
 `current().memory` without the note, the page says it was rolled back; a second `synthesize` takes nothing;
 the card files byte-for-byte the same. Prints each step and writes the same to
-.engine/artifacts/synthesizer/smoke.txt; exits 1 on a failed check.
+.engine/artifacts/synthesizer/smoke.txt and .engine/artifacts/step-results/smoke.txt; exits 1 on a failed
+check.
+`THINKHOW_SMOKE_ARTIFACTS` names another folder in place of .engine/artifacts (the tests that break the run on
+purpose write there, not over the record of the real run).
 """
 
 import contextlib
 import dataclasses
 import io
 import json
+import os
 import re
 import sys
 import tempfile
@@ -34,8 +38,9 @@ from thinkhow.web.server import create_app  # noqa: E402
 from thinkhow.workspace import conversation as conv_file  # noqa: E402
 
 CARDS = ROOT / "cards"
-OUT = ROOT / ".engine" / "artifacts" / "synthesizer" / "smoke.txt"
-STEPS_OUT = ROOT / ".engine" / "artifacts" / "step-results" / "smoke.txt"  # the same run, S6's exit criterion
+ARTIFACTS = Path(os.environ.get("THINKHOW_SMOKE_ARTIFACTS") or ROOT / ".engine" / "artifacts")
+OUT = ARTIFACTS / "synthesizer" / "smoke.txt"
+STEPS_OUT = ARTIFACTS / "step-results" / "smoke.txt"  # the same run, S6's exit criterion
 STEP = "поговорити з трьома власниками кав'ярень"
 
 
