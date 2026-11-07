@@ -246,3 +246,8 @@
 - Record: tasks/done/417-deps-outdated-cmd/report.md
 - Reason: All four questions hold. The references I could check match the files: maintain.py has parse_outdated, dependencies, the section wording and the class words; the 2026-11-03 report has the 30 packages at lines 58–60; project.env:192 holds the quoted command; commit fd670e9 is in commits; updates.json is absent. The task's two «Що зробити» items and its «Готово, коли» are answered (command, its output, what /maintain reads), there is no open question, and the engine terms are English (runner, commit, extra). «догляд», «латка» and «мала версія» are the engine script's own output words, not invent
 - Request: 20261106T235612Z-94b866 (attempt 1)
+
+## 2026-11-07T01:49:10Z — 738-open-item-test-gap-a-test-that-renders-a-page-e-g — READER_PASS
+- Record: tasks/done/738-open-item-test-gap-a-test-that-renders-a-page-e-g/report.md
+- Reason: All four questions hold. The references I could check say what the report claims: server.py:47 computes the version when it is imported, the tests are as described, and the red-run assertion text matches the assert in the new test. The «Що зробити» item has its answer: both red runs, the green run, no code change and the fast suite are all shown. There is no open question for the owner. Technical terms are English (overseer, runner, commit, Playwright).
+- Request: 20261107T014834Z-caecf8 (attempt 1)

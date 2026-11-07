@@ -3,14 +3,13 @@
 The deploy is played out in one browser profile at one address: first the old image — its page asks
 for `/static/conversation.js` and `/static/style.css` without a version, the files dated as `git archive`
 dates them (the old commit's time) — then the real app of this tree. The person opens their topic and
-clicks the real `#attach`: the file chooser must open, and the new stylesheet must be in force.
+clicks the real `#attach`: the file chooser must open, and the new stylesheet must be in force. The version on
+every /static URL is checked without a browser in `test_static_version.py`.
 """
 
 from __future__ import annotations
 
-import hashlib
 import os
-import re
 import socket
 import threading
 import time
@@ -20,7 +19,6 @@ from pathlib import Path
 
 import pytest
 import uvicorn
-from fastapi.testclient import TestClient
 from starlette.applications import Starlette
 from starlette.responses import HTMLResponse
 from starlette.routing import Mount, Route
@@ -100,20 +98,3 @@ def test_after_a_deploy_the_paperclip_opens_the_file_chooser(tmp_path: Path) -> 
         "the paperclip opened no file chooser: the old conversation.js came from the browser's cache"
     )
     assert stale == "", f"the old image's style.css came from the browser's cache: --stale={stale!r}"
-
-
-def test_every_static_url_on_the_pages_carries_the_content_version(tmp_path: Path) -> None:
-    env = {"THINKHOW_LOCAL": "true", "THINKHOW_LOCAL_DIR": str(tmp_path / "data")}
-    static = Path(__file__).resolve().parents[2] / "src/thinkhow/web/static"
-    files = sorted(f for f in static.iterdir() if f.is_file())
-    version = hashlib.sha256(b"".join(f.read_bytes() for f in files)).hexdigest()[:12]
-    client = TestClient(create_app(build_deps(env, CARDS_DIR)))
-    client.post("/language", data={"code": "uk-UA"})
-    topic = client.post("/topics", data={"title": "Тест версії"})
-    urls = re.findall(r'"(/static/[^"]*)"', client.get("/").text + topic.text)
-    assert {u.split("?")[0] for u in urls} == {
-        "/static/style.css",
-        "/static/rename.js",
-        "/static/conversation.js",
-    }, urls
-    assert all(u.endswith(f"?v={version}") for u in urls), urls
