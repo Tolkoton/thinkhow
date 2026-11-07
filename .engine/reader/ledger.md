@@ -261,3 +261,8 @@
 - Record: tasks/done/739-open-item-test-gap-test-no-deploy-while-a-task-wit/report.md
 - Reason: All four questions hold. The changed test in tests/test_auto_deploy.py is what the report describes: `running=older` is set from the commit before `→ done`, and the test asserts `deployed <done>`, src/app.py == v2 and that tasks/doing/101-b.md is absent. The task's one item (red and green runs shown, no code change, fast suite green) is answered in the report. There is no open question, and engine terms (overseer, runner, commit, build, deploy) stay in English.
 - Request: 20261107T040250Z-a2e5f8 (attempt 1)
+
+## 2026-11-07T04:25:31Z — 740-open-item-test-gap-a-change-only-under-notes-runs — READER_PASS
+- Record: tasks/done/740-open-item-test-gap-a-change-only-under-notes-runs/report.md
+- Reason: All four questions hold. The test, its parametrization and the code line the report cites are where it says. The one «Що зробити» item (a notes-only check that fails on both breakages and passes on the code as it is, with no code change and a green quick suite) has its answer. There are no open questions for the owner, and engine terms stay in English.
+- Request: 20261107T042502Z-25302f (attempt 1)

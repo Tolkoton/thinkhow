@@ -227,9 +227,10 @@ def test_a_failure_of_the_build_updates_nothing(repo: Path) -> None:
     assert gcloud.steps() == ["builds submit --tag"]
 
 
-def test_changed_cards_run_the_job_command_between_job_and_service(repo: Path) -> None:
+@pytest.mark.parametrize("path", ["cards", "notes"])
+def test_changed_knowledge_runs_its_job_command_between_job_and_service(repo: Path, path: str) -> None:
     deployed = commit(repo, "board: 100-a → done", {"src/app.py": "v2\n"})
-    commit(repo, "board: 302-cards → done", {"cards/b.yaml": "b\n"})
+    commit(repo, f"board: 302-{path} → done", {f"{path}/b.yaml": "b\n"})
     gcloud = Gcloud(running=deployed[:7])
     deploy(repo, gcloud)
     runs = [
@@ -241,7 +242,7 @@ def test_changed_cards_run_the_job_command_between_job_and_service(repo: Path) -
     ]
     assert runs == [
         "run jobs update",
-        "run jobs execute thinkhow-learning --args=-m,thinkhow.learning.job,cards",
+        f"run jobs execute thinkhow-learning --args=-m,thinkhow.learning.job,{path}",
         "run services update",
     ]
     assert all("seed" not in " ".join(c) for c in gcloud.calls)
