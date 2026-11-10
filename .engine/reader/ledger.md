@@ -341,3 +341,8 @@
 - Record: tasks/done/731-open-item-playwright-other-scripts/report.md
 - Reason: All four questions hold. The references I could check say what the report ascribes to them. Every point of «Що зробити» has an answer: plain import, a `uv run python` docstring, THINKHOW_CHROMIUM or Playwright's own Chromium, and each script run (talk_harness through the two scripts that import it). The pl-PL live run and the catch-up tests are deferred with reasons. No question is open for the owner, and the technical terms are in English. One small inconsistency, not a block: line 11 says «десять із задачі, talk_harness.py і ще два», but the task's ten already include talk_harness, and «Ріше
 - Request: 20261110T162750Z-3d6668 (attempt 1)
+
+## 2026-11-10T18:12:43Z — 736-open-item-wsblock-tests-old-observation-shape — READER_PASS
+- Record: tasks/done/736-open-item-wsblock-tests-old-observation-shape/report.md
+- Reason: All four questions hold. Every reference I could check says what the report says: the ledger lines, the objection file, task 721's report lines 42–44, the engine-feedback entry and the current test code. The one item of «Що зробити» is answered: commit 7adcdc6 already did it in task 721, and the report says so with the evidence. There is no open question for the owner, and the engine terms stay in English.
+- Request: 20261110T181214Z-75a164 (attempt 1)
