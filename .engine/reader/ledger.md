@@ -291,3 +291,8 @@
 - Record: tasks/done/707-open-item-testing-review/report.md
 - Reason: All four questions hold. Every reference I could check matches its source, and the earlier BLOCK (five proposals vs six) is fixed at line 93. Every «Що зробити» item is answered, including the two owner questions: the report shows they were already answered in engine task 504 («504 1а 2а») and explains why it does not ask them again. The report opens no new question for the owner, and the engine terms are in English.
 - Request: 20261110T093900Z-c2e308 (attempt 2)
+
+## 2026-11-10T10:15:42Z — 717-open-item-test-gap-a-cl-talk-test-where-with-the-m — READER_PASS
+- Record: tasks/done/717-open-item-test-gap-a-cl-talk-test-where-with-the-m/report.md
+- Reason: Every reference I could check says what the report says it does: commits be86d83 and f8e999f, the cl_talk 409 test (it does not assert #mic/#send), cl_disputed_q4_enable (it covers only the /voice error), failed() with `return halt()` for 409, the separate-file precedent in task 713, and both new test files. The task's one item (a test that fails on the named defects and passes on the code as it is, with both runs, code unchanged, fast suite green) is answered. There is no open question for the owner, and the technical terms are in English.
+- Request: 20261110T101501Z-18d2e7 (attempt 1)
