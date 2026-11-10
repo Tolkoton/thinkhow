@@ -1,0 +1,37 @@
+--- tests/contract/skel_learning/test_skell_live.py	2026-10-28 23:31:34.297943564 +0000
++++ tests/contract/skel_learning/proposed_735_live.py	2026-11-10 17:31:08.125448726 +0000
+@@ -1,7 +1,7 @@
+ """Contract test of skel-learning, Seam 3: one real analyzer call to gemini-4-argon on `eu` (`-m live`).
+ 
+ Slice tester; from the contract, not the code. A topic of 40 Ukrainian turns → one call through
+-`analyze` → one `Observation` whose turn is one of the topic's turns.
++`analyze` → one `ObservationSet` whose observations each anchor to one of the topic's turns.
+ 
+ Corrected by objection (round 2, slice continuous-analysis, task 202): no closing is needed; the file is
+ `t1-t40.json`.
+@@ -14,7 +14,8 @@
+ import pytest
+ from skell_fakes import ALICE, NOW, S1, S, T, range_path, write_topic
+ 
+-from thinkhow.learning.analyze import AnalyzeReport, Observation, analyze
++from thinkhow.learning.analyze import AnalyzeReport, analyze
++from thinkhow.learning.observations import ObservationSet
+ from thinkhow.platform.config import load_settings
+ from thinkhow.platform.llm import make_llm
+ from thinkhow.platform.storage import LocalStorage
+@@ -61,8 +62,10 @@
+     assert report == AnalyzeReport(written=1, skipped=0, failed=0)
+     raw = storage.read("system", range_path(ALICE, "t-a00000000001", 1, 40))
+     assert raw is not None
+-    obs = Observation.model_validate_json(raw)
+-    assert (obs.first_turn, obs.last_turn) == (1, 40)
+-    assert obs.turn in set(range(1, 41))
+-    assert obs.link == f"/topics/{ALICE}/t-a00000000001#t{obs.turn}"
+-    assert obs.finding.strip() != ""
++    got = ObservationSet.model_validate_json(raw)
++    assert (got.first_turn, got.last_turn) == (1, 40)
++    assert got.observations
++    for obs in got.observations:
++        assert obs.turn in set(range(1, 41))
++        assert obs.link == f"/topics/{ALICE}/t-a00000000001#t{obs.turn}"
++        assert obs.finding.strip() != ""

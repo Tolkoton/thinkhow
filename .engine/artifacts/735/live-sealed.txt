@@ -1,0 +1,3 @@
+tests/contract/skel_learning/test_skell_live.py:64: ValidationError
+{"severity": "INFO", "written": 1, "skipped": 0, "failed": 0, "event": "analyze_done", "request_id": null}
+1 failed in 132.04s (0:02:12)
