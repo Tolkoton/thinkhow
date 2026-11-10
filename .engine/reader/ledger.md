@@ -336,3 +336,8 @@
 - Record: tasks/done/730-open-item-test-gap-with-thinkhow-local-true-and-no/report.md
 - Reason: All four questions hold. The file and line references match config.py and the test file, and commit 86ab174 is in .git/logs/HEAD as the «→ doing» commit. The one item of «Що зробити» (a test, red with the guard dropped, green on the code as is, code unchanged, fast suite green) is answered with both runs, there is no open question, and the technical terms are in English. The pytest, ruff and mypy outputs were never recorded in any file, so they are not checked.
 - Request: 20261110T154142Z-13ae37 (attempt 1)
+
+## 2026-11-10T16:28:44Z — 731-open-item-playwright-other-scripts — READER_PASS
+- Record: tasks/done/731-open-item-playwright-other-scripts/report.md
+- Reason: All four questions hold. The references I could check say what the report ascribes to them. Every point of «Що зробити» has an answer: plain import, a `uv run python` docstring, THINKHOW_CHROMIUM or Playwright's own Chromium, and each script run (talk_harness through the two scripts that import it). The pl-PL live run and the catch-up tests are deferred with reasons. No question is open for the owner, and the technical terms are in English. One small inconsistency, not a block: line 11 says «десять із задачі, talk_harness.py і ще два», but the task's ten already include talk_harness, and «Ріше
+- Request: 20261110T162750Z-3d6668 (attempt 1)
