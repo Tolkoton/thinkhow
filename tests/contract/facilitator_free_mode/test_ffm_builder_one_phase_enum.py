@@ -1,6 +1,7 @@
 """Builder test of task 704 (not the sealed contract): a one-phase card's schema carries an `enum`."""
 
 from ffm_fakes import ALPHA, SOLO
+from pydantic import BaseModel
 
 from thinkhow.facilitation.respond import answer_schema, update_schema
 
@@ -15,6 +16,6 @@ def test_one_phase_card_sends_an_enum_not_a_const() -> None:
             assert schema.model_validate({**_update_fields(schema), "current_phase_id": None})
 
 
-def _update_fields(schema: type) -> dict[str, object]:
+def _update_fields(schema: type[BaseModel]) -> dict[str, object]:
     base: dict[str, object] = {"phase_exit_met": False, "map_updates": []}
     return {"reply": "Так?", **base} if "reply" in schema.model_fields else base

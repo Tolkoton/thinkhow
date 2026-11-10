@@ -126,6 +126,9 @@ class ScenarioLlm:
             raw_json=self.done_raw, usage=pl.Usage(prompt_tokens=10, output_tokens=5, thought_tokens=0)
         )
 
+    def search_text(self, *args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("search_text is not part of these scenarios")
+
     def generate_json(
         self, system: str, contents: Sequence[pl.Turn], schema: type[Any], rev: pl.KnowledgeRev | None
     ) -> Any:

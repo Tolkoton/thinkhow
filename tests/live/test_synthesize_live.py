@@ -15,7 +15,7 @@ from pathlib import Path
 import pytest
 
 from thinkhow import knowledge
-from thinkhow.learning.observations import Observation, ObservationSet
+from thinkhow.learning.observations import Kind, Observation, ObservationSet
 from thinkhow.learning.synthesize import runs, synthesize
 from thinkhow.learning.vet import measure, vet_with
 from thinkhow.platform.config import load_settings
@@ -57,7 +57,7 @@ def store(tmp: Path, observations: list[Observation]) -> LocalStorage:
 
 
 def synthetic(n: int) -> list[Observation]:
-    kinds = ("stuck", "progress", "method_fit")
+    kinds: tuple[Kind, ...] = ("stuck", "progress", "method_fit")
     return [
         Observation(
             id=f"owner/t-84d1517cb1c1/t1-t400/{k}",

@@ -70,6 +70,10 @@ class RecordingStorage:
         self.calls.append(("list", bucket, prefix))
         return self._inner.list(bucket, prefix)
 
+    def delete(self, bucket: Bucket, path: str) -> None:
+        self.calls.append(("delete", bucket, path))
+        self._inner.delete(bucket, path)
+
     def writes(self) -> builtins.list[tuple[str, str, str]]:
         return [c for c in self.calls if c[0] in ("write", "create_if_absent")]
 
@@ -89,6 +93,9 @@ class RecordingLlm:
             self.fail_streams -= 1
             raise LlmUnavailable("planned")
         yield from self.inner.stream_json(system, contents, schema, rev)
+
+    def search_text(self, *args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("search_text is not part of these scenarios")
 
     def generate_json(
         self, system: str, contents: Sequence[Turn], schema: type[Any], rev: KnowledgeRev | None

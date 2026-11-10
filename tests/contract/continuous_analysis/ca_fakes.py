@@ -284,6 +284,9 @@ class FakeLlm:
     def stream_json(self, *args: Any, **kwargs: Any) -> Any:
         raise AssertionError("the analyzer must use generate_json, not stream_json")
 
+    def search_text(self, *args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("search_text is not part of these scenarios")
+
     def generate_json(
         self, system: str, contents: Sequence[Turn], schema: Any, rev: KnowledgeRev | None
     ) -> Any:

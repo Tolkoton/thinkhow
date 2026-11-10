@@ -37,6 +37,7 @@ from thinkhow.facilitation import respond  # noqa: E402
 from thinkhow.facilitation.types import Facilitate  # noqa: E402
 from thinkhow.knowledge import CurrentKnowledge  # noqa: E402
 from thinkhow.platform import llm as pl  # noqa: E402
+from thinkhow.platform.identity import IapIdentity  # noqa: E402
 from thinkhow.platform.speech import ScriptedSpeech  # noqa: E402
 from thinkhow.platform.storage import LocalStorage  # noqa: E402
 from thinkhow.web.server import Deps, create_app  # noqa: E402
@@ -90,7 +91,7 @@ def web_app(tmp_path: Path, fac: Facilitate, now: Callable[[], datetime] = lambd
     store = LocalStorage(tmp_path / "data")
     deps = Deps(
         storage=store,
-        identity=sw.IapIdentity("aud-test", sw.verify_fake),
+        identity=IapIdentity("aud-test", sw.verify_fake),
         settings=sw.settings_for(tmp_path),
         facilitate=fac,
         now=now,

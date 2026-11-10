@@ -32,8 +32,12 @@ def test_retry_passes_spoken_into_the_context(tmp_path: Path) -> None:
     for flag in (True, False, None):
         fac.scripts += [fail(), ok()]
         assert isinstance(list(reply(store, fac, ALICE, ref, "Репліка.", T0))[-1], Failed), flag
-        kw = {} if flag is None else {"spoken": flag}
-        assert isinstance(list(retry(store, fac, ALICE, ref, T0, **kw))[-1], Answered), flag
+        events = list(
+            retry(store, fac, ALICE, ref, T0)
+            if flag is None
+            else retry(store, fac, ALICE, ref, T0, spoken=flag)
+        )
+        assert isinstance(events[-1], Answered), flag
         assert fac.contexts[-1].spoken is (flag is True), flag
 
 

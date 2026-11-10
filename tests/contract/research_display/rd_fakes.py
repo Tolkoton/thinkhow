@@ -26,7 +26,8 @@ for sibling in ("research_quick", "skel_web"):
     if path not in sys.path:
         sys.path.insert(0, path)
 
-from rq_fakes import ScenarioFacilitate, put_research, upd  # noqa: E402
+from rq_fakes import ScenarioFacilitate, upd  # noqa: E402
+from rq_fakes import put_research as put_research  # noqa: E402  (re-exported for test_rd_workspace)
 
 from thinkhow.access import CurrentUser  # noqa: E402
 from thinkhow.facilitation import ReplyDelta  # noqa: E402

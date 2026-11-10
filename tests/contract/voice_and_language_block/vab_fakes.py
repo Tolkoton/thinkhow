@@ -87,6 +87,9 @@ class RecordingLlm:
         self.systems.append(system)
         yield from self.inner.stream_json(system, contents, schema, rev)
 
+    def search_text(self, *args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("search_text is not part of these scenarios")
+
     def generate_json(
         self, system: str, contents: Sequence[Turn], schema: type[Any], rev: KnowledgeRev | None
     ) -> Any:

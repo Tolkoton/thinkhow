@@ -61,8 +61,11 @@ def vertex(plans: list[list[Any]], resolve: Any) -> pl.VertexLlm:
 
 def only_done(items: list[Any]) -> pl.Done:
     done = [i for i in items if isinstance(i, pl.Done)]
-    assert len(done) == 1 and items[-1] is done[0]
-    return done[0]
+    assert len(done) == 1
+    (only,) = done
+    last = items[-1]
+    assert isinstance(last, pl.Done) and last is only
+    return last
 
 
 @pytest.fixture(autouse=True)

@@ -224,6 +224,9 @@ class FoundLlm:
         else:
             yield pl.Done(self.done_raw, USAGE, self.found)
 
+    def search_text(self, *args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("search_text is not part of these scenarios")
+
     def generate_json(
         self, system: str, contents: Sequence[pl.Turn], schema: type[Any], rev: pl.KnowledgeRev | None
     ) -> Any:
