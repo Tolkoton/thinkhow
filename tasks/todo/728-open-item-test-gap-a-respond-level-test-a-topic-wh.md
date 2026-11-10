@@ -1,8 +1,15 @@
 # 728 — Брак тесту (overseer): A respond-level test: a topic whose first reply is a router ask (or a fact answer), then a choose on turn 3. It asserts that FIRST_REPLY_LINE is in the frame of the first facilitator reply. Or else, t
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: test-gap-a-respond-level-test-a-topic-whose-first-reply-is-a-router-a-a76cec0f
+
+## Рішення власника
+Слова власника (2026-11-10, сесія Thinkhow; записано Claude зі слів власника): «Добре, став ті задачі і попередні
+всі задачі теж став. Давай докінчимо це.» — «попередні всі задачі» — усі пропозиції з `tasks/proposed/`.
 
 ## Що сталося
 Overseer прийняв юніт `-|310-router-leads-one-method|unit 1` (PASS, запит `20261028T045936Z-cd789a`) і знайшов брак тесту: _state adds the line only when the history has no model turn. On a topic that opened with an ask or an answer, the line never appears, so the person is never told the opinion can be asked. That is the task's variant A promise. Today's tests only try a choose on turn 1 with an empty history. Де: `tests/contract/router/test_rt_310_leads_one_method.py`. Вердикт — у ledger: `python3 .claude/hooks/journal.py show ledger`.

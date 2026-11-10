@@ -1,8 +1,15 @@
 # 722 — Брак тесту (overseer): scripts/analyze_owner_conversation.py keeps the raw JSON of every attempt in the artifact (attempt 1 included), as Seam 4 requires ('сирий JSON кожного прогону')
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: test-gap-scripts-analyze-owner-conversation-py-keeps-the-raw-json-of-3a76c7f3
+
+## Рішення власника
+Слова власника (2026-11-10, сесія Thinkhow; записано Claude зі слів власника): «Добре, став ті задачі і попередні
+всі задачі теж став. Давай докінчимо це.» — «попередні всі задачі» — усі пропозиції з `tasks/proposed/`.
 
 ## Що сталося
 Overseer повернув юніт `analysis-rules|309-close-learning-loop|unit 2` (BLOCK, запит `20261027T174608Z-f15f28`) і назвав ще й брак тесту: the artifact now holds only attempt 2's raw JSON; attempt 1 is a prose summary, and its old-analyzer anchor (t18, per premise-log PR-27) disagrees with the t15 the artifact shows — nothing checks that each run's record survives Де: `scripts/analyze_owner_conversation.py`. Вердикт — у ledger: `python3 .claude/hooks/journal.py show ledger`.

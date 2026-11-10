@@ -1,8 +1,15 @@
 # 727 — Брак тесту (overseer): the smoke's 'no question about it again' step asserts that the page has no .step-question section, not only that the text is missing after the «Кроки» heading
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: test-gap-the-smoke-s-no-question-about-it-again-step-asserts-that-the-f91634a3
+
+## Рішення власника
+Слова власника (2026-11-10, сесія Thinkhow; записано Claude зі слів власника): «Добре, став ті задачі і попередні
+всі задачі теж став. Давай докінчимо це.» — «попередні всі задачі» — усі пропозиції з `tasks/proposed/`.
 
 ## Що сталося
 Overseer повернув юніт `step-results|309-close-learning-loop|unit 6` (BLOCK, запит `20261028T002152Z-d47deb`) і назвав ще й брак тесту: a template that put the question line before the «Кроки» block would still pass, because the check only looks at the text after 'Кроки' Де: `scripts/smoke_test_learning_loop.py`. Вердикт — у ledger: `python3 .claude/hooks/journal.py show ledger`.

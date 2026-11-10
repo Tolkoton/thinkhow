@@ -1,8 +1,15 @@
 # 736 — Два тести walking-skeleton-block читають старий вигляд спостереження
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: wsblock-tests-old-observation-shape
+
+## Рішення власника
+Слова власника (2026-11-10, сесія Thinkhow; записано Claude зі слів власника): «Добре, став ті задачі і попередні
+всі задачі теж став. Давай докінчимо це.» — «попередні всі задачі» — усі пропозиції з `tasks/proposed/`.
 
 ## Що сталося
 Повний прогін у задачі 720 (4 failed, 1521 passed) показав два червоні тести: tests/contract/walking_skeleton_block/test_wsblock_connections.py::test_s4_learning_reads_every_topic_and_topic_sessions_numbered_across_the_topic і ::test_s6_observation_link_of_a_persons_topic_opens_the_turn_for_the_owner. Обидва падають з KeyError: 'turn'. Вони читають файл спостереження як одне спостереження, а з analysis-rules це набір (ObservationSet). Без змін задачі 720 вони теж червоні (перевірено на bd68d21). Exit criterion analysis-rules називає objection-пакет і до walking-skeleton-block.

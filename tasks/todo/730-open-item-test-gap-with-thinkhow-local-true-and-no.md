@@ -1,8 +1,15 @@
 # 730 — Брак тесту (overseer): with THINKHOW_LOCAL=true and no THINKHOW_IAP_AUDIENCE, reading app.app goes on to build_deps (stub records the call) without raising ConfigError
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: test-gap-with-thinkhow-local-true-and-no-thinkhow-iap-audience-readin-02f31d5c
+
+## Рішення власника
+Слова власника (2026-11-10, сесія Thinkhow; записано Claude зі слів власника): «Добре, став ті задачі і попередні
+всі задачі теж став. Давай докінчимо це.» — «попередні всі задачі» — усі пропозиції з `tasks/proposed/`.
 
 ## Що сталося
 Overseer прийняв юніт `-|705-open-item-iap-audience-required|unit 1` (PASS, запит `20261028T090729Z-32ceb8`) і знайшов брак тесту: refuse_web_without_iap_audience with the `not settings.local` guard dropped would refuse local mode at the entry point. Every current test sets cloud env, so all of them still pass Де: `tests/web/test_iap_audience_required.py`. Вердикт — у ledger: `python3 .claude/hooks/journal.py show ledger`.

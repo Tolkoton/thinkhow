@@ -1,8 +1,15 @@
 # 726 — Брак тесту (overseer): a test where a memory change is published between two field reads inside one reply, asserting that the routing decision's rev and the memory in the instruction come from the same revision
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: test-gap-a-test-where-a-memory-change-is-published-between-two-field-53b1082c
+
+## Рішення власника
+Слова власника (2026-11-10, сесія Thinkhow; записано Claude зі слів власника): «Добре, став ті задачі і попередні
+всі задачі теж став. Давай докінчимо це.» — «попередні всі задачі» — усі пропозиції з `tasks/proposed/`.
 
 ## Що сталося
 Overseer повернув юніт `notes-readers|309-close-learning-loop|unit 4` (BLOCK, запит `20261027T214157Z-023d21`) і назвав ще й брак тесту: rev_pair read from revision N while memory is read from revision N+1 passes every current test Де: `tests/web/test_live_knowledge.py`. Вердикт — у ledger: `python3 .claude/hooks/journal.py show ledger`.
