@@ -1,6 +1,6 @@
 """Live acceptance of the conversation mode (task 308, AC5): the browser stand on the real models.
 
-Run: `uv run --with playwright==1.64.1 python scripts/live_conversation_mode.py [uk-UA pl-PL]`. For each
+Run: `uv run python scripts/live_conversation_mode.py [uk-UA pl-PL]`. For each
 language: one click on «Режим розмови», then the person's recorded turns
 (`tests/fixtures/voice/conversation/<lang>-<n>.mp3`, 6 each) with no touch; the server is
 `scripts/live_app.py` (Gemini `eu` with search, `gemini-3.5-transcribe`, Cloud TTS `eu`). Writes

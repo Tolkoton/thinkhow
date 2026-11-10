@@ -1,14 +1,13 @@
 """Screenshots and checks of task 203: the caption of the thinking model on a topic; real uvicorn + Chromium.
 
-Run: `PYTHONPATH=src uv run --with playwright==1.64.1 python scripts/screenshots_current_model.py --out <dir>`
-(Playwright is no project dependency). Chromium: `THINKHOW_CHROMIUM`, else the cached chromium-1208.
+Run: `PYTHONPATH=src uv run python scripts/screenshots_current_model.py --out <dir>`
+(Playwright is a dev dependency). Chromium: `THINKHOW_CHROMIUM`, else Playwright's own.
 Seeds one topic through `workspace.reply` with a scripted facilitator (offer → «П'ять чому» to its end → the
 weighted matrix at phase 2), then a fresh topic through the browser and the local model: «вільна розмова»
 before the first reply, the card after it. Asserts by itself, leaves the PNGs in <dir>, ends with `OK:`.
 """
 
 import argparse
-import importlib
 import os
 import subprocess
 import sys
@@ -18,14 +17,13 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from playwright.sync_api import sync_playwright
 from screenshots_minimal_design import CHROMIUM, DESKTOP, PHONE, free_port, new_page, wait_for
 
 from thinkhow.access import CurrentUser
 from thinkhow.facilitation.types import Decision, FacilitatorUpdate, ReplyDelta, RoutingEvent
 from thinkhow.platform.storage import LocalStorage
 from thinkhow.workspace import TopicRef, create_topic, reply, set_language
-
-sync_playwright = importlib.import_module("playwright.sync_api").sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 OWNER = CurrentUser(id="local-owner", email="owner@localhost", is_owner=True)

@@ -1,6 +1,6 @@
 """Screenshots and checks of task 208: the interface speaks the language the person chose.
 
-Run: `uv run --with playwright==1.64.1 python scripts/screenshots_interface_language.py --out <dir>`.
+Run: `uv run python scripts/screenshots_interface_language.py --out <dir>`.
 For each language a fresh uvicorn in local mode and a Chromium whose browser language is that language:
 the language page before the choice (in the browser's language), the choice, a topic with one reply and its
 answer, «Мої теми» with the delete confirmation open, the language page after the choice. Every page is
@@ -8,7 +8,6 @@ checked against the language's catalog and for the absence of the Ukrainian word
 """
 
 import argparse
-import importlib
 import os
 import re
 import subprocess
@@ -18,9 +17,8 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from playwright.sync_api import sync_playwright
 from smoke_test_voice_dictation import CHROMIUM, FLAGS, ROOT, free_port, wait_for
-
-sync_playwright = importlib.import_module("playwright.sync_api").sync_playwright
 
 sys.path.insert(0, str(ROOT / "src"))
 from thinkhow.web import ui_text  # noqa: E402

@@ -3,12 +3,11 @@
 The page's own code is untouched: `getUserMedia` returns a stream from an AudioContext of the stand, and each
 time the mode's button (`#talk[data-state]`) becomes `listening`, the stand plays the next recorded turn into
 that stream after `DELAY_MS`. Nobody touches the page after the one click on `#talk`. Used by
-`smoke_test_conversation_mode.py` (local mode) and `live_conversation_mode.py` (real models). Playwright is no
-project dependency (`uv run --with …`).
+`smoke_test_conversation_mode.py` (local mode) and `live_conversation_mode.py` (real models).
+Playwright is a dev dependency; Chromium: `THINKHOW_CHROMIUM`, else Playwright's own.
 """
 
 import base64
-import importlib
 import json
 import os
 import socket
@@ -20,11 +19,11 @@ from pathlib import Path
 from typing import Any
 
 import httpx
+from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 CLIPS = ROOT / "tests" / "fixtures" / "voice" / "conversation"
-CACHED = Path.home() / ".cache/ms-playwright/chromium-1208/chrome-linux64/chrome"
-CHROMIUM = os.environ.get("THINKHOW_CHROMIUM", str(CACHED))
+CHROMIUM = os.environ.get("THINKHOW_CHROMIUM") or None
 DELAY_MS = 600
 
 FAKE_MIC = """
@@ -110,7 +109,6 @@ def talk(
     base: str, language: str, title: str, turns: int, turn_timeout_s: float, shots: Path | None = None
 ) -> Run:
     """Flow: a language and a topic → the page → one click on #talk → wait for `turns` spoken answers."""
-    sync_playwright = importlib.import_module("playwright.sync_api").sync_playwright
     httpx.post(base + "/language", data={"code": language})
     topic = httpx.post(base + "/topics", data={"title": title}).headers["location"]
     with sync_playwright() as p:

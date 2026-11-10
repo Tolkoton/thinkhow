@@ -1,18 +1,18 @@
 """Smoke of slice conversation-resilience: Chromium, local mode; one /speak fails, the mode goes on.
 
-Run: `uv run --with playwright==1.64.1 python scripts/smoke_test_conversation_resilience.py`. The stand of
+Run: `uv run python scripts/smoke_test_conversation_resilience.py`. The stand of
 `talk_harness.py`, plus: the second `/speak` of the run answers 502 (Playwright `route`), and spies record
 `navigator.wakeLock.request` and the frequency of every oscillator the page starts. After one click: 3 cycles,
 one `/speak` fewer answered 200 than asked, a wake lock for "screen", at least 3 listening tones (~880 Hz).
 Writes its output to `.engine/artifacts/conversation-resilience/smoke.txt` itself.
 """
 
-import importlib
 import json
 import tempfile
 import time
 from typing import Any
 
+from playwright.sync_api import sync_playwright
 from talk_harness import CHROMIUM, FAKE_MIC, ROOT, clips, serve
 
 OUT = ROOT / ".engine" / "artifacts" / "conversation-resilience"
@@ -67,7 +67,6 @@ def main() -> None:
 def run(base: str) -> dict[str, Any]:
     import httpx
 
-    sync_playwright = importlib.import_module("playwright.sync_api").sync_playwright
     httpx.post(base + "/language", data={"code": "uk-UA"})
     topic = httpx.post(base + "/topics", data={"title": "Стійкість"}).headers["location"]
     speak: list[int] = []

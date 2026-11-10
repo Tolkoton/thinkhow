@@ -1,13 +1,12 @@
 """Screenshots and checks of slice minimal-design: real uvicorn in local mode + real Chromium.
 
-Run: `uv run --with playwright==1.64.1 python scripts/screenshots_minimal_design.py --out <dir>`
-(Playwright is no project dependency). Chromium: `THINKHOW_CHROMIUM`, else the cached chromium-1208.
+Run: `uv run python scripts/screenshots_minimal_design.py --out <dir>`
+(Playwright is a dev dependency). Chromium: `THINKHOW_CHROMIUM`, else Playwright's own.
 Asserts by itself (Seams 1–3 of .engine/slices/minimal-design.md), prints steps, leaves the PNGs in <dir>,
 ends with an `OK:` line.
 """
 
 import argparse
-import importlib
 import os
 import socket
 import subprocess
@@ -19,13 +18,10 @@ from pathlib import Path
 from typing import Any
 
 import httpx
-
-# Playwright is no project dependency (run with `uv run --with playwright…`), so it is loaded by name.
-sync_playwright = importlib.import_module("playwright.sync_api").sync_playwright
+from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-CACHED = Path.home() / ".cache/ms-playwright/chromium-1208/chrome-linux64/chrome"
-CHROMIUM = os.environ.get("THINKHOW_CHROMIUM", str(CACHED))
+CHROMIUM = os.environ.get("THINKHOW_CHROMIUM") or None
 DESKTOP: dict[str, Any] = {"viewport": {"width": 1280, "height": 900}}
 PHONE: dict[str, Any] = {
     "viewport": {"width": 390, "height": 844},

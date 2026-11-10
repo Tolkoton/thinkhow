@@ -1,7 +1,7 @@
 """Screenshots and checks of task 204: deleting a topic from the list, its only place since 211.
 
-Run: `PYTHONPATH=src uv run --with playwright==1.64.1 python scripts/screenshots_delete_topic.py --out <dir>`
-(Playwright is no project dependency). Chromium: `THINKHOW_CHROMIUM`, else the cached chromium-1208.
+Run: `PYTHONPATH=src uv run python scripts/screenshots_delete_topic.py --out <dir>`
+(Playwright is a dev dependency). Chromium: `THINKHOW_CHROMIUM`, else Playwright's own.
 Makes three topics in the browser, each with one reply of the local model (so map.json and routing.json
 exist), deletes two from the list (desktop and phone; the page has no bin), each through the one
 confirmation, and checks the folder of a deleted topic in the local `users` bucket is empty while the
@@ -9,7 +9,6 @@ kept topic keeps its files. Leaves the PNGs in <dir>, ends with `OK:`.
 """
 
 import argparse
-import importlib
 import os
 import subprocess
 import sys
@@ -17,9 +16,8 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from playwright.sync_api import sync_playwright
 from screenshots_minimal_design import CHROMIUM, DESKTOP, PHONE, free_port, new_page, wait_for
-
-sync_playwright = importlib.import_module("playwright.sync_api").sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 UID = "local-owner"

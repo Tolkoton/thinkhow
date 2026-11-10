@@ -1,6 +1,6 @@
 """Browser check of task 206: «Говорити» → «Надіслати» → text in the field, nothing sent → «Надіслати» → sent.
 
-Run: `uv run --with playwright==1.64.1 python scripts/smoke_test_send_stops_recording.py`.
+Run: `uv run python scripts/smoke_test_send_stops_recording.py`.
 Real uvicorn in local mode, real Chromium with a fake microphone (helpers of smoke_test_voice_dictation.py).
 Asserts by itself.
 """
@@ -12,7 +12,8 @@ import tempfile
 import time
 from typing import Any
 
-from smoke_test_voice_dictation import CHROMIUM, FLAGS, LOCAL_TEXT, ROOT, free_port, sync_playwright, wait_for
+from playwright.sync_api import sync_playwright
+from smoke_test_voice_dictation import CHROMIUM, FLAGS, LOCAL_TEXT, ROOT, free_port, wait_for
 
 
 def main() -> None:

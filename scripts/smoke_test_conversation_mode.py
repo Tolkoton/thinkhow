@@ -1,6 +1,6 @@
 """Smoke of slice conversation-loop: real uvicorn in local mode + Chromium whose microphone speaks turns.
 
-Run: `uv run --with playwright==1.64.1 python scripts/smoke_test_conversation_mode.py`. One click on «Режим
+Run: `uv run python scripts/smoke_test_conversation_mode.py`. One click on «Режим
 розмови», then 3 cycles «turn → text → answer → voice → listening» with no touch. Asserts by itself.
 """
 

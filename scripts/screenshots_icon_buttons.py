@@ -1,6 +1,6 @@
 """Screenshots and checks of task 207: the buttons are icons, the mic shows its state without words.
 
-Run: `uv run --with playwright==1.64.1 python scripts/screenshots_icon_buttons.py --out <dir>`.
+Run: `uv run python scripts/screenshots_icon_buttons.py --out <dir>`.
 Real uvicorn in local mode, real Chromium with a fake microphone (helpers of smoke_test_voice_dictation.py).
 Shoots «Мої теми» with the delete confirmation open, the topic page idle, recording, recognizing (the /voice
 request held) and waiting for the answer (the /reply request held) — then lets both go and checks the
@@ -16,7 +16,8 @@ import time
 from pathlib import Path
 from typing import Any
 
-from smoke_test_voice_dictation import CHROMIUM, FLAGS, LOCAL_TEXT, ROOT, free_port, sync_playwright, wait_for
+from playwright.sync_api import sync_playwright
+from smoke_test_voice_dictation import CHROMIUM, FLAGS, LOCAL_TEXT, ROOT, free_port, wait_for
 
 PHONE: dict[str, Any] = {
     "viewport": {"width": 390, "height": 844},

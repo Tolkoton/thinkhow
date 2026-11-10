@@ -18,7 +18,8 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from smoke_test_voice_dictation import CHROMIUM, ROOT, free_port, sync_playwright, wait_for
+from playwright.sync_api import sync_playwright
+from smoke_test_voice_dictation import CHROMIUM, ROOT, free_port, wait_for
 
 FILES = ROOT / "tests" / "contract" / "document_upload" / "files"
 UK = json.loads((ROOT / "src" / "thinkhow" / "web" / "locales" / "uk.json").read_text(encoding="utf-8"))

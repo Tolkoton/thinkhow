@@ -1,7 +1,7 @@
 """Screenshots and checks of task 209: renaming a topic in the list, its only place since 211.
 
-Run: `PYTHONPATH=src uv run --with playwright==1.64.1 python scripts/screenshots_rename_topic.py --out <dir>`
-(Playwright is no project dependency). Chromium: `THINKHOW_CHROMIUM`, else the cached chromium-1208.
+Run: `PYTHONPATH=src uv run python scripts/screenshots_rename_topic.py --out <dir>`
+(Playwright is a dev dependency). Chromium: `THINKHOW_CHROMIUM`, else Playwright's own.
 Puts another person's topic into the local `users` bucket, makes two own topics in the browser, renames one
 in the list by Enter and one by the check icon (its page has no pencil), checks Esc puts the old
 title back, an empty title is not saved, both new titles stand in both places after a reload, the
@@ -10,7 +10,6 @@ refuses a rename with 404. Leaves the PNGs in <dir>, ends with `OK:`.
 """
 
 import argparse
-import importlib
 import os
 import subprocess
 import sys
@@ -18,9 +17,8 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from playwright.sync_api import sync_playwright
 from screenshots_minimal_design import CHROMIUM, DESKTOP, PHONE, free_port, new_page, wait_for
-
-sync_playwright = importlib.import_module("playwright.sync_api").sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 UID = "local-owner"
