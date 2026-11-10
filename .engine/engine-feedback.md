@@ -95,3 +95,17 @@ From: lesson #d34aa232 (gate, document-upload, 2026-11-03).
 The Stop gate type-checks spike scripts under .engine/artifacts/spikes/ although pyproject's ruff excludes .engine as 'spike and probe scripts, not working code'; mypy has no such exclusion (task 311, 2026-11-03).
 
 From: lesson #95f78217 (gate, document-upload, 2026-11-03).
+
+## 2026-11-10 — testing.py: five old parks stay PARKED and CHANGED; the repeat review comes early
+
+Two things task 707 (the testing review after ten slices) saw in the ledger. (1) skel-web, skel-learning,
+skel-guards-deploy, skel-facilitation and conversation-loop still show `seal: CHANGED … ; PARKED` in
+`testing.py status`, although the owner answered each park (tasks 708, 718, 720, 721, 724 are in `done/`) and the
+builder fixed the tests as told. `supersede` (v0.14.3) un-parks only when a new contract's round runs; for parks
+that came before it, nothing clears the mark (the 2026-10-23 entry above). (2) `review_task` counts the slices no
+`review_task` row has counted yet. The only row here is 707's (10 slices); engine task 504 reviewed 35 slices but
+wrote no row in this ledger. So the next point-(b) decision will lay a repeat review over 27 slices, 25 of them
+already in 504's review, and none of them built on v0.14.4. The owner's answer 1А to 504 asked for a review after
+10 slices on the updated engine.
+
+From: task 707, review.

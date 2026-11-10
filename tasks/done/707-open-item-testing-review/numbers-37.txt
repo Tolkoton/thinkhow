@@ -1,0 +1,1 @@
+37 slices: Invariants: записано 124 у 34 slice-ах; «немає — причина» — 3; slice contract без розділу — 0. Помилки в коді, який уже пройшов contract tests tester-а (35 slice-ів): overseer заблокував за перевіркою №4 — 0, пропустив (PASS) із test gaps — 13; інтеграційних тестів упало — 1.

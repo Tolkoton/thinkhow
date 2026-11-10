@@ -281,3 +281,13 @@
 - Record: tasks/done/737-open-item-full-run-step-results-smoke-fail/report.md
 - Reason: All four checks hold. Every reference I could open says what the report claims. Each part of «Що зробити» (find the test, explain why the cards change, write to tmp, fail when the real records change) is answered in the report and the code. The task file's only owner question already has an answer, and the report raises no new one. Technical terms in the report are English (commit, runner, script). The two commit shas and the test-run counts could not be checked with the tools I have.
 - Request: 20261107T090341Z-89ef8e (attempt 1)
+
+## 2026-11-10T09:38:50Z — 707-open-item-testing-review — READER_BLOCK
+- Record: tasks/done/707-open-item-testing-review/report.md
+- Reason: Question 1 fails at one number. Report line 93 says the definition-change proposals are «ті п'ять, що дав 504», but the table under it (lines 97–102) has six rows. The 504 report shows six proposals: five (1769–1773) plus a separate new one, 1777. Questions 2–4 hold. The two questions the task asked for were already answered in 504, and the report says so with the verbatim quote. There is no open owner question, and the engine terms are in English.
+- Request: 20261110T093746Z-baf226 (attempt 1)
+
+## 2026-11-10T09:40:10Z — 707-open-item-testing-review — READER_PASS
+- Record: tasks/done/707-open-item-testing-review/report.md
+- Reason: All four questions hold. Every reference I could check matches its source, and the earlier BLOCK (five proposals vs six) is fixed at line 93. Every «Що зробити» item is answered, including the two owner questions: the report shows they were already answered in engine task 504 («504 1а 2а») and explains why it does not ask them again. The report opens no new question for the owner, and the engine terms are in English.
+- Request: 20261110T093900Z-c2e308 (attempt 2)
