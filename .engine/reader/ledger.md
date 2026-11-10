@@ -301,3 +301,8 @@
 - Record: tasks/done/719-open-item-test-gap-test-changes-rollback-changed-i/report.md
 - Reason: All four questions hold. The test file matches what the report says it does. The references it makes to versions.py, proposal 746, the sealed files, smoke.txt, cd66df9 and tasks 713/717 check out. The one item of «Що зробити» (red runs, a green run, no code change, suite green) is answered. There are no open owner questions in the report or the task file. Engine terms stay English. The pytest/ruff/mypy outputs are not recorded anywhere I can read, so they are not verified.
 - Request: 20261110T112757Z-52c89f (attempt 1)
+
+## 2026-11-10T11:52:41Z — 722-open-item-test-gap-scripts-analyze-owner-conversat — READER_PASS
+- Record: tasks/done/722-open-item-test-gap-scripts-analyze-owner-conversat/report.md
+- Reason: All four questions hold. Every reference I could check says what the report claims. The one «Що зробити» item is covered: a test that goes red on the named breakages and green on the code as is, no code change, both runs shown, the suite green. There are no open questions for the owner. Engine terms stay in English. The red-run outputs, the history of commits 9b2e243 and 4eeebf1, and the sha1sum are not recorded in any file I can read, so I could not check them.
+- Request: 20261110T115159Z-44473b (attempt 1)
