@@ -167,7 +167,13 @@ def _routes(app: FastAPI, deps: Deps) -> None:
 
     @app.post("/topics/{uid}/{topic_id}/delete")
     def delete(user: User, uid: str, topic_id: str) -> Response:
-        workspace.delete_topic(deps.storage, user, workspace.TopicRef(uid, topic_id))
+        """An own topic that is already gone (a second click while `/` loads) goes home too (task 212);
+        a foreign one stays a 404 (G4)."""
+        try:
+            workspace.delete_topic(deps.storage, user, workspace.TopicRef(uid, topic_id))
+        except workspace.TopicNotFound:
+            if uid != user.id:
+                raise
         return RedirectResponse("/", status_code=303)
 
     @app.post("/topics/{uid}/{topic_id}/rename")

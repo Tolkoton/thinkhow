@@ -237,6 +237,17 @@ def test_post_delete_removes_the_topic_and_goes_home(tmp_path: Path) -> None:
     assert client.get(_url(ref), headers=H_ALICE).status_code == 404
 
 
+def test_a_second_delete_of_the_own_topic_goes_home_without_an_error(tmp_path: Path) -> None:
+    """Task 212: the person clicks the confirmation twice while `/` loads; the second click finds no topic
+    and must lead to the list «Мої теми», not to «Тему не знайдено.»."""
+    store = LocalStorage(tmp_path)
+    client = _client(tmp_path, store)
+    ref = _topic(store, ALICE, "Непотрібна розмова")
+    client.post(_url(ref) + "/delete", headers=H_ALICE, follow_redirects=False)
+    r = client.post(_url(ref) + "/delete", headers=H_ALICE, follow_redirects=False)
+    assert (r.status_code, r.headers.get("location")) == (303, "/")
+
+
 def test_post_delete_of_a_foreign_topic_is_404_and_deletes_nothing(tmp_path: Path) -> None:
     store = LocalStorage(tmp_path)
     client = _client(tmp_path, store)

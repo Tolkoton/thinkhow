@@ -1,5 +1,9 @@
 # PROGRESS
 
+## Bugfix 002-delete-twice-not-found — DONE 2026-11-10
+
+- Record: `.engine/bugs/002-delete-twice-not-found.md` (task 212)
+
 
 ## Slice 1 — skel-platform (DONE 2026-10-22)
 
