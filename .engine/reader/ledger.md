@@ -316,3 +316,8 @@
 - Record: tasks/done/725-open-item-test-gap-a-web-test-that-wraps-liveknowl/report.md
 - Reason: Every reference I could check is correct: LiveKnowledge is at app.py:52, the old test does count latest_pair over 25 notes, and both commits exist with matching subjects. The task's one «Що зробити» item has its answer: the test is added, a red run and a green run are both shown, and no code changed. There are no open questions, and the engine terms in the report are in English.
 - Request: 20261110T134039Z-ef0394 (attempt 1)
+
+## 2026-11-10T14:05:55Z — 726-open-item-test-gap-a-test-where-a-memory-change-is — READER_PASS
+- Record: tasks/done/726-open-item-test-gap-a-test-where-a-memory-change-is/report.md
+- Reason: Every reference I could check says what the report says it does: the test file lines, LiveKnowledge at app.py:52, the single now() snapshot at respond.py:46, the overseer request and its quote, commits 043f651 and cd1d07e (described the same way in task 725's report), and the 1641-test count. The one item in «Що зробити» is answered (red runs M1–M4, a green run, no code changed, suite green), there is no open question for the owner, and engine terms stay in English.
+- Request: 20261110T140528Z-d23952 (attempt 1)
