@@ -25,6 +25,7 @@ from thinkhow.facilitation.types import (
     ReplyDelta,
     ResearchEvent,
     RoutingEvent,
+    StepOutcome,
     current_card,
 )
 from thinkhow.facilitation.types import Turn as FacilitationTurn
@@ -308,20 +309,36 @@ def _recognize(
 ) -> None:
     """The answer right after the question about a step: recognize it into the record (before Answered)."""
     steps = read_steps(storage, ref)
-    open_ones = [s for s in steps if s.asked_turn == turn_no - 1 and s.outcome is None]
-    if not open_ones:
+    record = _open_record(steps, turn_no)
+    if record is None:
         return
-    record = open_ones[0]
-    asked = next((t.text for s in conv.sessions for t in s.turns if t.no == record.asked_turn), "")
+    found = _recognized(recognize, record, _asked_text(conv, record.asked_turn), text)
+    if found is None:
+        return
+    done = record.model_copy(update={"outcome": found.outcome, "clearer": found.clearer, "said": found.said})
+    _write_steps(storage, ref, [done if s is record else s for s in steps])
+
+
+def _open_record(steps: Sequence[StepResult], turn_no: int) -> StepResult | None:
+    """The step asked about in the turn before this answer and not yet recognized, if any."""
+    return next((s for s in steps if s.asked_turn == turn_no - 1 and s.outcome is None), None)
+
+
+def _asked_text(conv: conv_file.Conversation, asked_turn: int) -> str:
+    """The text of the question turn; empty when the conversation has no such turn."""
+    return next((t.text for s in conv.sessions for t in s.turns if t.no == asked_turn), "")
+
+
+def _recognized(recognize: Recognize, record: StepResult, asked: str, text: str) -> StepOutcome | None:
+    """The outcome when the answer answers the step; None when it does not or recognition failed."""
     try:
         found = recognize(record.step, asked, text)
     except Exception as exc:  # the answer is given already; the record stays as asked
         log_event("step_recognize_failed", severity="WARNING", error=type(exc).__name__)
-        return
+        return None
     if found is None or not found.answered:
-        return
-    done = record.model_copy(update={"outcome": found.outcome, "clearer": found.clearer, "said": found.said})
-    _write_steps(storage, ref, [done if s is record else s for s in steps])
+        return None
+    return found
 
 
 def topic_routing(storage: Storage, ref: TopicRef) -> tuple[Decision, ...]:
