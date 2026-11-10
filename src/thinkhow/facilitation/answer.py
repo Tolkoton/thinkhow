@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from thinkhow.facilitation.language import language_rule, listening_rule
-from thinkhow.facilitation.settle import RESEARCH_SECTION, frame, settle, with_research
+from thinkhow.facilitation.settle import FIRST_REPLY_LINE, RESEARCH_SECTION, frame, settle, with_research
 from thinkhow.facilitation.types import (
     FacilitationContext,
     FacilitatorUpdate,
@@ -27,8 +27,14 @@ FACT_RETRY_ASK = "Поверни лише зміни карти до своєї 
 def answer_fact(
     ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm
 ) -> Iterator[ReplyDelta | FacilitatorUpdate | ResearchEvent]:
-    """Flow: the instruction → one streamed call → the deltas on → settle the update → what search found."""
-    system, contents, rev = answer_instruction(ctx.language, ctx.spoken), frame(ctx), knowledge.rev_pair()
+    """Flow: the instruction → one streamed call → the deltas on → settle the update → what search found.
+    On the topic's first reply the frame carries the first-reply line (bug 004)."""
+    first = "" if any(t.role == "model" for t in ctx.history) else f"{FIRST_REPLY_LINE}\n\n"
+    system, contents, rev = (
+        answer_instruction(ctx.language, ctx.spoken),
+        frame(ctx, first),
+        knowledge.rev_pair(),
+    )
     shown: list[str] = []
     raw, found = "", None
     for event in llm.stream_json(system, contents, FactAnswer, rev):

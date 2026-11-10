@@ -1,5 +1,9 @@
 # PROGRESS
 
+## Bugfix 004-first-reply-after-ask — DONE 2026-11-10
+
+- Record: `.engine/bugs/004-first-reply-after-ask.md` (task 728)
+
 ## Bugfix 003-hung-router-call — DONE 2026-11-10
 
 - Record: `.engine/bugs/003-hung-router-call.md` (task 313)

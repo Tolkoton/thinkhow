@@ -22,6 +22,10 @@ from thinkhow.platform import llm as model
 
 RESEARCH_SECTION = (Path(__file__).with_name("research.md")).read_text(encoding="utf-8").rstrip("\n")
 SOURCES_HEAD = "\n\nДжерела: "
+FIRST_REPLY_LINE = (
+    "[Стан] Перша відповідь у темі: перед питанням одним реченням скажи, що будь-коли можна спитати "
+    "твою думку («що б ти обрав?») або попросити інший спосіб."
+)
 Fill = Callable[[dict[str, Any]], dict[str, Any]]
 
 

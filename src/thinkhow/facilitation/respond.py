@@ -14,6 +14,7 @@ from thinkhow.facilitation.deep import with_deep
 from thinkhow.facilitation.language import NO_LANGUAGE_RULE as NO_LANGUAGE_RULE
 from thinkhow.facilitation.language import language_rule as language_rule
 from thinkhow.facilitation.language import listening_rule
+from thinkhow.facilitation.settle import FIRST_REPLY_LINE as FIRST_REPLY_LINE
 from thinkhow.facilitation.settle import RESEARCH_SECTION as RESEARCH_SECTION
 from thinkhow.facilitation.settle import frame, settle, with_research
 from thinkhow.facilitation.settle import sources_line as sources_line
@@ -35,7 +36,6 @@ ROUTED_SECTION = (Path(__file__).with_name("routed.md")).read_text(encoding="utf
 DEEP_FIELD = (Path(__file__).with_name("deep_field.md")).read_text(encoding="utf-8").rstrip("\n")
 FREE_MODE_LINE = "[Стан] Вільний режим уже триває: людина чула, що картка не підходить. Не кажи цього знову."
 JUST_CHOSEN_LINE = "[Стан] Метод щойно обрано: почни з його пояснення за правилом вище, далі — перше питання."
-FIRST_REPLY_LINE = "[Стан] Перша відповідь у темі: скажи про це за правилом вище."
 
 
 def respond(

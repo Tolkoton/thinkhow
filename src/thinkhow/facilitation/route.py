@@ -14,6 +14,7 @@ from typing import Any, ClassVar, Literal, cast
 from pydantic import ValidationError, create_model, field_validator, model_validator
 
 from thinkhow.facilitation.language import language_rule, listening_rule
+from thinkhow.facilitation.settle import FIRST_REPLY_LINE
 from thinkhow.facilitation.types import (
     Candidate,
     Decision,
@@ -124,10 +125,12 @@ def _one_line(text: str) -> str:
 
 
 def _contents(ctx: FacilitationContext) -> list[model.Turn]:
-    """The topic's history as the facilitator sees it, then one frame: routing state, map, the turn."""
+    """The topic's history as the facilitator sees it, then one frame: routing state, map, the first-reply
+    line on the topic's first reply (bug 004), the turn."""
+    first = "" if any(t.role == "model" for t in ctx.history) else f"{FIRST_REPLY_LINE}\n\n"
     frame = (
         f"[Стан вибору способу]\n{_routing_state(ctx.routing or ())}\n\n"
-        f"[Карта проблеми зараз]\n{ctx.problem_map.model_dump_json()}\n\n"
+        f"[Карта проблеми зараз]\n{ctx.problem_map.model_dump_json()}\n\n{first}"
         f"[Репліка людини #{ctx.turn_no}]\n{ctx.text}"
     )
     return [*(model.Turn(t.role, t.text) for t in ctx.history), model.Turn("user", frame)]
