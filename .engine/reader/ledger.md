@@ -296,3 +296,8 @@
 - Record: tasks/done/717-open-item-test-gap-a-cl-talk-test-where-with-the-m/report.md
 - Reason: Every reference I could check says what the report says it does: commits be86d83 and f8e999f, the cl_talk 409 test (it does not assert #mic/#send), cl_disputed_q4_enable (it covers only the /voice error), failed() with `return halt()` for 409, the separate-file precedent in task 713, and both new test files. The task's one item (a test that fails on the named defects and passes on the code as it is, with both runs, code unchanged, fast suite green) is answered. There is no open question for the owner, and the technical terms are in English.
 - Request: 20261110T101501Z-18d2e7 (attempt 1)
+
+## 2026-11-10T11:28:30Z — 719-open-item-test-gap-test-changes-rollback-changed-i — READER_PASS
+- Record: tasks/done/719-open-item-test-gap-test-changes-rollback-changed-i/report.md
+- Reason: All four questions hold. The test file matches what the report says it does. The references it makes to versions.py, proposal 746, the sealed files, smoke.txt, cd66df9 and tasks 713/717 check out. The one item of «Що зробити» (red runs, a green run, no code change, suite green) is answered. There are no open owner questions in the report or the task file. Engine terms stay English. The pytest/ruff/mypy outputs are not recorded anywhere I can read, so they are not verified.
+- Request: 20261110T112757Z-52c89f (attempt 1)
