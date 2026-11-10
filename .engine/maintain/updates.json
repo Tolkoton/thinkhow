@@ -1,0 +1,52 @@
+{
+  "updates": [
+    {
+      "name": "google-auth[requests]",
+      "current": "2.62.0",
+      "latest": "2.62.1",
+      "kind": "patch"
+    },
+    {
+      "name": "mypy",
+      "current": "2.4.0",
+      "latest": "2.4.1",
+      "kind": "patch"
+    },
+    {
+      "name": "pydantic",
+      "current": "2.14.1",
+      "latest": "2.14.3",
+      "kind": "patch"
+    },
+    {
+      "name": "pydantic-settings",
+      "current": "2.16.1",
+      "latest": "2.16.2",
+      "kind": "patch"
+    },
+    {
+      "name": "ruff",
+      "current": "0.17.1",
+      "latest": "0.17.4",
+      "kind": "patch"
+    },
+    {
+      "name": "import-linter",
+      "current": "2.15",
+      "latest": "2.16",
+      "kind": "minor"
+    },
+    {
+      "name": "playwright",
+      "current": "1.64.1",
+      "latest": "1.65.0",
+      "kind": "minor"
+    },
+    {
+      "name": "pytest",
+      "current": "9.1.1",
+      "latest": "9.2.0",
+      "kind": "minor"
+    }
+  ]
+}
