@@ -3,7 +3,7 @@ this module imports neither thinkhow.knowledge nor thinkhow.platform (skel-facil
 
 from collections.abc import Callable, Iterator, Sequence
 from dataclasses import dataclass, field
-from typing import Annotated, Literal
+from typing import Annotated, ClassVar, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -83,6 +83,8 @@ class FactUpdate(_Frozen):
 
 class DeepPlan(_Frozen):
     """The deep cycle's plan: one line to the person, then 2–4 sub-questions to search."""
+
+    llm_timeout_s: ClassVar[float] = 60.0  # measured 7.7–16.4 s; a hung call waited 300 s (bug 003)
 
     intro: str = Field(min_length=1)
     questions: list[Annotated[str, Field(min_length=1)]] = Field(min_length=2, max_length=4)

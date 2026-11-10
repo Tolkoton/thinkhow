@@ -1,5 +1,9 @@
 # PROGRESS
 
+## Bugfix 003-hung-router-call — DONE 2026-11-10
+
+- Record: `.engine/bugs/003-hung-router-call.md` (task 313)
+
 ## Bugfix 002-delete-twice-not-found — DONE 2026-11-10
 
 - Record: `.engine/bugs/002-delete-twice-not-found.md` (task 212)

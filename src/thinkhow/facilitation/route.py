@@ -9,7 +9,7 @@ Reads `card.router`, `card.title` and the `router` notes of the experience memor
 
 from collections.abc import Callable, Sequence
 from pathlib import Path
-from typing import Any, Literal, cast
+from typing import Any, ClassVar, Literal, cast
 
 from pydantic import ValidationError, create_model, field_validator, model_validator
 
@@ -35,6 +35,7 @@ NOTES_RULE = (
 
 
 class RouterAnswer(_Frozen):
+    llm_timeout_s: ClassVar[float] = 60.0  # measured 3.5–45 s, one 177 s; a hung call waited 300 s (bug 003)
     action: Literal["offer", "ask", "choose", "answer"]
     profile: Profile
     candidates: list[Candidate]

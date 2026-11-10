@@ -223,12 +223,17 @@ class VertexLlm:
     def _config(
         self, system: str, schema: type[BaseModel], search: bool = False
     ) -> types.GenerateContentConfig:
-        """The call's config; the search tool only when asked (only stream_json of a search instance asks)."""
+        """The call's config; the search tool only when asked (only stream_json of a search instance asks).
+
+        A schema of a short answer may carry its own `llm_timeout_s` (a ClassVar): a hung call is given up
+        after it, not after the instance's limit, which is sized for the longest call (bug 003).
+        """
+        timeout_s = getattr(schema, "llm_timeout_s", self.timeout_s)
         return types.GenerateContentConfig(
             system_instruction=system,
             response_mime_type="application/json",
             response_json_schema=schema.model_json_schema(),
-            http_options=types.HttpOptions(timeout=int(self.timeout_s * 1000)),
+            http_options=types.HttpOptions(timeout=int(timeout_s * 1000)),
             tools=[types.Tool(enterprise_web_search=types.EnterpriseWebSearch())] if search else None,
         )
 
