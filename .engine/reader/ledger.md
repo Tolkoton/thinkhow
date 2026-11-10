@@ -311,3 +311,8 @@
 - Record: tasks/done/723-open-item-test-gap-smoke-step-a-second-synthesize/report.md
 - Reason: All four questions hold. I checked every reference I could and each one says what the report claims. The task's only item (a test that is red on the gap the overseer named, green on the code as is, no code change, fast suite green) is answered with red and green runs. The 'zero model calls' alternative is explained under «Відкладене». There are no open questions, and the engine terms stay in English.
 - Request: 20261110T122750Z-77e08d (attempt 1)
+
+## 2026-11-10T13:41:10Z — 725-open-item-test-gap-a-web-test-that-wraps-liveknowl — READER_PASS
+- Record: tasks/done/725-open-item-test-gap-a-web-test-that-wraps-liveknowl/report.md
+- Reason: Every reference I could check is correct: LiveKnowledge is at app.py:52, the old test does count latest_pair over 25 notes, and both commits exist with matching subjects. The task's one «Що зробити» item has its answer: the test is added, a red run and a green run are both shown, and no code changed. There are no open questions, and the engine terms in the report are in English.
+- Request: 20261110T134039Z-ef0394 (attempt 1)
