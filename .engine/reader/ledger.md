@@ -346,3 +346,8 @@
 - Record: tasks/done/736-open-item-wsblock-tests-old-observation-shape/report.md
 - Reason: All four questions hold. Every reference I could check says what the report says: the ledger lines, the objection file, task 721's report lines 42–44, the engine-feedback entry and the current test code. The one item of «Що зробити» is answered: commit 7adcdc6 already did it in task 721, and the report says so with the evidence. There is no open question for the owner, and the engine terms stay in English.
 - Request: 20261110T181214Z-75a164 (attempt 1)
+
+## 2026-11-10T18:58:17Z — 420-cleanup-2026-11-10 — READER_PASS
+- Record: tasks/done/420-cleanup-2026-11-10/report.md
+- Reason: All four questions hold. The nightly output in the report matches the saved file. The metrics figures match metrics.jsonl lines 18 and 20, and the 42 signals and head aea8a28 match report 418. Each of the four «Що зробити» items gets an answer, the report raises no questions for the owner, and technical terms are in English.
+- Request: 20261110T185752Z-590626 (attempt 1)
