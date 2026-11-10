@@ -326,3 +326,8 @@
 - Record: tasks/done/727-open-item-test-gap-the-smoke-s-no-question-about-i/report.md
 - Reason: All four checks pass. Every reference I could open says what the report says it does. The single «Що зробити» item is done: the test is written, the report shows the red and green runs, no code changed, and the fast suite is green. The report and the task file have no open question for the owner. Engine terms (overseer, smoke, commit, runner, sealed suite) stay in English.
 - Request: 20261110T143009Z-8b57a9 (attempt 1)
+
+## 2026-11-10T15:41:12Z — 730-open-item-test-gap-with-thinkhow-local-true-and-no — READER_INVALID
+- Record: tasks/done/730-open-item-test-gap-with-thinkhow-local-true-and-no/report.md
+- Reason: .engine/artifacts/conversation-loop/after-3-turns.png, .engine/artifacts/conversation-loop/smoke.txt changed while the report tasks/done/730-open-item-test-gap-with-thinkhow-local-true-and-no/report.md was read
+- Request: 20261110T154041Z-83f237 (attempt 1)

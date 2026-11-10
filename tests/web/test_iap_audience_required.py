@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from thinkhow.platform.config import ConfigError, load_settings
+from thinkhow.platform.config import CLOUD_RUN_MARKERS, ConfigError, load_settings
 from thinkhow.web import app
 
 CLOUD = {
@@ -53,3 +53,21 @@ def test_the_entry_point_with_an_iap_audience_goes_on_to_build_the_service(
 
 def test_the_job_settings_in_the_cloud_need_no_iap_audience() -> None:
     assert load_settings(CLOUD).iap_audience == ""
+
+
+def test_local_mode_without_an_iap_audience_goes_on_to_build_the_service(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    for key in (*CLOUD, *CLOUD_RUN_MARKERS):
+        monkeypatch.delenv(key, raising=False)
+    monkeypatch.setenv("THINKHOW_LOCAL", "true")
+    built: list[str] = []
+
+    def stop_at_deps(environ: object, cards_dir: Path) -> object:
+        built.append("deps")
+        raise RuntimeError("stop here")
+
+    monkeypatch.setattr(app, "build_deps", stop_at_deps)
+    with pytest.raises(RuntimeError, match="stop here"):
+        app.app  # noqa: B018
+    assert built == ["deps"]
