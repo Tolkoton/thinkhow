@@ -331,3 +331,48 @@ gcloud scheduler jobs create http thinkhow-synthesize-daily --location=$REGION \
 mkdir -p ~/.local/state/thinkhow-deploy
 ( crontab -l 2>/dev/null; echo '*/5 * * * * PATH=/home/lao/engine-ops/bin:/snap/bin:/usr/bin:/bin python3 /home/lao/projects/thinkhow/scripts/auto_deploy.py >> /home/lao/.local/state/thinkhow-deploy/cron.log 2>&1' ) | crontab -
 ```
+
+## 12. Резервна копія bucket-ів поза проєктом (задача 103)
+
+Старі версії файлів (§3) рятують від помилкового перезапису, але не від втрати bucket-а чи всього проєкту
+`pocket-lawyer-431614` — напр., коли закінчаться кредити Google (Q2). Від цього рятує лише копія **поза проєктом**.
+Сервер, на якому працюють runner і `auto_deploy.py`, для цього не годиться: це VM того самого проєкту (`us-central1-b`),
+вона зникне разом із ним. Обсяг на 2026-11-10: `users` — 26 файлів, 0,35 MB; `system` — 119 файлів, 1,0 MB.
+
+Команди виконуються на машині поза проєктом, де є `gcloud` з обліковим записом, що читає обидва bucket-и
+(власника, або будь-який з роллю `roles/storage.objectViewer` на них). Змінні — з §1; `BACKUP_DIR` — тека копій.
+
+**Копія** — кожного разу в нову теку з датою, тож попередні копії лишаються, навіть якщо в bucket-і щось зіпсувалось:
+
+```bash
+D=$BACKUP_DIR/$(date -u +%Y-%m-%d)
+gcloud storage rsync -r gs://$USERS_BUCKET  $D/users
+gcloud storage rsync -r gs://$SYSTEM_BUCKET $D/system
+```
+
+**Перевірка копії** — та сама команда з `--dry-run` не має знайти жодного файлу, якого бракує чи який відрізняється
+(вона порівнює розмір і контрольну суму). Порожній вивід обох рядків — копія повна:
+
+```bash
+gcloud storage rsync -r --dry-run gs://$USERS_BUCKET  $D/users  2>&1 | grep "Would copy"
+gcloud storage rsync -r --dry-run gs://$SYSTEM_BUCKET $D/system 2>&1 | grep "Would copy"
+```
+
+**Відновлення.** Якщо bucket-и цілі й треба повернути зіпсовані файли — у ті самі bucket-и. Якщо проєкту більше немає —
+спершу §1–§4 у новому проєкті (нові bucket-и з versioning, service accounts, права), потім копія в нові bucket-и, і ці
+нові імена йдуть у `THINKHOW_USERS_BUCKET` / `THINKHOW_SYSTEM_BUCKET` (§7, §8): код знає лише логічні `users` і `system`.
+Спершу `--dry-run`, щоб побачити, що буде записано; потім те саме без нього. Без `--delete-unmatched-destination-objects`
+нічого в bucket-і не видаляється:
+
+```bash
+D=$BACKUP_DIR/<дата копії>
+gcloud storage rsync -r --dry-run $D/users  gs://$USERS_BUCKET
+gcloud storage rsync -r --dry-run $D/system gs://$SYSTEM_BUCKET
+gcloud storage rsync -r $D/users  gs://$USERS_BUCKET
+gcloud storage rsync -r $D/system gs://$SYSTEM_BUCKET
+```
+
+Перевірено 2026-11-10 на сервері, у тимчасовій теці, яку потім видалено: копія дала 26 і 119 файлів — стільки ж,
+скільки об'єктів у bucket-ах; перевірка `--dry-run` не знайшла жодного; після видалення одного файлу з копії знайшла
+рівно його (`Would copy …`); `--dry-run` відновлення з копії в справжні bucket-и не знайшов, що записувати.
+Де лежатиме постійна копія і хто її робить — питання до власника в задачі 103.
