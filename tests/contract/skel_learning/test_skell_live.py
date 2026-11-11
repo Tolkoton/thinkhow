@@ -1,7 +1,7 @@
 """Contract test of skel-learning, Seam 3: one real analyzer call to gemini-4-argon on `eu` (`-m live`).
 
 Slice tester; from the contract, not the code. A topic of 40 Ukrainian turns → one call through
-`analyze` → one `Observation` whose turn is one of the topic's turns.
+`analyze` → one `ObservationSet` whose observations each anchor to one of the topic's turns.
 
 Corrected by objection (round 2, slice continuous-analysis, task 202): no closing is needed; the file is
 `t1-t40.json`.
@@ -14,7 +14,8 @@ from pathlib import Path
 import pytest
 from skell_fakes import ALICE, NOW, S1, S, T, range_path, write_topic
 
-from thinkhow.learning.analyze import AnalyzeReport, Observation, analyze
+from thinkhow.learning.analyze import AnalyzeReport, analyze
+from thinkhow.learning.observations import ObservationSet
 from thinkhow.platform.config import load_settings
 from thinkhow.platform.llm import make_llm
 from thinkhow.platform.storage import LocalStorage
@@ -61,8 +62,10 @@ def test_seam3_real_model_anchors_the_observation_to_a_turn_of_a_40_turn_topic(t
     assert report == AnalyzeReport(written=1, skipped=0, failed=0)
     raw = storage.read("system", range_path(ALICE, "t-a00000000001", 1, 40))
     assert raw is not None
-    obs = Observation.model_validate_json(raw)
-    assert (obs.first_turn, obs.last_turn) == (1, 40)
-    assert obs.turn in set(range(1, 41))
-    assert obs.link == f"/topics/{ALICE}/t-a00000000001#t{obs.turn}"
-    assert obs.finding.strip() != ""
+    got = ObservationSet.model_validate_json(raw)
+    assert (got.first_turn, got.last_turn) == (1, 40)
+    assert got.observations
+    for obs in got.observations:
+        assert obs.turn in set(range(1, 41))
+        assert obs.link == f"/topics/{ALICE}/t-a00000000001#t{obs.turn}"
+        assert obs.finding.strip() != ""

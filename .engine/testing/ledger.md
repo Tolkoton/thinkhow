@@ -2170,3 +2170,13 @@ Written by `.claude/hooks/testing.py` only: every decision of the testing manage
 ## 2026-11-11T18:40:05Z — notes-readers — resealed on the owner's word
 - tests/contract/notes_readers/test_nr_catchup_disputed_q1_full_instructions.py: sealed again as it is now
 - the owner's «так»: `tasks/doing/733-open-item-tests-mypy-red.md`; no objection round, no round counted
+
+## 2026-11-11T19:16:23Z — skel-learning — resealed on the owner's word
+- tests/contract/skel_learning/test_skell_analyze.py: sealed again as it is now
+- tests/contract/skel_learning/test_skell_chain.py: sealed again as it is now
+- tests/contract/skel_learning/test_skell_invariants.py: sealed again as it is now
+- tests/contract/skel_learning/test_skell_job.py: sealed again as it is now
+- tests/contract/skel_learning/test_skell_live.py: sealed again as it is now
+- tests/contract/skel_learning/test_skell_schema.py: sealed again as it is now
+- tests/contract/skel_learning/test_skell_catchup_smoke.py: sealed again as it is now
+- the owner's «так»: `tasks/doing/735-open-item-skel-learning-live-test-old-shape.md`; no objection round, no round counted
