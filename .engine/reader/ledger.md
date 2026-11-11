@@ -371,3 +371,8 @@
 - Record: tasks/done/735-open-item-skel-learning-live-test-old-shape/report.md
 - Reason: Every reference I could check is correct: the files, the diff, the outputs, the ledger entry and both commits. The task's only item is covered: the ObservationSet checks are in the test, and the objection package was replaced by the owner's «так» (option А) and a reseal, which the report says plainly. The owner's question in the task file offers options А, Б and В with advice and is already answered. The report keeps the engine terms in English (reseal, objection, slice, Stop gate, board runner).
 - Request: 20261111T195912Z-45cf3b (attempt 1)
+
+## 2026-11-11T23:39:06Z — 750-open-item-scripts-mypy-red — READER_PASS
+- Record: tasks/done/750-open-item-scripts-mypy-red/report.md
+- Reason: All four questions hold. The references I could check say what the report claims: llm.py:21/258, log.py:16, the contract test files, 733/735 being in done/, commit fbdd164 and the 1695-passed artifact. The task's three items (the rename, a product-cards fix that differs from the suggested patch with the reason given, mypy and the smokes run, or why not) are each answered. There are no open questions, and the technical terms stay in English.
+- Request: 20261111T233818Z-a28162 (attempt 1)
