@@ -9,12 +9,12 @@ contract Q7). Whether a new card is offered is printed, not judged: that is S2's
 `.engine/artifacts/spikes/product-cards-router-live-<time>.txt`.
 """
 
-import json
+import io
 import sys
 import tempfile
+from contextlib import redirect_stdout
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -22,7 +22,6 @@ sys.path.insert(0, str(ROOT / "src"))
 from thinkhow.facilitation import RouterAnswer, route  # noqa: E402
 from thinkhow.knowledge import CurrentKnowledge, current, seed  # noqa: E402
 from thinkhow.platform import llm as model  # noqa: E402
-from thinkhow.platform import log  # noqa: E402
 from thinkhow.platform.storage import LocalStorage  # noqa: E402
 
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -71,33 +70,24 @@ def describe(answer: RouterAnswer) -> list[str]:
 def main() -> int:
     k = knowledge()
     settings = product_settings()
-    calls: list[str] = []
-    original = model.log_event
-
-    def recording(event: str, **fields: Any) -> None:
-        line = {"severity": "INFO", **fields, "event": event, "request_id": log.request_id.get()}
-        calls.append(json.dumps(line, ensure_ascii=False, default=str))
-
-    model.log_event = recording
+    captured = io.StringIO()  # log_event writes to the stdout of the moment
     lines = [
         "# Smoke product-cards — роутер на першій репліці t-84d1517cb1c1",
         f"модель: {settings.model}; регіон: {settings.location}",
         f"Знання: ревізія {k.rev}, карток {len(k.cards)}; нові: {[cid for cid in NEW if cid in k.cards]}",
         "",
     ]
-    try:
+    with redirect_stdout(captured):
         llm = model.make_llm(settings, lambda *_: "")
         answer = ask(k, llm)
         lines += ["## Відповідь 1", *describe(answer), ""]
         if not passed(answer, set(k.cards)):
             answer = ask(k, llm)
             lines += ["## Відповідь 2 (повтор після не-offer, Q7)", *describe(answer), ""]
-    finally:
-        model.log_event = original
     ok = len(k.cards) == 25 and all(cid in k.cards for cid in NEW) and passed(answer, set(k.cards))
     lines += [
         "## llm_call",
-        *[c for c in calls if '"llm_call"' in c],
+        *[c for c in captured.getvalue().splitlines() if '"llm_call"' in c],
         "",
         f"результат: {'PASS' if ok else 'FAIL'}",
     ]

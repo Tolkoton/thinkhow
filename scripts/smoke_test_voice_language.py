@@ -48,9 +48,9 @@ def main() -> None:
         assert chosen.status_code == 303 and chosen.headers["location"] == "/", chosen
         print("POST /language pl-PL → 303 /")
         home = httpx.get(base + "/")
-        chosen = f"{PL['language']}: Polski"  # the page speaks the chosen language (task 208)
-        assert home.status_code == 200 and chosen in home.text, home.status_code
-        print(f"GET / → 200, «{chosen}»")
+        greeting = f"{PL['language']}: Polski"  # the page speaks the chosen language (task 208)
+        assert home.status_code == 200 and greeting in home.text, home.status_code
+        print(f"GET / → 200, «{greeting}»")
         stored = json.loads(profile.read_text(encoding="utf-8"))
         assert stored == {"email": "owner@localhost", "language": "pl-PL"}, stored
         print("profile.json:", stored)
