@@ -92,13 +92,16 @@ SearchScript = Callable[[str, str], tuple[str, Found | None]]
 
 
 class _Attempt:
-    """What one call learnt, for the log line: attempts made, usage, outcome."""
+    """What one call learnt, for the log line: its kind (the schema's name, or «search»), attempts, usage,
+    and for a stream the time from opening its last attempt to the first chunk (task 744)."""
 
-    def __init__(self, search: bool = False) -> None:
+    def __init__(self, kind: str, search: bool = False) -> None:
+        self.kind = kind
         self.attempts = 0
         self.usage = Usage(0, 0, 0)
         self.search = search
         self.found: Found | None = None
+        self.first_chunk_ms: int | None = None
 
 
 class VertexLlm:
@@ -128,14 +131,16 @@ class VertexLlm:
         self, system: str, contents: Sequence[Turn], schema: type[BaseModel], rev: KnowledgeRev | None
     ) -> Iterator[ReplyDelta | Done]:
         """Flow: up to `attempts` tries → stream deltas, gather what search found → one Done; one log line."""
-        started, call = self.clock(), _Attempt(self.search)
+        started, call = self.clock(), _Attempt(schema.__name__, self.search)
         try:
             for attempt in range(self.attempts):
-                call.attempts = attempt + 1
-                shown = False
+                call.attempts, call.first_chunk_ms = attempt + 1, None
+                shown, opened = False, self.clock()
                 try:
                     extractor, raw, gathered = ReplyExtractor(), [], _Gathered()
                     for chunk in self._open_stream(system, contents, schema, self.search):
+                        if call.first_chunk_ms is None:
+                            call.first_chunk_ms = int((self.clock() - opened) * 1000)
                         piece = _chunk_text(chunk)
                         raw.append(piece)
                         call.usage = _usage(chunk.usage_metadata) or call.usage
@@ -159,7 +164,7 @@ class VertexLlm:
         self, system: str, contents: Sequence[Turn], schema: type[M], rev: KnowledgeRev | None
     ) -> M:
         """Flow: try up to `attempts` times → validate against the schema; one log line."""
-        started, call = self.clock(), _Attempt()
+        started, call = self.clock(), _Attempt(schema.__name__)
         try:
             for attempt in range(self.attempts):
                 call.attempts = attempt + 1
@@ -180,7 +185,7 @@ class VertexLlm:
 
     def search_text(self, system: str, prompt: str, rev: KnowledgeRev | None) -> tuple[str, Found | None]:
         """One web-searched call without JSON: the text and what search found (the deep cycle, S3)."""
-        started, call = self.clock(), _Attempt(search=True)
+        started, call = self.clock(), _Attempt("search", search=True)
         try:
             for attempt in range(self.attempts):
                 call.attempts = attempt + 1
@@ -264,6 +269,8 @@ class VertexLlm:
             outcome=outcome,
             search=call.search,
             queries=len(call.found.queries) if call.found else 0,
+            kind=call.kind,
+            first_chunk_ms=call.first_chunk_ms,
         )
 
 
