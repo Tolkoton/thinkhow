@@ -5,12 +5,13 @@ artifact, not an excerpt or a summary of the check.
 """
 
 from pathlib import Path
+from typing import Any
 
 from nr_catchup_smoke_run import run_smoke
 
 
-def _two_notes(memory: list[dict[str, object]]) -> bool:
-    shape = sorted((str(r["audience"]), tuple(r["cards"])) for r in memory)  # type: ignore[call-overload]
+def _two_notes(memory: list[dict[str, Any]]) -> bool:
+    shape = sorted((str(r["audience"]), tuple(r["cards"])) for r in memory)
     return shape == [("facilitator", ("five-whys",)), ("router", ("pre-mortem",))]
 
 

@@ -361,3 +361,8 @@
 - Record: tasks/done/419-maintain-2026-11-10/report.md
 - Reason: All four questions hold. The references check out: the numbers match the maintain report, and the commits match the request or .git/logs/HEAD. Both items of «Що зробити» / «Готово, коли» are answered: the report was written, and the update question went to blocked, was answered «так», and then failed. The report explains why and where the update went. There is no open question for the owner, and engine terms stay in English (runner, gate, commit, type-check, sealed).
 - Request: 20261111T183805Z-7c606d (attempt 1)
+
+## 2026-11-11T19:15:53Z — 733-open-item-tests-mypy-red — READER_PASS
+- Record: tasks/done/733-open-item-tests-mypy-red/report.md
+- Reason: All four questions hold. The file lines, commits and ledger entries the report cites say what it says they do. Each item of «Що зробити» is either done or deferred to task 735 with a reason. The one owner question was answered «так» and the report carries out option A. Technical terms are in English; the one Ukrainian phrase, «повторну печатку», follows the owner's own word «запечатаного».
+- Request: 20261111T191519Z-b4accc (attempt 1)
