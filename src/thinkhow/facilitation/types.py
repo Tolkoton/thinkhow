@@ -97,6 +97,28 @@ class DeepReport(_Frozen):
     facts: list[str]
 
 
+class PendingDeep(_Frozen):
+    """A deep research shown to the person and waiting for their consent: the research question, the sentence
+    to them and the sub-questions that go to the search word for word (deep-research-confirm-first)."""
+
+    question: str = Field(min_length=1)
+    intro: str = Field(min_length=1)
+    questions: list[Annotated[str, Field(min_length=1)]] = Field(min_length=2, max_length=4)
+
+
+class DeepConsent(_Frozen):
+    """What the person answered to a shown proposal of deep research."""
+
+    answer: Literal["yes", "change", "no", "other"]
+
+
+@dataclass(frozen=True)
+class DeepProposed:
+    """This answer leaves a proposal of deep research waiting for the person's consent."""
+
+    pending: PendingDeep
+
+
 class Profile(_Frozen):
     """The problem profile: the 8 dimensions of M1 (no «crisis» state — N3)."""
 
@@ -200,10 +222,13 @@ class FacilitationContext:
     language: str | None = None
     routing: tuple[Decision, ...] | None = field(default=None, compare=False)
     spoken: bool = False
+    pending_deep: PendingDeep | None = None
+    deep_off: bool = False
 
 
 Facilitate = Callable[
-    [FacilitationContext], Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent]
+    [FacilitationContext],
+    Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent | DeepProposed],
 ]
 
 

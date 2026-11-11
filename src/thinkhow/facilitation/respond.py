@@ -19,6 +19,7 @@ from thinkhow.facilitation.settle import RESEARCH_SECTION as RESEARCH_SECTION
 from thinkhow.facilitation.settle import frame, settle, with_research
 from thinkhow.facilitation.settle import sources_line as sources_line
 from thinkhow.facilitation.types import (
+    DeepProposed,
     FacilitationContext,
     FacilitatorUpdate,
     MapUpdate,
@@ -40,7 +41,7 @@ JUST_CHOSEN_LINE = "[Стан] Метод щойно обрано: почни з
 
 def respond(
     ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm
-) -> Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent]:
+) -> Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent | DeepProposed]:
     """The app's Facilitate: without routing — leading by the card, as before; with it — converse.
     The Knowledge is taken once for the whole reply (`now()`: one revision per reply, learning-loop S4)."""
     knowledge = knowledge.now()
@@ -51,7 +52,7 @@ def respond(
 
 def lead(
     ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm
-) -> Iterator[ReplyDelta | FacilitatorUpdate | ResearchEvent]:
+) -> Iterator[ReplyDelta | FacilitatorUpdate | ResearchEvent | DeepProposed]:
     """Flow: the card → one streamed call → pass the deltas on → settle the update → what search found."""
     card = knowledge.cards.get(ctx.card_id)
     if card is None:

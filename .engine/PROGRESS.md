@@ -599,3 +599,17 @@
 ## Bugfix 001-stale-static-cache — task 210 (DONE 2026-11-04 — overseer PASS 20261104T114955Z-4006de)
 
 - Record: `.engine/bugs/001-stale-static-cache.md` (task 210: the paperclip on the server does nothing)
+
+## Slice deep-research-confirm-first — task 747 (DONE 2026-11-11)
+
+- Contract: `.engine/slices/deep-research-confirm-first.md` (sealed; tester's 42 contract tests `tests/contract/deep_confirm/`)
+- Modules: `facilitation/deep.py` — `propose`, `proposal_text`, `run_deep`, `consent`, `with_deep` (proposal instead
+  of the cycle), `deep_offer`, `deep_agreed`, `deep_changed`; `deep_research`/`deep_answer` removed;
+  `facilitation/types.py` — `PendingDeep`, `DeepConsent`, `DeepProposed`, `FacilitationContext.pending_deep/deep_off`;
+  `facilitation/converse.py` — consent first when a proposal waits; `workspace/topics.py` — `deep_pending.json`
+  (`PendingFile{turn, pending}`), given to the turn right after the proposing answer only; prompts `deep.md` («План»,
+  new «Згода»), `deep_field.md`, `research.md`
+- Superseded sealed tests: research-deep (rdp_*), research-live (ric_block, ric_disputed_q1), spoken-replies (oracle)
+- Live: `scripts/live_deep_confirm.py` → `.engine/artifacts/747/live-deep-confirm.txt` (router path, yes/change/no)
+- Open for next slice: after a change the research-question line stays the first one (Q6) — the person may see words
+  of what they removed; proposal in the task report

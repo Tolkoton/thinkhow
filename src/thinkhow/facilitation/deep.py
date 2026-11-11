@@ -1,6 +1,6 @@
-"""The deep cycle (S3): plan the sub-questions → search them in parallel → one report with sources.
-
-Runs inside the reply that asked for it (`lead` under the router, or the router's «answer»), stores nothing.
+"""The deep cycle (S3), confirmed first (deep-research-confirm-first): the reply that decides on it only
+shows the plan and asks; the person's next turn agrees (the shown sub-questions searched in parallel → one
+report with sources), changes it (a new plan) or declines. Stores nothing: workspace keeps what waits.
 """
 
 import contextvars
@@ -9,18 +9,22 @@ from collections.abc import Callable, Iterator, Sequence
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal
 
 from pydantic import BaseModel, ValidationError
 
 from thinkhow.facilitation.language import language_rule, listening_rule
-from thinkhow.facilitation.settle import frame, sources_line
+from thinkhow.facilitation.settle import FIRST_REPLY_LINE, frame, sources_line
 from thinkhow.facilitation.types import (
+    DeepConsent,
     DeepPlan,
+    DeepProposed,
     DeepReport,
     FacilitationContext,
     FacilitationError,
     FacilitatorUpdate,
     MapUpdate,
+    PendingDeep,
     ReplyDelta,
     ResearchEvent,
     Source,
@@ -47,7 +51,7 @@ class _Searched:
 
 
 def _rules() -> dict[str, str]:
-    """The three rules of `deep.md`, by their `## ` headings."""
+    """The rules of `deep.md`, by their `## ` headings."""
     text = (Path(__file__).with_name("deep.md")).read_text(encoding="utf-8")
     parts = SECTION.split(text)[1:]
     return {name.strip(): body.strip() for name, body in zip(parts[::2], parts[1::2], strict=True)}
@@ -56,21 +60,34 @@ def _rules() -> dict[str, str]:
 RULES = _rules()
 
 
-def deep_research(
-    question: str,
+def propose(
+    question: str, ctx: FacilitationContext, llm: model.Llm, rev: model.KnowledgeRev, first: bool
+) -> PendingDeep:
+    """Flow: one plan call (the first-reply line in its frame when `first`) → the proposal; no search."""
+    state = f"{FIRST_REPLY_LINE}\n\n" if first else ""
+    contents = _plan_contents(ctx, question, state)
+    plan = _twice(lambda: llm.generate_json(_system("План", ctx), contents, DeepPlan, rev))
+    return PendingDeep(question=question, intro=plan.intro, questions=list(plan.questions))
+
+
+def proposal_text(pending: PendingDeep) -> str:
+    """What the person sees: the sentence to them, the research question, a line per search."""
+    return f"{pending.intro}\n\n{pending.question}\n{_steps(pending)}"
+
+
+def run_deep(
+    pending: PendingDeep,
     ctx: FacilitationContext,
     llm: model.Llm,
     rev: model.KnowledgeRev,
     taken: frozenset[str] = frozenset(),
 ) -> Iterator[ReplyDelta | DeepDone]:
-    """Flow: plan → the steps shown → searches in parallel → the report → the sources line → DeepDone."""
-    plan = _twice(
-        lambda: llm.generate_json(_system("План", ctx), _plan_contents(ctx, question), DeepPlan, rev)
-    )
-    steps = plan.intro + "\n" + "\n".join(f"- {q}" for q in plan.questions)
+    """Flow: the steps shown → the shown sub-questions searched in parallel → the report → the sources line
+    → DeepDone. No plan: the searches are exactly the ones the person agreed to."""
+    steps = _steps(pending)
     yield ReplyDelta(steps)
-    found = _search_all(plan.questions, ctx, llm, rev)
-    findings = [model.Turn("user", _findings(question, found))]
+    found = _search_all(pending.questions, ctx, llm, rev)
+    findings = [model.Turn("user", _findings(pending.question, found))]
     report = _twice(lambda: llm.generate_json(_system("Звіт", ctx), findings, DeepReport, rev))
     yield ReplyDelta("\n\n" + report.report)
     sources = _united_sources(found)
@@ -78,10 +95,18 @@ def deep_research(
     if line:
         yield ReplyDelta(line)
     event = ResearchEvent(
-        "deep", _united_queries(found), sources, _suggestions(found), question, report.report
+        "deep", _united_queries(found), sources, _suggestions(found), pending.question, report.report
     )
     updates = _fact_items(report.facts, ctx, taken)
     yield DeepDone(steps + "\n\n" + report.report + line, updates, event)
+
+
+def consent(
+    ctx: FacilitationContext, llm: model.Llm, rev: model.KnowledgeRev
+) -> Literal["yes", "change", "no", "other"]:
+    """What the person's turn says to the proposal shown before it."""
+    answer = _twice(lambda: llm.generate_json(_system("Згода", ctx), frame(ctx), DeepConsent, rev))
+    return answer.answer
 
 
 def with_deep(
@@ -90,26 +115,36 @@ def with_deep(
     ctx: FacilitationContext,
     llm: model.Llm,
     rev: model.KnowledgeRev,
-) -> Iterator[ReplyDelta | FacilitatorUpdate | ResearchEvent]:
-    """Flow: pass the answer on; a deep question at its update → the cycle, its event, the update grown."""
+) -> Iterator[ReplyDelta | FacilitatorUpdate | ResearchEvent | DeepProposed]:
+    """Flow: pass the answer on; a deep question at its update (not after the person's «no») → the proposal
+    after the answer, its event, the update grown."""
     for item in items:
         if not isinstance(item, FacilitatorUpdate):
             yield item
             continue
-        question = clean_question(deep_question())
+        question = None if ctx.deep_off else clean_question(deep_question())
         if question is None:
             yield item
             return
-        yield from _grown(item, question, ctx, llm, rev)
+        yield from _grown(item, propose(question, ctx, llm, rev, first=False))
         return
 
 
-def deep_answer(
+def deep_offer(
     question: str, ctx: FacilitationContext, llm: model.Llm, rev: model.KnowledgeRev
+) -> Iterator[ReplyDelta | FacilitatorUpdate | DeepProposed]:
+    """The router's «answer» with a deep question: the proposal is the whole answer, an update that leads no
+    card; on the topic's first reply the plan gets the first-reply line."""
+    first = not any(t.role == "model" for t in ctx.history)
+    yield from _proposed(propose(question, ctx, llm, rev, first), None)
+
+
+def deep_agreed(
+    pending: PendingDeep, ctx: FacilitationContext, llm: model.Llm, rev: model.KnowledgeRev
 ) -> Iterator[ReplyDelta | FacilitatorUpdate | ResearchEvent]:
-    """The router's «answer» with a deep question: the cycle at once, then an update that leads no card."""
+    """«Yes» to the proposal: the research it showed, its event, an update that keeps the card's phase."""
     done: DeepDone | None = None
-    for piece in deep_research(question, ctx, llm, rev):
+    for piece in run_deep(pending, ctx, llm, rev):
         if isinstance(piece, DeepDone):
             done = piece
         else:
@@ -118,45 +153,50 @@ def deep_answer(
         return
     yield done.event
     yield FacilitatorUpdate(
-        reply=done.text, current_phase_id=None, phase_exit_met=False, map_updates=list(done.map_updates)
+        reply=done.text,
+        current_phase_id=ctx.problem_map.phase_id,
+        phase_exit_met=False,
+        map_updates=list(done.map_updates),
     )
+
+
+def deep_changed(
+    pending: PendingDeep, ctx: FacilitationContext, llm: model.Llm, rev: model.KnowledgeRev
+) -> Iterator[ReplyDelta | FacilitatorUpdate | DeepProposed]:
+    """A change to the proposal: a new plan for the same question (the change is the person's turn)."""
+    yield from _proposed(propose(pending.question, ctx, llm, rev, first=False), ctx.problem_map.phase_id)
+
+
+def _proposed(
+    pending: PendingDeep, phase: str | None
+) -> Iterator[ReplyDelta | FacilitatorUpdate | DeepProposed]:
+    text = proposal_text(pending)
+    yield ReplyDelta(text)
+    yield DeepProposed(pending)
+    yield FacilitatorUpdate(reply=text, current_phase_id=phase, phase_exit_met=False, map_updates=[])
 
 
 def _grown(
-    update: FacilitatorUpdate,
-    question: str,
-    ctx: FacilitationContext,
-    llm: model.Llm,
-    rev: model.KnowledgeRev,
-) -> Iterator[ReplyDelta | FacilitatorUpdate | ResearchEvent]:
-    """The cycle after an answer: its deltas (the first after a separator), its event, the grown update."""
+    update: FacilitatorUpdate, pending: PendingDeep
+) -> Iterator[ReplyDelta | FacilitatorUpdate | DeepProposed]:
+    """The proposal after an answer: one delta after a separator, its event, the update grown."""
     separator = "\n\n" if update.reply else ""
-    taken = frozenset(change.id for change in update.map_updates)
-    done: DeepDone | None = None
-    first = True
-    for piece in deep_research(question, ctx, llm, rev, taken):
-        if isinstance(piece, DeepDone):
-            done = piece
-            continue
-        yield ReplyDelta(separator + piece.text if first else piece.text)
-        first = False
-    if done is None:
-        return
-    yield done.event
-    yield update.model_copy(
-        update={
-            "reply": update.reply + separator + done.text,
-            "map_updates": [*update.map_updates, *done.map_updates],
-        }
-    )
+    text = separator + proposal_text(pending)
+    yield ReplyDelta(text)
+    yield DeepProposed(pending)
+    yield update.model_copy(update={"reply": update.reply + text})
+
+
+def _steps(pending: PendingDeep) -> str:
+    return "\n".join(f"- {q}" for q in pending.questions)
 
 
 def _system(rule: str, ctx: FacilitationContext) -> str:
     return f"{RULES[rule]}\n\n# Мова відповіді\n{language_rule(ctx.language)}\n{listening_rule(ctx.spoken)}"
 
 
-def _plan_contents(ctx: FacilitationContext, question: str) -> list[model.Turn]:
-    contents = frame(ctx)
+def _plan_contents(ctx: FacilitationContext, question: str, state: str) -> list[model.Turn]:
+    contents = frame(ctx, state)
     last = contents[-1]
     return [*contents[:-1], model.Turn("user", last.text + QUESTION_HEAD + question)]
 

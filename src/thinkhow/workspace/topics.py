@@ -16,11 +16,13 @@ from pydantic import BaseModel, ConfigDict
 from thinkhow.access import CurrentUser
 from thinkhow.facilitation.types import (
     Decision,
+    DeepProposed,
     Facilitate,
     FacilitationContext,
     FacilitatorUpdate,
     MapItem,
     MapUpdate,
+    PendingDeep,
     ProblemMap,
     ReplyDelta,
     ResearchEvent,
@@ -106,6 +108,14 @@ class ResearchFile(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
     entries: list[ResearchEntry]
+
+
+class PendingFile(BaseModel):
+    """deep_pending.json: the deep research the topic's answer `turn` showed, waiting for consent."""
+
+    model_config = ConfigDict(extra="forbid")
+    turn: int
+    pending: PendingDeep
 
 
 TOPIC_ID = re.compile(r"^t-[0-9a-f]{12}$")
@@ -416,8 +426,11 @@ def _answer(
     if framed is not None:
         text, recognize = framed, None  # a document is not the person's answer to a step question (Q8)
     problem_map, routing = _read_map(storage, ref), _read_routing(storage, ref)
+    waiting = _read_pending(storage, ref)
     card_id = current_card(routing) or CARD_ID
-    ctx = FacilitationContext(card_id, history, problem_map, turn_no, text, lang, routing, spoken)
+    ctx = FacilitationContext(
+        card_id, history, problem_map, turn_no, text, lang, routing, spoken, _answered(waiting, turn_no)
+    )
     try:
         facilitated = yield from _stream(facilitate(ctx))
     except Exception as exc:
@@ -439,6 +452,7 @@ def _answer(
     fresh.sessions[-1].turns.append(conv_file.Turn(turn_no + 1, "model", conv_file.second(now), answer))
     _write_conversation(storage, ref, fresh)
     _write_after_answer(storage, ref, turn_no + 1, problem_map, routing, update, facilitated)
+    _write_pending(storage, ref, turn_no + 1, waiting, facilitated.proposed)
     if recognize is not None:
         _recognize(storage, ref, fresh, turn_no, text, recognize)
     yield Answered(turn_no + 1)
@@ -464,25 +478,30 @@ class _Facilitated:
     update: FacilitatorUpdate | None
     decisions: tuple[Decision, ...]
     research: tuple[ResearchEvent, ...]
+    proposed: PendingDeep | None = None
 
 
 def _stream(
-    items: Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent],
+    items: Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent | DeepProposed],
 ) -> Generator[Delta, None, _Facilitated]:
     """Yields the text as deltas and collects the rest, up to the update (what follows it is not read)."""
     decisions: list[Decision] = []
     research: list[ResearchEvent] = []
+    proposed: PendingDeep | None = None
     for item in items:
         if isinstance(item, FacilitatorUpdate):
-            return _Facilitated(item, tuple(decisions), tuple(research))
+            return _Facilitated(item, tuple(decisions), tuple(research), proposed)
         if isinstance(item, RoutingEvent):
             decisions.append(item.decision)
             continue
         if isinstance(item, ResearchEvent):
             research.append(item)
             continue
+        if isinstance(item, DeepProposed):
+            proposed = item.pending
+            continue
         yield Delta(item.text)
-    return _Facilitated(None, tuple(decisions), tuple(research))
+    return _Facilitated(None, tuple(decisions), tuple(research), proposed)
 
 
 def _write_after_answer(
@@ -652,3 +671,30 @@ def _append_research(storage: Storage, ref: TopicRef, entries: list[ResearchEntr
 def _write_map(storage: Storage, ref: TopicRef, problem_map: ProblemMap) -> None:
     path = f"{ref.uid}/{ref.topic_id}/map.json"
     storage.write("users", path, problem_map.model_dump_json().encode("utf-8"), JSON)
+
+
+def _read_pending(storage: Storage, ref: TopicRef) -> PendingFile | None:
+    """The deep research waiting for consent; none without deep_pending.json (a parse error is not
+    recovered)."""
+    data = storage.read("users", f"{ref.uid}/{ref.topic_id}/deep_pending.json")
+    return None if data is None else PendingFile.model_validate_json(data)
+
+
+def _answered(waiting: PendingFile | None, turn_no: int) -> PendingDeep | None:
+    """The proposal the person's turn answers: only the turn right after the answer that showed it — not one
+    after another turn of the model (a step question after a break, S6)."""
+    if waiting is None or turn_no != waiting.turn + 1:
+        return None
+    return waiting.pending
+
+
+def _write_pending(
+    storage: Storage, ref: TopicRef, answer_no: int, waiting: PendingFile | None, proposed: PendingDeep | None
+) -> None:
+    """After the answer: the proposal it showed waits in deep_pending.json; otherwise an older one is gone."""
+    path = f"{ref.uid}/{ref.topic_id}/deep_pending.json"
+    if proposed is not None:
+        body = PendingFile(turn=answer_no, pending=proposed).model_dump_json().encode("utf-8")
+        storage.write("users", path, body, JSON)
+    elif waiting is not None:
+        storage.delete("users", path)

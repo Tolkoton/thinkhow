@@ -3,18 +3,20 @@
 They reuse the sealed slice-tester helpers (`rdp_fakes`) without changing them.
 """
 
+import importlib
 import sys
 from pathlib import Path
+from typing import Any
 
 HERE = Path(__file__).resolve().parents[1] / "contract" / "research_deep"
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
-import rdp_fakes as f  # noqa: E402
+f: Any = importlib.import_module("rdp_fakes")  # the sealed research-deep helpers
 
-from thinkhow.facilitation.deep import DeepDone, deep_research, with_deep  # noqa: E402
+from thinkhow.facilitation.deep import DeepDone, run_deep, with_deep  # noqa: E402
 from thinkhow.facilitation.route import RouterAnswer  # noqa: E402
-from thinkhow.facilitation.types import FacilitatorUpdate, ReplyDelta  # noqa: E402
+from thinkhow.facilitation.types import FacilitatorUpdate, PendingDeep, ReplyDelta  # noqa: E402
 from thinkhow.platform import llm as pl  # noqa: E402
 
 REV = pl.KnowledgeRev(rev=3, n=7)
@@ -30,7 +32,8 @@ def test_a_blank_deep_question_beside_an_offer_or_an_ask_is_none_and_valid() -> 
 
 
 def test_with_deep_cannot_meet_an_empty_reply_so_its_separator_always_follows_text() -> None:
-    """The overseer's case «no text before the deep part» cannot arise: an update never has an empty reply."""
+    """The overseer's case «no text before the deep part» cannot arise: an update never has an empty reply;
+    the proposal (deep-research-confirm-first) follows the answer after its separator."""
     import pytest
     from pydantic import ValidationError
 
@@ -50,6 +53,7 @@ def test_a_query_two_searches_return_is_recorded_once_in_sub_question_order() ->
         f.QA: (f.TEXT_A, pl.Found((same, "erste"), (f.PA,), None)),
         f.QB: (f.TEXT_B, pl.Found(("zweite", same), (f.PB,), None)),
     }
-    llm = f.deep_llm([f.plan_raw(questions=[f.QA, f.QB])], [f.report_raw()], searches)
-    (done,) = [i for i in deep_research(f.DQ, f.ctx(), llm, REV) if isinstance(i, DeepDone)]
+    llm = f.deep_llm([], [f.report_raw()], searches)
+    pending = PendingDeep(question=f.DQ, intro="Дослідю.", questions=[f.QA, f.QB])
+    (done,) = [i for i in run_deep(pending, f.ctx(), llm, REV) if isinstance(i, DeepDone)]
     assert done.event.queries == (same, "erste", "zweite")

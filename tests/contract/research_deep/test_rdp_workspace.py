@@ -1,6 +1,10 @@
 """Contract tests of research-deep through `workspace.reply`: deep research under the card, the whole way
 (Seam 1, with `ScriptedLlm`), on the router's path (Seam 2), and every search failed (Seam 3)
-(slice tester; from the contract)."""
+(slice tester; from the contract).
+
+Superseded by deep-research-confirm-first: the reply that decides on deep research writes a proposal
+(`deep_pending.json`) and searches nothing; the cycle and its writes come on the person's next turn when they
+agree («yes»)."""
 
 from collections.abc import Sequence
 from functools import partial
@@ -13,23 +17,31 @@ from rdp_fakes import (
     FACT_1,
     FACT_2,
     LINE_ABC,
+    PROPOSAL_ABC,
     QUERIES_ABC,
     REPORT,
     SEARCHES_ABC,
+    STEPS_ABC,
     card_answer,
     card_update,
+    consent_raw,
     fa,
     full_deep,
     plan_raw,
     report_raw,
     rq,
-    steps_lines,
-    want_steps,
     with_deep_question,
 )
 
 from thinkhow.facilitation import respond
-from thinkhow.facilitation.types import DeepPlan, DeepReport, FacilitatorUpdate, MapUpdate, ReplyDelta
+from thinkhow.facilitation.types import (
+    DeepConsent,
+    DeepPlan,
+    DeepReport,
+    FacilitatorUpdate,
+    MapUpdate,
+    ReplyDelta,
+)
 from thinkhow.platform import llm as pl
 from thinkhow.platform.storage import LocalStorage
 from thinkhow.workspace import Answered, Delta, Failed, open_topic, reply
@@ -39,7 +51,8 @@ FIRST = "Звучить як питання ринку. Досліджую гл�
 FOUND_1 = pl.Found(("Mittelstand Beratung",), (pl.Source("Перше джерело", "https://q.example/first"),), None)
 LINE_1 = "\n\nДжерела: [Перше джерело](https://q.example/first)"
 SEED = "Кому саме ви хочете продавати?"
-GOAL = {"id": "d3-1", "type": "goal", "text": "продавати консалтинг Mittelstand", "turn": "t1"}
+GOAL = {"id": "d5-1", "type": "goal", "text": "продавати консалтинг Mittelstand", "turn": "t1"}
+PENDING = "deep_pending.json"
 SOURCES_ABC = [
     {"title": "Mittelstand Studie", "url": "https://a.example/mittelstand"},
     {"title": "Beratermarkt", "url": "https://b.example/markt"},
@@ -75,6 +88,8 @@ def scripted() -> pl.ScriptedLlm:
             return plan_raw()
         if issubclass(schema, DeepReport):
             return report_raw()
+        if issubclass(schema, DeepConsent):
+            return consent_raw("yes")
         if "reply" in fields:
             if "deep_question" in fields:
                 return card_answer(FIRST, "b_two", True, [], deep_question=DQ)
@@ -105,29 +120,39 @@ def test_seam1_deep_under_the_card_through_workspace_writes_the_shown_text_resea
     )
     got, _ = say(store, rq.ScenarioFacilitate([[ReplyDelta(SEED), seed]]), ref, "Хочу продавати консалтинг.")
     assert isinstance(got[-1], Answered)
+    fac = partial(respond, knowledge=rq.knowledge(), llm=scripted())
 
-    got, shown = say(store, partial(respond, knowledge=rq.knowledge(), llm=scripted()), ref, "Так, досліди.")
+    # the reply that decides on deep research: the card's answer, its sources line, then the proposal
+    got, shown = say(store, fac, ref, "Досліди це глибоко.")
     assert isinstance(got[-1], Answered), got[-1]
-    head, tail = FIRST + LINE_1 + "\n\n", "\n\n" + REPORT + LINE_ABC
-    assert shown.startswith(head) and shown.endswith(tail)
-    assert steps_lines(shown[len(head) : -len(tail)]) == want_steps()
+    assert shown.startswith(FIRST + LINE_1) and shown.endswith(PROPOSAL_ABC)
+    assert shown[len(FIRST + LINE_1) : -len(PROPOSAL_ABC)].strip() == ""
+    assert recorded(store, ref) == normalize(shown)
+    assert store.read("users", rq.topic_path(ref, PENDING)) is not None
+    entries = rq.read_research(store, ref)
+    assert entries is not None and [(e["turn"], e["depth"]) for e in entries] == [(4, "quick")]
+    routing = fa.read_routing(store, ref)
+    assert routing is not None
+    assert (routing[-1].kind, routing[-1].end, routing[-1].card_id) == ("end", "done", "beta")
+
+    # the person agrees: the cycle over the shown sub-questions
+    got, shown = say(store, fac, ref, "Так, запускай.")
+    assert isinstance(got[-1], Answered), got[-1]
+    assert shown == STEPS_ABC + "\n\n" + REPORT + LINE_ABC
     assert recorded(store, ref) == normalize(shown)
 
     entries = rq.read_research(store, ref)
     assert entries is not None and len(entries) == 2
     assert (entries[0]["turn"], entries[0]["depth"]) == (4, "quick")
     assert entries[0]["sources"] == [{"title": "Перше джерело", "url": "https://q.example/first"}]
-    assert entries[1] == deep_entry(4)
+    assert entries[1] == deep_entry(6)
 
     items = rq.read_map(store, ref)["items"]
     assert GOAL in items
-    assert {"id": "d3-2", "type": "fact", "text": FACT_1, "turn": "t3"} in items
-    assert {"id": "d3-3", "type": "fact", "text": FACT_2, "turn": "t3"} in items
+    assert {"id": "d5-2", "type": "fact", "text": FACT_1, "turn": "t5"} in items
+    assert {"id": "d5-3", "type": "fact", "text": FACT_2, "turn": "t5"} in items
     assert len(items) == 3
-
-    routing = fa.read_routing(store, ref)
-    assert routing is not None
-    assert (routing[-1].kind, routing[-1].end, routing[-1].card_id) == ("end", "done", "beta")
+    assert store.read("users", rq.topic_path(ref, PENDING)) is None
 
 
 def test_seam2_deep_on_the_router_path_through_workspace_writes_routing_research_map_and_the_shown_text(
@@ -135,20 +160,26 @@ def test_seam2_deep_on_the_router_path_through_workspace_writes_routing_research
 ) -> None:
     store = LocalStorage(tmp_path)
     ref = rq.topic(store)
-    llm = full_deep(router=[with_deep_question(fa.answer_raw(), DQ)])
-    got, shown = say(store, partial(respond, knowledge=fa.knowledge(), llm=llm), ref, "Так, досліди глибоко.")
+    llm = full_deep(router=[with_deep_question(fa.answer_raw(), DQ)], consents=[consent_raw("yes")])
+    fac = partial(respond, knowledge=fa.knowledge(), llm=llm)
+    got, shown = say(store, fac, ref, "Досліди глибоко.")
     assert isinstance(got[-1], Answered), got[-1]
-    assert shown.endswith("\n\n" + REPORT + LINE_ABC)
-    assert steps_lines(shown[: -len("\n\n" + REPORT + LINE_ABC)]) == want_steps()
+    assert shown == PROPOSAL_ABC
+    assert llm.of("search") == [] and llm.of("report") == []
+    assert rq.read_research(store, ref) is None
+
+    got, shown = say(store, fac, ref, "Так.")
+    assert isinstance(got[-1], Answered), got[-1]
+    assert shown == STEPS_ABC + "\n\n" + REPORT + LINE_ABC
     assert recorded(store, ref) == normalize(shown)
     assert fa.ROUTER_REPLY not in shown
     assert llm.of("stream") == []
     routing = fa.read_routing(store, ref)
     assert routing is not None and [(d.kind, d.turn) for d in routing] == [("answer", 1)]
-    assert rq.read_research(store, ref) == [deep_entry(2)]
+    assert rq.read_research(store, ref) == [deep_entry(4)]
     items = rq.read_map(store, ref)["items"]
-    assert {"id": "d1-1", "type": "fact", "text": FACT_1, "turn": "t1"} in items
-    assert {"id": "d1-2", "type": "fact", "text": FACT_2, "turn": "t1"} in items
+    assert {"id": "d3-1", "type": "fact", "text": FACT_1, "turn": "t3"} in items
+    assert {"id": "d3-2", "type": "fact", "text": FACT_2, "turn": "t3"} in items
 
 
 def test_seam3_every_search_failed_is_failed_and_no_file_changes_but_the_turn_of_the_person(
@@ -156,15 +187,22 @@ def test_seam3_every_search_failed_is_failed_and_no_file_changes_but_the_turn_of
 ) -> None:
     store = LocalStorage(tmp_path)
     ref = rq.topic(store)
-    names = ("map.json", "routing.json", "research.json")
-    before = {n: store.read("users", rq.topic_path(ref, n)) for n in names}
     down = pl.LlmUnavailable("search down")
-    llm = full_deep(router=[with_deep_question(fa.answer_raw(), DQ)])
+    llm = full_deep(router=[with_deep_question(fa.answer_raw(), DQ)], consents=[consent_raw("yes")])
     llm.searches = {q: down for q in SEARCHES_ABC}
-    got, _ = say(store, partial(respond, knowledge=fa.knowledge(), llm=llm), ref, "Так, досліди глибоко.")
+    fac = partial(respond, knowledge=fa.knowledge(), llm=llm)
+    got, _ = say(store, fac, ref, "Досліди глибоко.")
+    assert isinstance(got[-1], Answered), got[-1]
+    names = ("map.json", "routing.json", "research.json", PENDING)
+    before = {n: store.read("users", rq.topic_path(ref, n)) for n in names}
+    got, _ = say(store, fac, ref, "Так.")
     assert isinstance(got[-1], Failed), got[-1]
     assert len(llm.of("search")) == 3
     assert llm.of("report") == []
     assert {n: store.read("users", rq.topic_path(ref, n)) for n in names} == before
     turns = [t for s in open_topic(store, rq.ALICE, ref, rq.T0).sessions for t in s.turns]
-    assert [(t.role, t.text) for t in turns] == [("user", "Так, досліди глибоко.")]
+    assert [(t.role, t.text) for t in turns] == [
+        ("user", "Досліди глибоко."),
+        ("model", PROPOSAL_ABC),
+        ("user", "Так."),
+    ]

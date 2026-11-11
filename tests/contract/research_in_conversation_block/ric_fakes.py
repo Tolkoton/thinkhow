@@ -14,6 +14,7 @@ The sealed helpers of the block's slices are reused as they are (their folders a
 
 from __future__ import annotations
 
+import importlib
 import sys
 from collections.abc import Callable, Iterator, Sequence
 from dataclasses import dataclass, field
@@ -28,8 +29,8 @@ for sibling in ("research_deep", "research_quick", "fact_answer", "skel_web"):
     if path not in sys.path:
         sys.path.insert(0, path)
 
-import rdp_fakes as rdp  # noqa: E402
-import skelweb_fakes as sw  # noqa: E402
+rdp: Any = importlib.import_module("rdp_fakes")
+sw: Any = importlib.import_module("skelweb_fakes")
 from fastapi.testclient import TestClient  # noqa: E402
 from pydantic import BaseModel  # noqa: E402
 

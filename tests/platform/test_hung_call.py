@@ -13,9 +13,8 @@ from typing import Any
 import httpx
 from google.genai import types
 
-from thinkhow.facilitation.deep import deep_research
+from thinkhow.facilitation.deep import propose
 from thinkhow.facilitation.route import route
-from thinkhow.facilitation.types import ReplyDelta
 from thinkhow.platform.config import Settings
 from thinkhow.platform.llm import KnowledgeRev, VertexLlm
 
@@ -71,6 +70,6 @@ def test_a_router_call_that_hangs_twice_is_given_up_within_a_minute_each_time() 
 def test_a_deep_plan_call_that_hangs_twice_is_given_up_within_a_minute_each_time() -> None:
     plan = '{"intro": "Шукаю.", "questions": ["перше питання", "друге питання"]}'
     client = HangingGemini(hangs=2, raw=plan)
-    steps = next(deep_research("питання", fa.context(()), production_llm(client), KnowledgeRev(3, 7)))
-    assert isinstance(steps, ReplyDelta) and steps.text.startswith("Шукаю.")
+    got = propose("питання", fa.context(()), production_llm(client), KnowledgeRev(3, 7), False)
+    assert got.intro == "Шукаю."
     assert client.now <= 2 * 60 + BACKOFF_S + ANSWER_S, f"the person waited {client.now:.0f} s"

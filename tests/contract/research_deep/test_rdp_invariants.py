@@ -1,5 +1,9 @@
 """Contract tests of research-deep: the invariants I1-I4 (slice tester; inputs chosen by hand from each
-«Domain», expected values written by hand)."""
+«Domain», expected values written by hand).
+
+Superseded by deep-research-confirm-first: the reply that decides on deep research shows a proposal, and the
+cycle (`run_deep` over the shown sub-questions) runs on the person's next turn when they agree; the laws of
+I1-I4 are held over that cycle."""
 
 import time
 from functools import partial
@@ -33,11 +37,13 @@ from rdp_fakes import (
     TEXT_D,
     Stream,
     card_answer,
+    consent_raw,
     ctx,
     deep_llm,
     fa,
     fact_update,
     full_deep,
+    pending,
     plan_raw,
     report_raw,
     rq,
@@ -45,7 +51,7 @@ from rdp_fakes import (
 )
 
 from thinkhow.facilitation import FacilitatorUpdate, ReplyDelta, ResearchEvent, converse, respond
-from thinkhow.facilitation.deep import DeepDone, deep_research, with_deep
+from thinkhow.facilitation.deep import DeepDone, run_deep, with_deep
 from thinkhow.facilitation.types import FactAnswer, MapItem, MapUpdate, Source
 from thinkhow.platform import llm as pl
 from thinkhow.platform.storage import LocalStorage
@@ -80,10 +86,13 @@ def test_I1_the_text_shown_by_the_stream_equals_the_recorded_answer_with_deep_re
     tmp_path: Path,
 ) -> None:
     card_raw = card_answer(REPLY, "a_one", deep_question=DQ)
-    cases: dict[str, tuple[str, Any, str]] = {
+    router_raw = with_deep_question(fa.answer_raw(), DQ)
+    yes = [consent_raw("yes")]
+    cases: dict[str, tuple[str, Any, list[str], str]] = {
         "card, first found, 3 sub-questions, none failed": (
             "card",
-            full_deep(streams=[Stream(list(DELTAS), card_raw, FOUND_1)]),
+            full_deep(streams=[Stream(list(DELTAS), card_raw, FOUND_1)], consents=yes),
+            [QA, QB, QC],
             "\n\n" + REPORT + "\n\nДжерела: " + ", ".join([LINK_A, LINK_B, LINK_C]),
         ),
         "card, no first found, 2 sub-questions, one failed": (
@@ -93,7 +102,9 @@ def test_I1_the_text_shown_by_the_stream_equals_the_recorded_answer_with_deep_re
                 [report_raw()],
                 {QA: DOWN, QB: (TEXT_B, found(PB))},
                 streams=[Stream(list(DELTAS), card_raw, None)],
+                consents=yes,
             ),
+            [QA, QB],
             "\n\n" + REPORT + "\n\nДжерела: " + LINK_B,
         ),
         "router, 4 sub-questions, two failed": (
@@ -102,8 +113,10 @@ def test_I1_the_text_shown_by_the_stream_equals_the_recorded_answer_with_deep_re
                 [plan_raw(questions=[QA, QB, QC, QD])],
                 [report_raw()],
                 {QA: DOWN, QB: (TEXT_B, found(PB)), QC: DOWN, QD: (TEXT_D, found(PD, PB))},
-                router=[with_deep_question(fa.answer_raw(), DQ)],
+                router=[router_raw],
+                consents=yes,
             ),
+            [QA, QB, QC, QD],
             "\n\n" + REPORT + "\n\nДжерела: " + ", ".join([LINK_B, LINK_D]),
         ),
         "router, 2 sub-questions, nothing among the sources": (
@@ -112,25 +125,29 @@ def test_I1_the_text_shown_by_the_stream_equals_the_recorded_answer_with_deep_re
                 [plan_raw(questions=[QA, QB])],
                 [report_raw()],
                 {QA: (TEXT_A, None), QB: (TEXT_B, pl.Found(("запит",), (), None))},
-                router=[with_deep_question(fa.answer_raw(), DQ)],
+                router=[router_raw],
+                consents=yes,
             ),
+            [QA, QB],
             "\n\n" + REPORT,
         ),
     }
-    for i, (name, (path, llm, tail)) in enumerate(cases.items()):
+    for i, (name, (path, llm, questions, tail)) in enumerate(cases.items()):
         store = LocalStorage(tmp_path / str(i))
         ref = rq.topic(store)
         if path == "card":
             rq.put_routing(store, ref, [rq.d_choose(1, "alpha")])
         fac = partial(respond, knowledge=rq.knowledge(), llm=llm)
-        got = list(reply(store, fac, rq.ALICE, ref, "Так, досліди.", rq.T0))
+        first = list(reply(store, fac, rq.ALICE, ref, "Досліди це глибоко.", rq.T0))
+        assert isinstance(first[-1], Answered), (name, first[-1])
+        assert llm.of("search") == [], name
+        got = list(reply(store, fac, rq.ALICE, ref, "Так, запускай.", rq.T0))
         assert isinstance(got[-1], Answered), (name, got[-1])
         shown = "".join(e.text for e in got if isinstance(e, Delta))
         recorded = open_topic(store, rq.ALICE, ref, rq.T0).sessions[-1].turns[-1].text
         assert recorded == normalize(shown), name
+        assert shown.startswith("\n".join(f"- {q}" for q in questions)), name
         assert shown.endswith(tail), name
-        if path == "card":
-            assert shown.startswith(REPLY), name
 
 
 # ------------------------------------------------------------------ I2
@@ -170,8 +187,8 @@ def test_I2_deep_sources_are_the_union_of_the_searches_that_worked_each_url_once
         ),
     ]
     for questions, searches, sources, line in cases:
-        llm = deep_llm([plan_raw(questions=questions)], [report_raw()], searches)
-        done = done_of(list(deep_research(DQ, ctx(), llm, REV)))
+        llm = deep_llm([], [report_raw()], searches)
+        done = done_of(list(run_deep(pending(questions), ctx(), llm, REV)))
         assert done.event.sources == sources, questions
         assert done.text.endswith("\n\n" + REPORT + line), questions
 
@@ -235,9 +252,9 @@ def test_I4_the_report_only_adds_fact_items_with_ids_unique_among_the_map_the_fi
         return [MapItem(id=i, type="goal", text=f"пункт {i}", turn="t1") for i in ids]
 
     # ids of the form d<N>-<k> already in the map and among the first answer's changes; a repeated fact
-    llm = deep_llm([plan_raw()], [report_raw(facts=["Факт А.", "Факт А.", "Факт Б."])])
+    llm = deep_llm([], [report_raw(facts=["Факт А.", "Факт А.", "Факт Б."])])
     c = ctx(items("i1", "d3-1", "d3-3", "d3-6"), turn_no=3)
-    done = done_of(list(deep_research(DQ, c, llm, REV, frozenset({"d3-2"}))))
+    done = done_of(list(run_deep(pending(), c, llm, REV, frozenset({"d3-2"}))))
     assert [u.model_dump() for u in done.map_updates] == [
         fact_update("d3-4", "Факт А.", "t3"),
         fact_update("d3-5", "Факт А.", "t3"),
@@ -245,30 +262,33 @@ def test_I4_the_report_only_adds_fact_items_with_ids_unique_among_the_map_the_fi
     ]
 
     # no facts: no changes
-    llm = deep_llm([plan_raw()], [report_raw(facts=[])])
-    assert done_of(list(deep_research(DQ, ctx(turn_no=5), llm, REV))).map_updates == ()
+    llm = deep_llm([], [report_raw(facts=[])])
+    assert done_of(list(run_deep(pending(), ctx(turn_no=5), llm, REV))).map_updates == ()
 
     # an id of another turn does not take this turn's number
-    llm = deep_llm([plan_raw()], [report_raw(facts=[FACT_1])])
-    done = done_of(list(deep_research(DQ, ctx(items("d2-1", "d5-2"), turn_no=5), llm, REV)))
+    llm = deep_llm([], [report_raw(facts=[FACT_1])])
+    done = done_of(list(run_deep(pending(), ctx(items("d2-1", "d5-2"), turn_no=5), llm, REV)))
     assert done.map_updates == (MapUpdate.model_validate(fact_update("d5-1", FACT_1, "t5")),)
 
-    # through workspace: the first answer's own item is kept, two equal facts are two items in map.json
+    # through workspace: the proposal under the card carries its own item with an id of the form d<N>-<k>;
+    # the «yes» on the next turn (person turn 3) adds two equal facts — two items, none replacing the own one
     store = LocalStorage(tmp_path)
     ref = rq.topic(store)
     rq.put_routing(store, ref, [rq.d_choose(1, "alpha")])
-    own = fact_update("d1-1", "Своє: перші гроші за пів року.", "t1")
+    own = fact_update("d3-1", "Своє: перші гроші за пів року.", "t1")
     llm = deep_llm(
         [plan_raw()],
         [report_raw(facts=[FACT_2, FACT_2])],
         streams=[Stream(list(DELTAS), card_answer(REPLY, "a_one", updates=[own], deep_question=DQ), None)],
+        consents=[consent_raw("yes")],
     )
-    got = list(
-        reply(store, partial(respond, knowledge=rq.knowledge(), llm=llm), rq.ALICE, ref, "Так.", rq.T0)
-    )
+    fac = partial(respond, knowledge=rq.knowledge(), llm=llm)
+    first = list(reply(store, fac, rq.ALICE, ref, "Досліди це глибоко.", rq.T0))
+    assert isinstance(first[-1], Answered), first[-1]
+    got = list(reply(store, fac, rq.ALICE, ref, "Так.", rq.T0))
     assert isinstance(got[-1], Answered), got[-1]
     stored = rq.read_map(store, ref)["items"]
     assert {k: v for k, v in own.items() if k != "op"} in stored
-    assert {"id": "d1-2", "type": "fact", "text": FACT_2, "turn": "t1"} in stored
-    assert {"id": "d1-3", "type": "fact", "text": FACT_2, "turn": "t1"} in stored
+    assert {"id": "d3-2", "type": "fact", "text": FACT_2, "turn": "t3"} in stored
+    assert {"id": "d3-3", "type": "fact", "text": FACT_2, "turn": "t3"} in stored
     assert len(stored) == 3

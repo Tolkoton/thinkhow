@@ -1,6 +1,10 @@
 """Contract tests of research-deep, the rules and the router side: `deep_question` of `RouterAnswer` (only
 with `answer`, one retry, a blank one is `None`, trimmed on both paths), the new sentences of `router.md`
-and `research.md`, the section of `deep_field.md` only under the router (slice tester; from the contract)."""
+and `research.md`, the section of `deep_field.md` only under the router (slice tester; from the contract).
+
+Superseded by deep-research-confirm-first in part: the texts of `research.md` and `deep_field.md` are its
+texts (in `rdp_fakes`), and a trimmed `deep_question` now reaches a proposal (`DeepProposed`), not the
+cycle."""
 
 from typing import Any
 
@@ -22,10 +26,11 @@ from rdp_fakes import (
     with_deep_question,
 )
 
-from thinkhow.facilitation import FacilitationError, ResearchEvent, converse, respond
+from thinkhow.facilitation import FacilitationError, converse, respond
 from thinkhow.facilitation.answer import answer_instruction
 from thinkhow.facilitation.respond import RESEARCH_SECTION, system_instruction
 from thinkhow.facilitation.route import ROUTER_RULES, RouterAnswer, route
+from thinkhow.facilitation.types import DeepProposed
 
 OFFER = fa.router_raw("offer", ("alpha", "beta"), None, fa.OFFER_REPLY, "пропоную за профілем")
 
@@ -58,22 +63,22 @@ def test_deep_question_is_trimmed_and_a_blank_one_is_none_on_the_router_and_the_
         got = RouterAnswer.model_validate_json(with_deep_question(fa.answer_raw(), blank))
         assert got.deep_question is None, repr(blank)
 
-    # the router path: the cycle gets the trimmed question
+    # the router path: the proposal gets the trimmed question
     llm = full_deep(router=[with_deep_question(fa.answer_raw(), padded)])
     items: list[Any] = list(converse(fa.context((), turn_no=1, history=[]), fa.knowledge(), llm, fa.no_lead))
     (plan,) = llm.of("plan")
     assert plan.contents[-1].text.endswith(QUESTION_HEAD + DQ)
-    (ev,) = [i for i in items if isinstance(i, ResearchEvent)]
-    assert ev.question == DQ
+    (ev,) = [i for i in items if isinstance(i, DeepProposed)]
+    assert ev.pending.question == DQ
 
     # the facilitator under the router: the same
-    raw = card_answer("Починаю дослідження.", "a_one", deep_question=padded)
-    llm = full_deep(streams=[Stream(["Починаю дослідження."], raw, None)])
+    raw = card_answer("Це варто дослідити.", "a_one", deep_question=padded)
+    llm = full_deep(streams=[Stream(["Це варто дослідити."], raw, None)])
     items = list(respond(rq.context(), rq.knowledge(), llm))
     (plan,) = llm.of("plan")
     assert plan.contents[-1].text.endswith(QUESTION_HEAD + DQ)
-    (ev,) = [i for i in items if isinstance(i, ResearchEvent)]
-    assert ev.question == DQ
+    (ev,) = [i for i in items if isinstance(i, DeepProposed)]
+    assert ev.pending.question == DQ
 
 
 def test_router_md_answer_item_ends_with_the_sentence_about_agreeing_to_deep_research() -> None:

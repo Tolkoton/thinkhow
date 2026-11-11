@@ -1,6 +1,10 @@
-"""Contract tests of research-deep, `facilitation/deep.py`: the plan schema, `deep_research` (its deltas, its
+"""Contract tests of research-deep, `facilitation/deep.py`: the plan schema, the cycle (its deltas, its
 `DeepDone`, its calls, its rules, its errors), `with_deep`, and the parallel searches with their failures
-(Seam 3) (slice tester; from the contract)."""
+(Seam 3) (slice tester; from the contract).
+
+Superseded by deep-research-confirm-first: `deep_research` (plan + cycle in one reply) is gone; the plan is
+`propose`, the cycle is `run_deep(pending, …)` over the shown sub-questions (no plan call), and `with_deep`
+appends a proposal instead of the cycle."""
 
 import threading
 from pathlib import Path
@@ -12,12 +16,14 @@ from rdp_fakes import (
     DQ,
     FACT_1,
     FACT_2,
+    INTRO,
     INVALID_PLAN,
     INVALID_REPORT,
     LINE_ABC,
     LINK_A,
     LINK_C,
     PLAN_RULE,
+    PROPOSAL_ABC,
     QA,
     QB,
     QC,
@@ -30,6 +36,7 @@ from rdp_fakes import (
     SC,
     SEARCH_RULE,
     SEARCHES_ABC,
+    STEPS_ABC,
     TEXT_A,
     TEXT_B,
     TEXT_C,
@@ -38,18 +45,18 @@ from rdp_fakes import (
     fact_update,
     flat,
     full_deep,
+    pending,
     plan_raw,
     report_raw,
     rq,
-    steps_lines,
-    want_steps,
 )
 
 from thinkhow.facilitation import FacilitationError
-from thinkhow.facilitation.deep import DeepDone, deep_research, with_deep
+from thinkhow.facilitation.deep import DeepDone, propose, run_deep, with_deep
 from thinkhow.facilitation.settle import frame
 from thinkhow.facilitation.types import (
     DeepPlan,
+    DeepProposed,
     DeepReport,
     FacilitatorUpdate,
     MapUpdate,
@@ -65,8 +72,10 @@ PL = "Polski (pl-PL)"  # the person's language, named in each rule of the cycle 
 DEEP_MD = Path(__file__).resolve().parents[3] / "src" / "thinkhow" / "facilitation" / "deep.md"
 
 
-def run(llm: Any, question: str = DQ, c: Any = None, taken: frozenset[str] = frozenset()) -> list[Any]:
-    return list(deep_research(question, c if c is not None else ctx(), llm, REV, taken))
+def run(
+    llm: Any, questions: Any = (QA, QB, QC), c: Any = None, taken: frozenset[str] = frozenset()
+) -> list[Any]:
+    return list(run_deep(pending(questions), c if c is not None else ctx(), llm, REV, taken))
 
 
 def done_of(items: list[Any]) -> DeepDone:
@@ -105,29 +114,31 @@ def test_deep_plan_has_a_non_empty_intro_and_2_to_4_non_empty_sub_questions() ->
         DeepPlan.model_validate_json(plan_raw(intro=""))
 
 
-# ------------------------------------------------------------------ deep_research
+# ------------------------------------------------------------------ propose and run_deep
 
 
-def test_deep_research_streams_the_steps_then_the_report_then_the_sources_line_then_deep_done() -> None:
-    items = run(full_deep())
+def test_run_deep_streams_the_steps_then_the_report_then_the_sources_line_then_deep_done() -> None:
+    llm = deep_llm(reports=[report_raw()])
+    items = run(llm)
     assert [type(i).__name__ for i in items] == ["ReplyDelta", "ReplyDelta", "ReplyDelta", "DeepDone"]
     steps, report, line = (i.text for i in items[:3])
-    assert steps_lines(steps) == want_steps()
+    assert steps == STEPS_ABC
     assert report == "\n\n" + REPORT
     assert line == LINE_ABC
     done = done_of(items)
-    assert done.text == steps + "\n\n" + REPORT + LINE_ABC
+    assert done.text == STEPS_ABC + "\n\n" + REPORT + LINE_ABC
     assert done.event == deep_event()
     assert done.map_updates == (
         MapUpdate.model_validate(fact_update("d3-1", FACT_1, "t3")),
         MapUpdate.model_validate(fact_update("d3-2", FACT_2, "t3")),
     )
+    assert llm.of("plan") == []
 
 
-def test_deep_research_without_any_source_has_no_sources_line_in_the_stream_or_the_text() -> None:
+def test_run_deep_without_any_source_has_no_sources_line_in_the_stream_or_the_text() -> None:
     empty = pl.Found(("Berater Auswahl",), (), None)
-    llm = deep_llm([plan_raw(questions=[QA, QB])], [report_raw()], {QA: (TEXT_A, empty), QB: (TEXT_B, None)})
-    items = run(llm)
+    llm = deep_llm([], [report_raw()], {QA: (TEXT_A, empty), QB: (TEXT_B, None)})
+    items = run(llm, (QA, QB))
     texts = [i.text for i in items if isinstance(i, ReplyDelta)]
     assert all("Джерела:" not in t for t in texts)
     done = done_of(items)
@@ -137,12 +148,11 @@ def test_deep_research_without_any_source_has_no_sources_line_in_the_stream_or_t
     assert done.event.sources == ()
 
 
-def test_deep_research_plans_from_the_frame_and_the_question_searches_each_sub_question_then_reports() -> (
-    None
-):
-    llm = full_deep()
+def test_propose_plans_from_the_frame_and_the_question_and_run_deep_searches_each_sub_question() -> None:
+    llm = deep_llm(plans=[plan_raw()])
     c = ctx()
-    run(llm, c=c)
+    got = propose(DQ, c, llm, REV, False)
+    assert (got.question, got.intro, list(got.questions)) == (DQ, INTRO, [QA, QB, QC])
     (plan,) = llm.of("plan")
     want = frame(c)
     assert plan.contents[:-1] == want[:-1]
@@ -150,6 +160,10 @@ def test_deep_research_plans_from_the_frame_and_the_question_searches_each_sub_q
     assert plan.contents[-1].text == want[-1].text + QUESTION_HEAD + DQ
     assert plan.rev == REV
     assert issubclass(plan.schema, DeepPlan)
+    assert llm.of("search") == [] and llm.of("report") == []
+
+    llm = deep_llm(reports=[report_raw()])
+    run(llm, c=c)
     searches = llm.of("search")
     assert sorted(s.prompt or "" for s in searches) == sorted([QA, QB, QC])
     assert all(s.rev == REV for s in searches)
@@ -159,8 +173,7 @@ def test_deep_research_plans_from_the_frame_and_the_question_searches_each_sub_q
     assert len(report.contents) == 1 and report.contents[0].role == "user"
     body = report.contents[0].text
     assert DQ in body and TEXT_A in body and TEXT_B in body and TEXT_C in body
-    assert [c.kind for c in llm.calls if c.kind in ("stream", "update", "router")] == []
-    assert [c.kind for c in llm.calls].index("plan") == 0
+    assert [c.kind for c in llm.calls if c.kind in ("stream", "update", "router", "plan")] == []
     assert [c.kind for c in llm.calls][-1] == "report"
 
 
@@ -172,9 +185,12 @@ def test_deep_md_rules_go_to_their_calls_each_with_the_language_of_the_person() 
         flat(PLAN_RULE) in flat(text) and flat(SEARCH_RULE) in flat(text) and flat(REPORT_RULE) in flat(text)
     )
 
-    llm = full_deep()
-    run(llm, c=ctx(language="Polski (pl-PL)"))
-    (plan,) = llm.of("plan")
+    c = ctx(language="Polski (pl-PL)")
+    planner = deep_llm(plans=[plan_raw()])
+    propose(DQ, c, planner, REV, False)
+    (plan,) = planner.of("plan")
+    llm = deep_llm(reports=[report_raw()])
+    run(llm, c=c)
     (report,) = llm.of("report")
     searches = llm.of("search")
     assert len(searches) == 3
@@ -188,23 +204,24 @@ def test_deep_md_rules_go_to_their_calls_each_with_the_language_of_the_person() 
 
 
 def test_an_invalid_plan_gets_one_retry_and_twice_is_a_facilitation_error_before_any_search() -> None:
-    llm = deep_llm([INVALID_PLAN, plan_raw()], [report_raw()])
-    assert done_of(run(llm)).event == deep_event()
+    llm = deep_llm([INVALID_PLAN, plan_raw()])
+    got = propose(DQ, ctx(), llm, REV, False)
+    assert list(got.questions) == [QA, QB, QC]
     assert len(llm.of("plan")) == 2
 
     twice = deep_llm([INVALID_PLAN, plan_raw(questions=[QA])], [report_raw()])
     with pytest.raises(FacilitationError):
-        run(twice)
+        propose(DQ, ctx(), twice, REV, False)
     assert len(twice.of("plan")) == 2
     assert twice.of("search") == [] and twice.of("report") == []
 
 
 def test_an_invalid_report_gets_one_retry_and_twice_is_a_facilitation_error() -> None:
-    llm = deep_llm([plan_raw()], [INVALID_REPORT, report_raw()])
+    llm = deep_llm([], [INVALID_REPORT, report_raw()])
     assert done_of(run(llm)).event == deep_event()
     assert len(llm.of("report")) == 2
 
-    twice = deep_llm([plan_raw()], [INVALID_REPORT, json_report_without_text()])
+    twice = deep_llm([], [INVALID_REPORT, json_report_without_text()])
     with pytest.raises(FacilitationError):
         run(twice)
     assert len(twice.of("report")) == 2
@@ -217,12 +234,12 @@ def json_report_without_text() -> str:
 # ------------------------------------------------------------------ with_deep
 
 
-def test_with_deep_reads_deep_question_when_the_update_came_and_appends_the_cycle_to_the_held_update() -> (
+def test_with_deep_reads_deep_question_when_the_update_came_and_appends_the_proposal_to_the_held_update() -> (
     None
 ):
     quick = ResearchEvent(depth="quick", queries=("Mittelstand",), sources=(SA,), suggestions_html=None)
     first = FacilitatorUpdate(
-        reply="Звучить як ринок. Починаю.",
+        reply="Звучить як ринок.",
         current_phase_id="a_two",
         phase_exit_met=True,
         map_updates=[MapUpdate.model_validate(fact_update("d3-1", "Мета: перші гроші.", "t3"))],
@@ -230,37 +247,35 @@ def test_with_deep_reads_deep_question_when_the_update_came_and_appends_the_cycl
     asked: dict[str, str | None] = {"q": None}
 
     def items() -> Any:
-        yield ReplyDelta("Звучить як ринок. ")
-        yield ReplyDelta("Починаю.")
+        yield ReplyDelta("Звучить ")
+        yield ReplyDelta("як ринок.")
         yield quick
         asked["q"] = DQ  # what `fill` took off during `settle`, known only when the update arrives
         yield first
 
     llm = full_deep()
     got: list[Any] = list(with_deep(items(), lambda: asked["q"], ctx(), llm, REV))
-    assert got[:3] == [ReplyDelta("Звучить як ринок. "), ReplyDelta("Починаю."), quick]
-    assert [type(i).__name__ for i in got[3:]] == [
-        "ReplyDelta",
-        "ReplyDelta",
-        "ReplyDelta",
-        "ResearchEvent",
-        "FacilitatorUpdate",
-    ]
-    steps = got[3].text
-    assert steps.startswith("\n\n")
-    assert steps_lines(steps[2:]) == want_steps()
-    assert got[4] == ReplyDelta("\n\n" + REPORT)
-    assert got[5] == ReplyDelta(LINE_ABC)
-    assert got[6] == deep_event()
-    update = got[7]
-    assert update.reply == "Звучить як ринок. Починаю." + "\n\n" + steps[2:] + "\n\n" + REPORT + LINE_ABC
-    assert update.reply == "".join(i.text for i in got if isinstance(i, ReplyDelta))
+    assert got[:3] == [ReplyDelta("Звучить "), ReplyDelta("як ринок."), quick]
+    rest = got[3:]
+    assert isinstance(rest[-1], FacilitatorUpdate)
+    assert [i for i in got if isinstance(i, FacilitatorUpdate)] == [rest[-1]]
+    (offer,) = [i for i in rest if isinstance(i, DeepProposed)]
+    assert rest.index(offer) < len(rest) - 1
+    assert (offer.pending.question, offer.pending.intro, list(offer.pending.questions)) == (
+        DQ,
+        INTRO,
+        [QA, QB, QC],
+    )
+    shown = "".join(i.text for i in got if isinstance(i, ReplyDelta))
+    assert shown.startswith("Звучить як ринок.") and shown.endswith(PROPOSAL_ABC)
+    assert shown[len("Звучить як ринок.") : -len(PROPOSAL_ABC)].strip() == ""
+    update = rest[-1]
+    assert update.reply == shown
     assert (update.current_phase_id, update.phase_exit_met) == ("a_two", True)
-    assert [u.model_dump() for u in update.map_updates] == [
-        fact_update("d3-1", "Мета: перші гроші.", "t3"),
-        fact_update("d3-2", FACT_1, "t3"),
-        fact_update("d3-3", FACT_2, "t3"),
-    ]
+    assert [u.model_dump() for u in update.map_updates] == [fact_update("d3-1", "Мета: перші гроші.", "t3")]
+    assert len(llm.of("plan")) == 1
+    assert llm.of("search") == [] and llm.of("report") == []
+    assert not any(isinstance(i, ResearchEvent) and i.depth == "deep" for i in got)
 
 
 # ------------------------------------------------------------------ Seam 3: parallel searches, failures
@@ -284,7 +299,7 @@ def test_seam3_searches_run_in_parallel_and_their_results_keep_the_order_of_the_
         answer: tuple[str, pl.Found | None] = results[prompt]
         return answer
 
-    llm = deep_llm([plan_raw()], [report_raw()], {QA: search, QB: search, QC: search})
+    llm = deep_llm([], [report_raw()], {QA: search, QB: search, QC: search})
     done = done_of(run(llm))
     assert finished[-1] == QA, finished
     assert done.event.sources == (SA, SB, SC)
@@ -304,7 +319,7 @@ def test_seam3_a_failed_search_is_left_out_and_the_report_is_made_of_the_rest() 
         answer: tuple[str, pl.Found | None] = SEARCHES_ABC[prompt]
         return answer
 
-    llm = deep_llm([plan_raw()], [report_raw()], {QA: search, QB: search, QC: search})
+    llm = deep_llm([], [report_raw()], {QA: search, QB: search, QC: search})
     done = done_of(run(llm))
     body = llm.of("report")[0].contents[0].text
     assert TEXT_A in body and TEXT_C in body
@@ -336,7 +351,7 @@ def test_seam3_every_llm_call_line_of_the_searches_carries_the_request_id(
     scripted = full_deep()
 
     class Mixed:
-        """Plan and report by the fake; every search through VertexLlm, which writes the `llm_call` lines."""
+        """The report by the fake; every search through VertexLlm, which writes the `llm_call` lines."""
 
         def stream_json(self, *args: Any, **kwargs: Any) -> Any:
             raise AssertionError("no streamed call in the deep cycle")
@@ -360,7 +375,7 @@ def test_seam3_every_llm_call_line_of_the_searches_carries_the_request_id(
 
 def test_seam3_all_searches_failed_is_llm_unavailable_without_a_report() -> None:
     down = pl.LlmUnavailable("search down")
-    llm = deep_llm([plan_raw()], [report_raw()], {QA: down, QB: down, QC: down})
+    llm = deep_llm([], [report_raw()], {QA: down, QB: down, QC: down})
     with pytest.raises(pl.LlmUnavailable):
         run(llm)
     assert llm.of("report") == []

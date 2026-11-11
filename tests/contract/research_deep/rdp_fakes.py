@@ -4,20 +4,23 @@ The sealed helpers of research-quick (`rq_fakes`: cards alpha/beta, contexts, th
 the journal capture, the research.json helpers) and of fact-answer (`fa_fakes`: router answers, the texts of
 router.md and research.md, `flat`) are reused as they are: their folders are put on `sys.path`.
 
-- DeepLlm: a fake `platform.llm.Llm` with `search_text`. `generate_json` answers by the schema it was given:
-  a `RouterAnswer` schema from `router`, `DeepPlan` from `plans`, `DeepReport` from `reports`, any other
-  (a retry of an update) from `updates`; each planned raw JSON is validated by that schema, so an invalid
-  plan is a `ValidationError` inside the call. `stream_json` yields the planned deltas, then
-  `Done(raw, usage, found)`. `search_text` answers by the prompt from `searches`: a `(text, found)`, an
-  exception to raise, or a callable of the prompt. Every call is recorded (thread-safe).
-- The texts the contract fixes word for word: the three rules of `deep.md`, the sentence of `research.md`,
-  the section of `deep_field.md`, the sentence added to `router.md`.
-- A deep scenario written by hand: a question, a plan of three sub-questions, their findings and sources,
-  a report with two facts, and the sources line of the cycle.
+- DeepLlm: a fake `platform.llm.Llm` with `search_text`. `generate_json` answers by the schema it was
+  given: a `RouterAnswer` schema from `router`, `DeepPlan` from `plans`, `DeepReport` from `reports`,
+  `DeepConsent` from `consents`, any other (a retry of an update) from `updates`; each planned raw JSON is
+  validated by that schema, so an invalid plan is a `ValidationError` inside the call. `stream_json` yields
+  the planned deltas, then `Done(raw, usage, found)`. `search_text` answers by the prompt from `searches`: a
+  `(text, found)`, an exception to raise, or a callable of the prompt. Every call is recorded (thread-safe).
+- The texts the contract fixes word for word: the rules of `deep.md` (of «План» only its first sentence:
+  the sentence about `intro` is changed by deep-research-confirm-first), the sentence of `research.md` and
+  the body of `deep_field.md` (both as deep-research-confirm-first has them), the sentence of `router.md`.
+- A deep scenario written by hand: a question, a plan of three sub-questions, the proposal shown for it
+  (deep-research-confirm-first: the cycle runs after the person's «yes»), their findings and sources, a report
+  with two facts, and the sources line of the cycle.
 """
 
 from __future__ import annotations
 
+import importlib
 import json
 import sys
 import threading
@@ -34,16 +37,18 @@ for sibling in ("research_quick", "fact_answer"):
     if path not in sys.path:
         sys.path.insert(0, path)
 
-import fa_fakes as fa  # noqa: E402, F401  (re-exported: the tests import the sibling helpers from here)
-import rq_fakes as rq  # noqa: E402, F401
+fa: Any = importlib.import_module("fa_fakes")  # re-exported: the tests import the sibling helpers from here
+rq: Any = importlib.import_module("rq_fakes")
 from pydantic import BaseModel  # noqa: E402
 
 from thinkhow.facilitation.route import RouterAnswer  # noqa: E402
 from thinkhow.facilitation.types import (  # noqa: E402
+    DeepConsent,
     DeepPlan,
     DeepReport,
     FacilitationContext,
     MapItem,
+    PendingDeep,
     ProblemMap,
     Source,
     Turn,
@@ -52,10 +57,9 @@ from thinkhow.platform import llm as pl  # noqa: E402
 
 # --- the texts of the contract, word for word -------------------------------------------------------
 
-PLAN_RULE = (
-    "Розклади питання на 2–4 підпитання для пошуку в інтернеті, кожне — коротке речення мовою людини. "
-    "intro — одне речення людині, що ти досліджуєш і що це займе близько двох хвилин."
-)
+# «План»: the first sentence of research-deep; the sentence about `intro` is changed by
+# deep-research-confirm-first
+PLAN_RULE = "Розклади питання на 2–4 підпитання для пошуку в інтернеті, кожне — коротке речення мовою людини."
 SEARCH_RULE = "Знайди факти з джерелами на це підпитання. Коротко, з числами, назвами й датами."
 REPORT_RULE = (
     "Склади стислий звіт людині на її питання з цих знахідок: що відомо, з числами; де джерела розходяться — "
@@ -64,14 +68,16 @@ REPORT_RULE = (
     "який вона спиратиметься, одним реченням, з числом чи назвою, без посилань."
 )
 RESEARCH_SENTENCE = (
-    "Коли питання багатогранне (ринок, кілька шляхів, порівняння) і швидкого пошуку замало, запропонуй "
-    "людині глибоке дослідження: скажи, що це займе близько двох хвилин, і спитай, чи шукати."
+    "Коли питання багатогранне (ринок, кілька шляхів, порівняння) і швидкого пошуку замало, скажи одним "
+    "реченням, що це можна дослідити глибше, якщо людина захоче; згоди не питай — що саме шукати, "
+    "покаже система."
 )
 DEEP_FIELD_HEAD = "# Глибоке дослідження"
 DEEP_FIELD_BODY = (
-    "Коли людина погодилась на глибоке дослідження або сама просить дослідити глибоко — постав питання "
-    "дослідження в deep_question (одне речення: що саме з'ясувати), а в reply коротко скажи, що починаєш. "
-    "Інакше deep_question — null."
+    "Коли людина сама просить дослідити глибоко або погоджується на глибше дослідження, про яке щойно "
+    "сказано, — постав питання дослідження в deep_question (одне речення: що саме з'ясувати), "
+    "а в reply не кажи, що починаєш, і не питай згоди: система сама допише, що саме досліджуватиме, "
+    "і спитає людину. Інакше deep_question — null."
 )
 ROUTER_DEEP_SENTENCE = (
     'Так само "answer" — коли людина погоджується на глибоке дослідження, яке щойно запропоновано, або сама '
@@ -149,12 +155,35 @@ INVALID_REPORT = json.dumps({"facts": [FACT_1]}, ensure_ascii=False)
 
 
 def steps_lines(text: str) -> list[str]:
-    """The lines of the steps text: `intro`, then `- <sub-question>` each."""
+    """The lines of the steps text: `- <sub-question>` each (deep-research-confirm-first: no `intro`)."""
     return text.splitlines()
 
 
-def want_steps(intro: str = INTRO, questions: Sequence[str] = (QA, QB, QC)) -> list[str]:
-    return [intro, *[f"- {q}" for q in questions]]
+def want_steps(questions: Sequence[str] = (QA, QB, QC)) -> list[str]:
+    return [f"- {q}" for q in questions]
+
+
+# the proposal of the scenario: `intro`, a blank line, the question, then one `- <sub-question>` line each
+PROPOSAL_ABC = (
+    "Досліджую, як Mittelstand купує консалтинг, — це займе близько двох хвилин.\n\n"
+    "Як компанії Mittelstand купують консалтинг і де швидше перші гроші?\n"
+    "- Як Mittelstand обирає консультантів?\n"
+    "- Скільки коштує проєкт консалтингу для Mittelstand?\n"
+    "- Де консультанти знаходять перших клієнтів у Саксонії?"
+)
+STEPS_ABC = (
+    "- Як Mittelstand обирає консультантів?\n"
+    "- Скільки коштує проєкт консалтингу для Mittelstand?\n"
+    "- Де консультанти знаходять перших клієнтів у Саксонії?"
+)
+
+
+def pending(questions: Sequence[str] = (QA, QB, QC), question: str = DQ, intro: str = INTRO) -> PendingDeep:
+    return PendingDeep(question=question, intro=intro, questions=list(questions))
+
+
+def consent_raw(answer: str = "yes") -> str:
+    return json.dumps({"answer": answer})
 
 
 def fact_update(fid: str, text: str, turn: str) -> dict[str, Any]:
@@ -239,7 +268,7 @@ class Stream:
 
 @dataclass
 class Call:
-    kind: str  # "stream", "router", "plan", "report", "update", "search"
+    kind: str  # "stream", "router", "plan", "report", "consent", "update", "search"
     system: str
     contents: list[pl.Turn]
     schema: Any
@@ -254,6 +283,7 @@ class DeepLlm:
     plans: list[str] = field(default_factory=list)
     reports: list[str] = field(default_factory=list)
     updates: list[str] = field(default_factory=list)
+    consents: list[str] = field(default_factory=list)
     searches: Mapping[str, SearchPlan] = field(default_factory=dict)
     calls: list[Call] = field(default_factory=list)
     lock: threading.Lock = field(default_factory=threading.Lock)
@@ -294,6 +324,8 @@ class DeepLlm:
             kind, queue = "plan", self.plans
         elif isinstance(schema, type) and issubclass(schema, DeepReport):
             kind, queue = "report", self.reports
+        elif isinstance(schema, type) and issubclass(schema, DeepConsent):
+            kind, queue = "consent", self.consents
         else:
             kind, queue = "update", self.updates
         self._record(Call(kind, system, list(contents), schema, rev))
@@ -324,6 +356,7 @@ def deep_llm(
     streams: Sequence[Stream | BaseException] = (),
     router: Sequence[str] = (),
     updates: Sequence[str] = (),
+    consents: Sequence[str] = (),
 ) -> DeepLlm:
     return DeepLlm(
         streams=list(streams),
@@ -331,6 +364,7 @@ def deep_llm(
         plans=list(plans),
         reports=list(reports),
         updates=list(updates),
+        consents=list(consents),
         searches=dict(SEARCHES_ABC if searches is None else searches),
     )
 

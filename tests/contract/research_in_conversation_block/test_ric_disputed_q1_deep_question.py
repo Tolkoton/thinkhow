@@ -3,6 +3,9 @@
 The «Inter-slice contracts» line for S3 puts `deep_question` on `FacilitatorUpdate`; the appendix amendment
 from planning S3 puts it in the facilitator's schema under the router and in `RouterAnswer`. The test takes
 the amendment. Slice tester, mode `block`; from the feature artifact and the public signatures.
+
+Superseded in part by deep-research-confirm-first (task 747): on both paths the reply that decides shows a
+proposal and searches nothing; the one cycle runs on the person's «yes».
 """
 
 from __future__ import annotations
@@ -53,7 +56,10 @@ def research(store: LocalStorage, ref: Any) -> list[dict[str, Any]] | None:
 
 # S3 (amended in planning S3: «поле `deep_question` — … в схемі фасилітатора під роутером і в
 # `RouterAnswer`»):
-# without the router the card's schema has no such field; under it — the field, and the cycle follows
+# without the router the card's schema has no such field; under it — the field, and the cycle follows.
+# deep-research-confirm-first: «при `deep_question` і не `ctx.deep_off` — пропозиція замість циклу»;
+# «`deep_offer` … шлях роутера»; «`converse`: перш за все, коли `ctx.pending_deep` є: `consent(...)`; `yes` →
+# `deep_agreed`» — a proposal on both paths, the one cycle after «yes»
 def test_deep_question_only_under_the_router_and_the_one_cycle_runs_from_the_card_and_from_answer(
     tmp_path: Path,
 ) -> None:
@@ -67,23 +73,36 @@ def test_deep_question_only_under_the_router_and_the_one_cycle_runs_from_the_car
     ref = rq.topic(store)
     rq.put_routing(store, ref, [rq.d_choose(1, "alpha")])
     llm = rdp.full_deep(
-        streams=[rdp.Stream(["Досліджую глибше."], card_raw("Досліджую глибше.", deep_question=rdp.DQ))]
+        streams=[rdp.Stream(["Варто дослідити."], card_raw("Варто дослідити.", deep_question=rdp.DQ))],
+        consents=[rdp.consent_raw("yes")],
     )
-    got, _ = say(store, facilitate(llm), ref, "Так, досліди.")
+    fac = facilitate(llm)
+    got, _ = say(store, fac, ref, "Так, досліди.")
     assert isinstance(got[-1], Answered), got[-1]
     assert "deep_question" in llm.of("stream")[0].schema.model_fields
-    assert [c.kind for c in llm.calls if c.kind != "search"] == ["stream", "plan", "report"]
-    assert research(store, ref) == [deep_entry(2)]
+    assert [c.kind for c in llm.calls] == ["stream", "plan"]
+    assert rq.raw_research(store, ref) is None
+    got, _ = say(store, fac, ref, "Так, запускай.")
+    assert isinstance(got[-1], Answered), got[-1]
+    assert [c.kind for c in llm.calls if c.kind != "search"] == ["stream", "plan", "consent", "report"]
+    assert research(store, ref) == [deep_entry(4)]
     facts = [i for i in rq.read_map(store, ref)["items"] if i["type"] == "fact"]
     assert sorted(i["text"] for i in facts) == sorted([rdp.FACT_1, rdp.FACT_2])
 
     # from the router's «answer»
     store = LocalStorage(tmp_path / "answer")
     ref = rq.topic(store)
-    llm = rdp.full_deep(router=[rdp.with_deep_question(fa.answer_raw(), rdp.DQ)])
-    got, _ = say(store, facilitate(llm, fa.knowledge()), ref, "Так, досліди глибоко.")
+    llm = rdp.full_deep(
+        router=[rdp.with_deep_question(fa.answer_raw(), rdp.DQ)], consents=[rdp.consent_raw("yes")]
+    )
+    fac = facilitate(llm, fa.knowledge())
+    got, _ = say(store, fac, ref, "Так, досліди глибоко.")
     assert isinstance(got[-1], Answered), got[-1]
-    assert [c.kind for c in llm.calls if c.kind != "search"] == ["router", "plan", "report"]
-    assert research(store, ref) == [deep_entry(2)]
+    assert [c.kind for c in llm.calls] == ["router", "plan"]
+    assert rq.raw_research(store, ref) is None
+    got, _ = say(store, fac, ref, "Так, запускай.")
+    assert isinstance(got[-1], Answered), got[-1]
+    assert [c.kind for c in llm.calls if c.kind != "search"] == ["router", "plan", "consent", "report"]
+    assert research(store, ref) == [deep_entry(4)]
     facts = [i for i in rq.read_map(store, ref)["items"] if i["type"] == "fact"]
     assert sorted(i["text"] for i in facts) == sorted([rdp.FACT_1, rdp.FACT_2])

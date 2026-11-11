@@ -5,6 +5,10 @@ Slice tester, mode `block`; from `.engine/architecture/feature/research-in-conve
 signatures, not the bodies. Every test drives two or more slices together through the seam its line names,
 through `respond` (the app's Facilitate) and `workspace.reply`, or the web app. Expected values are written
 by hand from the artifact and the sealed scenarios of the slices.
+
+Superseded in part by deep-research-confirm-first (task 747): the reply that decides on deep research shows a
+proposal (no search, nothing in `research.json`); the cycle, its sources line and its `deep` entry come on the
+person's next turn when it agrees («yes»).
 """
 
 from __future__ import annotations
@@ -262,7 +266,10 @@ def test_research_event_comes_before_the_update_on_the_card_path_and_on_the_answ
 
 
 # «`workspace._answer` збирає їх і після запису відповіді дописує в `research.json` з `turn` = номер відповіді
-# моделі; без подій файл не чіпає» — quick (S1), a turn without search, deep (S3) in one topic
+# моделі; без подій файл не чіпає» — quick (S1), a turn without search, deep (S3) in one topic.
+# deep-research-confirm-first: «`with_deep(items, deep_question, ctx, llm, rev)` — та сама сигнатура; при
+# `deep_question` і не `ctx.deep_off` — пропозиція замість циклу»; «`yes` → `deep_agreed`» — the deep entry
+# carries the turn of the reply after «yes»
 def test_one_topic_quick_then_no_search_then_deep_entries_keep_the_model_turns_and_the_file_is_left_alone(
     tmp_path: Path,
 ) -> None:
@@ -273,10 +280,13 @@ def test_one_topic_quick_then_no_search_then_deep_entries_keep_the_model_turns_a
         streams=[
             rdp.Stream(list(RENT_DELTAS), card_raw(RENT_REPLY, [RENT_FACT]), RENT_FOUND),
             rdp.Stream([PLAIN_REPLY], card_raw(PLAIN_REPLY)),
-            rdp.Stream(["Досліджую глибше."], card_raw("Досліджую глибше.", deep_question=rdp.DQ)),
+            rdp.Stream(
+                ["Це варто дослідити глибше."], card_raw("Це варто дослідити глибше.", deep_question=rdp.DQ)
+            ),
         ],
         plans=[rdp.plan_raw()],
         reports=[rdp.report_raw()],
+        consents=[rdp.consent_raw("yes")],
     )
     fac = facilitate(llm)
     got, _ = say(store, fac, ref, ASK_RENT)
@@ -288,9 +298,17 @@ def test_one_topic_quick_then_no_search_then_deep_entries_keep_the_model_turns_a
     assert isinstance(got[-1], Answered) and got[-1].turn_no == 4, got[-1]
     assert raw_research(store, ref) == before
 
+    # the reply that decides: a proposal, no search, the file left alone
     got, shown = say(store, fac, ref, "Так, досліди глибоко, як купує Mittelstand.")
     assert isinstance(got[-1], Answered) and got[-1].turn_no == 6, got[-1]
-    assert research(store, ref) == [RENT_ENTRY, deep_entry(6)]
+    assert shown.endswith(rdp.PROPOSAL_ABC)
+    assert llm.of("search") == []
+    assert raw_research(store, ref) == before
+
+    # «yes»: the cycle, and its entry with this reply's turn
+    got, shown = say(store, fac, ref, "Так, запускай.")
+    assert isinstance(got[-1], Answered) and got[-1].turn_no == 8, got[-1]
+    assert research(store, ref) == [RENT_ENTRY, deep_entry(8)]
     assert shown.endswith("\n\n" + rdp.REPORT + rdp.LINE_ABC)
     assert len(llm.of("search")) == 3
 
@@ -320,11 +338,20 @@ def test_the_sources_line_shown_live_is_the_one_recorded_on_the_card_answer_and_
     assert shown == fa.REPLY + fa.LINE
     assert last_model_text(store, ref) == normalize(shown)
 
-    # deep, on the router's «answer» with a deep question
+    # deep, on the router's «answer» with a deep question: the proposal (no sources), then the report
+    # after «yes»
+    # (deep-research-confirm-first: «`deep_offer` … шлях роутера»; «`yes` → `deep_agreed`»)
     store = LocalStorage(tmp_path / "deep")
     ref = rq.topic(store)
-    llm = rdp.full_deep(router=[rdp.with_deep_question(fa.answer_raw(), rdp.DQ)])
-    _, shown = say(store, facilitate(llm, fa.knowledge()), ref, "Так, досліди глибоко.")
+    llm = rdp.full_deep(
+        router=[rdp.with_deep_question(fa.answer_raw(), rdp.DQ)], consents=[rdp.consent_raw("yes")]
+    )
+    fac = facilitate(llm, fa.knowledge())
+    _, shown = say(store, fac, ref, "Так, досліди глибоко.")
+    assert shown == rdp.PROPOSAL_ABC
+    assert "Джерела: " not in shown
+    assert last_model_text(store, ref) == normalize(shown)
+    _, shown = say(store, fac, ref, "Так, запускай.")
     assert shown.endswith("\n\n" + rdp.REPORT + rdp.LINE_ABC)
     assert shown.count("Джерела: ") == 1
     assert last_model_text(store, ref) == normalize(shown)

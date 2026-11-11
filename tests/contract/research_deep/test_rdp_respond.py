@@ -1,29 +1,29 @@
 """Contract tests of research-deep, the generators: `respond` under the router with `deep_question` (Seam 1:
 the deep events and the card's end before the held update), with `deep_question: null` (Seam 4: the events
 of S1), the retry of the update with the field, and `converse` on `answer` with `deep_question` (Seam 2)
-(slice tester; from the contract)."""
+(slice tester; from the contract).
+
+Superseded by deep-research-confirm-first in part: a `deep_question` no longer runs the cycle in the same
+reply — `with_deep` (under the router) and `deep_offer` (the router's `answer`) show a proposal instead."""
 
 from typing import Any
 
 from rdp_fakes import (
     DQ,
-    FACT_1,
-    FACT_2,
-    LINE_ABC,
-    QUERIES_ABC,
-    REPORT,
-    SA,
-    SB,
-    SC,
+    INTRO,
+    PROPOSAL_ABC,
+    QA,
+    QB,
+    QC,
     Stream,
     card_answer,
     card_update,
+    deep_llm,
     fa,
     fact_update,
     full_deep,
+    plan_raw,
     rq,
-    steps_lines,
-    want_steps,
     with_deep_question,
 )
 
@@ -36,7 +36,7 @@ from thinkhow.facilitation import (
     respond,
 )
 from thinkhow.facilitation.respond import answer_schema, update_schema
-from thinkhow.facilitation.types import FactAnswer, MapUpdate, Source
+from thinkhow.facilitation.types import DeepProposed, FactAnswer, Source
 from thinkhow.platform import llm as pl
 
 REPLY = "Звучить як питання ринку. Можу дослідити глибше."
@@ -49,18 +49,19 @@ QUICK = ResearchEvent(
     sources=(Source("Перше джерело", "https://q.example/first"),),
     suggestions_html=None,
 )
-DEEP = ResearchEvent(
-    depth="deep",
-    queries=QUERIES_ABC,
-    sources=(SA, SB, SC),
-    suggestions_html="<div>підказки Б</div>",
-    question=DQ,
-    report=REPORT,
-)
 
 
 def texts(items: list[Any]) -> list[str]:
     return [i.text for i in items if isinstance(i, ReplyDelta)]
+
+
+def offer_of(items: list[Any]) -> DeepProposed:
+    (offer,) = [i for i in items if isinstance(i, DeepProposed)]
+    return offer
+
+
+def no_cycle(llm: Any) -> bool:
+    return bool(llm.of("search") == [] and llm.of("report") == [])
 
 
 def test_seam1_respond_under_the_router_gives_the_deep_events_and_the_card_end_before_the_held_update() -> (
@@ -73,22 +74,25 @@ def test_seam1_respond_under_the_router_gives_the_deep_events_and_the_card_end_b
     update = items[-1]
     assert isinstance(update, FacilitatorUpdate)
     assert [i for i in items if isinstance(i, FacilitatorUpdate)] == [update]
-    assert DEEP in items and items.index(DEEP) < len(items) - 1
+    offer = offer_of(items)
+    assert items.index(offer) < len(items) - 1
+    assert (offer.pending.question, offer.pending.intro, list(offer.pending.questions)) == (
+        DQ,
+        INTRO,
+        [QA, QB, QC],
+    )
     ends = [i for i in items if isinstance(i, RoutingEvent)]
     assert [(e.decision.kind, e.decision.end, e.decision.card_id) for e in ends] == [("end", "done", "alpha")]
     assert items.index(ends[0]) < len(items) - 1
     assert QUICK in items
+    assert not any(isinstance(i, ResearchEvent) and i.depth == "deep" for i in items)
     shown = "".join(texts(items))
     assert update.reply == shown
-    assert shown.startswith(REPLY + LINE_1 + "\n\n")
-    assert shown.endswith("\n\n" + REPORT + LINE_ABC)
-    assert steps_lines(shown[len(REPLY + LINE_1 + "\n\n") : -len("\n\n" + REPORT + LINE_ABC)]) == want_steps()
-    assert [u.model_dump() for u in update.map_updates] == [
-        first_fact,
-        fact_update("d3-2", FACT_1, "t3"),
-        fact_update("d3-3", FACT_2, "t3"),
-    ]
+    assert shown.startswith(REPLY + LINE_1) and shown.endswith(PROPOSAL_ABC)
+    assert shown[len(REPLY + LINE_1) : -len(PROPOSAL_ABC)].strip() == ""
+    assert [u.model_dump() for u in update.map_updates] == [first_fact]
     assert (update.current_phase_id, update.phase_exit_met) == ("a_three", True)
+    assert no_cycle(llm)
 
 
 def test_seam4_routed_lead_with_deep_question_null_gives_the_events_of_s1_and_its_schema_has_the_field() -> (
@@ -110,7 +114,7 @@ def test_seam4_routed_lead_with_deep_question_null_gives_the_events_of_s1_and_it
     assert list(call.schema.model_fields) == [*answer_schema(rq.ALPHA).model_fields, "deep_question"]
 
 
-def test_under_the_router_the_retry_of_the_update_carries_deep_question_and_the_cycle_follows() -> None:
+def test_under_the_router_the_retry_of_the_update_carries_deep_question_and_the_proposal_follows() -> None:
     invalid = card_answer(REPLY, "b_one", deep_question=DQ)  # b_one is not a phase of alpha
     llm = full_deep(
         streams=[Stream(list(DELTAS), invalid, None)], updates=[card_update("a_two", deep_question=DQ)]
@@ -118,41 +122,37 @@ def test_under_the_router_the_retry_of_the_update_carries_deep_question_and_the_
     items: list[Any] = list(respond(rq.context(), rq.knowledge(), llm))
     (retry,) = llm.of("update")
     assert list(retry.schema.model_fields) == [*update_schema(rq.ALPHA).model_fields, "deep_question"]
-    assert DEEP in items
+    assert offer_of(items).pending.question == DQ
     update = items[-1]
     assert isinstance(update, FacilitatorUpdate)
     assert update.current_phase_id == "a_two"
     assert update.reply == "".join(texts(items))
-    assert update.reply.startswith(REPLY + "\n\n") and update.reply.endswith("\n\n" + REPORT + LINE_ABC)
+    assert update.reply.startswith(REPLY) and update.reply.endswith(PROPOSAL_ABC)
+    assert update.reply[len(REPLY) : -len(PROPOSAL_ABC)].strip() == ""
+    assert no_cycle(llm)
 
 
-def test_seam2_converse_on_answer_with_deep_question_runs_the_cycle_at_once_without_answer_fact() -> None:
+def test_seam2_converse_on_answer_with_deep_question_shows_the_proposal_at_once_without_answer_fact() -> None:
     router = with_deep_question(fa.answer_raw(("alpha",)), DQ)
-    llm = full_deep(router=[router])
+    llm = deep_llm(plans=[plan_raw()], router=[router])
     items: list[Any] = list(converse(fa.context((), turn_no=1, history=[]), fa.knowledge(), llm, fa.no_lead))
-    assert [type(i).__name__ for i in items] == [
-        "RoutingEvent",
-        "ReplyDelta",
-        "ReplyDelta",
-        "ReplyDelta",
-        "ResearchEvent",
-        "FacilitatorUpdate",
-    ]
+    assert type(items[0]).__name__ == "RoutingEvent"
     decision = items[0].decision
     assert (decision.kind, decision.card_id, decision.turn) == ("answer", None, 1)
-    steps, report, line = texts(items)
-    assert steps_lines(steps) == want_steps()
-    assert (report, line) == ("\n\n" + REPORT, LINE_ABC)
-    assert items[4] == DEEP
-    assert items[5] == FacilitatorUpdate(
-        reply=steps + "\n\n" + REPORT + LINE_ABC,
-        current_phase_id=None,
-        phase_exit_met=False,
-        map_updates=[
-            MapUpdate.model_validate(fact_update("d1-1", FACT_1, "t1")),
-            MapUpdate.model_validate(fact_update("d1-2", FACT_2, "t1")),
-        ],
+    assert isinstance(items[-1], FacilitatorUpdate)
+    middle = items[1:-1]
+    assert {type(i).__name__ for i in middle} == {"ReplyDelta", "DeepProposed"}
+    offer = offer_of(items)
+    assert (offer.pending.question, offer.pending.intro, list(offer.pending.questions)) == (
+        DQ,
+        INTRO,
+        [QA, QB, QC],
     )
-    assert fa.ROUTER_REPLY not in items[5].reply
+    assert "".join(texts(items)) == PROPOSAL_ABC
+    assert items[-1] == FacilitatorUpdate(
+        reply=PROPOSAL_ABC, current_phase_id=None, phase_exit_met=False, map_updates=[]
+    )
+    assert fa.ROUTER_REPLY not in items[-1].reply
     assert llm.of("stream") == []
     assert all(c.schema is not FactAnswer for c in llm.calls)
+    assert no_cycle(llm)

@@ -8,10 +8,11 @@ from collections.abc import Callable, Iterator
 from dataclasses import replace
 
 from thinkhow.facilitation.answer import answer_fact
-from thinkhow.facilitation.deep import deep_answer
+from thinkhow.facilitation.deep import consent, deep_agreed, deep_changed, deep_offer
 from thinkhow.facilitation.route import RouterAnswer, route
 from thinkhow.facilitation.types import (
     Decision,
+    DeepProposed,
     FacilitationContext,
     FacilitatorUpdate,
     ReplyDelta,
@@ -23,7 +24,8 @@ from thinkhow.facilitation.types import (
 from thinkhow.knowledge import Card, CurrentKnowledge
 from thinkhow.platform import llm as model
 
-LeadItem = ReplyDelta | FacilitatorUpdate | ResearchEvent
+LeadItem = ReplyDelta | FacilitatorUpdate | ResearchEvent | DeepProposed
+Item = ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent | DeepProposed
 Lead = Callable[[FacilitationContext, CurrentKnowledge, model.Llm], Iterator[LeadItem]]
 DONE_WHY = "картку пройдено"
 NOT_FIT_WHY = "картка не підходить"
@@ -31,7 +33,27 @@ NOT_FIT_WHY = "картка не підходить"
 
 def converse(
     ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm, lead: Lead
-) -> Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent]:
+) -> Iterator[Item]:
+    """Flow: a deep research waiting for consent → its answer; otherwise the conversation
+    (deep-research-confirm-first): «yes» runs the shown research, a change shows a new plan, «no» and anything
+    else go on talking."""
+    pending = ctx.pending_deep
+    if pending is None:
+        yield from _converse(ctx, knowledge, llm, lead)
+        return
+    rev = knowledge.rev_pair()
+    choice = consent(ctx, llm, rev)
+    if choice == "yes":
+        yield from deep_agreed(pending, ctx, llm, rev)
+    elif choice == "change":
+        yield from deep_changed(pending, ctx, llm, rev)
+    else:
+        yield from _converse(replace(ctx, pending_deep=None, deep_off=choice == "no"), knowledge, llm, lead)
+
+
+def _converse(
+    ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm, lead: Lead
+) -> Iterator[Item]:
     """Flow: route when no card is chosen → the chosen card's lead → the end of the card before the update."""
     routing = ctx.routing or ()
     card_id = current_card(routing)
@@ -39,8 +61,8 @@ def converse(
         answer = route(ctx, knowledge, llm)
         decision = _decision(answer, ctx.turn_no, knowledge)
         yield RoutingEvent(decision)
-        if answer.action == "answer" and answer.deep_question is not None:
-            yield from deep_answer(answer.deep_question, ctx, llm, knowledge.rev_pair())
+        if answer.action == "answer" and answer.deep_question is not None and not ctx.deep_off:
+            yield from deep_offer(answer.deep_question, ctx, llm, knowledge.rev_pair())
             return
         if answer.action == "answer":
             yield from answer_fact(ctx, knowledge, llm)
@@ -56,7 +78,7 @@ def converse(
 
 def _lead_card(
     ctx: FacilitationContext, knowledge: CurrentKnowledge, llm: model.Llm, lead: Lead
-) -> Iterator[ReplyDelta | FacilitatorUpdate | RoutingEvent | ResearchEvent]:
+) -> Iterator[Item]:
     """The card's stream with its update held back, so the end of the card comes before it."""
     update: FacilitatorUpdate | None = None
     for item in lead(ctx, knowledge, llm):
