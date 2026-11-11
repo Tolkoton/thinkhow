@@ -231,22 +231,18 @@ def _candidate(history: History, record: ChangeRecord, by: str, now: datetime) -
 
 
 def changes(storage: Storage) -> list[ChangeView]:
-    """Every revision, newest first, with what it upserted and removed and its rollback (the smallest n)."""
+    """Every revision, newest first, with what it upserted and removed and its rollback (the smallest n) —
+    with what that rollback changed when it was written, its stored `changed`."""
     history = read_history(storage)
-    last = history.records[max(history.records)]
-    _, acted = apply_rollbacks(history, dict(last.memory))
     first: dict[int, Rollback] = {}
     for rb in history.rollbacks:
         first.setdefault(rb.rev, rb)
     return [
-        _view(storage, history.records[rev], first.get(rev), acted)
-        for rev in sorted(history.records, reverse=True)
+        _view(storage, history.records[rev], first.get(rev)) for rev in sorted(history.records, reverse=True)
     ]
 
 
-def _view(
-    storage: Storage, record: ChangeRecord, rb: Rollback | None, acted: dict[int, list[str]]
-) -> ChangeView:
+def _view(storage: Storage, record: ChangeRecord, rb: Rollback | None) -> ChangeView:
     upserted = [
         MemoryRecord.model_validate_json(storage.read("system", record.memory[mid]) or b"")
         for mid in sorted(record.replaced)
@@ -261,5 +257,5 @@ def _view(
         upserted=upserted,
         removed=sorted(mid for mid in record.replaced if mid not in record.memory),
         rolled_back=rb.n if rb else None,
-        rollback_changed=acted.get(rb.n, []) if rb else [],
+        rollback_changed=list(rb.changed) if rb else [],
     )
