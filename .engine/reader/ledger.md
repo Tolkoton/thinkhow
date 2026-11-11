@@ -356,3 +356,8 @@
 - Record: tasks/done/103-backup-before-volume/report.md
 - Reason: All four questions hold. The report's references check out: docs/deploy.md §12, the 26 + 119 files, the dry-run result, the architecture-map wording, proposed task 749, and the commits 3b2835e, fc79b49 and 6399dd1 with the stated subjects. The task has one «Що зробити» item; the report says plainly that the procedure was done and checked, that the permanent copy was not made because of the owner's answer «Г», and that it was deferred to proposed/749. The owner's question has options А–Г with advice and is already answered, so no open question is left. Technical terms (bucket, commit, overseer,
 - Request: 20261111T183551Z-77ed91 (attempt 1)
+
+## 2026-11-11T18:38:45Z — 419-maintain-2026-11-10 — READER_PASS
+- Record: tasks/done/419-maintain-2026-11-10/report.md
+- Reason: All four questions hold. The references check out: the numbers match the maintain report, and the commits match the request or .git/logs/HEAD. Both items of «Що зробити» / «Готово, коли» are answered: the report was written, and the update question went to blocked, was answered «так», and then failed. The report explains why and where the update went. There is no open question for the owner, and engine terms stay in English (runner, gate, commit, type-check, sealed).
+- Request: 20261111T183805Z-7c606d (attempt 1)
