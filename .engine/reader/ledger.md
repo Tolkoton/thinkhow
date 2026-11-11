@@ -366,3 +366,8 @@
 - Record: tasks/done/733-open-item-tests-mypy-red/report.md
 - Reason: All four questions hold. The file lines, commits and ledger entries the report cites say what it says they do. Each item of «Що зробити» is either done or deferred to task 735 with a reason. The one owner question was answered «так» and the report carries out option A. Technical terms are in English; the one Ukrainian phrase, «повторну печатку», follows the owner's own word «запечатаного».
 - Request: 20261111T191519Z-b4accc (attempt 1)
+
+## 2026-11-11T19:59:43Z — 735-open-item-skel-learning-live-test-old-shape — READER_PASS
+- Record: tasks/done/735-open-item-skel-learning-live-test-old-shape/report.md
+- Reason: Every reference I could check is correct: the files, the diff, the outputs, the ledger entry and both commits. The task's only item is covered: the ObservationSet checks are in the test, and the objection package was replaced by the owner's «так» (option А) and a reseal, which the report says plainly. The owner's question in the task file offers options А, Б and В with advice and is already answered. The report keeps the engine terms in English (reseal, objection, slice, Stop gate, board runner).
+- Request: 20261111T195912Z-45cf3b (attempt 1)
