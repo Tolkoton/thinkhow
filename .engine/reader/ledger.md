@@ -351,3 +351,8 @@
 - Record: tasks/done/420-cleanup-2026-11-10/report.md
 - Reason: All four questions hold. The nightly output in the report matches the saved file. The metrics figures match metrics.jsonl lines 18 and 20, and the 42 signals and head aea8a28 match report 418. Each of the four «Що зробити» items gets an answer, the report raises no questions for the owner, and technical terms are in English.
 - Request: 20261110T185752Z-590626 (attempt 1)
+
+## 2026-11-11T18:36:20Z — 103-backup-before-volume — READER_PASS
+- Record: tasks/done/103-backup-before-volume/report.md
+- Reason: All four questions hold. The report's references check out: docs/deploy.md §12, the 26 + 119 files, the dry-run result, the architecture-map wording, proposed task 749, and the commits 3b2835e, fc79b49 and 6399dd1 with the stated subjects. The task has one «Що зробити» item; the report says plainly that the procedure was done and checked, that the permanent copy was not made because of the owner's answer «Г», and that it was deferred to proposed/749. The owner's question has options А–Г with advice and is already answered, so no open question is left. Technical terms (bucket, commit, overseer,
+- Request: 20261111T183551Z-77ed91 (attempt 1)
