@@ -376,3 +376,8 @@
 - Record: tasks/done/750-open-item-scripts-mypy-red/report.md
 - Reason: All four questions hold. The references I could check say what the report claims: llm.py:21/258, log.py:16, the contract test files, 733/735 being in done/, commit fbdd164 and the 1695-passed artifact. The task's three items (the rename, a product-cards fix that differs from the suggested patch with the reason given, mypy and the smokes run, or why not) are each answered. There are no open questions, and the technical terms stay in English.
 - Request: 20261111T233818Z-a28162 (attempt 1)
+
+## 2026-11-11T23:40:29Z — 750-open-item-scripts-mypy-red — READER_PASS
+- Record: tasks/done/750-open-item-scripts-mypy-red/report.md
+- Reason: All four questions hold. The references I could check match what the report says. Every item of «Що зробити» is either done or has a stated reason: voice-language is renamed; product-cards uses redirect_stdout instead of patch, with the reason given; mypy is green; the product-cards live smoke is deferred because the server has no ADC. The report has no open question for the owner, and its technical terms are in English.
+- Request: 20261111T233945Z-489bf5 (attempt 1)
