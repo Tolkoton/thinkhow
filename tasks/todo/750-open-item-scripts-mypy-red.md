@@ -1,8 +1,17 @@
 # 750 — Two smoke scripts keep the type-check red
 
 Залежить від: —
-Аудит потрібен: ні
+Потрібна присутність власника: ні
+Режим: соло
+Аудит потрібен: так
+Додаткові сесії: ні
 Відкритий пункт: scripts-mypy-red
+
+## Рішення власника
+Слова власника (2026-11-11, сесія Thinkhow; записано Claude зі слів власника): «Залежності мають робитися
+автоматично. Нащо мене це питати?» Задача 419 на його «так» нічого не оновила, бо type-check червоний ще до
+оновлень (733, 735 і ці два smoke scripts); без цієї задачі наступний догляд знову не оновить залежностей — тому
+Claude ставить її в роботу з цих слів [не слова власника].
 
 ## Що сталося
 On cf4adde 'uv run mypy src tests scripts' prints «Found 12 errors in 4 files». Two of the four files are not covered by tasks 733 and 735: scripts/smoke_test_voice_language.py:51-52 (variable 'chosen' first holds an httpx Response, then a str — task 208) and scripts/smoke_test_product_cards.py:75,81,96 (patches thinkhow.platform.llm.log_event, which the module does not export explicitly, and the stand-in has another signature — task 307). The runner's update-deps for task 419 refused to start because gate[ci] was red before any update (.engine/maintain/update-result.md); with 733 and 735 done these two files would still keep it red.
