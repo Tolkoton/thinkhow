@@ -63,7 +63,8 @@ scripts/live_deep_confirm.py`. Повний вивід — `.engine/artifacts/74
 
 ## Діапазон commit-ів
 Від `ead0414` (задача → doing) до commit-а, яким задача переходить у `done/`. Код, тести і контракт — commit
-`bc5fa40`.
+`bc5fa40`. Запис slice-а S3b в артефакті функції `.engine/architecture/feature/research-in-conversation.md` —
+`d906a09`.
 
 ## Як збудовано (коротко)
 - Контракт: `.engine/slices/deep-research-confirm-first.md`, запечатаний. Його план перевірили 8 раундів critic-ів,
