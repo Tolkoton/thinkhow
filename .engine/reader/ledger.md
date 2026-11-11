@@ -381,3 +381,8 @@
 - Record: tasks/done/750-open-item-scripts-mypy-red/report.md
 - Reason: All four questions hold. The references I could check match what the report says. Every item of «Що зробити» is either done or has a stated reason: voice-language is renamed; product-cards uses redirect_stdout instead of patch, with the reason given; mypy is green; the product-cards live smoke is deferred because the server has no ADC. The report has no open question for the owner, and its technical terms are in English.
 - Request: 20261111T233945Z-489bf5 (attempt 1)
+
+## 2026-11-11T23:42:06Z — 421-cleanup-2026-11-11 — READER_PASS
+- Record: tasks/done/421-cleanup-2026-11-11/report.md
+- Reason: All four questions hold. The nightly output and the metrics numbers match the files. Each of the four «Що зробити» items has an answer: no sharp growth, so the simplifier did not run and nothing was removed or routed. There are no open questions for the owner. Engine terms stay English.
+- Request: 20261111T234132Z-4cc087 (attempt 1)
