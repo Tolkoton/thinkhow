@@ -386,3 +386,8 @@
 - Record: tasks/done/421-cleanup-2026-11-11/report.md
 - Reason: All four questions hold. The nightly output and the metrics numbers match the files. Each of the four «Що зробити» items has an answer: no sharp growth, so the simplifier did not run and nothing was removed or routed. There are no open questions for the owner. Engine terms stay English.
 - Request: 20261111T234132Z-4cc087 (attempt 1)
+
+## 2026-11-12T11:34:15Z — 422-cleanup-2026-11-12 — READER_PASS
+- Record: tasks/done/422-cleanup-2026-11-12/report.md
+- Reason: All four checks pass. Every reference I could check says what the report claims: the metrics.jsonl entries, the nightly output copy and the 421 report's head and signal count. Each of the four «Що зробити» items has an answer. There is no open question for the owner, and the engine terms stay in English.
+- Request: 20261112T113350Z-fb4201 (attempt 1)
