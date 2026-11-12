@@ -82,12 +82,14 @@ class FactUpdate(_Frozen):
 
 
 class DeepPlan(_Frozen):
-    """The deep cycle's plan: one line to the person, then 2–4 sub-questions to search."""
+    """The deep cycle's plan: one line to the person, then 2–4 sub-questions to search; on a change, the
+    research question rewritten (deep-change-question)."""
 
     llm_timeout_s: ClassVar[float] = 60.0  # measured 7.7–16.4 s; a hung call waited 300 s (bug 003)
 
     intro: str = Field(min_length=1)
     questions: list[Annotated[str, Field(min_length=1)]] = Field(min_length=2, max_length=4)
+    question: str | None = None  # the research question rewritten with the person's change; only on a change
 
 
 class DeepReport(_Frozen):

@@ -613,3 +613,14 @@
 - Live: `scripts/live_deep_confirm.py` → `.engine/artifacts/747/live-deep-confirm.txt` (router path, yes/change/no)
 - Open for next slice: after a change the research-question line stays the first one (Q6) — the person may see words
   of what they removed; proposal in the task report
+
+## Slice deep-change-question — task 754 (DONE 2026-11-12)
+
+- Contract: `.engine/slices/deep-change-question.md` (sealed; tester's 12 contract tests
+  `tests/contract/deep_change_question/`)
+- Modules: `facilitation/types.py` — `DeepPlan.question: str | None = None`; `facilitation/deep.py` — `CHANGE_LINE`,
+  `propose(..., changed=False)` (on a change: the change line in the plan's frame, the question
+  `clean_question(plan.question) or question`), `deep_changed` calls it with `changed=True`; prompt `deep.md` «План»
+- Sealed tests: none changed (contract Q5)
+- Live: `scripts/live_deep_confirm.py` → `.engine/artifacts/754/live-deep-confirm.txt` (change: the question line
+  rewritten without «оренд», equal to `deep_pending.json`; yes/no as in 747)

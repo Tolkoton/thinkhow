@@ -33,6 +33,10 @@ from thinkhow.facilitation.types import (
 from thinkhow.platform import llm as model
 
 QUESTION_HEAD = "\n\n[Питання дослідження]\n"
+CHANGE_LINE = (
+    "[Стан] Людина змінює попередній план: склади новий з її правкою і заповни question — питання "
+    "дослідження заново, з її правкою."
+)
 SECTION = re.compile(r"^## (.+)$", re.M)
 
 
@@ -61,13 +65,20 @@ RULES = _rules()
 
 
 def propose(
-    question: str, ctx: FacilitationContext, llm: model.Llm, rev: model.KnowledgeRev, first: bool
+    question: str,
+    ctx: FacilitationContext,
+    llm: model.Llm,
+    rev: model.KnowledgeRev,
+    first: bool,
+    changed: bool = False,
 ) -> PendingDeep:
-    """Flow: one plan call (the first-reply line in its frame when `first`) → the proposal; no search."""
-    state = f"{FIRST_REPLY_LINE}\n\n" if first else ""
+    """Flow: one plan call (the first-reply line in its frame when `first`, the change line when `changed`) →
+    the proposal; on a change its question is the plan's rewritten one, if any. No search."""
+    state = f"{FIRST_REPLY_LINE}\n\n" if first else f"{CHANGE_LINE}\n\n" if changed else ""
     contents = _plan_contents(ctx, question, state)
     plan = _twice(lambda: llm.generate_json(_system("План", ctx), contents, DeepPlan, rev))
-    return PendingDeep(question=question, intro=plan.intro, questions=list(plan.questions))
+    asked = (clean_question(plan.question) if changed else None) or question
+    return PendingDeep(question=asked, intro=plan.intro, questions=list(plan.questions))
 
 
 def proposal_text(pending: PendingDeep) -> str:
@@ -163,8 +174,10 @@ def deep_agreed(
 def deep_changed(
     pending: PendingDeep, ctx: FacilitationContext, llm: model.Llm, rev: model.KnowledgeRev
 ) -> Iterator[ReplyDelta | FacilitatorUpdate | DeepProposed]:
-    """A change to the proposal: a new plan for the same question (the change is the person's turn)."""
-    yield from _proposed(propose(pending.question, ctx, llm, rev, first=False), ctx.problem_map.phase_id)
+    """A change to the proposal: a new plan (the change is the person's turn) with the question it rewrote."""
+    yield from _proposed(
+        propose(pending.question, ctx, llm, rev, first=False, changed=True), ctx.problem_map.phase_id
+    )
 
 
 def _proposed(

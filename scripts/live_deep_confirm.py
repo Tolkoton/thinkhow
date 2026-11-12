@@ -1,9 +1,10 @@
-"""Live check of task 747 (slice deep-research-confirm-first): deep research only after the person's consent.
+"""Live check of tasks 747 and 754 (slices deep-research-confirm-first, deep-change-question): deep research
+only after the person's consent; after a change the proposal shows the research question rewritten with it.
 
 Three new topics through the product's `workspace.reply` on the real model (Vertex `eu`, the app's default
 model, the search instance), each opened by the same request to research deep:
   (а) the proposal → «Так, запускай.» → the report searched by exactly the shown sub-questions;
-  (б) the proposal → a change → a new proposal;
+  (б) the proposal → a change → a new proposal whose research question is rewritten without the removed rent;
   (в) the proposal → «Ні, не треба.» → the conversation goes on without research.
 A recorder around the model writes the prompt of every `search_text` and the schema of every `generate_json`.
 The facts of the contract's Exit criterion 2 are asserted by code (exit 1 on any breach); whether the first
@@ -11,7 +12,8 @@ answer came «за секунди» and says that the system's opinion can be as
 Only the router path runs live; the card path is covered by the tests.
 
 Run: `PYTHONPATH=src uv run python scripts/live_deep_confirm.py`; the output goes to
-.engine/artifacts/747/live-deep-confirm.txt (and to the screen).
+.engine/artifacts/754/live-deep-confirm.txt (and to the screen); the 747 output stays as that slice's
+evidence.
 """
 
 import json
@@ -36,7 +38,7 @@ from thinkhow.platform.storage import LocalStorage
 from thinkhow.workspace import Answered, Delta, TopicRef, create_topic, reply
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / ".engine" / "artifacts" / "747" / "live-deep-confirm.txt"
+OUT = ROOT / ".engine" / "artifacts" / "754" / "live-deep-confirm.txt"
 USER = CurrentUser(id="live-person", email="live@example.com", is_owner=False)
 OPENER = (
     "Я хочу відкрити невелику кав'ярню у Львові. Досліди, будь ласка, глибоко ринок: скільки там кав'ярень, "
@@ -171,7 +173,8 @@ def case_yes(run: Run, storage: LocalStorage, rec: Recorder, knowledge: Any) -> 
 
 def case_change(run: Run, storage: LocalStorage, rec: Recorder, knowledge: Any) -> None:
     ref, waiting = propose(run, storage, rec, knowledge, "б: правка")
-    _, calls, _ = turn(run, storage, rec, knowledge, ref, CHANGE, datetime.now(UTC) + timedelta(seconds=30))
+    later = datetime.now(UTC) + timedelta(seconds=30)
+    shown, calls, _ = turn(run, storage, rec, knowledge, ref, CHANGE, later)
     after = pending(storage, ref)
     run.check(kinds(calls, "search") == [], "у відповіді на правку нуль search_text")
     run.check(
@@ -183,6 +186,10 @@ def case_change(run: Run, storage: LocalStorage, rec: Recorder, knowledge: Any) 
         set((after or {}).get("pending", {}).get("questions", [])),
     )
     run.check(bool(new) and new != old, "множина підпитань інша, ніж до правки")
+    question = (after or {}).get("pending", {}).get("question", "")
+    run.check(question != waiting["pending"]["question"], f"питання інше, ніж до правки: {question}")
+    run.check(question in shown.split("\n"), "рядок питання у відповіді — питання з deep_pending.json")
+    run.check("оренд" not in question.lower(), "у питанні після правки немає «оренд»")
 
 
 def case_no(run: Run, storage: LocalStorage, rec: Recorder, knowledge: Any) -> None:
@@ -196,11 +203,12 @@ def case_no(run: Run, storage: LocalStorage, rec: Recorder, knowledge: Any) -> N
 def main() -> None:
     settings = Settings(local=False, users_bucket="-", system_bucket="-", owner_email="-")
     rec = Recorder(model.make_llm(settings, lambda *_: "", search=True))
-    storage = LocalStorage(Path(tempfile.mkdtemp(prefix="thinkhow-747-")))
+    storage = LocalStorage(Path(tempfile.mkdtemp(prefix="thinkhow-754-")))
     seed(storage, ROOT / "cards")
     knowledge = current(storage)
     run = Run()
-    run.say(f"Жива перевірка 747, {datetime.now(UTC).isoformat(timespec='seconds')}, модель {settings.model}")
+    started = datetime.now(UTC).isoformat(timespec="seconds")
+    run.say(f"Жива перевірка 747/754, {started}, модель {settings.model}")
     for case in (case_yes, case_change, case_no):
         case(run, storage, rec, knowledge)
     run.say(f"\nПідсумок: {'усе OK' if not run.failed else 'FAIL: ' + '; '.join(run.failed)}")
