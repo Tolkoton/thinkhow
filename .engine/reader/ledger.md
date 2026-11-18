@@ -391,3 +391,8 @@
 - Record: tasks/done/422-cleanup-2026-11-12/report.md
 - Reason: All four checks pass. Every reference I could check says what the report claims: the metrics.jsonl entries, the nightly output copy and the 421 report's head and signal count. Each of the four «Що зробити» items has an answer. There is no open question for the owner, and the engine terms stay in English.
 - Request: 20261112T113350Z-fb4201 (attempt 1)
+
+## 2026-11-18T08:39:48Z — 756-open-item-full-tests-over-gate-step-timeout — READER_PASS
+- Record: tasks/done/756-open-item-full-tests-over-gate-step-timeout/report.md
+- Reason: All four questions hold. Every reference I could open says what the report says. The task's one «Що зробити» item and its done-condition are answered with the change and the run results. There is no open question for the owner. Technical terms are in English, and «двигун» is the word the engine's own tasks/README.md uses for the owner.
+- Request: 20261118T083915Z-c55473 (attempt 1)
