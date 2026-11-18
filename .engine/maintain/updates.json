@@ -3,7 +3,13 @@
     {
       "name": "google-auth[requests]",
       "current": "2.62.0",
-      "latest": "2.62.1",
+      "latest": "2.62.2",
+      "kind": "patch"
+    },
+    {
+      "name": "httpx2",
+      "current": "2.16.0",
+      "latest": "2.16.2",
       "kind": "patch"
     },
     {
@@ -21,13 +27,13 @@
     {
       "name": "pydantic-settings",
       "current": "2.16.1",
-      "latest": "2.16.2",
+      "latest": "2.16.3",
       "kind": "patch"
     },
     {
       "name": "ruff",
       "current": "0.17.1",
-      "latest": "0.17.4",
+      "latest": "0.17.5",
       "kind": "patch"
     },
     {
@@ -39,7 +45,7 @@
     {
       "name": "playwright",
       "current": "1.64.1",
-      "latest": "1.65.0",
+      "latest": "1.65.2",
       "kind": "minor"
     },
     {
