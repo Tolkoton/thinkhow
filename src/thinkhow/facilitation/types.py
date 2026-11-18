@@ -62,6 +62,8 @@ class MapUpdate(_Frozen):
 
 
 class FacilitatorUpdate(_Frozen):
+    # streamed: the first chunk measured 3.3–93.7 s, a whole stream up to 119.3 s; a hung one waited 300 s
+    llm_timeout_s: ClassVar[float] = 180.0  # task 752
     reply: str = Field(min_length=1)
     current_phase_id: str | None
     phase_exit_met: bool
@@ -70,6 +72,8 @@ class FacilitatorUpdate(_Frozen):
 
 class FactAnswer(_Frozen):
     """A fact answered at once (the router's «answer»): the reply first, the map's changes."""
+
+    llm_timeout_s: ClassVar[float] = 180.0  # streamed like FacilitatorUpdate (task 752)
 
     reply: str = Field(min_length=1)
     map_updates: list[MapUpdate]
@@ -240,6 +244,8 @@ class FacilitationError(Exception):
 
 class StepOutcome(_Frozen):
     """What `recognize` found in the person's answer."""
+
+    llm_timeout_s: ClassVar[float] = 60.0  # measured 2.6–4.5 s (task 752)
 
     answered: bool
     outcome: Literal["worked", "not_worked", "unexpected"] | None

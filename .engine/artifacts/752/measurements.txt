@@ -1,0 +1,40 @@
+# gcloud logging read 'jsonPayload.event="llm_call"' --freshness=40d --format=json --limit=2000 (2026-11-18): 163 lines from 2026-10-23
+(before 744) search=false: 67 calls, latency_ms sorted: [3424, 3455, 3459, 3475, 3767, 3960, 3992, 4052, 4190, 4437, 4504, 4695, 4791, 5066, 5249, 5258, 5347, 5449, 5457, 5674, 5735, 6134, 6217, 6302, 6379, 6518, 6936, 6998, 7001, 7731, 7775, 7812, 8072, 8215, 8254, 8355, 8670, 8842, 9341, 9456, 9929, 10212, 10369, 10628, 10910, 10920, 10996, 11467, 11510, 11681, 11902, 11914, 13039, 14190, 14278, 16049, 16414, 21264, 21639, 24913, 43799, 45034, 47587, 72460, 177472, 193632, 604431]
+(before 744) search=true: 74 calls, latency_ms sorted: [4131, 4132, 4171, 4613, 4971, 5296, 5620, 5684, 5856, 5882, 6001, 6069, 6085, 6155, 6169, 6173, 6182, 6374, 6644, 6737, 6750, 6762, 6826, 6852, 7225, 7255, 7472, 7508, 7703, 7887, 7903, 8141, 8601, 9544, 9683, 10236, 11199, 11828, 13186, 13821, 13903, 14558, 14927, 20464, 21635, 21939, 23868, 24156, 25725, 26293, 26458, 26691, 28384, 28884, 36957, 38027, 40385, 40908, 41450, 43675, 49846, 50376, 62489, 68755, 72066, 78961, 81630, 89623, 97916, 109419, 110038, 119308, 180640, 347544]
+DeepConsent: 1 calls, latency_ms sorted: [3280]
+DeepPlan: 1 calls, latency_ms sorted: [5764]
+DeepReport: 1 calls, latency_ms sorted: [32480]
+ObservationAnswer: 1 calls, latency_ms sorted: [17680]
+RoutedFacilitatorAnswer: 14 calls, latency_ms sorted: [8914, 9643, 12169, 18186, 24827, 34232, 37027, 45197, 48176, 50247, 56855, 58768, 74600, 109836]
+RouterAnswerSchema: 1 calls, latency_ms sorted: [8826]
+search: 3 calls, latency_ms sorted: [67711, 70026, 86657]
+streams with first_chunk_ms (kind, latency_ms, first_chunk_ms, after first chunk ms):
+  2026-11-12T17:19:43 RoutedFacilitatorAnswer 56855 43234 13621
+  2026-11-12T17:21:06 RoutedFacilitatorAnswer 34232 29348 4884
+  2026-11-12T17:22:54 RoutedFacilitatorAnswer 37027 26160 10867
+  2026-11-12T17:23:24 RoutedFacilitatorAnswer 8914 4819 4095
+  2026-11-12T17:24:38 RoutedFacilitatorAnswer 48176 29446 18730
+  2026-11-12T17:25:40 RoutedFacilitatorAnswer 12169 4028 8141
+  2026-11-12T17:26:17 RoutedFacilitatorAnswer 9643 3275 6368
+  2026-11-12T17:27:32 RoutedFacilitatorAnswer 24827 19799 5028
+  2026-11-12T17:28:26 RoutedFacilitatorAnswer 18186 11726 6460
+  2026-11-12T17:29:58 RoutedFacilitatorAnswer 50247 38607 11640
+  2026-11-12T17:31:03 RoutedFacilitatorAnswer 45197 37164 8033
+  2026-11-12T17:33:26 RoutedFacilitatorAnswer 109836 93697 16139
+  2026-11-12T17:40:27 RoutedFacilitatorAnswer 58768 50740 8028
+  2026-11-12T17:44:25 RoutedFacilitatorAnswer 74600 56054 18546
+retried or failed: [('2026-11-10T07:22:23', 604431, 3, False), ('2026-11-06T08:52:19', 347544, 2, True)]
+
+# live, 2026-11-18: PYTHONPATH=src uv run python /tmp/m752/measure.py (VertexLlm, gemini-4-argon, eu, attempts=1)
+StepOutcome 3.9 worked yes
+StepOutcome 4.3 not_worked None
+StepOutcome 4.5 unexpected no
+StepOutcome 4.0 None None
+StepOutcome 2.6 worked partly
+StepOutcome 3.7 worked yes
+DeepConsent 3.0 yes
+DeepConsent 2.6 no
+DeepConsent 4.3 change
+DeepConsent 3.6 other
+DeepConsent 3.2 yes
+DeepConsent 9.7 yes

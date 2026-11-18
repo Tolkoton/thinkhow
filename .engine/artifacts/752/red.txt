@@ -1,0 +1,7 @@
+E       AssertionError: the person waited 607 s
+E       AssertionError: the person waited 305 s
+E       AssertionError: the person waited 305 s
+E       AssertionError: the person waited 305 s
+E       AssertionError: the person waited 606 s
+E       AssertionError: the person waited 606 s
+6 failed, 4 passed in 0.64s

@@ -107,6 +107,8 @@ class _Attempt:
 class VertexLlm:
     """Gemini on Vertex AI. Retries only before the first reply text reaches the caller (contract Q3, Q3a)."""
 
+    search_timeout_s = 240.0  # a search measured 25.7–180.6 s; a hung one waited 300 s (task 752)
+
     def __init__(
         self,
         client: Any,
@@ -213,7 +215,7 @@ class VertexLlm:
         """A searched call's config: the search tool, no JSON schema."""
         return types.GenerateContentConfig(
             system_instruction=system,
-            http_options=types.HttpOptions(timeout=int(self.timeout_s * 1000)),
+            http_options=types.HttpOptions(timeout=int(min(self.timeout_s, self.search_timeout_s) * 1000)),
             tools=[types.Tool(enterprise_web_search=types.EnterpriseWebSearch())],
         )
 

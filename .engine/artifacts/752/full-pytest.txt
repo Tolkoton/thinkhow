@@ -1,0 +1,74 @@
+........................................................................ [  4%]
+........................................................................ [  8%]
+........................................................................ [ 12%]
+...................................................F.................... [ 16%]
+........................................................................ [ 20%]
+........................................................................ [ 25%]
+........................................................................ [ 29%]
+..............................................F......................... [ 33%]
+........................................................................ [ 37%]
+........................................................................ [ 41%]
+........................................................................ [ 46%]
+........................................................................ [ 50%]
+........................................................................ [ 54%]
+........................................................................ [ 58%]
+........................................................................ [ 62%]
+........................................................................ [ 67%]
+........................................................................ [ 71%]
+........................................................................ [ 75%]
+........................................................................ [ 79%]
+........................................................................ [ 83%]
+........................................................................ [ 88%]
+........................................................................ [ 92%]
+........................................................................ [ 96%]
+.............................................................            [100%]
+=================================== FAILURES ===================================
+___ test_deep_consent_answer_is_one_of_four_words_and_has_no_own_time_limit ____
+
+    def test_deep_consent_answer_is_one_of_four_words_and_has_no_own_time_limit() -> None:
+        consent = api(ft, "DeepConsent")
+        for word in ("yes", "change", "no", "other"):
+            assert consent.model_validate_json(f'{{"answer": "{word}"}}').answer == word
+        for bad in ('{"answer": "maybe"}', '{"answer": true}', "{}"):
+            with pytest.raises(ValidationError):
+                consent.model_validate_json(bad)
+>       assert not hasattr(consent, "llm_timeout_s")
+E       AssertionError: assert not True
+E        +  where True = hasattr(<class 'thinkhow.facilitation.types.DeepConsent'>, 'llm_timeout_s')
+
+tests/contract/deep_confirm/test_dc_types.py:37: AssertionError
+_ test_acceptance_4_mypy_src_tests_is_no_worse_than_on_5249680_and_the_slices_files_are_clean _
+
+tmp_path = PosixPath('/tmp/pytest-of-lao/pytest-986/test_acceptance_4_mypy_src_tes0')
+
+    def test_acceptance_4_mypy_src_tests_is_no_worse_than_on_5249680_and_the_slices_files_are_clean(
+        tmp_path: Path,
+    ) -> None:
+        uv = shutil.which("uv")
+        git = shutil.which("git")
+        assert uv is not None and git is not None, "uv and git must be on PATH"
+    
+        base = tmp_path / "base"
+        base.mkdir()
+        archive = subprocess.run([git, "archive", BASE], cwd=ROOT, capture_output=True, timeout=300)
+        assert archive.returncode == 0, archive.stderr.decode(errors="replace")[-1500:]
+        with tarfile.open(fileobj=io.BytesIO(archive.stdout)) as tar:
+            tar.extractall(base, filter="data")
+    
+        before = mypy_errors(uv, base, tmp_path / "cache-base")
+        now = mypy_errors(uv, ROOT, tmp_path / "cache-now")
+    
+        worse = {pair: (before[pair], n) for pair, n in now.items() if n > before[pair]}
+>       assert worse == {}, f"(file, code): (errors on {BASE}, errors now) — more than on {BASE}: {worse}"
+E       AssertionError: (file, code): (errors on 5249680, errors now) — more than on 5249680: {('tests/platform/test_measured_limits.py', 'comparison-overlap'): (0, 1)}
+E       assert {('tests/plat...lap'): (0, 1)} == {}
+E         
+E         Left contains 1 more item:
+E         {('tests/platform/test_measured_limits.py', 'comparison-overlap'): (0, 1)}
+E         Use -v to get more diff
+
+tests/contract/one_conversation_block/test_ocb_block.py:276: AssertionError
+=========================== short test summary info ============================
+FAILED tests/contract/deep_confirm/test_dc_types.py::test_deep_consent_answer_is_one_of_four_words_and_has_no_own_time_limit
+FAILED tests/contract/one_conversation_block/test_ocb_block.py::test_acceptance_4_mypy_src_tests_is_no_worse_than_on_5249680_and_the_slices_files_are_clean
+2 failed, 1715 passed, 35 deselected in 1205.96s (0:20:05)
