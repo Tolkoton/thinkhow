@@ -1,17 +1,23 @@
 # Оновлення залежностей: що вийшло
 
-Перелік: `.engine/maintain/updates.json` (85fb8e5a33578c5bc0a5238d16d5d92764138ec8196c58c4541639b575f586cc). Написав `owner_action.py update-deps` — runner за відповіддю власника «так».
+Перелік: `.engine/maintain/updates.json` (8c6977f48f6fb5eaf89c3c977ed5364472b976bfd923b7cc2c99e8b6728150d3). Написав `owner_action.py update-deps` — runner за відповіддю власника «так».
 
-Нічого не оновлено: перевірки не зелені ще до оновлень, тож зламане оновлення не відрізнити від старої біди:
-```
-gate[ci] 14 finding(s), exit 2
-  block tests/contract/notes_readers/test_nr_catchup_disputed_q1_full_instructions.py:13 [typecheck] error: Unused "type: ignore" comment  [unused-ignore]
-  block tests/contract/notes_readers/test_nr_catchup_disputed_q1_full_instructions.py:13 [typecheck] error: Need type annotation for "shape"  [var-annotated]
-  block tests/contract/notes_readers/test_nr_catchup_disputed_q1_full_instructions.py:13 [typecheck] note: Error code "var-annotated" not covered by "type: ignore[call-overload]" comment
-  block tests/contract/notes_readers/test_nr_catchup_disputed_q1_full_instructions.py:13 [typecheck] error: Argument 1 to "tuple" has incompatible type "object"; expected "Iterable[Never]"  [arg-type]
-  block tests/contract/notes_readers/test_nr_catchup_disputed_q1_full_instructions.py:13 [typecheck] note: Error code "arg-type" not covered by "type: ignore[call-overload]" comment
-  block scripts/smoke_test_voice_language.py:51 [typecheck] error: Incompatible types in assignment (expression has type "str", variable has type "Response")  [assignment]
-  block scripts/smoke_test_voice_language.py:52 [typecheck] error: Unsupported operand types for in ("Response" and "str")  [operator]
-  block tests/contract/skel_learning/test_skell_live.py:17 [typecheck] error: Module "thinkhow.learning.analyze" does not explicitly export attribute "Observation"  [attr-defined]
-```
+Оновлено 8 з 9.
 
+- `google-auth[requests]` 2.62.0 → 2.62.2, `httpx2` 2.16.0 → 2.16.2, `mypy` 2.4.0 → 2.4.1, `pydantic` 2.14.1 → 2.14.3, `pydantic-settings` 2.16.1 → 2.16.3, `ruff` 0.17.1 → 0.17.5 — оновлено, перевірки зелені, commit `7433ca3`.
+- `import-linter` 2.15 → 2.16 — оновлено, перевірки зелені, commit `fb9d8b9`.
+- `playwright` 1.64.1 → 1.65.2 — СКАСОВАНО: команда оновлення завершилась з кодом 1; файли повернуто з git; `uv sync --frozen` — код завершення 0. Вивід:
+  ```
+  × No solution found when resolving dependencies for split (markers:
+    │ python_full_version >= '3.15'):
+    ╰─▶ Because thinkhow:dev depends on playwright==1.64.1 and
+        playwright==1.65.2, we can conclude that thinkhow:dev's requirements
+        are unsatisfiable.
+        And because your project requires thinkhow:dev, we can conclude that
+        your project's requirements are unsatisfiable.
+  
+        hint: While the active Python version is 3.13, the resolution failed for
+        other Python versions supported by your project. Consider limiting your
+        project's supported Python versions using `requires-python`.
+  ```
+- `pytest` 9.1.1 → 9.2.0 — оновлено, перевірки зелені, commit `e34ddc0`.
