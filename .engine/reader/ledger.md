@@ -406,3 +406,8 @@
 - Record: tasks/done/424-cleanup-2026-11-18/report.md
 - Reason: All four questions hold. The nightly output in the report matches the saved copy, and the metrics numbers match metrics.jsonl and the 422 report. Every item of «Що зробити» is answered: no SIMPLIFIER CALL, so no pass, no auto_remove and report.md left as it was. There are no open questions, and the engine terms are in English.
 - Request: 20261118T084140Z-84fc4f (attempt 1)
+
+## 2026-11-18T11:11:42Z — 423-maintain-2026-11-18 — READER_PASS
+- Record: tasks/done/423-maintain-2026-11-18/report.md
+- Reason: All four questions hold. Every reference I could check matches what the report says about it. Both items of «Що зробити» and «Готово, коли» are answered: the maintain report is written, and the update question was asked and then answered by the runner. There is no open owner question, and the engine terms in the report are in English (runner, gate, commit, sealed contract tests).
+- Request: 20261118T111109Z-3e3bd8 (attempt 1)
