@@ -396,3 +396,13 @@
 - Record: tasks/done/756-open-item-full-tests-over-gate-step-timeout/report.md
 - Reason: All four questions hold. Every reference I could open says what the report says. The task's one «Що зробити» item and its done-condition are answered with the change and the run results. There is no open question for the owner. Technical terms are in English, and «двигун» is the word the engine's own tasks/README.md uses for the owner.
 - Request: 20261118T083915Z-c55473 (attempt 1)
+
+## 2026-11-18T08:41:34Z — 424-cleanup-2026-11-18 — READER_INVALID
+- Record: tasks/done/424-cleanup-2026-11-18/report.md
+- Reason: the record tasks/done/424-cleanup-2026-11-18/report.md changed while it was read
+- Request: 20261118T084101Z-1cc473 (attempt 1)
+
+## 2026-11-18T08:42:11Z — 424-cleanup-2026-11-18 — READER_PASS
+- Record: tasks/done/424-cleanup-2026-11-18/report.md
+- Reason: All four questions hold. The nightly output in the report matches the saved copy, and the metrics numbers match metrics.jsonl and the 422 report. Every item of «Що зробити» is answered: no SIMPLIFIER CALL, so no pass, no auto_remove and report.md left as it was. There are no open questions, and the engine terms are in English.
+- Request: 20261118T084140Z-84fc4f (attempt 1)
