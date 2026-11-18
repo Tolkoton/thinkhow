@@ -18,6 +18,7 @@ from google.genai import types
 from pydantic import BaseModel
 
 from thinkhow.facilitation.answer import answer_fact
+from thinkhow.facilitation.deep import consent
 from thinkhow.facilitation.respond import _routed, answer_schema
 from thinkhow.facilitation.steps import recognize_step
 from thinkhow.facilitation.types import FactAnswer
@@ -131,4 +132,11 @@ def test_a_step_recognition_that_hangs_twice_is_given_up_within_a_minute_each_ti
     client = SlowGemini(STEP, [HUNG, HUNG, ANSWER_S])
     got = recognize_step("крок", "Як вийшло?", "Вийшло.", production_llm(client))
     assert got.outcome == "worked"
+    assert client.now <= 2 * 60 + BACKOFF_S + ANSWER_S, f"the person waited {client.now:.0f} s"
+
+
+def test_a_deep_consent_that_hangs_twice_is_given_up_within_a_minute_each_time() -> None:
+    client = SlowGemini('{"answer": "yes"}', [HUNG, HUNG, ANSWER_S])
+    got = consent(fa.context(()), production_llm(client), KnowledgeRev(3, 7))
+    assert got == "yes"
     assert client.now <= 2 * 60 + BACKOFF_S + ANSWER_S, f"the person waited {client.now:.0f} s"

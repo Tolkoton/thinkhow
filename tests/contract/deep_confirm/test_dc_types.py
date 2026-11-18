@@ -27,14 +27,14 @@ def test_pending_deep_holds_question_intro_and_two_to_four_non_empty_sub_questio
             pending(question, intro, questions)
 
 
-def test_deep_consent_answer_is_one_of_four_words_and_has_no_own_time_limit() -> None:
+def test_deep_consent_answer_is_one_of_four_words_and_has_its_own_minute_limit() -> None:
     consent = api(ft, "DeepConsent")
     for word in ("yes", "change", "no", "other"):
         assert consent.model_validate_json(f'{{"answer": "{word}"}}').answer == word
     for bad in ('{"answer": "maybe"}', '{"answer": true}', "{}"):
         with pytest.raises(ValidationError):
             consent.model_validate_json(bad)
-    assert not hasattr(consent, "llm_timeout_s")
+    assert consent.llm_timeout_s == 60.0  # measured 2.6–9.7 s (task 752)
 
 
 def test_deep_proposed_is_a_frozen_event_carrying_the_pending_proposal() -> None:

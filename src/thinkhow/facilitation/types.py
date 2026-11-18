@@ -115,6 +115,8 @@ class PendingDeep(_Frozen):
 class DeepConsent(_Frozen):
     """What the person answered to a shown proposal of deep research."""
 
+    llm_timeout_s: ClassVar[float] = 60.0  # measured 2.6–9.7 s (task 752)
+
     answer: Literal["yes", "change", "no", "other"]
 
 
