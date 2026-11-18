@@ -1,0 +1,19 @@
+# 756 — Повний набір тестів довший за межу кроку gate (900 s)
+
+Залежить від: —
+Аудит потрібен: ні
+Відкритий пункт: full-tests-over-gate-step-timeout
+
+## Що сталося
+Задача 423, 2026-11-18: gate.py --layer ci на 072da4a дав «[tests] TESTS FAILED: timed out after 900 s». Той самий набір окремо зелений: «1707 passed, 35 deselected in 1207.92s». Найдовші — contract smoke-тести з Playwright і uvicorn (до 122 s кожен: test_cres_catchup_smoke, test_cloop_catchup_smoke, test_du_catchup_smoke). Поки набір довший за 900 s, gate ci і pre_commit червоні, і update-deps на «так» власника нічого не оновить. Межу в двигуні описано в .engine/to-engine/gate-step-timeout-fixed-900s.md.
+
+- Записано: 2026-11-18T07:40:34Z, агент
+- Це пропозиція, а не задача в черзі: runner із `tasks/proposed/` нічого не бере. У роботу її ставить власник — файлом із цим номером в inbox.
+
+## Що зробити
+Скоротити повний набір нижче 900 s, не послаблюючи жодного assertion: наприклад, запускати кожен Playwright smoke-сценарій один раз на модуль (fixture scope=module) замість одного на тест, або паралельно (pytest-xdist). Готово, коли uv run pytest на чистому дереві триває менше 900 s і gate.py --layer ci дає exit 0.
+
+## Готово, коли
+Описане вище зроблено і перевірено, або на нього є відповідь власника.
+
+## Питання до власника
