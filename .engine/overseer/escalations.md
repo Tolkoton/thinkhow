@@ -452,3 +452,27 @@ one; do not reopen the old one in conversation.
   full check; the sealed tests and the overseer still stand between the contract and the code.
 - Door: two-way. Cost to reverse: a re-plan of the slice before its code.
 - Status: CLOSED.
+
+## 2026-11-18 — AUTONOMOUS — deep-research-agent (task 314): a report not collected within Google's 7 days is lost, shown honestly
+- Supersedes nothing.
+- What: the cold reader escalated (BLOCKER_CLASSIFICATION, two-way) that delivery runs only while the topic page is
+  open, and Google keeps an interaction 7 days: a person who says «так» and comes back on day 8 gets a 404. I took its
+  recommendation A: accept as a known risk (contract Q20, Deferred with trigger `deep_broken reason=not_found`), and
+  show a separate honest sentence `deep_expired` instead of «не вдалося завершити».
+- Why: the loss needs a 7-day absence after a 7–20 min research; closing it means the nightly Job (Scheduler exists,
+  INDEX F10) gets write access to `users` and the Gemini key — two Сонько steps and a larger slice. The owner's «Google
+  тримає їх 7 днів» was a privacy permission, not consent to the loss — so this is my decision, not the owner's.
+- Door: two-way. Cost to reverse: Job delivery added later, no data migration (`deep_running.json` already holds ids).
+- Status: CLOSED.
+
+## 2026-11-18 — AUTONOMOUS — deep-research-agent (task 314): second cold reader's REVISE resolved, a third reader decides the seal
+- Supersedes nothing.
+- What: cold reader 1 escalated the 7-day loss (two-way, entry above); cold reader 2 blocked on a masked test gap:
+  the second read of `conversation.md` after `collect` in `deliver_research` had no test and I2's Domain covered only
+  the state on entry. Fix as named: I2's Domain widened to a reply or proposal that appears during `collect`, new
+  Seam 13 (a `Collect` double that writes mid-call), plus its notes — Q12 heading restored (lost in my own edit),
+  Q8/Deferred say `deep_expired` for `not_found`, Seam 14 pins `expired_text`, Seam 6 pins the in-flight rule.
+- Why: two readers, two different concrete defects, each fixed as named; no oscillation. The tester, the sealed
+  tests and the overseer still stand between the contract and the code.
+- Door: two-way. Cost to reverse: a re-plan of the slice before its code.
+- Status: CLOSED.
