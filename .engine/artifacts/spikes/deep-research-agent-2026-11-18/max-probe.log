@@ -1,0 +1,37 @@
+Traceback (most recent call last):
+  File "/home/lao/projects/thinkhow/.venv/lib/python3.13/site-packages/google/genai/_gaos/interactions.py", line 618, in create
+    return _speakeasy_parse_response(http_res)
+  File "/home/lao/projects/thinkhow/.venv/lib/python3.13/site-packages/google/genai/_gaos/interactions.py", line 534, in _speakeasy_parse_response
+    raise errors.CreateInteractionClientError(
+        response_data, http_res, http_res_text
+    )
+google.genai._gaos.errors.createinteraction.CreateInteractionClientError: Previous interaction v1_ChdxWXY5YXJYT0lxYlRqTWNQMUplZW1RNBIXcVl2OWFyWE9JcWJUak1jUDFKZWVtUTQ belongs to a different agent.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/lao/projects/thinkhow/.engine/artifacts/spikes/deep-research-agent-2026-11-18/max_probe.py", line 6, in <module>
+    made = c.interactions.create(
+        agent="deep-research-max-preview-04-2026", input="Так, запускай.", previous_interaction_id=prev,
+        agent_config={"type": "deep-research", "collaborative_planning": False}, background=True, store=True)
+  File "/home/lao/projects/thinkhow/.venv/lib/python3.13/site-packages/google/genai/_gaos/google_genai.py", line 291, in create
+    response = wrap_sdk_call(
+        super().create,
+    ...<5 lines>...
+        timeout=timeout,
+    )
+  File "/home/lao/projects/thinkhow/.venv/lib/python3.13/site-packages/google/genai/_gaos/lib/compat_errors.py", line 369, in wrap_sdk_call
+    return fn(*args, **kwargs)
+  File "/home/lao/projects/thinkhow/.venv/lib/python3.13/site-packages/google/genai/_gaos/interactions.py", line 620, in create
+    response_helpers.raise_parse_error(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.sdk_configuration.__dict__["_hooks"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        parse_exc_,
+        ^^^^^^^^^^^
+    )
+    ^
+  File "/home/lao/projects/thinkhow/.venv/lib/python3.13/site-packages/google/genai/_gaos/utils/response_helpers.py", line 94, in raise_parse_error
+    raise parse_error from exc
+google.genai._gaos.lib.compat_errors.BadRequestError: Error code: 400 - {'error': {'message': 'Previous interaction v1_ChdxWXY5YXJYT0lxYlRqTWNQMUplZW1RNBIXcVl2OWFyWE9JcWJUak1jUDFKZWVtUTQ belongs to a different agent.', 'code': 'invalid_request'}}

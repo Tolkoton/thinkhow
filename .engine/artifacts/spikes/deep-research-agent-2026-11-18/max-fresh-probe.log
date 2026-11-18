@@ -1,0 +1,4 @@
+max fresh start: in_progress
+after cancel: cancelled null
+unknown id v1_bogus google.genai._gaos.lib.compat_errors BadRequestError status_code 400 code None Error code: 400 - {'error': {'message': 'Invalid interaction name: interactions/v1_bogus', 'code': 'invalid_request'}}
+unknown id v1_ChdycEw5YW96REg4bTgzOUlQdS1TMnFROBIXcnBMOWFvekRIOG04MzlJUHUtUAAAAAA google.genai._gaos.lib.compat_errors NotFoundError status_code 404 code None Error code: 404 - {'error': {'message': 'Requested entity was not found.', 'code': 'not_found'}}

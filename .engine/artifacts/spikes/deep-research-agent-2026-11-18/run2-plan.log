@@ -1,0 +1,5 @@
+id v1_ChdxWXY5YXJYT0lxYlRqTWNQMUplZW1RNBIXcVl2OWFyWE9JcWJUak1jUDFKZWVtUTQ
+    1.5s status=in_progress
+   11.8s status=in_progress
+   23.0s status=completed
+elapsed 23.0 usage {"input_tokens_by_modality": [{"modality": "text", "tokens": 202}], "output_tokens_by_modality": [{"modality": "text", "tokens": 407}], "total_cached_tokens": 0, "total_input_tokens": 202, "total_output_tokens": 407, "total_thought_tokens": 1887, "total_tokens": 2496, "total_tool_use_tokens": 0}
