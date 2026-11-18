@@ -22,6 +22,7 @@ dev = [
     "mypy>=2.4.0",
     "playwright==1.64.1",
     "pytest>=9.1.1",
+    "pytest-xdist>=3.8.0",
     "ruff>=0.17.1",
     "types-pyyaml>=6.0.12.20260906",
 ]
@@ -34,7 +35,8 @@ markers = [
     "live: calls real Google services (Vertex AI); run with -m live",
     "live_codes: the 85 language codes against the real speech model; run with -m live_codes",
 ]
-addopts = "-m 'not live and not live_codes'"
+# gate-allow: -n auto (pytest-xdist) — the full suite took 1208 s serially, over the gate's 900 s step (task 756)
+addopts = "-m 'not live and not live_codes' -n auto"
 
 [tool.ruff]
 line-length = 110
